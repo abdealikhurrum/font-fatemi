@@ -5,6 +5,6 @@ FatemiMaqala is a modified version of ALFATEMILSD (and its variants), and AlFate
 Currently, FatemiMaqala is the more developed of the two. However, they are both ready for use in production environments.
 Features:
 -------
-*Ligatures for honorific appendages, so that their width is preserved after superscript
-*Reduced file size through re-edited outlines and extensive referencing
-*Unicode compliance
+* Ligatures for honorific appendages, so that their width is preserved after superscript
+* Reduced file size through re-edited outlines and extensive referencing
+* Unicode compliance
