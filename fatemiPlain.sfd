@@ -1,24 +1,22 @@
 SplineFontDB: 3.0
 FontName: FatemiMaqala-Regular
-FullName: FatemiMaqala-Regular
+FullName: FatemiMaqala
 FamilyName: FatemiMaqala
-Weight: Regular
+Weight: Book
 Copyright: All the rights are reserved to Dawat Hadiyah
-Version: Ayyam ul Barakaat al Khuldiyah 1423
+Version: 1.0
 ItalicAngle: 0
 UnderlinePosition: -1250
 UnderlineWidth: 100
 Ascent: 1638
 Descent: 410
 InvalidEm: 0
-sfntRevision: 0x00080000
 LayerCount: 4
 Layer: 0 1 "Back" 1
 Layer: 1 1 "Fore" 0
 Layer: 2 0 "Back 2" 1
 Layer: 3 1 "Back 3" 1
-NeedsXUIDChange: 1
-XUID: [1021 574 -2067448607 8683120]
+XUID: [1021 574 -2067448607 4195946]
 UseXUID: 1
 UseUniqueID: 1
 StyleMap: 0x0000
@@ -27,7 +25,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1441134868
+ModificationTime: 1441199607
 PfmFamily: 81
 TTFWeight: 500
 TTFWidth: 5
