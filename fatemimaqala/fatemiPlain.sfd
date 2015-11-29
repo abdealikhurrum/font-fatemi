@@ -25,7 +25,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1448809233
+ModificationTime: 1448810140
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -67,7 +67,7 @@ Lookup: 1 0 0 "'zero' Slashed Zero lookup 15" { "'zero' Slashed Zero lookup 15 s
 Lookup: 1 0 0 "'onum' Oldstyle Figures lookup 16" { "'onum' Oldstyle Figures lookup 16 subtable" ("oldstyle") } ['onum' ('DFLT' <'dflt' > 'grek' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 1 0 0 "'ordn' Ordinals lookup 17" { "'ordn' Ordinals lookup 17 subtable"  } ['ordn' ('DFLT' <'dflt' > 'grek' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 1 0 0 "kashida" { "kashida-1"  } [' RQD' ('DFLT' <'dflt' > 'arab' <'dflt' > 'cyrl' <'dflt' > 'hebr' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
-Lookup: 258 9 0 "'kern' Horizontal Kerning in Arabic lookup 5" { "'kern' Horizontal Kerning in Arabic lookup 5-1" [307,30,0] "'kern' Horizontal Kerning in Arabic lookup 5-2" [307,0,2] } ['kern' ('DFLT' <'dflt' > 'arab' <'dflt' > ) ]
+Lookup: 258 9 0 "'kern' Horizontal Kerning in Arabic lookup 5" { "'kern' Horizontal Kerning in Arabic lookup 5-1" [307,30,0] } ['kern' ('DFLT' <'dflt' > 'arab' <'dflt' > ) ]
 Lookup: 259 15 0 "'curs' Cursive Attachment in Arabic lookup 4" { "basic"  } ['curs' ('DFLT' <'dflt' > 'arab' <'dflt' > ) ]
 Lookup: 258 0 0 "'kern' Horizontal Kerning lookup 5" { "'kern' Horizontal Kerning lookup 5 kerning class 0" [307,0,0] "'kern' Horizontal Kerning lookup 5 kerning class 1"  "'kern' Horizontal Kerning lookup 5 kerning class 2"  "'kern' Horizontal Kerning lookup 5 kerning class 3"  "'kern' Horizontal Kerning lookup 5 kerning class 4"  "'kern' Horizontal Kerning lookup 5 kerning class 5"  "'kern' Horizontal Kerning lookup 5 kerning class 6" [307,0,0] "'kern' Horizontal Kerning lookup 5 kerning class 7" [307,0,0] "'kern' Horizontal Kerning lookup 5 kerning class 8" [307,0,0] } ['kern' ('DFLT' <'dflt' > 'cyrl' <'dflt' > 'grek' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 261 5 0 "kharoLiga" { "kharoLiga-1"  "normalLiga"  } ['mark' ('DFLT' <'dflt' > 'arab' <'dflt' > ) ]
@@ -75,14 +75,6 @@ Lookup: 260 5 0 "kharoSingle" { "kharoSingle-1"  "normalSingle"  } ['mark' ('DFL
 Lookup: 262 5 0 "marktomark" { "marktomark-1"  } [' RQD' ('DFLT' <'dflt' > 'arab' <'dflt' > ) ]
 MarkAttachClasses: 1
 DEI: 91125
-KernClass2: 5 3 "'kern' Horizontal Kerning in Arabic lookup 5-2"
- 7 uniFEAD
- 7 uniFEAE
- 7 uniFEAF
- 7 uniFEB0
- 7 uniFE8F
- 15 uniFE95 uniFE99
- 0 {} 0 {} 0 {} 0 {} -468 {} -264 {} 0 {} -458 {} -253 {} 0 {} -468 {} -308 {} 0 {} -462 {} -327 {}
 KernClass2: 14+ 24 "'kern' Horizontal Kerning lookup 5 kerning class 0"
  9 ampersand
  25 zero zero.slash zero.prop
