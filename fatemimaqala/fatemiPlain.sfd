@@ -16,16 +16,15 @@ Layer: 0 1 "Back" 1
 Layer: 1 1 "Fore" 0
 Layer: 2 0 "Back 2" 1
 Layer: 3 1 "Back 3" 1
-XUID: [1021 574 -2067448607 4195946]
+XUID: [1021 574 -2067448607 5288500]
 UseXUID: 1
 UseUniqueID: 1
-StyleMap: 0x0000
 FSType: 0
 OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1452865495
+ModificationTime: 1452941080
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -52,6 +51,7 @@ Lookup: 1 8 0 "'locl' Localized Forms in Arabic lookup 25" { "'locl' Localized F
 Lookup: 2 0 0 "longlaamkaafs" { "longlaamkaafs-1"  } []
 Lookup: 3 0 0 "shortalefs" { "'aalt' Access All Alternates lookup 8 subtable"  } []
 Lookup: 1 0 0 "straightrehs" { "straightrehs-1"  } []
+Lookup: 1 8 0 "hehgoal" { "hehgoal-1"  } []
 Lookup: 1 8 0 "'fina' Terminal Forms in Arabic lookup 4" { "'fina' Terminal Forms in Arabic lookup 4 subtable"  } ['fina' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 1 8 0 "'medi' Medial Forms in Arabic lookup 3" { "'medi' Medial Forms in Arabic lookup 3 subtable"  } ['medi' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 1 8 0 "'init' Initial Forms in Arabic lookup 2" { "'init' Initial Forms in Arabic lookup 2 subtable"  } ['init' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
@@ -60,6 +60,7 @@ Lookup: 1 0 0 "'c2sc' Capitals to Small Capitals in Latin lookup 11" { "'c2sc' C
 Lookup: 4 12 1 "'rlig' Required Ligatures in Arabic lookup 24" { "'rlig' Required Ligatures in Arabic lookup 24-1"  } ['rlig' ('arab' <'FAR ' > ) ]
 Lookup: 4 8 1 "honorifics" { "'rlig' Required Ligatures lookup 5 subtable"  } ['rlig' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 4 8 1 "'rlig' Required Ligatures lookup 21" { "'rlig' Required Ligatures lookup 21-1"  } ['rlig' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
+Lookup: 6 8 0 "'calt' Contextual Alternates lookup 27" { "'calt' Contextual Alternates lookup 27-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 6 4 0 "shortalefcontext" { "'calt' Contextual Alternates lookup 7 contextual 1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 6 0 0 "shortunderalefcontext" { "shortunderalefcontext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 6 8 0 "straightrehscontext" { "straightrehscontext-4"  "straightrehscontext-1"  "straightrehscontext-2"  "straightrehscontext-3"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
@@ -513,6 +514,13 @@ KernClass2: 7+ 9 "'kern' Horizontal Kerning lookup 5 kerning class 8"
  19 w.sc wcircumflex.sc
  53 y.sc yacute.sc ycircumflex.sc ydieresis.sc uni0233.sc
  0 {} -66 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 16 {} -30 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} -78 {} 0 {} -32 {} -20 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} -32 {} -20 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} -32 {} -28 {} -44 {} -32 {} 0 {} 0 {} 0 {} 0 {} 0 {} -44 {} 0 {} -46 {} -32 {} 0 {} 0 {} 0 {} 0 {} 0 {} -40 {} 0 {} -44 {} -28 {}
+ChainSub2: coverage "'calt' Contextual Alternates lookup 27-1" 0 0 0 1
+ 1 0 1
+  Coverage: 7 uniFBA8
+  FCoverage: 184 uniFB51 uniFB89 uniFB8B uniFB8D uniFB8F uniFB91 uniFB93 uniFB95 uniFE82 uniFE84 uniFE88 uniFE8E uniFEAA uniFEAE uniFEB0 uniFEDA uniFEDC uniFEDE uniFEE0 uniFEF4 uniFEFC alefsupalef.fina
+ 1
+  SeqLookup: 0 "hehgoal"
+EndFPST
 ChainPos2: coverage "rehAltyeh" 0 0 0 1
  1 1 0
   Coverage: 55 uni0626 uni0649 uni064A uni06CC uniFE89 uniFEEF uniFEF1
@@ -538,7 +546,7 @@ EndFPST
 ChainSub2: coverage "straightrehscontext-4" 0 0 0 1
  1 0 1
   Coverage: 63 uni0631 uni0632 uni0691 uni0698 uniFB8A uniFB8C uniFEAD uniFEAF
-  FCoverage: 87 uni0626 uni0649 uni064A uni06CC uniFB7A uniFB7C uniFE89 uniFE9D uniFE9F uniFEEF uniFEF1
+  FCoverage: 95 uni0626 uni062C uni0649 uni064A uni06CC uniFB7A uniFB7C uniFE89 uniFE9D uniFE9F uniFEEF uniFEF1
  1
   SeqLookup: 0 "straightrehs"
 EndFPST
@@ -1769,7 +1777,7 @@ NameList: AGL without afii
 DisplaySize: -36
 AntiAlias: 1
 FitToEm: 0
-WinInfo: 1188 36 11
+WinInfo: 272 34 12
 BeginPrivate: 0
 EndPrivate
 Grid
@@ -1782,7 +1790,7 @@ Grid
 EndSplineSet
 TeXData: 1 0 0 78848 39424 26282 440320 -1048576 26282 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
 AnchorClass2: "base" "basic" "belowmark" "marktomark-1" "abovemark" "marktomark-1" "subLiga" "kharoLiga-1" "supLiga" "kharoLiga-1" "subSingle" "kharoSingle-1" "supSingle" "kharoSingle-1" "belowSingle" "normalSingle" "aboveSingle" "normalSingle" "belowLiga" "normalLiga" "aboveLiga" "normalLiga" 
-BeginChars: 1580 1580
+BeginChars: 1581 1581
 
 StartChar: .notdef
 Encoding: 1142 -1 0
@@ -16312,7 +16320,7 @@ Substitution2: "'locl' Localized Forms in Arabic lookup 25-1" uni06BE
 Substitution2: "'locl' Localized Forms in Arabic lookup 18-1" uni06C1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFEEA
 Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" uniFEEC
-Substitution2: "'init' Initial Forms in Arabic lookup 2 subtable" uniFEEB
+Substitution2: "'init' Initial Forms in Arabic lookup 2 subtable" uniFBA8
 EndChar
 
 StartChar: uni0648
@@ -17575,8 +17583,8 @@ EndSplineSet
 Substitution2: "'ss01' Style Set 1 lookup 19-1" uniFB9E.urd
 Substitution2: "'locl' Localized Forms in Arabic lookup 18-1" uniFB9E.urd
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFB9F
-Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" uni066E.medi
-Substitution2: "'init' Initial Forms in Arabic lookup 2 subtable" uni066E.init
+Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" uniFEE8
+Substitution2: "'init' Initial Forms in Arabic lookup 2 subtable" uniFEE7
 EndChar
 
 StartChar: uni06BE
@@ -17587,9 +17595,9 @@ Flags: W
 LayerCount: 4
 Fore
 Refer: 1107 65259 N 1 0 0 1 0 0 2
-Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFEEC
+Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFBAB
 Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" uniFEEC
-Substitution2: "'init' Initial Forms in Arabic lookup 2 subtable" uniFBA8
+Substitution2: "'init' Initial Forms in Arabic lookup 2 subtable" uniFEEB
 EndChar
 
 StartChar: uni06C0
@@ -33730,7 +33738,7 @@ AnchorPoint: "aboveSingle" 462 1517 basechar 0
 AnchorPoint: "belowSingle" 453 -1333 basechar 0
 LayerCount: 4
 Fore
-Refer: 1036 65188 N 1 0 0 0.996298 -1.13687e-013 -0.317349 2
+Refer: 1036 65188 N 1 0 0 0.996298 -1.13687e-13 -0.317349 2
 Refer: 1474 64440 S 1 0 0 1 -228 -884 2
 EndChar
 
@@ -34303,17 +34311,71 @@ SplineSet
 EndSplineSet
 EndChar
 
-StartChar: uniFBA8
-Encoding: 908 64424 906
-Width: 798
+StartChar: uniFBA8.alt
+Encoding: 908 -1 906
+Width: 394
 GlyphClass: 2
 Flags: W
-AnchorPoint: "aboveSingle" 342 1238 basechar 0
-AnchorPoint: "belowSingle" 358 -332 basechar 0
-AnchorPoint: "base" -6 90 exit 0
+AnchorPoint: "aboveSingle" 150 1365 basechar 0
+AnchorPoint: "belowSingle" 117 -803 basechar 0
 LayerCount: 4
 Fore
-Refer: 1107 65259 N 1 0 0 1 0 0 2
+SplineSet
+107 -162 m 22,0,-1
+ 103 -176 l 5,1,-1
+ 99 -184 l 5,2,-1
+ 97 -192 l 5,3,-1
+ 95 -198 l 5,4,-1
+ 95 -204 l 5,5,6
+ 88 -224 88 -224 85 -254 c 5,7,-1
+ 83 -260 l 5,8,-1
+ 83 -266 l 6,9,10
+ 83 -267 83 -267 81 -282 c 4,11,12
+ 79 -300 79 -300 79 -302 c 6,13,-1
+ 79 -308 l 5,14,-1
+ 79 -314 l 5,15,-1
+ 79 -320 l 5,16,-1
+ 79 -326 l 5,17,-1
+ 79 -332 l 5,18,-1
+ 79 -338 l 5,19,-1
+ 83 -354 l 5,20,-1
+ 83 -360 l 5,21,22
+ 106 -423 106 -423 147 -423 c 4,23,24
+ 173 -423 173 -423 219 -388 c 4,25,26
+ 223 -385 223 -385 233 -394 c 5,27,28
+ 234 -521 234 -521 133 -572 c 5,29,30
+ 112 -575 112 -575 95 -570 c 4,31,32
+ 75 -565 75 -565 49 -540 c 5,33,34
+ 43 -526 43 -526 31 -508 c 5,35,-1
+ 31 -502 l 5,36,-1
+ 27 -498 l 6,37,38
+ 26 -497 26 -497 25 -492 c 4,39,40
+ 17 -453 17 -453 17 -401 c 4,41,42
+ 17 -313.06640625 17 -313.06640625 43 -242 c 4,43,44
+ 58 -201 58 -201 88 -155 c 4,45,46
+ 123.041015625 -103.852539062 123.041015625 -103.852539062 107 -162 c 22,0,-1
+137 511 m 5,47,-1
+ 205 661 l 5,48,-1
+ 240 604 l 4,49,50
+ 316 467 316 467 316 357 c 4,51,52
+ 316 316 316 316 305 279 c 4,53,54
+ 251 93 251 93 119 27 c 4,55,56
+ 65 0 65 0 0 0 c 4,57,58
+ -30 0 -30 0 -57 53.693359375 c 4,59,60
+ -66 72 -66 72 -66 89.693359375 c 4,61,62
+ -66 113 -66 113 -49 137.693359375 c 4,63,64
+ -21 179 -21 179 0 179 c 4,65,66
+ 24 179 24 179 48 182 c 132,-1,67
+ 72 185 72 185 92.5 189 c 132,-1,68
+ 113 193 113 193 131.5 198.5 c 132,-1,69
+ 150 204 150 204 165.5 210 c 132,-1,70
+ 181 216 181 216 194 222 c 132,-1,71
+ 207 228 207 228 216.5 233.5 c 132,-1,72
+ 226 239 226 239 233 243 c 4,73,74
+ 242 248 242 248 244 250 c 6,75,-1
+ 247 253 l 5,76,77
+ 222 397 222 397 137 511 c 5,47,-1
+EndSplineSet
 EndChar
 
 StartChar: uniFBA9
@@ -34424,9 +34486,11 @@ Encoding: 910 64426 908
 Width: 798
 GlyphClass: 2
 Flags: W
+AnchorPoint: "aboveSingle" 412 1453 basechar 0
+AnchorPoint: "belowSingle" 346 -341 basechar 0
 LayerCount: 4
 Fore
-Refer: 906 64424 N 1 0 0 1 0 0 2
+Refer: 1107 65259 N 1 0 0 1 0 0 2
 EndChar
 
 StartChar: uniFBAB
@@ -34447,12 +34511,11 @@ Encoding: 912 64428 910
 Width: 798
 GlyphClass: 2
 Flags: W
-AnchorPoint: "base" -2 90 entry 0
-AnchorPoint: "aboveSingle" 286 1475 basechar 0
-AnchorPoint: "belowSingle" 382 -493 basechar 0
+AnchorPoint: "aboveSingle" 351 1405 basechar 0
+AnchorPoint: "belowSingle" 357 -389 basechar 0
 LayerCount: 4
 Fore
-Refer: 906 64424 N 1 0 0 1 0 0 2
+Refer: 1107 65259 N 1 0 0 1 0 0 2
 EndChar
 
 StartChar: uniFBAD
@@ -36640,7 +36703,7 @@ AnchorPoint: "belowLiga" 166 -566 baselig 1
 LayerCount: 4
 Fore
 Refer: 1468 64434 N 1 0 0 1 -165 -462 2
-Refer: 979 64719 S 1 0 0 1 -1.13687e-013 2.69376 2
+Refer: 979 64719 S 1 0 0 1 -1.13687e-13 2.69376 2
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEE3 uniFEA0
 LCarets2: 1 449
 EndChar
@@ -38158,7 +38221,6 @@ SplineSet
  1175 1413 1175 1413 1172 1390 c 0,185,186
  1164 1318 1164 1318 1116 1281 c 1,164,165
 EndSplineSet
-Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF uniFEE0 uniFEEC
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF uniFEE0 uniFBA7
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF uniFEE0 uniFBAB
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF uniFEE0 uniFEEA
@@ -40058,7 +40120,7 @@ Encoding: 1075 65211 1059
 Width: 1190
 GlyphClass: 2
 Flags: W
-AnchorPoint: "base" -1.13687e-013 89.0813 exit 0
+AnchorPoint: "base" -1.13687e-13 89.0813 exit 0
 AnchorPoint: "aboveSingle" 563 1366 basechar 0
 AnchorPoint: "belowSingle" 663 -400 basechar 0
 LayerCount: 4
@@ -43481,8 +43543,9 @@ SplineSet
  540 781 540 781 520 825 c 1,42,-1
  595 1008 l 1,0,-1
 EndSplineSet
-Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB90 uniFBA7
+Ligature2: "'liga' Standard Ligatures lookup 13 subtable" kaaf.init uniFBA7
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDB uniFBA7
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB90 uniFBA7
 EndChar
 
 StartChar: afii57420.init_hehfinal.liga
@@ -45152,7 +45215,7 @@ SplineSet
  310.794060008 -363.628529242 310.794060008 -363.628529242 270.831352536 -64.7693884344 c 0,20,21
  258.834322887 26.6477967471 258.834322887 26.6477967471 268 137 c 1,22,23
  188.688919568 63.1668654139 188.688919568 63.1668654139 144.857747143 38.2509091037 c 0,24,25
- 77.2268524119 0.482885458513 77.2268524119 0.482885458513 0 -6.2172489379e-015 c 1,26,27
+ 77.2268524119 0.482885458513 77.2268524119 0.482885458513 0 -6.2172489379e-15 c 1,26,27
  -43.1670449868 89.8549071591 -43.1670449868 89.8549071591 0 176.693756104 c 1,28,29
  146.047863262 176.693756104 146.047863262 176.693756104 227.343258748 238.359193887 c 0,30,31
  279.006185673 278.336035369 279.006185673 278.336035369 314 343 c 0,32,33
@@ -46946,36 +47009,36 @@ SplineSet
  980 28 l 2,251,252
  977 28 977 28 974 26 c 2,253,-1
  966 26 l 1,254,255
- 960 13 960 13 954 -10 c 2,256,-1
- 950 -24 l 1,257,-1
- 946 -32 l 1,258,-1
- 944 -40 l 1,259,-1
- 942 -46 l 1,260,-1
- 942 -52 l 1,261,262
- 935 -72 935 -72 932 -102 c 1,263,-1
- 930 -108 l 1,264,-1
- 930 -114 l 2,265,266
- 928 -120 928 -120 928 -130 c 0,267,268
- 926 -138 926 -138 926 -150 c 2,269,-1
- 926 -156 l 1,270,-1
- 926 -162 l 1,271,-1
- 926 -168 l 1,272,-1
- 926 -174 l 1,273,-1
- 926 -180 l 1,274,-1
- 926 -186 l 1,275,-1
- 930 -202 l 1,276,-1
- 930 -208 l 1,277,278
- 953 -271 953 -271 994 -271 c 0,279,280
- 1025 -271 1025 -271 1066 -236 c 0,281,282
- 1072 -235 1072 -235 1080 -242 c 1,283,284
- 1081 -369 1081 -369 980 -420 c 1,285,286
- 964 -422 964 -422 942 -418 c 0,287,288
- 919 -410 919 -410 896 -388 c 1,289,290
- 890 -374 890 -374 878 -356 c 1,291,-1
- 878 -350 l 1,292,-1
- 874 -346 l 2,293,294
- 874 -343 874 -343 872 -340 c 0,295,296
- 864 -294 864 -294 864 -249 c 0,297,298
+ 960 13 960 13 954 -10 c 6,256,-1
+ 950 -24 l 5,257,-1
+ 946 -32 l 5,258,-1
+ 944 -40 l 5,259,-1
+ 942 -46 l 5,260,-1
+ 942 -52 l 5,261,262
+ 935 -72 935 -72 932 -102 c 5,263,-1
+ 930 -108 l 5,264,-1
+ 930 -114 l 6,265,266
+ 928 -120 928 -120 928 -130 c 4,267,268
+ 926 -138 926 -138 926 -150 c 6,269,-1
+ 926 -156 l 5,270,-1
+ 926 -162 l 5,271,-1
+ 926 -168 l 5,272,-1
+ 926 -174 l 5,273,-1
+ 926 -180 l 5,274,-1
+ 926 -186 l 5,275,-1
+ 930 -202 l 5,276,-1
+ 930 -208 l 5,277,278
+ 953 -271 953 -271 994 -271 c 4,279,280
+ 1025 -271 1025 -271 1066 -236 c 4,281,282
+ 1072 -235 1072 -235 1080 -242 c 5,283,284
+ 1081 -369 1081 -369 980 -420 c 5,285,286
+ 964 -422 964 -422 942 -418 c 4,287,288
+ 919 -410 919 -410 896 -388 c 5,289,290
+ 890 -374 890 -374 878 -356 c 5,291,-1
+ 878 -350 l 5,292,-1
+ 874 -346 l 6,293,294
+ 874 -343 874 -343 872 -340 c 4,295,296
+ 864 -294 864 -294 864 -249 c 4,297,298
  864 -113 864 -113 934 24 c 1,299,-1
  890 22 l 1,300,-1
  884 22 l 2,301,302
@@ -47109,6 +47172,8 @@ SplineSet
  1210 1048 l 1,466,-1
  1214 1058 l 1,0,-1
 EndSplineSet
+LCarets2: 1 0
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFBA8.alt uniFBAF
 EndChar
 
 StartChar: tcheh.init_yehbarree.fina.liga
@@ -59016,7 +59081,7 @@ GlyphClass: 2
 Flags: W
 LayerCount: 4
 Fore
-Refer: 1469 64436 N -6.10352e-005 1 -1 -6.10352e-005 925 -379 2
+Refer: 1469 64436 N -6.10352e-05 1 -1 -6.10352e-05 925 -379 2
 EndChar
 
 StartChar: uniFBBE
@@ -59324,7 +59389,7 @@ SplineSet
  460 262 l 5
  460 262 327 219.599609375 248 198.299804688 c 4
  179.051610039 179.710092793 26.0813770794 178.995033246 2.95322960793 178.995033246 c 4
- 1.0256777311 178.995033246 2.62195863979e-014 179 0 179 c 5
+ 1.0256777311 178.995033246 2.62195863979e-14 179 0 179 c 5
  -68.5889882662 134.136765165 -96.1348685145 102.600000859 -96.1348685145 77.2336649932 c 4
  -96.1348685145 46.7108176111 -56.2515516891 25.1220522107 0 0 c 5
  2.87898989372 -0.143135358344 5.88350647799 -0.212567417786 9.0020205409 -0.212567417786 c 4
@@ -59497,6 +59562,8 @@ SplineSet
  1018 350 1018 350 936 501 c 0,61,62
  916 538 916 538 874 606 c 1,0,1
 EndSplineSet
+Substitution2: "'init' Initial Forms in Arabic lookup 2 subtable" uniFEE7
+Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" uniFEE8
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFB9F
 EndChar
 
@@ -61890,7 +61957,7 @@ AnchorPoint: "base" 1 90 exit 0
 AnchorPoint: "base" 1033 90 entry 0
 LayerCount: 4
 Fore
-Refer: 1036 65188 N 1 0 0 0.996298 -1.13687e-013 -0.317349 2
+Refer: 1036 65188 N 1 0 0 0.996298 -1.13687e-13 -0.317349 2
 Refer: 1474 64440 N 1 0 0 1 -228 -884 2
 LCarets2: 1 0
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" haa.medi haa.medi
@@ -62978,7 +63045,7 @@ StartChar: saad.init
 Encoding: 1552 -1 1552
 Width: 1190
 Flags: W
-AnchorPoint: "base" -1.13687e-013 89.0813 exit 0
+AnchorPoint: "base" -1.13687e-13 89.0813 exit 0
 AnchorPoint: "aboveSingle" 563 1366 basechar 0
 AnchorPoint: "belowSingle" 663 -400 basechar 0
 LayerCount: 4
@@ -64201,6 +64268,20 @@ LayerCount: 4
 Fore
 Refer: 474 1648 N 1 0 0 1 36 -135 2
 Refer: 1014 65166 N 1.02182 0 0 1 -32.362 0 2
+EndChar
+
+StartChar: uniFBA8
+Encoding: 1580 64424 1580
+Width: 807
+Flags: W
+AnchorPoint: "belowSingle" 414 -992 basechar 0
+AnchorPoint: "aboveSingle" 398 1341 basechar 0
+AnchorPoint: "base" 4 89.6934 exit 0
+LayerCount: 4
+Fore
+Refer: 906 -1 N 1 0 0 1 376 0 2
+Refer: 1176 -1 N 1 0 0 1 -28 3 2
+Substitution2: "hehgoal-1" uniFBA8.alt
 EndChar
 EndChars
 EndSplineFont
