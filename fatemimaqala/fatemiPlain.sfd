@@ -24,7 +24,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1452941080
+ModificationTime: 1452944360
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -1777,7 +1777,7 @@ NameList: AGL without afii
 DisplaySize: -36
 AntiAlias: 1
 FitToEm: 0
-WinInfo: 272 34 12
+WinInfo: 1190 34 12
 BeginPrivate: 0
 EndPrivate
 Grid
@@ -1790,7 +1790,7 @@ Grid
 EndSplineSet
 TeXData: 1 0 0 78848 39424 26282 440320 -1048576 26282 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
 AnchorClass2: "base" "basic" "belowmark" "marktomark-1" "abovemark" "marktomark-1" "subLiga" "kharoLiga-1" "supLiga" "kharoLiga-1" "subSingle" "kharoSingle-1" "supSingle" "kharoSingle-1" "belowSingle" "normalSingle" "aboveSingle" "normalSingle" "belowLiga" "normalLiga" "aboveLiga" "normalLiga" 
-BeginChars: 1581 1581
+BeginChars: 1583 1583
 
 StartChar: .notdef
 Encoding: 1142 -1 0
@@ -64266,7 +64266,7 @@ Flags: W
 AnchorPoint: "base" 402 90 entry 0
 LayerCount: 4
 Fore
-Refer: 474 1648 N 1 0 0 1 36 -135 2
+Refer: 474 1648 S 1 0 0 1 36 -135 2
 Refer: 1014 65166 N 1.02182 0 0 1 -32.362 0 2
 EndChar
 
@@ -64282,6 +64282,117 @@ Fore
 Refer: 906 -1 N 1 0 0 1 376 0 2
 Refer: 1176 -1 N 1 0 0 1 -28 3 2
 Substitution2: "hehgoal-1" uniFBA8.alt
+EndChar
+
+StartChar: laam_alefsupa.fina
+Encoding: 1581 -1 1581
+Width: 800
+Flags: W
+AnchorPoint: "supLiga" 633 1008 baselig 0
+AnchorPoint: "subLiga" 526 -259 baselig 0
+AnchorPoint: "aboveLiga" 781 1376 baselig 0
+AnchorPoint: "belowLiga" 553 -228 baselig 0
+AnchorPoint: "subLiga" 132 -234 baselig 1
+AnchorPoint: "belowLiga" 184 -228 baselig 1
+AnchorPoint: "aboveLiga" 67 1646 baselig 1
+AnchorPoint: "supLiga" 306 1155 baselig 1
+LayerCount: 4
+Fore
+SplineSet
+394 336 m 1
+ 372 323 372 323 351 306 c 0
+ 309 271 309 271 252 188 c 1
+ 281 135 281 135 334 135 c 0
+ 339 135 339 135 343 135 c 0
+ 399 140 399 140 439 188 c 1
+ 436 254 436 254 394 336 c 1
+438 521 m 1
+ 443 528 443 528 909 882 c 0
+ 1032 977 1032 977 1044 987 c 0
+ 1074 1014 1074 1014 1105 1017 c 0
+ 1125 1020 1125 1020 1123 1005 c 0
+ 1120 988 1120 988 1092 957 c 0
+ 1060 922 1060 922 908.5 786 c 0
+ 757 650 757 650 622 532 c 2
+ 486 414 l 1
+ 506 349 506 349 506 281 c 0
+ 506 224 506 224 492 163 c 0
+ 462 31 462 31 384 -11 c 0
+ 353 -27 353 -27 319 -27 c 0
+ 210 -25 210 -25 183 82 c 0
+ 174 116 174 116 174 149 c 0
+ 174 187 174 187 186 225 c 0
+ 187 226 187 226 187 227 c 0
+ 216 312 216 312 320 408 c 0
+ 338 424 338 424 355 438 c 1
+ 104 1074 l 1
+ 55 1102 55 1102 29 1174 c 0
+ 10 1228 10 1228 10 1297 c 0
+ 10 1312 10 1312 27.5 1350.5 c 0
+ 45 1389 45 1389 62 1420 c 2
+ 80 1451 l 1
+ 438 521 l 1
+EndSplineSet
+Refer: 474 1648 S 1 0 0 1 12 -57 2
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF alefsupalef.fina
+EndChar
+
+StartChar: laammedi_alefsupa.fina
+Encoding: 1582 -1 1582
+Width: 1199
+Flags: W
+AnchorPoint: "base" 1195 90 entry 0
+AnchorPoint: "subLiga" 766 -259 baselig 0
+AnchorPoint: "supLiga" 641 1184 baselig 0
+AnchorPoint: "aboveLiga" 840 1581 baselig 0
+AnchorPoint: "belowLiga" 816 -228 baselig 0
+AnchorPoint: "supLiga" 514 1195 baselig 1
+AnchorPoint: "subLiga" 372 -234 baselig 1
+AnchorPoint: "belowLiga" 363 -252 baselig 1
+AnchorPoint: "aboveLiga" 219 1479 baselig 1
+LayerCount: 4
+Fore
+SplineSet
+254 1311 m 1
+ 552 1047 552 1047 598 675 c 0
+ 606 608 606 608 606 543 c 0
+ 606 391 606 391 560 253 c 0
+ 546 211 546 211 530 179 c 1
+ 530 205 530 205 530 230 c 0
+ 530 401 530 401 524 468 c 0
+ 503 697 503 697 393 904 c 1
+ 380 902 380 902 367 902 c 0
+ 296 902 296 902 246 959 c 0
+ 194 1017 194 1017 194 1104 c 0
+ 194 1131 194 1131 199 1161 c 0
+ 212 1235 212 1235 254 1311 c 1
+1198 0 m 1
+ 1157 0 1157 0 1119 9 c 0
+ 875 71 875 71 853 516 c 1
+ 849 497 l 2
+ 845 478 845 478 831 442 c 0
+ 817 406 817 406 798 371 c 0
+ 794 364 794 364 784 341 c 0
+ 716 189 716 189 644 103 c 0
+ 483 -92 483 -92 250 -92 c 0
+ 125 -92 125 -92 -21 -36 c 1
+ 191 -22 191 -22 367 61 c 0
+ 595 170 595 170 730 375 c 0
+ 808 494 808 494 819 582 c 0
+ 822 604 822 604 822 641 c 0
+ 822 698 822 698 815 790 c 0
+ 797 1063 797 1063 762 1275 c 1
+ 878 1435 l 1
+ 892 1253 l 2
+ 906 1071 906 1071 927 832 c 0
+ 948 593 948 593 961 480 c 0
+ 973 376 973 376 1024 292 c 0
+ 1092 179 1092 179 1187 179 c 0
+ 1193 179 1193 179 1198 179 c 1
+ 1198 0 l 1
+EndSplineSet
+Refer: 474 1648 S 1 0 0 1 246 -90 2
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEE0 alefsupalef.fina
 EndChar
 EndChars
 EndSplineFont
