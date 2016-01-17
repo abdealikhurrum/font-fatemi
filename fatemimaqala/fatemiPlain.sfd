@@ -16,6 +16,7 @@ Layer: 0 1 "Back" 1
 Layer: 1 1 "Fore" 0
 Layer: 2 0 "Back 2" 1
 Layer: 3 1 "Back 3" 1
+NeedsXUIDChange: 1
 XUID: [1021 574 -2067448607 5288500]
 UseXUID: 1
 UseUniqueID: 1
@@ -24,7 +25,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1452944360
+ModificationTime: 1452967455
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -57,6 +58,7 @@ Lookup: 1 8 0 "'medi' Medial Forms in Arabic lookup 3" { "'medi' Medial Forms in
 Lookup: 1 8 0 "'init' Initial Forms in Arabic lookup 2" { "'init' Initial Forms in Arabic lookup 2 subtable"  } ['init' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 1 0 0 "'smcp' Lowercase to Small Capitals lookup 12" { "'smcp' Lowercase to Small Capitals lookup 12 subtable"  } ['smcp' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 1 0 0 "'c2sc' Capitals to Small Capitals in Latin lookup 11" { "'c2sc' Capitals to Small Capitals in Latin lookup 11 subtable"  } ['c2sc' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
+Lookup: 4 4 1 "'rlig' Required Ligatures in Arabic lookup 29" { "'rlig' Required Ligatures in Arabic lookup 29-1"  } ['rlig' ('arab' <'FAR ' > ) ]
 Lookup: 4 12 1 "'rlig' Required Ligatures in Arabic lookup 24" { "'rlig' Required Ligatures in Arabic lookup 24-1"  } ['rlig' ('arab' <'FAR ' > ) ]
 Lookup: 4 8 1 "honorifics" { "'rlig' Required Ligatures lookup 5 subtable"  } ['rlig' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 4 8 1 "'rlig' Required Ligatures lookup 21" { "'rlig' Required Ligatures lookup 21-1"  } ['rlig' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
@@ -1777,7 +1779,7 @@ NameList: AGL without afii
 DisplaySize: -36
 AntiAlias: 1
 FitToEm: 0
-WinInfo: 1190 34 12
+WinInfo: 782 34 12
 BeginPrivate: 0
 EndPrivate
 Grid
@@ -39888,7 +39890,7 @@ Encoding: 1068 65204 1052
 Width: 1001
 GlyphClass: 2
 Flags: W
-AnchorPoint: "base" -12 88.0813 exit 0
+AnchorPoint: "base" -12 90 exit 0
 AnchorPoint: "base" 998 90 entry 0
 AnchorPoint: "aboveSingle" 519 1361 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
@@ -39959,7 +39961,7 @@ Encoding: 1071 65207 1055
 Width: 899
 GlyphClass: 2
 Flags: W
-AnchorPoint: "base" -20 87.0813 exit 0
+AnchorPoint: "base" -20 90 exit 0
 AnchorPoint: "aboveSingle" 517 1353 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
 LayerCount: 4
@@ -39974,7 +39976,7 @@ Width: 995
 GlyphClass: 2
 Flags: W
 AnchorPoint: "base" 995 90 entry 0
-AnchorPoint: "base" -23 86.0813 exit 0
+AnchorPoint: "base" -23 90 exit 0
 AnchorPoint: "aboveSingle" 571 1372 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
 LayerCount: 4
@@ -40120,7 +40122,7 @@ Encoding: 1075 65211 1059
 Width: 1190
 GlyphClass: 2
 Flags: W
-AnchorPoint: "base" -1.13687e-13 89.0813 exit 0
+AnchorPoint: "base" -1 90 exit 0
 AnchorPoint: "aboveSingle" 563 1366 basechar 0
 AnchorPoint: "belowSingle" 663 -400 basechar 0
 LayerCount: 4
@@ -40166,7 +40168,7 @@ Width: 1208
 GlyphClass: 2
 Flags: W
 AnchorPoint: "base" 1204 90 entry 0
-AnchorPoint: "base" -2 90.0813 exit 0
+AnchorPoint: "base" 0 90 exit 0
 AnchorPoint: "aboveSingle" 631 1375 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
 LayerCount: 4
@@ -40349,7 +40351,7 @@ Encoding: 1079 65215 1063
 Width: 1195
 GlyphClass: 2
 Flags: W
-AnchorPoint: "base" -14 87.3875 exit 0
+AnchorPoint: "base" -14 90 exit 0
 AnchorPoint: "aboveSingle" 553 1358 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
 LayerCount: 4
@@ -40364,7 +40366,7 @@ Width: 1205
 GlyphClass: 2
 Flags: W
 AnchorPoint: "base" 1201 90 entry 0
-AnchorPoint: "base" -4 87.3875 exit 0
+AnchorPoint: "base" 0 90 exit 0
 AnchorPoint: "aboveSingle" 547 1367 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
 LayerCount: 4
@@ -40538,7 +40540,7 @@ Width: 960
 GlyphClass: 2
 Flags: W
 AnchorPoint: "base" 957 90 entry 0
-AnchorPoint: "base" -23 87.3875 exit 0
+AnchorPoint: "base" -23 90 exit 0
 AnchorPoint: "aboveSingle" 649 1329 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
 LayerCount: 4
@@ -40621,7 +40623,7 @@ Encoding: 1087 65223 1071
 Width: 882
 GlyphClass: 2
 Flags: W
-AnchorPoint: "base" -16 87.3875 exit 0
+AnchorPoint: "base" -16 90 exit 0
 AnchorPoint: "aboveSingle" 631 1368 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
 LayerCount: 4
@@ -40636,7 +40638,7 @@ Width: 960
 GlyphClass: 2
 Flags: W
 AnchorPoint: "base" 959 90 entry 0
-AnchorPoint: "base" -23 87.3875 exit 0
+AnchorPoint: "base" -23 90 exit 0
 AnchorPoint: "aboveSingle" 623 1377 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
 LayerCount: 4
@@ -40803,7 +40805,7 @@ Width: 679
 GlyphClass: 2
 Flags: W
 AnchorPoint: "base" 678 90 entry 0
-AnchorPoint: "base" -4 87.3875 exit 0
+AnchorPoint: "base" 0 90 exit 0
 AnchorPoint: "aboveSingle" 337 1365 basechar 0
 AnchorPoint: "belowSingle" 343 -415 basechar 0
 LayerCount: 4
@@ -41213,7 +41215,7 @@ Encoding: 1095 65231 1079
 Width: 704
 GlyphClass: 2
 Flags: W
-AnchorPoint: "base" -20 83.0813 exit 0
+AnchorPoint: "base" -20 90 exit 0
 AnchorPoint: "aboveSingle" 315 1371 basechar 0
 AnchorPoint: "belowSingle" 313 -419 basechar 0
 LayerCount: 4
@@ -41228,7 +41230,7 @@ Width: 677
 GlyphClass: 2
 Flags: W
 AnchorPoint: "base" 674 90 entry 0
-AnchorPoint: "base" -25 87.3875 exit 0
+AnchorPoint: "base" -25 90 exit 0
 AnchorPoint: "aboveSingle" 331 1349 basechar 0
 AnchorPoint: "belowSingle" 337 -403 basechar 0
 LayerCount: 4
@@ -41398,7 +41400,7 @@ Width: 620
 GlyphClass: 2
 Flags: W
 AnchorPoint: "base" 613 90 entry 0
-AnchorPoint: "base" -5 88.3875 exit 0
+AnchorPoint: "base" -5 90 exit 0
 AnchorPoint: "aboveSingle" 307 1370 basechar 0
 AnchorPoint: "belowSingle" 277 -421 basechar 0
 LayerCount: 4
@@ -41592,7 +41594,7 @@ Width: 788
 GlyphClass: 2
 Flags: W
 AnchorPoint: "base" 784 90 entry 0
-AnchorPoint: "base" -8 87.3875 exit 0
+AnchorPoint: "base" -8 90 exit 0
 AnchorPoint: "aboveSingle" 239 1529 basechar 0
 AnchorPoint: "belowSingle" 361 -409 basechar 0
 LayerCount: 4
@@ -41758,7 +41760,7 @@ Encoding: 1112 65248 1096
 Width: 645
 GlyphClass: 2
 Flags: W
-AnchorPoint: "base" -1 89.4688 exit 0
+AnchorPoint: "base" -1 90 exit 0
 AnchorPoint: "base" 641 90 entry 0
 AnchorPoint: "aboveSingle" 238 1490 basechar 0
 AnchorPoint: "belowSingle" 301 -404 basechar 0
@@ -41917,7 +41919,7 @@ Width: 585
 GlyphClass: 2
 Flags: W
 AnchorPoint: "base" 585 90 entry 0
-AnchorPoint: "base" -1 89.4688 exit 0
+AnchorPoint: "base" -1 90 exit 0
 AnchorPoint: "aboveSingle" 275 873 basechar 0
 AnchorPoint: "belowSingle" 305 -417 basechar 0
 LayerCount: 4
@@ -42064,7 +42066,7 @@ Encoding: 1119 65255 1103
 Width: 399
 GlyphClass: 2
 Flags: W
-AnchorPoint: "base" -11 90 exit 0
+AnchorPoint: "base" 0 90 exit 0
 AnchorPoint: "aboveSingle" 187 1376 basechar 0
 AnchorPoint: "belowSingle" 157 -403 basechar 0
 LayerCount: 4
@@ -42075,17 +42077,17 @@ EndChar
 
 StartChar: uniFEE8
 Encoding: 1120 65256 1104
-Width: 436
+Width: 439
 GlyphClass: 2
 Flags: W
-AnchorPoint: "base" 437 90 entry 0
-AnchorPoint: "base" -1 89.4688 exit 0
+AnchorPoint: "base" 439 90 entry 0
+AnchorPoint: "base" 0 90 exit 0
 AnchorPoint: "aboveSingle" 181 1353 basechar 0
 AnchorPoint: "belowSingle" 205 -415 basechar 0
 LayerCount: 4
 Fore
 Refer: 1468 64434 N 1 0 0 1 -637 532 2
-Refer: 1176 -1 N 1 0 0 1 0 -3 2
+Refer: 1176 -1 S 1.00642 0 0 1 -2.81937 -4.61249 2
 EndChar
 
 StartChar: uniFEE9
@@ -47172,8 +47174,7 @@ SplineSet
  1210 1048 l 1,466,-1
  1214 1058 l 1,0,-1
 EndSplineSet
-LCarets2: 1 0
-Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFBA8.alt uniFBAF
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFBA8 uniFBAF
 EndChar
 
 StartChar: tcheh.init_yehbarree.fina.liga
@@ -62582,6 +62583,8 @@ Flags: W
 LayerCount: 4
 Fore
 Refer: 1210 -1 N 1 0 0 1 0 0 2
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 29-1" haa.init haa.medi uniFEEC seen.medi seen.fina
+LCarets2: 4 1452 1084 470 234
 Ligature2: "'rlig' Required Ligatures lookup 26-1" haa.init haa.medi uniFEEC seen.medi seen.fina
 EndChar
 
@@ -62933,7 +62936,7 @@ StartChar: seen.medi
 Encoding: 1550 -1 1550
 Width: 1001
 Flags: W
-AnchorPoint: "base" -12 88.0813 exit 0
+AnchorPoint: "base" -12 90 exit 0
 AnchorPoint: "base" 998 90 entry 0
 AnchorPoint: "aboveSingle" 519 1361 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
@@ -63090,7 +63093,7 @@ Encoding: 1553 -1 1553
 Width: 1208
 Flags: W
 AnchorPoint: "base" 1204 90 entry 0
-AnchorPoint: "base" -2 90.0813 exit 0
+AnchorPoint: "base" -2 90 exit 0
 AnchorPoint: "aboveSingle" 631 1375 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
 LayerCount: 4
@@ -63159,7 +63162,7 @@ StartChar: daad.init
 Encoding: 1555 -1 1555
 Width: 1195
 Flags: W
-AnchorPoint: "base" -14 87.3875 exit 0
+AnchorPoint: "base" -14 90 exit 0
 AnchorPoint: "aboveSingle" 553 1358 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
 LayerCount: 4
@@ -63173,7 +63176,7 @@ Encoding: 1556 -1 1556
 Width: 1205
 Flags: W
 AnchorPoint: "base" 1201 90 entry 0
-AnchorPoint: "base" -4 87.3875 exit 0
+AnchorPoint: "base" -4 90 exit 0
 AnchorPoint: "aboveSingle" 547 1367 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
 LayerCount: 4
@@ -63291,7 +63294,7 @@ Encoding: 1559 -1 1559
 Width: 960
 Flags: W
 AnchorPoint: "base" 957 90 entry 0
-AnchorPoint: "base" -23 87.3875 exit 0
+AnchorPoint: "base" -23 90 exit 0
 AnchorPoint: "aboveSingle" 649 1329 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
 LayerCount: 4
@@ -63359,7 +63362,7 @@ StartChar: zaa.init
 Encoding: 1561 -1 1561
 Width: 882
 Flags: W
-AnchorPoint: "base" -16 87.3875 exit 0
+AnchorPoint: "base" -16 90 exit 0
 AnchorPoint: "aboveSingle" 631 1368 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
 LayerCount: 4
@@ -63373,7 +63376,7 @@ Encoding: 1562 -1 1562
 Width: 960
 Flags: W
 AnchorPoint: "base" 959 90 entry 0
-AnchorPoint: "base" -23 87.3875 exit 0
+AnchorPoint: "base" -23 90 exit 0
 AnchorPoint: "aboveSingle" 623 1377 basechar 0
 AnchorPoint: "belowSingle" 529 -433 basechar 0
 LayerCount: 4
@@ -63495,7 +63498,7 @@ Encoding: 1565 -1 1565
 Width: 788
 Flags: W
 AnchorPoint: "base" 784 90 entry 0
-AnchorPoint: "base" -8 87.3875 exit 0
+AnchorPoint: "base" -8 90 exit 0
 AnchorPoint: "aboveSingle" 239 1529 basechar 0
 AnchorPoint: "belowSingle" 361 -409 basechar 0
 LayerCount: 4
@@ -64276,7 +64279,7 @@ Width: 807
 Flags: W
 AnchorPoint: "belowSingle" 414 -992 basechar 0
 AnchorPoint: "aboveSingle" 398 1341 basechar 0
-AnchorPoint: "base" 4 89.6934 exit 0
+AnchorPoint: "base" 4 90 exit 0
 LayerCount: 4
 Fore
 Refer: 906 -1 N 1 0 0 1 376 0 2
@@ -64299,39 +64302,39 @@ AnchorPoint: "supLiga" 306 1155 baselig 1
 LayerCount: 4
 Fore
 SplineSet
-394 336 m 1
- 372 323 372 323 351 306 c 0
- 309 271 309 271 252 188 c 1
- 281 135 281 135 334 135 c 0
- 339 135 339 135 343 135 c 0
- 399 140 399 140 439 188 c 1
- 436 254 436 254 394 336 c 1
-438 521 m 1
- 443 528 443 528 909 882 c 0
- 1032 977 1032 977 1044 987 c 0
- 1074 1014 1074 1014 1105 1017 c 0
- 1125 1020 1125 1020 1123 1005 c 0
- 1120 988 1120 988 1092 957 c 0
- 1060 922 1060 922 908.5 786 c 0
- 757 650 757 650 622 532 c 2
- 486 414 l 1
- 506 349 506 349 506 281 c 0
- 506 224 506 224 492 163 c 0
- 462 31 462 31 384 -11 c 0
- 353 -27 353 -27 319 -27 c 0
- 210 -25 210 -25 183 82 c 0
- 174 116 174 116 174 149 c 0
- 174 187 174 187 186 225 c 0
- 187 226 187 226 187 227 c 0
- 216 312 216 312 320 408 c 0
- 338 424 338 424 355 438 c 1
- 104 1074 l 1
- 55 1102 55 1102 29 1174 c 0
- 10 1228 10 1228 10 1297 c 0
- 10 1312 10 1312 27.5 1350.5 c 0
- 45 1389 45 1389 62 1420 c 2
- 80 1451 l 1
- 438 521 l 1
+394 336 m 1,0,1
+ 372 323 372 323 351 306 c 0,2,3
+ 309 271 309 271 252 188 c 1,4,5
+ 281 135 281 135 334 135 c 0,6,7
+ 339 135 339 135 343 135 c 0,8,9
+ 399 140 399 140 439 188 c 1,10,11
+ 436 254 436 254 394 336 c 1,0,1
+438 521 m 1,12,13
+ 443 528 443 528 909 882 c 0,14,15
+ 1032 977 1032 977 1044 987 c 0,16,17
+ 1074 1014 1074 1014 1105 1017 c 0,18,19
+ 1125 1020 1125 1020 1123 1005 c 0,20,21
+ 1120 988 1120 988 1092 957 c 0,22,23
+ 1060 922 1060 922 908.5 786 c 0,24,25
+ 757 650 757 650 622 532 c 2,26,-1
+ 486 414 l 1,27,28
+ 506 349 506 349 506 281 c 0,29,30
+ 506 224 506 224 492 163 c 0,31,32
+ 462 31 462 31 384 -11 c 0,33,34
+ 353 -27 353 -27 319 -27 c 0,35,36
+ 210 -25 210 -25 183 82 c 0,37,38
+ 174 116 174 116 174 149 c 0,39,40
+ 174 187 174 187 186 225 c 0,41,42
+ 187 226 187 226 187 227 c 0,43,44
+ 216 312 216 312 320 408 c 0,45,46
+ 338 424 338 424 355 438 c 1,47,-1
+ 104 1074 l 1,48,49
+ 55 1102 55 1102 29 1174 c 0,50,51
+ 10 1228 10 1228 10 1297 c 0,52,53
+ 10 1312 10 1312 27.5 1350.5 c 0,54,55
+ 45 1389 45 1389 62 1420 c 2,56,-1
+ 80 1451 l 1,57,-1
+ 438 521 l 1,12,13
 EndSplineSet
 Refer: 474 1648 S 1 0 0 1 12 -57 2
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF alefsupalef.fina
@@ -64353,43 +64356,43 @@ AnchorPoint: "aboveLiga" 219 1479 baselig 1
 LayerCount: 4
 Fore
 SplineSet
-254 1311 m 1
- 552 1047 552 1047 598 675 c 0
- 606 608 606 608 606 543 c 0
- 606 391 606 391 560 253 c 0
- 546 211 546 211 530 179 c 1
- 530 205 530 205 530 230 c 0
- 530 401 530 401 524 468 c 0
- 503 697 503 697 393 904 c 1
- 380 902 380 902 367 902 c 0
- 296 902 296 902 246 959 c 0
- 194 1017 194 1017 194 1104 c 0
- 194 1131 194 1131 199 1161 c 0
- 212 1235 212 1235 254 1311 c 1
-1198 0 m 1
- 1157 0 1157 0 1119 9 c 0
- 875 71 875 71 853 516 c 1
- 849 497 l 2
- 845 478 845 478 831 442 c 0
- 817 406 817 406 798 371 c 0
- 794 364 794 364 784 341 c 0
- 716 189 716 189 644 103 c 0
- 483 -92 483 -92 250 -92 c 0
- 125 -92 125 -92 -21 -36 c 1
- 191 -22 191 -22 367 61 c 0
- 595 170 595 170 730 375 c 0
- 808 494 808 494 819 582 c 0
- 822 604 822 604 822 641 c 0
- 822 698 822 698 815 790 c 0
- 797 1063 797 1063 762 1275 c 1
- 878 1435 l 1
- 892 1253 l 2
- 906 1071 906 1071 927 832 c 0
- 948 593 948 593 961 480 c 0
- 973 376 973 376 1024 292 c 0
- 1092 179 1092 179 1187 179 c 0
- 1193 179 1193 179 1198 179 c 1
- 1198 0 l 1
+254 1311 m 1,0,1
+ 552 1047 552 1047 598 675 c 0,2,3
+ 606 608 606 608 606 543 c 0,4,5
+ 606 391 606 391 560 253 c 0,6,7
+ 546 211 546 211 530 179 c 1,8,9
+ 530 205 530 205 530 230 c 0,10,11
+ 530 401 530 401 524 468 c 0,12,13
+ 503 697 503 697 393 904 c 1,14,15
+ 380 902 380 902 367 902 c 0,16,17
+ 296 902 296 902 246 959 c 0,18,19
+ 194 1017 194 1017 194 1104 c 0,20,21
+ 194 1131 194 1131 199 1161 c 0,22,23
+ 212 1235 212 1235 254 1311 c 1,0,1
+1198 0 m 1,24,25
+ 1157 0 1157 0 1119 9 c 0,26,27
+ 875 71 875 71 853 516 c 1,28,-1
+ 849 497 l 2,29,30
+ 845 478 845 478 831 442 c 0,31,32
+ 817 406 817 406 798 371 c 0,33,34
+ 794 364 794 364 784 341 c 0,35,36
+ 716 189 716 189 644 103 c 0,37,38
+ 483 -92 483 -92 250 -92 c 0,39,40
+ 125 -92 125 -92 -21 -36 c 1,41,42
+ 191 -22 191 -22 367 61 c 0,43,44
+ 595 170 595 170 730 375 c 0,45,46
+ 808 494 808 494 819 582 c 0,47,48
+ 822 604 822 604 822 641 c 0,49,50
+ 822 698 822 698 815 790 c 0,51,52
+ 797 1063 797 1063 762 1275 c 1,53,-1
+ 878 1435 l 1,54,-1
+ 892 1253 l 2,55,56
+ 906 1071 906 1071 927 832 c 0,57,58
+ 948 593 948 593 961 480 c 0,59,60
+ 973 376 973 376 1024 292 c 0,61,62
+ 1092 179 1092 179 1187 179 c 0,63,64
+ 1193 179 1193 179 1198 179 c 1,65,-1
+ 1198 0 l 1,24,25
 EndSplineSet
 Refer: 474 1648 S 1 0 0 1 246 -90 2
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEE0 alefsupalef.fina
