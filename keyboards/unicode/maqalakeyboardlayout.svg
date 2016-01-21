@@ -227,7 +227,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -3763,5 +3763,10 @@
          style="fill:#ffffff;font-family:FatemiMaqala;-inkscape-font-specification:FatemiMaqala"
          id="path3532" />
     </g>
+    <path
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#008000;fill-opacity:1;stroke:none;font-family:Swis721 BT"
+       d="m 639.60872,98.078666 -0.68888,0.9707 -0.6654,-0.46578 0.75151,-0.9433 -1.09595,-0.3053 0.25442,-0.79456 1.05289,0.37575 0,-1.12335 0.77499,0 0,1.12335 1.0529,-0.36792 0.26224,0.79456 -1.09595,0.29747 0.74368,0.93547 -0.68105,0.48927 -0.6654,-0.98636"
+       id="path3827"
+       inkscape:connector-curvature="0" />
   </g>
 </svg>
