@@ -25,23 +25,23 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1460281112
+ModificationTime: 1460282319
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
 LineGap: -100
 VLineGap: 0
 Panose: 0 0 0 0 0 0 0 0 0 0
-OS2TypoAscent: 2200
+OS2TypoAscent: 2500
 OS2TypoAOffset: 0
 OS2TypoDescent: -1400
 OS2TypoDOffset: 0
 OS2TypoLinegap: -100
-OS2WinAscent: 2200
+OS2WinAscent: 2500
 OS2WinAOffset: 0
 OS2WinDescent: 1400
 OS2WinDOffset: 0
-HheadAscent: 2200
+HheadAscent: 2500
 HheadAOffset: 0
 HheadDescent: -1400
 HheadDOffset: 0
@@ -1779,9 +1779,9 @@ Compacted: 1
 UnicodeInterp: none
 NameList: AGL without afii
 DisplaySize: -36
-AntiAlias: 0
-FitToEm: 0
-WinInfo: 936 36 11
+AntiAlias: 1
+FitToEm: 1
+WinInfo: 414 18 6
 BeginPrivate: 0
 EndPrivate
 Grid
@@ -6712,6 +6712,7 @@ SplineSet
  589 536 589 536 542 554 c 0,0,1
 EndSplineSet
 Validated: 1
+Substitution2: "'locl' Localized Forms in Arabic lookup 30-1" uni0653
 Substitution2: "'smcp' Lowercase to Small Capitals lookup 12 subtable" asciitilde.sc
 EndChar
 
@@ -13370,7 +13371,6 @@ LayerCount: 4
 Fore
 Refer: 376 771 N 1 0 0 1 850 12 2
 Validated: 1
-Substitution2: "'locl' Localized Forms in Arabic lookup 30-1" uni0653
 EndChar
 
 StartChar: hungarumlaut
@@ -16372,7 +16372,6 @@ AnchorPoint: "belowSingle" 231 -1432 basechar 0
 LayerCount: 4
 Fore
 Refer: 1091 65249 N 1 0 0 1 0 0 2
-Validated: 1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFEE2
 Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" uniFEE4
 Substitution2: "'init' Initial Forms in Arabic lookup 2 subtable" uniFEE3
@@ -40412,6 +40411,8 @@ Encoding: 65247 65247 1089
 Width: 453
 GlyphClass: 2
 Flags: W
+AnchorPoint: "subSingle" 134 -215 basechar 0
+AnchorPoint: "supSingle" -1 954 basechar 0
 AnchorPoint: "base" -4 90 exit 0
 AnchorPoint: "aboveSingle" 203 1599 basechar 0
 AnchorPoint: "belowSingle" 161 -391 basechar 0
@@ -40433,7 +40434,6 @@ SplineSet
  193 249 193 249 216 278 c 1,23,-1
  124 1286 l 1,0,-1
 EndSplineSet
-Validated: 1
 MultipleSubs2: "longlaamkaafs-1" uniFEDF uni0640.1
 EndChar
 
@@ -40442,6 +40442,8 @@ Encoding: 65248 65248 1090
 Width: 645
 GlyphClass: 2
 Flags: W
+AnchorPoint: "subSingle" 271 -135 basechar 0
+AnchorPoint: "supSingle" 36 956 basechar 0
 AnchorPoint: "base" -1 90 exit 0
 AnchorPoint: "base" 641 90 entry 0
 AnchorPoint: "aboveSingle" 238 1490 basechar 0
@@ -40471,7 +40473,6 @@ SplineSet
  243 522.428571429 243 522.428571429 237 594 c 2,35,-1
  181 1262 l 1,0,-1
 EndSplineSet
-Validated: 1
 MultipleSubs2: "longlaamkaafs-1" uniFEE0 uni0640.1
 EndChar
 
@@ -40483,7 +40484,7 @@ Flags: W
 AnchorPoint: "supSingle" 368 956 basechar 0
 AnchorPoint: "subSingle" 472 -112 basechar 0
 AnchorPoint: "aboveSingle" 371 961 basechar 0
-AnchorPoint: "belowSingle" 221 -1241 basechar 0
+AnchorPoint: "belowSingle" 476 -171 basechar 0
 LayerCount: 4
 Fore
 SplineSet
@@ -40510,7 +40511,6 @@ SplineSet
  106 220 106 220 226 302 c 0,36,37
  256 322 256 322 291 334 c 1,0,1
 EndSplineSet
-Validated: 1
 EndChar
 
 StartChar: uniFEE2
@@ -40522,7 +40522,7 @@ AnchorPoint: "base" 1083 90 entry 0
 AnchorPoint: "supSingle" 624 1054 basechar 0
 AnchorPoint: "subSingle" 660 -314 basechar 0
 AnchorPoint: "aboveSingle" 615 1049 basechar 0
-AnchorPoint: "belowSingle" 257 -1297 basechar 0
+AnchorPoint: "belowSingle" 662 -357 basechar 0
 LayerCount: 4
 Fore
 SplineSet
@@ -40552,7 +40552,6 @@ SplineSet
  1084 179 l 1,42,-1
  1084 0 l 1,0,1
 EndSplineSet
-Validated: 1
 EndChar
 
 StartChar: uniFEE3
@@ -41300,15 +41299,14 @@ GlyphClass: 3
 LigCaretCntFixed: 1
 Flags: W
 AnchorPoint: "base" 1193 90 entry 0
-AnchorPoint: "aboveLiga" 813 2094 baselig 0
+AnchorPoint: "aboveLiga" 819 1728 baselig 0
 AnchorPoint: "belowLiga" 941 -394 baselig 0
-AnchorPoint: "aboveLiga" 205 2070 baselig 1
+AnchorPoint: "aboveLiga" 211 1842 baselig 1
 AnchorPoint: "belowLiga" 333 -418 baselig 1
 LayerCount: 4
 Fore
-Refer: 456 1619 N 1.49695 0 0 1.61859 243 -1067 2
+Refer: 456 1619 N 1.49695 0 0 1.61859 15 -1313 2
 Refer: 1118 65276 N 1 0 0 1 0 1.69376 2
-Validated: 1
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEE0 uniFE82
 LCarets2: 1 600
 EndChar
