@@ -25,7 +25,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1465274097
+ModificationTime: 1470571322
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -54,20 +54,23 @@ Lookup: 2 0 0 "longlaamkaafs" { "longlaamkaafs-1"  } []
 Lookup: 3 0 0 "shortalefs" { "'aalt' Access All Alternates lookup 8 subtable"  } []
 Lookup: 1 0 0 "straightrehs" { "straightrehs-1"  } []
 Lookup: 1 8 0 "hehgoal" { "hehgoal-1"  } []
+Lookup: 1 0 0 "jalaalahzabr" { "jalaalahzabr-1"  } []
 Lookup: 1 8 0 "'fina' Terminal Forms in Arabic lookup 4" { "'fina' Terminal Forms in Arabic lookup 4 subtable"  } ['fina' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 1 8 0 "'medi' Medial Forms in Arabic lookup 3" { "'medi' Medial Forms in Arabic lookup 3 subtable"  } ['medi' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 1 8 0 "'init' Initial Forms in Arabic lookup 2" { "'init' Initial Forms in Arabic lookup 2 subtable"  } ['init' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
-Lookup: 1 0 0 "'smcp' Lowercase to Small Capitals lookup 12" { "'smcp' Lowercase to Small Capitals lookup 12 subtable"  } ['smcp' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 1 0 0 "'c2sc' Capitals to Small Capitals in Latin lookup 11" { "'c2sc' Capitals to Small Capitals in Latin lookup 11 subtable"  } ['c2sc' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
-Lookup: 4 4 1 "chheCase1" { "'rlig' Required Ligatures in Arabic lookup 29-1"  } ['rlig' ('arab' <'FAR ' > ) ]
+Lookup: 1 0 0 "'smcp' Lowercase to Small Capitals lookup 12" { "'smcp' Lowercase to Small Capitals lookup 12 subtable"  } ['smcp' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 4 12 1 "doublePress" { "'rlig' Required Ligatures in Arabic lookup 24-1"  } ['rlig' ('arab' <'FAR ' > ) ]
 Lookup: 4 8 1 "honorifics" { "'rlig' Required Ligatures lookup 5 subtable"  } ['rlig' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 4 8 1 "kashidas" { "'rlig' Required Ligatures lookup 21-1"  } ['rlig' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
-Lookup: 6 8 0 "hehGoalForms" { "'calt' Contextual Alternates lookup 27-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
+Lookup: 4 4 1 "chheCase1" { "'rlig' Required Ligatures in Arabic lookup 29-1"  } ['rlig' ('arab' <'FAR ' > ) ]
 Lookup: 6 4 0 "shortalefcontext" { "'calt' Contextual Alternates lookup 7 contextual 1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 6 0 0 "hamzaunderalefContext" { "shortunderalefcontext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 6 8 0 "straightrehscontext" { "straightrehscontext-4"  "straightrehscontext-1"  "straightrehscontext-2"  "straightrehscontext-3"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 5 8 0 "longlaamkaafcontext" { "'calt' Contextual Alternates in Arabic lookup 21-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
+Lookup: 6 8 0 "hehGoalForms" { "'calt' Contextual Alternates lookup 27-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
+Lookup: 6 0 0 "jalalahZabrContext" { "jalalahZabrContext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
+Lookup: 4 0 1 "jalaalahtashdeed" { "jalaalahtashdeed-1"  } ['liga' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 4 8 1 "standardArabicLigas" { "'liga' Standard Ligatures in Arabic lookup 6 subtable"  } ['liga' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 4 0 1 "'liga' Standard Ligatures lookup 13" { "'liga' Standard Ligatures lookup 13 subtable"  } ['liga' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 4 12 1 "chheCase2" { "'rlig' Required Ligatures lookup 26-1"  } [' RQD' ('arab' <'FAR ' > ) ]
@@ -85,7 +88,8 @@ Lookup: 258 8 0 "'kern' Horizontal Kerning in Arabic lookup 5" { "'kern' Horizon
 Lookup: 257 0 0 "aynvert" { "aynvert-1"  } []
 Lookup: 259 9 0 "'curs' Cursive Attachment in Arabic lookup 4" { "basic"  } ['curs' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 258 0 0 "'kern' Horizontal Kerning lookup 5" { "'kern' Horizontal Kerning lookup 5 kerning class 0" [307,0,0] "'kern' Horizontal Kerning lookup 5 kerning class 1"  "'kern' Horizontal Kerning lookup 5 kerning class 2"  "'kern' Horizontal Kerning lookup 5 kerning class 3"  "'kern' Horizontal Kerning lookup 5 kerning class 4"  "'kern' Horizontal Kerning lookup 5 kerning class 5"  "'kern' Horizontal Kerning lookup 5 kerning class 6" [307,0,0] "'kern' Horizontal Kerning lookup 5 kerning class 7" [307,0,0] "'kern' Horizontal Kerning lookup 5 kerning class 8" [307,0,0] } ['kern' ('DFLT' <'dflt' > 'arab' <'ARA ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
-Lookup: 260 4 0 "kharoSingle" { "kharoSingle-1"  "normalSingle"  } ['mark' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
+Lookup: 264 0 0 "rehhehbelowmark" { "rehhehbelowmark-2"  "rehhehbelowmark-1"  } [' RQD' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
+Lookup: 260 4 0 "kharoSingle" { "kharoSingle-1" "hehzer-1"  "normalSingle"  } ['mark' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 261 4 0 "kharoLiga" { "kharoLiga-1"  "normalLiga"  } ['mark' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 262 4 0 "marktomark" { "marktomark-1"  } ['mkmk' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 MarkAttachClasses: 1
@@ -517,6 +521,33 @@ KernClass2: 7+ 9 "'kern' Horizontal Kerning lookup 5 kerning class 8"
  19 w.sc wcircumflex.sc
  53 y.sc yacute.sc ycircumflex.sc ydieresis.sc uni0233.sc
  0 {} -66 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 16 {} -30 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} -78 {} 0 {} -32 {} -20 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} -32 {} -20 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} -32 {} -28 {} -44 {} -32 {} 0 {} 0 {} 0 {} 0 {} 0 {} -44 {} 0 {} -46 {} -32 {} 0 {} 0 {} 0 {} 0 {} 0 {} -40 {} 0 {} -44 {} -28 {}
+ChainSub2: coverage "jalalahZabrContext-1" 0 0 0 1
+ 1 3 1
+  Coverage: 7 uni064E
+  BCoverage: 7 uni0651
+  BCoverage: 7 uniFEE0
+  BCoverage: 7 uniFEDF
+  FCoverage: 23 uniFBA7 uniFBAB uniFEEA
+ 1
+  SeqLookup: 0 "jalaalahzabr"
+EndFPST
+ChainPos2: coverage "rehhehbelowmark-2" 0 0 0 1
+ 1 2 1
+  Coverage: 8 zaa.fina
+  BCoverage: 8 zaa.init
+  BCoverage: 63 uni0631 uni0632 uni0691 uni0698 uniFB8A uniFB8C uniFEAD uniFEAF
+  FCoverage: 23 uni064D uni0650 uni0655
+ 1
+  SeqLookup: 0 "hehzer"
+EndFPST
+ChainPos2: coverage "rehhehbelowmark-1" 0 0 0 1
+ 1 1 1
+  Coverage: 71 uni0629 uni0647 uni06BE uni06D5 uniFBA4 uniFBA6 uniFBAA uniFE93 uniFEE9
+  BCoverage: 63 uni0631 uni0632 uni0691 uni0698 uniFB8A uniFB8C uniFEAD uniFEAF
+  FCoverage: 23 uni064D uni0650 uni0655
+ 1
+  SeqLookup: 0 "hehzer"
+EndFPST
 ChainSub2: coverage "'calt' Contextual Alternates lookup 27-1" 0 0 0 1
  1 0 1
   Coverage: 7 uniFBA8
@@ -1780,7 +1811,7 @@ NameList: AGL without afii
 DisplaySize: -36
 AntiAlias: 1
 FitToEm: 1
-WinInfo: 615 41 13
+WinInfo: 1107 41 13
 BeginPrivate: 0
 EndPrivate
 Grid
@@ -1792,8 +1823,8 @@ Grid
   Named: "anchor"
 EndSplineSet
 TeXData: 1 0 0 78848 39424 26282 440320 -1048576 26282 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
-AnchorClass2: "base" "basic" "belowmark" "marktomark-1" "abovemark" "marktomark-1" "subLiga" "kharoLiga-1" "supLiga" "kharoLiga-1" "subSingle" "kharoSingle-1" "supSingle" "kharoSingle-1" "belowSingle" "normalSingle" "aboveSingle" "normalSingle" "belowLiga" "normalLiga" "aboveLiga" "normalLiga" 
-BeginChars: 1616 1618
+AnchorClass2: "zer" "hehzer-1" "base" "basic" "belowmark" "marktomark-1" "abovemark" "marktomark-1" "subLiga" "kharoLiga-1" "supLiga" "kharoLiga-1" "subSingle" "kharoSingle-1" "supSingle" "kharoSingle-1" "belowSingle" "normalSingle" "aboveSingle" "normalSingle" "belowLiga" "normalLiga" "aboveLiga" "normalLiga" 
+BeginChars: 1619 1621
 
 StartChar: .notdef
 Encoding: 1202 -1 0
@@ -15223,13 +15254,13 @@ Encoding: 416 1577 418
 Width: 629
 GlyphClass: 2
 Flags: W
+AnchorPoint: "zer" 313 -640 basechar 0
 AnchorPoint: "aboveSingle" 324 1497 basechar 0
 AnchorPoint: "belowSingle" 282 -195 basechar 0
 LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 -322 978 2
 Refer: 443 1607 N 1 0 0 1 -15 0 2
-Validated: 1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFE94
 EndChar
 
@@ -15418,10 +15449,10 @@ AnchorPoint: "belowSingle" 364 -660 basechar 0
 LayerCount: 4
 Fore
 SplineSet
-690 245 m 2,0,1
- 699 246 699 246 708 246 c 0,2,3
- 765 246 765 246 820 212 c 0,4,5
- 826 204 826 204 836 200 c 1,6,-1
+704 246 m 6,0,1
+ 708 246 l 0,2,3
+ 775 246 775 246 820 212 c 0,4,5
+ 828 206 828 206 836 200 c 1,6,-1
  862 175 l 1,7,-1
  864 110 l 2,8,9
  865 108 865 108 865 106 c 0,10,11
@@ -15430,19 +15461,19 @@ SplineSet
  854 33 l 1,14,-1
  846 10 l 1,15,-1
  835 -3 l 2,16,17
- 832 -4 832 -4 829 -4 c 0,18,19
- 824 -4 824 -4 820 -2 c 0,20,21
- 755 85 755 85 653 85 c 2,22,-1
+ 834 -4 834 -4 829 -4 c 0,18,19
+ 822 -4 822 -4 820 -2 c 0,20,21
+ 753 85 753 85 653 85 c 2,22,-1
  651 85 l 1,23,-1
  640 83 l 2,24,25
- 631 83 631 83 618 78 c 1,26,-1
+ 623 80 623 80 618 78 c 1,26,-1
  614 78 l 1,27,-1
  581 66 l 1,28,-1
  538 41 l 1,29,-1
  537 39 l 1,30,-1
  518 28 l 1,31,-1
  516 25 l 2,32,33
- 511 23 511 23 500 14 c 2,34,-1
+ 510.256756757 22.7027027027 510.256756757 22.7027027027 500 14 c 2,34,-1
  467 -14 l 1,35,-1
  434 -45 l 1,36,-1
  396 -85 l 1,37,-1
@@ -15450,11 +15481,11 @@ SplineSet
  384 -97 384 -97 377 -110 c 1,40,-1
  369 -118 l 1,41,-1
  350 -144 l 2,42,43
- 342 -152 342 -152 335 -163 c 2,44,-1
+ 348 -146 348 -146 335 -163 c 2,44,-1
  309 -197 l 1,45,-1
  301 -212 l 2,46,47
- 294 -218 294 -218 289 -229 c 0,48,49
- 285 -232 285 -232 282 -239 c 0,50,51
+ 292 -221 292 -221 289 -229 c 0,48,49
+ 287 -234 287 -234 282 -239 c 0,50,51
  274 -247 274 -247 270 -257 c 2,52,-1
  264 -264 l 1,53,-1
  192 -375 l 1,54,-1
@@ -15466,7 +15497,7 @@ SplineSet
  46 -528 46 -528 34 -539 c 1,61,-1
  -21 -567 l 1,62,-1
  -36 -572 l 2,63,64
- -38 -572 -38 -572 -39 -573 c 0,65,66
+ -39 -573 l 0,65,66
  -44 -573 -44 -573 -50 -576 c 2,67,-1
  -77 -581 l 1,68,-1
  -126 -580 l 1,69,-1
@@ -15475,33 +15506,33 @@ SplineSet
  -198 -554 l 1,72,-1
  -219 -537 l 1,73,-1
  -243 -513 l 2,74,75
- -245 -509 -245 -509 -249 -504 c 2,76,-1
+ -243.818181818 -511.363636364 -243.818181818 -511.363636364 -249 -504 c 2,76,-1
  -268 -477 l 1,77,-1
  -288 -437 l 2,78,79
  -289 -430 -289 -430 -294 -421 c 2,80,-1
  -303 -395 l 1,81,82
  -323 -315 -323 -315 -323 -231 c 0,83,84
- -323 -92 -323 -92 -267 55 c 0,85,86
- -264 59 -264 59 -261 67 c 2,87,-1
+ -323 -85 -323 -85 -267 55 c 0,85,86
+ -265 60 -265 60 -261 67 c 2,87,-1
  -253 81 l 1,88,-1
  -248 87 l 1,89,90
  -240 85 -240 85 -240 71 c 0,91,92
- -240 67 -240 67 -241 62 c 2,93,-1
+ -240 67.9411764706 -240 67.9411764706 -241 62 c 2,93,-1
  -258 -39 l 1,94,-1
  -261 -75 l 1,95,-1
  -262 -131 l 1,96,-1
  -260 -164 l 2,97,98
  -260 -166 -260 -166 -259 -167 c 2,99,-1
  -259 -171 l 2,100,101
- -259 -176 -259 -176 -257 -184 c 2,102,-1
+ -259 -172 -259 -172 -257 -184 c 2,102,-1
  -252 -214 l 2,103,104
- -252 -219 -252 -219 -250 -224 c 2,105,-1
+ -250 -224 l 2,105,-1
  -249 -230 l 2,106,107
- -247 -238 -247 -238 -245 -243 c 0,108,109
- -243 -255 -243 -255 -238 -267 c 2,110,-1
+ -248 -232 -248 -232 -245 -243 c 0,108,109
+ -239.691780822 -263.171232877 -239.691780822 -263.171232877 -238 -267 c 2,110,-1
  -219 -310 l 2,111,112
- -219 -311 -219 -311 -217 -313 c 0,113,114
- -216 -318 -216 -318 -211 -325 c 2,115,-1
+ -218 -312 -218 -312 -217 -313 c 0,113,114
+ -216.142857143 -317.285714286 -216.142857143 -317.285714286 -211 -325 c 2,115,-1
  -201 -340 l 1,116,-1
  -165 -376 l 1,117,-1
  -147 -388 l 2,118,119
@@ -15510,46 +15541,45 @@ SplineSet
  -84 -406 l 1,122,-1
  -69 -405 l 1,123,-1
  -63 -405 l 2,124,125
- -51 -405 -51 -405 -37 -399 c 2,126,-1
+ -59.2857142857 -405 -59.2857142857 -405 -37 -399 c 2,126,-1
  -11 -392 l 2,127,128
- -6 -390 -6 -390 0 -386 c 0,129,130
- 52 -364 52 -364 90 -314 c 1,131,-1
+ -9 -390 -9 -390 0 -386 c 0,129,130
+ 54 -362 54 -362 90 -314 c 1,131,-1
  100 -304 l 1,132,-1
  128 -269 l 2,133,134
- 132 -267 132 -267 135 -260 c 2,135,-1
+ 135 -260 135 -260 135 -260 c 2,135,-1
  165 -223 l 1,136,-1
  172 -212 l 2,137,138
  173 -212 173 -212 175 -210 c 0,139,140
- 180 -205 180 -205 186 -196 c 2,141,-1
+ 175.875 -209.125 175.875 -209.125 186 -196 c 2,141,-1
  213 -161 l 2,142,143
- 214 -158 214 -158 219 -155 c 2,144,-1
+ 216 -157 216 -157 219 -155 c 2,144,-1
  257 -103 l 2,145,146
- 261 -101 261 -101 262 -97 c 2,147,-1
+ 262 -97 l 2,147,-1
  363 30 l 1,148,-1
  376 43 l 1,149,-1
  388 58 l 2,150,151
  393 61 393 61 397 68 c 2,152,-1
  412 83 l 2,153,154
- 421 89 421 89 431 102 c 0,155,156
+ 431 102 l 0,155,156
  432 102 432 102 434 104 c 0,157,158
- 443 108 443 108 452 119 c 0,159,160
- 456 120 456 120 461 125 c 2,161,-1
+ 443 110 443 110 452 119 c 0,159,160
+ 455 122 455 122 461 125 c 2,161,-1
  495 151 l 1,162,-1
  498 155 l 1,163,-1
  528 174 l 1,164,-1
  532 178 l 1,165,-1
  574 201 l 2,166,167
- 578 202 578 202 586 207 c 2,168,-1
+ 576.666666667 201.666666667 576.666666667 201.666666667 586 207 c 2,168,-1
  593 211 l 2,169,170
- 601 213 601 213 610 217 c 2,171,-1
+ 600.529411765 212.882352941 600.529411765 212.882352941 610 217 c 2,171,-1
  633 227 l 2,172,173
- 640 228 640 228 649 233 c 0,174,175
- 653 233 653 233 658 236 c 2,176,-1
+ 634 227 634 227 649 233 c 0,174,175
+ 655 235 655 235 658 236 c 2,176,-1
  693 244 l 1,177,-1
- 686 244 l 1,178,-1
- 690 245 l 2,0,1
+ 700 245 l 1,178,-1
+ 704 246 l 6,0,1
 EndSplineSet
-Validated: 1
 Substitution2: "straightrehs-1" uniFEAD.alt
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFEAE
 EndChar
@@ -15565,7 +15595,6 @@ LayerCount: 4
 Fore
 Refer: 1443 64435 S 1 0 0 1 -180 734 2
 Refer: 426 1585 N 1 0 0 1 -26 0 2
-Validated: 1
 Substitution2: "straightrehs-1" uniFEAF.alt
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFEB0
 EndChar
@@ -16390,12 +16419,12 @@ Encoding: 441 1607 443
 Width: 658
 GlyphClass: 2
 Flags: W
+AnchorPoint: "zer" 332 -648 basechar 0
 AnchorPoint: "aboveSingle" 301 1361 basechar 0
-AnchorPoint: "belowSingle" 337 -432 basechar 0
+AnchorPoint: "belowSingle" 331 -372 basechar 0
 LayerCount: 4
 Fore
 Refer: 1094 65257 N 1 0 0 1 20 0 2
-Validated: 1
 Substitution2: "'locl' Localized Forms in Arabic lookup 18-1" uni06C1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFEEA
 Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" uniFEEC
@@ -16758,6 +16787,7 @@ Encoding: 447 1613 449
 Width: 389
 GlyphClass: 4
 Flags: W
+AnchorPoint: "zer" 204 -641 mark 0
 AnchorPoint: "belowmark" 232 -792 mark 0
 AnchorPoint: "belowLiga" 202 -637 mark 0
 AnchorPoint: "belowSingle" 203 -640 mark 0
@@ -16801,6 +16831,7 @@ SplineSet
  408 1708 l 1,0,1
 EndSplineSet
 Validated: 1
+Substitution2: "jalaalahzabr-1" uni0670
 EndChar
 
 StartChar: uni064F
@@ -16841,6 +16872,7 @@ Encoding: 450 1616 452
 Width: 408
 GlyphClass: 4
 Flags: W
+AnchorPoint: "zer" 216 -657 mark 0
 AnchorPoint: "abovemark" 205 -660 basemark 0
 AnchorPoint: "belowmark" 246 -956 basemark 0
 AnchorPoint: "belowmark" 246 -819 mark 0
@@ -16993,6 +17025,7 @@ Encoding: 455 1621 457
 Width: 361
 GlyphClass: 4
 Flags: W
+AnchorPoint: "zer" 195 -348 mark 0
 AnchorPoint: "abovemark" 204 -341 basemark 0
 AnchorPoint: "belowmark" 232 -928 basemark 0
 AnchorPoint: "belowmark" 218 -492 mark 0
@@ -17575,7 +17608,6 @@ LayerCount: 4
 Fore
 Refer: 426 1585 N 1 0 0 1 0 0 2
 Refer: 407 1557 N 1 0 0 1 72 -147 2
-Validated: 1
 Substitution2: "straightrehs-1" uniFB8A.alt
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFB8D
 EndChar
@@ -17591,7 +17623,6 @@ LayerCount: 4
 Fore
 Refer: 426 1585 N 1 0 0 1 0 0 2
 Refer: 1442 64438 N 1 0 0 1 -179 129 2
-Validated: 1
 Substitution2: "straightrehs-1" uniFB8C.alt
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFB8B
 EndChar
@@ -17712,7 +17743,6 @@ Flags: W
 LayerCount: 4
 Fore
 Refer: 489 1730 N 1 0 0 1 0 0 2
-Validated: 1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFBA5
 EndChar
 
@@ -17724,7 +17754,6 @@ Flags: W
 LayerCount: 4
 Fore
 Refer: 443 1607 N 1 0 0 1 0 0 2
-Validated: 1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFBA7
 Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" uniFBA9
 Substitution2: "'init' Initial Forms in Arabic lookup 2 subtable" uniFEEB
@@ -17741,7 +17770,6 @@ LayerCount: 4
 Fore
 Refer: 475 1652 N 1.52734 0 0 1.47681 -5 -1166 2
 Refer: 443 1607 N 1 0 0 1 -19 0 2
-Validated: 1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFBA5
 EndChar
 
@@ -17753,7 +17781,6 @@ Flags: W
 LayerCount: 4
 Fore
 Refer: 418 1577 N 1 0 0 1 0 0 2
-Validated: 1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFE94
 EndChar
 
@@ -17849,7 +17876,6 @@ AnchorPoint: "belowSingle" 318 -396 basechar 0
 LayerCount: 4
 Fore
 Refer: 443 1607 N 1 0 0 1 14 0 2
-Validated: 1
 EndChar
 
 StartChar: uni06DE
@@ -33739,7 +33765,6 @@ LayerCount: 4
 Fore
 Refer: 1034 65197 N 1 0 0 1 0 1 2
 Refer: 1442 64438 N 1 0 0 1 -32 269 2
-Validated: 1
 Substitution2: "straightrehs-1" uniFB8A.alt
 Substitution2: "'ss02' Style Set 2 lookup 20-1" uniFB8A.alt
 EndChar
@@ -33772,7 +33797,6 @@ LayerCount: 4
 Fore
 Refer: 1034 65197 N 1 0 0 1 -16 9 2
 Refer: 1449 64448 N 1 0 0 1 97 -5 2
-Validated: 1
 Substitution2: "straightrehs-1" uniFB8C.alt
 PairPos2: "'kern' Horizontal Kerning in Arabic lookup 5-1" uniFEAD dx=124 dy=0 dh=124 dv=0 dx=0 dy=0 dh=0 dv=0
 Substitution2: "'ss02' Style Set 2 lookup 20-1" uniFB8C.alt
@@ -34226,12 +34250,13 @@ Encoding: 903 64420 896
 Width: 644
 GlyphClass: 3
 Flags: W
+AnchorPoint: "zer" 327 -640 basechar 0
 AnchorPoint: "aboveSingle" 276 1642 basechar 0
 AnchorPoint: "belowSingle" 276 -421 basechar 0
 LayerCount: 4
 Fore
 Refer: 489 1730 N 1 0 0 1 0 0 2
-Validated: 1
+LCarets2: 1 291
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEE9 uniFE80
 EndChar
 
@@ -34257,10 +34282,12 @@ Encoding: 905 64422 898
 Width: 658
 GlyphClass: 2
 Flags: W
+AnchorPoint: "aboveSingle" 312 1216 basechar 0
+AnchorPoint: "belowSingle" 334 -352 basechar 0
+AnchorPoint: "zer" 308 -646 basechar 0
 LayerCount: 4
 Fore
-Refer: 443 1607 S 1 0 0 1 0 0 2
-Validated: 1
+Refer: 443 1607 N 1 0 0 1 0 0 2
 EndChar
 
 StartChar: uniFBA7
@@ -34468,12 +34495,12 @@ Encoding: 909 64426 902
 Width: 798
 GlyphClass: 2
 Flags: W
+AnchorPoint: "zer" 374 -648 basechar 0
 AnchorPoint: "aboveSingle" 412 1453 basechar 0
 AnchorPoint: "belowSingle" 346 -341 basechar 0
 LayerCount: 4
 Fore
 Refer: 1096 65259 N 1 0 0 1 0 0 2
-Validated: 1
 EndChar
 
 StartChar: uniFBAB
@@ -36814,123 +36841,14 @@ EndChar
 
 StartChar: uniFDF2
 Encoding: 1075 65010 988
-Width: 1799
+Width: 2259
 GlyphClass: 3
-LigCaretCntFixed: 1
 Flags: W
 LayerCount: 4
 Fore
-SplineSet
-418 370 m 1,0,1
- 302 357 302 357 234 278 c 1,2,3
- 273 259 273 259 316 259 c 0,4,5
- 364 259 364 259 418 282 c 1,6,-1
- 418 370 l 1,0,1
-1466 646 m 1,7,-1
- 1542 838 l 1,8,9
- 1550 825 1550 825 1565 798 c 0,10,11
- 1618 702 1618 702 1660 659 c 0,12,13
- 1669 650 1669 650 1678 642 c 1,14,-1
- 1646 590 l 1,15,16
- 1649 583 1649 583 1659 565 c 0,17,18
- 1762 371 1762 371 1768 254 c 0,19,20
- 1769 245 1769 245 1769 236 c 0,21,22
- 1769 160 1769 160 1730 110 c 0,23,24
- 1660 20 1660 20 1537 -3 c 0,25,26
- 1501 -10 1501 -10 1467 -10 c 0,27,28
- 1365 -10 1365 -10 1276 49 c 0,29,30
- 1178 115 1178 115 1126 238 c 1,31,32
- 1087 144 1087 144 976 64 c 0,33,34
- 842 -33 842 -33 709 -33 c 0,35,-1
- 706 -33 l 0,36,37
- 530 -32 530 -32 442 145 c 0,38,39
- 440 150 440 150 438 154 c 1,40,41
- 391 109 391 109 279 96 c 0,42,43
- 250 93 250 93 225 93 c 0,44,45
- 152 93 152 93 114 119 c 0,46,47
- 92 135 92 135 90 158 c 0,48,49
- 90 166 90 166 90 173 c 0,50,51
- 90 307 90 307 209 393 c 0,52,53
- 305 462 305 462 430 470 c 1,54,-1
- 446 594 l 1,55,-1
- 495 660 l 2,56,57
- 513 682 513 682 526 696 c 0,58,59
- 547 717 547 717 558 717 c 0,60,61
- 566 717 566 717 567 706 c 0,62,63
- 568 700 568 700 568 666 c 0,64,65
- 568 648 568 648 538 470 c 0,66,67
- 532 434 532 434 530 416 c 0,68,69
- 528 395 528 395 528 375 c 0,70,71
- 528 265 528 265 604 206 c 0,72,73
- 662 161 662 161 743 161 c 0,74,75
- 781 161 781 161 824 171 c 0,76,77
- 975 207 975 207 1106 346 c 1,78,-1
- 1081 579 l 2,79,80
- 1079 590 1079 590 1078 598 c 0,81,82
- 1077 603 1077 603 1077 607 c 0,83,84
- 1077 654 1077 654 1138 730 c 0,85,86
- 1140 734 1140 734 1146 740 c 0,87,88
- 1150 746 1150 746 1152 748 c 0,89,90
- 1167 766 1167 766 1176 766 c 0,91,92
- 1183 766 1183 766 1188 755 c 0,93,94
- 1193 740 1193 740 1198 698 c 0,95,96
- 1201 670 1201 670 1206 612 c 0,97,98
- 1211 531 1211 531 1218 482 c 0,99,100
- 1233 374 1233 374 1260 318 c 0,101,102
- 1261 315 1261 315 1262 314 c 0,103,104
- 1322 194 1322 194 1475 177 c 0,105,106
- 1501 174 1501 174 1525 174 c 0,107,108
- 1588 174 1588 174 1638 195 c 0,109,110
- 1666 209 1666 209 1666 220 c 0,111,112
- 1666 221 1666 221 1666 222 c 0,113,114
- 1644 291 1644 291 1564 428 c 0,115,116
- 1488 557 1488 557 1472 618 c 0,117,118
- 1468 633 1468 633 1466 646 c 1,7,-1
-983 1012 m 1,119,120
- 971 1044 971 1044 971 1075 c 0,121,122
- 971 1143 971 1143 1029 1209 c 1,123,-1
- 1047 1202 l 1,124,125
- 1022 1155 1022 1155 1022 1096 c 0,126,127
- 1022 1092 1022 1092 1022 1087 c 1,128,129
- 1026 1064 1026 1064 1046 1064 c 0,130,131
- 1051 1064 1051 1064 1058 1066 c 0,132,133
- 1077 1069 1077 1069 1077 1104 c 0,134,135
- 1077 1122 1077 1122 1072 1148 c 1,136,137
- 1097 1162 1097 1162 1119 1191 c 1,138,-1
- 1130 1187 l 1,139,140
- 1129 1178 1129 1178 1129 1169 c 0,141,142
- 1129 1143 1129 1143 1137 1112 c 1,143,-1
- 1137 1101 l 1,144,145
- 1149 1070 1149 1070 1187 1066 c 1,146,-1
- 1187 1080 l 1,147,148
- 1178 1100 1178 1100 1178 1119 c 0,149,150
- 1178 1147 1178 1147 1198 1173 c 1,151,152
- 1206 1196 1206 1196 1212 1196 c 128,-1,153
- 1218 1196 1218 1196 1223 1173 c 1,154,155
- 1241 1125 1241 1125 1241 1087 c 0,156,157
- 1241 1013 1241 1013 1173 976 c 1,158,159
- 1131 978 1131 978 1105 1015 c 1,160,161
- 1072 978 1072 978 1041 978 c 0,162,163
- 1011 978 1011 978 983 1012 c 1,119,120
-1116 1281 m 1,164,165
- 1117 1315 l 0,166,-1
- 1117 1314 l 1,167,168
- 1117 1323 1117 1323 1117 1333 c 0,169,170
- 1117 1438 1117 1438 1087 1562 c 0,171,172
- 1082 1574 1082 1574 1082 1587 c 0,173,174
- 1082 1591 1082 1591 1083 1595 c 1,175,176
- 1102 1616 1102 1616 1143 1671 c 1,177,178
- 1154 1624 1154 1624 1167 1543 c 0,179,180
- 1175 1494 1175 1494 1175 1449 c 0,181,182
- 1175 1443 1175 1443 1175 1437 c 0,183,184
- 1175 1413 1175 1413 1172 1390 c 0,185,186
- 1164 1318 1164 1318 1116 1281 c 1,164,165
-EndSplineSet
-Validated: 5
-Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF uniFEE0 uniFBAB
-Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF uniFEE0 uniFEEA
-Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF uniFEE0 uniFBA7
-LCarets2: 2 1356 718
+Refer: 416 1575 N 1 0 0 1 1805 0 2
+Refer: 1619 -1 S 1 0 0 1 852 0 2
+Refer: 1618 -1 S 1 0 0 1 0 0 2
 EndChar
 
 StartChar: uniFE80
@@ -37238,8 +37156,7 @@ AnchorPoint: "belowSingle" 180 -305 basechar 0
 LayerCount: 4
 Fore
 Refer: 455 1619 N 1 0 0 1 14 -2 2
-Refer: 416 1575 N 1 0 0 1 -111 0 2
-Validated: 1
+Refer: 416 1575 S 1 0 0 1 -23 0 2
 EndChar
 
 StartChar: uniFE82
@@ -37519,13 +37436,13 @@ Encoding: 1095 65171 1008
 Width: 694
 GlyphClass: 2
 Flags: W
-AnchorPoint: "aboveSingle" 312 1628 basechar 0
-AnchorPoint: "belowSingle" 356 -400 basechar 0
+AnchorPoint: "zer" 349 -645 basechar 0
+AnchorPoint: "aboveSingle" 351 1613 basechar 0
+AnchorPoint: "belowSingle" 347 -397 basechar 0
 LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 -306 1016 2
 Refer: 1094 65257 N 1 0 0 1 43 0 2
-Validated: 1
 EndChar
 
 StartChar: uniFE94
@@ -38169,8 +38086,7 @@ AnchorPoint: "aboveSingle" 322.09 1163 basechar 0
 AnchorPoint: "belowSingle" 256.09 -753 basechar 0
 LayerCount: 4
 Fore
-Refer: 426 1585 N 1 0 0 1 0 0 2
-Validated: 1
+Refer: 426 1585 S 1 0 0 1 0 0 2
 Substitution2: "straightrehs-1" uniFEAD.alt
 PairPos2: "'kern' Horizontal Kerning in Arabic lookup 5-1" uniFB8C dx=36 dy=0 dh=36 dv=0 dx=0 dy=0 dh=0 dv=0
 PairPos2: "'kern' Horizontal Kerning in Arabic lookup 5-1" uniFEED dx=56 dy=0 dh=56 dv=0 dx=0 dy=0 dh=0 dv=0
@@ -38230,7 +38146,6 @@ LayerCount: 4
 Fore
 Refer: 1034 65197 N 1 0 0 1 0 0 2
 Refer: 1439 64434 N 1 0 0 1 -351 544 2
-Validated: 1
 Substitution2: "straightrehs-1" uniFEAF.alt
 EndChar
 
@@ -40601,6 +40516,9 @@ Encoding: 1181 65257 1094
 Width: 644
 GlyphClass: 2
 Flags: W
+AnchorPoint: "zer" 298 -640 basechar 0
+AnchorPoint: "aboveSingle" 280 1361 basechar 0
+AnchorPoint: "belowSingle" 292 -335 basechar 0
 LayerCount: 4
 Fore
 SplineSet
@@ -40629,7 +40547,6 @@ SplineSet
  472 315 472 315 458 349 c 0,42,43
  410 459 410 459 296 540 c 1,26,27
 EndSplineSet
-Validated: 1
 Substitution2: "'locl' Localized Forms in Arabic lookup 18-1" uniFBA6
 EndChar
 
@@ -59941,7 +59858,6 @@ AnchorPoint: "aboveLiga" 289 1190 baselig 1
 LayerCount: 4
 Fore
 Refer: 443 1607 N 1 0 0 1 0 0 2
-Validated: 1
 LCarets2: 1 314
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" zaa.init zaa.fina
 EndChar
@@ -62144,6 +62060,160 @@ Refer: 1445 64440 N 1 0 0 1 798 -799 2
 Refer: 1471 -1 N 1 0 0 1 0 0 2
 LCarets2: 1 819
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB7C uniFBA7
+EndChar
+
+StartChar: jalaalah.liga
+Encoding: 1616 -1 1618
+Width: 1799
+Flags: W
+AnchorPoint: "aboveLiga" 1540 1021 baselig 0
+AnchorPoint: "belowLiga" 1579 -212 baselig 0
+AnchorPoint: "aboveLiga" 1128 868 baselig 1
+AnchorPoint: "belowLiga" 1138 -239 baselig 1
+AnchorPoint: "aboveLiga" 406 1009 baselig 2
+AnchorPoint: "belowLiga" 301 -218 baselig 2
+LayerCount: 4
+Fore
+SplineSet
+418 370 m 1,0,1
+ 302 357 302 357 234 278 c 1,2,3
+ 273 259 273 259 316 259 c 0,4,5
+ 364 259 364 259 418 282 c 1,6,-1
+ 418 370 l 1,0,1
+1466 646 m 1,7,-1
+ 1542 838 l 5,8,9
+ 1550 825 1550 825 1565 798 c 0,10,11
+ 1618 702 1618 702 1660 659 c 0,12,13
+ 1669 650 1669 650 1678 642 c 1,14,-1
+ 1646 590 l 1,15,16
+ 1649 583 1649 583 1659 565 c 0,17,18
+ 1762 371 1762 371 1768 254 c 0,19,20
+ 1769 245 1769 245 1769 236 c 0,21,22
+ 1769 160 1769 160 1730 110 c 0,23,24
+ 1660 20 1660 20 1537 -3 c 0,25,26
+ 1501 -10 1501 -10 1467 -10 c 0,27,28
+ 1365 -10 1365 -10 1276 49 c 0,29,30
+ 1178 115 1178 115 1126 238 c 1,31,32
+ 1087 144 1087 144 976 64 c 0,33,34
+ 842 -33 842 -33 709 -33 c 0,35,-1
+ 706 -33 l 0,36,37
+ 530 -32 530 -32 442 145 c 0,38,39
+ 440 150 440 150 438 154 c 1,40,41
+ 391 109 391 109 279 96 c 0,42,43
+ 250 93 250 93 225 93 c 0,44,45
+ 152 93 152 93 114 119 c 0,46,47
+ 92 135 92 135 90 158 c 0,48,49
+ 90 166 90 166 90 173 c 0,50,51
+ 90 307 90 307 209 393 c 0,52,53
+ 305 462 305 462 430 470 c 1,54,-1
+ 446 594 l 1,55,-1
+ 495 660 l 2,56,57
+ 513 682 513 682 526 696 c 0,58,59
+ 547 717 547 717 558 717 c 0,60,61
+ 566 717 566 717 567 706 c 0,62,63
+ 568 700 568 700 568 666 c 0,64,65
+ 568 648 568 648 538 470 c 0,66,67
+ 532 434 532 434 530 416 c 0,68,69
+ 528 395 528 395 528 375 c 0,70,71
+ 528 265 528 265 604 206 c 0,72,73
+ 662 161 662 161 743 161 c 0,74,75
+ 781 161 781 161 824 171 c 0,76,77
+ 975 207 975 207 1106 346 c 1,78,-1
+ 1081 579 l 2,79,80
+ 1079 590 1079 590 1078 598 c 0,81,82
+ 1077 603 1077 603 1077 607 c 0,83,84
+ 1077 654 1077 654 1138 730 c 0,85,86
+ 1140 734 1140 734 1146 740 c 0,87,88
+ 1150 746 1150 746 1152 748 c 0,89,90
+ 1167 766 1167 766 1176 766 c 0,91,92
+ 1183 766 1183 766 1188 755 c 0,93,94
+ 1193 740 1193 740 1198 698 c 0,95,96
+ 1201 670 1201 670 1206 612 c 0,97,98
+ 1211 531 1211 531 1218 482 c 0,99,100
+ 1233 374 1233 374 1260 318 c 0,101,102
+ 1261 315 1261 315 1262 314 c 0,103,104
+ 1322 194 1322 194 1475 177 c 0,105,106
+ 1501 174 1501 174 1525 174 c 0,107,108
+ 1588 174 1588 174 1638 195 c 0,109,110
+ 1666 209 1666 209 1666 220 c 0,111,112
+ 1666 221 1666 221 1666 222 c 0,113,114
+ 1644 291 1644 291 1564 428 c 0,115,116
+ 1488 557 1488 557 1472 618 c 0,117,118
+ 1468 633 1468 633 1466 646 c 1,7,-1
+EndSplineSet
+LCarets2: 2 0 0
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF uniFEE0 uniFEEA
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF uniFEE0 uniFBAB
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF uniFEE0 uniFBA7
+EndChar
+
+StartChar: jalaalahtashdeed.liga
+Encoding: 1617 -1 1619
+Width: 485
+Flags: W
+AnchorPoint: "aboveLiga" 250 881 mark 0
+LayerCount: 4
+Fore
+SplineSet
+141 1012 m 1,0,1
+ 129 1044 129 1044 129 1075 c 0,2,3
+ 129 1143 129 1143 187 1209 c 1,4,-1
+ 205 1202 l 1,5,6
+ 180 1155 180 1155 180 1096 c 0,7,8
+ 180 1092 180 1092 180 1087 c 1,9,10
+ 184 1064 184 1064 204 1064 c 0,11,12
+ 209 1064 209 1064 216 1066 c 0,13,14
+ 235 1069 235 1069 235 1104 c 0,15,16
+ 235 1122 235 1122 230 1148 c 1,17,18
+ 255 1162 255 1162 277 1191 c 1,19,-1
+ 288 1187 l 1,20,21
+ 287 1178 287 1178 287 1169 c 0,22,23
+ 287 1143 287 1143 295 1112 c 1,24,-1
+ 295 1101 l 1,25,26
+ 307 1070 307 1070 345 1066 c 1,27,-1
+ 345 1080 l 1,28,29
+ 336 1100 336 1100 336 1119 c 0,30,31
+ 336 1147 336 1147 356 1173 c 1,32,33
+ 364 1196 364 1196 370 1196 c 128,-1,34
+ 376 1196 376 1196 381 1173 c 1,35,36
+ 399 1125 399 1125 399 1087 c 0,37,38
+ 399 1013 399 1013 331 976 c 1,39,40
+ 289 978 289 978 263 1015 c 1,41,42
+ 230 978 230 978 199 978 c 0,43,44
+ 169 978 169 978 141 1012 c 1,0,1
+274 1281 m 1,45,-1
+ 275 1312 l 0,46,-1
+ 275 1319 l 0,47,48
+ 275 1326 275 1326 275 1333 c 0,49,50
+ 275 1445 275 1445 245 1562 c 0,51,52
+ 240 1581 240 1581 240 1587 c 0,53,54
+ 240 1591 240 1591 241 1595 c 1,55,56
+ 260 1616 260 1616 301 1671 c 1,57,58
+ 312 1624 312 1624 325 1543 c 0,59,60
+ 333 1494 333 1494 333 1449 c 0,61,62
+ 333 1443 333 1443 333 1437 c 0,63,64
+ 333 1413 333 1413 330 1390 c 0,65,66
+ 322 1318 322 1318 274 1281 c 1,45,-1
+EndSplineSet
+EndChar
+
+StartChar: NameMe.1618
+Encoding: 1618 -1 1620
+Width: 1863
+Flags: W
+AnchorPoint: "belowLiga" 301 -218 baselig 2
+AnchorPoint: "aboveLiga" 406 1009 baselig 2
+AnchorPoint: "belowLiga" 1138 -239 baselig 1
+AnchorPoint: "aboveLiga" 1128 868 baselig 1
+AnchorPoint: "belowLiga" 1579 -212 baselig 0
+AnchorPoint: "aboveLiga" 1540 1021 baselig 0
+LayerCount: 4
+Fore
+Refer: 1618 -1 N 1 0 0 1 0 0 2
+Refer: 1619 -1 N 1 0 0 1 852 0 2
+Ligature2: "jalaalahtashdeed-1" uniFEDF uniFEE0 uniFEEA
+Ligature2: "jalaalahtashdeed-1" uniFEDF uniFEE0 uniFBAB
+Ligature2: "jalaalahtashdeed-1" uniFEDF uniFEE0 uniFBA7
 EndChar
 EndChars
 EndSplineFont
