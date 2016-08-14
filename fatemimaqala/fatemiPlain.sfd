@@ -26,7 +26,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1470595095
+ModificationTime: 1471195600
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -1820,7 +1820,7 @@ NameList: AGL without afii
 DisplaySize: -36
 AntiAlias: 1
 FitToEm: 1
-WinInfo: 369 41 13
+WinInfo: 1107 41 13
 BeginPrivate: 0
 EndPrivate
 Grid
@@ -1833,7 +1833,7 @@ Grid
 EndSplineSet
 TeXData: 1 0 0 78848 39424 26282 440320 -1048576 26282 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
 AnchorClass2: "zerLiga" "hehzerLiga" "zer" "hehzer-1" "base" "basic" "belowmark" "marktomark-1" "abovemark" "marktomark-2" "subLiga" "kharoLiga-1" "supLiga" "kharoLiga-1" "subSingle" "kharoSingle-1" "supSingle" "kharoSingle-1" "belowSingle" "normalSingle" "aboveSingle" "normalSingle" "belowLiga" "normalLiga" "aboveLiga" "normalLiga" 
-BeginChars: 1628 1629
+BeginChars: 1634 1635
 
 StartChar: .notdef
 Encoding: 1202 -1 0
@@ -15591,7 +15591,7 @@ SplineSet
  700 245 l 1,178,-1
  704 246 l 2,0,1
 EndSplineSet
-Validated: 524289
+Validated: 1
 Substitution2: "straightrehs-1" uniFEAD.alt
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFEAE
 EndChar
@@ -24293,22 +24293,19 @@ EndChar
 
 StartChar: uniE813
 Encoding: 842 59411 835
-Width: 1087
+Width: 911
 GlyphClass: 2
 Flags: W
-AnchorPoint: "base" 186 90 exit 0
-AnchorPoint: "aboveLiga" 748 1370 baselig 0
-AnchorPoint: "belowLiga" 976 -922 baselig 0
-AnchorPoint: "aboveLiga" 288 1370 baselig 1
-AnchorPoint: "belowLiga" 340 -936 baselig 1
+AnchorPoint: "base" 10 90 exit 0
+AnchorPoint: "aboveLiga" 572 1370 baselig 0
+AnchorPoint: "belowLiga" 800 -922 baselig 0
+AnchorPoint: "aboveLiga" 112 1370 baselig 1
+AnchorPoint: "belowLiga" 164 -936 baselig 1
 LayerCount: 4
 Fore
-Refer: 1445 64440 N 1 0 0 1 31 -1096 2
-Refer: 1434 -1 N 1 0 0 1 156 0 2
-Validated: 1
-LCarets2: 1 524
+Refer: 1445 64440 N 1 0 0 1 -145 -1096 2
+Refer: 1434 -1 N 1 0 0 1 -20 0 2
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58 uniFBAD
-Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58 uniFBAB
 EndChar
 
 StartChar: uniE
@@ -33533,7 +33530,7 @@ EndChar
 
 StartChar: uniFB57
 Encoding: 872 64343 865
-Width: 1479
+Width: 1495
 GlyphClass: 2
 Flags: W
 AnchorPoint: "base" 1480 90 entry 0
@@ -33543,7 +33540,6 @@ LayerCount: 4
 Fore
 Refer: 1148 -1 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 -68 -1095 2
-Validated: 1
 EndChar
 
 StartChar: uniFB58
@@ -33719,7 +33715,7 @@ AnchorPoint: "belowSingle" 653 -1221 basechar 0
 LayerCount: 4
 Fore
 Refer: 1023 65186 N 1 0 0 1 0 0 2
-Refer: 1445 64440 S 1 0 0 1 -29 -814 2
+Refer: 1445 64440 N 1 0 0 1 -29 -814 2
 Validated: 1
 EndChar
 
@@ -40236,7 +40232,7 @@ SplineSet
  243 522.428571429 243 522.428571429 237 594 c 2,35,-1
  181 1262 l 1,0,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 MultipleSubs2: "longlaamkaafs-1" uniFEE0 uni0640.1
 EndChar
 
@@ -43298,7 +43294,7 @@ SplineSet
  892.139447594 249.116385064 892.139447594 249.116385064 912.854310972 232.767361313 c 0,56,57
  984.919459655 177.052671472 984.919459655 177.052671472 1098 176.693756104 c 9,0,-1
 EndSplineSet
-Validated: 524321
+Validated: 33
 Layer: 2
 SplineSet
 1098 176.693756104 m 9
@@ -46870,7 +46866,7 @@ SplineSet
  1215 503 1215 503 1216 588 c 0,73,74
  1220 794 1220 794 1416 900 c 1,14,-1
 EndSplineSet
-Validated: 524321
+Validated: 33
 Layer: 2
 SplineSet
 1476 1080 m 5
@@ -61384,93 +61380,83 @@ EndChar
 
 StartChar: uniFC9B
 Encoding: 1022 64667 1580
-Width: 1108
+Width: 896
 Flags: W
-AnchorPoint: "base" 202 90 exit 0
-AnchorPoint: "aboveLiga" 654 1855 baselig 0
-AnchorPoint: "belowLiga" 970 -720 baselig 0
-AnchorPoint: "aboveLiga" 314 1370 baselig 1
-AnchorPoint: "belowLiga" 382 -696 baselig 1
+AnchorPoint: "base" -10 90 exit 0
+AnchorPoint: "aboveLiga" 442 1855 baselig 0
+AnchorPoint: "belowLiga" 758 -720 baselig 0
+AnchorPoint: "aboveLiga" 102 1370 baselig 1
+AnchorPoint: "belowLiga" 170 -696 baselig 1
 LayerCount: 4
 Fore
-Refer: 1434 -1 N 1 0 0 1 203 -5.61249 2
-Refer: 475 1652 N 1.47247 0 0 1.48462 408 -871 2
-Validated: 1
-LCarets2: 1 608
+Refer: 1434 -1 N 1 0 0 1 -9 -5.61249 2
+Refer: 475 1652 N 1.47247 0 0 1.48462 196 -871 2
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE8B uniFBAD
-Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE8B uniFBAB
 EndChar
 
 StartChar: uniFCA0
 Encoding: 1027 64672 1581
-Width: 1075
+Width: 910
 Flags: W
-AnchorPoint: "base" 164 90 exit 0
-AnchorPoint: "aboveLiga" 736 1370 baselig 0
-AnchorPoint: "belowLiga" 932 -720 baselig 0
-AnchorPoint: "aboveLiga" 276 1370 baselig 1
-AnchorPoint: "belowLiga" 344 -696 baselig 1
+AnchorPoint: "base" -1 90 exit 0
+AnchorPoint: "aboveLiga" 571 1370 baselig 0
+AnchorPoint: "belowLiga" 767 -720 baselig 0
+AnchorPoint: "aboveLiga" 111 1370 baselig 1
+AnchorPoint: "belowLiga" 179 -696 baselig 1
 LayerCount: 4
 Fore
-Refer: 1443 64435 N 1 0 0 1 -140 -536 2
-Refer: 1434 -1 N 1 0 0 1 165 -5.61249 2
-Validated: 1
+Refer: 1443 64435 N 1 0 0 1 -305 -536 2
+Refer: 1434 -1 N 1 0 0 1 0 -5.61249 2
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE91 uniFBAD
-Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE91 uniFBAB
 EndChar
 
 StartChar: uniFCA5
 Encoding: 1032 64677 1582
-Width: 1113
+Width: 913
 Flags: W
-AnchorPoint: "base" 202 90 exit 0
-AnchorPoint: "aboveLiga" 714 1595 baselig 0
-AnchorPoint: "belowLiga" 970 -720 baselig 0
-AnchorPoint: "aboveLiga" 314 1370 baselig 1
-AnchorPoint: "belowLiga" 382 -696 baselig 1
+AnchorPoint: "base" 2 90 exit 0
+AnchorPoint: "aboveLiga" 514 1595 baselig 0
+AnchorPoint: "belowLiga" 770 -720 baselig 0
+AnchorPoint: "aboveLiga" 114 1370 baselig 1
+AnchorPoint: "belowLiga" 182 -696 baselig 1
 LayerCount: 4
 Fore
-Refer: 1440 64436 N 1 0 0 1 40 1151 2
-Refer: 1434 -1 N 1 0 0 1 203 -5.61249 2
-Validated: 1
+Refer: 1440 64436 N 1 0 0 1 -160 1151 2
+Refer: 1434 -1 N 1 0 0 1 3 -5.61249 2
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE97 uniFBAD
-Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE97 uniFBAB
 EndChar
 
 StartChar: uniFCD6
 Encoding: 1051 64726 1583
-Width: 1073
+Width: 905
 Flags: W
-AnchorPoint: "base" 162 90 exit 0
-AnchorPoint: "aboveLiga" 674 1585 baselig 0
-AnchorPoint: "belowLiga" 915 -345 baselig 0
-AnchorPoint: "aboveLiga" 274 1370 baselig 1
-AnchorPoint: "belowLiga" 327 -321 baselig 1
+AnchorPoint: "base" -6 90 exit 0
+AnchorPoint: "aboveLiga" 506 1585 baselig 0
+AnchorPoint: "belowLiga" 747 -345 baselig 0
+AnchorPoint: "aboveLiga" 106 1370 baselig 1
+AnchorPoint: "belowLiga" 159 -321 baselig 1
 LayerCount: 4
 Fore
-Refer: 1443 64435 N 1 0 0 1 -192 1124 2
-Refer: 1434 -1 N 1 0 0 1 163 -5.61249 2
-Validated: 1
+Refer: 1443 64435 N 1 0 0 1 -360 1124 2
+Refer: 1434 -1 N 1 0 0 1 -5 -5.61249 2
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEE7 uniFBAD
-Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEE7 uniFBAB
 EndChar
 
 StartChar: uniFCDE
 Encoding: 1057 64734 1584
-Width: 1035
+Width: 909
 Flags: W
-AnchorPoint: "base" 124 90 exit 0
-AnchorPoint: "aboveLiga" 696 1370 baselig 0
-AnchorPoint: "belowLiga" 892 -720 baselig 0
-AnchorPoint: "aboveLiga" 236 1370 baselig 1
-AnchorPoint: "belowLiga" 304 -696 baselig 1
+AnchorPoint: "base" -2 90 exit 0
+AnchorPoint: "aboveLiga" 570 1370 baselig 0
+AnchorPoint: "belowLiga" 766 -720 baselig 0
+AnchorPoint: "aboveLiga" 110 1370 baselig 1
+AnchorPoint: "belowLiga" 178 -696 baselig 1
 LayerCount: 4
 Fore
-Refer: 1440 64436 N 1 0 0 1 105 -489 2
-Refer: 1434 -1 N 1 0 0 1 125 -5.61249 2
-Validated: 1
-Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEF3 uniFBAD
+Refer: 1440 64436 N 1 0 0 1 -21 -489 2
+Refer: 1434 -1 N 1 0 0 1 -1 -5.61249 2
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEF3 uniFBAB
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEF3 uniFBAD
 EndChar
 
 StartChar: uniFCDF
@@ -61876,7 +61862,7 @@ AnchorPoint: "belowLiga" 782 -598 baselig 0
 LayerCount: 4
 Fore
 Refer: 1589 64742 N 1 0 0 1 0 0 2
-Validated: 65537
+Validated: 1
 LCarets2: 2 630 255
 Ligature2: "'rlig' Required Ligatures lookup 26-1" uniFE9C zaa.medi zaa.medi
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 29-1" uniFE9C zaa.medi zaa.medi
@@ -62449,6 +62435,108 @@ LayerCount: 4
 Fore
 Refer: 1096 65259 N 1 0 0 1 0 0 2
 Validated: 1
+EndChar
+
+StartChar: NameMe.1627
+Encoding: 1627 -1 1629
+Width: 1087
+Flags: W
+AnchorPoint: "base" 186 90 exit 0
+AnchorPoint: "aboveLiga" 748 1370 baselig 0
+AnchorPoint: "belowLiga" 976 -922 baselig 0
+AnchorPoint: "aboveLiga" 288 1370 baselig 1
+AnchorPoint: "belowLiga" 340 -936 baselig 1
+LayerCount: 4
+Fore
+Refer: 1445 64440 N 1 0 0 1 31 -1096 2
+Refer: 1434 -1 N 1 0 0 1 156 0 2
+LCarets2: 1 604
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58 uniFBAB
+EndChar
+
+StartChar: NameMe.1628
+Encoding: 1628 -1 1630
+Width: 1108
+Flags: W
+AnchorPoint: "base" 202 90 exit 0
+AnchorPoint: "aboveLiga" 654 1855 baselig 0
+AnchorPoint: "belowLiga" 970 -720 baselig 0
+AnchorPoint: "aboveLiga" 314 1370 baselig 1
+AnchorPoint: "belowLiga" 382 -696 baselig 1
+LayerCount: 4
+Fore
+Refer: 1434 -1 N 1 0 0 1 203 -5.61249 2
+Refer: 475 1652 N 1.47247 0 0 1.48462 408 -871 2
+LCarets2: 1 624
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE8C uniFBAB
+EndChar
+
+StartChar: NameMe.1629
+Encoding: 1629 -1 1631
+Width: 1075
+Flags: W
+AnchorPoint: "base" 164 90 exit 0
+AnchorPoint: "aboveLiga" 736 1370 baselig 0
+AnchorPoint: "belowLiga" 932 -720 baselig 0
+AnchorPoint: "aboveLiga" 276 1370 baselig 1
+AnchorPoint: "belowLiga" 344 -696 baselig 1
+LayerCount: 4
+Fore
+Refer: 1443 64435 N 1 0 0 1 -140 -536 2
+Refer: 1434 -1 N 1 0 0 1 165 -5.61249 2
+LCarets2: 1 594
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE91 uniFBAB
+EndChar
+
+StartChar: NameMe.1630
+Encoding: 1630 -1 1632
+Width: 1113
+Flags: W
+AnchorPoint: "base" 202 90 exit 0
+AnchorPoint: "aboveLiga" 714 1595 baselig 0
+AnchorPoint: "belowLiga" 970 -720 baselig 0
+AnchorPoint: "aboveLiga" 314 1370 baselig 1
+AnchorPoint: "belowLiga" 382 -696 baselig 1
+LayerCount: 4
+Fore
+Refer: 1440 64436 N 1 0 0 1 40 1151 2
+Refer: 1434 -1 N 1 0 0 1 203 -5.61249 2
+LCarets2: 1 636
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE97 uniFBAB
+EndChar
+
+StartChar: NameMe.1631
+Encoding: 1631 -1 1633
+Width: 1073
+Flags: W
+AnchorPoint: "base" 162 90 exit 0
+AnchorPoint: "aboveLiga" 674 1585 baselig 0
+AnchorPoint: "belowLiga" 915 -345 baselig 0
+AnchorPoint: "aboveLiga" 274 1370 baselig 1
+AnchorPoint: "belowLiga" 327 -321 baselig 1
+LayerCount: 4
+Fore
+Refer: 1443 64435 N 1 0 0 1 -192 1124 2
+Refer: 1434 -1 N 1 0 0 1 163 -5.61249 2
+LCarets2: 1 639
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEE7 uniFBAB
+EndChar
+
+StartChar: NameMe.1632
+Encoding: 1632 -1 1634
+Width: 1035
+Flags: W
+AnchorPoint: "base" 124 90 exit 0
+AnchorPoint: "aboveLiga" 696 1370 baselig 0
+AnchorPoint: "belowLiga" 892 -720 baselig 0
+AnchorPoint: "aboveLiga" 236 1370 baselig 1
+AnchorPoint: "belowLiga" 304 -696 baselig 1
+LayerCount: 4
+Fore
+Refer: 1440 64436 N 1 0 0 1 105 -489 2
+Refer: 1434 -1 N 1 0 0 1 125 -5.61249 2
+LCarets2: 1 594
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEF3 uniFBAB
 EndChar
 EndChars
 EndSplineFont
