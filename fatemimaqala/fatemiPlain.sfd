@@ -16,6 +16,7 @@ Layer: 0 1 "Back" 1
 Layer: 1 1 "Fore" 0
 Layer: 2 0 "Back 2" 1
 Layer: 3 1 "Back 3" 1
+NeedsXUIDChange: 1
 XUID: [1021 574 -2067448607 5288500]
 UseXUID: 1
 UseUniqueID: 1
@@ -25,7 +26,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1471702291
+ModificationTime: 1471702448
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -1903,7 +1904,7 @@ NameList: AGL without afii
 DisplaySize: -36
 AntiAlias: 1
 FitToEm: 1
-WinInfo: 123 41 13
+WinInfo: 369 41 13
 BeginPrivate: 0
 EndPrivate
 Grid
