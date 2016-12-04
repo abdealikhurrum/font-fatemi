@@ -28,7 +28,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1480855286
+ModificationTime: 1480877604
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -73,8 +73,8 @@ Lookup: 1 8 0 "'init' Initial Forms in Arabic lookup 2" { "'init' Initial Forms 
 Lookup: 1 0 0 "'smcp' Lowercase to Small Capitals lookup 12" { "'smcp' Lowercase to Small Capitals lookup 12 subtable"  } ['smcp' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 1 0 0 "'c2sc' Capitals to Small Capitals in Latin lookup 11" { "'c2sc' Capitals to Small Capitals in Latin lookup 11 subtable"  } ['c2sc' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 4 8 0 "honorifics" { "'rlig' Required Ligatures lookup 5 subtable"  } ['rlig' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 4 12 0 "doublePress" { "'rlig' Required Ligatures in Arabic lookup 24-1"  } ['rlig' ('arab' <'FAR ' > ) ]
-Lookup: 6 12 0 "bottomExchange" { "LowHigh"  "RehLow"  "HighLow"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
+Lookup: 4 12 0 "doublePress" { "doublePress-1"  "'rlig' Required Ligatures in Arabic lookup 24-1"  } ['rlig' ('arab' <'FAR ' > ) ]
+Lookup: 6 8 0 "bottomExchange" { "LowHigh"  "RehLow"  "HighLow"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 6 8 0 "topExchange" { "highHigh"  "lowLow"  "LowKaaf"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 6 8 0 "mediKaafElongContext" { "mediKaafElongContext-1"  "mediKaafElongContext-2"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 6 8 0 "rehhehzerContext" { "'calt' Contextual Alternates in Arabic lookup 34-1"  "rehhehzerContext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
@@ -90,6 +90,7 @@ Lookup: 6 4 0 "jalalahZabrContext" { "jalalahZabrContext-1"  } ['calt' ('DFLT' <
 Lookup: 4 0 0 "jalaalahtashdeed" { "jalaalahtashdeed-1"  } ['liga' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 4 8 0 "standardArabicLigas" { "'liga' Standard Ligatures in Arabic lookup 6 subtable"  } ['liga' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 4 0 0 "'liga' Standard Ligatures lookup 13" { "'liga' Standard Ligatures lookup 13 subtable"  } ['liga' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > ) ]
+Lookup: 4 8 0 "'rlig' Required Ligatures in Arabic lookup 49" { "'rlig' Required Ligatures in Arabic lookup 49-1"  } ['rlig' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 4 12 0 "chheCase2" { "'rlig' Required Ligatures lookup 26-1"  } [' RQD' ('arab' <'FAR ' > ) ]
 Lookup: 1 8 0 "urduGhunna" { "'ss01' Style Set 1 lookup 19-1"  } ['ss01' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 1 8 0 "straightRaa" { "'ss02' Style Set 2 lookup 20-1"  } ['ss02' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
@@ -578,22 +579,22 @@ ChainSub2: coverage "LowKaaf" 0 0 0 1
 EndFPST
 ChainSub2: coverage "RehLow" 0 0 0 1
  1 1 0
-  Coverage: 55 uniFB59 uniFE91 uniFE92 uniFEF3 uniFEF4 thehDouble.init
+  Coverage: 104 uniFB59 uniFE91 uniFE92 uniFEF3 uniFEF4 pehDouble.init pehDoubleChashm.init pehDoubleChashm.isol uniFB58
   BCoverage: 111 uni0631 uni0632 uni0691 uni0698 uniFB8A uniFB8C uniFEAD uniFEAF uniFEAE uniFEB0 uniFEED uniFEEE uniFB8B uniFB8D
  1
   SeqLookup: 0 "lowbottom"
 EndFPST
 ChainSub2: coverage "HighLow" 0 0 0 1
  1 1 0
-  Coverage: 71 uniFB59 uniFE91 uniFE92 uniFEF3 uniFEF4 thehDouble.init thehDouble.medi
-  BCoverage: 39 uniFB59 uniFE91 uniFE92 uniFEF3 uniFEF4
+  Coverage: 77 uniFB59 uniFE91 uniFE92 uniFEF3 uniFEF4 pehDouble.init pehDouble.medi uniFB58
+  BCoverage: 77 uniFB59 uniFE91 uniFE92 uniFEF3 uniFEF4 pehDouble.init pehDouble.medi uniFB58
  1
   SeqLookup: 0 "lowbottom"
 EndFPST
 ChainSub2: coverage "LowHigh" 0 0 0 1
  1 1 0
-  Coverage: 141 uniFB59.lowbottom uniFE91.lowbottom uniFE92.lowbottom uniFEF3.lowbottom uniFEF4.lowbottom thehDouble.init.lowbottom thehDouble.medi.lowbottom
-  BCoverage: 89 uniFB59.lowbottom uniFE91.lowbottom uniFE92.lowbottom uniFEF3.lowbottom uniFEF4.lowbottom
+  Coverage: 132 uniFB59.lowbottom uniFE91.lowbottom uniFE92.lowbottom uniFEF3.lowbottom uniFEF4.lowbottom pehDouble.medi.lowbottom uniFB58.lowbottom
+  BCoverage: 132 uniFB59.lowbottom uniFE91.lowbottom uniFE92.lowbottom uniFEF3.lowbottom uniFEF4.lowbottom pehDouble.init.lowbottom uniFB58.lowbottom
  1
   SeqLookup: 0 "highbottom"
 EndFPST
@@ -1922,7 +1923,7 @@ DisplaySize: -36
 AntiAlias: 1
 FitToEm: 1
 ExtremaBound: 10
-WinInfo: 840 40 13
+WinInfo: 1280 40 13
 BeginPrivate: 0
 EndPrivate
 Grid
@@ -56307,7 +56308,7 @@ SplineSet
  323 2124 323 2124 323 2118 c 8,71,72
  322 2052 322 2052 313 2028 c 0,21,22
 EndSplineSet
-Validated: 524289
+Validated: 1
 EndChar
 
 StartChar: uniFEAD.alt
@@ -59518,8 +59519,8 @@ Fore
 Refer: 1148 -1 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 -68 -1095 2
 LCarets2: 1 652
-Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" thehDouble.medi thehDouble.fina
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" thehDouble.medi.hightop thehDouble.fina
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" thehDouble.medi thehDouble.fina
 EndChar
 
 StartChar: pehDouble.init
@@ -59535,6 +59536,7 @@ LayerCount: 4
 Fore
 Refer: 1149 -1 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 -565 -961 2
+Substitution2: "lowbottom-1" pehDouble.init.lowbottom
 LCarets2: 1 186
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" thehDouble.init thehDouble.medi
 EndChar
@@ -59553,6 +59555,7 @@ LayerCount: 4
 Fore
 Refer: 1150 -1 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 -522 -987 2
+Substitution2: "lowbottom-1" pehDouble.medi.lowbottom
 LCarets2: 1 230
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" thehDouble.medi thehDouble.medi
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" thehDouble.medi.hightop thehDouble.medi
@@ -59587,9 +59590,9 @@ Fore
 Refer: 1148 -1 N 1 0 0 1 0 0 2
 Refer: 1449 64448 N 1 0 0 1 300 -64 2
 LCarets2: 1 730
-Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" daadDouble.medi daadDouble.fina
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" daad.medi.lowtop daadDouble.fina
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" daad.medi.hightop daadDouble.fina
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" daadDouble.medi daadDouble.fina
 EndChar
 
 StartChar: ttehDouble.init
@@ -59606,8 +59609,8 @@ Fore
 Refer: 1149 -1 N 1 0 0 1 0 0 2
 Refer: 1449 64448 N 1 0 0 1 -288 99 2
 LCarets2: 1 156
-Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" daadDouble.init daad.medi.lowtop
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" daadDouble.init daadDouble.medi
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" daadDouble.init daad.medi.lowtop
 EndChar
 
 StartChar: ttehDouble.medi
@@ -59625,8 +59628,8 @@ Fore
 Refer: 1150 -1 N 1 0 0 1 0 0 2
 Refer: 1449 64448 N 1 0 0 1 -188 -262 2
 LCarets2: 1 260
-Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" daadDouble.medi daadDouble.medi
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" daad.medi.lowtop daadDouble.medi
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" daadDouble.medi daadDouble.medi
 EndChar
 
 StartChar: tchehDouble.isol
@@ -60602,7 +60605,7 @@ SplineSet
  506 1067 506 1067 537.608240806 1128.35699938 c 128,-1,86
  569.216481612 1189.71399877 569.216481612 1189.71399877 603 1226 c 0,0,1
 EndSplineSet
-Validated: 524321
+Validated: 33
 EndChar
 
 StartChar: uni06E8
@@ -61835,10 +61838,10 @@ AnchorPoint: "belowLiga" 782 -598 baselig 0
 LayerCount: 4
 Fore
 Refer: 1589 64742 N 1 0 0 1 0 0 2
-Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" uniFE9C zaaDouble.medi zaaDouble.medi
-Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" uniFE9C.hightop zaaDouble.medi zaaDouble.medi
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" thehDouble.medi zaaDouble.medi zaaDouble.medi
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" thehDouble.medi.hightop zaaDouble.medi zaaDouble.medi
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" uniFE9C zaaDouble.medi zaaDouble.medi
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" uniFE9C.hightop zaaDouble.medi zaaDouble.medi
 EndChar
 
 StartChar: noon_goalDouble.medi
@@ -61875,8 +61878,8 @@ AnchorPoint: "belowLiga" 878 -970 baselig 0
 LayerCount: 4
 Fore
 Refer: 1594 64753 N 1 0 0 1 0 0 2
-Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" uniFEF4 zaaDouble.medi zaaDouble.medi
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" uniFEF4.lowbottom zaaDouble.medi zaaDouble.medi
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" uniFEF4 zaaDouble.medi zaaDouble.medi
 EndChar
 
 StartChar: kaaf_goalDouble.isol
@@ -62398,7 +62401,7 @@ LayerCount: 4
 Fore
 Refer: 1445 64440 N 1 0 0 1 31 -1096 2
 Refer: 1434 -1 N 1 0 0 1 156 0 2
-Validated: 1
+LCarets2: 1 595
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58 uniFBAB
 EndChar
 
@@ -62415,7 +62418,7 @@ LayerCount: 4
 Fore
 Refer: 1434 -1 N 1 0 0 1 203 -5.61249 2
 Refer: 475 1652 N 1.47247 0 0 1.48462 408 -871 2
-Validated: 1
+LCarets2: 1 658
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE8C uniFBAB
 EndChar
 
@@ -62432,7 +62435,7 @@ LayerCount: 4
 Fore
 Refer: 1443 64435 N 1 0 0 1 -140 -536 2
 Refer: 1434 -1 N 1 0 0 1 165 -5.61249 2
-Validated: 1
+LCarets2: 1 636
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE91 uniFBAB
 EndChar
 
@@ -62449,7 +62452,7 @@ LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 40 1151 2
 Refer: 1434 -1 N 1 0 0 1 203 -5.61249 2
-Validated: 1
+LCarets2: 1 682
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE97 uniFBAB
 EndChar
 
@@ -62466,7 +62469,7 @@ LayerCount: 4
 Fore
 Refer: 1443 64435 N 1 0 0 1 -192 1124 2
 Refer: 1434 -1 N 1 0 0 1 163 -5.61249 2
-Validated: 1
+LCarets2: 1 651
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEE7 uniFBAB
 EndChar
 
@@ -62483,7 +62486,7 @@ LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 105 -489 2
 Refer: 1434 -1 N 1 0 0 1 125 -5.61249 2
-Validated: 1
+LCarets2: 1 579
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEF3 uniFBAB
 EndChar
 
@@ -62500,7 +62503,7 @@ LayerCount: 4
 Fore
 Refer: 407 1557 N 1 0 0 1 300 255 2
 Refer: 1434 -1 N 1 0 0 1 203 -5.61249 2
-Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB68 uniFBAB
 EndChar
 
 StartChar: ttehChashm.init
@@ -62517,6 +62520,7 @@ Fore
 Refer: 407 1557 N 1 0 0 1 118 295 2
 Refer: 1434 -1 N 1 0 0 1 -9 -5.61249 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures lookup 13 subtable" uniFB68 uniFBAD
 EndChar
 
 StartChar: uniFB58.lowbottom
@@ -62861,7 +62865,6 @@ LayerCount: 4
 Fore
 Refer: 1445 64440 N 1 0 0 1 -181 -1400 2
 Refer: 1434 -1 N 1 0 0 1 -20 0 2
-Validated: 1
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58.lowbottom uniFBAD
 EndChar
 
@@ -62878,8 +62881,7 @@ LayerCount: 4
 Fore
 Refer: 1443 64435 N 1 0 0 1 -341 -1019 2
 Refer: 1434 -1 N 1 0 0 1 0 -5.61249 2
-Validated: 1
-Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE91.lowbottom uniFBAB
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE91.lowbottom uniFBAD
 EndChar
 
 StartChar: yehChashm.init.lowbottom
@@ -62895,8 +62897,6 @@ LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 -81 -1011 2
 Refer: 1434 -1 N 1 0 0 1 -1 -5.61249 2
-Validated: 1
-Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEF3.lowbottom uniFBAB
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEF4.lowbottom uniFEEC
 EndChar
 
@@ -62913,24 +62913,23 @@ LayerCount: 4
 Fore
 Refer: 1445 64440 N 1 0 0 1 39 -1432 2
 Refer: 1434 -1 N 1 0 0 1 156 0 2
-Validated: 1
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58.lowbottom uniFBAB
 EndChar
 
 StartChar: behChashm.isol.lowbottom
 Encoding: 65996 -1 1660
-Width: 1075
+Width: 1059
 Flags: W
-AnchorPoint: "base" 164 90 exit 0
-AnchorPoint: "aboveLiga" 736 1370 baselig 0
-AnchorPoint: "belowLiga" 974 -1095 baselig 0
-AnchorPoint: "aboveLiga" 276 1370 baselig 1
-AnchorPoint: "belowLiga" 386 -1071 baselig 1
+AnchorPoint: "base" 148 90 exit 0
+AnchorPoint: "aboveLiga" 720 1370 baselig 0
+AnchorPoint: "belowLiga" 958 -1095 baselig 0
+AnchorPoint: "aboveLiga" 260 1370 baselig 1
+AnchorPoint: "belowLiga" 370 -1071 baselig 1
 LayerCount: 4
 Fore
-Refer: 1443 64435 N 1 0 0 1 -44 -1019 2
-Refer: 1434 -1 N 1 0 0 1 165 -5.61249 2
-Validated: 1
+Refer: 1443 64435 N 1 0 0 1 -60 -1019 2
+Refer: 1434 -1 N 1 0 0 1 149 -5.61249 2
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFE91.lowbottom uniFBAB
 EndChar
 
 StartChar: yehChashm.isol.lowbottom
@@ -62947,6 +62946,7 @@ Fore
 Refer: 1440 64436 N 1 0 0 1 132 -990 2
 Refer: 1434 -1 N 1 0 0 1 125 -5.61249 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEF3.lowbottom uniFBAB
 EndChar
 
 StartChar: uni0631.alt
@@ -63272,7 +63272,7 @@ SplineSet
  593 2892 593 2892 577 2893 c 0,19,20
  477 2897 477 2897 411 2921 c 1,0,1
 EndSplineSet
-Validated: 524321
+Validated: 33
 EndChar
 
 StartChar: uni06D9
@@ -64029,6 +64029,8 @@ Fore
 Refer: 1149 -1 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 -581 -1409 2
 Validated: 1
+Ligature2: "doublePress-1" thehDouble.init.lowbottom thehDouble.medi
+Substitution2: "highbottom-1" pehDouble.init
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" thehDouble.init.lowbottom thehDouble.medi
 EndChar
 
@@ -64045,6 +64047,8 @@ Fore
 Refer: 1150 -1 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 -528 -1428 2
 Validated: 1
+Substitution2: "highbottom-1" pehDouble.medi
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" thehDouble.medi.lowbottom thehDouble.medi.hightop
 LCarets2: 1 0
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" thehDouble.medi.lowbottom thehDouble.medi
 EndChar
@@ -64091,7 +64095,6 @@ LayerCount: 4
 Fore
 Refer: 1442 64438 N 1 0 0 1 -517 301 2
 Refer: 1149 -1 N 1 0 0 1 0 3 2
-Validated: 1
 EndChar
 
 StartChar: theh.medi.hightop
@@ -64106,7 +64109,6 @@ LayerCount: 4
 Fore
 Refer: 1442 64438 N 1 0 0 1 -466 368 2
 Refer: 1150 -1 N 1 0 0 1 1 1 2
-Validated: 1
 EndChar
 
 StartChar: pehDoubleChashm.isol
@@ -64122,7 +64124,9 @@ LayerCount: 4
 Fore
 Refer: 1445 64440 N 1 0 0 1 31 -1096 2
 Refer: 1434 -1 N 1 0 0 1 156 0 2
-Validated: 1
+LCarets2: 1 604
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.init uniFBAB
+Substitution2: "lowbottom-1" pehDoubleChashm.isol.lowbottom
 EndChar
 
 StartChar: pehDoubleChashm.init.lowbottom
@@ -64138,7 +64142,8 @@ LayerCount: 4
 Fore
 Refer: 1445 64440 N 1 0 0 1 -181 -1400 2
 Refer: 1434 -1 N 1 0 0 1 -20 0 2
-Validated: 1
+LCarets2: 1 456
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.init.lowbottom uniFBAD
 EndChar
 
 StartChar: pehDoubleChashm.init
@@ -64154,7 +64159,9 @@ LayerCount: 4
 Fore
 Refer: 1445 64440 N 1 0 0 1 -149 -1096 2
 Refer: 1434 -1 N 1 0 0 1 -24 0 2
-Validated: 1
+LCarets2: 1 456
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.init uniFBAD
+Substitution2: "lowbottom-1" pehDoubleChashm.init.lowbottom
 EndChar
 
 StartChar: pehDoubleChashm.isol.lowbottom
@@ -64170,7 +64177,8 @@ LayerCount: 4
 Fore
 Refer: 1445 64440 N 1 0 0 1 39 -1432 2
 Refer: 1434 -1 N 1 0 0 1 156 0 2
-Validated: 1
+LCarets2: 1 610
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.init.lowbottom uniFBAB
 EndChar
 
 StartChar: ttehDoubleChashm.isol
@@ -64186,7 +64194,8 @@ LayerCount: 4
 Fore
 Refer: 407 1557 N 1 0 0 1 300 255 2
 Refer: 1434 -1 N 1 0 0 1 203 -5.61249 2
-Validated: 1
+LCarets2: 1 628
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" ttehDouble.init uniFBAB
 EndChar
 
 StartChar: ttehDoubleChashm.init
@@ -64203,6 +64212,7 @@ Fore
 Refer: 407 1557 N 1 0 0 1 118 295 2
 Refer: 1434 -1 N 1 0 0 1 -9 -5.61249 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" ttehDouble.init uniFBAD
 EndChar
 
 StartChar: daad.medi.hightop
@@ -64251,6 +64261,7 @@ Refer: 1446 64441 N 1 0 0 1 415 -1125 2
 Refer: 1440 64436 N 1 0 0 1 -100 -1046 2
 Refer: 1429 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58 uniFEF2
 EndChar
 
 StartChar: pehYaa.fina
@@ -64268,6 +64279,7 @@ Refer: 1440 64436 N 1 0 0 1 -97 -881 2
 Refer: 1446 64441 N 1 0 0 1 695 -1125 2
 Refer: 1433 -1 N 1 0 0 1 0 9 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB59 uniFEF2
 EndChar
 
 StartChar: pehMaksura.fina
@@ -64284,6 +64296,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 695 -1125 2
 Refer: 1433 -1 N 1 0 0 1 0 9 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB59 uniFEF0
 EndChar
 
 StartChar: pehMaksura.isol
@@ -64299,6 +64312,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 415 -1125 2
 Refer: 1429 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58 uniFEF0
 EndChar
 
 StartChar: pehJeem.isol
@@ -64315,6 +64329,7 @@ Refer: 1446 64441 N 1 0 0 1 287 -516.306 2
 Refer: 1439 64434 N 1 0 0 1 -73 -595 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58 uniFE9E
 EndChar
 
 StartChar: pehHaa.isol
@@ -64330,6 +64345,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 335 -567 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58 uniFEA1
 EndChar
 
 StartChar: pehKhaa.isol
@@ -64346,6 +64362,7 @@ Refer: 1446 64441 N 1 0 0 1 335 -567 2
 Refer: 1439 64434 N 1 0 0 1 -483 1036 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58 uniFEA5
 EndChar
 
 StartChar: pehMeem.isol
@@ -64365,6 +64382,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 110 -558 2
 Refer: 1430 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58 uniFEE2
 EndChar
 
 StartChar: pehJeem.init
@@ -64382,6 +64400,7 @@ Refer: 1446 64441 N 1 0 0 1 116 -705 2
 Refer: 1443 64435 N 1 0 0 1 -611 -515 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" uniFB58 uniFE9F
 EndChar
 
 StartChar: pehHaa.init
@@ -64398,6 +64417,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 65 -855 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58 uniFEA4
 EndChar
 
 StartChar: pehKhaa.init
@@ -64415,6 +64435,7 @@ Refer: 1446 64441 N 1 0 0 1 59 -783 2
 Refer: 1443 64435 N 1 0 0 1 -701 964 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58 uniFEA8
 EndChar
 
 StartChar: pehMeem.init
@@ -64430,6 +64451,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 233 -576.612 2
 Refer: 1460 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB58 uniFEE4
 EndChar
 
 StartChar: pehMeem.medi.init
@@ -64447,6 +64469,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 41 -1020 2
 Refer: 1456 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB59 uniFEE4
 EndChar
 
 StartChar: pehGoal.medi
@@ -64464,6 +64487,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 95 -1347 2
 Refer: 1152 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFB59 uniFBA9
 EndChar
 
 StartChar: pehDoubleYaa.isol
@@ -64480,6 +64504,7 @@ Refer: 1446 64441 N 1 0 0 1 415 -1125 2
 Refer: 1440 64436 N 1 0 0 1 -100 -1046 2
 Refer: 1429 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.init uniFEF2
 EndChar
 
 StartChar: pehDoubleMaksura.isol
@@ -64495,6 +64520,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 415 -1125 2
 Refer: 1429 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.init uniFEF0
 EndChar
 
 StartChar: pehDoubleYaa.fina
@@ -64512,6 +64538,7 @@ Refer: 1440 64436 N 1 0 0 1 -97 -881 2
 Refer: 1446 64441 N 1 0 0 1 695 -1125 2
 Refer: 1433 -1 N 1 0 0 1 0 9 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.medi uniFEF2
 EndChar
 
 StartChar: pehDoubleMaksura.fina
@@ -64528,6 +64555,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 695 -1125 2
 Refer: 1433 -1 N 1 0 0 1 0 9 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.medi uniFEF0
 EndChar
 
 StartChar: pehDoubleJeem.isol
@@ -64544,6 +64572,7 @@ Refer: 1446 64441 N 1 0 0 1 287 -516.306 2
 Refer: 1439 64434 N 1 0 0 1 -73 -595 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'liga' Standard Ligatures lookup 13 subtable" pehDouble.init uniFE9E
 EndChar
 
 StartChar: pehDoubleHaa.isol
@@ -64559,6 +64588,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 335 -567 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.init uniFEA2
 EndChar
 
 StartChar: pehDoubleKhaa.isol
@@ -64575,6 +64605,7 @@ Refer: 1446 64441 N 1 0 0 1 335 -567 2
 Refer: 1439 64434 N 1 0 0 1 -483 1036 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.init uniFEA6
 EndChar
 
 StartChar: pehDoubleMeem.isol
@@ -64594,6 +64625,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 110 -558 2
 Refer: 1430 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.init uniFEE2
 EndChar
 
 StartChar: pehDoubleJeem.init
@@ -64611,6 +64643,7 @@ Refer: 1446 64441 N 1 0 0 1 116 -705 2
 Refer: 1443 64435 N 1 0 0 1 -611 -515 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.init uniFEA0
 EndChar
 
 StartChar: pehDoubleHaa.init
@@ -64627,6 +64660,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 65 -855 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.init uniFEA4
 EndChar
 
 StartChar: pehDoubleKhaa.init
@@ -64644,6 +64678,7 @@ Refer: 1446 64441 N 1 0 0 1 59 -783 2
 Refer: 1443 64435 N 1 0 0 1 -701 964 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.init uniFEA6
 EndChar
 
 StartChar: pehDoubleMeem.init
@@ -64659,6 +64694,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 233 -576.612 2
 Refer: 1460 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.init uniFEE4
 EndChar
 
 StartChar: pehDoubleMeem.medi
@@ -64676,6 +64712,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 41 -1020 2
 Refer: 1456 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.medi uniFEE4
 EndChar
 
 StartChar: pehDoubleGoal.medi
@@ -64693,6 +64730,8 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 95 -1347 2
 Refer: 1152 -1 N 1 0 0 1 0 0 2
 Validated: 1
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.medi goalDouble.medi
+Ligature2: "'rlig' Required Ligatures in Arabic lookup 49-1" pehDouble.medi uniFBA9
 EndChar
 
 StartChar: ttehYeh.isol
@@ -65444,7 +65483,6 @@ LayerCount: 4
 Fore
 Refer: 1442 64438 N 1 0 0 1 -480 478 2
 Refer: 1149 -1 N 1 0 0 1 0 3 2
-Validated: 1
 Substitution2: "highbottom-1" thehDouble.init
 EndChar
 
@@ -65460,7 +65498,6 @@ LayerCount: 4
 Fore
 Refer: 1442 64438 N 1 0 0 1 -404 64 2
 Refer: 1150 -1 N 1 0 0 1 1 1 2
-Validated: 1
 Substitution2: "highbottom-1" thehDouble.medi
 EndChar
 
@@ -65475,7 +65512,6 @@ LayerCount: 4
 Fore
 Refer: 1442 64438 N 1 0 0 1 -517 301 2
 Refer: 1149 -1 N 1 0 0 1 0 3 2
-Validated: 1
 EndChar
 
 StartChar: thehDouble.medi.hightop
@@ -65490,7 +65526,6 @@ LayerCount: 4
 Fore
 Refer: 1442 64438 N 1 0 0 1 -466 368 2
 Refer: 1150 -1 N 1 0 0 1 1 1 2
-Validated: 1
 EndChar
 EndChars
 EndSplineFont
