@@ -1,0 +1,11 @@
+behs = beh,teh,theh,peh,noon,yeh,thehDouble,pehDouble,tteh,ttehDouble = 10
+rehs = reh,zeh,jeh,rreh = 4
+haas = jeem,haa,khaa,cheh = 4 
+meem = 1
+
+
+****
+
+
+behs + (jeh,rreh) = 10*2 = 20
+behs + cheh = (10*1)*3 [init,isol,medi] = 30
