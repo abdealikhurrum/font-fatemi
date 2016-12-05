@@ -28,7 +28,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1480948287
+ModificationTime: 1480960648
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -628,7 +628,7 @@ ChainSub2: coverage "fatKharoContext-1" 0 0 0 1
 EndFPST
 ChainSub2: coverage "'calt' Contextual Alternates in Arabic lookup 34-1" 0 0 0 1
  1 1 0
-  Coverage: 63 uni0629 uni0647 uni06D5 uniFBA4 uniFBA6 uniFE93 uniFEE9 uniFEEB
+  Coverage: 79 uni0629 uni0647 uni06D5 uniFBA4 uniFBA6 uniFE93 uniFEE9 uniFEEB goalDouble.isol
   BCoverage: 63 uni0631 uni0632 uni0691 uni0698 uniFB8A uniFB8C uniFEAD uniFEAF
  1
   SeqLookup: 0 "hehzerSubs"
@@ -15430,14 +15430,12 @@ Width: 629
 GlyphClass: 2
 Flags: W
 AnchorPoint: "finaAnchor" -36 1613 basechar 0
-AnchorPoint: "zer" 313 -640 basechar 0
 AnchorPoint: "aboveSingle" 324 1497 basechar 0
 AnchorPoint: "belowSingle" 282 -195 basechar 0
 LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 -322 978 2
 Refer: 443 1607 N 1 0 0 1 -15 0 2
-Validated: 1
 Substitution2: "hehzerSubs-1" zerligataa
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFE94
 EndChar
@@ -16629,13 +16627,11 @@ Width: 658
 GlyphClass: 2
 Flags: W
 AnchorPoint: "finaAnchor" 120 1349 basechar 0
-AnchorPoint: "zer" 332 -648 basechar 0
 AnchorPoint: "aboveSingle" 301 1361 basechar 0
 AnchorPoint: "belowSingle" 331 -372 basechar 0
 LayerCount: 4
 Fore
 Refer: 1094 65257 N 1 0 0 1 20 0 2
-Validated: 1
 Substitution2: "hehzerSubs-1" zerligaheh
 Substitution2: "'locl' Localized Forms in Arabic lookup 18-1" uni06C1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFEEA
@@ -17959,10 +17955,11 @@ Encoding: 489 1726 486
 Width: 798
 GlyphClass: 2
 Flags: W
+AnchorPoint: "belowSingle" 331 -372 basechar 0
+AnchorPoint: "aboveSingle" 301 1361 basechar 0
 LayerCount: 4
 Fore
 Refer: 1096 65259 N 1 0 0 1 0 0 2
-Validated: 1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFBAB
 Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" uniFBAD
 Substitution2: "'init' Initial Forms in Arabic lookup 2 subtable" uniFEEB
@@ -17973,10 +17970,11 @@ Encoding: 490 1728 487
 Width: 644
 GlyphClass: 2
 Flags: W
+AnchorPoint: "belowSingle" 331 -372 basechar 0
+AnchorPoint: "aboveSingle" 269 1497 basechar 0
 LayerCount: 4
 Fore
 Refer: 489 1730 N 1 0 0 1 0 0 2
-Validated: 1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFBA5
 EndChar
 
@@ -17985,10 +17983,11 @@ Encoding: 491 1729 488
 Width: 658
 GlyphClass: 2
 Flags: W
+AnchorPoint: "belowSingle" 331 -372 basechar 0
+AnchorPoint: "aboveSingle" 301 1361 basechar 0
 LayerCount: 4
 Fore
 Refer: 443 1607 N 1 0 0 1 0 0 2
-Validated: 1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFBA7
 Substitution2: "'medi' Medial Forms in Arabic lookup 3 subtable" uniFBA9
 Substitution2: "'init' Initial Forms in Arabic lookup 2 subtable" uniFEEB
@@ -18005,7 +18004,6 @@ LayerCount: 4
 Fore
 Refer: 475 1652 N 1.52734 0 0 1.47681 -5 -1166 2
 Refer: 443 1607 N 1 0 0 1 -19 0 2
-Validated: 1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFBA5
 EndChar
 
@@ -18014,10 +18012,11 @@ Encoding: 493 1731 490
 Width: 629
 GlyphClass: 2
 Flags: W
+AnchorPoint: "belowSingle" 331 -372 basechar 0
+AnchorPoint: "aboveSingle" 301 1361 basechar 0
 LayerCount: 4
 Fore
 Refer: 418 1577 N 1 0 0 1 0 0 2
-Validated: 1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFE94
 EndChar
 
@@ -18095,11 +18094,12 @@ Encoding: 496 1747 493
 Width: 1453
 GlyphClass: 2
 Flags: W
+AnchorPoint: "belowSingle" 760 -276 basechar 0
+AnchorPoint: "aboveSingle" 730 1457 basechar 0
 LayerCount: 4
 Fore
 Refer: 475 1652 N 1 0 0 1 528 -464 2
 Refer: 492 1746 N 1 0 0 1 0 0 2
-Validated: 1
 Substitution2: "'fina' Terminal Forms in Arabic lookup 4 subtable" uniFBB1
 EndChar
 
@@ -18113,7 +18113,6 @@ AnchorPoint: "belowSingle" 318 -396 basechar 0
 LayerCount: 4
 Fore
 Refer: 443 1607 N 1 0 0 1 14 0 2
-Validated: 1
 Substitution2: "hehzerSubs-1" zerligaheh
 EndChar
 
@@ -34168,7 +34167,6 @@ AnchorPoint: "belowSingle" 276 -421 basechar 0
 LayerCount: 4
 Fore
 Refer: 489 1730 N 1 0 0 1 0 0 2
-Validated: 1
 Substitution2: "hehzerSubs-1" zerHehHamza
 LCarets2: 1 291
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEE9 uniFE80
@@ -34201,7 +34199,6 @@ AnchorPoint: "belowSingle" 334 -352 basechar 0
 LayerCount: 4
 Fore
 Refer: 443 1607 N 1 0 0 1 0 0 2
-Validated: 1
 Substitution2: "hehzerSubs-1" zerligaheh
 EndChar
 
@@ -35813,7 +35810,7 @@ SplineSet
  423 583 423 583 379 583 c 0,82,83
  312 583 312 583 278 547 c 1,10,11
 EndSplineSet
-Validated: 524321
+Validated: 33
 LCarets2: 1 516
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEA3 uniFEE4
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" haaDouble.init uniFEE4
@@ -35905,7 +35902,7 @@ SplineSet
  1231 551 1231 551 1241 549 c 1,98,-1
  1185 693 l 1,0,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 LCarets2: 1 561
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" seenDouble.init uniFEE4
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEB3 uniFEE4
@@ -35987,7 +35984,7 @@ SplineSet
  586 751 586 751 632 790 c 1,56,57
  619 996 619 996 566 1342 c 1,0,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 LCarets2: 1 398
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF haaDouble.medi
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF uniFEA4
@@ -36063,7 +36060,7 @@ SplineSet
  265 287 265 287 276 296 c 1,42,-1
  204 1265 l 1,0,-1
 EndSplineSet
-Validated: 524289
+Validated: 1
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEDF uniFEE4
 LCarets2: 1 183
 EndChar
@@ -36212,7 +36209,7 @@ SplineSet
  742 818 l 1,70,-1
  648 876 l 1,0,1
 EndSplineSet
-Validated: 524321
+Validated: 33
 LCarets2: 1 539
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEE3 haaDouble.medi
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEE3 uniFEA4
@@ -36441,7 +36438,7 @@ SplineSet
  680 952 680 952 714 982 c 1,90,-1
  804 1145 l 1,26,27
 EndSplineSet
-Validated: 524321
+Validated: 33
 LCarets2: 1 561
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFEEB uniFEE4
 Ligature2: "'liga' Standard Ligatures in Arabic lookup 6 subtable" uniFBAC uniFEE4
@@ -46450,7 +46447,7 @@ SplineSet
  1236 604 1236 604 1207 611 c 0,68,69
  1132 630 1132 630 1104 651 c 1,0,1
 EndSplineSet
-Validated: 524321
+Validated: 33
 Layer: 2
 SplineSet
 1106 651 m 5
@@ -59974,7 +59971,7 @@ AnchorPoint: "aboveLiga" 289 1190 baselig 1
 LayerCount: 4
 Fore
 Refer: 443 1607 N 1 0 0 1 0 0 2
-Validated: 1
+Substitution2: "hehzerSubs-1" zerLigaGoal
 LCarets2: 1 328
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" zaaDouble.init zaaDouble.fina
 EndChar
@@ -60038,7 +60035,7 @@ Flags: W
 LayerCount: 4
 Fore
 Refer: 1182 -1 N 1 0 0 1 0 0 2
-Validated: 65537
+Validated: 1
 LCarets2: 4 1354 1104 524 312
 Ligature2: "'rlig' Required Ligatures lookup 26-1" haaDouble.init haaDouble.medi uniFEEC seenDouble.medi seenDouble.fina
 EndChar
@@ -61989,7 +61986,7 @@ AnchorPoint: "belowLiga" 782 -598 baselig 0
 LayerCount: 4
 Fore
 Refer: 1589 64742 N 1 0 0 1 0 0 2
-Validated: 65537
+Validated: 1
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" thehDouble.medi zaaDouble.medi zaaDouble.medi
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" thehDouble.medi.hightop zaaDouble.medi zaaDouble.medi
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" uniFE9C zaaDouble.medi zaaDouble.medi
@@ -62395,14 +62392,12 @@ Width: 658
 Flags: W
 AnchorPoint: "zerLiga" 306 -626 baselig 0
 AnchorPoint: "zerLiga" 322 -626 baselig 0
-AnchorPoint: "belowLiga" 326 -432 baselig 0
 AnchorPoint: "aboveLiga" 311 1179 baselig 0
-AnchorPoint: "belowLiga" 304 -388 baselig 1
 AnchorPoint: "aboveLiga" 289 1190 baselig 1
 LayerCount: 4
 Fore
 Refer: 443 1607 N 1 0 0 1 0 0 2
-Validated: 1
+LCarets2: 1 304
 Ligature2: "'rlig' Required Ligatures in Arabic lookup 24-1" zaaDouble.init zerLigaZaa
 EndChar
 
@@ -62454,7 +62449,6 @@ SplineSet
  472 315 472 315 458 349 c 0,42,43
  410 459 410 459 296 540 c 1,26,27
 EndSplineSet
-Validated: 1
 EndChar
 
 StartChar: zerligataa
@@ -62525,7 +62519,6 @@ AnchorPoint: "aboveSingle" 276 1642 basechar 0
 LayerCount: 4
 Fore
 Refer: 489 1730 N 1 0 0 1 0 0 2
-Validated: 1
 EndChar
 
 StartChar: hehzerHeh.init
@@ -65764,7 +65757,7 @@ Validated: 1
 Substitution2: "lowtop-1" thehDouble.medi
 EndChar
 
-StartChar: NameMe.1774
+StartChar: behTcheh.isol
 Encoding: 1774 -1 1776
 Width: 1192
 Flags: W
@@ -65778,7 +65771,7 @@ Refer: 1446 64441 N 1 0 0 1 65 -905 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1775
+StartChar: tehTcheh.isol
 Encoding: 1775 -1 1777
 Width: 1192
 Flags: W
@@ -65792,7 +65785,7 @@ Refer: 1446 64441 N 1 0 0 1 65 -905 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1776
+StartChar: thehTcheh.isol
 Encoding: 1776 -1 1778
 Width: 1192
 Flags: W
@@ -65806,7 +65799,7 @@ Refer: 1446 64441 N 1 0 0 1 65 -905 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1777
+StartChar: noonTcheh.isol
 Encoding: 1777 -1 1779
 Width: 1192
 Flags: W
@@ -65820,7 +65813,7 @@ Refer: 1446 64441 N 1 0 0 1 65 -905 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1778
+StartChar: yehTcheh.isol
 Encoding: 1778 -1 1780
 Width: 1192
 Flags: W
@@ -65834,7 +65827,7 @@ Refer: 1446 64441 N 1 0 0 1 65 -905 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1779
+StartChar: pehTcheh.isol
 Encoding: 1779 -1 1781
 Width: 1192
 Flags: W
@@ -65848,7 +65841,7 @@ Refer: 1446 64441 N 1 0 0 1 65 -905 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1780
+StartChar: ttehTcheh.isol
 Encoding: 1780 -1 1782
 Width: 1192
 Flags: W
@@ -65862,7 +65855,7 @@ Refer: 1446 64441 N 1 0 0 1 65 -905 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1781
+StartChar: behTcheh.init
 Encoding: 1781 -1 1783
 Width: 1024
 Flags: W
@@ -65877,7 +65870,7 @@ Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1782
+StartChar: tehTcheh.init
 Encoding: 1782 -1 1784
 Width: 1024
 Flags: W
@@ -65892,7 +65885,7 @@ Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1783
+StartChar: thehTcheh.init
 Encoding: 1783 -1 1785
 Width: 1024
 Flags: W
@@ -65907,7 +65900,7 @@ Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1784
+StartChar: noonTcheh.init
 Encoding: 1784 -1 1786
 Width: 1024
 Flags: W
@@ -65922,7 +65915,7 @@ Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1785
+StartChar: yehTcheh.init
 Encoding: 1785 -1 1787
 Width: 1024
 Flags: W
@@ -65937,7 +65930,7 @@ Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1786
+StartChar: pehTcheh.init
 Encoding: 1786 -1 1788
 Width: 1024
 Flags: W
@@ -65952,7 +65945,7 @@ Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1787
+StartChar: ttehTcheh.init
 Encoding: 1787 -1 1789
 Width: 1024
 Flags: W
@@ -65967,7 +65960,7 @@ Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1788
+StartChar: behRreh.fina
 Encoding: 1788 -1 1790
 Width: 1064
 Flags: W
@@ -65982,7 +65975,7 @@ Refer: 407 1557 S 1 0 0 1 0 -349 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
 EndChar
 
-StartChar: NameMe.1789
+StartChar: tehRreh.fina
 Encoding: 1789 -1 1791
 Width: 1064
 Flags: W
@@ -65997,7 +65990,7 @@ Refer: 407 1557 S 1 0 0 1 0 -349 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
 EndChar
 
-StartChar: NameMe.1790
+StartChar: thehRreh.fina
 Encoding: 1790 -1 1792
 Width: 1064
 Flags: W
@@ -66012,7 +66005,7 @@ Refer: 407 1557 S 1 0 0 1 0 -349 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
 EndChar
 
-StartChar: NameMe.1791
+StartChar: noonRreh.fina
 Encoding: 1791 -1 1793
 Width: 1064
 Flags: W
@@ -66027,7 +66020,7 @@ Refer: 407 1557 S 1 0 0 1 0 -349 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
 EndChar
 
-StartChar: NameMe.1792
+StartChar: yehRreh.fina
 Encoding: 1792 -1 1794
 Width: 1064
 Flags: W
@@ -66042,7 +66035,7 @@ Refer: 407 1557 S 1 0 0 1 0 -349 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
 EndChar
 
-StartChar: NameMe.1793
+StartChar: pehRreh.fina
 Encoding: 1793 -1 1795
 Width: 1064
 Flags: W
@@ -66057,7 +66050,7 @@ Refer: 407 1557 S 1 0 0 1 0 -349 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
 EndChar
 
-StartChar: NameMe.1794
+StartChar: ttehRreh.fina
 Encoding: 1794 -1 1796
 Width: 1064
 Flags: W
@@ -66072,7 +66065,7 @@ Refer: 407 1557 S 1 0 0 1 0 -349 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
 EndChar
 
-StartChar: NameMe.1795
+StartChar: behJeh.fina
 Encoding: 1795 -1 1797
 Width: 1064
 Flags: W
@@ -66087,7 +66080,7 @@ Refer: 1442 64438 S 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
 EndChar
 
-StartChar: NameMe.1796
+StartChar: tehJeh.fina
 Encoding: 1796 -1 1798
 Width: 1064
 Flags: W
@@ -66102,7 +66095,7 @@ Refer: 1442 64438 S 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
 EndChar
 
-StartChar: NameMe.1797
+StartChar: thehJeh.fina
 Encoding: 1797 -1 1799
 Width: 1064
 Flags: W
@@ -66117,7 +66110,7 @@ Refer: 1442 64438 S 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
 EndChar
 
-StartChar: NameMe.1798
+StartChar: noonJeh.fina
 Encoding: 1798 -1 1800
 Width: 1064
 Flags: W
@@ -66132,7 +66125,7 @@ Refer: 1442 64438 S 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
 EndChar
 
-StartChar: NameMe.1799
+StartChar: yehJeh.fina
 Encoding: 1799 -1 1801
 Width: 1064
 Flags: W
@@ -66147,7 +66140,7 @@ Refer: 1442 64438 S 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
 EndChar
 
-StartChar: NameMe.1800
+StartChar: pehJeh.fina
 Encoding: 1800 -1 1802
 Width: 1064
 Flags: W
@@ -66162,7 +66155,7 @@ Refer: 1442 64438 S 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
 EndChar
 
-StartChar: NameMe.1801
+StartChar: ttehJeh.fina
 Encoding: 1801 -1 1803
 Width: 1064
 Flags: W
@@ -66177,7 +66170,7 @@ Refer: 1442 64438 S 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
 EndChar
 
-StartChar: NameMe.1802
+StartChar: behGoal.fina
 Encoding: 1802 -1 1804
 Width: 1049
 Flags: W
@@ -66192,7 +66185,7 @@ Refer: 1440 64436 N 1 0 0 1 -19 -812 2
 Refer: 1455 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1803
+StartChar: thehGoal.fina
 Encoding: 1803 -1 1805
 Width: 1049
 Flags: W
@@ -66207,7 +66200,7 @@ Refer: 1440 64436 N 1 0 0 1 -19 -812 2
 Refer: 1455 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1804
+StartChar: noonGoal.fina
 Encoding: 1804 -1 1806
 Width: 1049
 Flags: W
@@ -66222,7 +66215,7 @@ Refer: 1440 64436 N 1 0 0 1 -19 -812 2
 Refer: 1455 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1805
+StartChar: pehGoal.fina
 Encoding: 1805 -1 1807
 Width: 1049
 Flags: W
@@ -66237,21 +66230,22 @@ Refer: 1440 64436 N 1 0 0 1 -19 -812 2
 Refer: 1455 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1806
+StartChar: ttehGoal.fina
 Encoding: 1806 -1 1808
-Width: 1235
+Width: 1049
 Flags: W
-AnchorPoint: "aboveLiga" 766 1345 baselig 0
-AnchorPoint: "belowLiga" 822 -806 baselig 0
-AnchorPoint: "aboveLiga" 262 1337 baselig 1
-AnchorPoint: "belowLiga" 270 -822 baselig 1
+AnchorPoint: "base" 1034 90 entry 0
+AnchorPoint: "aboveLiga" 766 1180 baselig 0
+AnchorPoint: "belowLiga" 822 -971 baselig 0
+AnchorPoint: "aboveLiga" 262 1172 baselig 1
+AnchorPoint: "belowLiga" 270 -987 baselig 1
 LayerCount: 4
 Fore
-Refer: 1440 64436 N 1 0 0 1 113 -782 2
-Refer: 1454 -1 N 1 0 0 1 0 0 2
+Refer: 1440 64436 N 1 0 0 1 -19 -812 2
+Refer: 1455 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1807
+StartChar: behGoal.isol
 Encoding: 1807 -1 1809
 Width: 1235
 Flags: W
@@ -66265,7 +66259,7 @@ Refer: 1440 64436 N 1 0 0 1 113 -782 2
 Refer: 1454 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1808
+StartChar: thehGoal.isol
 Encoding: 1808 -1 1810
 Width: 1235
 Flags: W
@@ -66279,7 +66273,7 @@ Refer: 1440 64436 N 1 0 0 1 113 -782 2
 Refer: 1454 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1809
+StartChar: pehGoal.isol
 Encoding: 1809 -1 1811
 Width: 1235
 Flags: W
@@ -66293,7 +66287,7 @@ Refer: 1440 64436 N 1 0 0 1 113 -782 2
 Refer: 1454 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1810
+StartChar: ttehGoal.isol
 Encoding: 1810 -1 1812
 Width: 1235
 Flags: W
@@ -66377,7 +66371,7 @@ Refer: 1440 64436 N 1 0 0 1 113 -782 2
 Refer: 1454 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1816
+StartChar: tehBarree.fina
 Encoding: 1816 -1 1818
 Width: 1205
 Flags: W
@@ -66392,7 +66386,7 @@ Refer: 1439 64434 N 1 0 0 1 190 -988 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1817
+StartChar: thehBarree.fina
 Encoding: 1817 -1 1819
 Width: 1205
 Flags: W
@@ -66407,7 +66401,7 @@ Refer: 1439 64434 N 1 0 0 1 190 -988 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1818
+StartChar: noonBarree.fina
 Encoding: 1818 -1 1820
 Width: 1205
 Flags: W
@@ -66422,7 +66416,7 @@ Refer: 1439 64434 N 1 0 0 1 190 -988 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1819
+StartChar: yehBarree.fina
 Encoding: 1819 -1 1821
 Width: 1205
 Flags: W
@@ -66437,7 +66431,7 @@ Refer: 1439 64434 N 1 0 0 1 190 -988 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1820
+StartChar: pehBarree.fina
 Encoding: 1820 -1 1822
 Width: 1205
 Flags: W
@@ -66452,7 +66446,7 @@ Refer: 1439 64434 N 1 0 0 1 190 -988 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1821
+StartChar: ttehBarree.fina
 Encoding: 1821 -1 1823
 Width: 1205
 Flags: W
@@ -66482,43 +66476,48 @@ Refer: 1439 64434 N 1 0 0 1 190 -988 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
 EndChar
 
-StartChar: NameMe.1823
+StartChar: gaafGoal.isol
 Encoding: 1823 -1 1825
 Width: 1214
 Flags: W
-AnchorPoint: "aboveLiga" 726 1553 baselig 0
+AnchorPoint: "aboveLiga" 718 1769 baselig 0
 AnchorPoint: "belowLiga" 782 -598 baselig 0
 AnchorPoint: "aboveLiga" 222 1545 baselig 1
 AnchorPoint: "belowLiga" 230 -614 baselig 1
 LayerCount: 4
 Fore
 SplineSet
-595 1008 m 1,0,-1
- 1515 1600 l 1,1,-1
- 1445 1415 l 1,2,-1
- 633 889 l 1,3,4
- 774 565 l 0,5,6
- 867 343 867 343 880 285 c 0,7,8
- 890 239 890 239 890 191 c 0,9,10
- 890 116 890 116 865 39 c 0,11,12
- 835 -52 835 -52 791 -80 c 0,13,14
- 718 -125 718 -125 654 -125 c 0,15,16
- 577 -125 577 -125 511 -61 c 0,17,18
- 461 -13 461 -13 421 70 c 1,19,-1
- -307 -547 l 1,20,-1
- -278 -366 l 1,21,-1
- 316 127 l 0,22,23
- 405 202 405 202 418 215 c 0,24,25
- 449 246 449 246 467 218 c 0,26,27
- 469 213 469 213 485 179 c 0,28,29
- 504 139 504 139 565 95 c 0,30,31
- 639 41 639 41 703 41 c 0,32,33
- 728 41 728 41 751 49 c 0,34,35
- 784 61 784 61 810 90 c 1,36,37
- 776 267 776 267 658 529 c 0,38,39
- 634 583 634 583 582 692 c 0,40,41
- 540 781 540 781 520 825 c 1,42,-1
- 595 1008 l 1,0,-1
+640 1282 m 5,0,-1
+ 1472 1834 l 1,1,-1
+ 1402 1649 l 1,2,-1
+ 580 1102 l 13,3,4
+ 640 1282 l 5,0,-1
+595 1008 m 1,5,-1
+ 1515 1600 l 1,6,-1
+ 1445 1415 l 1,7,-1
+ 633 889 l 1,8,-1
+ 774 565 l 0,9,10
+ 867 343 867 343 880 285 c 0,11,12
+ 890 239 890 239 890 191 c 0,13,14
+ 890 116 890 116 865 39 c 0,15,16
+ 835 -52 835 -52 791 -80 c 0,17,18
+ 718 -125 718 -125 654 -125 c 0,19,20
+ 577 -125 577 -125 511 -61 c 0,21,22
+ 461 -13 461 -13 421 70 c 1,23,-1
+ -307 -547 l 1,24,-1
+ -278 -366 l 1,25,-1
+ 316 127 l 0,26,27
+ 405 202 405 202 418 215 c 0,28,29
+ 449 246 449 246 467 218 c 0,30,31
+ 469 213 469 213 485 179 c 0,32,33
+ 504 139 504 139 565 95 c 0,34,35
+ 639 41 639 41 703 41 c 0,36,37
+ 728 41 728 41 751 49 c 0,38,39
+ 784 61 784 61 810 90 c 1,40,41
+ 776 267 776 267 658 529 c 0,42,43
+ 634 583 634 583 582 692 c 0,44,45
+ 540 781 540 781 520 825 c 1,46,-1
+ 595 1008 l 1,5,-1
 EndSplineSet
 EndChar
 EndChars
