@@ -27,7 +27,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1481467000
+ModificationTime: 1481478926
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -48,11 +48,10 @@ HheadAOffset: 0
 HheadDescent: -1400
 HheadDOffset: 0
 OS2Vendor: 'GLYF'
-Lookup: 1 0 0 "tildeToMadda" { "tilToMaddaArabic101"  } ['locl' ('arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
+Lookup: 1 0 0 "tildeToMadda" { "tilToMaddaArabic101"  } ['locl' ('arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
 Lookup: 1 8 0 "urduSubs" { "urduHeh_roundGhunna"  } ['locl' ('arab' <'URD ' > ) ]
 Lookup: 1 8 0 "lsdSubs" { "doublePressEnablers"  } ['locl' ('arab' <'FAR ' > ) ]
-Lookup: 4 0 0 "compatibilityRREHddeh" { "compatibilityRREHddeh-1"  } ['ccmp' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 1 0 0 "compatibiltyStyle" { "compatibiltyStyle-1"  } ['ss03' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
+Lookup: 1 0 0 "compatibiltyStyle" { "compatibiltyStyle-1"  } ['locl' ('arab' <'PAS ' > ) ]
 Lookup: 1 0 0 "RehSpace" { "RehSpace-1"  } []
 Lookup: 1 0 0 "RehAlef" { "RehAlef-1" ("alt") } []
 Lookup: 1 0 0 "hightop" { "hightop-1" ("hightop") } []
@@ -69,35 +68,35 @@ Lookup: 1 0 0 "jalaalahzabr" { "jalaalahzabr-1"  } []
 Lookup: 1 0 0 "hehzerSubs" { "hehzerSubs-1"  } []
 Lookup: 1 0 0 "thintofatKharo" { "thintofatKharo-1"  } []
 Lookup: 1 8 0 "curvyIsolatedRehs" { "isolRehs"  } ['isol' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 1 8 0 "Final Forms" { "fina"  } ['fina' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 1 8 0 "Medial Forms" { "medi"  } ['medi' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 1 8 0 "Initial Forms" { "init"  } ['init' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 4 0 1 "specials" { "specials-1"  } ['liga' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
+Lookup: 1 8 0 "Final Forms" { "fina"  } ['fina' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 1 8 0 "Medial Forms" { "medi"  } ['medi' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 1 8 0 "Initial Forms" { "init"  } ['init' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 4 0 1 "specials" { "specials-1"  } ['liga' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
 Lookup: 1 0 0 "smcp" { "smcp"  } ['smcp' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
-Lookup: 4 0 0 "honorifics" { "honoSuperscript"  "honoLigas"  } ['rlig' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'latn' <'dflt' > ) ]
-Lookup: 4 12 0 "doublePress" { "bottomExchange2"  "doublePressSingles"  } ['rlig' ('arab' <'FAR ' > ) ]
-Lookup: 6 8 0 "bottomExchange" { "LowHigh"  "RehLow"  "yehBarreeLow"  "HighLow"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 6 8 0 "topExchange" { "highHigh"  "lowLow"  "LowKaaf"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 6 8 0 "nuktaVariant_to_original" { "highTopToNormal"  "lowBottomToNormal"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 6 8 0 "rehhehzerContext" { "Reh_zer_heh__Rules"  "rehhehzerContext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 6 0 0 "fatKharoContext" { "fatKharoContext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 6 4 0 "shortalefcontext" { "ShortAlefRules"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 6 8 0 "straightrehscontext" { "straightrehscontext-5"  "straightrehscontext-4"  "straightrehscontext-1"  "straightrehscontext-2"  "straightrehscontext-3"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 6 0 0 "hamzaunderalefContext" { "shortunderalefcontext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 5 8 0 "longlaamContext" { "longLaam_kaaf"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 6 8 0 "ElongContext" { "mediKaafElongContext-2"  "yehBarreeElong"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 6 8 0 "RehAlefcontext" { "RehAlefcontext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 6 8 0 "RehSpaceContext" { "reh_spaceRule"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 6 8 0 "hehGoalForms" { "goalHehRules"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 6 4 0 "jalalahZabrContext" { "jalalahZabrContext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 4 0 0 "jalaalahtashdeed" { "jalaalahtashdeed-1"  } ['liga' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 4 8 0 "standardArabicLigas" { "Arabic Ligatures"  } ['liga' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
+Lookup: 4 0 0 "honorifics" { "honoSuperscript"  "honoLigas"  } ['rlig' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 4 12 0 "doublePress" { "bottomExchange2"  "doublePressSingles"  } ['rlig' ('arab' <'FAR ' 'PAS ' > ) ]
+Lookup: 4 0 1 "compatibilityRREHddeh" { "compatibilityRREHddeh-1"  } ['liga' ('ara ' <'PAS ' > ) ]
+Lookup: 6 8 0 "bottomExchange" { "LowHigh"  "RehLow"  "yehBarreeLow"  "HighLow"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 6 8 0 "topExchange" { "highHigh"  "lowLow"  "LowKaaf"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 6 8 0 "nuktaVariant_to_original" { "highTopToNormal"  "lowBottomToNormal"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 6 8 0 "rehhehzerContext" { "Reh_zer_heh__Rules"  "rehhehzerContext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 6 0 0 "fatKharoContext" { "fatKharoContext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 6 4 0 "shortalefcontext" { "ShortAlefRules"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 6 8 0 "straightrehscontext" { "straightrehscontext-5"  "straightrehscontext-4"  "straightrehscontext-1"  "straightrehscontext-2"  "straightrehscontext-3"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 6 0 0 "hamzaunderalefContext" { "shortunderalefcontext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 5 8 0 "longlaamContext" { "longLaam_kaaf"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 6 8 0 "ElongContext" { "mediKaafElongContext-2"  "yehBarreeElong"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 6 8 0 "RehAlefcontext" { "RehAlefcontext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 6 8 0 "RehSpaceContext" { "reh_spaceRule"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 6 8 0 "hehGoalForms" { "goalHehRules"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 6 4 0 "jalalahZabrContext" { "jalalahZabrContext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 4 0 0 "jalaalahtashdeed" { "jalaalahtashdeed-1"  } ['liga' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 4 8 0 "standardArabicLigas" { "Arabic Ligatures"  } ['liga' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
 Lookup: 4 0 0 "latnLigas" { "Latin Ligatures"  } ['liga' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > ) ]
-Lookup: 4 8 0 "DoublePress Ligatures" { "doublePressLiga"  } ['rlig' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 1 8 0 "urduGhunna" { "ss01_NoonGhunnaAlternate"  } ['ss01' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 1 8 0 "straightRaa" { "ss02_StraightRaa"  } ['ss02' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 4 8 0 "kashidas" { "kashidaLigas"  } ['rlig' ('
-   ' <'dflt' > 'DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
+Lookup: 4 8 0 "DoublePress Ligatures" { "doublePressLiga"  } ['rlig' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 1 8 0 "urduGhunna" { "ss01_NoonGhunnaAlternate"  } ['ss01' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 1 8 0 "straightRaa" { "ss02_StraightRaa"  } ['ss02' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
+Lookup: 4 8 0 "kashidas" { "kashidaLigas"  } ['rlig' ('    ' <'dflt' > 'DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
 Lookup: 1 0 0 "pnum" { "proNum"  } ['pnum' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 1 0 0 "slashZero" { "slash_zero"  } ['zero' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
 Lookup: 1 0 0 "onum" { "onum-1" ("oldstyle") } ['onum' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
@@ -1944,7 +1943,7 @@ DisplaySize: -36
 AntiAlias: 1
 FitToEm: 1
 ExtremaBound: 10
-WinInfo: 1271 41 13
+WinInfo: 0 41 13
 BeginPrivate: 0
 EndPrivate
 Grid
@@ -2151,6 +2150,7 @@ SplineSet
  584 454 l 1,64,-1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" uktub
 EndChar
 
 StartChar: dollar
@@ -2242,6 +2242,7 @@ SplineSet
  437 779 437 779 482 751 c 1,88,-1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" kaifa
 EndChar
 
 StartChar: percent
@@ -2310,6 +2311,7 @@ SplineSet
  1192 1252 1192 1252 1196 1248 c 1,57,-1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" ma_huwa
 EndChar
 
 StartChar: ampersand
@@ -2515,6 +2517,7 @@ SplineSet
  484 948 l 1,0,1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" uzkur
 EndChar
 
 StartChar: comma
@@ -2608,6 +2611,7 @@ SplineSet
  716 1522 716 1522 738 1522 c 0,0,1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" bayyin
 Substitution2: "smcp" slash.sc
 EndChar
 
@@ -3202,6 +3206,7 @@ SplineSet
  888 80 888 80 888 70 c 0,0,1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" bhai
 Substitution2: "smcp" less.sc
 EndChar
 
@@ -3263,6 +3268,7 @@ SplineSet
  96 55 96 55 96 70 c 0,0,1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" qasreAali
 Substitution2: "smcp" greater.sc
 EndChar
 
@@ -5152,6 +5158,7 @@ SplineSet
  355 1290 355 1290 372 1290 c 0,0,1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" maa_hiya
 Substitution2: "smcp" asciicircum.sc
 EndChar
 
@@ -5175,6 +5182,7 @@ SplineSet
  28 -86 28 -86 28 -66 c 0,0,1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" awdih
 EndChar
 
 StartChar: grave
@@ -6764,6 +6772,7 @@ SplineSet
  208 637 208 637 208 766 c 0,0,1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" uni06DA
 Substitution2: "smcp" braceleft.sc
 EndChar
 
@@ -6791,6 +6800,7 @@ SplineSet
  257 -212 l 2,0,1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" wabayyin
 Substitution2: "smcp" bar.sc
 EndChar
 
@@ -6857,6 +6867,7 @@ SplineSet
  102 1440 102 1440 114 1440 c 1,0,1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" uni06E8
 Substitution2: "smcp" braceright.sc
 EndChar
 
@@ -8737,6 +8748,7 @@ SplineSet
  390 486 390 486 398 494 c 1,0,-1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" bhaisaheb
 Substitution2: "smcp" multiply.sc
 EndChar
 
@@ -9481,6 +9493,7 @@ SplineSet
  504 834 504 834 504 876 c 128,-1,22
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" shehzada
 Substitution2: "smcp" divide.sc
 EndChar
 
@@ -14916,7 +14929,7 @@ SplineSet
  350.393219991 1771.22824662 l 2,301,302
  351.014089788 1771.11868136 351.014089788 1771.11868136 351.641963809 1771.0616019 c 0,276,277
 EndSplineSet
-Validated: 524321
+Validated: 33
 Ligature2: "honoSuperscript" asciicircum uni0631 uni0636
 Ligature2: "honoSuperscript" asciicircum uniFEAD uni0636
 EndChar
@@ -15370,6 +15383,7 @@ Fore
 Refer: 455 1619 N 1 0 0 1 0 0 2
 Refer: 416 1575 N 1 0 0 1 -4 0 2
 Validated: 1
+Substitution2: "compatibiltyStyle-1" alefsupalef
 Substitution2: "doublePressEnablers" alefsupalef
 Substitution2: "fina" uniFE82
 EndChar
@@ -15537,6 +15551,7 @@ Fore
 Refer: 1444 64439 N 1 0 0 1 62 230 2
 Refer: 472 1646 N 1 0 0 1 -10 0 2
 Validated: 1
+Substitution2: "compatibiltyStyle-1" thehDouble
 Substitution2: "doublePressEnablers" thehDouble
 Substitution2: "init" uniFE9B
 Substitution2: "medi" uniFE9C
@@ -15616,6 +15631,7 @@ SplineSet
  141 510 l 1,0,1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" haaDouble
 Substitution2: "doublePressEnablers" haaDouble
 Substitution2: "init" uniFEA3
 Substitution2: "medi" uniFEA4
@@ -15926,6 +15942,7 @@ SplineSet
  1497 396 l 1,0,-1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" seenDouble
 Substitution2: "doublePressEnablers" seenDouble
 Substitution2: "fina" uniFEB2
 Substitution2: "medi" uniFEB4
@@ -16056,6 +16073,7 @@ SplineSet
  1668 228 l 1,97,98
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" saadDouble
 Substitution2: "doublePressEnablers" saadDouble
 Substitution2: "fina" uniFEBA
 Substitution2: "medi" uniFEBC
@@ -16075,6 +16093,7 @@ Fore
 Refer: 1443 64435 N 1 0 0 1 602 1014 2
 Refer: 430 1589 N 1 0 0 1 0 0 2
 Validated: 1
+Substitution2: "compatibiltyStyle-1" daadDouble
 Substitution2: "doublePressEnablers" daadDouble
 Substitution2: "fina" uniFEBE
 Substitution2: "medi" uniFEC0
@@ -16283,6 +16302,7 @@ SplineSet
  1135 283 l 1,192,193
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" taaDouble
 Substitution2: "doublePressEnablers" taaDouble
 Substitution2: "fina" uniFEC2
 Substitution2: "medi" uniFEC4
@@ -16302,6 +16322,7 @@ Fore
 Refer: 1443 64435 N 1 0 0 1 46 929 2
 Refer: 432 1591 N 1 0 0 1 0 0 2
 Validated: 1
+Substitution2: "compatibiltyStyle-1" zaaDouble
 Substitution2: "doublePressEnablers" zaaDouble
 Substitution2: "fina" uniFEC6
 Substitution2: "medi" uniFEC8
@@ -16627,6 +16648,7 @@ LayerCount: 4
 Fore
 Refer: 1078 65241 N 1 0 0 1 -21 0 2
 Validated: 1
+Substitution2: "compatibiltyStyle-1" kaafDouble
 Substitution2: "doublePressEnablers" kaafDouble
 Substitution2: "fina" uniFEDA
 Substitution2: "medi" uniFEDC
@@ -17954,6 +17976,7 @@ LayerCount: 4
 Fore
 Refer: 439 1603 N 1 0 0 1 -11 0 2
 Validated: 1
+Substitution2: "compatibiltyStyle-1" kaafDouble
 Substitution2: "doublePressEnablers" kaafDouble
 Substitution2: "fina" uniFEDA
 Substitution2: "medi" uniFEDC
@@ -21949,6 +21972,7 @@ LayerCount: 4
 Fore
 Refer: 771 8216 N -1 0 0 -1 470 2380 3
 Validated: 1
+Substitution2: "compatibiltyStyle-1" bhaisaheb
 EndChar
 
 StartChar: quotesinglbase
@@ -33075,7 +33099,7 @@ SplineSet
  346.933190759 1537.28255971 346.933190759 1537.28255971 344.672377256 1529.34482455 c 128,-1,256
  342.411563753 1521.40708938 342.411563753 1521.40708938 347.04003392 1513.4000212 c 0,130,131
 EndSplineSet
-Validated: 524321
+Validated: 33
 LCarets2: 3 448 576 760
 Ligature2: "honoSuperscript" asciicircum uniFEC3 uniFECA
 Ligature2: "honoSuperscript" asciicircum uni0637 uni00A0 uni0639
@@ -33449,7 +33473,7 @@ SplineSet
  729.535032714 881 729.535032714 881 729 881 c 0,270,271
  668.713909845 881 668.713909845 881 531.939145428 932.167537768 c 0,169,170
 EndSplineSet
-Validated: 524321
+Validated: 33
 Ligature2: "honoSuperscript" asciicircum saadDouble uni0639
 Ligature2: "honoSuperscript" asciicircum saadDouble.init uniFECA
 Ligature2: "honoSuperscript" asciicircum uniFEBB uniFECA
@@ -35989,7 +36013,7 @@ SplineSet
  423 583 423 583 379 583 c 0,82,83
  312 583 312 583 278 547 c 1,10,11
 EndSplineSet
-Validated: 524321
+Validated: 33
 LCarets2: 1 516
 Ligature2: "Arabic Ligatures" haaDouble.init uniFEE4
 Ligature2: "Arabic Ligatures" uniFEA3 uniFEE4
@@ -42519,7 +42543,7 @@ SplineSet
  920 475 l 2,284,285
  917.379126519 475 917.379126519 475 914.846746989 474.324698792 c 0,27,28
 EndSplineSet
-Validated: 524321
+Validated: 33
 Ligature2: "honoLigas" uniFEBB uniFEE0 uniFECA
 EndChar
 
@@ -42648,7 +42672,7 @@ SplineSet
  515.832913249 972.881800473 515.832913249 972.881800473 541.11000158 1014.64394641 c 0,206,207
  542.924411476 1017.64166711 542.924411476 1017.64166711 543.611613514 1021.0776773 c 0,144,145
 EndSplineSet
-Validated: 524321
+Validated: 33
 Ligature2: "honoLigas" uniFEC9 uni00A0 uniFEE1
 Ligature2: "honoLigas" uni0639 uni00A0 uni0645
 EndChar
@@ -42984,7 +43008,7 @@ SplineSet
  721.188611612 1197.87988881 l 2,274,275
  719.775791414 1198.03542865 719.775791414 1198.03542865 718.35517412 1197.98960229 c 0,142,143
 EndSplineSet
-Validated: 524321
+Validated: 33
 Ligature2: "honoLigas" uniFEC1 uni00A0 uniFEC9
 Ligature2: "honoLigas" uni0637 uni00A0 uni0639
 EndChar
@@ -43190,7 +43214,7 @@ SplineSet
  2033.24172319 1753.95745194 l 1,327,-1
  2058.94514887 1780.39526121 l 1,261,262
 EndSplineSet
-Validated: 524321
+Validated: 33
 EndChar
 
 StartChar: glyph578
@@ -43376,7 +43400,7 @@ SplineSet
  1772.54354848 717.553847697 1772.54354848 717.553847697 1835.01235102 694.260395904 c 0,304,305
  1848.77155559 689.129845045 1848.77155559 689.129845045 1857.78704435 700.72118773 c 0,161,162
 EndSplineSet
-Validated: 524321
+Validated: 33
 Ligature2: "honoLigas" uni0635 uni00A0 uni0639
 EndChar
 
@@ -43483,7 +43507,7 @@ SplineSet
  645.640095694 694 645.640095694 694 516.961688258 790.028662266 c 0,164,165
  508.096212555 796.64468891 508.096212555 796.64468891 497.780117949 792.651361965 c 0,0,1
 EndSplineSet
-Validated: 524321
+Validated: 33
 EndChar
 
 StartChar: uni066E.fina
@@ -61254,7 +61278,7 @@ SplineSet
  -56.7499080083 1606.46329543 l 1,154,-1
  -59.4032548635 1603.80994857 l 1,68,69
 EndSplineSet
-Validated: 524289
+Validated: 1
 Ligature2: "honoSuperscript" asciicircum uni0631 uni062D
 Ligature2: "honoSuperscript" asciicircum uniFEAD uni062D
 EndChar
@@ -66199,7 +66223,7 @@ Fore
 Refer: 475 1652 N 1.52911 0 0 1.52588 346 -951 2
 Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
-Validated: 2097153
+Validated: 1
 Ligature2: "Arabic Ligatures" uniFE8B uniFB7D
 Ligature2: "doublePressLiga" uniFE8B tchehDouble.medi
 EndChar
@@ -66218,7 +66242,7 @@ Fore
 Refer: 475 1652 N 1.10784 0 0 1.13652 549.176 -769.848 2
 Refer: 407 1557 N 0.780952 0 0 0.763158 45.1619 -166.395 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
-Validated: 2097153
+Validated: 1
 LCarets2: 1 541
 Ligature2: "doublePressLiga" uniFE8C uniFB8D
 Ligature2: "Arabic Ligatures" uniFE8C uniFB8D
@@ -66238,7 +66262,7 @@ Fore
 Refer: 475 1652 N 1.07134 0 0 1.13961 581.147 -721.033 2
 Refer: 1442 64438 N 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
-Validated: 2097153
+Validated: 1
 LCarets2: 1 563
 Ligature2: "doublePressLiga" uniFE8C uniFB8B
 Ligature2: "Arabic Ligatures" uniFE8C uniFB8B
@@ -66257,7 +66281,7 @@ LayerCount: 4
 Fore
 Refer: 475 1652 N 1.52911 0 0 1.52588 491 -1453 2
 Refer: 1455 -1 N 1 0 0 1 0 0 2
-Validated: 2097153
+Validated: 1
 LCarets2: 1 491
 Ligature2: "doublePressLiga" uniFE8C goalDouble.fina
 Ligature2: "Arabic Ligatures" uniFE8C uniFBA7
@@ -66498,7 +66522,7 @@ Fore
 Refer: 475 1652 N 1.52911 0 0 1.52588 346 -951 2
 Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
-Validated: 2097153
+Validated: 1
 Ligature2: "doublePressLiga" uniFE8B tchehDouble.medi
 Ligature2: "Arabic Ligatures" uniFE8B uniFB7D
 EndChar
@@ -66517,7 +66541,7 @@ Fore
 Refer: 475 1652 N 1.10784 0 0 1.13652 549.176 -769.848 2
 Refer: 407 1557 N 0.780952 0 0 0.763158 45.1619 -166.395 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
-Validated: 2097153
+Validated: 1
 LCarets2: 1 501
 Ligature2: "Arabic Ligatures" uniFE8C uniFB8D
 Ligature2: "doublePressLiga" uniFE8C uniFB8D
@@ -66537,7 +66561,7 @@ Fore
 Refer: 475 1652 N 1.07134 0 0 1.13961 581.147 -721.033 2
 Refer: 1442 64438 N 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
-Validated: 2097153
+Validated: 1
 LCarets2: 1 577
 Ligature2: "doublePressLiga" uniFE8C uniFB8B
 Ligature2: "Arabic Ligatures" uniFE8C uniFB8B
@@ -66556,7 +66580,7 @@ LayerCount: 4
 Fore
 Refer: 475 1652 N 1.52911 0 0 1.52588 491 -1453 2
 Refer: 1455 -1 N 1 0 0 1 0 0 2
-Validated: 2097153
+Validated: 1
 LCarets2: 1 499
 Ligature2: "Arabic Ligatures" uniFE8C uniFBA7
 Ligature2: "doublePressLiga" uniFE8C goalDouble.fina
