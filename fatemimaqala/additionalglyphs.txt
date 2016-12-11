@@ -1,0 +1,13 @@
+behs = beh,teh,theh,peh,noon,yeh,thehDouble,pehDouble,tteh,ttehDouble = 10
+behs_lower = beh,peh,pehDouble = 3
+rehs = reh,zeh,jeh,rreh = 4
+haas = jeem,haa,khaa,cheh = 4 
+meem = 1
+hehs = goal,chashm
+
+
+****
+
+
+behs + (jeh,rreh) = 10*2 = 20
+behs + cheh = (10*1)*2 [init,isol] = 20
