@@ -18,6 +18,7 @@ Layer: 0 1 "Back" 1
 Layer: 1 1 "Fore" 0
 Layer: 2 0 "Back 2" 1
 Layer: 3 1 "Back 3" 1
+NeedsXUIDChange: 1
 XUID: [1021 574 -2067448607 5288500]
 UseXUID: 1
 UseUniqueID: 1
@@ -27,7 +28,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1481489500
+ModificationTime: 1481491202
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -1943,7 +1944,7 @@ DisplaySize: -36
 AntiAlias: 1
 FitToEm: 1
 ExtremaBound: 10
-WinInfo: 328 41 13
+WinInfo: 287 41 13
 BeginPrivate: 0
 EndPrivate
 Grid
@@ -17257,6 +17258,7 @@ SplineSet
  209 1233 209 1233 285 1296 c 0,0,1
 EndSplineSet
 Validated: 1
+Substitution2: "compatibiltyStyle-1" uni0670
 EndChar
 
 StartChar: uni0653
