@@ -27,7 +27,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1481460521
+ModificationTime: 1481467000
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -74,18 +74,18 @@ Lookup: 1 8 0 "Medial Forms" { "medi"  } ['medi' ('DFLT' <'dflt' > 'arab' <'ARA 
 Lookup: 1 8 0 "Initial Forms" { "init"  } ['init' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 4 0 1 "specials" { "specials-1"  } ['liga' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 1 0 0 "smcp" { "smcp"  } ['smcp' ('DFLT' <'dflt' > 'arab' <'URD ' 'dflt' > 'cyrl' <'dflt' > 'latn' <'TRK ' 'dflt' > ) ]
-Lookup: 4 0 0 "honorifics" { "honoSuperscript"  "honoLigas"  } ['rlig' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 4 12 0 "doublePress" { "doublePressSingles"  } ['rlig' ('arab' <'FAR ' > ) ]
-Lookup: 6 8 0 "nuktaVariant_to_original" { "highTopToNormal"  "lowBottomToNormal"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 6 8 0 "bottomExchange" { "LowHigh"  "RehLow"  "HighLow"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
+Lookup: 4 0 0 "honorifics" { "honoSuperscript"  "honoLigas"  } ['rlig' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > 'latn' <'dflt' > ) ]
+Lookup: 4 12 0 "doublePress" { "bottomExchange2"  "doublePressSingles"  } ['rlig' ('arab' <'FAR ' > ) ]
+Lookup: 6 8 0 "bottomExchange" { "LowHigh"  "RehLow"  "yehBarreeLow"  "HighLow"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 6 8 0 "topExchange" { "highHigh"  "lowLow"  "LowKaaf"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
-Lookup: 6 8 0 "mediKaafElongContext" { "mediKaafElongContext-2"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
+Lookup: 6 8 0 "nuktaVariant_to_original" { "highTopToNormal"  "lowBottomToNormal"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 6 8 0 "rehhehzerContext" { "Reh_zer_heh__Rules"  "rehhehzerContext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 6 0 0 "fatKharoContext" { "fatKharoContext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 6 4 0 "shortalefcontext" { "ShortAlefRules"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 6 8 0 "straightrehscontext" { "straightrehscontext-5"  "straightrehscontext-4"  "straightrehscontext-1"  "straightrehscontext-2"  "straightrehscontext-3"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 6 0 0 "hamzaunderalefContext" { "shortunderalefcontext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 5 8 0 "longlaamContext" { "longLaam_kaaf"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
+Lookup: 6 8 0 "ElongContext" { "mediKaafElongContext-2"  "yehBarreeElong"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 6 8 0 "RehAlefcontext" { "RehAlefcontext-1"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 6 8 0 "RehSpaceContext" { "reh_spaceRule"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
 Lookup: 6 8 0 "hehGoalForms" { "goalHehRules"  } ['calt' ('DFLT' <'dflt' > 'arab' <'ARA ' 'FAR ' 'URD ' 'dflt' > ) ]
@@ -542,9 +542,23 @@ KernClass2: 7+ 9 "'kern' Horizontal Kerning lookup 5 kerning class 8"
  19 w.sc wcircumflex.sc
  53 y.sc yacute.sc ycircumflex.sc ydieresis.sc uni0233.sc
  0 {} -66 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 16 {} -30 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} -78 {} 0 {} -32 {} -20 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} -32 {} -20 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} 0 {} -32 {} -28 {} -44 {} -32 {} 0 {} 0 {} 0 {} 0 {} 0 {} -44 {} 0 {} -46 {} -32 {} 0 {} 0 {} 0 {} 0 {} 0 {} -40 {} 0 {} -44 {} -28 {}
+ChainSub2: coverage "yehBarreeLow" 0 0 0 1
+ 1 0 1
+  Coverage: 38 uniFE91 uniFB58 pehDouble.init uniFEF3
+  FCoverage: 25 uniFBAF barreeDouble.fina
+ 1
+  SeqLookup: 0 "lowbottom"
+EndFPST
+ChainSub2: coverage "yehBarreeElong" 0 0 0 1
+ 1 0 1
+  Coverage: 155 uniFB59 uniFE91 uniFE92 uniFEF3 uniFEF4 uniFB58.lowbottom uniFB59.lowbottom pehDouble.init pehDouble.medi pehDouble.init.lowbottom pehDouble.medi.lowbottom
+  FCoverage: 134 glyph547 tehBarree.fina thehBarree.fina noonBarree.fina yehBarree.fina pehBarree.fina ttehBarree.fina NameMe.1822 yehHamza_barree.fina
+ 1
+  SeqLookup: 0 "elongation"
+EndFPST
 ChainSub2: coverage "lowBottomToNormal" 0 0 0 1
  1 0 1
-  Coverage: 89 uniFB59.lowbottom uniFE91.lowbottom uniFE92.lowbottom uniFEF3.lowbottom uniFEF4.lowbottom
+  Coverage: 53 uniFB59.lowbottom uniFE92.lowbottom uniFEF4.lowbottom
   FCoverage: 105 uniFB8B uniFB8D uniFBAF uniFBFD uniFEAE uniFEB0 uniFEE2 uniFEE4 uniFEE6 uniFEF0 uniFEF2 barreeDouble.fina
  1
   SeqLookup: 0 "variantToOriginal"
@@ -706,8 +720,8 @@ EndFPST
 ChainSub2: coverage "straightrehscontext-1" 0 0 0 1
  1 0 2
   Coverage: 63 uni0631 uni0632 uni0691 uni0698 uniFB8A uniFB8C uniFEAD uniFEAF
-  FCoverage: 79 uniFB58 uniFB68 uniFE91 uniFE97 uniFE9F uniFED3 uniFEDF uniFEE3 uniFEE7 uniFEF3
-  FCoverage: 31 uniFB7B uniFE9E uniFEF0 uniFEF2
+  FCoverage: 115 uniFB58 uniFB68 uniFE91 uniFE97 uniFE9F uniFED3 uniFEDF uniFEE3 uniFEE7 uniFEF3 uniFE91.lowbottom uniFEF3.lowbottom
+  FCoverage: 74 uniFB7B uniFE9E uniFEF0 uniFEF2 uniFBAF barreeDouble.fina tchehDouble.fina
  1
   SeqLookup: 0 "straightrehs"
 EndFPST
@@ -738,7 +752,7 @@ EndFPST
 ContextSub2: coverage "longLaam_kaaf" 0 0 0 1
  2 0 0
   Coverage: 111 uniFB90 uniFB91 uniFEDB uniFEDC kaafDouble.init kaafDouble.medi gaafDouble.init gaafDouble.medi uniFB94 uniFB95
-  Coverage: 593 uniFB67 uniFB68 uniFB69 uniFB6B uniFB6D uniFB89 uniFB8B uniFB8C uniFB8D uniFB8F uniFB91 uniFB93 uniFB95 uniFBA5 uniFBB1 uniFC64 uniFC65 uniFC70 uniFC71 uniFC73 uniFC74 uniFC75 uniFC76 uniFC77 uniFC8A uniFC8B uniFC8E uniFC8F uniFE86 uniFE94 uniFE96 uniFE97 uniFE98 uniFE9A uniFE9B uniFE9C uniFEA6 uniFEA7 uniFEA8 uniFEAC uniFEB0 uniFED3 uniFED4 uniFED6 uniFED8 uniFEDA uniFEDC uniFEDE uniFEE0 uniFEE6 uniFEE8 uniFEF6 uniFEF8 uniFEFA uniFEFC uni06C2.medi afii57418.medi_hehfinal.liga uniFC87 uniFC86 ttehDouble.medi ttehDouble.init thehDouble.medi thehDouble.init kaafDouble.init kaafDouble.medi
+  Coverage: 580 uniFB67 uniFB68 uniFB69 uniFB6B uniFB6D uniFB89 uniFB8B uniFB8C uniFB8D uniFB8F uniFB91 uniFB93 uniFB95 uniFBA5 uniFBB1 uniFC64 uniFC65 uniFC70 uniFC71 uniFC73 uniFC74 uniFC75 uniFC76 uniFC77 uniFC8A uniFC8B uniFC8E uniFC8F uniFE86 uniFE94 uniFE96 uniFE97 uniFE98 uniFE9A uniFE9B uniFE9C uniFEA6 uniFEA7 uniFEA8 uniFEAC uniFEB0 uniFED3 uniFED4 uniFED6 uniFED8 uniFEDA uniFEDC uniFEDE uniFEE0 uniFEE6 uniFEE8 uniFEF6 uniFEF8 uniFEFA uniFEFC afii57418.medi_hehfinal.liga uniFC87 uniFC86 ttehDouble.medi ttehDouble.init thehDouble.medi thehDouble.init kaafDouble.init kaafDouble.medi
  1
   SeqLookup: 0 "longlaamkaafs"
 EndFPST
@@ -1930,7 +1944,7 @@ DisplaySize: -36
 AntiAlias: 1
 FitToEm: 1
 ExtremaBound: 10
-WinInfo: 0 41 13
+WinInfo: 1271 41 13
 BeginPrivate: 0
 EndPrivate
 Grid
@@ -7674,6 +7688,7 @@ LayerCount: 4
 Fore
 Refer: 964 64682 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 73 -868 2
+Validated: 1
 LCarets2: 1 497
 Ligature2: "doublePressLiga" tchehDouble.init uniFEE4
 Ligature2: "Arabic Ligatures" uniFB7C uniFEE4
@@ -14614,6 +14629,7 @@ AnchorPoint: "finaAnchor" 1116 580 mark 0
 LayerCount: 4
 Fore
 Refer: 1141 -1 N 0.75 0 0 0.75 -418 725 2
+Validated: 1
 Ligature2: "honoSuperscript" asciicircum uniFEBB uniFEE0 uniFECA
 Ligature2: "honoSuperscript" asciicircum saadDouble.init uniFEE0 uniFECA
 EndChar
@@ -14900,8 +14916,9 @@ SplineSet
  350.393219991 1771.22824662 l 2,301,302
  351.014089788 1771.11868136 351.014089788 1771.11868136 351.641963809 1771.0616019 c 0,276,277
 EndSplineSet
-LCarets2: 2 340 648
-Ligature2: "honoSuperscript" asciicircum uniFEAE uni0636
+Validated: 524321
+Ligature2: "honoSuperscript" asciicircum uni0631 uni0636
+Ligature2: "honoSuperscript" asciicircum uniFEAD uni0636
 EndChar
 
 StartChar: uni0614
@@ -15484,6 +15501,7 @@ LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 -322 978 2
 Refer: 443 1607 N 1 0 0 1 -15 0 2
+Validated: 1
 Substitution2: "hehzerSubs-1" zerligataa
 Substitution2: "fina" uniFE94
 EndChar
@@ -16680,6 +16698,7 @@ AnchorPoint: "belowSingle" 331 -372 basechar 0
 LayerCount: 4
 Fore
 Refer: 1094 65257 N 1 0 0 1 20 0 2
+Validated: 1
 Substitution2: "hehzerSubs-1" zerligaheh
 Substitution2: "urduHeh_roundGhunna" uni06C1
 Substitution2: "fina" uniFEEA
@@ -18011,6 +18030,7 @@ AnchorPoint: "aboveSingle" 301 1361 basechar 0
 LayerCount: 4
 Fore
 Refer: 1096 65259 N 1 0 0 1 0 0 2
+Validated: 1
 Substitution2: "fina" uniFBAB
 Substitution2: "medi" uniFBAD
 Substitution2: "init" uniFEEB
@@ -18026,6 +18046,7 @@ AnchorPoint: "aboveSingle" 269 1497 basechar 0
 LayerCount: 4
 Fore
 Refer: 489 1730 N 1 0 0 1 0 0 2
+Validated: 1
 Substitution2: "fina" uniFBA5
 EndChar
 
@@ -18039,6 +18060,7 @@ AnchorPoint: "aboveSingle" 301 1361 basechar 0
 LayerCount: 4
 Fore
 Refer: 443 1607 N 1 0 0 1 0 0 2
+Validated: 1
 Substitution2: "fina" uniFBA7
 Substitution2: "medi" uniFBA9
 Substitution2: "init" uniFEEB
@@ -18055,6 +18077,7 @@ LayerCount: 4
 Fore
 Refer: 475 1652 N 1.52734 0 0 1.47681 -5 -1166 2
 Refer: 443 1607 N 1 0 0 1 -19 0 2
+Validated: 1
 Substitution2: "fina" uniFBA5
 EndChar
 
@@ -18068,6 +18091,7 @@ AnchorPoint: "aboveSingle" 301 1361 basechar 0
 LayerCount: 4
 Fore
 Refer: 418 1577 N 1 0 0 1 0 0 2
+Validated: 1
 Substitution2: "fina" uniFE94
 EndChar
 
@@ -18151,6 +18175,7 @@ LayerCount: 4
 Fore
 Refer: 475 1652 N 1 0 0 1 528 -464 2
 Refer: 492 1746 N 1 0 0 1 0 0 2
+Validated: 1
 Substitution2: "fina" uniFBB1
 EndChar
 
@@ -18164,6 +18189,7 @@ AnchorPoint: "belowSingle" 318 -396 basechar 0
 LayerCount: 4
 Fore
 Refer: 443 1607 N 1 0 0 1 14 0 2
+Validated: 1
 Substitution2: "hehzerSubs-1" zerligaheh
 EndChar
 
@@ -24586,6 +24612,7 @@ LayerCount: 4
 Fore
 Refer: 1446 64441 N 1 0 0 1 136 -692 2
 Refer: 964 64682 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 276
 Ligature2: "Arabic Ligatures" uniFB7C uniFEE4
 EndChar
@@ -32258,6 +32285,7 @@ SplineSet
  416 -218 416 -218 416 -244 c 0,80,81
  416 -249 416 -249 414 -259 c 0,59,60
 EndSplineSet
+Validated: 1
 Ligature2: "specials-1" exclam uni0628 exclam
 EndChar
 
@@ -33047,6 +33075,7 @@ SplineSet
  346.933190759 1537.28255971 346.933190759 1537.28255971 344.672377256 1529.34482455 c 128,-1,256
  342.411563753 1521.40708938 342.411563753 1521.40708938 347.04003392 1513.4000212 c 0,130,131
 EndSplineSet
+Validated: 524321
 LCarets2: 3 448 576 760
 Ligature2: "honoSuperscript" asciicircum uniFEC3 uniFECA
 Ligature2: "honoSuperscript" asciicircum uni0637 uni00A0 uni0639
@@ -33254,6 +33283,7 @@ SplineSet
  1367 1963 l 5,320,-1
  1384 1980 l 5,257,258
 EndSplineSet
+Validated: 37
 Ligature2: "honoSuperscript" asciicircum uniFED7 uniFEB2
 EndChar
 
@@ -33419,6 +33449,7 @@ SplineSet
  729.535032714 881 729.535032714 881 729 881 c 0,270,271
  668.713909845 881 668.713909845 881 531.939145428 932.167537768 c 0,169,170
 EndSplineSet
+Validated: 524321
 Ligature2: "honoSuperscript" asciicircum saadDouble uni0639
 Ligature2: "honoSuperscript" asciicircum saadDouble.init uniFECA
 Ligature2: "honoSuperscript" asciicircum uniFEBB uniFECA
@@ -33597,6 +33628,7 @@ Fore
 Refer: 1149 -1 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 -625 -989 2
 Validated: 1
+MultipleSubs2: "elongation-1" uniFB58 uni0640.1
 Substitution2: "lowbottom-1" uniFB58.lowbottom
 EndChar
 
@@ -33614,6 +33646,7 @@ Fore
 Refer: 1150 -1 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 -549 -984 2
 Validated: 1
+MultipleSubs2: "elongation-1" uniFB59 uni0640.1
 Substitution2: "lowbottom-1" uniFB59.lowbottom
 EndChar
 
@@ -34334,6 +34367,7 @@ AnchorPoint: "belowSingle" 276 -421 basechar 0
 LayerCount: 4
 Fore
 Refer: 489 1730 N 1 0 0 1 0 0 2
+Validated: 1
 Substitution2: "hehzerSubs-1" zerHehHamza
 LCarets2: 1 291
 Ligature2: "Arabic Ligatures" uniFEE9 uniFE80
@@ -34366,6 +34400,7 @@ AnchorPoint: "belowSingle" 334 -352 basechar 0
 LayerCount: 4
 Fore
 Refer: 443 1607 N 1 0 0 1 0 0 2
+Validated: 1
 Substitution2: "hehzerSubs-1" zerligaheh
 EndChar
 
@@ -35160,6 +35195,7 @@ LayerCount: 4
 Fore
 Refer: 1443 64435 N 1 0 0 1 39 996 2
 Refer: 1430 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 570
 Ligature2: "Arabic Ligatures" uniFEE7 uniFEE2
 EndChar
@@ -35410,6 +35446,7 @@ LayerCount: 4
 Fore
 Refer: 1440 64436 S 1 0 0 1 102 861 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 556
 Ligature2: "Arabic Ligatures" uniFE98 uniFEAE
 EndChar
@@ -35429,6 +35466,7 @@ Fore
 Refer: 1443 64435 N 1 0 0 1 -526 659 2
 Refer: 1440 64436 S 1 0 0 1 99 863 2
 Refer: 1431 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 505
 Ligature2: "Arabic Ligatures" uniFE98 uniFEB0
 EndChar
@@ -35506,6 +35544,7 @@ LayerCount: 4
 Fore
 Refer: 1444 64439 N 1 0 0 1 115 192 2
 Refer: 1431 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 540
 Ligature2: "Arabic Ligatures" thehDouble.medi uniFEAE
 Ligature2: "Arabic Ligatures" uniFE9C uniFEAE
@@ -35885,6 +35924,7 @@ LayerCount: 4
 Fore
 Refer: 1439 64434 N 1 0 0 1 48 -235.306 2
 Refer: 964 64682 N 1 0 0 1 0 0 2
+Validated: 1
 Ligature2: "Arabic Ligatures" uniFE9F uniFEE4
 LCarets2: 1 476
 EndChar
@@ -35949,6 +35989,7 @@ SplineSet
  423 583 423 583 379 583 c 0,82,83
  312 583 312 583 278 547 c 1,10,11
 EndSplineSet
+Validated: 524321
 LCarets2: 1 516
 Ligature2: "Arabic Ligatures" haaDouble.init uniFEE4
 Ligature2: "Arabic Ligatures" uniFEA3 uniFEE4
@@ -35969,6 +36010,7 @@ LayerCount: 4
 Fore
 Refer: 1439 64434 N 1 0 0 1 -254 1017 2
 Refer: 964 64682 N 1 0 0 1 0 0 2
+Validated: 1
 Ligature2: "Arabic Ligatures" uniFEA7 uniFEE4
 LCarets2: 1 471
 EndChar
@@ -36913,6 +36955,7 @@ Fore
 Refer: 416 1575 N 1 0 0 1 1805 0 2
 Refer: 1606 -1 N 1 0 0 1 852 0 2
 Refer: 1605 -1 N 1 0 0 1 0 0 2
+Validated: 1
 EndChar
 
 StartChar: uniFE80
@@ -37480,6 +37523,7 @@ Fore
 Refer: 1439 64434 N 1 0 0 1 -709 -522 2
 Refer: 1149 -1 N 1 0 0 1 -2 4 2
 Validated: 1
+MultipleSubs2: "elongation-1" uniFE91 uni0640.1
 Substitution2: "lowbottom-1" uniFE91.lowbottom
 EndChar
 
@@ -37497,6 +37541,7 @@ Fore
 Refer: 1439 64434 N 1 0 0 1 -638 -532 2
 Refer: 1150 -1 N 1 0 0 1 0 3 2
 Validated: 1
+MultipleSubs2: "elongation-1" uniFE92 uni0640.1
 Substitution2: "lowbottom-1" uniFE92.lowbottom
 EndChar
 
@@ -41205,6 +41250,7 @@ Fore
 Refer: 1440 64436 N 1 0 0 1 -497 -521 2
 Refer: 1149 -1 N 1 0 0 1 0 9 2
 Validated: 1
+MultipleSubs2: "elongation-1" uniFEF3 uni0640.1
 Substitution2: "lowbottom-1" uniFEF3.lowbottom
 EndChar
 
@@ -41222,6 +41268,7 @@ Fore
 Refer: 1440 64436 N 1 0 0 1 -462 -504 2
 Refer: 1150 -1 N 1 0 0 1 1 -2.30624 2
 Validated: 1
+MultipleSubs2: "elongation-1" uniFEF4 uni0640.1
 Substitution2: "lowbottom-1" uniFEF4.lowbottom
 EndChar
 
@@ -41238,6 +41285,7 @@ LayerCount: 4
 Fore
 Refer: 455 1619 N 1.42969 0 0 1.33893 157 -589 2
 Refer: 1112 65275 N 1 0 0 1 20 0 2
+Validated: 1
 LCarets2: 1 465
 Ligature2: "Arabic Ligatures" uniFEDF uniFE82
 EndChar
@@ -41574,6 +41622,7 @@ LayerCount: 4
 Fore
 Refer: 1439 64434 N 1 0 0 1 34 -984 2
 Refer: 1152 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 513
 Ligature2: "doublePressLiga" uniFE92 goalDouble.medi
 Ligature2: "Arabic Ligatures" uniFE92 uniFBA9
@@ -41711,6 +41760,7 @@ LayerCount: 4
 Fore
 Refer: 1439 64434 N 1 0 0 1 190 -988 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 734
 Ligature2: "Arabic Ligatures" uniFE92 uniFBAF
 Ligature2: "doublePressLiga" uniFE92 barreeDouble.fina
@@ -41755,6 +41805,7 @@ SplineSet
  540 781 540 781 520 825 c 1,42,-1
  595 1008 l 1,0,-1
 EndSplineSet
+Validated: 33
 LCarets2: 1 495
 Ligature2: "Arabic Ligatures" uniFB90 uniFBA7
 Ligature2: "Arabic Ligatures" uniFEDB uniFBA7
@@ -41777,6 +41828,7 @@ LayerCount: 4
 Fore
 Refer: 1471 -1 N 1 0 0 1 0 0 2
 Refer: 1439 64434 N 1 0 0 1 427 -798 2
+Validated: 1
 LCarets2: 1 743
 Ligature2: "Arabic Ligatures" uniFE9F uniFBA7
 Ligature2: "doublePressLiga" uniFE9F goalDouble.fina
@@ -41795,6 +41847,7 @@ LayerCount: 4
 Fore
 Refer: 1439 64434 N 1 0 0 1 -90 930 2
 Refer: 1454 -1 N 1 0 0 1 0 4 2
+Validated: 1
 LCarets2: 1 592
 Ligature2: "Arabic Ligatures" uniFEE7 uniFBA7
 Ligature2: "doublePressLiga" uniFEE7 goalDouble.fina
@@ -41813,6 +41866,7 @@ LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 166 985 2
 Refer: 1454 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 560
 Ligature2: "Arabic Ligatures" uniFE97 uniFBA7
 Ligature2: "doublePressLiga" uniFE97 goalDouble.fina
@@ -41831,6 +41885,7 @@ LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 113 -782 2
 Refer: 1454 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 632
 Ligature2: "Arabic Ligatures" uniFEF3 uniFBA7
 Ligature2: "doublePressLiga" uniFEF3 goalDouble.fina
@@ -41850,6 +41905,7 @@ LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 114 940 2
 Refer: 1455 -1 N 1 0 0 1 93 0 2
+Validated: 1
 LCarets2: 1 525
 Ligature2: "Arabic Ligatures" uniFE98 uniFBA7
 Ligature2: "doublePressLiga" uniFE98 goalDouble.fina
@@ -41869,6 +41925,7 @@ LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 -19 -812 2
 Refer: 1455 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 398
 Ligature2: "Arabic Ligatures" uniFEF4 uniFBA7
 Ligature2: "doublePressLiga" uniFEF4 goalDouble.fina
@@ -42297,7 +42354,6 @@ StartChar: glyph573
 Encoding: 1114157 -1 1141
 Width: 2441
 GlyphClass: 2
-LigCaretCntFixed: 1
 Flags: W
 LayerCount: 4
 Fore
@@ -42463,8 +42519,8 @@ SplineSet
  920 475 l 2,284,285
  917.379126519 475 917.379126519 475 914.846746989 474.324698792 c 0,27,28
 EndSplineSet
+Validated: 524321
 Ligature2: "honoLigas" uniFEBB uniFEE0 uniFECA
-LCarets2: 2 817 1498
 EndChar
 
 StartChar: glyph574
@@ -42592,16 +42648,15 @@ SplineSet
  515.832913249 972.881800473 515.832913249 972.881800473 541.11000158 1014.64394641 c 0,206,207
  542.924411476 1017.64166711 542.924411476 1017.64166711 543.611613514 1021.0776773 c 0,144,145
 EndSplineSet
-LCarets2: 2 865 1136
-Ligature2: "honoLigas" uni0639 uni00A0 uni0645
+Validated: 524321
 Ligature2: "honoLigas" uniFEC9 uni00A0 uniFEE1
+Ligature2: "honoLigas" uni0639 uni00A0 uni0645
 EndChar
 
 StartChar: glyph575
 Encoding: 1114159 -1 1143
 Width: 2872
 GlyphClass: 2
-LigCaretCntFixed: 1
 Flags: W
 LayerCount: 4
 Fore
@@ -42763,7 +42818,7 @@ SplineSet
  1406 1451 l 1,244,-1
  1429 1448 l 2,226,227
 EndSplineSet
-LCarets2: 3 0 1481 2532
+Validated: 33
 EndChar
 
 StartChar: glyph576
@@ -42929,9 +42984,9 @@ SplineSet
  721.188611612 1197.87988881 l 2,274,275
  719.775791414 1198.03542865 719.775791414 1198.03542865 718.35517412 1197.98960229 c 0,142,143
 EndSplineSet
-LCarets2: 2 781 1260
-Ligature2: "honoLigas" uni0637 uni00A0 uni0639
+Validated: 524321
 Ligature2: "honoLigas" uniFEC1 uni00A0 uniFEC9
+Ligature2: "honoLigas" uni0637 uni00A0 uni0639
 EndChar
 
 StartChar: glyph577
@@ -43135,6 +43190,7 @@ SplineSet
  2033.24172319 1753.95745194 l 1,327,-1
  2058.94514887 1780.39526121 l 1,261,262
 EndSplineSet
+Validated: 524321
 EndChar
 
 StartChar: glyph578
@@ -43320,7 +43376,7 @@ SplineSet
  1772.54354848 717.553847697 1772.54354848 717.553847697 1835.01235102 694.260395904 c 0,304,305
  1848.77155559 689.129845045 1848.77155559 689.129845045 1857.78704435 700.72118773 c 0,161,162
 EndSplineSet
-LCarets2: 2 0 0
+Validated: 524321
 Ligature2: "honoLigas" uni0635 uni00A0 uni0639
 EndChar
 
@@ -43427,6 +43483,7 @@ SplineSet
  645.640095694 694 645.640095694 694 516.961688258 790.028662266 c 0,164,165
  508.096212555 796.64468891 508.096212555 796.64468891 497.780117949 792.651361965 c 0,0,1
 EndSplineSet
+Validated: 524321
 EndChar
 
 StartChar: uni066E.fina
@@ -43597,6 +43654,7 @@ SplineSet
  650 -332 650 -332 660 -337 c 1,62,-1
  600 -495 l 1,0,1
 EndSplineSet
+Validated: 33
 Layer: 2
 SplineSet
 1098 176.693756104 m 9
@@ -43903,6 +43961,7 @@ SplineSet
  651 529 l 1,53,54
  600 684 600 684 504 796 c 1,10,-1
 EndSplineSet
+Validated: 1
 LCarets2: 1 0
 Ligature2: "doublePressLiga" uniFEE7 barreeDouble.fina
 Ligature2: "Arabic Ligatures" uniFEE7 uniFBAF
@@ -59883,6 +59942,7 @@ Fore
 Refer: 1149 -1 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 -565 -961 2
 Validated: 1
+MultipleSubs2: "elongation-1" pehDouble.init uni0640.1
 Substitution2: "lowbottom-1" pehDouble.init.lowbottom
 LCarets2: 1 186
 Ligature2: "doublePressSingles" thehDouble.init thehDouble.medi
@@ -59903,6 +59963,7 @@ Fore
 Refer: 1150 -1 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 -522 -987 2
 Validated: 1
+MultipleSubs2: "elongation-1" pehDouble.medi uni0640.1
 Substitution2: "lowbottom-1" pehDouble.medi.lowbottom
 LCarets2: 1 230
 Ligature2: "doublePressSingles" thehDouble.medi thehDouble.medi
@@ -59959,6 +60020,7 @@ Fore
 Refer: 1149 -1 N 1 0 0 1 0 0 2
 Refer: 1449 64448 N 1 0 0 1 -288 99 2
 Validated: 1
+MultipleSubs2: "elongation-1" ttehDouble.init uni0640.1
 LCarets2: 1 156
 Ligature2: "doublePressSingles" daadDouble.init daadDouble.medi
 Ligature2: "doublePressSingles" daadDouble.init daad.medi.lowtop
@@ -59979,6 +60041,7 @@ Fore
 Refer: 1150 -1 N 1 0 0 1 0 0 2
 Refer: 1449 64448 N 1 0 0 1 -188 -262 2
 Validated: 1
+MultipleSubs2: "elongation-1" ttehDouble.medi uni0640.1
 Substitution2: "hightop-1" ttehDouble.medi.hightop
 LCarets2: 1 260
 Ligature2: "doublePressSingles" daad.medi.lowtop daadDouble.medi
@@ -60171,6 +60234,7 @@ AnchorPoint: "aboveLiga" 729 1598 baselig 1
 LayerCount: 4
 Fore
 Refer: 492 1746 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 628
 Ligature2: "doublePressSingles" seenDouble.init seenDouble.fina
 EndChar
@@ -60235,6 +60299,7 @@ AnchorPoint: "aboveLiga" 289 1190 baselig 1
 LayerCount: 4
 Fore
 Refer: 443 1607 N 1 0 0 1 0 0 2
+Validated: 1
 Substitution2: "hehzerSubs-1" zerLigaGoal
 LCarets2: 1 328
 Ligature2: "doublePressSingles" zaaDouble.init zaaDouble.fina
@@ -61189,6 +61254,8 @@ SplineSet
  -56.7499080083 1606.46329543 l 1,154,-1
  -59.4032548635 1603.80994857 l 1,68,69
 EndSplineSet
+Validated: 524289
+Ligature2: "honoSuperscript" asciicircum uni0631 uni062D
 Ligature2: "honoSuperscript" asciicircum uniFEAD uni062D
 EndChar
 
@@ -61864,6 +61931,7 @@ LayerCount: 4
 Fore
 Refer: 1441 64437 N 1 0 0 1 144 1168 2
 Refer: 1152 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 551
 Ligature2: "doublePressLiga" uniFE98 goalDouble.medi
 Ligature2: "Arabic Ligatures" uniFE98 uniFEEC
@@ -61904,6 +61972,7 @@ LayerCount: 4
 Fore
 Refer: 1444 64439 N 1 0 0 1 126 154 2
 Refer: 1152 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 497
 Ligature2: "doublePressLiga" uniFE9C goalDouble.medi
 Ligature2: "doublePressLiga" thehDouble.medi goalDouble.medi
@@ -61927,6 +61996,7 @@ LayerCount: 4
 Fore
 Refer: 475 1652 N 1.47247 0 0 1.48462 509 -1401 2
 Refer: 1152 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 501
 Ligature2: "doublePressLiga" uniFE8C goalDouble.medi
 Ligature2: "Arabic Ligatures" uniFE8C uniFEEC
@@ -61966,6 +62036,7 @@ LayerCount: 4
 Fore
 Refer: 1439 64434 N 1 0 0 1 -46 584 2
 Refer: 1152 -1 N 1 0 0 1 0 0 2
+Validated: 1
 Ligature2: "Arabic Ligatures" uniFEE8 uniFBA9
 Ligature2: "Arabic Ligatures" uniFEE8 uniFEEC
 Ligature2: "doublePressLiga" uniFEE8 goalDouble.medi
@@ -62004,6 +62075,7 @@ LayerCount: 4
 Fore
 Refer: 1441 64437 N 1 0 0 1.00885 250 -444.354 2
 Refer: 1152 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 601
 Ligature2: "doublePressLiga" uniFEF4 goalDouble.medi
 Ligature2: "Arabic Ligatures" uniFEF4 uniFEEC
@@ -62164,6 +62236,7 @@ AnchorPoint: "belowLiga" 286 -610 baselig 2
 LayerCount: 4
 Fore
 Refer: 1590 64736 N 1 0 0 1 0 0 2
+Validated: 1
 Ligature2: "Arabic Ligatures" uniFE8C.hightop uniFBA9
 Ligature2: "Arabic Ligatures" uniFE8C uniFEEC
 Ligature2: "Arabic Ligatures" uniFE8C uniFBA9
@@ -62188,6 +62261,7 @@ AnchorPoint: "belowLiga" 782 -598 baselig 0
 LayerCount: 4
 Fore
 Refer: 1152 -1 N 1 0 0 1 0 0 2
+Validated: 1
 EndChar
 
 StartChar: cheh_goalDouble.isol
@@ -62221,6 +62295,7 @@ LayerCount: 4
 Fore
 Refer: 1445 64440 N 1 0 0 1 798 -799 2
 Refer: 1471 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 822
 Ligature2: "Arabic Ligatures" uniFB7C uniFBA7
 EndChar
@@ -62304,6 +62379,7 @@ SplineSet
  1488 557 1488 557 1472 618 c 0,117,118
  1468 633 1468 633 1466 646 c 1,7,-1
 EndSplineSet
+Validated: 1
 LCarets2: 2 838 1383
 Ligature2: "Arabic Ligatures" uniFEDF uniFEE0 uniFEEA
 Ligature2: "Arabic Ligatures" uniFEDF uniFEE0 uniFBA7
@@ -62375,6 +62451,7 @@ LayerCount: 4
 Fore
 Refer: 1605 -1 N 1 0 0 1 0 0 2
 Refer: 1606 -1 N 1 0 0 1 852 0 2
+Validated: 1
 LCarets2: 2 796 1368
 Ligature2: "jalaalahtashdeed-1" uniFEDF uniFEE0 uniFBA7
 Ligature2: "jalaalahtashdeed-1" uniFEDF uniFEE0 uniFBAB
@@ -62392,6 +62469,7 @@ AnchorPoint: "aboveLiga" 289 1190 baselig 1
 LayerCount: 4
 Fore
 Refer: 443 1607 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 304
 Ligature2: "doublePressSingles" zaaDouble.init zerLigaZaa
 EndChar
@@ -62444,6 +62522,7 @@ SplineSet
  472 315 472 315 458 349 c 0,42,43
  410 459 410 459 296 540 c 1,26,27
 EndSplineSet
+Validated: 1
 EndChar
 
 StartChar: zerligataa
@@ -62514,6 +62593,7 @@ AnchorPoint: "aboveSingle" 276 1642 basechar 0
 LayerCount: 4
 Fore
 Refer: 489 1730 N 1 0 0 1 0 0 2
+Validated: 1
 EndChar
 
 StartChar: hehzerHeh.init
@@ -62542,6 +62622,7 @@ LayerCount: 4
 Fore
 Refer: 1445 64440 N 1 0 0 1 31 -1096 2
 Refer: 1434 -1 N 1 0 0 1 156 0 2
+Validated: 1
 LCarets2: 1 680
 Ligature2: "doublePressLiga" pehDouble.init uniFBAB
 Ligature2: "Arabic Ligatures" uniFB58 uniFBAB
@@ -62560,6 +62641,7 @@ LayerCount: 4
 Fore
 Refer: 1434 -1 N 1 0 0 1 203 -5.61249 2
 Refer: 475 1652 N 1.47247 0 0 1.48462 408 -871 2
+Validated: 1
 LCarets2: 1 520
 Ligature2: "Arabic Ligatures" uniFE8C uniFBAB
 EndChar
@@ -62577,6 +62659,7 @@ LayerCount: 4
 Fore
 Refer: 1443 64435 N 1 0 0 1 -140 -536 2
 Refer: 1434 -1 N 1 0 0 1 165 -5.61249 2
+Validated: 1
 LCarets2: 1 563
 Ligature2: "Arabic Ligatures" uniFE91 uniFBAB
 EndChar
@@ -62594,6 +62677,7 @@ LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 40 1151 2
 Refer: 1434 -1 N 1 0 0 1 203 -5.61249 2
+Validated: 1
 LCarets2: 1 560
 Ligature2: "Arabic Ligatures" uniFE97 uniFBAB
 EndChar
@@ -62611,6 +62695,7 @@ LayerCount: 4
 Fore
 Refer: 1443 64435 N 1 0 0 1 -192 1124 2
 Refer: 1434 -1 N 1 0 0 1 163 -5.61249 2
+Validated: 1
 LCarets2: 1 567
 Ligature2: "Arabic Ligatures" uniFEE7 uniFBAB
 EndChar
@@ -62628,6 +62713,7 @@ LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 105 -489 2
 Refer: 1434 -1 N 1 0 0 1 125 -5.61249 2
+Validated: 1
 LCarets2: 1 591
 Ligature2: "Arabic Ligatures" uniFEF3 uniFBAB
 EndChar
@@ -62645,6 +62731,7 @@ LayerCount: 4
 Fore
 Refer: 407 1557 N 1 0 0 1 300 255 2
 Refer: 1434 -1 N 1 0 0 1 203 -5.61249 2
+Validated: 1
 LCarets2: 1 546
 Ligature2: "doublePressLiga" ttehDouble.init uniFBAB
 Ligature2: "Arabic Ligatures" uniFB68 uniFBAB
@@ -62663,6 +62750,7 @@ LayerCount: 4
 Fore
 Refer: 407 1557 N 1 0 0 1 118 295 2
 Refer: 1434 -1 N 1 0 0 1 -9 -5.61249 2
+Validated: 1
 LCarets2: 1 308
 Ligature2: "doublePressLiga" uniFB68 uniFBAD
 Ligature2: "Arabic Ligatures" uniFB68 uniFBAD
@@ -62680,6 +62768,7 @@ Fore
 Refer: 1149 -1 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 -581 -1409 2
 Validated: 1
+MultipleSubs2: "elongation-1" uniFB58.lowbottom uni0640.1
 Substitution2: "highbottom-1" uniFB58
 Substitution2: "variantToOriginal-1" uniFB58
 EndChar
@@ -62697,6 +62786,7 @@ Fore
 Refer: 1150 -1 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 -528 -1428 2
 Validated: 1
+MultipleSubs2: "elongation-1" uniFB59.lowbottom uni0640.1
 Substitution2: "variantToOriginal-1" uniFB59
 Substitution2: "highbottom-1" uniFB59
 EndChar
@@ -62761,6 +62851,7 @@ Fore
 Refer: 1439 64434 N 1 0 0 1 -711 -1026 2
 Refer: 1149 -1 N 1 0 0 1 -2 4 2
 Validated: 1
+MultipleSubs2: "elongation-1" uniFE91.lowbottom uni0640.1
 Substitution2: "variantToOriginal-1" uniFE91
 Substitution2: "highbottom-1" uniFE91
 EndChar
@@ -62778,6 +62869,7 @@ Fore
 Refer: 1439 64434 N 1 0 0 1 -652 -806 2
 Refer: 1150 -1 N 1 0 0 1 0 3 2
 Validated: 1
+MultipleSubs2: "elongation-1" uniFE92.lowbottom uni0640.1
 Substitution2: "variantToOriginal-1" uniFE92
 Substitution2: "highbottom-1" uniFE92
 EndChar
@@ -62961,6 +63053,7 @@ Fore
 Refer: 1440 64436 N 1 0 0 1 -462 -1045 2
 Refer: 1149 -1 N 1 0 0 1 0 9 2
 Validated: 1
+MultipleSubs2: "elongation-1" uniFEF3.lowbottom uni0640.1
 Substitution2: "variantToOriginal-1" uniFEF3
 Substitution2: "highbottom-1" uniFEF3
 EndChar
@@ -62978,6 +63071,7 @@ Fore
 Refer: 1440 64436 N 1 0 0 1 -492 -810 2
 Refer: 1150 -1 N 1 0 0 1 1 -2.30624 2
 Validated: 1
+MultipleSubs2: "elongation-1" uniFEF4.lowbottom uni0640.1
 Substitution2: "variantToOriginal-1" uniFEF4
 Substitution2: "highbottom-1" uniFEF4
 EndChar
@@ -64200,6 +64294,7 @@ Fore
 Refer: 1149 -1 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 -581 -1409 2
 Validated: 1
+MultipleSubs2: "elongation-1" pehDouble.init.lowbottom uni0640.1
 Substitution2: "variantToOriginal-1" pehDouble.init
 Substitution2: "highbottom-1" pehDouble.init
 Ligature2: "doublePressSingles" thehDouble.init.lowbottom thehDouble.medi
@@ -64218,6 +64313,7 @@ Fore
 Refer: 1150 -1 N 1 0 0 1 0 0 2
 Refer: 1445 64440 N 1 0 0 1 -528 -1428 2
 Validated: 1
+MultipleSubs2: "elongation-1" pehDouble.medi.lowbottom uni0640.1
 Substitution2: "variantToOriginal-1" pehDouble.medi
 Substitution2: "highbottom-1" pehDouble.medi
 Ligature2: "doublePressSingles" thehDouble.medi.lowbottom thehDouble.medi.hightop
@@ -64237,6 +64333,7 @@ Fore
 Refer: 1149 -1 N 1 0 0 1 0 0 2
 Refer: 1449 64448 N 1 0 0 1 -291 -48 2
 Validated: 1
+MultipleSubs2: "elongation-1" ttehDouble.init.lowtop uni0640.1
 Substitution2: "variantToOriginal-1" ttehDouble.init
 Ligature2: "doublePressSingles" daadDouble.init daad.medi.lowtop
 EndChar
@@ -64441,6 +64538,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 415 -1125 2
 Refer: 1440 64436 N 1 0 0 1 -100 -1046 2
 Refer: 1429 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 781
 Ligature2: "doublePressLiga" pehDouble.init uniFEF2
 Ligature2: "Arabic Ligatures" uniFB58 uniFEF2
@@ -64460,6 +64558,7 @@ Fore
 Refer: 1440 64436 N 1 0 0 1 -97 -881 2
 Refer: 1446 64441 N 1 0 0 1 695 -1125 2
 Refer: 1433 -1 N 1 0 0 1 0 9 2
+Validated: 1
 LCarets2: 1 1014
 Ligature2: "doublePressLiga" pehDouble.medi uniFEF2
 Ligature2: "Arabic Ligatures" uniFB59 uniFEF2
@@ -64478,6 +64577,7 @@ LayerCount: 4
 Fore
 Refer: 1446 64441 N 1 0 0 1 695 -1125 2
 Refer: 1433 -1 N 1 0 0 1 0 9 2
+Validated: 1
 LCarets2: 1 953
 Ligature2: "doublePressLiga" pehDouble.medi uniFEF0
 Ligature2: "Arabic Ligatures" uniFB59 uniFEF0
@@ -64495,6 +64595,7 @@ LayerCount: 4
 Fore
 Refer: 1446 64441 N 1 0 0 1 415 -1125 2
 Refer: 1429 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 705
 Ligature2: "doublePressLiga" pehDouble.init uniFEF0
 Ligature2: "Arabic Ligatures" uniFB58 uniFEF0
@@ -64513,6 +64614,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 287 -516.306 2
 Refer: 1439 64434 N 1 0 0 1 -73 -595 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 540
 Ligature2: "doublePressLiga" pehDouble.init uniFE9E
 Ligature2: "Arabic Ligatures" uniFB58 uniFE9E
@@ -64530,6 +64632,7 @@ LayerCount: 4
 Fore
 Refer: 1446 64441 N 1 0 0 1 335 -567 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 656
 Ligature2: "doublePressLiga" pehDouble.init uniFEA1
 Ligature2: "Arabic Ligatures" uniFB58 uniFEA1
@@ -64548,6 +64651,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 335 -567 2
 Refer: 1439 64434 N 1 0 0 1 -483 1036 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 675
 Ligature2: "doublePressLiga" pehDouble.init uniFEA5
 Ligature2: "Arabic Ligatures" uniFB58 uniFEA5
@@ -64569,6 +64673,7 @@ LayerCount: 4
 Fore
 Refer: 1446 64441 N 1 0 0 1 110 -558 2
 Refer: 1430 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 405
 Ligature2: "doublePressLiga" pehDouble.init uniFEE2
 Ligature2: "Arabic Ligatures" uniFB58 uniFEE2
@@ -64588,6 +64693,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 116 -705 2
 Refer: 1443 64435 N 1 0 0 1 -611 -515 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 406
 Ligature2: "doublePressLiga" pehDouble.init uniFE9F
 Ligature2: "Arabic Ligatures" uniFB58 uniFE9F
@@ -64606,6 +64712,7 @@ LayerCount: 4
 Fore
 Refer: 1446 64441 N 1 0 0 1 65 -855 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 414
 Ligature2: "doublePressLiga" pehDouble.init uniFEA4
 Ligature2: "Arabic Ligatures" uniFB58 uniFEA4
@@ -64625,6 +64732,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 59 -783 2
 Refer: 1443 64435 N 1 0 0 1 -701 964 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 347
 Ligature2: "doublePressLiga" pehDouble.init uniFEA8
 Ligature2: "Arabic Ligatures" uniFB58 uniFEA8
@@ -64642,6 +64750,7 @@ LayerCount: 4
 Fore
 Refer: 1446 64441 N 1 0 0 1 233 -576.612 2
 Refer: 1460 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 386
 Ligature2: "doublePressLiga" pehDouble.init uniFEE4
 Ligature2: "Arabic Ligatures" uniFB58 uniFEE4
@@ -64661,6 +64770,7 @@ LayerCount: 4
 Fore
 Refer: 1446 64441 N 1 0 0 1 41 -1020 2
 Refer: 1456 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 477
 Ligature2: "doublePressLiga" pehDouble.medi uniFEE4
 Ligature2: "Arabic Ligatures" uniFB59 uniFEE4
@@ -64680,6 +64790,7 @@ LayerCount: 4
 Fore
 Refer: 1446 64441 N 1 0 0 1 95 -1347 2
 Refer: 1152 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 600
 Ligature2: "doublePressLiga" pehDouble.medi uniFBA9
 Ligature2: "Arabic Ligatures" uniFB59 uniFBA9
@@ -64937,6 +65048,7 @@ LayerCount: 4
 Fore
 Refer: 407 1557 N 1 0 0 1 483 -265 2
 Refer: 1152 -1 N 1 0 0 1 0 0 2
+Validated: 1
 Ligature2: "doublePressLiga" ttehDouble.medi uniFBA9
 Ligature2: "Arabic Ligatures" uniFB69 uniFBA9
 EndChar
@@ -64954,6 +65066,7 @@ LayerCount: 4
 Fore
 Refer: 1446 64441 N 1 0 0 1 -133 -960 2
 Refer: 1431 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 412
 Ligature2: "doublePressLiga" pehDouble.medi uniFEAE
 Ligature2: "Arabic Ligatures" uniFB59 uniFEAE
@@ -64973,6 +65086,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 -117 -963 2
 Refer: 1443 64435 N 1 0 0 1 -486 569 2
 Refer: 1431 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 498
 Ligature2: "doublePressLiga" pehDouble.medi uniFEB0
 Ligature2: "Arabic Ligatures" uniFB59 uniFEB0
@@ -64995,6 +65109,7 @@ LayerCount: 4
 Fore
 Refer: 1446 64441 N 1 0 0 1 99 -991 2
 Refer: 1473 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 642
 Ligature2: "doublePressLiga" pehDouble.medi uniFEE2
 Ligature2: "Arabic Ligatures" uniFB59 uniFEE2
@@ -65014,6 +65129,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 463 -971 2
 Refer: 1439 64434 N 1 0 0 1 -219 750 2
 Refer: 1432 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 1017
 Ligature2: "doublePressLiga" pehDouble.medi uniFEE6
 Ligature2: "Arabic Ligatures" uniFB59 uniFEE6
@@ -65032,6 +65148,7 @@ LayerCount: 4
 Fore
 Refer: 1446 64441 N 1 0 0 1 -107 -960 2
 Refer: 1431 -1 S 1 0 0 1 0 0 2
+Validated: 1
 Ligature2: "doublePressLiga" pehDouble.medi uniFEAE
 EndChar
 
@@ -65105,6 +65222,7 @@ LayerCount: 4
 Fore
 Refer: 407 1557 N 1 0 0 1 358 -135 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 440
 Ligature2: "doublePressLiga" ttehDouble.medi uniFEAE
 Ligature2: "Arabic Ligatures" uniFB69 uniFEAE
@@ -65124,6 +65242,7 @@ Fore
 Refer: 407 1557 N 1 0 0 1 428 -45 2
 Refer: 1443 64435 N 1 0 0 1 -526 659 2
 Refer: 1431 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 486
 Ligature2: "doublePressLiga" ttehDouble.medi uniFEB0
 Ligature2: "Arabic Ligatures" uniFB69 uniFEB0
@@ -65146,6 +65265,7 @@ LayerCount: 4
 Fore
 Refer: 407 1557 N 1 0 0 1 406 -189 2
 Refer: 1473 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 490
 Ligature2: "doublePressLiga" ttehDouble.medi uniFEE2
 Ligature2: "Arabic Ligatures" uniFB69 uniFEE2
@@ -65165,6 +65285,7 @@ Fore
 Refer: 407 1557 S 1 0 0 1 830 27 2
 Refer: 1439 64434 N 1 0 0 1 -256 524 2
 Refer: 1432 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 903
 Ligature2: "doublePressLiga" ttehDouble.medi uniFEE6
 Ligature2: "Arabic Ligatures" uniFB69 uniFEE6
@@ -65288,6 +65409,7 @@ LayerCount: 4
 Fore
 Refer: 1442 64438 S 1 0 0 1 -517 307 2
 Refer: 1149 -1 N 1 0 0 1 0 3 2
+Validated: 1
 Substitution2: "variantToOriginal-1" thehDouble.init
 EndChar
 
@@ -65321,6 +65443,7 @@ Fore
 Refer: 1443 64435 N 1 0 0 1 295 -111 2
 Refer: 1446 64441 N 1 0 0 1 65 -905 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 676
 Ligature2: "doublePressLiga" uniFE91 tchehDouble.fina
 Ligature2: "Arabic Ligatures" uniFE91 uniFB7B
@@ -65339,6 +65462,7 @@ Fore
 Refer: 1440 64436 N 1 0 0 1 248 1436 2
 Refer: 1446 64441 N 1 0 0 1 65 -905 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 562
 Ligature2: "doublePressLiga" uniFE97 tchehDouble.fina
 Ligature2: "Arabic Ligatures" uniFE97 uniFB7B
@@ -65357,6 +65481,7 @@ Fore
 Refer: 1442 64438 N 1 0 0 1 220 969.388 2
 Refer: 1446 64441 N 1 0 0 1 65 -905 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 610
 Ligature2: "doublePressLiga" uniFE9B tchehDouble.fina
 Ligature2: "doublePressLiga" thehDouble.init tchehDouble.fina
@@ -65377,6 +65502,7 @@ Fore
 Refer: 1439 64434 N 1 0 0 1 88 1448 2
 Refer: 1446 64441 N 1 0 0 1 65 -905 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 676
 Ligature2: "doublePressLiga" uniFEE7 tchehDouble.fina
 Ligature2: "Arabic Ligatures" uniFEE7 uniFB7B
@@ -65395,6 +65521,7 @@ Fore
 Refer: 1440 64436 N 1 0 0 1 444 -112 2
 Refer: 1446 64441 N 1 0 0 1 65 -905 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 736
 Ligature2: "doublePressLiga" uniFEF3 tchehDouble.fina
 Ligature2: "Arabic Ligatures" uniFEF3 uniFB7B
@@ -65413,6 +65540,7 @@ Fore
 Refer: 1446 64441 N 1 0 0 1 384 -409 2
 Refer: 1446 64441 N 1 0 0 1 -79 -953 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 651
 Ligature2: "doublePressLiga" pehDouble.init tchehDouble.fina
 Ligature2: "doublePressLiga" pehDouble.init uniFB7B
@@ -65433,6 +65561,7 @@ Fore
 Refer: 1449 64448 S 1 0 0 1 460 648 2
 Refer: 1446 64441 N 1 0 0 1 65 -905 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 662
 Ligature2: "doublePressLiga" ttehDouble.init tchehDouble.fina
 Ligature2: "doublePressLiga" ttehDouble.init uniFB7B
@@ -65454,6 +65583,7 @@ Fore
 Refer: 1439 64434 N 1 0 0 1 69 -306.306 2
 Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 400
 Ligature2: "doublePressLiga" uniFE91 tchehDouble.medi
 Ligature2: "Arabic Ligatures" uniFE91 uniFB7D
@@ -65473,6 +65603,7 @@ Fore
 Refer: 1440 64436 N 1 0 0 1 -84 1059 2
 Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 351
 Ligature2: "doublePressLiga" uniFE97 tchehDouble.medi
 Ligature2: "Arabic Ligatures" uniFE97 uniFB7D
@@ -65492,6 +65623,7 @@ Fore
 Refer: 1442 64438 N 1 0 0 1 -51 609.388 2
 Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 396
 Ligature2: "doublePressLiga" thehDouble.medi tchehDouble.medi
 Ligature2: "doublePressLiga" uniFE9B tchehDouble.medi
@@ -65513,6 +65645,7 @@ Fore
 Refer: 1439 64434 N 1 0 0 1 -219 1110 2
 Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 385
 Ligature2: "doublePressLiga" uniFEE7 tchehDouble.medi
 Ligature2: "Arabic Ligatures" uniFEE7 uniFB7D
@@ -65532,6 +65665,7 @@ Fore
 Refer: 1440 64436 N 1 0 0 1 276 -333 2
 Refer: 1446 64441 N 0.898707 0 0 0.905747 -295.922 -734.667 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 508
 Ligature2: "doublePressLiga" uniFEF3 tchehDouble.medi
 Ligature2: "Arabic Ligatures" uniFEF3 uniFB7D
@@ -65551,6 +65685,7 @@ Fore
 Refer: 1446 64441 N 0.859914 0 0 0.885057 255.405 -584.667 2
 Refer: 1446 64441 N 0.795259 0 0 0.795402 -241.716 -654.667 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 472
 Ligature2: "doublePressLiga" pehDouble.init uniFB7D
 Ligature2: "doublePressLiga" pehDouble.init tchehDouble.medi
@@ -65572,6 +65707,7 @@ Fore
 Refer: 1449 64448 N 1 0 0 1 153 367.2 2
 Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 433
 Ligature2: "Arabic Ligatures" uniFB68 uniFB7D
 Ligature2: "doublePressLiga" uniFB68 tchehDouble.medi
@@ -65593,6 +65729,7 @@ Fore
 Refer: 1439 64434 N 1 0 0 1 -138 -475.306 2
 Refer: 407 1557 N 1 0 0 1 0 -349 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 552
 Ligature2: "Arabic Ligatures" uniFE92 uniFB8D
 EndChar
@@ -65611,6 +65748,7 @@ Fore
 Refer: 1440 64436 N 1 0 0 1 48 629.694 2
 Refer: 407 1557 N 0.747619 0 0 0.817814 39.2952 -216.842 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 516
 Ligature2: "Arabic Ligatures" uniFE98 uniFB8D
 EndChar
@@ -65629,6 +65767,7 @@ Fore
 Refer: 1442 64438 N 0.905745 0 0 0.930522 141.51 248.696 2
 Refer: 407 1557 N 0.82381 0 0 0.811741 23.8476 -115.237 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 540
 Ligature2: "Arabic Ligatures" thehDouble.medi uniFB8D
 Ligature2: "Arabic Ligatures" uniFE9C uniFB8D
@@ -65648,6 +65787,7 @@ Fore
 Refer: 1439 64434 N 1 0 0 1 -118 733.694 2
 Refer: 407 1557 N 1 0 0 1 0 -349 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 527
 Ligature2: "Arabic Ligatures" uniFEE8 uniFB8D
 EndChar
@@ -65666,6 +65806,7 @@ Fore
 Refer: 1440 64436 N 1 0 0 1 52 -585.306 2
 Refer: 407 1557 N 1 0 0 1 0 -349 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 558
 Ligature2: "Arabic Ligatures" uniFEF4 uniFB8D
 EndChar
@@ -65684,6 +65825,7 @@ Fore
 Refer: 1445 64440 N 1 0 0 1 -64 -909 2
 Refer: 407 1557 N 1 0 0 1 0 -349 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 463
 Ligature2: "doublePressLiga" pehDouble.medi uniFB8D
 Ligature2: "Arabic Ligatures" uniFB59 uniFB8D
@@ -65703,6 +65845,7 @@ Fore
 Refer: 407 1557 N 0.780952 0 0 0.763158 413.162 139.605 2
 Refer: 407 1557 N 0.780952 0 0 0.763158 45.1619 -166.395 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 500
 Ligature2: "doublePressLiga" ttehDouble.medi uniFB8D
 Ligature2: "Arabic Ligatures" uniFB69 uniFB8D
@@ -65722,6 +65865,7 @@ Fore
 Refer: 1439 64434 N 1 0 0 1 -130 -407.306 2
 Refer: 1442 64438 N 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 475
 Ligature2: "Arabic Ligatures" uniFE92 uniFB8B
 EndChar
@@ -65740,6 +65884,7 @@ Fore
 Refer: 1440 64436 N 0.8125 0 0 0.831858 247.125 597.328 2
 Refer: 1442 64438 N 0.765086 0 0 0.793407 -169.866 228.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 584
 Ligature2: "Arabic Ligatures" uniFE98 uniFB8B
 EndChar
@@ -65758,6 +65903,7 @@ Fore
 Refer: 1442 64438 N 0.765086 0 0 0.793407 265.134 333.198 2
 Refer: 1442 64438 N 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 530
 Ligature2: "Arabic Ligatures" thehDouble.medi uniFB8B
 Ligature2: "Arabic Ligatures" uniFE9C uniFB8B
@@ -65777,6 +65923,7 @@ Fore
 Refer: 1439 64434 N 0.785408 0 0 0.731804 99.2918 681.233 2
 Refer: 1442 64438 N 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 600
 Ligature2: "Arabic Ligatures" uniFEE8 uniFB8B
 EndChar
@@ -65795,6 +65942,7 @@ Fore
 Refer: 1440 64436 S 1 0 0 1 75 -607.306 2
 Refer: 1442 64438 N 1 0 0 1 -350 92.0813 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 580
 Ligature2: "Arabic Ligatures" uniFEF4 uniFB8B
 EndChar
@@ -65813,6 +65961,7 @@ Fore
 Refer: 1442 64438 N 1 0 0 1 -342 70.0813 2
 Refer: 1445 64440 N 1 0 0 1 5 -920.1 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 500
 Ligature2: "doublePressLiga" pehDouble.medi uniFB8B
 Ligature2: "Arabic Ligatures" uniFB58 uniFB8B
@@ -65832,6 +65981,7 @@ Fore
 Refer: 1449 64448 N 1 0 0 1 366 -37.8 2
 Refer: 1442 64438 N 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 1
 LCarets2: 1 552
 Ligature2: "doublePressLiga" ttehDouble.medi uniFB8B
 Ligature2: "Arabic Ligatures" uniFB69 uniFB8B
@@ -65850,6 +66000,7 @@ LayerCount: 4
 Fore
 Refer: 1439 64434 N 1 0 0 1 -192 -795.612 2
 Refer: 1455 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 508
 Ligature2: "doublePressLiga" uniFE92 goalDouble.fina
 Ligature2: "Arabic Ligatures" uniFE92 uniFBA7
@@ -65868,6 +66019,7 @@ LayerCount: 4
 Fore
 Refer: 1442 64438 N 1 0 0 1 154 204.081 2
 Refer: 1455 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 656
 Ligature2: "doublePressLiga" thehDouble.medi goalDouble.fina
 Ligature2: "doublePressLiga" uniFE9C goalDouble.fina
@@ -65888,6 +66040,7 @@ LayerCount: 4
 Fore
 Refer: 1439 64434 N 1 0 0 1 -86 596.388 2
 Refer: 1455 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 552
 Ligature2: "doublePressLiga" uniFEE8 goalDouble.fina
 Ligature2: "Arabic Ligatures" uniFEE8 uniFBA7
@@ -65906,6 +66059,7 @@ LayerCount: 4
 Fore
 Refer: 1445 64440 N 1 0 0 1 -111 -1038.1 2
 Refer: 1455 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 562
 Ligature2: "doublePressLiga" pehDouble.medi goalDouble.fina
 Ligature2: "doublePressLiga" pehDouble.medi uniFBA7
@@ -65926,6 +66080,7 @@ LayerCount: 4
 Fore
 Refer: 1449 64448 S 1 0 0 1 363 -113.6 2
 Refer: 1455 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 540
 Ligature2: "doublePressLiga" ttehDouble.medi goalDouble.fina
 Ligature2: "doublePressLiga" ttehDouble.medi uniFBA7
@@ -65945,6 +66100,7 @@ LayerCount: 4
 Fore
 Refer: 1439 64434 N 1 0 0 1 -50 -776.612 2
 Refer: 1454 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 605
 Ligature2: "doublePressLiga" uniFE91 goalDouble.fina
 Ligature2: "Arabic Ligatures" uniFE91 uniFBA7
@@ -65962,6 +66118,7 @@ LayerCount: 4
 Fore
 Refer: 1442 64438 N 1 0 0 1 175 427.081 2
 Refer: 1454 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 673
 Ligature2: "doublePressLiga" thehDouble.medi goalDouble.fina
 Ligature2: "doublePressLiga" uniFE9B goalDouble.fina
@@ -65981,6 +66138,7 @@ LayerCount: 4
 Fore
 Refer: 1445 64440 N 1 0 0 1 31 -990.1 2
 Refer: 1454 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 565
 Ligature2: "doublePressLiga" pehDouble.init uniFBA7
 Ligature2: "doublePressLiga" uniFB58 goalDouble.fina
@@ -66000,6 +66158,7 @@ LayerCount: 4
 Fore
 Refer: 1449 64448 N 1 0 0 1 418 55.4 2
 Refer: 1454 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 588
 Ligature2: "doublePressLiga" ttehDouble.init uniFBA7
 Ligature2: "doublePressLiga" ttehDouble.init goalDouble.fina
@@ -66020,6 +66179,7 @@ Fore
 Refer: 475 1652 N 1.52911 0 0 1.52588 621 -593 2
 Refer: 1446 64441 N 1 0 0 1 65 -905 2
 Refer: 1466 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 690
 Ligature2: "Arabic Ligatures" uniFE8B uniFB7B
 Ligature2: "doublePressLiga" uniFE8B tchehDouble.fina
@@ -66039,6 +66199,7 @@ Fore
 Refer: 475 1652 N 1.52911 0 0 1.52588 346 -951 2
 Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
+Validated: 2097153
 Ligature2: "Arabic Ligatures" uniFE8B uniFB7D
 Ligature2: "doublePressLiga" uniFE8B tchehDouble.medi
 EndChar
@@ -66057,6 +66218,7 @@ Fore
 Refer: 475 1652 N 1.10784 0 0 1.13652 549.176 -769.848 2
 Refer: 407 1557 N 0.780952 0 0 0.763158 45.1619 -166.395 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 2097153
 LCarets2: 1 541
 Ligature2: "doublePressLiga" uniFE8C uniFB8D
 Ligature2: "Arabic Ligatures" uniFE8C uniFB8D
@@ -66076,6 +66238,7 @@ Fore
 Refer: 475 1652 N 1.07134 0 0 1.13961 581.147 -721.033 2
 Refer: 1442 64438 N 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 2097153
 LCarets2: 1 563
 Ligature2: "doublePressLiga" uniFE8C uniFB8B
 Ligature2: "Arabic Ligatures" uniFE8C uniFB8B
@@ -66094,6 +66257,7 @@ LayerCount: 4
 Fore
 Refer: 475 1652 N 1.52911 0 0 1.52588 491 -1453 2
 Refer: 1455 -1 N 1 0 0 1 0 0 2
+Validated: 2097153
 LCarets2: 1 491
 Ligature2: "doublePressLiga" uniFE8C goalDouble.fina
 Ligature2: "Arabic Ligatures" uniFE8C uniFBA7
@@ -66112,9 +66276,9 @@ LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 272 592.694 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
-LCarets2: 1 808
-Ligature2: "doublePressLiga" uniFE98 barreeDouble.fina
+Validated: 1
 Ligature2: "Arabic Ligatures" uniFE98 uniFBAF
+Ligature2: "doublePressLiga" uniFE98 barreeDouble.fina
 EndChar
 
 StartChar: thehBarree.fina
@@ -66130,11 +66294,11 @@ LayerCount: 4
 Fore
 Refer: 1442 64438 N 1 0 0 1 240 227.081 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
-LCarets2: 1 828
-Ligature2: "doublePressLiga" thehDouble.medi barreeDouble.fina
-Ligature2: "doublePressLiga" uniFE98 barreeDouble.fina
+Validated: 1
+Ligature2: "Arabic Ligatures" uniFE9C uniFBAF
 Ligature2: "Arabic Ligatures" thehDouble.medi uniFBAF
-Ligature2: "Arabic Ligatures" uniFE98 uniFBAF
+Ligature2: "doublePressLiga" uniFE9C barreeDouble.fina
+Ligature2: "doublePressLiga" thehDouble.medi barreeDouble.fina
 EndChar
 
 StartChar: noonBarree.fina
@@ -66150,6 +66314,7 @@ LayerCount: 4
 Fore
 Refer: 1439 64434 N 1 0 0 1 45 577 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 730
 Ligature2: "doublePressLiga" uniFEE8 barreeDouble.fina
 Ligature2: "Arabic Ligatures" uniFEE8 uniFBAF
@@ -66168,6 +66333,7 @@ LayerCount: 4
 Fore
 Refer: 1440 64436 N 1 0 0 1 280 -1010.31 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 668
 Ligature2: "doublePressLiga" uniFEF4 barreeDouble.fina
 Ligature2: "Arabic Ligatures" uniFEF4 uniFBAF
@@ -66186,6 +66352,7 @@ LayerCount: 4
 Fore
 Refer: 1445 64440 N 1 0 0 1 243 -1250.1 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 726
 Ligature2: "doublePressLiga" pehDouble.medi barreeDouble.fina
 Ligature2: "doublePressLiga" uniFB59 barreeDouble.fina
@@ -66206,6 +66373,7 @@ LayerCount: 4
 Fore
 Refer: 1449 64448 N 1 0 0 1 434 -135.6 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 1 602
 Ligature2: "doublePressLiga" ttehDouble.medi barreeDouble.fina
 Ligature2: "doublePressLiga" ttehDouble.medi uniFBAF
@@ -66226,6 +66394,7 @@ LayerCount: 4
 Fore
 Refer: 1439 64434 N 1 0 0 1 190 -988 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
+Validated: 1
 EndChar
 
 StartChar: gaafGoal.isol
@@ -66271,6 +66440,7 @@ SplineSet
  540 781 540 781 520 825 c 1,46,-1
  595 1008 l 1,5,-1
 EndSplineSet
+Validated: 33
 LCarets2: 1 496
 Ligature2: "doublePressLiga" gaafDouble.init goalDouble.fina
 Ligature2: "doublePressLiga" gaafDouble.init uniFBA7
@@ -66293,6 +66463,7 @@ Refer: 1445 64440 N 1 0 0 1 591 209.9 2
 Refer: 1442 64438 N 1 0 0 1 -660 -367.919 2
 Refer: 1440 64436 N 1 0 0 1 -120 -255.306 2
 Refer: 1439 64434 N 1 0 0 1 0 16.3875 2
+Validated: 32773
 EndChar
 
 StartChar: yehHamza_goalHeh.isol
@@ -66307,6 +66478,7 @@ LayerCount: 4
 Fore
 Refer: 475 1652 N 1.52911 0 0 1.52588 641 -1273 2
 Refer: 1454 -1 N 1 0 0 1 120 0 2
+Validated: 1
 LCarets2: 1 789
 Ligature2: "doublePressLiga" uniFE8B goalDouble.fina
 Ligature2: "Arabic Ligatures" uniFE8B uniFBA7
@@ -66326,6 +66498,7 @@ Fore
 Refer: 475 1652 N 1.52911 0 0 1.52588 346 -951 2
 Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1458 -1 N 1 0 0 1 0 0 2
+Validated: 2097153
 Ligature2: "doublePressLiga" uniFE8B tchehDouble.medi
 Ligature2: "Arabic Ligatures" uniFE8B uniFB7D
 EndChar
@@ -66344,6 +66517,7 @@ Fore
 Refer: 475 1652 N 1.10784 0 0 1.13652 549.176 -769.848 2
 Refer: 407 1557 N 0.780952 0 0 0.763158 45.1619 -166.395 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 2097153
 LCarets2: 1 501
 Ligature2: "Arabic Ligatures" uniFE8C uniFB8D
 Ligature2: "doublePressLiga" uniFE8C uniFB8D
@@ -66363,6 +66537,7 @@ Fore
 Refer: 475 1652 N 1.07134 0 0 1.13961 581.147 -721.033 2
 Refer: 1442 64438 N 0.765086 0 0 0.793407 -179.866 208.198 2
 Refer: 1431 -1 N 1 0 0 1 40 4 2
+Validated: 2097153
 LCarets2: 1 577
 Ligature2: "doublePressLiga" uniFE8C uniFB8B
 Ligature2: "Arabic Ligatures" uniFE8C uniFB8B
@@ -66381,6 +66556,7 @@ LayerCount: 4
 Fore
 Refer: 475 1652 N 1.52911 0 0 1.52588 491 -1453 2
 Refer: 1455 -1 N 1 0 0 1 0 0 2
+Validated: 2097153
 LCarets2: 1 499
 Ligature2: "Arabic Ligatures" uniFE8C uniFBA7
 Ligature2: "doublePressLiga" uniFE8C goalDouble.fina
@@ -66399,6 +66575,7 @@ LayerCount: 4
 Fore
 Refer: 475 1652 N 1.52911 0 0 1.52588 599 -1505 2
 Refer: 1435 -1 N 1 0 0 1 0 0 2
+Validated: 1
 Ligature2: "doublePressLiga" uniFE8C barreeDouble.fina
 Ligature2: "Arabic Ligatures" uniFB68 uniFBAF
 EndChar
@@ -66603,6 +66780,7 @@ SplineSet
  1367 1963 l 5,320,-1
  1384 1980 l 5,257,258
 EndSplineSet
+Validated: 37
 EndChar
 
 StartChar: NameMe.1826
@@ -66619,6 +66797,7 @@ LayerCount: 4
 Fore
 Refer: 1439 64434 N 1 0 0 1 -587 635.694 2
 Refer: 1599 64904 N 1 0 0 1 0 0 2
+Validated: 1
 Ligature2: "Arabic Ligatures" uniFEDF uniFEE3 uniFEA8
 EndChar
 
@@ -66637,6 +66816,7 @@ LayerCount: 4
 Fore
 Refer: 1446 64441 N 1 0 0 1 -349 -803 2
 Refer: 1599 64904 N 1 0 0 1 0 0 2
+Validated: 1
 LCarets2: 2 256 673
 Ligature2: "Arabic Ligatures" uniFEDF uniFEE3 uniFB7D
 EndChar
@@ -66650,6 +66830,7 @@ AnchorPoint: "aboveSingle" 396 848 mark 0
 LayerCount: 4
 Fore
 Refer: 407 1557 N 1 0 0 1 0 0 2
+Validated: 1
 EndChar
 EndChars
 EndSplineFont
