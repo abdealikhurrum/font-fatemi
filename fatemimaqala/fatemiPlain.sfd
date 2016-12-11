@@ -27,7 +27,7 @@ OS2Version: 0
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1033018408
-ModificationTime: 1481486290
+ModificationTime: 1481489500
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -51,7 +51,7 @@ OS2Vendor: 'GLYF'
 Lookup: 1 0 0 "tildeToMadda" { "tilToMaddaArabic101"  } ['locl' ('arab' <'ARA ' 'FAR ' 'PAS ' 'URD ' 'dflt' > ) ]
 Lookup: 1 8 0 "urduSubs" { "urduHeh_roundGhunna"  } ['locl' ('arab' <'URD ' > ) ]
 Lookup: 1 8 0 "lsdSubs" { "doublePressEnablers"  } ['locl' ('arab' <'FAR ' > ) ]
-Lookup: 1 0 0 "compatibiltyStyle" { "compatibiltyStyle-1"  } ['locl' ('arab' <'PAS ' > 'latn' <'dflt' > ) ]
+Lookup: 1 0 0 "compatibiltyStyle" { "compatibiltyStyle-1"  } ['locl' ('arab' <'PAS ' > ) ]
 Lookup: 1 0 0 "RehSpace" { "RehSpace-1"  } []
 Lookup: 1 0 0 "RehAlef" { "RehAlef-1" ("alt") } []
 Lookup: 1 0 0 "hightop" { "hightop-1" ("hightop") } []
@@ -1943,7 +1943,7 @@ DisplaySize: -36
 AntiAlias: 1
 FitToEm: 1
 ExtremaBound: 10
-WinInfo: 369 41 13
+WinInfo: 328 41 13
 BeginPrivate: 0
 EndPrivate
 Grid
