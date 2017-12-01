@@ -1,0 +1,1 @@
+KeymanWeb.KRS(new Stub_Keyboard_lsd()); function Stub_Keyboard_lsd() {this.KF="lsd-1.0.js";this.KI="Keyboard_lsd";this.KN="Lisan";}

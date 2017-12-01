@@ -1,0 +1,25 @@
+﻿{
+  "options" : {
+    "keyboardBaseUri" : "http://keyman.com/test",
+    "fontBaseUri" : "http://keyman.com/test"
+  },
+  "keyboard" : {
+    "id" : "lsd",
+    "name" : "Lisan",
+    "filename" : "lsd-1.0.js",
+    "version" : "1.0",
+    "lastModified" : "2017-12-01T13:59:10.238-06:00",
+    "rtl" : true,
+    "font" : {
+      "family" : "FatemiMaqala",
+      "size" : "10",
+      "source" : "Fatemimaqala.ttf"
+    },
+    "languages" : [
+      {
+        "id" : "ar",
+        "name" : "Arabic"
+      }
+      ]
+  }
+}

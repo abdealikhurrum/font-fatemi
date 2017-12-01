@@ -1,0 +1,260 @@
+﻿store(&VERSION) '9.0'
+store(&TARGETS) 'any'
+store(&VISUALKEYBOARD) 'lsd.kvk'
+store(&LAYOUTFILE) 'lsd-layout.js'
+store(&KMW_EMBEDCSS) 'lsd.css'
+store(&KMW_RTL) '1'
+store(&WINDOWSLANGUAGES) 'x0401'
+store(&LANGUAGE) 'x0401'
+store(&KEYBOARDVERSION) '1.0'
+store(&COPYRIGHT) 'M Abdeali Shk Mohammed Jamali (Khurrum)'
+store(&NAME) 'Lisan'
+begin Unicode > use(main)
+
+
+group(main) using keys   
+store( modkeys1 )     [k_0] [k_1] [k_2] [k_3] [k_4] [k_5] [k_6] [k_7] [k_8] [k_9] [k_hyphen]
+store( modvalues1 ) U+0660 U+0661 U+0662 U+0663 U+0664 U+0665 U+0666 U+0667 U+0668 U+0669 U+060D
+store( modkeys2 )   [shift k_0] [shift k_1] [shift k_2] [shift k_3] [shift k_4] [shift k_5] [shift k_6] [shift k_7] [shift k_8] [shift k_9] [shift k_equal]
+store( modvalues2 ) U+0600 U+0602 U+0606 U+20A8 U+002A U+2038  U+066D U+FD3F U+FD3E U+00F7 U+00D7 
+store( modkeys3 )  [k_w] [k_e] [k_t] [k_y] [k_u] [k_i][k_o][k_p] [k_lbrkt][k_rbrkt][k_bkslash]  
+store( modvalues3 )  "ؐ"   '؃' '؎' U+060F U+0611 U+06C2 U+0614 U+0612 U+06DA U+06E9 U+007C
+store( modkeys4 )     [k_a] [k_s]  [k_d]  [k_f]  [k_g] [k_h]         
+store( modvalues4 ) U+0604 U+0601 U+06D3 U+066E U+06A1 U+06DD 
+store( modkeys5 )  [k_v] [k_period] [k_slash] [shift k_bkslash] [shift k_rbrkt]
+store( modvalues5 ) U+061B U+200C U+200D '{' '}'    
+
+store( doubleKeys ) [k_s] [k_q] [k_slash] [k_quote] [k_p]	
+store( doubleChars )     "س"  "ض" "ظ" "ط" "ح"
+store( doubleOut ) "ے" "ٹ" "ہ" "ں" "چ"     
+
+store( iraabKey ) [shift k_q] [shift k_a] [shift k_w] [shift k_x]
+store( iraabs ) U+064E U+0650 U+064F U+0652
+store( iraabStrength ) U+0670 U+0656 U+0657 U+0651
+
++ [shift k_s] > dk(mod)
+c + [k_space] >
+
+dk(mod) + any(modkeys1) > index(modvalues1, 2)
+dk(mod) + any(modkeys2) > index(modvalues2, 2)
+dk(mod) + any(modkeys3) > index(modvalues3, 2)
+dk(mod) + any(modkeys4) > index(modvalues4, 2) 
+dk(mod) + any(modkeys5) > index(modvalues5, 2)   
+
+dk(mod) + [k_q] > "^صع"
+dk(mod) + [k_r] > "^قس"
+dk(mod) + [k_quote] > "^طع"
+dk(mod) + [k_j] > "!ب!"
+dk(mod) + [k_k] > "!بص!"
+dk(mod) + [k_l] > "!بهص!"
+dk(mod) + [k_m]> "!بههص!"
+
+c SMALL TAA
+"ر" + [SHIFT K_R] > "ڑ"
+"ت" + [SHIFT K_R] > "ٹ"
+"د" + [SHIFT K_R] > "ڈ"   
+
+c DOUBLES
+"س" + [K_S] > "ے"
+"ض" + [K_Q] > "ٹ"
+"ط" + [K_Quote] > "ں"
+"ظ" + [K_Slash] > "ہ"
+"ح" + [K_P] > "چ"
+"ئ" + [K_Z] > "ٖ"
+"ء" + [K_X] > "ٰ"
+"َ" + [SHIFT K_Q] > "ً"   
+"ِ" + [SHIFT K_A] > "ٍ" 
+"ُ" + [SHIFT K_W] > "ٌ"
+any(iraabs) + [shift k_x] > index(iraabStrength, 1) 
+U+0670 + [shift k_x] > U+0653
+c U+0652 + any(iraabTouch) > index(iraabStrength, 2)
+"،" + [SHIFT K_K] > U+061B 
+"." + [SHIFT K_PERIOD] > ":"
+":" + [SHIFT K_PERIOD] > U+2026  
+U+066C + [shift k_b] > U+066B  
+
+
+c Touch keys
++ [T_SAW]  >  U+0610 
++ [T_SA]   >  "^صع"
++ [T_AS]   >  U+0611 
++ [T_RA]   >  U+0613 
++ [T_TUS]  >  "^طع"
++ [T_QR]   >  "^قس"
++ [T_RH]   >  U+0612 
+
++ [T_B]    >  "!ب!"
++ [T_BH]   >  "!بص!"
++ [T_BHS]  >  "!بهص!"  
++ [T_BHHS] >  "!بههص!"
+
++ [T_Kzabr] >  U+0670 
++ [T_KZer] >   U+0656
++ [T_Maddah] > U+0653
+
++ [T_Semi] >   U+061B 
++ [T_SingQuote] > "'"
+
++ [T_goalHamza] > U+06C2
+
++ [T_Laa]  >  "لا"
++ [T_LaaU] >  "لأ"
++ [T_LaaD] >  "لإ"
++ [T_LaaK] >  "لاٰ"
++ [T_LaaM] >  "لآ"
+ 
++ [T_Rreh] >  "ڑ"
++ [T_Ddeh] >  "ڈ‎"
++ [T_Tteh] >  "ٹ"
+  
++ [T_Ara0] >  U+0660 
++ [T_Ara1] >  U+0661 
++ [T_Ara2] >  U+0662 
++ [T_Ara3] >  U+0663 
++ [T_Ara4] >  U+0664 
++ [T_Ara5] >  U+0665 
++ [T_Ara6] >  U+0666 
++ [T_Ara7] >  U+0667 
++ [T_Ara8] >  U+0668 
++ [T_Ara9] >  U+0669 
+
++ [T_Guj0] >  U+0AE6 
++ [T_Guj1] >  U+0AE7 
++ [T_Guj2] >  U+0AE8 
++ [T_Guj3] >  U+0AE9 
++ [T_Guj4] >  U+0AEA 
++ [T_Guj5] >  U+0AEB 
++ [T_Guj6] >  U+0AEC 
++ [T_Guj7] >  U+0AED 
++ [T_Guj8] >  U+0AEE 
++ [T_Guj9] >  U+0AEF 
+
++ [T_Afghani] >  U+060B 
++ [T_Yen] >      U+00A5 
++ [T_Ray] >      U+0608 
++ [T_GujRup] >   U+0AF1
++ [T_Rupee] >    U+20A8  
+
++ [T_mult]     >   U+00D7 
++ [T_divide]   >   U+00F7 
++ [T_asterisk] >   U+002A
++ [T_fivepoint]>   U+066D
++ [T_Caret]    >   U+2038
++ [T_zwj]      >   U+200D 
++ [T_zwnj]     >   U+200C 
+
++ [T_Sanah]    >  U+0601 
++ [T_Samvat]   >  U+0604 
++ [T_Footnote] >  U+0602 
++ [T_Safha]    >  U+0603 
++ [T_Poetry]   >  U+0612 
++ [T_Number]   >  U+0600 
++ [T_Takhallus] > U+0614 
++ [T_Misra]    >  U+060F 
++ [T_Ayah]     >  U+06E1 
++ [T_Sajda]   >   U+06E9 
++ [T_arabPercent]> U+066A 
+
+
++ [K_BKQUOTE] > 'ذ'
++ [K_EQUAL] > '='
++ [K_HYPHEN] > '-'
++ [K_0] > '0'
++ [K_9] > '9'
++ [K_8] > '8'
++ [K_7] > '7'
++ [K_6] > '6'
++ [K_5] > '5'
++ [K_4] > '4'
++ [K_3] > '3'
++ [K_2] > '2'
++ [K_1] > '1' 
+
++ [SHIFT K_BKQUOTE] > "ّ"
++ [SHIFT K_EQUAL] > '+'
++ [SHIFT K_HYPHEN] > '_'
++ [SHIFT K_0] > '('  
++ [SHIFT K_9] > ')'
++ [SHIFT K_8] > '۞'
++ [SHIFT K_7] > '<'
++ [SHIFT K_6] > '>'
++ [SHIFT K_5] > '%'
++ [SHIFT K_4] > '$'
++ [SHIFT K_3] > '#'
++ [SHIFT K_2] > '@'
++ [SHIFT K_1] > '!'
+
+   
++ [SHIFT K_SLASH] > '؟'
++ [SHIFT K_PERIOD] > '.'
++ [SHIFT K_COMMA] > '/'
++ [SHIFT K_M] > 'ۃ'
++ [SHIFT K_N] > 'آ'
++ [SHIFT K_B] > U+066C 
++ [SHIFT K_V] > U+06E8 
++ [SHIFT K_C] > 'ۚ'
++ [SHIFT K_X] > 'ْ'  
++ [SHIFT K_Z] > U+0653
+
++ [SHIFT K_QUOTE] > '"'
++ [SHIFT K_COLON] > 'گ'
++ [SHIFT K_L] > 'ں'
++ [SHIFT K_K] > '،'
++ [SHIFT K_J] > 'ـ'
++ [SHIFT K_H] > 'أ' 
++ [SHIFT K_G] > 'اٰ'
++ [SHIFT K_F] > 'پ'
++ [SHIFT K_D] > 'ے'  
+c shift s
++ [SHIFT K_A] > 'ِ'   
+
++ [SHIFT K_BKSLASH] > '[' 
++ [SHIFT K_RBRKT] > ']'
++ [SHIFT K_LBRKT] > 'چ'  
++ [SHIFT K_P] > 'چھے'
++ [SHIFT K_O] > 'ہ'
++ [SHIFT K_I] > 'ھ'  
++ [SHIFT K_U] > U+0698
++ [SHIFT K_Y] > 'إ' 
++ [SHIFT K_T] > 'ڤ'
++ [SHIFT K_R] > 'ؕ'
++ [SHIFT K_E] > 'ٗ'
++ [SHIFT K_W] > 'ُ'
++ [SHIFT K_Q] > 'َ'   
+
++ [K_SLASH] > 'ظ'
++ [K_PERIOD] > 'ز'
++ [K_COMMA] > 'و'
++ [K_M] > 'ة'
++ [K_N] > 'ى'
++ [K_B] > "ال"
++ [K_V] > 'ر'
++ [K_C] > 'ؤ'
++ [K_X] > 'ء'
++ [K_Z] > 'ئ'        
+
++ [K_QUOTE] > 'ط'
++ [K_COLON] > 'ك'
++ [K_L] > 'م'
++ [K_K] > 'ن'
++ [K_J] > 'ت'
++ [K_H] > 'ا'
++ [K_G] > 'ل'
++ [K_F] > 'ب'
++ [K_D] > 'ي'
++ [K_S] > 'س'
++ [K_A] > 'ش'         
+
++ [K_BKSLASH] > '\'
++ [K_RBRKT] > 'د'
++ [K_LBRKT] > 'ج'
++ [K_P] > 'ح'
++ [K_O] > 'خ'
++ [K_I] > 'ه'
++ [K_U] > 'ع'
++ [K_Y] > 'غ'
++ [K_T] > 'ف'
++ [K_R] > 'ق'
++ [K_E] > 'ث'
++ [K_W] > 'ص'
++ [K_Q] > 'ض'
