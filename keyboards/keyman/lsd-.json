@@ -8,12 +8,12 @@
     "name" : "Lisan",
     "filename" : "lsd-1.0.js",
     "version" : "1.0",
-    "lastModified" : "2017-12-01T13:59:10.238-06:00",
+    "lastModified" : "2017-12-01T14:05:25.316-06:00",
     "rtl" : true,
     "font" : {
       "family" : "FatemiMaqala",
       "size" : "10",
-      "source" : "Fatemimaqala.ttf"
+      "source" : "FatemiMaqala-Regular.ttf"
     },
     "languages" : [
       {
