@@ -1,4 +1,4 @@
-﻿{
+{
   "phone": {
     "font": "FatemiMaqala",
     "layer": [
@@ -109,15 +109,15 @@
                 "sk": [
                   {
                     "text": "ئ",
-                    "id": "k_z"
+                    "id": "K_Z"
                   },
                   {
                     "text": "ى",
-                    "id": "k_n"
+                    "id": "K_N"
                   },
                   {
                     "text": "ے",
-                    "id": "k_d",
+                    "id": "K_D",
                     "layer": "shift"
                   }
                 ]
@@ -158,22 +158,22 @@
                 "sk": [
                   {
                     "text": "أ",
-                    "id": "k_h",
+                    "id": "K_H",
                     "layer": "shift"
                   },
                   {
                     "text": "إ",
-                    "id": "k_y",
+                    "id": "K_Y",
                     "layer": "shift"
                   },
                   {
                     "text": "آ",
-                    "id": "k_n",
+                    "id": "K_N",
                     "layer": "shift"
                   },
                   {
                     "text": "اٰ",
-                    "id": "K_g",
+                    "id": "K_G",
                     "layer": "shift"
                   }
                 ]
@@ -198,7 +198,7 @@
                 "sk": [
                   {
                     "text": "گ",
-                    "id": "k_colon",
+                    "id": "K_COLON",
                     "layer": "shift"
                   }
                 ]
@@ -365,7 +365,7 @@
                   },
                   {
                     "text": "\\",
-                    "id": "k_bkslash"
+                    "id": "K_BKSLASH"
                   },
                   {
                     "text": "\"",
@@ -643,7 +643,7 @@
                 ]
               },
               {
-                "id": "k_2",
+                "id": "K_2",
                 "text": "2",
                 "sk": [
                   {
@@ -1092,15 +1092,15 @@
                 "sk": [
                   {
                     "text": "ئ",
-                    "id": "k_z"
+                    "id": "K_Z"
                   },
                   {
                     "text": "ى",
-                    "id": "k_n"
+                    "id": "K_N"
                   },
                   {
                     "text": "ے",
-                    "id": "k_d",
+                    "id": "K_D",
                     "layer": "shift"
                   }
                 ]
@@ -1141,22 +1141,22 @@
                 "sk": [
                   {
                     "text": "أ",
-                    "id": "k_h",
+                    "id": "K_H",
                     "layer": "shift"
                   },
                   {
                     "text": "إ",
-                    "id": "k_y",
+                    "id": "K_Y",
                     "layer": "shift"
                   },
                   {
                     "text": "آ",
-                    "id": "k_n",
+                    "id": "K_N",
                     "layer": "shift"
                   },
                   {
                     "text": "اٰ",
-                    "id": "K_g",
+                    "id": "K_G",
                     "layer": "shift"
                   }
                 ]
@@ -1181,7 +1181,7 @@
                 "sk": [
                   {
                     "text": "گ",
-                    "id": "k_colon",
+                    "id": "K_COLON",
                     "layer": "shift"
                   }
                 ]
@@ -1324,7 +1324,7 @@
                   },
                   {
                     "text": "!",
-                    "id": "k_1",
+                    "id": "K_1",
                     "layer": "shift"
                   },
                   {
@@ -1348,7 +1348,7 @@
                   },
                   {
                     "text": "\\",
-                    "id": "k_bkslash"
+                    "id": "K_BKSLASH"
                   },
                   {
                     "text": "\"",
@@ -1626,7 +1626,7 @@
                 ]
               },
               {
-                "id": "k_2",
+                "id": "K_2",
                 "text": "2",
                 "sk": [
                   {

@@ -147,7 +147,7 @@ c Touch keys
 + [T_Samvat]   >  U+0604 
 + [T_Footnote] >  U+0602 
 + [T_Safha]    >  U+0603 
-+ [T_Poetry]   >  U+0612 
++ [T_poetry]   >  U+0612 
 + [T_Number]   >  U+0600 
 + [T_Takhallus] > U+0614 
 + [T_Misra]    >  U+060F 
