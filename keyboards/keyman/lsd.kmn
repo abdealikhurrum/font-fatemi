@@ -59,7 +59,9 @@ c DOUBLES
 "ض" + [K_Q] > "ٹ"
 "ط" + [K_Quote] > "ں"
 "ظ" + [K_Slash] > "ہ"
-"ح" + [K_P] > "چ"
+"ح" + [K_P] > "چ" 
+"ث" + [K_E] > "پ"
+"ك" + [K_COLON] > "گ"
 "ئ" + [K_Z] > "ٖ"
 "ء" + [K_X] > "ٰ"
 "َ" + [SHIFT K_Q] > "ً"   
@@ -71,7 +73,8 @@ c U+0652 + any(iraabTouch) > index(iraabStrength, 2)
 "،" + [SHIFT K_K] > U+061B 
 "." + [SHIFT K_PERIOD] > ":"
 ":" + [SHIFT K_PERIOD] > U+2026  
-U+066C + [shift k_b] > U+066B  
+U+066C + [shift k_b] > U+066B 
+"ى" + [K_X] > "ئ"
 
 
 c Touch keys
