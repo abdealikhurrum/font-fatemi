@@ -16,7 +16,7 @@ group(main) using keys
 store( modkeys1 )     [k_0] [k_1] [k_2] [k_3] [k_4] [k_5] [k_6] [k_7] [k_8] [k_9] [k_hyphen]
 store( modvalues1 ) U+0660 U+0661 U+0662 U+0663 U+0664 U+0665 U+0666 U+0667 U+0668 U+0669 U+060D
 store( modkeys2 )   [shift k_0] [shift k_1] [shift k_2] [shift k_3] [shift k_4] [shift k_5] [shift k_6] [shift k_7] [shift k_8] [shift k_9] [shift k_equal]
-store( modvalues2 ) U+0600 U+0602 U+0606 U+20A8 U+002A U+2038  U+066D U+FD3F U+FD3E U+00F7 U+00D7 
+store( modvalues2 ) U+0600 U+0602 U+0606 U+20A8 U+002A U+005E  U+066D U+FD3F U+FD3E U+00F7 U+00D7 
 store( modkeys3 )  [k_w] [k_e] [k_t] [k_y] [k_u] [k_i][k_o][k_p] [k_lbrkt][k_rbrkt][k_bkslash]  
 store( modvalues3 )  "ؐ"   '؃' '؎' U+060F U+0611 U+06C2 U+0614 U+0612 U+06DA U+06E9 U+007C
 store( modkeys4 )     [k_a] [k_s]  [k_d]  [k_f]  [k_g] [k_h]         
@@ -63,7 +63,7 @@ c DOUBLES
 "ث" + [K_E] > "پ"
 "ك" + [K_COLON] > "گ"
 "ئ" + [K_Z] > "ٖ"
-"ء" + [K_X] > "ٰ"
+"ء" + [K_X] > "ٰ"                       
 "َ" + [SHIFT K_Q] > "ً"   
 "ِ" + [SHIFT K_A] > "ٍ" 
 "ُ" + [SHIFT K_W] > "ٌ"
