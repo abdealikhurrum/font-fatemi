@@ -202,12 +202,6 @@
                     "layer": "shift"
                   }
                 ]
-              },
-              {
-                "id": "T_new_439",
-                "text": "",
-                "width": "10",
-                "sp": "10"
               }
             ]
           },
@@ -296,15 +290,10 @@
                 "text": "ى"
               },
               {
-                "id": "K_SPACE",
-                "text": "",
-                "width": "325",
-                "sp": "1"
-              },
-              {
-                "id": "",
+                "id": "K_HELP",
                 "text": "اعراب",
                 "width": "120",
+                "nextlayer": "default",
                 "sk": [
                   {
                     "text": "زبر",
@@ -331,6 +320,12 @@
                     "id": "T_Maddah"
                   }
                 ]
+              },
+              {
+                "id": "K_SPACE",
+                "text": "",
+                "width": "325",
+                "sp": "1"
               },
               {
                 "id": "K_PERIOD",
@@ -984,7 +979,8 @@
           }
         ]
       }
-    ]
+    ],
+    "displayUnderlying": false
   },
   "tablet": {
     "font": "FatemiMaqala",
@@ -1285,7 +1281,7 @@
                 "sp": "1"
               },
               {
-                "id": "",
+                "id": "K_HELP",
                 "text": "اعراب",
                 "width": "120",
                 "sk": [

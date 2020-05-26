@@ -8,7 +8,7 @@ store(&WINDOWSLANGUAGES) 'x0401'
 store(&LANGUAGE) 'x0401'
 store(&KEYBOARDVERSION) '1.0'
 store(&COPYRIGHT) 'M Abdeali Shk Mohammed Jamali (Khurrum)'
-store(&NAME) 'Lisan'
+store(&NAME) 'LisanFlexible'
 begin Unicode > use(main)
 
 
