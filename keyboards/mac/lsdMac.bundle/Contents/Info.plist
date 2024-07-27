@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>org.sil.ukelele.keyboardlayout.lisanuddawatmac</string>
+	<key>CFBundleName</key>
+	<string>lsdMac</string>
+	<key>CFBundleVersion</key>
+	<string></string>
+	<key>KLInfo_Lisan ud Dawat - AK</key>
+	<dict>
+		<key>TICapsLockLanguageSwitchCapable</key>
+		<false/>
+		<key>TISIconIsTemplate</key>
+		<true/>
+		<key>TISInputSourceID</key>
+		<string>org.sil.ukelele.keyboardlayout.lisanuddawatmac.lisanuddawat-ak</string>
+		<key>TISIntendedLanguage</key>
+		<string>ar-AA</string>
+	</dict>
+	<key>KLInfo_Lisan ud Dawat - Mac</key>
+	<dict>
+		<key>TICapsLockLanguageSwitchCapable</key>
+		<false/>
+		<key>TISIconIsTemplate</key>
+		<false/>
+		<key>TISInputSourceID</key>
+		<string>org.sil.ukelele.keyboardlayout.lisanuddawatmac.lisanuddawat-mac</string>
+		<key>TISIntendedLanguage</key>
+		<string>ar-AA</string>
+	</dict>
+</dict>
+</plist>
