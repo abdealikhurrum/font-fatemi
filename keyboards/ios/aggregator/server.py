@@ -26,6 +26,7 @@ from fastapi.responses import FileResponse, JSONResponse
 import uvicorn
 
 from fedavg import run_fedavg
+from github_publisher import publish_model
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -117,6 +118,49 @@ async def download_model(version: str):
     return FileResponse(path, media_type="application/octet-stream", filename=f"lsd_model_{version}.onnx")
 
 
+@app.post("/corpus")
+async def receive_corpus_pairs(
+    request: Request,
+    authorization: str | None = Header(default=None),
+):
+    """
+    Accepts approved word pairs from a contributor's device.
+    Pairs are appended to a JSONL corpus file, one JSON object per line.
+    The file is suitable for direct use as training data or publishing as a dataset.
+    """
+    check_auth(authorization)
+
+    try:
+        payload = await request.json()
+        pairs   = payload.get("pairs", [])
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid JSON")
+
+    if not pairs:
+        raise HTTPException(status_code=400, detail="No pairs provided")
+
+    # Validate structure — each entry must have lsd and roman strings
+    for p in pairs:
+        if not isinstance(p.get("lsd"), str) or not isinstance(p.get("roman"), str):
+            raise HTTPException(status_code=400, detail="Each pair needs 'lsd' and 'roman' strings")
+
+    corpus_file = STORAGE_DIR / "corpus.jsonl"
+    with corpus_file.open("a", encoding="utf-8") as f:
+        for p in pairs:
+            f.write(json.dumps({"lsd": p["lsd"], "roman": p["roman"]}, ensure_ascii=False) + "\n")
+
+    log.info("Corpus: received %d pairs (total lines: %d)", len(pairs), _corpus_line_count())
+    return {"status": "accepted", "pairs_received": len(pairs)}
+
+
+def _corpus_line_count() -> int:
+    corpus_file = STORAGE_DIR / "corpus.jsonl"
+    if not corpus_file.exists():
+        return 0
+    with corpus_file.open() as f:
+        return sum(1 for _ in f)
+
+
 @app.get("/status")
 async def status():
     manifest = _load_manifest()
@@ -153,13 +197,16 @@ def _trigger_round(delta_files: list[Path], base_version: str):
 
     # Update manifest
     manifest = {
-        "version": new_version,
-        "url":     f"/model/download/{new_version}",
-        "created": timestamp,
+        "version":      new_version,
+        "url":          f"/model/download/{new_version}",
+        "created":      timestamp,
         "contributors": len(delta_files),
     }
     MANIFEST_FILE.write_text(json.dumps(manifest, indent=2))
     log.info("Round complete. New model: %s", new_version)
+
+    # Publish to GitHub — triggers model-release.yml which creates a Release
+    publish_model(version=new_version, contributors=len(delta_files))
 
 
 def _current_model_path() -> Path:
