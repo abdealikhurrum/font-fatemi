@@ -1,60 +1,72 @@
 import UIKit
 
-// UIInputViewController subclass — the entry point for the iOS keyboard extension.
-// Manages layer switching, text insertion, and the keyboard view hierarchy.
-
 final class KeyboardViewController: UIInputViewController {
 
-    // MARK: - Layer State
+    // MARK: - Layer state
 
     private enum Layer { case `default`, shift, numeric }
 
     private var currentLayer: Layer = .default {
         didSet { applyLayer() }
     }
-
-    private var shiftLocked = false  // double-tap shift activates caps lock
-
-    // MARK: - Transliteration tracking
-    // Buffers the last LSD word typed so we can record (lsd, roman) pairs
-    // when the user accepts or corrects a transliteration suggestion.
-
-    private var currentLSDBuffer = ""
-    private var currentRomanBuffer = ""
+    private var shiftActive = false {
+        didSet { keyboardView.updateShiftAppearance(active: shiftActive, locked: shiftLocked) }
+    }
+    private var shiftLocked = false
 
     // MARK: - Views
 
-    private var keyboardView: KeyboardView!
+    private var keyboardView   = KeyboardView()
+    private var predictiveBar  = PredictiveBar()
+
+    // MARK: - Double-space tracking
+
+    private var lastInsertedCharacter: Character?
+    private var lastInsertTime: Date?
+    private static let doubleSpaceWindow: TimeInterval = 0.4
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        buildKeyboardView()
+        buildUI()
+        applyLayer()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Force layout pass so intrinsic content size is respected
-        view.setNeedsLayout()
+        // Proper keyboard height: predictive bar + key area + bottom safe area
+        let keyH   = keyboardView.intrinsicContentSize.height
+        let barH   = PredictiveBar.height
+        let safeB  = view.safeAreaInsets.bottom
+        let total  = keyH + barH + safeB
+        view.frame.size.height = total
     }
 
     // MARK: - Setup
 
-    private func buildKeyboardView() {
-        keyboardView = KeyboardView()
-        keyboardView.translatesAutoresizingMaskIntoConstraints = false
+    private func buildUI() {
+        view.backgroundColor = UIColor(white: 0.82, alpha: 1)
+
+        predictiveBar.delegate = self
+        predictiveBar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(predictiveBar)
+
         keyboardView.delegate = self
+        keyboardView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(keyboardView)
 
         NSLayoutConstraint.activate([
+            predictiveBar.topAnchor.constraint(equalTo: view.topAnchor),
+            predictiveBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            predictiveBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            predictiveBar.heightAnchor.constraint(equalToConstant: PredictiveBar.height),
+
+            keyboardView.topAnchor.constraint(equalTo: predictiveBar.bottomAnchor),
             keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             keyboardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            keyboardView.topAnchor.constraint(equalTo: view.topAnchor),
-            keyboardView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            keyboardView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
-
-        applyLayer()
     }
 
     private func applyLayer() {
@@ -63,16 +75,39 @@ final class KeyboardViewController: UIInputViewController {
         case .shift:    keyboardView.configure(with: KeyboardLayoutData.shiftLayer)
         case .numeric:  keyboardView.configure(with: KeyboardLayoutData.numericLayer)
         }
+        // Refresh shift indicator after reconfigure
+        keyboardView.updateShiftAppearance(active: shiftActive, locked: shiftLocked)
     }
 
-    // MARK: - Text Helpers
+    // MARK: - Text insertion
 
     private func insert(_ text: String) {
         textDocumentProxy.insertText(text)
+        lastInsertedCharacter = text.last
+        lastInsertTime = Date()
+        updatePredictions()
     }
 
     private func deleteBack() {
         textDocumentProxy.deleteBackward()
+        lastInsertedCharacter = nil
+        updatePredictions()
+    }
+
+    // MARK: - Predictions
+    // Feed real results from the transliteration model here.
+    // For now, surfaces context from the document proxy as a placeholder.
+
+    private func updatePredictions() {
+        let context = textDocumentProxy.documentContextBeforeInput ?? ""
+        let word    = context.components(separatedBy: .whitespaces).last ?? ""
+
+        if word.isEmpty {
+            predictiveBar.update(suggestions: [])
+        } else {
+            // Placeholder — replace with model inference
+            predictiveBar.update(suggestions: [word, word + "ا", word + "ه"])
+        }
     }
 }
 
@@ -85,13 +120,24 @@ extension KeyboardViewController: KeyboardViewDelegate {
 
         case .character:
             insert(key.primary)
-            // Single-shot shift returns to default
-            if currentLayer == .shift, !shiftLocked {
+            if shiftActive && !shiftLocked {
+                shiftActive  = false
                 currentLayer = .default
             }
 
         case .space:
-            insert(" ")
+            // Double-space → period + space, matching iOS native behaviour
+            let now = Date()
+            if let last = lastInsertedCharacter,
+               let lastTime = lastInsertTime,
+               last != " " && last != "\n",
+               now.timeIntervalSince(lastTime) < Self.doubleSpaceWindow,
+               textDocumentProxy.documentContextBeforeInput?.last?.isLetter == true {
+                textDocumentProxy.deleteBackward()   // remove trailing space if any
+                textDocumentProxy.insertText(". ")
+            } else {
+                insert(" ")
+            }
 
         case .backspace:
             deleteBack()
@@ -100,28 +146,34 @@ extension KeyboardViewController: KeyboardViewDelegate {
             insert("\n")
 
         case .shift:
-            switch currentLayer {
-            case .default:
+            switch (currentLayer, shiftActive, shiftLocked) {
+            case (.default, false, _):
+                // First tap: shift on
                 currentLayer = .shift
-                shiftLocked = false
-            case .shift where !shiftLocked:
-                // Second tap on shift = caps lock
+                shiftActive  = true
+                shiftLocked  = false
+            case (.shift, true, false):
+                // Second tap: caps lock
                 shiftLocked = true
-            case .shift where shiftLocked:
-                // Third tap = release caps lock
-                shiftLocked = false
+                keyboardView.updateShiftAppearance(active: true, locked: true)
+            case (.shift, true, true):
+                // Third tap: off
                 currentLayer = .default
-            case .numeric:
-                break   // shift does nothing in numeric layer
+                shiftActive  = false
+                shiftLocked  = false
             default:
                 break
             }
 
         case .numeric:
             currentLayer = .numeric
+            shiftActive  = false
+            shiftLocked  = false
 
         case .abc:
             currentLayer = .default
+            shiftActive  = false
+            shiftLocked  = false
 
         case .globe:
             advanceToNextInputMode()
@@ -130,25 +182,30 @@ extension KeyboardViewController: KeyboardViewDelegate {
 
     func longPressAlternateSelected(_ character: String) {
         insert(character)
-        if currentLayer == .shift, !shiftLocked {
+        if shiftActive && !shiftLocked {
+            shiftActive  = false
             currentLayer = .default
         }
     }
 
-    // MARK: - Pair collection hooks
-
-    // Call this when the keyboard's transliteration engine suggests a roman reading
-    // and the user accepts it without modification.
+    // Pair collection hooks (connect to PairCollector when model is live)
     func transliterationAccepted(lsd: String, roman: String) {
         PairCollector.shared.recordAccepted(lsd: lsd, roman: roman)
     }
 
-    // Call this when the user edits the roman suggestion before finalising.
     func transliterationCorrected(lsd: String, suggested: String, corrected: String) {
-        PairCollector.shared.recordCorrection(
-            lsd: lsd,
-            suggestedRoman: suggested,
-            correctedRoman: corrected
-        )
+        PairCollector.shared.recordCorrection(lsd: lsd, suggestedRoman: suggested, correctedRoman: corrected)
+    }
+}
+
+// MARK: - PredictiveBarDelegate
+
+extension KeyboardViewController: PredictiveBarDelegate {
+    func predictiveBar(_ bar: PredictiveBar, didSelect suggestion: String) {
+        // Delete the partial word and insert the full suggestion
+        let before = textDocumentProxy.documentContextBeforeInput ?? ""
+        let partial = before.components(separatedBy: .whitespaces).last ?? ""
+        for _ in partial { textDocumentProxy.deleteBackward() }
+        insert(suggestion + " ")
     }
 }

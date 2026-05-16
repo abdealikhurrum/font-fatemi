@@ -7,51 +7,74 @@ protocol KeyboardViewDelegate: AnyObject {
 
 final class KeyboardView: UIView {
 
-    // MARK: - Public
-
     weak var delegate: KeyboardViewDelegate?
 
-    // MARK: - Constants
+    // MARK: - Layout constants
 
-    private static let rowSpacing: CGFloat = 8
-    private static let keySpacing: CGFloat = 6
-    private static let sidePadding: CGFloat = 3
-    private static let topPadding: CGFloat = 8
-    private static let bottomPadding: CGFloat = 4
-    private static let standardKeyHeight: CGFloat = 42
+    private static let rowSpacing:     CGFloat = 8
+    private static let keySpacing:     CGFloat = 6
+    private static let sidePadding:    CGFloat = 3
+    private static let topPadding:     CGFloat = 8
+    private static let bottomPadding:  CGFloat = 3
+    private static let standardKeyH:   CGFloat = 42
 
-    // MARK: - State
+    // MARK: - Haptics
+
+    private let impactLight  = UIImpactFeedbackGenerator(style: .light)
+
+    // MARK: - Touch tracking
+    // All touch logic lives here — gives us cross-key sliding for free.
+
+    private var activeKey: KeyButton?
+    private var longPressTimer: Timer?
+    private var backspaceRepeatTimer: Timer?
+    private var backspaceInitialTimer: Timer?
+
+    // MARK: - Callout
+
+    private var calloutView: KeyCalloutView?
+
+    // MARK: - Popup (long-press alternates)
+
+    private var activePopup: LongPressPopupView?
+    private var popupSourceKey: KeyButton?
+
+    // MARK: - Keys
 
     private var keyButtons: [KeyButton] = []
-    private var activePopup: LongPressPopupView?
-    private var activePopupSourceButton: KeyButton?
+    private var currentRows: [[KeyData]] = []
 
     // MARK: - Init
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor(white: 0.82, alpha: 1)
+        // Pre-warm haptic engine so first tap isn't delayed
+        impactLight.prepare()
     }
 
     required init?(coder: NSCoder) { fatalError() }
 
-    // MARK: - Configuration
+    // MARK: - Configure
 
     func configure(with layer: KeyboardLayer) {
-        // Remove existing buttons
         keyButtons.forEach { $0.removeFromSuperview() }
         keyButtons = []
+        currentRows = layer.rows
 
         for row in layer.rows {
             for keyData in row {
                 let btn = KeyButton(keyData: keyData)
-                btn.delegate = self
                 addSubview(btn)
                 keyButtons.append(btn)
             }
         }
-
         setNeedsLayout()
+    }
+
+    func updateShiftAppearance(active: Bool, locked: Bool) {
+        keyButtons.first(where: { $0.keyData.type == .shift })?
+            .setShiftActive(active, locked: locked)
     }
 
     // MARK: - Layout
@@ -60,194 +83,252 @@ final class KeyboardView: UIView {
         super.layoutSubviews()
         guard !keyButtons.isEmpty else { return }
 
-        // Collect all buttons in row order by matching against current subviews order
-        let rows = groupIntoRows()
-        guard !rows.isEmpty else { return }
-
-        let sp = KeyboardView.keySpacing
+        let rows    = groupedRows()
         let sidePad = KeyboardView.sidePadding
-        let availW = bounds.width - sidePad * 2
-        let keyH = KeyboardView.standardKeyHeight
-
-        var y = KeyboardView.topPadding
+        let availW  = bounds.width - sidePad * 2
+        let keyH    = KeyboardView.standardKeyH
+        var y       = KeyboardView.topPadding
 
         for row in rows {
-            let x = layout(row: row, y: y, availableWidth: availW, sidePad: sidePad, keyHeight: keyH)
-            _ = x
+            layoutRow(row, y: y, availableWidth: availW, sidePad: sidePad, keyH: keyH)
             y += keyH + KeyboardView.rowSpacing
         }
-
-        invalidateIntrinsicContentSize()
     }
 
-    // Returns actual height so parent can constrain
     override var intrinsicContentSize: CGSize {
-        let rowCount = groupIntoRows().count
+        let n = CGFloat(currentRows.count)
         let h = KeyboardView.topPadding
-            + CGFloat(rowCount) * KeyboardView.standardKeyHeight
-            + CGFloat(max(0, rowCount - 1)) * KeyboardView.rowSpacing
+            + n * KeyboardView.standardKeyH
+            + max(0, n - 1) * KeyboardView.rowSpacing
             + KeyboardView.bottomPadding
         return CGSize(width: UIView.noIntrinsicMetric, height: h)
     }
 
-    // MARK: - Layout helpers
+    // MARK: - Touch handling
 
-    private func groupIntoRows() -> [[KeyButton]] {
-        // Buttons are added in row order; re-group by matching layer rows
-        var result: [[KeyButton]] = []
-        var idx = 0
-        for row in currentLayerRows() {
-            let count = row.count
-            let slice = Array(keyButtons[idx..<min(idx + count, keyButtons.count)])
-            if !slice.isEmpty { result.append(slice) }
-            idx += count
-        }
-        return result
-    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        impactLight.prepare()
 
-    private func currentLayerRows() -> [[KeyData]] {
-        // Peek at first button to determine current layer (fragile but simple)
-        guard let first = keyButtons.first else { return [] }
-        switch first.keyData.primary {
-        case "ض": return KeyboardLayoutData.defaultLayer.rows
-        case "َ", "ُ": return KeyboardLayoutData.shiftLayer.rows
-        case "1": return KeyboardLayoutData.numericLayer.rows
-        default: return KeyboardLayoutData.defaultLayer.rows
+        if let key = keyButton(at: touch.location(in: self)) {
+            activate(key: key, touch: touch)
         }
     }
 
-    @discardableResult
-    private func layout(
-        row: [KeyButton],
-        y: CGFloat,
-        availableWidth: CGFloat,
-        sidePad: CGFloat,
-        keyHeight: CGFloat
-    ) -> CGFloat {
-        let sp = KeyboardView.keySpacing
-        let standardW = standardKeyWidth(in: row, availableWidth: availableWidth)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
 
-        // Compute each button width
-        var widths: [CGFloat] = row.map { btn in
-            switch btn.keyData.width {
-            case .standard:         return standardW
-            case .wide:             return standardW * 1.5
-            case .extraWide:        return standardW * 2.5
-            case .fixed(let w):     return w
-            case .flexible:         return 0 // computed below
+        // If popup is open, route movement into it
+        if let popup = activePopup {
+            popup.updateSelection(at: touch.location(in: popup))
+            return
+        }
+
+        let pt = touch.location(in: self)
+        guard let newKey = keyButton(at: pt), newKey !== activeKey else { return }
+
+        // Slid to a different key
+        cancelTimers()
+        dismissCallout()
+        activeKey?.setHighlighted(false)
+
+        activate(key: newKey, touch: touch)
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let popup = activePopup {
+            popup.confirmSelection()
+            dismissPopup()
+            return
+        }
+
+        cancelTimers()
+        dismissCallout()
+
+        if let key = activeKey {
+            key.setHighlighted(false)
+            activeKey = nil
+            delegate?.keyPressed(key.keyData)
+        }
+    }
+
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        cancelTimers()
+        dismissCallout()
+        dismissPopup()
+        activeKey?.setHighlighted(false)
+        activeKey = nil
+    }
+
+    // MARK: - Activation
+
+    private func activate(key: KeyButton, touch: UITouch) {
+        activeKey = key
+        key.setHighlighted(true)
+        impactLight.impactOccurred()
+
+        // Show callout for regular character keys (not special keys)
+        if key.keyData.type == .character && !key.keyData.primary.isEmpty {
+            showCallout(for: key)
+        }
+
+        // Backspace: fire once, then start accelerating repeat
+        if key.keyData.type == .backspace {
+            backspaceInitialTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [weak self] _ in
+                self?.startBackspaceRepeat()
+            }
+            return
+        }
+
+        // Long press for alternates
+        if !key.keyData.alternates.isEmpty {
+            longPressTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) { [weak self] _ in
+                guard let self else { return }
+                self.dismissCallout()
+                self.showPopup(for: key)
             }
         }
-
-        // Flexible keys fill remaining space
-        let fixedTotal = widths.reduce(0, +) + CGFloat(row.count - 1) * sp
-        let flexCount = CGFloat(widths.filter { $0 == 0 }.count)
-        let flexW = flexCount > 0 ? (availableWidth - fixedTotal) / flexCount : 0
-
-        widths = widths.map { $0 == 0 ? flexW : $0 }
-
-        // Lay out left-to-right
-        var x = sidePad
-        for (btn, w) in zip(row, widths) {
-            btn.frame = CGRect(x: x, y: y, width: w, height: keyHeight)
-            x += w + sp
-        }
-
-        return x
     }
 
-    private func standardKeyWidth(in row: [KeyButton], availableWidth: CGFloat) -> CGFloat {
-        let sp = KeyboardView.keySpacing
-        // Count how many standard-width slots
-        var standardCount: CGFloat = 0
-        var fixedUsed: CGFloat = 0
-        var flexCount: CGFloat = 0
+    // MARK: - Callout
 
-        for btn in row {
-            switch btn.keyData.width {
-            case .standard:             standardCount += 1
-            case .wide:                 standardCount += 1.5
-            case .extraWide:            standardCount += 2.5
-            case .fixed(let w):         fixedUsed += w
-            case .flexible:             flexCount += 1
-            }
-        }
+    private func showCallout(for key: KeyButton) {
+        dismissCallout()
+        // Find the top-level window layer to escape clipping bounds
+        guard let container = window else { return }
+        let keyFrameInContainer = key.convert(key.bounds, to: container)
 
-        let totalSpacing = CGFloat(row.count - 1) * sp
-        let availForStandard = availableWidth - fixedUsed - totalSpacing
-        guard standardCount > 0 else { return 44 }
-        return availForStandard / standardCount
+        let cv = KeyCalloutView(
+            character: key.keyData.primary,
+            keyFrame:  keyFrameInContainer,
+            in:        container
+        )
+        container.addSubview(cv)
+        calloutView = cv
     }
-}
 
-// MARK: - KeyButtonDelegate
+    private func dismissCallout() {
+        calloutView?.removeFromSuperview()
+        calloutView = nil
+    }
 
-extension KeyboardView: KeyButtonDelegate {
+    // MARK: - Popup (alternates)
 
-    func keyButtonTapped(_ button: KeyButton) {
+    private func showPopup(for key: KeyButton) {
         dismissPopup()
-        delegate?.keyPressed(button.keyData)
-    }
-
-    func keyButtonRepeatFired(_ button: KeyButton) {
-        delegate?.keyPressed(button.keyData)
-    }
-
-    func keyButtonLongPressed(_ button: KeyButton) {
-        guard !button.keyData.alternates.isEmpty else { return }
-        showPopup(for: button)
-    }
-
-    // MARK: - Popup management
-
-    private func showPopup(for button: KeyButton) {
-        dismissPopup()
-
         let popup = LongPressPopupView(
-            alternates: button.keyData.alternates,
-            keySize: button.bounds.size
+            alternates: key.keyData.alternates,
+            keySize:    key.bounds.size
         )
         popup.delegate = self
 
-        // Position above the key
-        var origin = button.convert(CGPoint.zero, to: self)
+        var origin = key.convert(CGPoint.zero, to: self)
         origin.y -= popup.bounds.height + 4
-        // Clamp to keyboard bounds
         origin.x = max(4, min(bounds.width - popup.bounds.width - 4, origin.x))
-
         popup.frame.origin = origin
         addSubview(popup)
-        activePopup = popup
-        activePopupSourceButton = button
-
-        // Track finger movement over popup
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePopupPan(_:)))
-        popup.addGestureRecognizer(pan)
-
-        // Also watch touches on this view
-        let overlay = UITapGestureRecognizer(target: self, action: #selector(dismissPopupTap))
-        overlay.numberOfTapsRequired = 1
-        overlay.cancelsTouchesInView = false
-        addGestureRecognizer(overlay)
+        activePopup   = popup
+        popupSourceKey = key
     }
 
     private func dismissPopup() {
         activePopup?.removeFromSuperview()
-        activePopup = nil
-        activePopupSourceButton = nil
-        gestureRecognizers?.removeAll(where: { $0 is UITapGestureRecognizer })
+        activePopup    = nil
+        popupSourceKey = nil
     }
 
-    @objc private func dismissPopupTap() { dismissPopup() }
+    // MARK: - Backspace repeat
 
-    @objc private func handlePopupPan(_ gr: UIPanGestureRecognizer) {
-        guard let popup = activePopup else { return }
-        let pt = gr.location(in: popup)
-        popup.updateSelection(at: pt)
-
-        if gr.state == .ended {
-            popup.confirmSelection()
-            dismissPopup()
+    private func startBackspaceRepeat() {
+        var interval: TimeInterval = 0.1
+        backspaceRepeatTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
+            guard let self, let key = self.activeKey else { return }
+            self.delegate?.keyPressed(key.keyData)
+            // Accelerate: halve the interval each 4 fires, min 0.033s (30/s)
+            interval = max(0.033, interval * 0.85)
         }
+    }
+
+    // MARK: - Timers
+
+    private func cancelTimers() {
+        longPressTimer?.invalidate();          longPressTimer = nil
+        backspaceRepeatTimer?.invalidate();    backspaceRepeatTimer = nil
+        backspaceInitialTimer?.invalidate();   backspaceInitialTimer = nil
+    }
+
+    // MARK: - Hit testing
+
+    private func keyButton(at point: CGPoint) -> KeyButton? {
+        // Expand tap targets slightly vertically — easier to hit row boundaries
+        keyButtons.first { btn in
+            btn.frame.insetBy(dx: 0, dy: -4).contains(point)
+        }
+    }
+
+    // MARK: - Layout helpers
+
+    private func groupedRows() -> [[KeyButton]] {
+        var result: [[KeyButton]] = []
+        var idx = 0
+        for row in currentRows {
+            let slice = Array(keyButtons[idx..<min(idx + row.count, keyButtons.count)])
+            if !slice.isEmpty { result.append(slice) }
+            idx += row.count
+        }
+        return result
+    }
+
+    private func layoutRow(
+        _ row: [KeyButton],
+        y: CGFloat,
+        availableWidth: CGFloat,
+        sidePad: CGFloat,
+        keyH: CGFloat
+    ) {
+        let sp = KeyboardView.keySpacing
+        let stdW = standardKeyWidth(in: row, availableWidth: availableWidth)
+
+        var widths: [CGFloat] = row.map { btn in
+            switch btn.keyData.width {
+            case .standard:        return stdW
+            case .wide:            return stdW * 1.5
+            case .extraWide:       return stdW * 2.5
+            case .fixed(let w):    return w
+            case .flexible:        return 0
+            }
+        }
+
+        let fixedTotal = widths.reduce(0, +) + CGFloat(row.count - 1) * sp
+        let flexCount  = CGFloat(widths.filter { $0 == 0 }.count)
+        let flexW      = flexCount > 0 ? (availableWidth - fixedTotal) / flexCount : 0
+        widths = widths.map { $0 == 0 ? flexW : $0 }
+
+        var x = sidePad
+        for (btn, w) in zip(row, widths) {
+            btn.frame = CGRect(x: x, y: y, width: w, height: keyH)
+            x += w + sp
+        }
+    }
+
+    private func standardKeyWidth(in row: [KeyButton], availableWidth: CGFloat) -> CGFloat {
+        let sp = KeyboardView.keySpacing
+        var slots: CGFloat = 0
+        var fixedUsed: CGFloat = 0
+
+        for btn in row {
+            switch btn.keyData.width {
+            case .standard:        slots += 1
+            case .wide:            slots += 1.5
+            case .extraWide:       slots += 2.5
+            case .fixed(let w):    fixedUsed += w
+            case .flexible:        break
+            }
+        }
+
+        let totalSpacing = CGFloat(row.count - 1) * sp
+        guard slots > 0 else { return 44 }
+        return (availableWidth - fixedUsed - totalSpacing) / slots
     }
 }
 
@@ -257,8 +338,5 @@ extension KeyboardView: LongPressPopupDelegate {
     func popupDidSelect(_ character: String) {
         delegate?.longPressAlternateSelected(character)
     }
-
-    func popupDidCancel() {
-        // No-op — already dismissed
-    }
+    func popupDidCancel() {}
 }
