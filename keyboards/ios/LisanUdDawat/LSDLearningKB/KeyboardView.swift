@@ -2,6 +2,7 @@ import UIKit
 
 protocol KeyboardViewDelegate: AnyObject {
     func keyPressed(_ key: KeyData)
+    func doubleTapPressed(on key: KeyData)
     func longPressAlternateSelected(_ character: String)
     func backspaceWordPressed()
 }
@@ -31,6 +32,11 @@ final class KeyboardView: UIView {
     private var backspaceRepeatTimer: Timer?
     private var backspaceInitialTimer: Timer?
     private var backspaceDeleteCount = 0
+
+    // Double-tap tracking
+    private var lastTappedKey: KeyButton?
+    private var lastTapTime: Date?
+    private static let doubleTapWindow: TimeInterval = 0.35
 
     // MARK: - Callout
 
@@ -63,6 +69,8 @@ final class KeyboardView: UIView {
         keyButtons.forEach { $0.removeFromSuperview() }
         keyButtons = []
         currentRows = layer.rows
+        lastTappedKey = nil
+        lastTapTime = nil
 
         for row in layer.rows {
             for keyData in row {
@@ -72,11 +80,6 @@ final class KeyboardView: UIView {
             }
         }
         setNeedsLayout()
-    }
-
-    func updateShiftAppearance(active: Bool, locked: Bool) {
-        keyButtons.first(where: { $0.keyData.type == .shift })?
-            .setShiftActive(active, locked: locked)
     }
 
     // MARK: - Layout
@@ -147,9 +150,23 @@ final class KeyboardView: UIView {
         cancelTimers()
         dismissCallout()
 
-        if let key = activeKey {
-            key.setHighlighted(false)
-            activeKey = nil
+        guard let key = activeKey else { return }
+        key.setHighlighted(false)
+        activeKey = nil
+
+        // Double-tap: same character key, non-empty secondary, within window
+        let isDouble = key === lastTappedKey
+            && key.keyData.type == .character
+            && !key.keyData.secondary.isEmpty
+            && lastTapTime.map { Date().timeIntervalSince($0) < Self.doubleTapWindow } == true
+
+        if isDouble {
+            lastTappedKey = nil
+            lastTapTime   = nil
+            delegate?.doubleTapPressed(on: key.keyData)
+        } else {
+            lastTappedKey = key.keyData.type == .character ? key : nil
+            lastTapTime   = key.keyData.type == .character ? Date() : nil
             delegate?.keyPressed(key.keyData)
         }
     }

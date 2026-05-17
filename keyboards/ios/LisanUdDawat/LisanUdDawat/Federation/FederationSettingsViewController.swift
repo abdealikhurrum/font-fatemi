@@ -17,7 +17,8 @@ final class FederationSettingsViewController: UIViewController {
     private lazy var statusLabel  = UILabel()
     private lazy var pushButton   = UIButton(type: .system)
     private lazy var pullButton   = UIButton(type: .system)
-    private lazy var autoToggle   = UISwitch()
+    private lazy var autoToggle        = UISwitch()
+    private lazy var predictionToggle  = UISwitch()
     private lazy var activityIndicator = UIActivityIndicatorView(style: .medium)
 
     // MARK: - Lifecycle
@@ -62,6 +63,7 @@ final class FederationSettingsViewController: UIViewController {
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
         ])
 
+        stackView.addArrangedSubview(keyboardCard())
         stackView.addArrangedSubview(privacyCard())
         stackView.addArrangedSubview(statsCard())
         stackView.addArrangedSubview(manualCard())
@@ -70,6 +72,29 @@ final class FederationSettingsViewController: UIViewController {
     }
 
     // MARK: - Cards
+
+    private func keyboardCard() -> UIView {
+        let v = cardContainer(title: "Keyboard")
+
+        let body = label(
+            "Word predictions appear above the keyboard. " +
+            "Turn this on once the transliteration model is connected.",
+            size: 14, color: .secondaryLabel
+        )
+        v.addArrangedSubview(body)
+
+        let row = UIStackView()
+        row.axis = .horizontal
+        row.distribution = .equalSpacing
+        row.alignment = .center
+        row.addArrangedSubview(label("Show predictions", size: 16))
+        predictionToggle.isOn = KeyboardSettings.predictionEnabled
+        predictionToggle.addTarget(self, action: #selector(predictionToggleChanged), for: .valueChanged)
+        row.addArrangedSubview(predictionToggle)
+        v.addArrangedSubview(row)
+
+        return v
+    }
 
     private func privacyCard() -> UIView {
         card(title: "How this works", body: """
@@ -178,6 +203,10 @@ final class FederationSettingsViewController: UIViewController {
 
     @objc private func toggleAutoChanged() {
         manager.autoPushEnabled = autoToggle.isOn
+    }
+
+    @objc private func predictionToggleChanged() {
+        KeyboardSettings.predictionEnabled = predictionToggle.isOn
     }
 
     // MARK: - Bindings

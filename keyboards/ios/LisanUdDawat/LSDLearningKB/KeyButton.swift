@@ -10,7 +10,8 @@ final class KeyButton: UIView {
     // MARK: - Appearance
 
     private let label = UILabel()
-    private let badge = UIView()   // small dot indicating alternates exist
+    private let secondaryLabel = UILabel()  // small char in top-left; double-tap inserts it
+    private let badge = UIView()            // dot indicating long-press alternates exist
 
     private var isHighlighted = false {
         didSet { applyHighlight() }
@@ -19,9 +20,9 @@ final class KeyButton: UIView {
     // Background colours — all adaptive (light/dark)
     var normalBackground: UIColor {
         switch keyData.type {
-        case .character, .space:               return KeyboardColors.characterKey
-        case .shift, .backspace, .numeric,
-             .abc, .globe, .enter:             return KeyboardColors.specialKey
+        case .character, .space:                    return KeyboardColors.characterKey
+        case .backspace, .numeric, .abc,
+             .globe, .enter:                        return KeyboardColors.specialKey
         }
     }
     private var pressedBackground: UIColor { KeyboardColors.pressedKey }
@@ -63,11 +64,27 @@ final class KeyButton: UIView {
             label.bottomAnchor.constraint(equalTo: bottomAnchor,     constant: -2),
         ])
 
-        // Tiny dot in top-right corner when alternates exist
-        if !keyData.alternates.isEmpty && keyData.type == .character {
+        // Secondary char — top-left corner, shown when double-tap is available
+        if !keyData.secondary.isEmpty && keyData.type == .character {
+            secondaryLabel.text      = keyData.secondary
+            secondaryLabel.font      = UIFont(name: "FatemiMaqala", size: 10) ?? UIFont.systemFont(ofSize: 10)
+            secondaryLabel.textColor = .tertiaryLabel
+            secondaryLabel.textAlignment = .center
+            secondaryLabel.adjustsFontSizeToFitWidth = true
+            secondaryLabel.minimumScaleFactor = 0.7
+            secondaryLabel.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(secondaryLabel)
+            NSLayoutConstraint.activate([
+                secondaryLabel.topAnchor.constraint(equalTo: topAnchor, constant: 2),
+                secondaryLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 2),
+                secondaryLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 16),
+            ])
+        }
+
+        // Tiny dot when long-press alternates exist but no secondary is shown
+        if !keyData.alternates.isEmpty && keyData.secondary.isEmpty && keyData.type == .character {
             badge.backgroundColor = UIColor(white: 0.55, alpha: 0.6)
             badge.layer.cornerRadius = 2
-            badge.frame = CGRect(x: 0, y: 0, width: 4, height: 4)
             badge.translatesAutoresizingMaskIntoConstraints = false
             addSubview(badge)
             NSLayoutConstraint.activate([
@@ -82,9 +99,8 @@ final class KeyButton: UIView {
     private func labelFont() -> UIFont {
         switch keyData.type {
         case .character:
-            if let custom = UIFont(name: "FatemiMaqala", size: 20) { return custom }
-            return UIFont.systemFont(ofSize: 20)
-        case .shift, .backspace, .enter:
+            return UIFont(name: "FatemiMaqala", size: 20) ?? UIFont.systemFont(ofSize: 20)
+        case .backspace, .enter:
             return UIFont.systemFont(ofSize: 16)
         default:
             return UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -98,25 +114,9 @@ final class KeyButton: UIView {
         isHighlighted = on
     }
 
-    // Shift key — visually indicates active state
-    func setShiftActive(_ active: Bool, locked: Bool = false) {
-        guard keyData.type == .shift else { return }
-        if locked {
-            backgroundColor = KeyboardColors.shiftLockedBackground
-            label.textColor = KeyboardColors.shiftLockedText
-        } else if active {
-            backgroundColor = KeyboardColors.characterKey
-            label.textColor = .label
-        } else {
-            backgroundColor = normalBackground
-            label.textColor = .label
-        }
-    }
-
     // MARK: - Private
 
     private func applyHighlight() {
-        // Immediate — no animation. Delay here is one of the main "off" feelings.
         backgroundColor = isHighlighted ? pressedBackground : normalBackground
     }
 }

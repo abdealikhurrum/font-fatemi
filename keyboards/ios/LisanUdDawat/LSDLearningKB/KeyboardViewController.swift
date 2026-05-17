@@ -4,20 +4,17 @@ final class KeyboardViewController: UIInputViewController {
 
     // MARK: - Layer state
 
-    private enum Layer { case `default`, shift, numeric }
+    private enum Layer { case `default`, numeric }
 
     private var currentLayer: Layer = .default {
         didSet { applyLayer() }
     }
-    private var shiftActive = false {
-        didSet { keyboardView.updateShiftAppearance(active: shiftActive, locked: shiftLocked) }
-    }
-    private var shiftLocked = false
 
     // MARK: - Views
 
-    private var keyboardView   = KeyboardView()
-    private var predictiveBar  = PredictiveBar()
+    private var keyboardView  = KeyboardView()
+    private var predictiveBar = PredictiveBar()
+    private var barHeightConstraint: NSLayoutConstraint?
 
     // MARK: - Double-space tracking
 
@@ -35,12 +32,14 @@ final class KeyboardViewController: UIInputViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Proper keyboard height: predictive bar + key area + bottom safe area
-        let keyH   = keyboardView.intrinsicContentSize.height
-        let barH   = PredictiveBar.height
-        let safeB  = view.safeAreaInsets.bottom
-        let total  = keyH + barH + safeB
-        view.frame.size.height = total
+        let predEnabled = KeyboardSettings.predictionEnabled
+        predictiveBar.isHidden = !predEnabled
+        barHeightConstraint?.constant = predEnabled ? PredictiveBar.height : 0
+
+        let keyH  = keyboardView.intrinsicContentSize.height
+        let barH  = predEnabled ? PredictiveBar.height : 0
+        let safeB = view.safeAreaInsets.bottom
+        view.frame.size.height = keyH + barH + safeB
     }
 
     // MARK: - Setup
@@ -56,11 +55,18 @@ final class KeyboardViewController: UIInputViewController {
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(keyboardView)
 
+        let predEnabled = KeyboardSettings.predictionEnabled
+        predictiveBar.isHidden = !predEnabled
+        let barH = predictiveBar.heightAnchor.constraint(
+            equalToConstant: predEnabled ? PredictiveBar.height : 0
+        )
+        barHeightConstraint = barH
+
         NSLayoutConstraint.activate([
             predictiveBar.topAnchor.constraint(equalTo: view.topAnchor),
             predictiveBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             predictiveBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            predictiveBar.heightAnchor.constraint(equalToConstant: PredictiveBar.height),
+            barH,
 
             keyboardView.topAnchor.constraint(equalTo: predictiveBar.bottomAnchor),
             keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -71,12 +77,9 @@ final class KeyboardViewController: UIInputViewController {
 
     private func applyLayer() {
         switch currentLayer {
-        case .default:  keyboardView.configure(with: KeyboardLayoutData.defaultLayer)
-        case .shift:    keyboardView.configure(with: KeyboardLayoutData.shiftLayer)
-        case .numeric:  keyboardView.configure(with: KeyboardLayoutData.numericLayer)
+        case .default: keyboardView.configure(with: KeyboardLayoutData.defaultLayer)
+        case .numeric: keyboardView.configure(with: KeyboardLayoutData.numericLayer)
         }
-        // Refresh shift indicator after reconfigure
-        keyboardView.updateShiftAppearance(active: shiftActive, locked: shiftLocked)
     }
 
     // MARK: - Text insertion
@@ -95,17 +98,14 @@ final class KeyboardViewController: UIInputViewController {
     }
 
     // MARK: - Predictions
-    // Feed real results from the transliteration model here.
-    // For now, surfaces context from the document proxy as a placeholder.
 
     private func updatePredictions() {
+        guard KeyboardSettings.predictionEnabled else { return }
         let context = textDocumentProxy.documentContextBeforeInput ?? ""
         let word    = context.components(separatedBy: .whitespaces).last ?? ""
-
         if word.isEmpty {
             predictiveBar.update(suggestions: [])
         } else {
-            // Placeholder — replace with model inference
             predictiveBar.update(suggestions: [word, word + "ا", word + "ه"])
         }
     }
@@ -120,10 +120,6 @@ extension KeyboardViewController: KeyboardViewDelegate {
 
         case .character:
             insert(key.primary)
-            if shiftActive && !shiftLocked {
-                shiftActive  = false
-                currentLayer = .default
-            }
 
         case .space:
             // Double-space → period + space, matching iOS native behaviour
@@ -133,7 +129,7 @@ extension KeyboardViewController: KeyboardViewDelegate {
                last != " " && last != "\n",
                now.timeIntervalSince(lastTime) < Self.doubleSpaceWindow,
                textDocumentProxy.documentContextBeforeInput?.last?.isLetter == true {
-                textDocumentProxy.deleteBackward()   // remove trailing space if any
+                textDocumentProxy.deleteBackward()
                 textDocumentProxy.insertText(". ")
             } else {
                 insert(" ")
@@ -145,55 +141,31 @@ extension KeyboardViewController: KeyboardViewDelegate {
         case .enter:
             insert("\n")
 
-        case .shift:
-            switch (currentLayer, shiftActive, shiftLocked) {
-            case (.default, false, _):
-                // First tap: shift on
-                currentLayer = .shift
-                shiftActive  = true
-                shiftLocked  = false
-            case (.shift, true, false):
-                // Second tap: caps lock
-                shiftLocked = true
-                keyboardView.updateShiftAppearance(active: true, locked: true)
-            case (.shift, true, true):
-                // Third tap: off
-                currentLayer = .default
-                shiftActive  = false
-                shiftLocked  = false
-            default:
-                break
-            }
-
         case .numeric:
             currentLayer = .numeric
-            shiftActive  = false
-            shiftLocked  = false
 
         case .abc:
             currentLayer = .default
-            shiftActive  = false
-            shiftLocked  = false
 
         case .globe:
             advanceToNextInputMode()
         }
     }
 
+    func doubleTapPressed(on key: KeyData) {
+        // Delete the primary char inserted on the first tap, replace with secondary
+        textDocumentProxy.deleteBackward()
+        insert(key.secondary)
+    }
+
     func longPressAlternateSelected(_ character: String) {
         insert(character)
-        if shiftActive && !shiftLocked {
-            shiftActive  = false
-            currentLayer = .default
-        }
     }
 
     func backspaceWordPressed() {
         let context = textDocumentProxy.documentContextBeforeInput ?? ""
         guard !context.isEmpty else { return }
 
-        // Walk backwards: skip trailing whitespace, then consume a full word,
-        // stopping when we hit the next whitespace boundary.
         var deleteCount = 0
         var hitWord = false
         for ch in context.reversed() {
@@ -210,7 +182,7 @@ extension KeyboardViewController: KeyboardViewDelegate {
         updatePredictions()
     }
 
-    // Pair collection hooks (connect to PairCollector when model is live)
+    // Pair collection hooks
     func transliterationAccepted(lsd: String, roman: String) {
         PairCollector.shared.recordAccepted(lsd: lsd, roman: roman)
     }
@@ -224,8 +196,7 @@ extension KeyboardViewController: KeyboardViewDelegate {
 
 extension KeyboardViewController: PredictiveBarDelegate {
     func predictiveBar(_ bar: PredictiveBar, didSelect suggestion: String) {
-        // Delete the partial word and insert the full suggestion
-        let before = textDocumentProxy.documentContextBeforeInput ?? ""
+        let before  = textDocumentProxy.documentContextBeforeInput ?? ""
         let partial = before.components(separatedBy: .whitespaces).last ?? ""
         for _ in partial { textDocumentProxy.deleteBackward() }
         insert(suggestion + " ")
