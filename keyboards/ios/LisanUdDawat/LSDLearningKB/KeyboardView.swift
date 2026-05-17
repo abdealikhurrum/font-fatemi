@@ -19,6 +19,9 @@ final class KeyboardView: UIView {
     private static let topPadding:     CGFloat = 12
     private static let bottomPadding:  CGFloat = 5
     private static let standardKeyH:   CGFloat = 46
+    // Extra transparent space at the top of the keyboard view so callout bubbles
+    // for top-row keys remain within the view's bounds and are never clipped.
+    private static let calloutOverflow: CGFloat = 44
 
     // MARK: - Haptics
 
@@ -92,7 +95,8 @@ final class KeyboardView: UIView {
         let sidePad = KeyboardView.sidePadding
         let availW  = bounds.width - sidePad * 2
         let keyH    = KeyboardView.standardKeyH
-        var y       = KeyboardView.topPadding
+        // Keys start below the callout overflow zone
+        var y       = KeyboardView.calloutOverflow + KeyboardView.topPadding
 
         for row in rows {
             layoutRow(row, y: y, availableWidth: availW, sidePad: sidePad, keyH: keyH)
@@ -102,7 +106,8 @@ final class KeyboardView: UIView {
 
     override var intrinsicContentSize: CGSize {
         let n = CGFloat(currentRows.count)
-        let h = KeyboardView.topPadding
+        let h = KeyboardView.calloutOverflow
+            + KeyboardView.topPadding
             + n * KeyboardView.standardKeyH
             + max(0, n - 1) * KeyboardView.rowSpacing
             + KeyboardView.bottomPadding
@@ -213,18 +218,15 @@ final class KeyboardView: UIView {
 
     private func showCallout(for key: KeyButton) {
         dismissCallout()
-        // Use superview (UIInputViewController.view) not window — the keyboard extension
-        // window is sized to the keyboard frame and clips upward overflow, but the
-        // input view controller's view is allowed to paint above its own bounds.
-        let container = superview ?? self
-        let keyFrameInContainer = key.convert(key.bounds, to: container)
-
+        // calloutOverflow reserves space above the keys inside this view, so the
+        // callout frame stays within self's bounds — no escape to window needed.
+        let keyFrameInSelf = key.convert(key.bounds, to: self)
         let cv = KeyCalloutView(
             character: key.keyData.primary,
-            keyFrame:  keyFrameInContainer,
-            in:        container
+            keyFrame:  keyFrameInSelf,
+            in:        self
         )
-        container.addSubview(cv)
+        addSubview(cv)
         calloutView = cv
     }
 

@@ -13,7 +13,7 @@ final class KeyCalloutView: UIView {
     init(character: String, keyFrame: CGRect, in container: UIView) {
         let font   = UIFont(name: "FatemiMaqala", size: 28) ?? UIFont.systemFont(ofSize: 28)
         let charW  = max(44, character.size(withAttributes: [.font: font]).width + 20)
-        let bubbleH: CGFloat = keyFrame.height * 1.45
+        let bubbleH: CGFloat = keyFrame.height  // 1:1 fits within the calloutOverflow zone
         let pointerH = KeyCalloutView.pointerH
 
         // Centre over the key, clamp to container edges

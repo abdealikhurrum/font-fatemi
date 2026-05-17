@@ -110,12 +110,12 @@ enum KeyboardLayoutData {
         [
             KeyData("🌐", type: .globe,   width: .fixed(44)),
             KeyData("١٢٣", type: .numeric, width: .fixed(80)),
-            KeyData(" ",
-                    alternates: ["َ", "ِ", "ُ", "ْ", "ٰ", "ً", "ٍ", "ٌ"],
-                    type: .space, width: .flexible),
             KeyData(".",
                     alternates: [".", "!", "؟", "،", "؛", "٬", "ء"],
                     width: .fixed(44)),
+            KeyData(" ",
+                    alternates: ["َ", "ِ", "ُ", "ْ", "ٰ", "ً", "ٍ", "ٌ"],
+                    type: .space, width: .flexible),
             KeyData("↵",  type: .enter,   width: .fixed(80)),
         ],
     ])
