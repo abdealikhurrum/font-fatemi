@@ -3,6 +3,7 @@ import UIKit
 protocol KeyboardViewDelegate: AnyObject {
     func keyPressed(_ key: KeyData)
     func longPressAlternateSelected(_ character: String)
+    func backspaceWordPressed()
 }
 
 final class KeyboardView: UIView {
@@ -11,12 +12,12 @@ final class KeyboardView: UIView {
 
     // MARK: - Layout constants
 
-    private static let rowSpacing:     CGFloat = 8
+    private static let rowSpacing:     CGFloat = 12
     private static let keySpacing:     CGFloat = 6
     private static let sidePadding:    CGFloat = 3
-    private static let topPadding:     CGFloat = 8
-    private static let bottomPadding:  CGFloat = 3
-    private static let standardKeyH:   CGFloat = 42
+    private static let topPadding:     CGFloat = 12
+    private static let bottomPadding:  CGFloat = 5
+    private static let standardKeyH:   CGFloat = 46
 
     // MARK: - Haptics
 
@@ -29,6 +30,7 @@ final class KeyboardView: UIView {
     private var longPressTimer: Timer?
     private var backspaceRepeatTimer: Timer?
     private var backspaceInitialTimer: Timer?
+    private var backspaceDeleteCount = 0
 
     // MARK: - Callout
 
@@ -238,14 +240,28 @@ final class KeyboardView: UIView {
     }
 
     // MARK: - Backspace repeat
+    // Phase 1 (char-by-char at 0.075s): fires for first 10 deletes
+    // Phase 2 (word-by-word at 0.35s): kicks in after phase 1
 
     private func startBackspaceRepeat() {
-        var interval: TimeInterval = 0.1
-        backspaceRepeatTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
+        backspaceDeleteCount = 0
+        backspaceRepeatTimer = Timer.scheduledTimer(withTimeInterval: 0.075, repeats: true) { [weak self] _ in
             guard let self, let key = self.activeKey else { return }
-            self.delegate?.keyPressed(key.keyData)
-            // Accelerate: halve the interval each 4 fires, min 0.033s (30/s)
-            interval = max(0.033, interval * 0.85)
+            self.backspaceDeleteCount += 1
+            if self.backspaceDeleteCount > 10 {
+                self.backspaceRepeatTimer?.invalidate()
+                self.backspaceRepeatTimer = nil
+                self.startWordRepeat()
+            } else {
+                self.delegate?.keyPressed(key.keyData)
+            }
+        }
+    }
+
+    private func startWordRepeat() {
+        backspaceRepeatTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: true) { [weak self] _ in
+            guard let self, self.activeKey != nil else { return }
+            self.delegate?.backspaceWordPressed()
         }
     }
 

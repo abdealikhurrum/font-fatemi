@@ -188,6 +188,28 @@ extension KeyboardViewController: KeyboardViewDelegate {
         }
     }
 
+    func backspaceWordPressed() {
+        let context = textDocumentProxy.documentContextBeforeInput ?? ""
+        guard !context.isEmpty else { return }
+
+        // Walk backwards: skip trailing whitespace, then consume a full word,
+        // stopping when we hit the next whitespace boundary.
+        var deleteCount = 0
+        var hitWord = false
+        for ch in context.reversed() {
+            if !hitWord {
+                deleteCount += 1
+                if !ch.isWhitespace { hitWord = true }
+            } else {
+                if ch.isWhitespace { break }
+                deleteCount += 1
+            }
+        }
+        for _ in 0..<deleteCount { textDocumentProxy.deleteBackward() }
+        lastInsertedCharacter = nil
+        updatePredictions()
+    }
+
     // Pair collection hooks (connect to PairCollector when model is live)
     func transliterationAccepted(lsd: String, roman: String) {
         PairCollector.shared.recordAccepted(lsd: lsd, roman: roman)
