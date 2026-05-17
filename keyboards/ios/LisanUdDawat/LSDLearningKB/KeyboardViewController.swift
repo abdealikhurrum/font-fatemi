@@ -1,4 +1,5 @@
 import UIKit
+import CoreText
 
 final class KeyboardViewController: UIInputViewController {
 
@@ -26,8 +27,21 @@ final class KeyboardViewController: UIInputViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerBundledFonts()
         buildUI()
         applyLayer()
+    }
+
+    // Register every .ttf/.otf in the extension bundle directly with the process,
+    // bypassing com.apple.fontservicesd which is sandboxed in keyboard extensions
+    // and produces log noise on every launch.
+    private func registerBundledFonts() {
+        for ext in ["ttf", "otf", "TTF", "OTF"] {
+            let urls = Bundle.main.urls(forResourcesWithExtension: ext, subdirectory: nil) ?? []
+            for url in urls {
+                CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -154,6 +168,12 @@ extension KeyboardViewController: KeyboardViewDelegate {
 
         case .abc:
             currentLayer = .default
+
+        case .cursorLeft:
+            textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
+
+        case .cursorRight:
+            textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
 
         case .globe:
             advanceToNextInputMode()

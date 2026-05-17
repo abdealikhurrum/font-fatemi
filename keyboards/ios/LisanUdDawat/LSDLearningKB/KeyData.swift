@@ -11,7 +11,9 @@ enum KeyType {
     case abc        // switch back to letters
     case globe      // switch system input mode
     case emoji      // advance to emoji keyboard
-    case diacritic  // switch to diacritics / eraab layer
+    case diacritic    // switch to diacritics / eraab layer
+    case cursorLeft   // move cursor one position left
+    case cursorRight  // move cursor one position right
 }
 
 // MARK: - Key Width
@@ -214,11 +216,13 @@ enum KeyboardLayoutData {
             KeyData("ۨ"),
             KeyData("⌫", type: .backspace, width: .wide),
         ],
-        // Row 4
+        // Row 4 — cursor keys for precise diacritic placement
         [
-            KeyData("ا ب ج", type: .abc,   width: .fixed(80)),
-            KeyData(" ",     type: .space,  width: .flexible),
-            KeyData("↵",     type: .enter,  width: .fixed(80)),
+            KeyData("ا ب ج", type: .abc,         width: .fixed(72)),
+            KeyData("←",     type: .cursorLeft,  width: .fixed(44)),
+            KeyData(" ",     type: .space,       width: .flexible),
+            KeyData("→",     type: .cursorRight, width: .fixed(44)),
+            KeyData("↵",     type: .enter,       width: .fixed(52)),
         ],
     ])
 }
