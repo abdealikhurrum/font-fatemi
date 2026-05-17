@@ -22,7 +22,7 @@ final class KeyButton: UIView {
         switch keyData.type {
         case .character, .space:                    return KeyboardColors.characterKey
         case .backspace, .numeric, .abc,
-             .globe, .emoji, .enter:                return KeyboardColors.specialKey
+             .globe, .emoji, .diacritic, .enter:    return KeyboardColors.specialKey
         }
     }
     private var pressedBackground: UIColor { KeyboardColors.pressedKey }

@@ -4,7 +4,7 @@ final class KeyboardViewController: UIInputViewController {
 
     // MARK: - Layer state
 
-    private enum Layer { case `default`, numeric }
+    private enum Layer { case `default`, numeric, diacritic }
 
     private var currentLayer: Layer = .default {
         didSet { applyLayer() }
@@ -77,8 +77,9 @@ final class KeyboardViewController: UIInputViewController {
 
     private func applyLayer() {
         switch currentLayer {
-        case .default: keyboardView.configure(with: KeyboardLayoutData.defaultLayer)
-        case .numeric: keyboardView.configure(with: KeyboardLayoutData.numericLayer)
+        case .default:   keyboardView.configure(with: KeyboardLayoutData.defaultLayer)
+        case .numeric:   keyboardView.configure(with: KeyboardLayoutData.numericLayer)
+        case .diacritic: keyboardView.configure(with: KeyboardLayoutData.diacriticLayer)
         }
     }
 
@@ -148,6 +149,9 @@ extension KeyboardViewController: KeyboardViewDelegate {
         case .numeric:
             currentLayer = .numeric
 
+        case .diacritic:
+            currentLayer = .diacritic
+
         case .abc:
             currentLayer = .default
 
@@ -155,8 +159,6 @@ extension KeyboardViewController: KeyboardViewDelegate {
             advanceToNextInputMode()
 
         case .emoji:
-            // advanceToNextInputMode() cycles through all enabled keyboards including emoji.
-            // This is the only public API available to keyboard extensions for this purpose.
             advanceToNextInputMode()
         }
     }

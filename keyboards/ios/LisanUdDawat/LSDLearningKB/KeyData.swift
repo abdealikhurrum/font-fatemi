@@ -11,6 +11,7 @@ enum KeyType {
     case abc        // switch back to letters
     case globe      // switch system input mode
     case emoji      // advance to emoji keyboard
+    case diacritic  // switch to diacritics / eraab layer
 }
 
 // MARK: - Key Width
@@ -65,8 +66,6 @@ struct KeyboardLayer {
 //
 // Long-press alternates are ordered by frequency so the first item is
 // quickest to reach (slide right / nearest target in the popup).
-// Eraab key primary is a standalone combining fatha (َ); KeyButton
-// renders combining marks on a tatweel base so they are visible.
 
 enum KeyboardLayoutData {
 
@@ -102,84 +101,124 @@ enum KeyboardLayoutData {
             KeyData("ط", secondary: "ں"),                                       // طط → ں  (PC: ' key)
         ],
         // Row 3 — 10 alpha + backspace  (matches PC Arabic row 3: Z–/)
-        // ذ moved to ز alternates; ئ ء ى promoted to own keys
         [
-            KeyData("ئ"),                                                        // Z key
-            KeyData("ء"),                                                        // X key
-            KeyData("ؤ", alternates: ["ۚ", "ۨ"]),                              // C key
-            KeyData("ر", secondary: "ڑ",  alternates: ["ڑ"]),                   // V key; رر → ڑ
-            KeyData("ى"),                                                        // N key
-            KeyData("ة", secondary: "ۃ"),                                       // M key; ةة → ۃ
-            KeyData("و"),                                                        // , key
-            KeyData("ز", alternates: ["ژ", "ذ"]),                               // . key; ذ here
+            KeyData("ئ"),
+            KeyData("ء"),
+            KeyData("ؤ", alternates: ["ۚ", "ۨ"]),
+            KeyData("ر", secondary: "ڑ",  alternates: ["ڑ"]),                   // رر → ڑ
+            KeyData("ى"),
+            KeyData("ة", secondary: "ۃ"),                                       // ةة → ۃ
+            KeyData("و"),
+            KeyData("ز", alternates: ["ژ", "ذ"]),
             KeyData("د", secondary: "ڈ",  alternates: ["ڈ"]),                   // دد → ڈ
-            KeyData("ظ", secondary: "ہ"),                                       // / key; ظظ → ہ
+            KeyData("ظ", secondary: "ہ"),                                       // ظظ → ہ
             KeyData("⌫", type: .backspace, width: .wide),
         ],
-        // Row 4 — 6 keys; globe removed (iOS provides it automatically)
-        // Eraab key: tap → fatha; long-press → full harakat picker
-        // Emoji key: opens system emoji keyboard
+        // Row 4 — 4 keys; punctuation lives in the ١٢٣ layer
         [
-            KeyData("١٢٣", type: .numeric, width: .fixed(44)),
-            KeyData("🙂",  type: .emoji,   width: .fixed(44)),
-            KeyData(" ",   type: .space,   width: .flexible),
-            KeyData("َ",                                                          // eraab — fatha
-                    alternates: ["ِ", "ُ", "ْ", "ٰ", "ً", "ٍ", "ٌ"],
-                    width: .fixed(44)),
-            KeyData(".",
-                    alternates: [".", "!", "؟", "،", "؛", "٬"],
-                    width: .fixed(36)),
-            KeyData("↵",  type: .enter,   width: .fixed(52)),
+            KeyData("١٢٣", type: .numeric,  width: .fixed(44)),
+            KeyData(" ",   type: .space,    width: .flexible),
+            KeyData("َ",   type: .diacritic, width: .fixed(44)),   // opens diacritic layer
+            KeyData("↵",   type: .enter,    width: .fixed(52)),
         ],
     ])
 
     // ------------------------------------------------------------------ numeric
 
     static let numericLayer = KeyboardLayer(id: "numeric", rows: [
-        // Row 1 — digits
+        // Row 1 — Eastern Arabic digits (primary); Western Arabic as alternates
         [
-            KeyData("1", alternates: ["١", "૧"]),
-            KeyData("2", alternates: ["٢", "૨"]),
-            KeyData("3", alternates: ["٣", "૩"]),
-            KeyData("4", alternates: ["٤", "૪"]),
-            KeyData("5", alternates: ["٥", "૫"]),
-            KeyData("6", alternates: ["٦", "૬"]),
-            KeyData("7", alternates: ["٧", "૭"]),
-            KeyData("8", alternates: ["٨", "૮"]),
-            KeyData("9", alternates: ["٩", "૯"]),
-            KeyData("0", alternates: ["٠", "૰"]),
+            KeyData("١", alternates: ["1", "૧"]),
+            KeyData("٢", alternates: ["2", "૨"]),
+            KeyData("٣", alternates: ["3", "૩"]),
+            KeyData("٤", alternates: ["4", "૪"]),
+            KeyData("٥", alternates: ["5", "૫"]),
+            KeyData("٦", alternates: ["6", "૬"]),
+            KeyData("٧", alternates: ["7", "૭"]),
+            KeyData("٨", alternates: ["8", "૮"]),
+            KeyData("٩", alternates: ["9", "૯"]),
+            KeyData("٠", alternates: ["0", "૰"]),
         ],
-        // Row 2 — symbols
+        // Row 2 — punctuation
         [
-            KeyData("$", alternates: ["₨", "¥", "؋", "؈", "૱"]),
+            KeyData(".",  alternates: ["۔"]),
+            KeyData("،",  alternates: [","]),
+            KeyData("؟",  alternates: ["?"]),
+            KeyData("!"),
+            KeyData("؛",  alternates: [";"]),
+            KeyData(":",  alternates: []),
+            KeyData("\"", alternates: ["«", "»"]),
+            KeyData("'",  alternates: ["`"]),
+            KeyData("(",  alternates: ["[", "{"]),
+            KeyData(")",  alternates: ["]", "}"]),
+        ],
+        // Row 3 — math / symbols
+        [
+            KeyData("$",  alternates: ["₨", "¥", "€", "؋"]),
             KeyData("#"),
-            KeyData("%", alternates: ["٪"]),
+            KeyData("%",  alternates: ["٪"]),
             KeyData("^"),
-            KeyData("<"),
-            KeyData(">"),
-            KeyData("+", alternates: ["×"]),
+            KeyData("+",  alternates: ["×"]),
             KeyData("="),
-            KeyData("*", alternates: ["٭"]),
-            KeyData("-", alternates: ["÷", "_"]),
-        ],
-        // Row 3 — literary / poetry marks
-        [
+            KeyData("*",  alternates: ["٭"]),
+            KeyData("-",  alternates: ["÷", "_"]),
             KeyData("@"),
-            KeyData("("),
-            KeyData(")"),
-            KeyData("؏"),
-            KeyData("ؔ"),
-            KeyData("؃"),
+            KeyData("⌫",  type: .backspace, width: .wide),
+        ],
+        // Row 4
+        [
+            KeyData("ا ب ج", type: .abc,   width: .fixed(80)),
+            KeyData(" ",     type: .space,  width: .flexible),
+            KeyData("↵",     type: .enter,  width: .fixed(80)),
+        ],
+    ])
+
+    // ------------------------------------------------------------------ diacritic
+
+    static let diacriticLayer = KeyboardLayer(id: "diacritic", rows: [
+        // Row 1 — core harakat (all are combining marks; KeyButton prepends tatweel)
+        [
+            KeyData("َ"),   // fatha
+            KeyData("ِ"),   // kasra
+            KeyData("ُ"),   // damma
+            KeyData("ْ"),   // sukun
+            KeyData("ّ"),   // shadda
+            KeyData("ً"),   // tanwin fath
+            KeyData("ٍ"),   // tanwin kasr
+            KeyData("ٌ"),   // tanwin damm
+            KeyData("ٰ"),   // superscript alef (kharo zabar)
+        ],
+        // Row 2 — honorifics
+        [
+            KeyData("ﷺ"),
+            KeyData("ﷻ"),
+            KeyData("ؓ"),
+            KeyData("ؒ"),
+            KeyData("ؑ"),
+            KeyData("ؐ"),
+            KeyData("ؔ"),   // takhallus
+            KeyData("ؕ"),
+            KeyData("؈"),
+            KeyData("؃"),   // safha
+        ],
+        // Row 3 — extended marks + literary
+        [
+            KeyData("ٓ"),               // maddah
+            KeyData("ٔ"),               // hamza above
+            KeyData("ٕ"),               // hamza below
+            KeyData("؏"),               // misra
             KeyData("؂", alternates: ["؎"]),
             KeyData("؁", alternates: ["؄"]),
             KeyData("؀", alternates: ["۝", "۩"]),
+            KeyData("ۚ"),
+            KeyData("ۨ"),
             KeyData("⌫", type: .backspace, width: .wide),
         ],
         // Row 4
         [
-            KeyData("ا ب ج", type: .abc, width: .fixed(80)),
-            KeyData(" ", type: .space, width: .flexible),
-            KeyData("↵", type: .enter, width: .fixed(80)),
+            KeyData("ا ب ج", type: .abc,   width: .fixed(80)),
+            KeyData(" ",     type: .space,  width: .flexible),
+            KeyData("↵",     type: .enter,  width: .fixed(80)),
         ],
     ])
 }
