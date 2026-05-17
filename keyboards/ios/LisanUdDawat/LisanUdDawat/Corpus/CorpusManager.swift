@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 // Manages explicit-consent corpus contribution.
 // Unlike the federated weight pipeline (which never transmits text),
@@ -18,7 +19,7 @@ final class CorpusManager: ObservableObject {
         case declined    // user opted out — never ask again
     }
 
-    private static let appGroupID = "group.com.yourorg.LisanUdDawat"
+    private static let appGroupID = "group.com.exordiumnetworks.lsdkeyboard"
     private let defaults = UserDefaults(suiteName: CorpusManager.appGroupID)!
     private let kConsent    = "corpus_consent"
     private let kLastUpload = "corpus_last_upload"

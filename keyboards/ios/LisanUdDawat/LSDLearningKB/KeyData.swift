@@ -103,8 +103,8 @@ enum KeyboardLayoutData {
         [
             KeyData("١٢٣", type: .numeric, width: .fixed(80)),
             KeyData("ى"),
-            KeyData("اعراب", alternates: ["َ", "ِ", "ُ", "ْ", "ٰ", "ً", "ٍ", "ٌ"], width: .fixed(70)),
-            KeyData(" ", type: .space, width: .flexible),
+            KeyData("", alternates: ["َ", "ِ", "ُ", "ْ", "ٰ", "ً", "ٍ", "ٌ"], width: .fixed(30)),
+            KeyData(" ", type: .space, width: .fixed(80)),
             KeyData(".", alternates: [".", "!", "؟", "،", "؛", "٬"], width: .fixed(44)),
             KeyData("ء"),
             KeyData("↵", type: .enter, width: .fixed(80)),

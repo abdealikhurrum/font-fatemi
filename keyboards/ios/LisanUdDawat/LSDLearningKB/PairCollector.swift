@@ -12,7 +12,7 @@ final class PairCollector {
     static let shared = PairCollector()
 
     // Must match the App Group entitlement in both targets.
-    static let appGroupID = "group.com.yourorg.LisanUdDawat"
+    static let appGroupID = "group.com.exordiumnetworks.lsdkeyboard"
 
     private var db: OpaquePointer?
 
