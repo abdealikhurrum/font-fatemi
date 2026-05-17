@@ -18,7 +18,8 @@ final class CorpusManager: ObservableObject {
         case declined    // user opted out — never ask again
     }
 
-    private let defaults = UserDefaults(suiteName: PairCollector.appGroupID)!
+    private static let appGroupID = "group.com.yourorg.LisanUdDawat"
+    private let defaults = UserDefaults(suiteName: CorpusManager.appGroupID)!
     private let kConsent    = "corpus_consent"
     private let kLastUpload = "corpus_last_upload"
 
