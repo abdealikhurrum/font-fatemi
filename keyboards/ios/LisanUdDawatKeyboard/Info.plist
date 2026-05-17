@@ -3,7 +3,12 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleDevelopmentRegion</key>
-    <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <string>ar</string>
+
+    <key>CFBundleLocalizations</key>
+    <array>
+        <string>ar</string>
+    </array>
 
     <key>CFBundleDisplayName</key>
     <string>Lisan ud Dawat</string>
@@ -29,11 +34,6 @@
     <key>CFBundleVersion</key>
     <string>1</string>
 
-    <!--
-        NSExtension declares this as a Custom Keyboard extension.
-        RequestsOpenAccess = NO keeps the keyboard sandboxed (recommended for privacy).
-        Set to YES only if you need network access or shared container.
-    -->
     <key>NSExtension</key>
     <dict>
         <key>NSExtensionAttributes</key>
