@@ -84,7 +84,7 @@ enum KeyboardLayoutData {
             KeyData("ه", secondary: "ھ",  alternates: ["ـہـ", "ـہ", "ۂ"]),    // هه → ھ
             KeyData("خ"),
             KeyData("ح", secondary: "چ"),                                       // حح → چ
-            KeyData("ج", alternates: ["چ", "چھے"]),
+            KeyData("ج", secondary: "چھے"),
         ],
         // Row 2 — 11 keys  (matches PC Arabic row 2: A–' ; ط added at end)
         [

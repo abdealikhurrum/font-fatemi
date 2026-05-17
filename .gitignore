@@ -19,8 +19,8 @@ DerivedData/
 *.dSYM
 
 # Xcode build output
-build/
-Build/
+*build/
+*Build/
 
 # CocoaPods (if using)
 Pods/
@@ -40,7 +40,7 @@ fastlane/screenshots
 fastlane/test_output
 
 # macOS
-.DS_Store
+*.DS_Store*
 .AppleDouble
 .LSOverride
 Thumbs.db
