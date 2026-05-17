@@ -23,10 +23,6 @@ final class KeyboardView: UIView {
     // for top-row keys remain within the view's bounds and are never clipped.
     private static let calloutOverflow: CGFloat = 44
 
-    // MARK: - Haptics
-
-    private let impactLight  = UIImpactFeedbackGenerator(style: .light)
-
     // MARK: - Touch tracking
     // All touch logic lives here — gives us cross-key sliding for free.
 
@@ -60,8 +56,6 @@ final class KeyboardView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = KeyboardColors.background
-        // Pre-warm haptic engine so first tap isn't delayed
-        impactLight.prepare()
     }
 
     required init?(coder: NSCoder) { fatalError() }
@@ -118,7 +112,6 @@ final class KeyboardView: UIView {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
-        impactLight.prepare()
 
         if let key = keyButton(at: touch.location(in: self)) {
             activate(key: key, touch: touch)
@@ -189,7 +182,6 @@ final class KeyboardView: UIView {
     private func activate(key: KeyButton, touch: UITouch) {
         activeKey = key
         key.setHighlighted(true)
-        impactLight.impactOccurred()
 
         // Show callout for regular character keys (not special keys)
         if key.keyData.type == .character && !key.keyData.primary.isEmpty {
@@ -296,11 +288,27 @@ final class KeyboardView: UIView {
 
     // MARK: - Hit testing
 
+    // Returns the key whose center is nearest to the touch point (Voronoi approach).
+    // Vertical distance is weighted down so row-boundary touches favour the closer
+    // key face rather than empty space between rows.
     private func keyButton(at point: CGPoint) -> KeyButton? {
-        // Expand tap targets slightly vertically — easier to hit row boundaries
-        keyButtons.first { btn in
-            btn.frame.insetBy(dx: 0, dy: -4).contains(point)
+        guard !keyButtons.isEmpty else { return nil }
+        // Must be within the overall keyboard content area (below callout overflow zone)
+        guard point.y >= KeyboardView.calloutOverflow else { return nil }
+        var best: KeyButton?
+        var bestDist = CGFloat.infinity
+        for btn in keyButtons {
+            let cx = btn.frame.midX
+            let cy = btn.frame.midY
+            let dx = point.x - cx
+            let dy = (point.y - cy) * 0.6   // compress vertical so wide keys win ties
+            let dist = dx * dx + dy * dy
+            if dist < bestDist {
+                bestDist = dist
+                best = btn
+            }
         }
+        return best
     }
 
     // MARK: - Layout helpers
