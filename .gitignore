@@ -1,5 +1,7 @@
 fatemimaqala/lsd.fea
+UserInterfaceState
 # Xcode
+*/*.xcuser*/*
 *.xcuserstate
 *.xcuserdatad/
 xcuserdata/
