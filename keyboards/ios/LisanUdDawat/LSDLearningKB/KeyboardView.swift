@@ -288,20 +288,24 @@ final class KeyboardView: UIView {
 
     // MARK: - Hit testing
 
-    // Returns the key whose center is nearest to the touch point (Voronoi approach).
-    // Vertical distance is weighted down so row-boundary touches favour the closer
-    // key face rather than empty space between rows.
+    // Phase 1: any key whose frame (+ 3 pt inset) contains the point wins immediately.
+    // This ensures wide keys like the space bar always fire when touched within their
+    // visible bounds, regardless of nearby key centers.
+    // Phase 2: for touches in the gaps between keys, fall back to nearest-key-center
+    // with vertical distance compressed — row-boundary misses resolve to the closer row.
     private func keyButton(at point: CGPoint) -> KeyButton? {
         guard !keyButtons.isEmpty else { return nil }
-        // Must be within the overall keyboard content area (below callout overflow zone)
         guard point.y >= KeyboardView.calloutOverflow else { return nil }
+
+        if let direct = keyButtons.first(where: { $0.frame.insetBy(dx: -3, dy: -3).contains(point) }) {
+            return direct
+        }
+
         var best: KeyButton?
         var bestDist = CGFloat.infinity
         for btn in keyButtons {
-            let cx = btn.frame.midX
-            let cy = btn.frame.midY
-            let dx = point.x - cx
-            let dy = (point.y - cy) * 0.6   // compress vertical so wide keys win ties
+            let dx = point.x - btn.frame.midX
+            let dy = (point.y - btn.frame.midY) * 0.6
             let dist = dx * dx + dy * dy
             if dist < bestDist {
                 bestDist = dist
