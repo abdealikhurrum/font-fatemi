@@ -26,8 +26,8 @@ enum KeyWidth {
 
 struct KeyData {
     let primary: String
-    let secondary: String       // shown small on key; double-tap inserts this instead
-    let alternates: [String]    // shown in long-press popup
+    let secondary: String       // small char shown on key; double-tap inserts this
+    let alternates: [String]    // long-press popup
     let type: KeyType
     let width: KeyWidth
 
@@ -38,11 +38,11 @@ struct KeyData {
         type: KeyType = .character,
         width: KeyWidth = .standard
     ) {
-        self.primary   = primary
-        self.secondary = secondary
+        self.primary    = primary
+        self.secondary  = secondary
         self.alternates = alternates
-        self.type  = type
-        self.width = width
+        self.type       = type
+        self.width      = width
     }
 }
 
@@ -54,9 +54,11 @@ struct KeyboardLayer {
 }
 
 // MARK: - Layout Definition
-// Based on keyboards/keyman/lsd-layout.js (phone layer).
-// The shift layer has been removed. Secondary characters (top-left of each key)
-// are accessed by double-tapping — no explicit shift key needed.
+// Based on keyboards/keyman/lsd.kmn
+//
+// Secondary characters follow the official LSD double-press convention from lsd.kmn lines 57-64:
+//   سس→ے  ضض→ٹ  طط→ں  ظظ→ہ  حح→چ  ثث→پ  كك→گ
+// All other keys have no secondary (double-tap just types the primary twice).
 
 enum KeyboardLayoutData {
 
@@ -65,52 +67,56 @@ enum KeyboardLayoutData {
     static let defaultLayer = KeyboardLayer(id: "default", rows: [
         // Row 1 — 11 keys
         [
-            KeyData("ض", secondary: "َ"),                                           // fatha
-            KeyData("ص", secondary: "ُ"),                                           // damma
-            KeyData("ث", secondary: "ٗ"),                                           // inverted damma
-            KeyData("ق", secondary: "ؕ"),
-            KeyData("ف", secondary: "ؐ"),
-            KeyData("غ", secondary: "ؑ"),
-            KeyData("ع", secondary: "ﷺ"),                                          // SAW honorific
-            KeyData("ه", secondary: "ھ",  alternates: ["ـہـ", "ـہ", "ھ", "ة", "ۂ"]),
-            KeyData("خ", secondary: "ژ"),
-            KeyData("ح", secondary: "چھے"),
-            KeyData("ج", secondary: "چ",  alternates: ["چ", "چھے"]),
+            KeyData("ض", secondary: "ٹ"),                                       // ضض → ٹ
+            KeyData("ص"),
+            KeyData("ث", secondary: "پ"),                                       // ثث → پ
+            KeyData("ق"),
+            KeyData("ف"),
+            KeyData("غ"),
+            KeyData("ع"),
+            KeyData("ه", alternates: ["ـہـ", "ـہ", "ھ", "ة", "ۂ"]),
+            KeyData("خ"),
+            KeyData("ح", secondary: "چ"),                                       // حح → چ
+            KeyData("ج", alternates: ["چ", "چھے"]),
         ],
         // Row 2 — 10 keys
         [
-            KeyData("ش", secondary: "ِ"),                                           // kasra
-            KeyData("س", secondary: "ٰ"),                                           // superscript alef
-            KeyData("ي", secondary: "ے",  alternates: ["ئ", "ى", "ے"]),
-            KeyData("ب", secondary: "پ"),
-            KeyData("ل", secondary: "ﷻ",  alternates: ["لا", "لأ", "لإ", "لآ", "لاٰ"]),
-            KeyData("ا", secondary: "ؓ",  alternates: ["أ", "إ", "آ", "اٰ"]),
-            KeyData("ت", secondary: "ـ"),                                           // tatweel
-            KeyData("ن", secondary: "،"),                                           // Arabic comma
-            KeyData("م", secondary: "ں"),
-            KeyData("ك", secondary: "گ",  alternates: ["گ"]),
+            KeyData("ش"),
+            KeyData("س", secondary: "ے"),                                       // سس → ے
+            KeyData("ي", alternates: ["ئ", "ى", "ے"]),
+            KeyData("ب"),
+            KeyData("ل", alternates: ["لا", "لأ", "لإ", "لآ", "لاٰ"]),
+            KeyData("ا", alternates: ["أ", "إ", "آ", "اٰ"]),
+            KeyData("ت"),
+            KeyData("ن"),
+            KeyData("م"),
+            KeyData("ك", secondary: "گ",  alternates: ["گ"]),                   // كك → گ
         ],
         // Row 3 — 8 chars + backspace (no shift key)
         [
-            KeyData("ذ", secondary: "ْ"),                                           // sukun
-            KeyData("ظ", secondary: "ٖ"),                                           // subscript alef
-            KeyData("ؤ", secondary: "ۚ",  alternates: ["ۚ", "ۨ"]),
-            KeyData("ر", secondary: "ڑ",  alternates: ["ڑ"]),
-            KeyData("ز", secondary: "ؒ",  alternates: ["ظ", "ژ"]),
-            KeyData("و", secondary: "ٹ",  alternates: ["ة", "ۃ"]),
-            KeyData("ط", secondary: "ڈ"),
-            KeyData("د",                  alternates: ["ڈ", "ذ"]),
+            KeyData("ذ"),
+            KeyData("ظ", secondary: "ہ"),                                       // ظظ → ہ
+            KeyData("ؤ", alternates: ["ۚ", "ۨ"]),
+            KeyData("ر", alternates: ["ڑ"]),
+            KeyData("ز", alternates: ["ظ", "ژ"]),
+            KeyData("و", alternates: ["ة", "ۃ"]),
+            KeyData("ط", secondary: "ں"),                                       // طط → ں
+            KeyData("د", alternates: ["ڈ", "ذ"]),
             KeyData("⌫", type: .backspace, width: .wide),
         ],
         // Row 4 — utility row
+        // Space long-press → diacritics (harakat)
+        // Period long-press → punctuation + ء
         [
+            KeyData("🌐", type: .globe,   width: .fixed(44)),
             KeyData("١٢٣", type: .numeric, width: .fixed(80)),
-            KeyData("ى",   secondary: "۞"),
-            KeyData("", alternates: ["َ", "ِ", "ُ", "ْ", "ٰ", "ً", "ٍ", "ٌ"], width: .fixed(30)),
-            KeyData(" ",   type: .space, width: .fixed(80)),
-            KeyData(".",   alternates: [".", "!", "؟", "،", "؛", "٬"], width: .fixed(44)),
-            KeyData("ء"),
-            KeyData("↵",   type: .enter, width: .fixed(80)),
+            KeyData(" ",
+                    alternates: ["َ", "ِ", "ُ", "ْ", "ٰ", "ً", "ٍ", "ٌ"],
+                    type: .space, width: .flexible),
+            KeyData(".",
+                    alternates: [".", "!", "؟", "،", "؛", "٬", "ء"],
+                    width: .fixed(44)),
+            KeyData("↵",  type: .enter,   width: .fixed(80)),
         ],
     ])
 
