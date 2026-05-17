@@ -17,12 +17,18 @@ final class KeyButton: UIView {
         didSet { applyHighlight() }
     }
 
+    // Cached once per process — UIFont(name:size:) triggers a font-service lookup every call.
+    private static let fatemiFont24 = UIFont(name: "FatemiMaqala", size: 24) ?? UIFont.systemFont(ofSize: 24)
+    private static let fatemiFont10 = UIFont(name: "FatemiMaqala", size: 10) ?? UIFont.systemFont(ofSize: 10)
+
     // Background colours — all adaptive (light/dark)
     var normalBackground: UIColor {
         switch keyData.type {
-        case .character, .space:                    return KeyboardColors.characterKey
-        case .backspace, .numeric, .abc,
-             .globe, .emoji, .diacritic, .enter:    return KeyboardColors.specialKey
+        case .character, .space:
+            return KeyboardColors.characterKey
+        case .backspace, .numeric, .abc, .globe, .emoji,
+             .diacritic, .cursorLeft, .cursorRight, .enter:
+            return KeyboardColors.specialKey
         }
     }
     private var pressedBackground: UIColor { KeyboardColors.pressedKey }
@@ -58,7 +64,7 @@ final class KeyButton: UIView {
 
         if !keyData.secondary.isEmpty && keyData.type == .character {
             secondaryLabel.text      = keyData.secondary
-            secondaryLabel.font      = UIFont(name: "FatemiMaqala", size: 10) ?? UIFont.systemFont(ofSize: 10)
+            secondaryLabel.font      = KeyButton.fatemiFont10
             secondaryLabel.textColor = .tertiaryLabel
             secondaryLabel.textAlignment = .center
             secondaryLabel.adjustsFontSizeToFitWidth = true
@@ -89,8 +95,8 @@ final class KeyButton: UIView {
     private func labelFont() -> UIFont {
         switch keyData.type {
         case .character:
-            return UIFont(name: "FatemiMaqala", size: 24) ?? UIFont.systemFont(ofSize: 24)
-        case .backspace, .enter:
+            return KeyButton.fatemiFont24
+        case .backspace, .enter, .cursorLeft, .cursorRight:
             return UIFont.systemFont(ofSize: 16)
         default:
             return UIFont.systemFont(ofSize: 14, weight: .medium)
