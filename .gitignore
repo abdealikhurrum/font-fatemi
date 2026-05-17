@@ -1,1 +1,52 @@
 fatemimaqala/lsd.fea
+# Xcode
+*.xcuserstate
+*.xcuserdatad/
+xcuserdata/
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Xcode build output
+build/
+Build/
+
+# CocoaPods (if using)
+Pods/
+# Uncomment if you commit the Podfile.lock:
+# !Podfile.lock
+
+# Swift Package Manager
+.build/
+*.resolved
+# Keep this if you want reproducible builds:
+# !Package.resolved
+
+# Fastlane (if using)
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# Credentials / secrets (important!)
+*.p12
+*.mobileprovision
+*.certSigningRequest
+AuthKey_*.p8
