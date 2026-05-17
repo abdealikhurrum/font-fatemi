@@ -10,6 +10,7 @@ enum KeyType {
     case numeric    // switch to 123 layer
     case abc        // switch back to letters
     case globe      // switch system input mode
+    case emoji      // advance to emoji keyboard
 }
 
 // MARK: - Key Width
@@ -72,7 +73,7 @@ enum KeyboardLayoutData {
     // ------------------------------------------------------------------ default
 
     static let defaultLayer = KeyboardLayer(id: "default", rows: [
-        // Row 1 — 11 keys
+        // Row 1 — 11 keys  (matches PC Arabic row 1: Q–[)
         [
             KeyData("ض", secondary: "ٹ"),                                       // ضض → ٹ
             KeyData("ص"),
@@ -86,49 +87,49 @@ enum KeyboardLayoutData {
             KeyData("ح", secondary: "چ"),                                       // حح → چ
             KeyData("ج", alternates: ["چ", "چھے"]),
         ],
-        // Row 2 — 10 keys
+        // Row 2 — 11 keys  (matches PC Arabic row 2: A–' ; ط added at end)
         [
             KeyData("ش"),
             KeyData("س", secondary: "ے"),                                       // سس → ے
-            KeyData("ي", secondary: "ئ",  alternates: ["ئ", "ى", "ے"]),        // يي → ئ
+            KeyData("ي", secondary: "ئ",  alternates: ["ے"]),                   // يي → ئ
             KeyData("ب"),
             KeyData("ل", alternates: ["لا", "لأ", "لإ", "لآ", "لاٰ"]),
-            KeyData("ا", secondary: "اٰ", alternates: ["أ", "آ", "إ"]),        // اا → اٰ; أ first in popup
+            KeyData("ا", secondary: "اٰ", alternates: ["أ", "آ", "إ"]),        // اا → اٰ
             KeyData("ت"),
             KeyData("ن"),
             KeyData("م"),
             KeyData("ك", secondary: "گ",  alternates: ["گ"]),                   // كك → گ
+            KeyData("ط", secondary: "ں"),                                       // طط → ں  (PC: ' key)
         ],
-        // Row 3 — 9 chars + backspace
+        // Row 3 — 10 alpha + backspace  (matches PC Arabic row 3: Z–/)
+        // ذ moved to ز alternates; ئ ء ى promoted to own keys
         [
-            KeyData("ذ"),
-            KeyData("ظ", secondary: "ہ"),                                       // ظظ → ہ
-            KeyData("ؤ", alternates: ["ۚ", "ۨ"]),
-            KeyData("ر", secondary: "ڑ",  alternates: ["ڑ"]),                   // رر → ڑ
-            KeyData("ز", alternates: ["ژ"]),
-            KeyData("و"),
-            KeyData("ط", secondary: "ں"),                                       // طط → ں
+            KeyData("ئ"),                                                        // Z key
+            KeyData("ء"),                                                        // X key
+            KeyData("ؤ", alternates: ["ۚ", "ۨ"]),                              // C key
+            KeyData("ر", secondary: "ڑ",  alternates: ["ڑ"]),                   // V key; رر → ڑ
+            KeyData("ى"),                                                        // N key
+            KeyData("ة", secondary: "ۃ"),                                       // M key; ةة → ۃ
+            KeyData("و"),                                                        // , key
+            KeyData("ز", alternates: ["ژ", "ذ"]),                               // . key; ذ here
             KeyData("د", secondary: "ڈ",  alternates: ["ڈ"]),                   // دد → ڈ
-            KeyData("ة", secondary: "ۃ"),                                       // ةة → ۃ
+            KeyData("ظ", secondary: "ہ"),                                       // / key; ظظ → ہ
             KeyData("⌫", type: .backspace, width: .wide),
         ],
-        // Row 4 — utility row (7 keys, space in centre)
-        // Eraab key: tap → fatha (َ); long-press → full harakat picker
-        // Emoji key: tap → 🤲; long-press → common emoji
+        // Row 4 — 6 keys; globe removed (iOS provides it automatically)
+        // Eraab key: tap → fatha; long-press → full harakat picker
+        // Emoji key: opens system emoji keyboard
         [
-            KeyData("🌐",  type: .globe,   width: .fixed(36)),
-            KeyData("١٢٣", type: .numeric, width: .fixed(60)),
-            KeyData("🤲",
-                    alternates: ["😊", "❤️", "🙏", "☝️", "🌹", "🕌", "⭐"],
-                    width: .fixed(36)),
+            KeyData("١٢٣", type: .numeric, width: .fixed(44)),
+            KeyData("🙂",  type: .emoji,   width: .fixed(44)),
             KeyData(" ",   type: .space,   width: .flexible),
-            KeyData("َ",                                                         // fatha — eraab key
+            KeyData("َ",                                                          // eraab — fatha
                     alternates: ["ِ", "ُ", "ْ", "ٰ", "ً", "ٍ", "ٌ"],
-                    width: .fixed(40)),
+                    width: .fixed(44)),
             KeyData(".",
-                    alternates: [".", "!", "؟", "،", "؛", "٬", "ء"],
+                    alternates: [".", "!", "؟", "،", "؛", "٬"],
                     width: .fixed(36)),
-            KeyData("↵",  type: .enter,   width: .fixed(60)),
+            KeyData("↵",  type: .enter,   width: .fixed(52)),
         ],
     ])
 

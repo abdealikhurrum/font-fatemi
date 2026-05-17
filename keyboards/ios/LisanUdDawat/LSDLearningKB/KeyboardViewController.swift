@@ -153,6 +153,11 @@ extension KeyboardViewController: KeyboardViewDelegate {
 
         case .globe:
             advanceToNextInputMode()
+
+        case .emoji:
+            // advanceToNextInputMode() cycles through all enabled keyboards including emoji.
+            // This is the only public API available to keyboard extensions for this purpose.
+            advanceToNextInputMode()
         }
     }
 
