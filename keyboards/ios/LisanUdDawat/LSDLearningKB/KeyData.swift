@@ -56,9 +56,14 @@ struct KeyboardLayer {
 // MARK: - Layout Definition
 // Based on keyboards/keyman/lsd.kmn
 //
-// Secondary characters follow the official LSD double-press convention from lsd.kmn lines 57-64:
-//   سس→ے  ضض→ٹ  طط→ں  ظظ→ہ  حح→چ  ثث→پ  كك→گ
-// All other keys have no secondary (double-tap just types the primary twice).
+// Secondaries — two tiers:
+//   Official LSD double-press rules (lsd.kmn lines 57-64):
+//     سس→ے  ضض→ٹ  طط→ں  ظظ→ہ  حح→چ  ثث→پ  كك→گ
+//   Extended quick-access secondaries:
+//     اا→أ  هه→ھ  يي→ئ  رر→ڑ  دد→ڈ  ةة→ۃ
+//
+// Long-press alternates are ordered by frequency so the first item is
+// quickest to reach (slide right / nearest target in the popup).
 
 enum KeyboardLayoutData {
 
@@ -74,7 +79,7 @@ enum KeyboardLayoutData {
             KeyData("ف"),
             KeyData("غ"),
             KeyData("ع"),
-            KeyData("ه", alternates: ["ـہـ", "ـہ", "ھ", "ة", "ۂ"]),
+            KeyData("ه", secondary: "ھ",  alternates: ["ـہـ", "ـہ", "ۂ"]),    // هه → ھ
             KeyData("خ"),
             KeyData("ح", secondary: "چ"),                                       // حح → چ
             KeyData("ج", alternates: ["چ", "چھے"]),
@@ -83,25 +88,26 @@ enum KeyboardLayoutData {
         [
             KeyData("ش"),
             KeyData("س", secondary: "ے"),                                       // سس → ے
-            KeyData("ي", alternates: ["ئ", "ى", "ے"]),
+            KeyData("ي", secondary: "ئ",  alternates: ["ئ", "ى", "ے"]),        // يي → ئ
             KeyData("ب"),
             KeyData("ل", alternates: ["لا", "لأ", "لإ", "لآ", "لاٰ"]),
-            KeyData("ا", alternates: ["أ", "إ", "آ", "اٰ"]),
+            KeyData("ا", secondary: "أ",  alternates: ["اٰ", "آ", "إ", "أ"]), // اا → أ; اٰ first in popup
             KeyData("ت"),
             KeyData("ن"),
             KeyData("م"),
             KeyData("ك", secondary: "گ",  alternates: ["گ"]),                   // كك → گ
         ],
-        // Row 3 — 8 chars + backspace (no shift key)
+        // Row 3 — 9 chars + backspace
         [
             KeyData("ذ"),
             KeyData("ظ", secondary: "ہ"),                                       // ظظ → ہ
             KeyData("ؤ", alternates: ["ۚ", "ۨ"]),
-            KeyData("ر", alternates: ["ڑ"]),
-            KeyData("ز", alternates: ["ظ", "ژ"]),
-            KeyData("و", alternates: ["ة", "ۃ"]),
+            KeyData("ر", secondary: "ڑ",  alternates: ["ڑ"]),                   // رر → ڑ
+            KeyData("ز", alternates: ["ژ"]),
+            KeyData("و"),
             KeyData("ط", secondary: "ں"),                                       // طط → ں
-            KeyData("د", alternates: ["ڈ", "ذ"]),
+            KeyData("د", secondary: "ڈ",  alternates: ["ڈ"]),                   // دد → ڈ
+            KeyData("ة", secondary: "ۃ"),                                       // ةة → ۃ
             KeyData("⌫", type: .backspace, width: .wide),
         ],
         // Row 4 — utility row
