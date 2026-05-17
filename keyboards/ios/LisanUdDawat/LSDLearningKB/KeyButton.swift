@@ -54,17 +54,8 @@ final class KeyButton: UIView {
         label.minimumScaleFactor = 0.6
         label.font = labelFont()
         label.textColor = .label
-        label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
 
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor,   constant: 2),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2),
-            label.topAnchor.constraint(equalTo: topAnchor,           constant: 2),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor,     constant: -2),
-        ])
-
-        // Secondary char — top-left corner, shown when double-tap is available
         if !keyData.secondary.isEmpty && keyData.type == .character {
             secondaryLabel.text      = keyData.secondary
             secondaryLabel.font      = UIFont(name: "FatemiMaqala", size: 10) ?? UIFont.systemFont(ofSize: 10)
@@ -72,27 +63,26 @@ final class KeyButton: UIView {
             secondaryLabel.textAlignment = .center
             secondaryLabel.adjustsFontSizeToFitWidth = true
             secondaryLabel.minimumScaleFactor = 0.7
-            secondaryLabel.translatesAutoresizingMaskIntoConstraints = false
             addSubview(secondaryLabel)
-            NSLayoutConstraint.activate([
-                secondaryLabel.topAnchor.constraint(equalTo: topAnchor, constant: 2),
-                secondaryLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 2),
-                secondaryLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 16),
-            ])
         }
 
-        // Tiny dot when long-press alternates exist but no secondary is shown
         if !keyData.alternates.isEmpty && keyData.secondary.isEmpty && keyData.type == .character {
             badge.backgroundColor = UIColor(white: 0.55, alpha: 0.6)
             badge.layer.cornerRadius = 2
-            badge.translatesAutoresizingMaskIntoConstraints = false
             addSubview(badge)
-            NSLayoutConstraint.activate([
-                badge.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-                badge.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4),
-                badge.widthAnchor.constraint(equalToConstant: 4),
-                badge.heightAnchor.constraint(equalToConstant: 4),
-            ])
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        label.frame = bounds.insetBy(dx: 2, dy: 2)
+
+        if !keyData.secondary.isEmpty && keyData.type == .character {
+            secondaryLabel.frame = CGRect(x: 2, y: 2, width: 16, height: 14)
+        }
+
+        if !keyData.alternates.isEmpty && keyData.secondary.isEmpty && keyData.type == .character {
+            badge.frame = CGRect(x: bounds.width - 8, y: 4, width: 4, height: 4)
         }
     }
 
