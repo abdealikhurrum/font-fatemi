@@ -60,10 +60,12 @@ struct KeyboardLayer {
 //   Official LSD double-press rules (lsd.kmn lines 57-64):
 //     سس→ے  ضض→ٹ  طط→ں  ظظ→ہ  حح→چ  ثث→پ  كك→گ
 //   Extended quick-access secondaries:
-//     اا→أ  هه→ھ  يي→ئ  رر→ڑ  دد→ڈ  ةة→ۃ
+//     اا→اٰ  هه→ھ  يي→ئ  رر→ڑ  دد→ڈ  ةة→ۃ
 //
 // Long-press alternates are ordered by frequency so the first item is
 // quickest to reach (slide right / nearest target in the popup).
+// Eraab key primary is a standalone combining fatha (َ); KeyButton
+// renders combining marks on a tatweel base so they are visible.
 
 enum KeyboardLayoutData {
 
@@ -91,7 +93,7 @@ enum KeyboardLayoutData {
             KeyData("ي", secondary: "ئ",  alternates: ["ئ", "ى", "ے"]),        // يي → ئ
             KeyData("ب"),
             KeyData("ل", alternates: ["لا", "لأ", "لإ", "لآ", "لاٰ"]),
-            KeyData("ا", secondary: "أ",  alternates: ["اٰ", "آ", "إ", "أ"]), // اا → أ; اٰ first in popup
+            KeyData("ا", secondary: "اٰ", alternates: ["أ", "آ", "إ"]),        // اا → اٰ; أ first in popup
             KeyData("ت"),
             KeyData("ن"),
             KeyData("م"),
@@ -110,19 +112,23 @@ enum KeyboardLayoutData {
             KeyData("ة", secondary: "ۃ"),                                       // ةة → ۃ
             KeyData("⌫", type: .backspace, width: .wide),
         ],
-        // Row 4 — utility row
-        // Space long-press → diacritics (harakat)
-        // Period long-press → punctuation + ء
+        // Row 4 — utility row (7 keys, space in centre)
+        // Eraab key: tap → fatha (َ); long-press → full harakat picker
+        // Emoji key: tap → 🤲; long-press → common emoji
         [
-            KeyData("🌐", type: .globe,   width: .fixed(44)),
-            KeyData("١٢٣", type: .numeric, width: .fixed(80)),
+            KeyData("🌐",  type: .globe,   width: .fixed(36)),
+            KeyData("١٢٣", type: .numeric, width: .fixed(60)),
+            KeyData("🤲",
+                    alternates: ["😊", "❤️", "🙏", "☝️", "🌹", "🕌", "⭐"],
+                    width: .fixed(36)),
+            KeyData(" ",   type: .space,   width: .flexible),
+            KeyData("َ",                                                         // fatha — eraab key
+                    alternates: ["ِ", "ُ", "ْ", "ٰ", "ً", "ٍ", "ٌ"],
+                    width: .fixed(40)),
             KeyData(".",
                     alternates: [".", "!", "؟", "،", "؛", "٬", "ء"],
-                    width: .fixed(44)),
-            KeyData(" ",
-                    alternates: ["َ", "ِ", "ُ", "ْ", "ٰ", "ً", "ٍ", "ٌ"],
-                    type: .space, width: .flexible),
-            KeyData("↵",  type: .enter,   width: .fixed(80)),
+                    width: .fixed(36)),
+            KeyData("↵",  type: .enter,   width: .fixed(60)),
         ],
     ])
 

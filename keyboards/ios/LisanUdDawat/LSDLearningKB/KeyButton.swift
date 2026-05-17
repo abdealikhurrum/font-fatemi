@@ -48,7 +48,7 @@ final class KeyButton: UIView {
         layer.shadowOffset  = CGSize(width: 0, height: 1)
         backgroundColor = normalBackground
 
-        label.text          = keyData.primary
+        label.text          = visibleText(keyData.primary)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.6
@@ -99,12 +99,21 @@ final class KeyButton: UIView {
     private func labelFont() -> UIFont {
         switch keyData.type {
         case .character:
-            return UIFont(name: "FatemiMaqala", size: 20) ?? UIFont.systemFont(ofSize: 20)
+            return UIFont(name: "FatemiMaqala", size: 24) ?? UIFont.systemFont(ofSize: 24)
         case .backspace, .enter:
             return UIFont.systemFont(ofSize: 16)
         default:
             return UIFont.systemFont(ofSize: 14, weight: .medium)
         }
+    }
+
+    // Combining diacritics (non-spacing marks) are invisible without a base glyph.
+    // Prepend an Arabic tatweel so they render visibly on the key face.
+    private func visibleText(_ text: String) -> String {
+        guard !text.isEmpty,
+              text.unicodeScalars.allSatisfy({ $0.properties.generalCategory == .nonspacingMark })
+        else { return text }
+        return "ـ" + text
     }
 
     // MARK: - Public state setters

@@ -57,7 +57,7 @@ final class LongPressPopupView: UIView {
         for (i, alt) in alternates.enumerated() {
             let x = p + CGFloat(i) * (itemW + sp)
             let btn = UIButton(frame: CGRect(x: x, y: p, width: itemW, height: itemH))
-            btn.setTitle(alt, for: .normal)
+            btn.setTitle(visibleTitle(alt), for: .normal)
             btn.setTitleColor(.label, for: .normal)
             btn.setTitleColor(.white, for: .selected)
             btn.titleLabel?.font = LongPressPopupView.font
@@ -115,5 +115,13 @@ final class LongPressPopupView: UIView {
             buttons[prev].backgroundColor = .clear
         }
         selectedIndex = nil
+    }
+
+    // Mirror of KeyButton.visibleText — tatweel base for standalone combining marks.
+    private func visibleTitle(_ text: String) -> String {
+        guard !text.isEmpty,
+              text.unicodeScalars.allSatisfy({ $0.properties.generalCategory == .nonspacingMark })
+        else { return text }
+        return "ـ" + text
     }
 }
