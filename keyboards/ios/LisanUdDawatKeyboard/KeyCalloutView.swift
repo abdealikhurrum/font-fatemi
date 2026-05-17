@@ -7,14 +7,12 @@ import UIKit
 final class KeyCalloutView: UIView {
 
     private let label = UILabel()
-    private static let bubbleColor = UIColor(white: 0.20, alpha: 1)
     private static let pointerH: CGFloat = 8
     private static let cornerR:  CGFloat = 8
 
     init(character: String, keyFrame: CGRect, in container: UIView) {
-        let charW  = max(44, character.size(withAttributes: [
-            .font: UIFont.systemFont(ofSize: 26)
-        ]).width + 20)
+        let font   = UIFont(name: "FatemiMaqala", size: 28) ?? UIFont.systemFont(ofSize: 28)
+        let charW  = max(44, character.size(withAttributes: [.font: font]).width + 20)
         let bubbleH: CGFloat = keyFrame.height * 1.45
         let pointerH = KeyCalloutView.pointerH
 
@@ -29,7 +27,7 @@ final class KeyCalloutView: UIView {
 
         label.text = character
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 26, weight: .regular)
+        label.font = font
         label.textAlignment = .center
         label.frame = CGRect(x: 0, y: 0, width: charW, height: bubbleH)
         addSubview(label)
@@ -68,7 +66,8 @@ final class KeyCalloutView: UIView {
                     startAngle: .pi, endAngle: -.pi / 2, clockwise: true)
         path.close()
 
-        KeyCalloutView.bubbleColor.setFill()
+        // Resolve against current trait collection — CGContext doesn't do this automatically
+        KeyboardColors.calloutBubble.resolvedColor(with: traitCollection).setFill()
         ctx.addPath(path.cgPath)
         ctx.fillPath()
     }

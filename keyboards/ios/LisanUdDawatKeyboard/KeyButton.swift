@@ -16,17 +16,15 @@ final class KeyButton: UIView {
         didSet { applyHighlight() }
     }
 
-    // Background colours
+    // Background colours — all adaptive (light/dark)
     var normalBackground: UIColor {
         switch keyData.type {
-        case .character:            return .white
-        case .shift, .backspace,
-             .numeric, .abc, .globe: return UIColor(white: 0.67, alpha: 1)
-        case .space:                return .white
-        case .enter:                return UIColor(white: 0.67, alpha: 1)
+        case .character, .space:               return KeyboardColors.characterKey
+        case .shift, .backspace, .numeric,
+             .abc, .globe, .enter:             return KeyboardColors.specialKey
         }
     }
-    private var pressedBackground: UIColor { UIColor(white: 0.82, alpha: 1) }
+    private var pressedBackground: UIColor { KeyboardColors.pressedKey }
 
     // MARK: - Init
 
@@ -67,7 +65,7 @@ final class KeyButton: UIView {
 
         // Tiny dot in top-right corner when alternates exist
         if !keyData.alternates.isEmpty && keyData.type == .character {
-            badge.backgroundColor = UIColor(white: 0.65, alpha: 1)
+            badge.backgroundColor = UIColor(white: 0.55, alpha: 0.6)
             badge.layer.cornerRadius = 2
             badge.frame = CGRect(x: 0, y: 0, width: 4, height: 4)
             badge.translatesAutoresizingMaskIntoConstraints = false
@@ -104,10 +102,10 @@ final class KeyButton: UIView {
     func setShiftActive(_ active: Bool, locked: Bool = false) {
         guard keyData.type == .shift else { return }
         if locked {
-            backgroundColor = UIColor(white: 0.22, alpha: 1)
-            label.textColor = .white
+            backgroundColor = KeyboardColors.shiftLockedBackground
+            label.textColor = KeyboardColors.shiftLockedText
         } else if active {
-            backgroundColor = .white
+            backgroundColor = KeyboardColors.characterKey
             label.textColor = .label
         } else {
             backgroundColor = normalBackground

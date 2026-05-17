@@ -15,13 +15,13 @@ final class PredictiveBar: UIView {
     static let height: CGFloat = 44
 
     private var buttons: [UIButton] = []
-    private let separatorColor = UIColor(white: 0.75, alpha: 1)
+    private let separatorColor = KeyboardColors.separator
 
     // MARK: - Init
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor(white: 0.86, alpha: 1)
+        backgroundColor = KeyboardColors.predictiveBar
         buildButtons()
         addSeparators()
     }
