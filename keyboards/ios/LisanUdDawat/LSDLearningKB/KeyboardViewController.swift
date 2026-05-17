@@ -46,7 +46,7 @@ final class KeyboardViewController: UIInputViewController {
     // MARK: - Setup
 
     private func buildUI() {
-        view.backgroundColor = UIColor(white: 0.82, alpha: 1)
+        view.backgroundColor = KeyboardColors.background
 
         predictiveBar.delegate = self
         predictiveBar.translatesAutoresizingMaskIntoConstraints = false

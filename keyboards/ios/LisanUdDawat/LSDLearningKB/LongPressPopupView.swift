@@ -20,7 +20,7 @@ final class LongPressPopupView: UIView {
     private static let padding: CGFloat = 6
     private static let itemSpacing: CGFloat = 4
     private static let cornerRadius: CGFloat = 10
-    private static let font = UIFont.systemFont(ofSize: 20, weight: .regular)
+    private static let font = UIFont(name: "FatemiMaqala", size: 20) ?? UIFont.systemFont(ofSize: 20)
 
     init(alternates: [String], keySize: CGSize) {
         self.alternates = alternates
@@ -49,7 +49,7 @@ final class LongPressPopupView: UIView {
         let totalH = itemH + 2 * p
 
         let bg = UIView(frame: CGRect(x: 0, y: 0, width: totalW, height: totalH))
-        bg.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        bg.backgroundColor = KeyboardColors.popup
         bg.layer.cornerRadius = LongPressPopupView.cornerRadius
         bg.layer.masksToBounds = true
         addSubview(bg)

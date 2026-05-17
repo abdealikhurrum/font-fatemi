@@ -48,7 +48,7 @@ final class KeyboardView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor(white: 0.82, alpha: 1)
+        backgroundColor = KeyboardColors.background
         // Pre-warm haptic engine so first tap isn't delayed
         impactLight.prepare()
     }
