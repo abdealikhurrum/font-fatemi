@@ -213,8 +213,10 @@ final class KeyboardView: UIView {
 
     private func showCallout(for key: KeyButton) {
         dismissCallout()
-        // Find the top-level window layer to escape clipping bounds
-        guard let container = window else { return }
+        // Use superview (UIInputViewController.view) not window — the keyboard extension
+        // window is sized to the keyboard frame and clips upward overflow, but the
+        // input view controller's view is allowed to paint above its own bounds.
+        let container = superview ?? self
         let keyFrameInContainer = key.convert(key.bounds, to: container)
 
         let cv = KeyCalloutView(

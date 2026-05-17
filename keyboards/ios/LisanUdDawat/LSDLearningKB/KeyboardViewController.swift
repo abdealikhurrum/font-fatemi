@@ -122,15 +122,19 @@ extension KeyboardViewController: KeyboardViewDelegate {
             insert(key.primary)
 
         case .space:
-            // Double-space → period + space, matching iOS native behaviour
+            // Double-space → period + space (user pressed space twice quickly)
             let now = Date()
-            if let last = lastInsertedCharacter,
+            if lastInsertedCharacter == " ",
                let lastTime = lastInsertTime,
-               last != " " && last != "\n",
-               now.timeIntervalSince(lastTime) < Self.doubleSpaceWindow,
-               textDocumentProxy.documentContextBeforeInput?.last?.isLetter == true {
-                textDocumentProxy.deleteBackward()
-                textDocumentProxy.insertText(". ")
+               now.timeIntervalSince(lastTime) < Self.doubleSpaceWindow {
+                // Confirm the char before the already-inserted space is a letter
+                let ctx = textDocumentProxy.documentContextBeforeInput ?? ""
+                if ctx.dropLast().last?.isLetter == true {
+                    textDocumentProxy.deleteBackward()
+                    insert(". ")
+                } else {
+                    insert(" ")
+                }
             } else {
                 insert(" ")
             }
