@@ -219,9 +219,9 @@ enum KeyboardLayoutData {
         // Row 4 — cursor keys for precise diacritic placement
         [
             KeyData("ا ب ج", type: .abc,         width: .fixed(72)),
-            KeyData("←",     type: .cursorLeft,  width: .fixed(44)),
+            KeyData("←",     type: .cursorRight,  width: .fixed(44)),
             KeyData(" ",     type: .space,       width: .flexible),
-            KeyData("→",     type: .cursorRight, width: .fixed(44)),
+            KeyData("→",     type: .cursorLeft, width: .fixed(44)),
             KeyData("↵",     type: .enter,       width: .fixed(52)),
         ],
     ])
