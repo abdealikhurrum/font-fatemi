@@ -22,15 +22,18 @@ final class CorpusLogger {
         // provisioning profile, so we probe with an actual write before committing.
         if let groupContainer = FileManager.default
                 .containerURL(forSecurityApplicationGroupIdentifier: Self.groupID) {
-            let probe = groupContainer.appendingPathComponent(".lsd_probe")
             do {
+                // Ensure the container directory exists (may not on very first run).
+                try FileManager.default.createDirectory(
+                    at: groupContainer, withIntermediateDirectories: true)
+                let probe = groupContainer.appendingPathComponent(".lsd_probe")
                 try Data().write(to: probe, options: .atomic)
                 try FileManager.default.removeItem(at: probe)
                 let url = groupContainer.appendingPathComponent(Self.fileName)
                 print("[CorpusLogger] storage (shared) → \(url.path)")
                 return url
             } catch {
-                print("[CorpusLogger] ⚠️ App Group container not writable — falling back to extension Documents")
+                print("[CorpusLogger] ⚠️ App Group container not writable (\(error.localizedDescription)) — falling back to extension Documents")
             }
         } else {
             print("[CorpusLogger] ⚠️ App Group not configured — falling back to extension Documents")
