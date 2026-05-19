@@ -55,7 +55,8 @@ enum CRULPUrduLayoutData {
         // Row 4
         [
             KeyData("١٢٣", type: .numeric,  width: .fixed(44)),
-            KeyData(" ",   type: .space,    width: .flexible),
+            KeyData(" ",   alternates: ["\u{200D}", "\u{200C}"],
+                           type: .space,    width: .flexible),
             KeyData("َ",   type: .diacritic, width: .fixed(36)),
             KeyData("↵",   type: .enter,    width: .fixed(52)),
         ],
