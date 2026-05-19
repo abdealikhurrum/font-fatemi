@@ -9,9 +9,7 @@ import Foundation
 
 final class CorpusLogger {
     static let shared = CorpusLogger()
-    private init() {
-        print("[CorpusLogger] storage → \(corpusFileURL.path)")
-    }
+    private init() {}
 
     private var pendingWord = ""
     private static let groupID   = "group.com.exordiumnetworks.lsdkeyboard"
@@ -20,13 +18,28 @@ final class CorpusLogger {
     // MARK: - Storage URL
 
     private lazy var corpusFileURL: URL = {
-        if let shared = FileManager.default
-            .containerURL(forSecurityApplicationGroupIdentifier: Self.groupID) {
-            return shared.appendingPathComponent(Self.fileName)
+        // containerURL returns a path even when the entitlement isn't in the
+        // provisioning profile, so we probe with an actual write before committing.
+        if let groupContainer = FileManager.default
+                .containerURL(forSecurityApplicationGroupIdentifier: Self.groupID) {
+            let probe = groupContainer.appendingPathComponent(".lsd_probe")
+            do {
+                try Data().write(to: probe, options: .atomic)
+                try FileManager.default.removeItem(at: probe)
+                let url = groupContainer.appendingPathComponent(Self.fileName)
+                print("[CorpusLogger] storage (shared) → \(url.path)")
+                return url
+            } catch {
+                print("[CorpusLogger] ⚠️ App Group container not writable — falling back to extension Documents")
+            }
+        } else {
+            print("[CorpusLogger] ⚠️ App Group not configured — falling back to extension Documents")
         }
-        print("[CorpusLogger] ⚠️ App Group not available — using extension Documents folder")
+        // Fallback: extension's own Documents directory (not readable by main app)
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        return docs.appendingPathComponent(Self.fileName)
+        let url  = docs.appendingPathComponent(Self.fileName)
+        print("[CorpusLogger] storage (local) → \(url.path)")
+        return url
     }()
 
     // MARK: - Public API
