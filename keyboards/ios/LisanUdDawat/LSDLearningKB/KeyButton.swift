@@ -17,9 +17,28 @@ final class KeyButton: UIView {
         didSet { applyHighlight() }
     }
 
-    // Cached once per process — UIFont(name:size:) triggers a font-service lookup every call.
-    private static let fatemiFont24 = UIFont(name: "FatemiMaqala", size: 24) ?? UIFont.systemFont(ofSize: 24)
-    private static let fatemiFont10 = UIFont(name: "FatemiMaqala", size: 10) ?? UIFont.systemFont(ofSize: 10)
+    // Lazily cached — nil until first use, and can be cleared by invalidateFontCache()
+    // so that a background font registration can take effect without rebuilding the keyboard.
+    private static var _fatemiFont24: UIFont?
+    private static var _fatemiFont10: UIFont?
+
+    static var fatemiFont24: UIFont {
+        if _fatemiFont24 == nil {
+            _fatemiFont24 = UIFont(name: "FatemiMaqala-Regular", size: 24) ?? UIFont.systemFont(ofSize: 24)
+        }
+        return _fatemiFont24!
+    }
+    static var fatemiFont10: UIFont {
+        if _fatemiFont10 == nil {
+            _fatemiFont10 = UIFont(name: "FatemiMaqala-Regular", size: 10) ?? UIFont.systemFont(ofSize: 10)
+        }
+        return _fatemiFont10!
+    }
+
+    static func invalidateFontCache() {
+        _fatemiFont24 = nil
+        _fatemiFont10 = nil
+    }
 
     // Background colours — all adaptive (light/dark)
     var normalBackground: UIColor {
@@ -113,6 +132,13 @@ final class KeyButton: UIView {
     }
 
     // MARK: - Public state setters
+
+    func refreshFont() {
+        label.font = labelFont()
+        if !keyData.secondary.isEmpty && keyData.type == .character {
+            secondaryLabel.font = KeyButton.fatemiFont10
+        }
+    }
 
     func setHighlighted(_ on: Bool) {
         guard on != isHighlighted else { return }

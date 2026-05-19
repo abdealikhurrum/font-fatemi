@@ -32,23 +32,33 @@ final class KeyboardViewController: UIInputViewController {
         applyLayer()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        CorpusLogger.shared.flush()
+    }
+
     private static var fontsRegistered = false
 
     private func registerBundledFonts() {
         guard !Self.fontsRegistered else { return }
-        // If the font already resolves (e.g. system-wide install), skip registration
-        // entirely to avoid the GSFont "file already registered" warning.
-        guard UIFont(name: "FatemiMaqala-Regular", size: 12) == nil else {
-            Self.fontsRegistered = true
-            return
-        }
-        for ext in ["ttf", "otf", "TTF", "OTF"] {
-            let urls = Bundle.main.urls(forResourcesWithExtension: ext, subdirectory: nil) ?? []
-            for url in urls {
-                CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
+        // Run off the main thread — CTFontManagerRegisterFontsForURL does IPC with
+        // fontservicesd which takes ~1s in a sandboxed extension on first call.
+        // The keyboard builds immediately with a system-font fallback; once the
+        // real font is ready we invalidate the cache and refresh key labels.
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            defer { Self.fontsRegistered = true }
+            guard UIFont(name: "FatemiMaqala-Regular", size: 12) == nil else { return }
+            for ext in ["ttf", "otf", "TTF", "OTF"] {
+                let urls = Bundle.main.urls(forResourcesWithExtension: ext, subdirectory: nil) ?? []
+                for url in urls {
+                    CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
+                }
+            }
+            DispatchQueue.main.async {
+                KeyButton.invalidateFontCache()
+                self?.keyboardView.refreshKeyFonts()
             }
         }
-        Self.fontsRegistered = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -110,12 +120,14 @@ final class KeyboardViewController: UIInputViewController {
         textDocumentProxy.insertText(text)
         lastInsertedCharacter = text.last
         lastInsertTime = Date()
+        CorpusLogger.shared.record(text)
         updatePredictions()
     }
 
     private func deleteBack() {
         textDocumentProxy.deleteBackward()
         lastInsertedCharacter = nil
+        CorpusLogger.shared.recordBackspace()
         updatePredictions()
     }
 

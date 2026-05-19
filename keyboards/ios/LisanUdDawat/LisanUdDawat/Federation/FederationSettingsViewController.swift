@@ -63,6 +63,7 @@ final class FederationSettingsViewController: UIViewController {
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
         ])
 
+        stackView.addArrangedSubview(corpusCard())
         stackView.addArrangedSubview(keyboardCard())
         stackView.addArrangedSubview(privacyCard())
         stackView.addArrangedSubview(statsCard())
@@ -72,6 +73,58 @@ final class FederationSettingsViewController: UIViewController {
     }
 
     // MARK: - Cards
+
+    private func corpusCard() -> UIView {
+        let v = cardContainer(title: "Corpus")
+
+        let notepadText = UserDefaults.standard.string(forKey: "notepad_text") ?? ""
+        let wordCount = notepadText
+            .components(separatedBy: .whitespacesAndNewlines)
+            .filter { !$0.isEmpty }.count
+
+        v.addArrangedSubview(label(
+            "Notepad corpus: \(wordCount) words",
+            size: 15, weight: .medium
+        ))
+        v.addArrangedSubview(label(
+            "Everything you type in the Notepad tab is saved here and can be exported " +
+            "as a plain-text training file.",
+            size: 14, color: .secondaryLabel
+        ))
+
+        let exportBtn = UIButton(type: .system)
+        exportBtn.setTitle("Export notepad as corpus", for: .normal)
+        exportBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        exportBtn.backgroundColor = .systemIndigo
+        exportBtn.setTitleColor(.white, for: .normal)
+        exportBtn.layer.cornerRadius = 10
+        exportBtn.contentEdgeInsets = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        exportBtn.isEnabled = wordCount > 0
+        exportBtn.alpha = wordCount > 0 ? 1.0 : 0.4
+        exportBtn.addTarget(self, action: #selector(exportNotepadCorpus), for: .touchUpInside)
+        v.addArrangedSubview(exportBtn)
+
+        v.addArrangedSubview(label(
+            "Keyboard typing data (from all apps) is collected in the keyboard extension " +
+            "and requires an App Group to appear here. Enable the " +
+            "\"group.com.exordiumnetworks.lsdkeyboard\" capability in both targets via " +
+            "Xcode → Signing & Capabilities to unlock cross-process corpus access.",
+            size: 13, color: .tertiaryLabel
+        ))
+
+        return v
+    }
+
+    @objc private func exportNotepadCorpus() {
+        let text = UserDefaults.standard.string(forKey: "notepad_text") ?? ""
+        guard !text.isEmpty else { return }
+        let tmpURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent("lsd_corpus.txt")
+        try? text.write(to: tmpURL, atomically: true, encoding: .utf8)
+        let share = UIActivityViewController(activityItems: [tmpURL], applicationActivities: nil)
+        share.popoverPresentationController?.sourceView = view
+        present(share, animated: true)
+    }
 
     private func keyboardCard() -> UIView {
         let v = cardContainer(title: "Keyboard")

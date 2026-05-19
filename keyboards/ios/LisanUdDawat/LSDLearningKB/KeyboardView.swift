@@ -79,6 +79,10 @@ final class KeyboardView: UIView {
         setNeedsLayout()
     }
 
+    func refreshKeyFonts() {
+        keyButtons.forEach { $0.refreshFont() }
+    }
+
     // MARK: - Layout
 
     override func layoutSubviews() {
