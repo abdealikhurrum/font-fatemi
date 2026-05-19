@@ -193,7 +193,10 @@ extension KeyboardViewController: KeyboardViewDelegate {
     }
 
     func doubleTapPressed(on key: KeyData) {
-        guard KeyboardSettings.doubleTapEnabled else { return }
+        guard KeyboardSettings.doubleTapEnabled else {
+            insert(key.primary)   // second tap registers normally when feature is off
+            return
+        }
         deleteBack()           // removes primary from both proxy and pendingWord
         insert(key.secondary)
     }
