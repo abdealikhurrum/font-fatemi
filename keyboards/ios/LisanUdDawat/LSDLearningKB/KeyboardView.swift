@@ -45,6 +45,9 @@ final class KeyboardView: UIView {
 
     private var activePopup: LongPressPopupView?
     private var popupSourceKey: KeyButton?
+    private var popupRepeatInitialTimer: Timer?
+    private var popupRepeatTimer: Timer?
+    private var popupRepeatFired = false
 
     // MARK: - Keys
 
@@ -125,9 +128,18 @@ final class KeyboardView: UIView {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
 
-        // If popup is open, route movement into it
+        // If popup is open, route movement into it and manage repeat timer
         if let popup = activePopup {
+            let prevChar = popup.selectedCharacter
             popup.updateSelection(at: touch.location(in: popup))
+            let newChar  = popup.selectedCharacter
+            if newChar != prevChar {
+                cancelPopupRepeatTimers()
+                popupRepeatFired = false
+                if newChar != nil { schedulePopupRepeat() }
+            } else if newChar != nil, popupRepeatInitialTimer == nil, popupRepeatTimer == nil {
+                schedulePopupRepeat()
+            }
             return
         }
 
@@ -144,7 +156,7 @@ final class KeyboardView: UIView {
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let popup = activePopup {
-            popup.confirmSelection()
+            if !popupRepeatFired { popup.confirmSelection() }
             dismissPopup()
             return
         }
@@ -251,9 +263,33 @@ final class KeyboardView: UIView {
     }
 
     private func dismissPopup() {
+        cancelPopupRepeatTimers()
+        popupRepeatFired = false
         activePopup?.removeFromSuperview()
         activePopup    = nil
         popupSourceKey = nil
+    }
+
+    // After the user holds on a popup item for 0.5s, insert it once, then keep
+    // inserting every 0.1s until the finger lifts (same feel as held backspace).
+    private func schedulePopupRepeat() {
+        popupRepeatInitialTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [weak self] _ in
+            guard let self, let char = self.activePopup?.selectedCharacter else { return }
+            self.popupRepeatFired = true
+            self.delegate?.longPressAlternateSelected(char)
+            self.popupRepeatTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+                guard let self, let c = self.activePopup?.selectedCharacter else {
+                    self?.cancelPopupRepeatTimers()
+                    return
+                }
+                self.delegate?.longPressAlternateSelected(c)
+            }
+        }
+    }
+
+    private func cancelPopupRepeatTimers() {
+        popupRepeatInitialTimer?.invalidate(); popupRepeatInitialTimer = nil
+        popupRepeatTimer?.invalidate();        popupRepeatTimer = nil
     }
 
     // MARK: - Backspace repeat
@@ -288,6 +324,7 @@ final class KeyboardView: UIView {
         longPressTimer?.invalidate();          longPressTimer = nil
         backspaceRepeatTimer?.invalidate();    backspaceRepeatTimer = nil
         backspaceInitialTimer?.invalidate();   backspaceInitialTimer = nil
+        cancelPopupRepeatTimers()
     }
 
     // MARK: - Hit testing

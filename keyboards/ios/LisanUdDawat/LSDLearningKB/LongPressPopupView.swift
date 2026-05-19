@@ -16,6 +16,7 @@ final class LongPressPopupView: UIView {
     private let alternates: [String]
     private var buttons: [UIButton] = []
     private var selectedIndex: Int? = nil
+    var selectedCharacter: String? { selectedIndex.map { alternates[$0] } }
 
     private static let padding: CGFloat = 6
     private static let itemSpacing: CGFloat = 4

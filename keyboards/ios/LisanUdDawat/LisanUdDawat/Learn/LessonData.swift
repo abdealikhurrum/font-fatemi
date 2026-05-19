@@ -191,12 +191,12 @@ enum LessonCatalog {
         ]
     )
 
-    // MARK: - Module 3: ZWJ & ZWNJ
+    // MARK: - Module 3: ZWJ, ZWNJ & Tatweel
 
     static let joiners = LessonModule(
         id: "joiners",
-        title: "ZWJ & ZWNJ",
-        subtitle: "Control letter joining with invisible formatting characters",
+        title: "Joiners & Tatweel",
+        subtitle: "Invisible joiners and the elongation stroke — all on the space bar",
         systemImage: "link",
         accent: .systemPurple,
         steps: [
@@ -225,6 +225,20 @@ enum LessonCatalog {
                 body: "Type ب then ZWJ. The ب will display in its medial (connected) form even though nothing follows it — useful when showing how a letter looks inside a word.\n\nType the sequence below:",
                 target: "ب\u{200D}",
                 keyHint: "ب → ZWJ"
+            ),
+            // Tatweel explanation
+            LessonStep(
+                heading: "ـ — Tatweel (Kashida)",
+                body: "Tatweel (ـ, U+0640) is the Arabic elongation stroke. It stretches the connecting baseline between two letters, used in calligraphic and display typography to justify lines or add visual weight.\n\nUnlike ZWJ/ZWNJ it is a visible character. Long-press the space bar and slide to ـ.\n\nYou can hold down on ـ in the popup to insert multiple tatweels in a row.",
+                target: "",
+                keyHint: "Long-press space → ـ"
+            ),
+            // Tatweel exercise: سـلام
+            LessonStep(
+                heading: "Practice: elongate a word",
+                body: "Type the word below. A tatweel sits between the س and the ل, stretching the baseline for calligraphic effect.\n\nInsert it with long-press space → ـ.",
+                target: "سـلام",
+                keyHint: "س → ـ → لام"
             ),
         ]
     )
