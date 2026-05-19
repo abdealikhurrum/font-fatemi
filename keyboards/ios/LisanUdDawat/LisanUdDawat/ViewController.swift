@@ -1,12 +1,12 @@
 import UIKit
-import CoreText
+import WebKit
 
 final class ViewController: UIViewController {
 
-    private lazy var scrollView       = UIScrollView()
-    private lazy var stackView        = UIStackView()
-    private lazy var fontStatusLabel  = UILabel()
-    private lazy var installButton    = UIButton(type: .system)
+    private lazy var scrollView      = UIScrollView()
+    private lazy var stackView       = UIStackView()
+    private lazy var installButton   = UIButton(type: .system)
+    private var profileWebView: WKWebView?   // kept alive until load completes
 
     // MARK: - Lifecycle
 
@@ -15,11 +15,6 @@ final class ViewController: UIViewController {
         title = "Setup"
         view.backgroundColor = .systemGroupedBackground
         buildUI()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateFontStatus()
     }
 
     // MARK: - Layout
@@ -60,55 +55,40 @@ final class ViewController: UIViewController {
             "Settings → General → Keyboard → Keyboards → " +
             "Add New Keyboard… → Lisan ud Dawat"
         ))
-        let btn = actionButton("Open Settings", color: .systemBlue, target: self, action: #selector(openSettings))
-        v.addArrangedSubview(btn)
+        v.addArrangedSubview(actionButton("Open Settings", color: .systemBlue,
+                                          target: self, action: #selector(openSettings)))
         return v
     }
 
     private func fontCard() -> UIView {
         let v = cardContainer(title: "FatemiMaqala Font")
+
         v.addArrangedSubview(bodyLabel(
-            "Install the font so other apps — Notes, Pages, Word — " +
-            "can render Lisan ud Dawat text correctly."
+            "Install the font so Notes, Pages, Word, and other apps can render " +
+            "Lisan ud Dawat text correctly. Tap the button, then follow the prompt " +
+            "to Settings → General → VPN & Device Management to finish installing."
         ))
 
         let preview = UILabel()
         preview.text = "اَلْبَيَانُ مِنَ الْإِيمَان"
         preview.font = UIFont(name: "FatemiMaqala-Regular", size: 24) ?? UIFont.systemFont(ofSize: 24)
         preview.textAlignment = .center
-        preview.textColor = .label
         v.addArrangedSubview(preview)
 
-        fontStatusLabel.font = UIFont.systemFont(ofSize: 14)
-        fontStatusLabel.textAlignment = .center
-        v.addArrangedSubview(fontStatusLabel)
-
+        installButton.setTitle("Install Font Profile", for: .normal)
         installButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        installButton.backgroundColor = .systemBlue
+        installButton.setTitleColor(.white, for: .normal)
         installButton.layer.cornerRadius = 10
         installButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-        installButton.setTitleColor(.white, for: .normal)
         installButton.addTarget(self, action: #selector(installFont), for: .touchUpInside)
         v.addArrangedSubview(installButton)
 
+        v.addArrangedSubview(bodyLabel(
+            "To remove: Settings → General → VPN & Device Management → FatemiMaqala Font → Remove Profile."
+        ))
+
         return v
-    }
-
-    // MARK: - Font status
-
-    private func updateFontStatus() {
-        let installed = isFontInstalled()
-        fontStatusLabel.text      = installed ? "Installed — available in other apps" : "Not yet installed"
-        fontStatusLabel.textColor = installed ? .systemGreen : .secondaryLabel
-        installButton.setTitle(installed ? "Reinstall Font" : "Install Font", for: .normal)
-        installButton.backgroundColor = installed ? .systemGray : .systemBlue
-    }
-
-    private func isFontInstalled() -> Bool {
-        guard let descs = CTFontManagerCopyRegisteredFontDescriptors(.user, true) as? [CTFontDescriptor]
-        else { return false }
-        return descs.contains {
-            (CTFontDescriptorCopyAttribute($0, kCTFontNameAttribute) as? String) == "FatemiMaqala-Regular"
-        }
     }
 
     // MARK: - Actions
@@ -119,31 +99,71 @@ final class ViewController: UIViewController {
     }
 
     @objc private func installFont() {
-        guard let url = Bundle.main.url(forResource: "FatemiMaqala-Regular", withExtension: "ttf") else {
+        guard
+            let fontURL  = Bundle.main.url(forResource: "FatemiMaqala-Regular", withExtension: "ttf"),
+            let fontData = try? Data(contentsOf: fontURL)
+        else {
             alert("Font file not found in app bundle.")
             return
         }
-        installButton.isEnabled = false
-        CTFontManagerRegisterFontURLs([url] as CFArray, .user, true) { [weak self] (errors, _) -> Bool in
-            DispatchQueue.main.async {
-                self?.installButton.isEnabled = true
-                if let errs = errors as? [CFError], !errs.isEmpty {
-                    let msg = errs.map { ($0 as Error).localizedDescription }.joined(separator: "\n")
-                    self?.alert(msg)
-                }
-                self?.updateFontStatus()
-            }
-            return true
+
+        guard let profileData = buildMobileconfig(fontData: fontData) else {
+            alert("Could not generate font profile.")
+            return
         }
+
+        // Loading a mobileconfig payload with this MIME type causes iOS to intercept
+        // the navigation and show the system "Profile Downloaded" prompt — no
+        // com.apple.developer.user-fonts entitlement required.
+        let wv = WKWebView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
+        view.addSubview(wv)
+        profileWebView = wv
+        wv.load(profileData,
+                mimeType: "application/x-apple-aspen-config",
+                characterEncodingName: "utf-8",
+                baseURL: URL(string: "about:blank")!)
+
+        alert(
+            "A notification should appear at the top of your screen saying " +
+            "\"Profile Downloaded\".\n\nThen go to:\n" +
+            "Settings → General → VPN & Device Management → FatemiMaqala Font → Install"
+        )
     }
+
+    // MARK: - Mobileconfig generation
+
+    private func buildMobileconfig(fontData: Data) -> Data? {
+        let fontPayload: [String: Any] = [
+            "Font":                   fontData,
+            "PayloadDescription":     "FatemiMaqala typeface for Lisan ud Dawat",
+            "PayloadDisplayName":     "FatemiMaqala",
+            "PayloadIdentifier":      "com.exordiumnetworks.LisanUdDawat.font.FatemiMaqala",
+            "PayloadOrganization":    "Lisan ud Dawat",
+            "PayloadType":            "com.apple.font",
+            "PayloadUUID":            "B2C3D4E5-F6A7-8901-BCDE-F01234567890",
+            "PayloadVersion":         1,
+        ]
+        let profile: [String: Any] = [
+            "PayloadContent":         [fontPayload],
+            "PayloadDescription":     "Installs FatemiMaqala so it is available in all apps",
+            "PayloadDisplayName":     "FatemiMaqala Font",
+            "PayloadIdentifier":      "com.exordiumnetworks.LisanUdDawat.fontprofile",
+            "PayloadOrganization":    "Lisan ud Dawat",
+            "PayloadRemovalDisallowed": false,
+            "PayloadType":            "Configuration",
+            "PayloadUUID":            "A1B2C3D4-E5F6-7890-ABCD-EF1234567890",
+            "PayloadVersion":         1,
+        ]
+        return try? PropertyListSerialization.data(fromPropertyList: profile, format: .xml, options: 0)
+    }
+
+    // MARK: - Helpers
 
     private func alert(_ message: String) {
         let a = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         a.addAction(UIAlertAction(title: "OK", style: .default))
         present(a, animated: true)
     }
-
-    // MARK: - Helpers
 
     private func cardContainer(title: String) -> UIStackView {
         let v = UIStackView()
