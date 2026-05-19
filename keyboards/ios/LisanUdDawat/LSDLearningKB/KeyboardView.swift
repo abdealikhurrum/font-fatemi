@@ -35,7 +35,7 @@ final class KeyboardView: UIView {
     // Double-tap tracking
     private var lastTappedKey: KeyButton?
     private var lastTapTime: Date?
-    private static let doubleTapWindow: TimeInterval = 0.15
+    private static let doubleTapWindow: TimeInterval = 0.35
 
     // MARK: - Callout
 
