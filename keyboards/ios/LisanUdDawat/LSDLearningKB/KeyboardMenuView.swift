@@ -56,6 +56,8 @@ final class KeyboardMenuView: UIView {
         stack.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stack)
 
+        addLayoutPicker(to: stack)
+        addSeparator(to: stack)
         addToggle(to: stack,
             label: "Word predictions",
             getValue: { KeyboardSettings.predictionEnabled },
@@ -109,6 +111,45 @@ final class KeyboardMenuView: UIView {
     }
 
     // MARK: - Row builders
+
+    private func addLayoutPicker(to stack: UIStackView) {
+        let row = UIView()
+        row.translatesAutoresizingMaskIntoConstraints = false
+
+        let lbl = UILabel()
+        lbl.text = "Layout"
+        lbl.font = .systemFont(ofSize: 15)
+        lbl.textColor = .label
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+
+        let seg = UISegmentedControl(items: ["LSD", "Arabic", "Urdu"])
+        seg.translatesAutoresizingMaskIntoConstraints = false
+        switch KeyboardSettings.selectedLayout {
+        case .lsd:            seg.selectedSegmentIndex = 0
+        case .arabicStandard: seg.selectedSegmentIndex = 1
+        case .crulpUrdu:      seg.selectedSegmentIndex = 2
+        }
+        seg.addAction(UIAction { _ in
+            switch seg.selectedSegmentIndex {
+            case 0: KeyboardSettings.selectedLayout = .lsd
+            case 1: KeyboardSettings.selectedLayout = .arabicStandard
+            case 2: KeyboardSettings.selectedLayout = .crulpUrdu
+            default: break
+            }
+        }, for: .valueChanged)
+
+        row.addSubview(lbl)
+        row.addSubview(seg)
+        NSLayoutConstraint.activate([
+            row.heightAnchor.constraint(equalToConstant: 44),
+            lbl.leadingAnchor.constraint(equalTo: row.leadingAnchor),
+            lbl.centerYAnchor.constraint(equalTo: row.centerYAnchor),
+            seg.trailingAnchor.constraint(equalTo: row.trailingAnchor),
+            seg.centerYAnchor.constraint(equalTo: row.centerYAnchor),
+            lbl.trailingAnchor.constraint(lessThanOrEqualTo: seg.leadingAnchor, constant: -8),
+        ])
+        stack.addArrangedSubview(row)
+    }
 
     private func addToggle(
         to stack: UIStackView,

@@ -95,9 +95,17 @@ final class KeyboardViewController: UIInputViewController {
 
     private func applyLayer() {
         switch currentLayer {
-        case .default:   keyboardView.configure(with: KeyboardLayoutData.defaultLayer)
+        case .default:   keyboardView.configure(with: activeDefaultLayer())
         case .numeric:   keyboardView.configure(with: KeyboardLayoutData.numericLayer)
         case .diacritic: keyboardView.configure(with: KeyboardLayoutData.diacriticLayer)
+        }
+    }
+
+    private func activeDefaultLayer() -> KeyboardLayer {
+        switch KeyboardSettings.selectedLayout {
+        case .lsd:            return KeyboardLayoutData.defaultLayer
+        case .arabicStandard: return ArabicStandardLayoutData.defaultLayer
+        case .crulpUrdu:      return CRULPUrduLayoutData.defaultLayer
         }
     }
 
@@ -247,6 +255,13 @@ extension KeyboardViewController: PredictiveBarDelegate {
     }
 
     func predictiveBarDidTapSettings(_ bar: PredictiveBar) {
-        KeyboardMenuView.show(in: view)
+        let menu = KeyboardMenuView.show(in: view)
+        let prevLayout = KeyboardSettings.selectedLayout
+        menu.onDismiss = { [weak self] in
+            if KeyboardSettings.selectedLayout != prevLayout {
+                self?.currentLayer = .default
+            }
+            self?.applyLayer()
+        }
     }
 }

@@ -170,9 +170,11 @@ enum KeyboardLayoutData {
         ],
         // Row 4
         [
-            KeyData("ا ب ج", type: .abc,   width: .fixed(80)),
-            KeyData(" ",     type: .space,  width: .flexible),
-            KeyData("↵",     type: .enter,  width: .fixed(80)),
+            KeyData("ا ب ج", type: .abc,   width: .fixed(60)),
+            KeyData("،",     alternates: [","],   width: .fixed(36)),
+            KeyData(" ",     type: .space,         width: .flexible),
+            KeyData(".",     alternates: ["۔"],    width: .fixed(36)),
+            KeyData("↵",     type: .enter,         width: .fixed(60)),
         ],
     ])
 

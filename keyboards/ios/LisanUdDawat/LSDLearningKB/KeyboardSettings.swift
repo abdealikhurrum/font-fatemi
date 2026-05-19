@@ -38,4 +38,16 @@ enum KeyboardSettings {
         }
         set { UserDefaults.standard.set(newValue, forKey: "double_tap_delay") }
     }
+
+    // Active keyboard layout.
+    enum LayoutType: String {
+        case lsd            = "lsd"
+        case arabicStandard = "arabic_standard"
+        case crulpUrdu      = "crulp_urdu"
+    }
+
+    static var selectedLayout: LayoutType {
+        get { LayoutType(rawValue: UserDefaults.standard.string(forKey: "selected_layout") ?? "lsd") ?? .lsd }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "selected_layout") }
+    }
 }
