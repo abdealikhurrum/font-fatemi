@@ -32,16 +32,23 @@ final class KeyboardViewController: UIInputViewController {
         applyLayer()
     }
 
-    // Register every .ttf/.otf in the extension bundle directly with the process,
-    // bypassing com.apple.fontservicesd which is sandboxed in keyboard extensions
-    // and produces log noise on every launch.
+    private static var fontsRegistered = false
+
     private func registerBundledFonts() {
+        guard !Self.fontsRegistered else { return }
+        // If the font already resolves (e.g. system-wide install), skip registration
+        // entirely to avoid the GSFont "file already registered" warning.
+        guard UIFont(name: "FatemiMaqala-Regular", size: 12) == nil else {
+            Self.fontsRegistered = true
+            return
+        }
         for ext in ["ttf", "otf", "TTF", "OTF"] {
             let urls = Bundle.main.urls(forResourcesWithExtension: ext, subdirectory: nil) ?? []
             for url in urls {
                 CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
             }
         }
+        Self.fontsRegistered = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
