@@ -60,7 +60,7 @@ final class CorpusLogger {
         var words = load()
         words.append(word)
         save(words)
-        print("[CorpusLogger] saved "\(word)"  (total: \(words.count) words)")
+        print("[CorpusLogger] saved \(word)  (total: \(words.count) words)")
     }
 
     var wordCount: Int { load().count }
