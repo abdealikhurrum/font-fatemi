@@ -48,7 +48,7 @@ final class CorpusLogger {
         words.append(word)
         defaults.set(words, forKey: Self.wordsKey)
         defaults.synchronize()
-        print("[CorpusLogger] saved "\(word)"  (total: \(words.count) words)")
+        print("[CorpusLogger] saved \(word)  (total: \(words.count) words)")
     }
 
     var wordCount: Int { storedWords.count }
