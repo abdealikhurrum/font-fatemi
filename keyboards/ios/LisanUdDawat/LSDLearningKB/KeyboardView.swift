@@ -49,6 +49,11 @@ final class KeyboardView: UIView {
     private var popupRepeatTimer: Timer?
     private var popupRepeatFired = false
 
+    // Held-key repeat for base character keys
+    private var keyRepeatInitialTimer: Timer?
+    private var keyRepeatTimer: Timer?
+    private var keyRepeatFired = false
+
     // MARK: - Keys
 
     private var keyButtons: [KeyButton] = []
@@ -168,6 +173,12 @@ final class KeyboardView: UIView {
         key.setHighlighted(false)
         activeKey = nil
 
+        // Held repeat was running — finger-up just stops it, no extra tap event
+        if keyRepeatFired {
+            keyRepeatFired = false
+            return
+        }
+
         // Double-tap: same character key, non-empty secondary, within window
         let isDouble = key === lastTappedKey
             && key.keyData.type == .character
@@ -212,11 +223,23 @@ final class KeyboardView: UIView {
             return
         }
 
-        // Long press for alternates
-        if !key.keyData.alternates.isEmpty {
+        // Long-press for character keys: show popup (if alternates exist) then fall through to repeat
+        if key.keyData.type == .character {
             longPressTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) { [weak self] _ in
                 guard let self else { return }
                 self.dismissCallout()
+                if !key.keyData.alternates.isEmpty {
+                    self.showPopup(for: key)
+                    // Popup times out → key repeat after another 0.8s if nothing selected
+                    self.scheduleKeyRepeat(for: key, delay: 0.8)
+                } else {
+                    self.startKeyRepeat(for: key)
+                }
+            }
+        } else if !key.keyData.alternates.isEmpty {
+            // Non-character keys with alternates (space bar) — popup only, no base repeat
+            longPressTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) { [weak self] _ in
+                guard let self else { return }
                 self.showPopup(for: key)
             }
         }
@@ -264,10 +287,34 @@ final class KeyboardView: UIView {
 
     private func dismissPopup() {
         cancelPopupRepeatTimers()
+        cancelKeyRepeatTimers()
         popupRepeatFired = false
         activePopup?.removeFromSuperview()
         activePopup    = nil
         popupSourceKey = nil
+    }
+
+    // After popup shows, if nothing is selected for `delay` seconds, dismiss popup and repeat base key.
+    private func scheduleKeyRepeat(for key: KeyButton, delay: TimeInterval) {
+        keyRepeatInitialTimer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { [weak self] _ in
+            guard let self, self.activePopup?.selectedCharacter == nil else { return }
+            self.dismissPopup()
+            self.startKeyRepeat(for: key)
+        }
+    }
+
+    // Insert the primary character once immediately, then keep inserting every 0.08s.
+    private func startKeyRepeat(for key: KeyButton) {
+        keyRepeatFired = true
+        delegate?.keyPressed(key.keyData)
+        keyRepeatTimer = Timer.scheduledTimer(withTimeInterval: 0.08, repeats: true) { [weak self] _ in
+            self?.delegate?.keyPressed(key.keyData)
+        }
+    }
+
+    private func cancelKeyRepeatTimers() {
+        keyRepeatInitialTimer?.invalidate(); keyRepeatInitialTimer = nil
+        keyRepeatTimer?.invalidate();        keyRepeatTimer = nil
     }
 
     // After the user holds on a popup item for 0.5s, insert it once, then keep
@@ -325,6 +372,7 @@ final class KeyboardView: UIView {
         backspaceRepeatTimer?.invalidate();    backspaceRepeatTimer = nil
         backspaceInitialTimer?.invalidate();   backspaceInitialTimer = nil
         cancelPopupRepeatTimers()
+        cancelKeyRepeatTimers()
     }
 
     // MARK: - Hit testing

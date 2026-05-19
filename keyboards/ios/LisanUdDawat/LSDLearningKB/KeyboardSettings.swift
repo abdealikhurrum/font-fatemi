@@ -39,6 +39,17 @@ enum KeyboardSettings {
         set { UserDefaults.standard.set(newValue, forKey: "double_tap_delay") }
     }
 
+    // Double alef (اا) produces either اٰ (alef with kharo zabar) or آ (alef madda).
+    enum DoubleAlefStyle: String {
+        case kharoZabar = "kharo_zabar"   // اٰ  default
+        case alefMadda  = "alef_madda"    // آ
+    }
+
+    static var doubleAlefStyle: DoubleAlefStyle {
+        get { DoubleAlefStyle(rawValue: UserDefaults.standard.string(forKey: "double_alef_style") ?? "") ?? .kharoZabar }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "double_alef_style") }
+    }
+
     // Active keyboard layout.
     enum LayoutType: String {
         case lsd            = "lsd"

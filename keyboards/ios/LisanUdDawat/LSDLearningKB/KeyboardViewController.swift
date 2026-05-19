@@ -202,11 +202,15 @@ extension KeyboardViewController: KeyboardViewDelegate {
 
     func doubleTapPressed(on key: KeyData) {
         guard KeyboardSettings.doubleTapEnabled else {
-            insert(key.primary)   // second tap registers normally when feature is off
+            insert(key.primary)
             return
         }
-        deleteBack()           // removes primary from both proxy and pendingWord
-        insert(key.secondary)
+        deleteBack()
+        // اا produces آ or اٰ depending on the setting
+        let secondary = (key.primary == "ا" && key.secondary == "اٰ" && KeyboardSettings.doubleAlefStyle == .alefMadda)
+            ? "آ"
+            : key.secondary
+        insert(secondary)
     }
 
     func longPressAlternateSelected(_ character: String) {
