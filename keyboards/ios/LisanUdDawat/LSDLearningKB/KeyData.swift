@@ -14,7 +14,7 @@ enum KeyType {
     case diacritic    // switch to diacritics / eraab layer
     case cursorLeft   // move cursor one position left
     case cursorRight  // move cursor one position right
-    case exportCorpus // copy collected corpus text to clipboard
+    case settings     // open keyboard settings menu
 }
 
 // MARK: - Key Width
@@ -117,11 +117,12 @@ enum KeyboardLayoutData {
             KeyData("ظ", secondary: "ہ"),                                       // ظظ → ہ
             KeyData("⌫", type: .backspace, width: .wide),
         ],
-        // Row 4 — 4 keys; punctuation lives in the ١٢٣ layer
+        // Row 4
         [
             KeyData("١٢٣", type: .numeric,  width: .fixed(44)),
+            KeyData("⚙",   type: .settings, width: .fixed(36)),
             KeyData(" ",   type: .space,    width: .flexible),
-            KeyData("َ",   type: .diacritic, width: .fixed(44)),   // opens diacritic layer
+            KeyData("َ",   type: .diacritic, width: .fixed(36)),
             KeyData("↵",   type: .enter,    width: .fixed(52)),
         ],
     ])
@@ -170,10 +171,9 @@ enum KeyboardLayoutData {
         ],
         // Row 4
         [
-            KeyData("ا ب ج", type: .abc,         width: .fixed(80)),
-            KeyData(" ",     type: .space,        width: .flexible),
-            KeyData("⬆ corpus", type: .exportCorpus, width: .fixed(80)),
-            KeyData("↵",     type: .enter,        width: .fixed(80)),
+            KeyData("ا ب ج", type: .abc,   width: .fixed(80)),
+            KeyData(" ",     type: .space,  width: .flexible),
+            KeyData("↵",     type: .enter,  width: .fixed(80)),
         ],
     ])
 

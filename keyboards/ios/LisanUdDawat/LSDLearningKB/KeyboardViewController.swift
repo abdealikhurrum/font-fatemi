@@ -14,6 +14,7 @@ final class KeyboardViewController: UIInputViewController {
     // MARK: - Views
 
     private var keyboardView  = KeyboardView()
+    private weak var activeMenu: KeyboardMenuView?
     private var predictiveBar = PredictiveBar()
     private var barHeightConstraint: NSLayoutConstraint?
 
@@ -120,7 +121,7 @@ final class KeyboardViewController: UIInputViewController {
         textDocumentProxy.insertText(text)
         lastInsertedCharacter = text.last
         lastInsertTime = Date()
-        CorpusLogger.shared.record(text)
+        if KeyboardSettings.corpusEnabled { CorpusLogger.shared.record(text) }
         updatePredictions()
     }
 
@@ -194,10 +195,8 @@ extension KeyboardViewController: KeyboardViewDelegate {
         case .cursorRight:
             textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
 
-        case .exportCorpus:
-            let text = CorpusLogger.shared.exportText()
-            UIPasteboard.general.string = text.isEmpty ? "(no corpus yet)" : text
-            print("[CorpusLogger] copied \(CorpusLogger.shared.wordCount) words to clipboard")
+        case .settings:
+            toggleSettingsMenu()
 
         case .globe:
             advanceToNextInputMode()
@@ -208,8 +207,23 @@ extension KeyboardViewController: KeyboardViewDelegate {
     }
 
     func doubleTapPressed(on key: KeyData) {
+        guard KeyboardSettings.doubleTapEnabled else { return }
         deleteBack()           // removes primary from both proxy and pendingWord
         insert(key.secondary)
+    }
+
+    // MARK: - Settings menu
+
+    private func toggleSettingsMenu() {
+        if let existing = activeMenu {
+            existing.dismiss()
+            activeMenu = nil
+            return
+        }
+        let anchorY = keyboardView.frame.minY
+        let menu = KeyboardMenuView.show(in: view, above: anchorY)
+        menu.delegate = self
+        activeMenu = menu
     }
 
     func longPressAlternateSelected(_ character: String) {
@@ -244,6 +258,14 @@ extension KeyboardViewController: KeyboardViewDelegate {
 
     func transliterationCorrected(lsd: String, suggested: String, corrected: String) {
         PairCollector.shared.recordCorrection(lsd: lsd, suggestedRoman: suggested, correctedRoman: corrected)
+    }
+}
+
+// MARK: - KeyboardMenuDelegate
+
+extension KeyboardViewController: KeyboardMenuDelegate {
+    func keyboardMenuDidDismiss() {
+        activeMenu = nil
     }
 }
 

@@ -46,7 +46,7 @@ final class KeyButton: UIView {
         case .character, .space:
             return KeyboardColors.characterKey
         case .backspace, .numeric, .abc, .globe, .emoji,
-             .diacritic, .cursorLeft, .cursorRight, .exportCorpus, .enter:
+             .diacritic, .cursorLeft, .cursorRight, .settings, .enter:
             return KeyboardColors.specialKey
         }
     }
