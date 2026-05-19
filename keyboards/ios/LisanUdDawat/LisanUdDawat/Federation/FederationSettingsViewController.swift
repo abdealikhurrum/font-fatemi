@@ -25,10 +25,24 @@ final class FederationSettingsViewController: UIViewController {
     private lazy var exportCorpusButton = UIButton(type: .system)
 
     private static let groupID  = "group.com.exordiumnetworks.lsdkeyboard"
-    private static let wordsKey = "lsd_corpus_words"
+    private static let fileName = "lsd_corpus_words.json"
 
     private var sharedDefaults: UserDefaults? {
         UserDefaults(suiteName: Self.groupID)
+    }
+
+    private var corpusFileURL: URL? {
+        FileManager.default
+            .containerURL(forSecurityApplicationGroupIdentifier: Self.groupID)?
+            .appendingPathComponent(Self.fileName)
+    }
+
+    private func loadKeyboardWords() -> [String] {
+        guard let url = corpusFileURL,
+              let data = try? Data(contentsOf: url),
+              let words = try? JSONDecoder().decode([String].self, from: data)
+        else { return [] }
+        return words
     }
 
     // MARK: - Lifecycle
@@ -106,15 +120,15 @@ final class FederationSettingsViewController: UIViewController {
     }
 
     private func refreshCorpusCard() {
-        let keyboardWords = sharedDefaults?.stringArray(forKey: Self.wordsKey) ?? []
+        let keyboardWords = loadKeyboardWords()
         let notepadText   = UserDefaults.standard.string(forKey: "notepad_text") ?? ""
         let notepadWords  = notepadText
             .components(separatedBy: .whitespacesAndNewlines)
             .filter { !$0.isEmpty }
 
-        let groupOK = sharedDefaults != nil
+        let groupOK = corpusFileURL != nil
         corpusCountLabel.text = """
-        Keyboard words collected: \(keyboardWords.count)\(groupOK ? "" : " ⚠️ App Group not found")
+        Keyboard words collected: \(keyboardWords.count)\(groupOK ? "" : "  ⚠️ App Group not found")
         Notepad words available:  \(notepadWords.count)
         """
         exportCorpusButton.isEnabled = !keyboardWords.isEmpty
@@ -122,7 +136,7 @@ final class FederationSettingsViewController: UIViewController {
     }
 
     @objc private func exportKeyboardCorpus() {
-        let words = sharedDefaults?.stringArray(forKey: Self.wordsKey) ?? []
+        let words = loadKeyboardWords()
         guard !words.isEmpty else { return }
         let text = words.joined(separator: "\n")
         let tmpURL = FileManager.default.temporaryDirectory

@@ -1,25 +1,36 @@
 import Foundation
 
 // Collects every word typed with the LSD keyboard.
-// Stored in the App Group container shared with the main app.
-// Falls back to the extension's own UserDefaults if the group isn't configured.
+//
+// Storage: JSON file in the App Group container so the main app can read it.
+// Falls back to the extension's own Documents folder if the group isn't
+// provisioned — containerURL(forSecurityApplicationGroupIdentifier:) returns
+// nil rather than a dummy object, unlike UserDefaults(suiteName:).
 
 final class CorpusLogger {
     static let shared = CorpusLogger()
-    private init() {}
+    private init() {
+        print("[CorpusLogger] storage → \(corpusFileURL.path)")
+    }
 
     private var pendingWord = ""
-    private static let groupID  = "group.com.exordiumnetworks.lsdkeyboard"
-    private static let wordsKey = "lsd_corpus_words"
+    private static let groupID   = "group.com.exordiumnetworks.lsdkeyboard"
+    private static let fileName  = "lsd_corpus_words.json"
 
-    private let defaults: UserDefaults = {
-        UserDefaults(suiteName: "group.com.exordiumnetworks.lsdkeyboard") ?? {
-            print("[CorpusLogger] ⚠️ App Group not available — falling back to standard UserDefaults")
-            return .standard
-        }()
+    // MARK: - Storage URL
+
+    private lazy var corpusFileURL: URL = {
+        if let shared = FileManager.default
+            .containerURL(forSecurityApplicationGroupIdentifier: Self.groupID) {
+            return shared.appendingPathComponent(Self.fileName)
+        }
+        print("[CorpusLogger] ⚠️ App Group not available — using extension Documents folder")
+        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        return docs.appendingPathComponent(Self.fileName)
     }()
 
-    // Call on every character inserted via textDocumentProxy.
+    // MARK: - Public API
+
     func record(_ text: String) {
         for scalar in text.unicodeScalars {
             switch scalar.value {
@@ -34,43 +45,51 @@ final class CorpusLogger {
         }
     }
 
-    // Call when backspace is pressed so the pending word stays accurate.
     func recordBackspace() {
         if !pendingWord.isEmpty { pendingWord.removeLast() }
     }
 
-    // Call after a word-delete (long-press backspace) where multiple chars are
-    // erased at once and we can no longer track what remains in progress.
     func resetPending() {
         pendingWord = ""
     }
 
-    // Flush the current pending word to storage.
     func flush() {
         let word = pendingWord
         pendingWord = ""
         guard !word.isEmpty else { return }
-        var words = storedWords
+        var words = load()
         words.append(word)
-        defaults.set(words, forKey: Self.wordsKey)
-        defaults.synchronize()
-        print("[CorpusLogger] saved \(word)  (total: \(words.count) words)")
+        save(words)
+        print("[CorpusLogger] saved "\(word)"  (total: \(words.count) words)")
     }
 
-    var wordCount: Int { storedWords.count }
+    var wordCount: Int { load().count }
 
-    // Newline-separated word list suitable for a training corpus.
     func exportText() -> String {
-        storedWords.joined(separator: "\n")
+        load().joined(separator: "\n")
     }
 
     func clear() {
-        defaults.removeObject(forKey: Self.wordsKey)
+        save([])
         pendingWord = ""
         print("[CorpusLogger] corpus cleared")
     }
 
-    private var storedWords: [String] {
-        defaults.stringArray(forKey: Self.wordsKey) ?? []
+    // MARK: - File I/O
+
+    private func load() -> [String] {
+        guard let data = try? Data(contentsOf: corpusFileURL),
+              let words = try? JSONDecoder().decode([String].self, from: data)
+        else { return [] }
+        return words
+    }
+
+    private func save(_ words: [String]) {
+        guard let data = try? JSONEncoder().encode(words) else { return }
+        do {
+            try data.write(to: corpusFileURL, options: .atomic)
+        } catch {
+            print("[CorpusLogger] ⚠️ write failed: \(error.localizedDescription)")
+        }
     }
 }
