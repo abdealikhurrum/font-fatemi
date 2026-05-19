@@ -203,8 +203,7 @@ extension KeyboardViewController: KeyboardViewDelegate {
     }
 
     func doubleTapPressed(on key: KeyData) {
-        // Delete the primary char inserted on the first tap, replace with secondary
-        textDocumentProxy.deleteBackward()
+        deleteBack()           // removes primary from both proxy and pendingWord
         insert(key.secondary)
     }
 
@@ -229,6 +228,7 @@ extension KeyboardViewController: KeyboardViewDelegate {
         }
         for _ in 0..<deleteCount { textDocumentProxy.deleteBackward() }
         lastInsertedCharacter = nil
+        CorpusLogger.shared.resetPending()   // word-delete may erase the in-progress word
         updatePredictions()
     }
 

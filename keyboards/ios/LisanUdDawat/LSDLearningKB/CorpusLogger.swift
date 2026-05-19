@@ -39,6 +39,12 @@ final class CorpusLogger {
         if !pendingWord.isEmpty { pendingWord.removeLast() }
     }
 
+    // Call after a word-delete (long-press backspace) where multiple chars are
+    // erased at once and we can no longer track what remains in progress.
+    func resetPending() {
+        pendingWord = ""
+    }
+
     // Flush the current pending word to storage.
     func flush() {
         let word = pendingWord
