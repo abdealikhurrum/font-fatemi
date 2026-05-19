@@ -144,14 +144,12 @@ final class NotepadViewController: UIViewController, UITextViewDelegate {
 
         let overlap = max(0, view.bounds.maxY - frame.minY)
         let safeBot = view.safeAreaInsets.bottom
-        let inset   = max(0, overlap - safeBot)
+        let shift   = overlap > 0 ? overlap - safeBot : 0
 
         UIView.animate(withDuration: duration,
                        delay: 0,
                        options: UIView.AnimationOptions(rawValue: curve << 16)) {
-            self.textView.contentInset.bottom = inset
-            self.textView.verticalScrollIndicatorInsets.bottom = inset
-            self.countBarBottom?.constant = -(overlap > 0 ? overlap - safeBot : 0)
+            self.countBarBottom?.constant = -shift
             self.view.layoutIfNeeded()
         }
     }
