@@ -14,9 +14,7 @@ final class KeyboardViewController: UIInputViewController {
     // MARK: - Views
 
     private var keyboardView  = KeyboardView()
-    private weak var activeMenu: KeyboardMenuView?
     private var predictiveBar = PredictiveBar()
-    private var barHeightConstraint: NSLayoutConstraint?
 
     // MARK: - Double-space tracking
 
@@ -64,14 +62,9 @@ final class KeyboardViewController: UIInputViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let predEnabled = KeyboardSettings.predictionEnabled
-        predictiveBar.isHidden = !predEnabled
-        barHeightConstraint?.constant = predEnabled ? PredictiveBar.height : 0
-
         let keyH  = keyboardView.intrinsicContentSize.height
-        let barH  = predEnabled ? PredictiveBar.height : 0
         let safeB = view.safeAreaInsets.bottom
-        view.frame.size.height = keyH + barH + safeB
+        view.frame.size.height = keyH + PredictiveBar.height + safeB
     }
 
     // MARK: - Setup
@@ -87,18 +80,11 @@ final class KeyboardViewController: UIInputViewController {
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(keyboardView)
 
-        let predEnabled = KeyboardSettings.predictionEnabled
-        predictiveBar.isHidden = !predEnabled
-        let barH = predictiveBar.heightAnchor.constraint(
-            equalToConstant: predEnabled ? PredictiveBar.height : 0
-        )
-        barHeightConstraint = barH
-
         NSLayoutConstraint.activate([
             predictiveBar.topAnchor.constraint(equalTo: view.topAnchor),
             predictiveBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             predictiveBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            barH,
+            predictiveBar.heightAnchor.constraint(equalToConstant: PredictiveBar.height),
 
             keyboardView.topAnchor.constraint(equalTo: predictiveBar.bottomAnchor),
             keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -135,7 +121,10 @@ final class KeyboardViewController: UIInputViewController {
     // MARK: - Predictions
 
     private func updatePredictions() {
-        guard KeyboardSettings.predictionEnabled else { return }
+        guard KeyboardSettings.predictionEnabled else {
+            predictiveBar.update(suggestions: [])
+            return
+        }
         let context = textDocumentProxy.documentContextBeforeInput ?? ""
         let word    = context.components(separatedBy: .whitespaces).last ?? ""
         if word.isEmpty {
@@ -195,9 +184,6 @@ extension KeyboardViewController: KeyboardViewDelegate {
         case .cursorRight:
             textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
 
-        case .settings:
-            toggleSettingsMenu()
-
         case .globe:
             advanceToNextInputMode()
 
@@ -210,20 +196,6 @@ extension KeyboardViewController: KeyboardViewDelegate {
         guard KeyboardSettings.doubleTapEnabled else { return }
         deleteBack()           // removes primary from both proxy and pendingWord
         insert(key.secondary)
-    }
-
-    // MARK: - Settings menu
-
-    private func toggleSettingsMenu() {
-        if let existing = activeMenu {
-            existing.dismiss()
-            activeMenu = nil
-            return
-        }
-        let anchorY = keyboardView.frame.minY
-        let menu = KeyboardMenuView.show(in: view, above: anchorY)
-        menu.delegate = self
-        activeMenu = menu
     }
 
     func longPressAlternateSelected(_ character: String) {
@@ -261,14 +233,6 @@ extension KeyboardViewController: KeyboardViewDelegate {
     }
 }
 
-// MARK: - KeyboardMenuDelegate
-
-extension KeyboardViewController: KeyboardMenuDelegate {
-    func keyboardMenuDidDismiss() {
-        activeMenu = nil
-    }
-}
-
 // MARK: - PredictiveBarDelegate
 
 extension KeyboardViewController: PredictiveBarDelegate {
@@ -277,5 +241,9 @@ extension KeyboardViewController: PredictiveBarDelegate {
         let partial = before.components(separatedBy: .whitespaces).last ?? ""
         for _ in partial { textDocumentProxy.deleteBackward() }
         insert(suggestion + " ")
+    }
+
+    func predictiveBarDidTapSettings(_ bar: PredictiveBar) {
+        KeyboardMenuView.show(in: view)
     }
 }

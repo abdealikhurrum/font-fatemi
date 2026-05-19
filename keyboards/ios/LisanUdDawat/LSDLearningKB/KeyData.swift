@@ -14,7 +14,6 @@ enum KeyType {
     case diacritic    // switch to diacritics / eraab layer
     case cursorLeft   // move cursor one position left
     case cursorRight  // move cursor one position right
-    case settings     // open keyboard settings menu
 }
 
 // MARK: - Key Width
@@ -120,7 +119,6 @@ enum KeyboardLayoutData {
         // Row 4
         [
             KeyData("١٢٣", type: .numeric,  width: .fixed(44)),
-            KeyData("⚙",   type: .settings, width: .fixed(36)),
             KeyData(" ",   type: .space,    width: .flexible),
             KeyData("َ",   type: .diacritic, width: .fixed(36)),
             KeyData("↵",   type: .enter,    width: .fixed(52)),
