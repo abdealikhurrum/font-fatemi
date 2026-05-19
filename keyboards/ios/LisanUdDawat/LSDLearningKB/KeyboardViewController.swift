@@ -194,6 +194,11 @@ extension KeyboardViewController: KeyboardViewDelegate {
         case .cursorRight:
             textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
 
+        case .exportCorpus:
+            let text = CorpusLogger.shared.exportText()
+            UIPasteboard.general.string = text.isEmpty ? "(no corpus yet)" : text
+            print("[CorpusLogger] copied \(CorpusLogger.shared.wordCount) words to clipboard")
+
         case .globe:
             advanceToNextInputMode()
 
