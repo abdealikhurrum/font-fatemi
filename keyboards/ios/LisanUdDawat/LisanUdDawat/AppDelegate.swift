@@ -1,3 +1,4 @@
+import CoreText
 import UIKit
 
 @main
@@ -8,6 +9,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        registerBundledFonts()
         let tabs = UITabBarController()
 
         let setup = UINavigationController(rootViewController: ViewController())
@@ -28,5 +30,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = tabs
         window?.makeKeyAndVisible()
         return true
+    }
+
+    private func registerBundledFonts() {
+        for ext in ["ttf", "otf", "TTF", "OTF"] {
+            let urls = Bundle.main.urls(forResourcesWithExtension: ext, subdirectory: nil) ?? []
+            for url in urls {
+                CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
+            }
+        }
     }
 }
