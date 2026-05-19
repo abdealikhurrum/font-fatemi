@@ -2,96 +2,79 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
 
-    <!-- Background: dark navy → deep teal, diagonal -->
+    <!-- Background: deep ink-blue → warm dark teal -->
     <linearGradient id="bg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#1B3660"/>
-      <stop offset="100%" stop-color="#0C6E80"/>
+      <stop offset="0%"   stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0E4D5C"/>
     </linearGradient>
 
-    <!-- Soft inner vignette to give depth -->
-    <radialGradient id="vignette" cx="50%" cy="45%" r="60%">
-      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.06"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    <!-- Warm radial bloom behind the ligature -->
+    <radialGradient id="bloom" cx="50%" cy="48%" r="42%">
+      <stop offset="0%"   stop-color="#C8914A" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#C8914A" stop-opacity="0"/>
     </radialGradient>
 
-    <!-- Clipping mask for rounded-square iOS icon shape -->
-    <clipPath id="icon-shape">
+    <!-- Ligature text shadow / glow -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Clipping mask: iOS rounded-square -->
+    <clipPath id="shape">
       <rect width="512" height="512" rx="114"/>
     </clipPath>
 
   </defs>
 
-  <g clip-path="url(#icon-shape)">
+  <g clip-path="url(#shape)">
 
-    <!-- Background fill -->
+    <!-- Base background -->
     <rect width="512" height="512" fill="url(#bg)"/>
-    <rect width="512" height="512" fill="url(#vignette)"/>
 
-    <!-- ════════════════════════════════════════════
-         Keyboard key row — decorative, bottom third
-         Six small keys + a wide space bar
-         ════════════════════════════════════════════ -->
+    <!-- Warm bloom centred on the ligature -->
+    <rect width="512" height="512" fill="url(#bloom)"/>
 
-    <!-- Top key row -->
-    <rect x="52"  y="388" width="54" height="36" rx="8" fill="white" fill-opacity="0.11"/>
-    <rect x="118" y="388" width="54" height="36" rx="8" fill="white" fill-opacity="0.11"/>
-    <rect x="184" y="388" width="54" height="36" rx="8" fill="white" fill-opacity="0.11"/>
-    <rect x="250" y="388" width="54" height="36" rx="8" fill="white" fill-opacity="0.11"/>
-    <rect x="316" y="388" width="54" height="36" rx="8" fill="white" fill-opacity="0.11"/>
-    <rect x="382" y="388" width="78" height="36" rx="8" fill="white" fill-opacity="0.14"/>
+    <!-- ─────────────────────────────────────────
+         Thin gold rule — like a ruled writing line,
+         or a keyboard base-line
+         ───────────────────────────────────────── -->
+    <line x1="64" y1="356" x2="448" y2="356"
+          stroke="#C8914A" stroke-width="1.5" stroke-opacity="0.45"/>
 
-    <!-- Bottom row: two utility keys + wide space bar -->
-    <rect x="52"  y="436" width="74"  height="36" rx="8" fill="white" fill-opacity="0.10"/>
-    <rect x="138" y="436" width="236" height="36" rx="8" fill="white" fill-opacity="0.20"/>
-    <rect x="386" y="436" width="74"  height="36" rx="8" fill="white" fill-opacity="0.10"/>
+    <!-- ─────────────────────────────────────────
+         چھے  ligature
+         Rendered at large size so the connected
+         form, the loop, and the three dots read
+         clearly even at small icon sizes.
 
-    <!-- ════════════════════════════════════════════
-         Main letterform — Arabic ل (lam)
-         Drawn as a path so no font dependency.
+         Font stack: FatemiMaqala (app font) →
+         Noto Naskh Arabic (web fallback) →
+         system Arabic serif.
+         ───────────────────────────────────────── -->
 
-         Anatomy of isolated ل:
-           • Tall right-side vertical stroke (the "alif" part)
-           • Curves left and down at the base
-           • Ends with a small leftward foot
-         ════════════════════════════════════════════ -->
+    <!-- Soft shadow pass (slightly offset, blurred, amber) -->
+    <text
+      x="260" y="344"
+      font-family="FatemiMaqala, 'FatemiMaqala-Regular', 'Noto Naskh Arabic', 'Traditional Arabic', 'Arabic Typesetting', serif"
+      font-size="236"
+      text-anchor="middle"
+      fill="#C8914A"
+      fill-opacity="0.35"
+      filter="url(#glow)"
+      direction="rtl">چھے</text>
 
-    <!-- Outer glow / shadow for the letter -->
-    <path d="M 295 82
-             C 295 82 295 82 293 84
-             L 278 290
-             C 276 318 268 338 250 352
-             C 234 365 212 368 194 362
-             C 172 354 163 336 166 318
-             L 168 306"
-          fill="none"
-          stroke="#0C6E80"
-          stroke-width="56"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          opacity="0.5"/>
-
-    <!-- Main letter stroke — warm white with slight cream tint -->
-    <path d="M 295 82
-             C 295 82 295 82 293 84
-             L 278 290
-             C 276 318 268 338 250 352
-             C 234 365 212 368 194 362
-             C 172 354 163 336 166 318
-             L 168 306"
-          fill="none"
-          stroke="#F7F1E6"
-          stroke-width="34"
-          stroke-linecap="round"
-          stroke-linejoin="round"/>
-
-    <!-- ════════════════════════════════════════════
-         Accent: warm amber dot — a nod to
-         diacritical marks in Arabic script
-         ════════════════════════════════════════════ -->
-    <circle cx="310" cy="200" r="16" fill="#F5C033" opacity="0.92"/>
-
-    <!-- Tiny second dot (like double diacritic) for visual balance -->
-    <circle cx="310" cy="158" r="9"  fill="#F5C033" opacity="0.55"/>
+    <!-- Main ligature — warm parchment white -->
+    <text
+      x="256" y="340"
+      font-family="FatemiMaqala, 'FatemiMaqala-Regular', 'Noto Naskh Arabic', 'Traditional Arabic', 'Arabic Typesetting', serif"
+      font-size="236"
+      text-anchor="middle"
+      fill="#F2EAD8"
+      direction="rtl">چھے</text>
 
   </g>
 
