@@ -43,7 +43,7 @@ final class LongPressPopupView: UIView {
         let count = CGFloat(alternates.count)
         let p = LongPressPopupView.padding
         let sp = LongPressPopupView.itemSpacing
-        let itemW = keySize.width
+        let itemW = min(keySize.width, 52)   // cap so space-bar popup isn't enormous
         let itemH = keySize.height
         let totalW = count * itemW + (count - 1) * sp + 2 * p
         let totalH = itemH + 2 * p
@@ -57,10 +57,15 @@ final class LongPressPopupView: UIView {
         for (i, alt) in alternates.enumerated() {
             let x = p + CGFloat(i) * (itemW + sp)
             let btn = UIButton(frame: CGRect(x: x, y: p, width: itemW, height: itemH))
-            btn.setTitle(visibleTitle(alt), for: .normal)
+            let title = visibleTitle(alt)
+            btn.setTitle(title, for: .normal)
             btn.setTitleColor(.label, for: .normal)
             btn.setTitleColor(.white, for: .selected)
-            btn.titleLabel?.font = LongPressPopupView.font
+            btn.titleLabel?.font = isLabel(title)
+                ? UIFont.systemFont(ofSize: 11, weight: .medium)
+                : LongPressPopupView.font
+            btn.titleLabel?.adjustsFontSizeToFitWidth = true
+            btn.titleLabel?.minimumScaleFactor = 0.7
             btn.titleLabel?.textAlignment = .center
             btn.layer.cornerRadius = 8
             btn.tag = i
@@ -118,10 +123,22 @@ final class LongPressPopupView: UIView {
     }
 
     // Mirror of KeyButton.visibleText — tatweel base for standalone combining marks.
+    // Invisible control characters get a short descriptive label instead.
     private func visibleTitle(_ text: String) -> String {
+        switch text {
+        case "\u{200D}": return "ZWJ"
+        case "\u{200C}": return "ZWNJ"
+        default: break
+        }
         guard !text.isEmpty,
               text.unicodeScalars.allSatisfy({ $0.properties.generalCategory == .nonspacingMark })
         else { return text }
         return "ـ" + text
+    }
+
+    // Returns true when the title is a descriptive label rather than a glyph,
+    // so we can use a smaller system font instead of the Arabic typeface.
+    private func isLabel(_ title: String) -> Bool {
+        title.unicodeScalars.allSatisfy({ $0.value < 128 })  // ASCII = label
     }
 }
