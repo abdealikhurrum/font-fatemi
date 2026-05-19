@@ -28,6 +28,8 @@ final class NotepadViewController: UIViewController, UITextViewDelegate {
             UIBarButtonItem(image: UIImage(systemName: "textformat.size"),
                             style: .plain, target: self, action: #selector(showFontSizePicker)),
         ]
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
 
         NotificationCenter.default.addObserver(
             self, selector: #selector(keyboardWillChange(_:)),
@@ -92,6 +94,10 @@ final class NotepadViewController: UIViewController, UITextViewDelegate {
     }
 
     // MARK: - Actions
+
+    @objc private func dismissKeyboard() {
+        textView.resignFirstResponder()
+    }
 
     @objc private func confirmClear() {
         let a = UIAlertController(title: "Clear notepad?", message: nil, preferredStyle: .alert)
