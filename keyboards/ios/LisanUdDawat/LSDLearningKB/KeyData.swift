@@ -111,7 +111,8 @@ enum KeyboardLayoutData {
             KeyData("ى"),
             KeyData("ة", secondary: "ۃ"),                                       // ةة → ۃ
             KeyData("و"),
-            KeyData("ز", secondary: "ذ", alternates: ["ژ"]),             // زز → ذ
+            KeyData("ز", alternates: ["ژ"]),
+            KeyData("ذ"),
             KeyData("د", secondary: "ڈ",  alternates: ["ڈ"]),                   // دد → ڈ
             KeyData("ظ", secondary: "ہ"),                                       // ظظ → ہ
             KeyData("⌫", type: .backspace, width: .wide),
