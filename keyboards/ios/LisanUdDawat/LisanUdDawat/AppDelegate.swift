@@ -20,11 +20,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         notepad.tabBarItem = UITabBarItem(
             title: "Notepad", image: UIImage(systemName: "doc.text"), tag: 1)
 
+        let learn = UINavigationController(rootViewController: LearnViewController())
+        learn.tabBarItem = UITabBarItem(
+            title: "Learn", image: UIImage(systemName: "graduationcap"), tag: 2)
+
         let contribute = UINavigationController(rootViewController: FederationSettingsViewController())
         contribute.tabBarItem = UITabBarItem(
-            title: "Contribute", image: UIImage(systemName: "arrow.triangle.2.circlepath"), tag: 2)
+            title: "Contribute", image: UIImage(systemName: "arrow.triangle.2.circlepath"), tag: 3)
 
-        tabs.viewControllers = [setup, notepad, contribute]
+        tabs.viewControllers = [setup, notepad, learn, contribute]
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = tabs
