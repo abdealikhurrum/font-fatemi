@@ -6,5 +6,9 @@
 	<array>
 		<string>group.com.exordiumnetworks.lsdkeyboard</string>
 	</array>
+	<key>com.apple.developer.user-fonts</key>
+	<array>
+		<string>app-usage</string>
+	</array>
 </dict>
 </plist>
