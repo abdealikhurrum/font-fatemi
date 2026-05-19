@@ -1,22 +1,27 @@
 import Foundation
 
 // Collects every word typed with the LSD keyboard.
-// Stored in the extension's own UserDefaults (standard).
-// Data stays in the extension sandbox; use exportText() + UIPasteboard
-// to copy out, or set up an App Group to share with the main app.
+// Stored in the App Group container shared with the main app.
+// Falls back to the extension's own UserDefaults if the group isn't configured.
 
 final class CorpusLogger {
     static let shared = CorpusLogger()
     private init() {}
 
     private var pendingWord = ""
+    private static let groupID  = "group.com.exordiumnetworks.lsdkeyboard"
     private static let wordsKey = "lsd_corpus_words"
-    private static let sessionCountKey = "lsd_corpus_session_count"
+
+    private let defaults: UserDefaults = {
+        UserDefaults(suiteName: "group.com.exordiumnetworks.lsdkeyboard") ?? {
+            print("[CorpusLogger] ⚠️ App Group not available — falling back to standard UserDefaults")
+            return .standard
+        }()
+    }()
 
     // Call on every character inserted via textDocumentProxy.
     func record(_ text: String) {
         for scalar in text.unicodeScalars {
-            let ch = String(scalar)
             switch scalar.value {
             case 0x0020, 0x000A,           // space, newline
                  0x060C, 0x061B, 0x061F,   // Arabic comma, semicolon, question
@@ -34,22 +39,19 @@ final class CorpusLogger {
         if !pendingWord.isEmpty { pendingWord.removeLast() }
     }
 
-    // Flush whatever is pending (e.g. on keyboard dismiss or explicit trigger).
+    // Flush the current pending word to storage.
     func flush() {
         let word = pendingWord
         pendingWord = ""
         guard !word.isEmpty else { return }
         var words = storedWords
         words.append(word)
-        UserDefaults.standard.set(words, forKey: Self.wordsKey)
-        UserDefaults.standard.set(sessionCount + 1, forKey: Self.sessionCountKey)
+        defaults.set(words, forKey: Self.wordsKey)
+        defaults.synchronize()
+        print("[CorpusLogger] saved "\(word)"  (total: \(words.count) words)")
     }
 
     var wordCount: Int { storedWords.count }
-
-    var sessionCount: Int {
-        UserDefaults.standard.integer(forKey: Self.sessionCountKey)
-    }
 
     // Newline-separated word list suitable for a training corpus.
     func exportText() -> String {
@@ -57,12 +59,12 @@ final class CorpusLogger {
     }
 
     func clear() {
-        UserDefaults.standard.removeObject(forKey: Self.wordsKey)
-        UserDefaults.standard.removeObject(forKey: Self.sessionCountKey)
+        defaults.removeObject(forKey: Self.wordsKey)
         pendingWord = ""
+        print("[CorpusLogger] corpus cleared")
     }
 
     private var storedWords: [String] {
-        UserDefaults.standard.stringArray(forKey: Self.wordsKey) ?? []
+        defaults.stringArray(forKey: Self.wordsKey) ?? []
     }
 }

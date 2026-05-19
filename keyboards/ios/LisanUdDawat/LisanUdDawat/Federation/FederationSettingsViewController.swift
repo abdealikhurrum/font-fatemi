@@ -21,6 +21,16 @@ final class FederationSettingsViewController: UIViewController {
     private lazy var predictionToggle  = UISwitch()
     private lazy var activityIndicator = UIActivityIndicatorView(style: .medium)
 
+    private lazy var corpusCountLabel  = UILabel()
+    private lazy var exportCorpusButton = UIButton(type: .system)
+
+    private static let groupID  = "group.com.exordiumnetworks.lsdkeyboard"
+    private static let wordsKey = "lsd_corpus_words"
+
+    private var sharedDefaults: UserDefaults? {
+        UserDefaults(suiteName: Self.groupID)
+    }
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -35,6 +45,7 @@ final class FederationSettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         manager.reload()
+        refreshCorpusCard()
     }
 
     // MARK: - UI Construction
@@ -77,49 +88,45 @@ final class FederationSettingsViewController: UIViewController {
     private func corpusCard() -> UIView {
         let v = cardContainer(title: "Corpus")
 
-        let notepadText = UserDefaults.standard.string(forKey: "notepad_text") ?? ""
-        let wordCount = notepadText
-            .components(separatedBy: .whitespacesAndNewlines)
-            .filter { !$0.isEmpty }.count
+        corpusCountLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 15, weight: .regular)
+        corpusCountLabel.numberOfLines = 0
+        corpusCountLabel.textColor = .secondaryLabel
+        v.addArrangedSubview(corpusCountLabel)
 
-        v.addArrangedSubview(label(
-            "Notepad corpus: \(wordCount) words",
-            size: 15, weight: .medium
-        ))
-        v.addArrangedSubview(label(
-            "Everything you type in the Notepad tab is saved here and can be exported " +
-            "as a plain-text training file.",
-            size: 14, color: .secondaryLabel
-        ))
-
-        let exportBtn = UIButton(type: .system)
-        exportBtn.setTitle("Export notepad as corpus", for: .normal)
-        exportBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        exportBtn.backgroundColor = .systemIndigo
-        exportBtn.setTitleColor(.white, for: .normal)
-        exportBtn.layer.cornerRadius = 10
-        exportBtn.contentEdgeInsets = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-        exportBtn.isEnabled = wordCount > 0
-        exportBtn.alpha = wordCount > 0 ? 1.0 : 0.4
-        exportBtn.addTarget(self, action: #selector(exportNotepadCorpus), for: .touchUpInside)
-        v.addArrangedSubview(exportBtn)
-
-        v.addArrangedSubview(label(
-            "Keyboard typing data (from all apps) is collected in the keyboard extension " +
-            "and requires an App Group to appear here. Enable the " +
-            "\"group.com.exordiumnetworks.lsdkeyboard\" capability in both targets via " +
-            "Xcode → Signing & Capabilities to unlock cross-process corpus access.",
-            size: 13, color: .tertiaryLabel
-        ))
+        exportCorpusButton.setTitle("Export keyboard corpus", for: .normal)
+        exportCorpusButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        exportCorpusButton.backgroundColor = .systemIndigo
+        exportCorpusButton.setTitleColor(.white, for: .normal)
+        exportCorpusButton.layer.cornerRadius = 10
+        exportCorpusButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        exportCorpusButton.addTarget(self, action: #selector(exportKeyboardCorpus), for: .touchUpInside)
+        v.addArrangedSubview(exportCorpusButton)
 
         return v
     }
 
-    @objc private func exportNotepadCorpus() {
-        let text = UserDefaults.standard.string(forKey: "notepad_text") ?? ""
-        guard !text.isEmpty else { return }
+    private func refreshCorpusCard() {
+        let keyboardWords = sharedDefaults?.stringArray(forKey: Self.wordsKey) ?? []
+        let notepadText   = UserDefaults.standard.string(forKey: "notepad_text") ?? ""
+        let notepadWords  = notepadText
+            .components(separatedBy: .whitespacesAndNewlines)
+            .filter { !$0.isEmpty }
+
+        let groupOK = sharedDefaults != nil
+        corpusCountLabel.text = """
+        Keyboard words collected: \(keyboardWords.count)\(groupOK ? "" : " ⚠️ App Group not found")
+        Notepad words available:  \(notepadWords.count)
+        """
+        exportCorpusButton.isEnabled = !keyboardWords.isEmpty
+        exportCorpusButton.alpha = keyboardWords.isEmpty ? 0.4 : 1.0
+    }
+
+    @objc private func exportKeyboardCorpus() {
+        let words = sharedDefaults?.stringArray(forKey: Self.wordsKey) ?? []
+        guard !words.isEmpty else { return }
+        let text = words.joined(separator: "\n")
         let tmpURL = FileManager.default.temporaryDirectory
-            .appendingPathComponent("lsd_corpus.txt")
+            .appendingPathComponent("lsd_keyboard_corpus.txt")
         try? text.write(to: tmpURL, atomically: true, encoding: .utf8)
         let share = UIActivityViewController(activityItems: [tmpURL], applicationActivities: nil)
         share.popoverPresentationController?.sourceView = view
