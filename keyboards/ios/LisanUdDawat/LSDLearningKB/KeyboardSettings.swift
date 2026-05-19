@@ -17,4 +17,25 @@ enum KeyboardSettings {
         get { UserDefaults.standard.object(forKey: "double_tap_enabled") as? Bool ?? true }
         set { UserDefaults.standard.set(newValue, forKey: "double_tap_enabled") }
     }
+
+    enum DelayPreset: String {
+        case short  = "short"   // 0.25s
+        case normal = "normal"  // 0.35s
+        case long   = "long"    // 0.50s
+        case custom = "custom"
+    }
+
+    static var doubleTapDelayPreset: DelayPreset {
+        get { DelayPreset(rawValue: UserDefaults.standard.string(forKey: "double_tap_delay_preset") ?? "normal") ?? .normal }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "double_tap_delay_preset") }
+    }
+
+    // Actual delay in seconds; presets write here, custom stepper writes here directly.
+    static var doubleTapDelay: TimeInterval {
+        get {
+            let v = UserDefaults.standard.double(forKey: "double_tap_delay")
+            return v > 0 ? v : 0.35
+        }
+        set { UserDefaults.standard.set(newValue, forKey: "double_tap_delay") }
+    }
 }
