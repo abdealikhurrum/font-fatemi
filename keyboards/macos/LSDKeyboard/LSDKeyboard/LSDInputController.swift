@@ -22,9 +22,7 @@ final class LSDInputController: IMKInputController {
     private var pendingPrimary: String?
     private var pendingTimer: Timer?
 
-    #if DEBUG
     private let log = Logger(subsystem: "com.exordiumnetworks.inputmethod.lsdkeyboard", category: "IME")
-    #endif
 
     // MARK: - Key event handling
 
@@ -59,24 +57,18 @@ final class LSDInputController: IMKInputController {
         let isOption = mods.contains(.option)
         guard let chars = KeyData.char(forCode: Int(event.keyCode),
                                        shift: isShift, option: isOption) else {
-            #if DEBUG
             log.debug("no-map code=\(event.keyCode, privacy: .public) shift=\(isShift, privacy: .public) opt=\(isOption, privacy: .public)")
-            #endif
             commitPending()
             return false
         }
 
-        #if DEBUG
         log.debug("mapped code=\(event.keyCode, privacy: .public) shift=\(isShift, privacy: .public) opt=\(isOption, privacy: .public) → \"\(chars, privacy: .public)\"")
-        #endif
 
         if let pending = pendingPrimary, chars == pending,
            let secondary = KeyData.secondary(for: chars) {
             cancelTimer()
             pendingPrimary = nil
-            #if DEBUG
             log.debug("double-press \"\(chars, privacy: .public)\" → \"\(secondary, privacy: .public)\"")
-            #endif
             insert(secondary)
             PairCollector.shared.recordDoublePress(primary: chars, secondary: secondary)
             return true
@@ -100,9 +92,7 @@ final class LSDInputController: IMKInputController {
     }
 
     override func deactivateServer(_ sender: Any!) {
-        #if DEBUG
         log.debug("deactivateServer — flushing corpus")
-        #endif
         CorpusLogger.shared.flush()
         commitPending()
     }
@@ -111,9 +101,7 @@ final class LSDInputController: IMKInputController {
 
     private func startComposition(char: String) {
         pendingPrimary = char
-        #if DEBUG
         log.debug("startComposition \"\(char, privacy: .public)\"")
-        #endif
 
         activeClient?.setMarkedText(
             NSAttributedString(string: char),
@@ -133,9 +121,7 @@ final class LSDInputController: IMKInputController {
         guard let char = pendingPrimary else { return }
         cancelTimer()
         pendingPrimary = nil
-        #if DEBUG
         log.debug("commitPending \"\(char, privacy: .public)\"")
-        #endif
         insert(char)
     }
 
@@ -143,9 +129,7 @@ final class LSDInputController: IMKInputController {
         guard let char = pendingPrimary else { return }
         cancelTimer()
         pendingPrimary = nil
-        #if DEBUG
         log.debug("cancelPending \"\(char, privacy: .public)\"")
-        #endif
         activeClient?.setMarkedText(
             NSAttributedString(string: ""),
             selectionRange: NSRange(location: 0, length: 0),
@@ -166,9 +150,7 @@ final class LSDInputController: IMKInputController {
     private var activeClient: (IMKTextInput & NSObjectProtocol)? { self.client() }
 
     private func insert(_ text: String) {
-        #if DEBUG
         log.debug("insert \"\(text, privacy: .public)\" hasClient=\(activeClient != nil, privacy: .public)")
-        #endif
         CorpusLogger.shared.record(text)
         activeClient?.insertText(
             text,
@@ -274,7 +256,6 @@ final class LSDInputController: IMKInputController {
 
     @objc private func toggleDoublePress(_ sender: NSMenuItem) {
         KeyboardSettings.doublePressEnabled.toggle()
-        // Discard any pending composition so the new state takes effect immediately.
         cancelPending()
     }
 
