@@ -36,10 +36,14 @@ codesign --force --sign - --deep "$INSTALL_DIR/$APP_NAME"
 echo "=== Clearing quarantine ==="
 xattr -dr com.apple.quarantine "$INSTALL_DIR/$APP_NAME" 2>/dev/null || true
 
-echo "=== Killing old process (if running) ==="
+echo "=== Killing old processes ==="
 killall LSDKeyboard 2>/dev/null || true
+# Kill imklaunchagent so launchd restarts it and rescans the updated plist.
+# Without this it keeps the old InputMethodConnectionName in its cache.
+killall imklaunchagent 2>/dev/null || true
+sleep 1
 
-echo "=== Refreshing Input Method system ==="
+echo "=== Refreshing TextInputMenuAgent ==="
 killall -9 TextInputMenuAgent 2>/dev/null || true
 sleep 1
 open -a /System/Library/CoreServices/TextInputMenuAgent.app 2>/dev/null || \
