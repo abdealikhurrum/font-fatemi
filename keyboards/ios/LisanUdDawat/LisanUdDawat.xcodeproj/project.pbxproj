@@ -18,6 +18,13 @@
 			remoteGlobalIDString = 7AE10CDF2FB9726C00CE0BE8;
 			remoteInfo = LSDLearningKB;
 		};
+		7AE10E812FBD397500CE0BE8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A769D4A2FB954E90024D52F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A769D512FB954E90024D52F;
+			remoteInfo = LisanUdDawat;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +44,7 @@
 /* Begin PBXFileReference section */
 		7A769D522FB954E90024D52F /* LisanUdDawat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LisanUdDawat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AE10CE02FB9726C00CE0BE8 /* LSDLearningKB.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LSDLearningKB.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AE10E7D2FBD397500CE0BE8 /* LSDLearningKBTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LSDLearningKBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -62,6 +70,15 @@
 			);
 			target = 7A769D512FB954E90024D52F /* LisanUdDawat */;
 		};
+		7AE10E8B2FBD399300CE0BE8 /* Exceptions for "LSDLearningKB" folder in "LSDLearningKBTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				ArabicStandardLayoutData.swift,
+				CRULPUrduLayoutData.swift,
+				KeyData.swift,
+			);
+			target = 7AE10E7C2FBD397500CE0BE8 /* LSDLearningKBTests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -78,8 +95,19 @@
 			exceptions = (
 				7AE10D062FB9806900CE0BE8 /* Exceptions for "LSDLearningKB" folder in "LisanUdDawat" target */,
 				7AE10D042FB9800800CE0BE8 /* Exceptions for "LSDLearningKB" folder in "LSDLearningKB" target */,
+				7AE10E8B2FBD399300CE0BE8 /* Exceptions for "LSDLearningKB" folder in "LSDLearningKBTests" target */,
 			);
 			path = LSDLearningKB;
+			sourceTree = "<group>";
+		};
+		7AE10E6D2FBD38DA00CE0BE8 /* LSDLearningKB Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "LSDLearningKB Tests";
+			sourceTree = "<group>";
+		};
+		7AE10E7E2FBD397500CE0BE8 /* LSDLearningKBTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = LSDLearningKBTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -99,6 +127,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7AE10E7A2FBD397500CE0BE8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -107,6 +142,8 @@
 			children = (
 				7A769D542FB954E90024D52F /* LisanUdDawat */,
 				7AE10CE12FB9726C00CE0BE8 /* LSDLearningKB */,
+				7AE10E6D2FBD38DA00CE0BE8 /* LSDLearningKB Tests */,
+				7AE10E7E2FBD397500CE0BE8 /* LSDLearningKBTests */,
 				7A769D532FB954E90024D52F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,6 +153,7 @@
 			children = (
 				7A769D522FB954E90024D52F /* LisanUdDawat.app */,
 				7AE10CE02FB9726C00CE0BE8 /* LSDLearningKB.appex */,
+				7AE10E7D2FBD397500CE0BE8 /* LSDLearningKBTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,6 +207,29 @@
 			productReference = 7AE10CE02FB9726C00CE0BE8 /* LSDLearningKB.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		7AE10E7C2FBD397500CE0BE8 /* LSDLearningKBTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AE10E832FBD397500CE0BE8 /* Build configuration list for PBXNativeTarget "LSDLearningKBTests" */;
+			buildPhases = (
+				7AE10E792FBD397500CE0BE8 /* Sources */,
+				7AE10E7A2FBD397500CE0BE8 /* Frameworks */,
+				7AE10E7B2FBD397500CE0BE8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7AE10E822FBD397500CE0BE8 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				7AE10E7E2FBD397500CE0BE8 /* LSDLearningKBTests */,
+			);
+			name = LSDLearningKBTests;
+			packageProductDependencies = (
+			);
+			productName = LSDLearningKBTests;
+			productReference = 7AE10E7D2FBD397500CE0BE8 /* LSDLearningKBTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -185,6 +246,10 @@
 					7AE10CDF2FB9726C00CE0BE8 = {
 						CreatedOnToolsVersion = 26.5;
 						LastSwiftMigration = 2650;
+					};
+					7AE10E7C2FBD397500CE0BE8 = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 7A769D512FB954E90024D52F;
 					};
 				};
 			};
@@ -204,6 +269,7 @@
 			targets = (
 				7A769D512FB954E90024D52F /* LisanUdDawat */,
 				7AE10CDF2FB9726C00CE0BE8 /* LSDLearningKB */,
+				7AE10E7C2FBD397500CE0BE8 /* LSDLearningKBTests */,
 			);
 		};
 /* End PBXProject section */
@@ -217,6 +283,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7AE10CDE2FB9726C00CE0BE8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AE10E7B2FBD397500CE0BE8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -240,6 +313,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7AE10E792FBD397500CE0BE8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -247,6 +327,11 @@
 			isa = PBXTargetDependency;
 			target = 7AE10CDF2FB9726C00CE0BE8 /* LSDLearningKB */;
 			targetProxy = 7AE10CE52FB9726C00CE0BE8 /* PBXContainerItemProxy */;
+		};
+		7AE10E822FBD397500CE0BE8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A769D512FB954E90024D52F /* LisanUdDawat */;
+			targetProxy = 7AE10E812FBD397500CE0BE8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -505,6 +590,50 @@
 			};
 			name = Release;
 		};
+		7AE10E842FBD397500CE0BE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K52KL4RVGR;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.exordiumnetworks.LisanUdDawat.LSDLearningKBTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LisanUdDawat.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LisanUdDawat";
+			};
+			name = Debug;
+		};
+		7AE10E852FBD397500CE0BE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K52KL4RVGR;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.exordiumnetworks.LisanUdDawat.LSDLearningKBTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LisanUdDawat.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LisanUdDawat";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -531,6 +660,15 @@
 			buildConfigurations = (
 				7AE10CEA2FB9726C00CE0BE8 /* Debug */,
 				7AE10CEB2FB9726C00CE0BE8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7AE10E832FBD397500CE0BE8 /* Build configuration list for PBXNativeTarget "LSDLearningKBTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AE10E842FBD397500CE0BE8 /* Debug */,
+				7AE10E852FBD397500CE0BE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
