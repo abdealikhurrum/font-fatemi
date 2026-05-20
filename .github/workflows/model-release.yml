@@ -1,0 +1,91 @@
+name: Publish merged model
+
+# Triggered by the aggregator via workflow_dispatch after a successful FedAvg round.
+# Downloads the new model from the aggregator, validates it, and publishes
+# it as a GitHub Release so keyboards can pull it.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Model version string (e.g. v20240501T120000)"
+        required: true
+      aggregator_url:
+        description: "Base URL of the aggregator server"
+        required: true
+      contributors:
+        description: "Number of contributors in this round"
+        required: false
+        default: "unknown"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to create releases
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install validation dependencies
+        run: pip install onnx numpy
+
+      - name: Download merged model from aggregator
+        run: |
+          curl -fsSL \
+            "${{ inputs.aggregator_url }}/model/download/${{ inputs.version }}" \
+            -o lsd_model_${{ inputs.version }}.onnx
+
+      - name: Validate ONNX model
+        run: |
+          python - <<'EOF'
+          import onnx, sys
+          model = onnx.load("lsd_model_${{ inputs.version }}.onnx")
+          try:
+              onnx.checker.check_model(model)
+              print(f"Model valid. Opset: {model.opset_import[0].version}")
+          except onnx.checker.ValidationError as e:
+              print(f"Validation failed: {e}", file=sys.stderr)
+              sys.exit(1)
+          EOF
+
+      - name: Update version manifest
+        run: |
+          python - <<'EOF'
+          import json, pathlib
+          manifest = {
+              "version": "${{ inputs.version }}",
+              "url": "https://github.com/${{ github.repository }}/releases/download/${{ inputs.version }}/lsd_model_${{ inputs.version }}.onnx",
+              "contributors": "${{ inputs.contributors }}",
+          }
+          pathlib.Path("keyboards/ios/model_manifest.json").write_text(
+              json.dumps(manifest, indent=2) + "\n"
+          )
+          EOF
+
+      - name: Commit manifest update
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add keyboards/ios/model_manifest.json
+          git commit -m "chore: update model manifest to ${{ inputs.version }}"
+          git push
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.version }}
+          name: "LSD Model ${{ inputs.version }}"
+          body: |
+            Federated model update.
+            Contributors this round: ${{ inputs.contributors }}
+
+            Install automatically via the Lisan ud Dawat keyboard app,
+            or download the `.onnx` file to use directly.
+          files: lsd_model_${{ inputs.version }}.onnx
+          make_latest: true

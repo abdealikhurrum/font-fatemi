@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+
+    <!-- Background: deep ink-blue → warm dark teal -->
+    <linearGradient id="bg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0E4D5C"/>
+    </linearGradient>
+
+    <!-- Warm radial bloom behind the ligature -->
+    <radialGradient id="bloom" cx="50%" cy="48%" r="42%">
+      <stop offset="0%"   stop-color="#C8914A" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#C8914A" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Glow filter for amber shadow pass -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Clipping mask: iOS rounded-square -->
+    <clipPath id="shape">
+      <rect width="512" height="512" rx="114"/>
+    </clipPath>
+
+    <!--
+      چھے  ligature — FatemiMaqala-Regular glyph "chhe.liga"
+      Extracted from /fatemimaqala/FatemiMaqala-Regular.ttf via fontTools.
+      Font units: 2048 UPM, glyph bounds x=1..1775 y=-622..1165.
+      Transform maps font coords → 512×512 canvas:
+        scale(0.1807, -0.1807)  — uniform scale + y-flip (font y-up → SVG y-down)
+        translate(95.49, 305.07) — centres the scaled glyph in the canvas
+    -->
+    <path id="chhe"
+      transform="translate(95.49,305.07) scale(0.1807,-0.1807)"
+      d="M1357 -187Q1372 -190 1396.5 -217.5Q1421 -245 1480 -294L1366 -413Q1303 -374 1249 -296Q1347 -200 1357 -187Z
+         M1124 -187Q1139 -190 1163.5 -218.0Q1188 -246 1247 -294L1249 -297L1133 -413Q1070 -374 1016 -296Q1114 -200 1124 -187Z
+         M1238 -396Q1253 -399 1277.5 -427.0Q1302 -455 1361 -503L1363 -506Q1358 -509 1247 -622Q1184 -583 1130 -505Q1228 -409 1238 -396Z
+         M561 588Q638 552 747 549Q765 548 787 550Q781 596 759 624Q728 663 685 663Q683 663 681 663Q669 663 657 661Q595 651 561 588Z
+         M867 637Q849 576 821 537Q881 531 932 531Q1022 531 1085 549Q1011 622 901 634Q885 636 867 637Z
+         M614 132Q614 132 1503 156L1427 1L1355 -5Q1288 -11 1184 -16Q1084 -21 1027 -24Q1015 -24 982 -26Q701 -43 501 -43
+          Q83 -43 19 32Q1 54 1 86Q1 116 17 155Q61 263 147 349Q270 472 443 508Q451 521 464 545Q534 674 553 702
+          Q640 829 738 829Q791 829 847 792Q1049 877 1311 930Q1169 1014 1050 1014Q881 1014 759 846
+          Q824 991 890 1067Q977 1165 1095 1165Q1102 1165 1109 1165Q1210 1160 1411 1076Q1436 1066 1461 1056
+          Q1623 991 1723 991Q1752 991 1775 996L1667 832Q1636 835 1605 835Q1551 835 1495 826
+          Q1407 812 1279.0 777.0Q1151 742 1107 732Q1144 718 1165 692Q1190 660 1190 620
+          Q1190 586 1173 547Q1133 456 1035 400Q976 367 794 367Q788 367 783 367Q618 368 567 392
+          Q550 387 528 381Q382 342 370 339Q232 304 119 180Q207 139 614 132Z"/>
+
+  </defs>
+
+  <g clip-path="url(#shape)">
+
+    <!-- Base background -->
+    <rect width="512" height="512" fill="url(#bg)"/>
+
+    <!-- Warm bloom centred on the ligature -->
+    <rect width="512" height="512" fill="url(#bloom)"/>
+
+    <!-- Thin gold rule — like a ruled writing line / keyboard baseline -->
+    <line x1="64" y1="356" x2="448" y2="356"
+          stroke="#C8914A" stroke-width="1.5" stroke-opacity="0.45"/>
+
+    <!-- Amber glow shadow (slightly offset, blurred) -->
+    <use href="#chhe"
+         fill="#C8914A"
+         fill-opacity="0.35"
+         filter="url(#glow)"
+         transform="translate(4,4)"/>
+
+    <!-- Main ligature — warm parchment white -->
+    <use href="#chhe" fill="#F2EAD8"/>
+
+  </g>
+
+</svg>

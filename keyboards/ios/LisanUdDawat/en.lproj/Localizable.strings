@@ -1,0 +1,211 @@
+"tab.setup" = "Setup";
+"tab.notepad" = "Notepad";
+"tab.learn" = "Learn";
+"tab.contribute" = "Contribute";
+"setup.title" = "Setup";
+"setup.keyboard.heading" = "Enable Keyboard";
+"setup.keyboard.instructions" = "Settings → General → Keyboard → Keyboards → Add New Keyboard… → Lisan ud Dawat";
+"setup.keyboard.open_settings" = "Open Settings";
+"setup.font.heading" = "FatemiMaqala Font";
+"setup.font.sample" = "اَلْبَيَانُ مِنَ الْإِيمَان";
+"setup.font.description" = "Install the font so Notes, Pages, Word, and other apps can render Lisan ud Dawat text correctly.";
+"setup.font.step1" = "Tap \"Save Profile\" below.";
+"setup.font.step2" = "In the share sheet, choose Save to Files.";
+"setup.font.step3" = "Open the Files app and tap FatemiMaqala.mobileconfig.";
+"setup.font.step4" = "Follow the prompt:
+Settings → General → VPN & Device Management → FatemiMaqala Font → Install.";
+"setup.font.save_profile" = "Save Profile";
+"setup.font.uninstall_note" = "To uninstall: Settings → General → VPN & Device Management → FatemiMaqala Font → Remove Profile.";
+"setup.ok" = "OK";
+"notepad.title" = "Notepad";
+"notepad.clear.prompt" = "Clear notepad?";
+"notepad.clear.confirm" = "Clear";
+"notepad.cancel" = "Cancel";
+"notepad.font_size" = "Font Size";
+"notepad.stats" = "%d words  ·  %d chars";
+"learn.title" = "Learn";
+"module.double_press.title" = "Double-press Characters";
+"module.double_press.subtitle" = "Tap any key twice quickly to get its extended letter";
+"module.diacritics.title" = "Diacritics & Marks";
+"module.diacritics.subtitle" = "Add vowel marks and special symbols using the diacritics layer";
+"module.joiners.title" = "Joiners & Tatweel";
+"module.joiners.subtitle" = "Invisible joiners and the elongation stroke — all on the space bar";
+"lesson.back" = "← Back";
+"lesson.continue" = "Continue →";
+"lesson.step_progress" = "Step %d of %d";
+"lesson.skip" = "Skip →";
+"lesson.finish" = "Finish";
+"lesson.correct" = "✓  Correct!";
+"lesson.dp.intro.title" = "How double-press works";
+"lesson.dp.intro.body" = "The LSD keyboard hides extended letters behind a quick double-tap on the same key. Tap a key twice in rapid succession and the second letter replaces the first with the correct character.
+
+Each exercise below asks you to type a word that contains one of these characters. Use the keyboard to produce it.";
+"lesson.dp.peh.title" = "پ — double-press ث";
+"lesson.dp.peh.body" = "Tap ث twice quickly. The keyboard will replace ث with پ.
+
+Type the word below:";
+"lesson.dp.peh.target" = "پانی";
+"lesson.dp.peh.hint" = "ث ث → پ";
+"lesson.dp.tteh.title" = "ٹ — double-press ض";
+"lesson.dp.tteh.body" = "Tap ض twice quickly to get the retroflex ٹ.
+
+Type the word below:";
+"lesson.dp.tteh.target" = "ٹھنڈا";
+"lesson.dp.tteh.hint" = "ض ض → ٹ";
+"lesson.dp.cheh.title" = "چ — double-press ح";
+"lesson.dp.cheh.body" = "Tap ح twice quickly to get چ.
+
+Type the word below:";
+"lesson.dp.cheh.target" = "چائے";
+"lesson.dp.cheh.hint" = "ح ح → چ";
+"lesson.dp.gaf.title" = "گ — double-press ك";
+"lesson.dp.gaf.body" = "Tap ك twice quickly to get گ.
+
+Type the word below:";
+"lesson.dp.gaf.target" = "گھر";
+"lesson.dp.gaf.hint" = "ك ك → گ";
+"lesson.dp.noon_ghunna.title" = "ں — double-press ط";
+"lesson.dp.noon_ghunna.body" = "Tap ط twice quickly to get the nasal ں.
+
+Type the word below:";
+"lesson.dp.noon_ghunna.target" = "ہاں";
+"lesson.dp.noon_ghunna.hint" = "ط ط → ں";
+"lesson.dp.heh_goal.title" = "ہ — double-press ظ";
+"lesson.dp.heh_goal.body" = "Tap ظ twice quickly to get ہ (do-chashmi he).
+
+Type the word below:";
+"lesson.dp.heh_goal.target" = "ہمیشہ";
+"lesson.dp.heh_goal.hint" = "ظ ظ → ہ";
+"lesson.dp.heh_doachashmee.title" = "ھ — double-press ه";
+"lesson.dp.heh_doachashmee.body" = "Tap ه twice quickly to get the aspiration marker ھ.
+
+Type the word below:";
+"lesson.dp.heh_doachashmee.target" = "بھائی";
+"lesson.dp.heh_doachashmee.hint" = "ه ه → ھ";
+"lesson.dp.rra.title" = "ڑ — double-press ر";
+"lesson.dp.rra.body" = "Tap ر twice quickly to get the retroflex ڑ.
+
+Type the word below:";
+"lesson.dp.rra.target" = "لڑکی";
+"lesson.dp.rra.hint" = "ر ر → ڑ";
+"lesson.dp.dda.title" = "ڈ — double-press د";
+"lesson.dp.dda.body" = "Tap د twice quickly to get the retroflex ڈ.
+
+Type the word below:";
+"lesson.dp.dda.target" = "ڈاکٹر";
+"lesson.dp.dda.hint" = "د د → ڈ";
+"lesson.dp.ye.title" = "ے — double-press س";
+"lesson.dp.ye.body" = "Tap س twice quickly to get bari ye ے.
+
+Type the word below:";
+"lesson.dp.ye.target" = "کیے";
+"lesson.dp.ye.hint" = "س س → ے";
+"lesson.dp.alef_above.title" = "اٰ — double-press ا";
+"lesson.dp.alef_above.body" = "Tap ا twice quickly to get alef with madda above اٰ, used in words like اٰمین.
+
+Type the word below:";
+"lesson.dp.alef_above.target" = "اٰمین";
+"lesson.dp.alef_above.hint" = "ا ا → اٰ";
+"lesson.dp.teh_marbuta.title" = "ۃ — double-press ة";
+"lesson.dp.teh_marbuta.body" = "Tap ة twice quickly to get the Urdu form ۃ, used in اللّٰہ.
+
+Type the word below:";
+"lesson.dp.teh_marbuta.target" = "رحمۃ";
+"lesson.dp.teh_marbuta.hint" = "ة ة → ۃ";
+"lesson.dia.intro.title" = "The diacritics layer";
+"lesson.dia.intro.body" = "Tap the ـَ key (bottom-right of the main layer) to open the diacritics layer. Tap ا ب ج to return to letters.
+
+Diacritics are placed after the letter they mark. Type a letter first, then the diacritic.";
+"lesson.dia.fatha.title" = "فتحة — fatha (a-vowel)";
+"lesson.dia.fatha.body" = "فتحة (fatha) marks a short /a/ vowel. It sits above the letter.
+
+Switch to the diacritics layer and type the marked letter below:";
+"lesson.dia.fatha.target" = "بَ";
+"lesson.dia.fatha.hint" = "ب then فتحة";
+"lesson.dia.kasra.title" = "كسرة — kasra (i-vowel)";
+"lesson.dia.kasra.body" = "كسرة (kasra) marks a short /i/ vowel. It sits below the letter.
+
+Type the marked letter below:";
+"lesson.dia.kasra.target" = "بِ";
+"lesson.dia.kasra.hint" = "ب then كسرة";
+"lesson.dia.damma.title" = "ضمة — damma (u-vowel)";
+"lesson.dia.damma.body" = "ضمة (damma) marks a short /u/ vowel. It sits above the letter.
+
+Type the marked letter below:";
+"lesson.dia.damma.target" = "بُ";
+"lesson.dia.damma.hint" = "ب then ضمة";
+"lesson.dia.sukun.title" = "سكون — sukun (no vowel)";
+"lesson.dia.sukun.body" = "سكون (sukun) indicates a consonant with no following vowel.
+
+Type the marked letter below:";
+"lesson.dia.sukun.target" = "بْ";
+"lesson.dia.sukun.hint" = "ب then سكون";
+"lesson.dia.shadda.title" = "شدة — shadda (gemination)";
+"lesson.dia.shadda.body" = "شدة (shadda) doubles the consonant. It is written above the letter.
+
+Type the marked letter below:";
+"lesson.dia.shadda.target" = "بّ";
+"lesson.dia.shadda.hint" = "ب then شدة";
+"lesson.dia.salawat.title" = "ﷺ — salawat symbol";
+"lesson.dia.salawat.body" = "The diacritics layer includes ﷺ (sallallahu alayhi wasallam), a single-codepoint symbol used when writing the Prophet's name ﷺ.
+
+Find it in the diacritics layer and type it below:";
+"lesson.dia.salawat.target" = "ﷺ";
+"lesson.dia.salawat.hint" = "Diacritics layer → ﷺ";
+"lesson.dia.radi.title" = "ؓ — radi symbol";
+"lesson.dia.radi.body" = "ؓ is a compact symbol for رضی اللّٰہ عنہ, placed after a companion's name.
+
+Find it in the diacritics layer and type it below:";
+"lesson.dia.radi.target" = "ؓ";
+"lesson.dia.radi.hint" = "Diacritics layer → ؓ";
+"lesson.jwj.zwj_intro.title" = "What is ZWJ?";
+"lesson.jwj.zwj_intro.body" = "Zero Width Joiner (ZWJ, U+200D) forces two letters to connect as if they were part of the same word, even when they normally wouldn't join.
+
+Access it by long-pressing the space bar and sliding to ZWJ.";
+"lesson.jwj.zwj_intro.hint" = "Long-press space → ZWJ";
+"lesson.jwj.zwnj_intro.title" = "What is ZWNJ?";
+"lesson.jwj.zwnj_intro.body" = "Zero Width Non-Joiner (ZWNJ, U+200C) prevents two letters from joining, even when they normally would. This is useful for showing a letter in its isolated form mid-word.
+
+Access it by long-pressing the space bar and sliding to ZWNJ.";
+"lesson.jwj.zwnj_intro.hint" = "Long-press space → ZWNJ";
+"lesson.jwj.zwnj_exercise.title" = "ZWNJ: break a join";
+"lesson.jwj.zwnj_exercise.body" = "Type م then ZWNJ then م. The second م will appear in isolated form instead of connecting to the first.
+
+The result should look like two separate م glyphs side by side.";
+"lesson.jwj.zwnj_exercise.hint" = "م → ZWNJ → م";
+"lesson.jwj.zwj_exercise.title" = "ZWJ: force a joining form";
+"lesson.jwj.zwj_exercise.body" = "Type ب then ZWJ. The ب will display in its medial (connected) form even though nothing follows it — useful when showing how a letter looks inside a word.
+
+Type the sequence below:";
+"lesson.jwj.zwj_exercise.hint" = "ب → ZWJ";
+"lesson.jwj.tatweel_intro.title" = "ـ — Tatweel (Kashida)";
+"lesson.jwj.tatweel_intro.body" = "Tatweel (ـ, U+0640) is the Arabic elongation stroke. It stretches the connecting baseline between two letters, used in calligraphic and display typography to justify lines or add visual weight.
+
+Unlike ZWJ/ZWNJ it is a visible character. Long-press the space bar and slide to ـ.
+
+You can hold down on ـ in the popup to insert multiple tatweels in a row.";
+"lesson.jwj.tatweel_intro.hint" = "Long-press space → ـ";
+"lesson.jwj.tatweel_exercise.title" = "Practice: elongate a word";
+"lesson.jwj.tatweel_exercise.body" = "Type the word below. A tatweel sits between the س and the ل, stretching the baseline for calligraphic effect.
+
+Insert it with long-press space → ـ.";
+"lesson.jwj.tatweel_exercise.target" = "سـلام";
+"lesson.jwj.tatweel_exercise.hint" = "س → ـ → لام";
+"keyboard.settings.title" = "Keyboard Settings";
+"keyboard.settings.done" = "Done";
+"keyboard.settings.layout" = "Layout";
+"keyboard.settings.layout.lsd" = "LSD";
+"keyboard.settings.layout.arabic" = "Arabic";
+"keyboard.settings.layout.urdu" = "Urdu";
+"keyboard.settings.default_yeh" = "Default yeh";
+"keyboard.settings.predictions" = "Word predictions";
+"keyboard.settings.corpus_logging" = "Corpus logging";
+"keyboard.settings.corpus_copy" = "Copy corpus to clipboard  (%d words)";
+"keyboard.settings.double_tap" = "Double-tap secondary char";
+"keyboard.settings.double_alef" = "Double ا produces";
+"keyboard.settings.tap_delay" = "Tap delay";
+"keyboard.settings.tap_delay.short" = "0.25s";
+"keyboard.settings.tap_delay.normal" = "0.35s";
+"keyboard.settings.tap_delay.long" = "0.50s";
+"keyboard.settings.tap_delay.custom" = "Custom";
+"keyboard.settings.custom_value" = "Custom value";
