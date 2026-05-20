@@ -15,15 +15,15 @@ final class CorpusLogger {
     private static let groupID   = "group.com.exordiumnetworks.lsdkeyboard"
     private static let fileName  = "lsd_corpus_words.json"
 
+    // Frequency map rebuilt lazily; invalidated whenever the corpus file is written.
+    private var frequencyCache: [String: Int]?
+
     // MARK: - Storage URL
 
     private lazy var corpusFileURL: URL = {
-        // containerURL returns a path even when the entitlement isn't in the
-        // provisioning profile, so we probe with an actual write before committing.
         if let groupContainer = FileManager.default
                 .containerURL(forSecurityApplicationGroupIdentifier: Self.groupID) {
             do {
-                // Ensure the container directory exists (may not on very first run).
                 try FileManager.default.createDirectory(
                     at: groupContainer, withIntermediateDirectories: true)
                 let probe = groupContainer.appendingPathComponent(".lsd_probe")
@@ -38,12 +38,14 @@ final class CorpusLogger {
         } else {
             print("[CorpusLogger] ⚠️ App Group not configured — falling back to extension Documents")
         }
-        // Fallback: extension's own Documents directory (not readable by main app)
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let url  = docs.appendingPathComponent(Self.fileName)
         print("[CorpusLogger] storage (local) → \(url.path)")
         return url
     }()
+
+    // URL callers can pass to UIActivityViewController for file export.
+    var exportURL: URL { corpusFileURL }
 
     // MARK: - Public API
 
@@ -91,6 +93,23 @@ final class CorpusLogger {
         print("[CorpusLogger] corpus cleared")
     }
 
+    // MARK: - Predictions
+
+    /// Top completions for `prefix`, ordered by corpus frequency.
+    /// Returns words that start with the prefix (including the prefix itself if
+    /// it appears in the corpus as a complete word).
+    func suggestions(for prefix: String, limit: Int = 3) -> [String] {
+        guard !prefix.isEmpty else { return [] }
+        let freq = frequencyMap()
+        return freq
+            .filter { $0.key.hasPrefix(prefix) }
+            .sorted { lhs, rhs in
+                lhs.value != rhs.value ? lhs.value > rhs.value : lhs.key.count < rhs.key.count
+            }
+            .prefix(limit)
+            .map { $0.key }
+    }
+
     // MARK: - File I/O
 
     private func load() -> [String] {
@@ -101,11 +120,22 @@ final class CorpusLogger {
     }
 
     private func save(_ words: [String]) {
+        frequencyCache = nil   // invalidate so next prediction call rebuilds
         guard let data = try? JSONEncoder().encode(words) else { return }
         do {
             try data.write(to: corpusFileURL, options: .atomic)
         } catch {
             print("[CorpusLogger] ⚠️ write failed: \(error.localizedDescription)")
         }
+    }
+
+    // MARK: - Private helpers
+
+    private func frequencyMap() -> [String: Int] {
+        if let cached = frequencyCache { return cached }
+        var freq: [String: Int] = [:]
+        for word in load() { freq[word, default: 0] += 1 }
+        frequencyCache = freq
+        return freq
     }
 }

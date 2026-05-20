@@ -156,7 +156,7 @@ final class KeyboardViewController: UIInputViewController {
         if word.isEmpty {
             predictiveBar.update(suggestions: [])
         } else {
-            predictiveBar.update(suggestions: [word, word + "ا", word + "ه"])
+            predictiveBar.update(suggestions: CorpusLogger.shared.suggestions(for: word, limit: 3))
         }
     }
 }
@@ -284,6 +284,14 @@ extension KeyboardViewController: PredictiveBarDelegate {
                 self?.currentLayer = .default
             }
             self?.applyLayer()
+        }
+        menu.onExportCorpus = { [weak self] in
+            guard let self else { return }
+            let ac = UIActivityViewController(
+                activityItems: [CorpusLogger.shared.exportURL],
+                applicationActivities: nil
+            )
+            self.present(ac, animated: true)
         }
     }
 }

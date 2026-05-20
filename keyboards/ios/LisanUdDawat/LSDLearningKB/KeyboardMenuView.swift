@@ -6,6 +6,7 @@ import UIKit
 final class KeyboardMenuView: UIView {
 
     var onDismiss: (() -> Void)?
+    var onExportCorpus: (() -> Void)?
 
     private weak var customDelayRow: UIView?
     private weak var customValueLabel: UILabel?
@@ -51,12 +52,16 @@ final class KeyboardMenuView: UIView {
         headerSep.translatesAutoresizingMaskIntoConstraints = false
         addSubview(headerSep)
 
-        // Settings rows
+        // Scrollable settings area
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(scrollView)
+
         let stack = UIStackView()
         stack.axis    = .vertical
         stack.spacing = 0
         stack.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(stack)
+        scrollView.addSubview(stack)
 
         addLayoutPicker(to: stack)
         addYehStyleRow(to: stack)
@@ -76,12 +81,10 @@ final class KeyboardMenuView: UIView {
         addDoubleTapSection(to: stack)
         addSeparator(to: stack)
         addActionRow(to: stack,
-            label: "Copy corpus to clipboard  (\(CorpusLogger.shared.wordCount) words)",
+            label: "Share corpus  (\(CorpusLogger.shared.wordCount) words)",
             action: { [weak self] in
-                let text = CorpusLogger.shared.exportText()
-                UIPasteboard.general.string = text.isEmpty ? "" : text
-                print("[CorpusLogger] copied \(CorpusLogger.shared.wordCount) words to clipboard")
                 self?.dismissTapped()
+                self?.onExportCorpus?()
             }
         )
 
@@ -102,9 +105,16 @@ final class KeyboardMenuView: UIView {
             headerSep.trailingAnchor.constraint(equalTo: trailingAnchor),
             headerSep.heightAnchor.constraint(equalToConstant: 0.5),
 
-            stack.topAnchor.constraint(equalTo: headerSep.bottomAnchor, constant: 8),
-            stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            scrollView.topAnchor.constraint(equalTo: headerSep.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+
+            stack.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor, constant: 8),
+            stack.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: 16),
+            stack.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor, constant: -16),
+            stack.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor, constant: -8),
+            stack.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, constant: -32),
         ])
     }
 
