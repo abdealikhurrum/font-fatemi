@@ -3,8 +3,8 @@ import UIKit
 struct LessonStep {
     let heading: String
     let body: String
-    let target: String    // empty = explanatory slide (Continue button); non-empty = typing exercise
-    let keyHint: String   // shown as a badge below the target, e.g. "ث ث → پ"
+    let target: String    // example character or word shown as a large reference; empty = omit
+    let keyHint: String   // badge below the target, e.g. "ث ث → پ"
 }
 
 struct LessonModule {
@@ -15,7 +15,7 @@ struct LessonModule {
     let accent: UIColor
     let steps: [LessonStep]
 
-    var exerciseCount: Int { steps.filter { !$0.target.isEmpty }.count }
+    var stepCount: Int { steps.count }
 }
 
 enum LessonCatalog {
@@ -33,91 +33,79 @@ enum LessonCatalog {
         steps: [
             LessonStep(
                 heading: "How double-press works",
-                body: "The LSD keyboard hides extended letters behind a quick double-tap on the same key. Tap a key twice in rapid succession and the second letter replaces the first with the correct character.\n\nEach exercise below asks you to type a word that contains one of these characters. Use the keyboard to produce it.",
+                body: "The LSD keyboard hides extended letters behind a quick double-tap on the same key. Tap a key twice in rapid succession and the second letter replaces the first with the correct character.\n\nEach step below shows the character and which key to double-press.",
                 target: "",
                 keyHint: ""
             ),
-            // پ  (ث ث → پ)
             LessonStep(
                 heading: "پ — double-press ث",
-                body: "Tap ث twice quickly. The keyboard will replace ث with پ.\n\nType the word below:",
+                body: "Tap ث twice quickly. The keyboard will replace ث with پ.",
                 target: "پانی",
                 keyHint: "ث ث → پ"
             ),
-            // ٹ  (ض ض → ٹ)
             LessonStep(
                 heading: "ٹ — double-press ض",
-                body: "Tap ض twice quickly to get the retroflex ٹ.\n\nType the word below:",
+                body: "Tap ض twice quickly to get the retroflex ٹ.",
                 target: "ٹھنڈا",
                 keyHint: "ض ض → ٹ"
             ),
-            // چ  (ح ح → چ)
             LessonStep(
                 heading: "چ — double-press ح",
-                body: "Tap ح twice quickly to get چ.\n\nType the word below:",
+                body: "Tap ح twice quickly to get چ.",
                 target: "چائے",
                 keyHint: "ح ح → چ"
             ),
-            // گ  (ك ك → گ)
             LessonStep(
                 heading: "گ — double-press ك",
-                body: "Tap ك twice quickly to get گ.\n\nType the word below:",
+                body: "Tap ك twice quickly to get گ.",
                 target: "گھر",
                 keyHint: "ك ك → گ"
             ),
-            // ں  (ط ط → ں)
             LessonStep(
                 heading: "ں — double-press ط",
-                body: "Tap ط twice quickly to get the nasal ں.\n\nType the word below:",
+                body: "Tap ط twice quickly to get the nasal ں.",
                 target: "ہاں",
                 keyHint: "ط ط → ں"
             ),
-            // ہ  (ظ ظ → ہ)
             LessonStep(
                 heading: "ہ — double-press ظ",
-                body: "Tap ظ twice quickly to get ہ (do-chashmi he).\n\nType the word below:",
+                body: "Tap ظ twice quickly to get ہ (do-chashmi he).",
                 target: "ہمیشہ",
                 keyHint: "ظ ظ → ہ"
             ),
-            // ھ  (ه ه → ھ)
             LessonStep(
                 heading: "ھ — double-press ه",
-                body: "Tap ه twice quickly to get the aspiration marker ھ.\n\nType the word below:",
+                body: "Tap ه twice quickly to get the aspiration marker ھ.",
                 target: "بھائی",
                 keyHint: "ه ه → ھ"
             ),
-            // ڑ  (ر ر → ڑ)
             LessonStep(
                 heading: "ڑ — double-press ر",
-                body: "Tap ر twice quickly to get the retroflex ڑ.\n\nType the word below:",
+                body: "Tap ر twice quickly to get the retroflex ڑ.",
                 target: "لڑکی",
                 keyHint: "ر ر → ڑ"
             ),
-            // ڈ  (د د → ڈ)
             LessonStep(
                 heading: "ڈ — double-press د",
-                body: "Tap د twice quickly to get the retroflex ڈ.\n\nType the word below:",
+                body: "Tap د twice quickly to get the retroflex ڈ.",
                 target: "ڈاکٹر",
                 keyHint: "د د → ڈ"
             ),
-            // ے  (س س → ے)
             LessonStep(
                 heading: "ے — double-press س",
-                body: "Tap س twice quickly to get bari ye ے.\n\nType the word below:",
+                body: "Tap س twice quickly to get bari ye ے.",
                 target: "کیے",
                 keyHint: "س س → ے"
             ),
-            // اٰ  (ا ا → اٰ)
             LessonStep(
                 heading: "اٰ — double-press ا",
-                body: "Tap ا twice quickly to get alef with madda above اٰ, used in words like اٰمین.\n\nType the word below:",
+                body: "Tap ا twice quickly to get alef with madda above اٰ, used in words like اٰمین.",
                 target: "اٰمین",
                 keyHint: "ا ا → اٰ"
             ),
-            // ۃ  (ة ة → ۃ)
             LessonStep(
                 heading: "ۃ — double-press ة",
-                body: "Tap ة twice quickly to get the Urdu form ۃ, used in اللّٰہ.\n\nType the word below:",
+                body: "Tap ة twice quickly to get the Urdu form ۃ, used in اللّٰہ.",
                 target: "رحمۃ",
                 keyHint: "ة ة → ۃ"
             ),
@@ -135,56 +123,49 @@ enum LessonCatalog {
         steps: [
             LessonStep(
                 heading: "The diacritics layer",
-                body: "Tap the ـَ key (bottom-right of the main layer) to open the diacritics layer. Tap ا ب ج to return to letters.\n\nDiacritics are placed after the letter they mark. Type a letter first, then the diacritic.",
+                body: "Tap the ـَ key (bottom-right of the main layer) to open the diacritics layer. Tap ا ب ج to return to letters.\n\nDiacritics are placed after the letter they mark — type a letter first, then the diacritic.",
                 target: "",
                 keyHint: ""
             ),
-            // Fatha
             LessonStep(
                 heading: "فتحة — fatha (a-vowel)",
-                body: "فتحة (fatha) marks a short /a/ vowel. It sits above the letter.\n\nSwitch to the diacritics layer and type the marked letter below:",
+                body: "فتحة (fatha) marks a short /a/ vowel. It sits above the letter.",
                 target: "بَ",
                 keyHint: "ب then فتحة"
             ),
-            // Kasra
             LessonStep(
                 heading: "كسرة — kasra (i-vowel)",
-                body: "كسرة (kasra) marks a short /i/ vowel. It sits below the letter.\n\nType the marked letter below:",
+                body: "كسرة (kasra) marks a short /i/ vowel. It sits below the letter.",
                 target: "بِ",
                 keyHint: "ب then كسرة"
             ),
-            // Damma
             LessonStep(
                 heading: "ضمة — damma (u-vowel)",
-                body: "ضمة (damma) marks a short /u/ vowel. It sits above the letter.\n\nType the marked letter below:",
+                body: "ضمة (damma) marks a short /u/ vowel. It sits above the letter.",
                 target: "بُ",
                 keyHint: "ب then ضمة"
             ),
-            // Sukun
             LessonStep(
                 heading: "سكون — sukun (no vowel)",
-                body: "سكون (sukun) indicates a consonant with no following vowel.\n\nType the marked letter below:",
+                body: "سكون (sukun) indicates a consonant with no following vowel.",
                 target: "بْ",
                 keyHint: "ب then سكون"
             ),
-            // Shadda
             LessonStep(
                 heading: "شدة — shadda (gemination)",
-                body: "شدة (shadda) doubles the consonant. It is written above the letter.\n\nType the marked letter below:",
+                body: "شدة (shadda) doubles the consonant. It is written above the letter.",
                 target: "بّ",
                 keyHint: "ب then شدة"
             ),
-            // Salawat
             LessonStep(
                 heading: "ﷺ — salawat symbol",
-                body: "The diacritics layer includes ﷺ (sallallahu alayhi wasallam), a single-codepoint symbol used when writing the Prophet's name ﷺ.\n\nFind it in the diacritics layer and type it below:",
+                body: "The diacritics layer includes ﷺ (sallallahu alayhi wasallam), a single-codepoint symbol used when writing the Prophet's name ﷺ.\n\nFind it in the diacritics layer.",
                 target: "ﷺ",
                 keyHint: "Diacritics layer → ﷺ"
             ),
-            // Radi
             LessonStep(
                 heading: "ؓ — radi symbol",
-                body: "ؓ is a compact symbol for رضی اللّٰہ عنہ, placed after a companion's name.\n\nFind it in the diacritics layer and type it below:",
+                body: "ؓ is a compact symbol for رضی اللّٰہ عنہ, placed after a companion's name.\n\nFind it in the diacritics layer.",
                 target: "ؓ",
                 keyHint: "Diacritics layer → ؓ"
             ),
@@ -208,35 +189,31 @@ enum LessonCatalog {
             ),
             LessonStep(
                 heading: "What is ZWNJ?",
-                body: "Zero Width Non-Joiner (ZWNJ, U+200C) prevents two letters from joining, even when they normally would. This is useful for showing a letter in its isolated form mid-word.\n\nAccess it by long-pressing the space bar and sliding to ZWNJ.",
+                body: "Zero Width Non-Joiner (ZWNJ, U+200C) prevents two letters from joining, even when they normally would. Useful for showing a letter in its isolated form mid-word.\n\nAccess it by long-pressing the space bar and sliding to ZWNJ.",
                 target: "",
                 keyHint: "Long-press space → ZWNJ"
             ),
-            // ZWNJ exercise: م‌م (letters forced apart)
             LessonStep(
                 heading: "ZWNJ: break a join",
-                body: "Type م then ZWNJ then م. The second م will appear in isolated form instead of connecting to the first.\n\nThe result should look like two separate م glyphs side by side.",
+                body: "م + ZWNJ + م: the second م appears isolated rather than joining the first. The example shows the result.",
                 target: "م\u{200C}م",
                 keyHint: "م → ZWNJ → م"
             ),
-            // ZWJ exercise: ب‍ (forced medial form)
             LessonStep(
                 heading: "ZWJ: force a joining form",
-                body: "Type ب then ZWJ. The ب will display in its medial (connected) form even though nothing follows it — useful when showing how a letter looks inside a word.\n\nType the sequence below:",
+                body: "ب + ZWJ: ب displays in medial (connected) form even though nothing follows — useful for showing how a letter looks inside a word.",
                 target: "ب\u{200D}",
                 keyHint: "ب → ZWJ"
             ),
-            // Tatweel explanation
             LessonStep(
                 heading: "ـ — Tatweel (Kashida)",
-                body: "Tatweel (ـ, U+0640) is the Arabic elongation stroke. It stretches the connecting baseline between two letters, used in calligraphic and display typography to justify lines or add visual weight.\n\nUnlike ZWJ/ZWNJ it is a visible character. Long-press the space bar and slide to ـ.\n\nYou can hold down on ـ in the popup to insert multiple tatweels in a row.",
+                body: "Tatweel (ـ, U+0640) is the Arabic elongation stroke. It stretches the connecting baseline between two letters, used in calligraphic and display typography.\n\nUnlike ZWJ/ZWNJ it is a visible character. Long-press the space bar and slide to ـ. Hold it down to insert multiple tatweels.",
                 target: "",
                 keyHint: "Long-press space → ـ"
             ),
-            // Tatweel exercise: سـلام
             LessonStep(
-                heading: "Practice: elongate a word",
-                body: "Type the word below. A tatweel sits between the س and the ل, stretching the baseline for calligraphic effect.\n\nInsert it with long-press space → ـ.",
+                heading: "Tatweel in a word",
+                body: "A tatweel sits between the س and the ل in this word, stretching the baseline for calligraphic effect.\n\nTry it anywhere using long-press space → ـ.",
                 target: "سـلام",
                 keyHint: "س → ـ → لام"
             ),

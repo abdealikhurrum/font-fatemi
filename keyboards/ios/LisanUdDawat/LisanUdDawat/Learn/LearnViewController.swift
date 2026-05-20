@@ -114,8 +114,8 @@ private final class ModuleCell: UITableViewCell {
         titleLabel.text = module.title
         subtitleLabel.text = module.subtitle
 
-        let count = module.exerciseCount
-        badgeLabel.text = "\(count)"
+        let count = module.stepCount
+        badgeLabel.text = "\(count) steps"
         badgeLabel.textColor = module.accent
         badgeLabel.backgroundColor = module.accent.withAlphaComponent(0.15)
     }
