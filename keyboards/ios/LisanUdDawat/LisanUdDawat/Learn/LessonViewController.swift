@@ -20,6 +20,9 @@ final class LessonViewController: UIViewController, UITextViewDelegate {
     private let prevButton    = UIButton(type: .system)
     private let nextButton    = UIButton(type: .system)
 
+    // Animated upward when the keyboard appears
+    private var bottomBarBottom: NSLayoutConstraint?
+
     private static let scratchPlaceholder = "Try typing here…"
 
     init(module: LessonModule) {
@@ -52,7 +55,6 @@ final class LessonViewController: UIViewController, UITextViewDelegate {
     private func buildUI() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.alwaysBounceVertical = true
-        scrollView.keyboardDismissMode  = .interactive
         view.addSubview(scrollView)
 
         contentStack.axis = .vertical
@@ -92,13 +94,12 @@ final class LessonViewController: UIViewController, UITextViewDelegate {
         hintBadge.textColor = module.accent
         hintBadge.backgroundColor = module.accent.withAlphaComponent(0.12)
 
-        buildScratchCard()
-
-        [progressLabel, headingLabel, bodyLabel, targetLabel, hintBadge, scratchCard]
+        // Lesson content only — scratch card lives outside the scroll view
+        [progressLabel, headingLabel, bodyLabel, targetLabel, hintBadge]
             .forEach { contentStack.addArrangedSubview($0) }
 
-        contentStack.setCustomSpacing(4,  after: targetLabel)
-        contentStack.setCustomSpacing(20, after: hintBadge)
+        // buildScratchCard adds scratchCard directly to view
+        buildScratchCard()
 
         // Bottom bar
         bottomBar.backgroundColor = .systemBackground
@@ -122,11 +123,15 @@ final class LessonViewController: UIViewController, UITextViewDelegate {
         prevButton.addTarget(self, action: #selector(prevTapped), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(nextTapped), for: .touchUpInside)
 
+        let bbc = bottomBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        bottomBarBottom = bbc
+
         NSLayoutConstraint.activate([
+            // Scroll view fills the space above the scratch card
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottomBar.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: scratchCard.topAnchor),
 
             contentStack.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
@@ -134,10 +139,16 @@ final class LessonViewController: UIViewController, UITextViewDelegate {
             contentStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
+            // Scratch card docked between scroll view and bottom bar
+            scratchCard.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scratchCard.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scratchCard.bottomAnchor.constraint(equalTo: bottomBar.topAnchor),
+
+            // Bottom bar — bottomBarBottom slides it (and scratchCard) up on keyboard show
             bottomBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomBar.heightAnchor.constraint(equalToConstant: 56),
-            bottomBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bbc,
 
             separator.topAnchor.constraint(equalTo: bottomBar.topAnchor),
             separator.leadingAnchor.constraint(equalTo: bottomBar.leadingAnchor),
@@ -151,10 +162,15 @@ final class LessonViewController: UIViewController, UITextViewDelegate {
     }
 
     private func buildScratchCard() {
-        scratchCard.backgroundColor    = .secondarySystemGroupedBackground
-        scratchCard.layer.cornerRadius = 12
-        scratchCard.layer.masksToBounds = true
+        scratchCard.backgroundColor = .secondarySystemGroupedBackground
         scratchCard.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scratchCard)
+
+        // Top hairline separates scratch card from lesson content
+        let topSep = UIView()
+        topSep.backgroundColor = .separator
+        topSep.translatesAutoresizingMaskIntoConstraints = false
+        scratchCard.addSubview(topSep)
 
         let label = UILabel()
         label.text      = "Practice"
@@ -181,7 +197,6 @@ final class LessonViewController: UIViewController, UITextViewDelegate {
         scratchView.isScrollEnabled = false
         scratchView.translatesAutoresizingMaskIntoConstraints = false
 
-        // Toolbar shown above the keyboard — "Done" dismisses it
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
         toolbar.items = [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
@@ -189,14 +204,18 @@ final class LessonViewController: UIViewController, UITextViewDelegate {
         ]
         toolbar.sizeToFit()
         scratchView.inputAccessoryView = toolbar
-
         scratchCard.addSubview(scratchView)
 
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: scratchCard.topAnchor, constant: 10),
+            topSep.topAnchor.constraint(equalTo: scratchCard.topAnchor),
+            topSep.leadingAnchor.constraint(equalTo: scratchCard.leadingAnchor),
+            topSep.trailingAnchor.constraint(equalTo: scratchCard.trailingAnchor),
+            topSep.heightAnchor.constraint(equalToConstant: 0.5),
+
+            label.topAnchor.constraint(equalTo: topSep.bottomAnchor, constant: 10),
             label.leadingAnchor.constraint(equalTo: scratchCard.leadingAnchor, constant: 12),
 
-            clearButton.topAnchor.constraint(equalTo: scratchCard.topAnchor, constant: 6),
+            clearButton.topAnchor.constraint(equalTo: topSep.bottomAnchor, constant: 6),
             clearButton.trailingAnchor.constraint(equalTo: scratchCard.trailingAnchor, constant: -8),
 
             scratchView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 4),
@@ -220,8 +239,8 @@ final class LessonViewController: UIViewController, UITextViewDelegate {
         targetLabel.isHidden = step.target.isEmpty
         hintBadge.isHidden   = step.keyHint.isEmpty
 
-        if !step.target.isEmpty  { targetLabel.text       = step.target }
-        if !step.keyHint.isEmpty { hintBadge.text         = "  \(step.keyHint)  " }
+        if !step.target.isEmpty  { targetLabel.text = step.target }
+        if !step.keyHint.isEmpty { hintBadge.text   = "  \(step.keyHint)  " }
 
         resetScratch()
 
@@ -293,11 +312,18 @@ final class LessonViewController: UIViewController, UITextViewDelegate {
             let duration = note.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
             let curve    = note.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
         else { return }
+
+        // How many points does the keyboard cover from the bottom of this view?
         let overlap = max(0, view.bounds.maxY - frame.minY)
+
+        // bottomBarBottom is pinned to safeAreaLayoutGuide.bottomAnchor, which already
+        // sits above the home-indicator inset. Subtract that inset so we don't over-shift.
+        let shift = max(0, overlap - view.safeAreaInsets.bottom)
+
         UIView.animate(withDuration: duration, delay: 0,
                        options: UIView.AnimationOptions(rawValue: curve << 16)) {
-            self.scrollView.contentInset.bottom = overlap
-            self.scrollView.verticalScrollIndicatorInsets.bottom = overlap
+            self.bottomBarBottom?.constant = -shift
+            self.view.layoutIfNeeded()
         }
     }
 }
