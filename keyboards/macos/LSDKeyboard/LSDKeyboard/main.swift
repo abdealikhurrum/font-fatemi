@@ -6,5 +6,5 @@ import InputMethodKit
 let info = Bundle.main.infoDictionary!
 let connectionName = info["InputMethodConnectionName"] as! String
 let bundleIdentifier = Bundle.main.bundleIdentifier!
-let server = IMKServer(name: connectionName, bundleIdentifier: Bundle.main.bundleIdentifier)
+let server = IMKServer(name: connectionName, bundleIdentifier: bundleIdentifier)
 NSApplication.shared.run()

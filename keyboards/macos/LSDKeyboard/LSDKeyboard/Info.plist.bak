@@ -27,7 +27,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>13.0</string>
 	<key>LSUIElement</key>
-	<true/>
+    <true/>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>ComponentInputModeDict</key>
@@ -55,5 +55,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<true/>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
 </dict>
 </plist>
