@@ -1,5 +1,6 @@
 import Foundation
 import InputMethodKit
+import os.log
 
 // MARK: - LSDInputController
 //
@@ -16,21 +17,22 @@ import InputMethodKit
 
 final class LSDInputController: IMKInputController {
 
-    // Reads the current setting on each use so changes take effect immediately.
     private var doublePressWindow: TimeInterval { KeyboardSettings.doublePressDelay }
 
-    // Character currently held in marked-text composition, if any.
     private var pendingPrimary: String?
     private var pendingTimer: Timer?
+
+    #if DEBUG
+    private let log = Logger(subsystem: "com.exordiumnetworks.lsdkeyboard.macos", category: "IME")
+    #endif
 
     // MARK: - Key event handling
 
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
         guard let event, event.type == .keyDown else { return false }
 
-        let mods = event.modifierFlags.intersection([.command, .option, .control])
-        guard mods.isEmpty else {
-            // Modified key: commit composition and let the app handle it.
+        let mods = event.modifierFlags
+        if mods.contains(.command) || mods.contains(.control) {
             commitPending()
             return false
         }
@@ -38,8 +40,8 @@ final class LSDInputController: IMKInputController {
         switch event.keyCode {
         case 51:        // Delete / Backspace
             CorpusLogger.shared.recordBackspace()
-            cancelPending()             // discard composition, don't commit
-            return false                // let the app handle the delete
+            cancelPending()
+            return false
         case 36, 76:    // Return / Enter
             commitPending()
             return false
@@ -53,26 +55,33 @@ final class LSDInputController: IMKInputController {
             break
         }
 
-        guard let chars = event.characters, !chars.isEmpty else {
+        let isShift  = mods.contains(.shift)
+        let isOption = mods.contains(.option)
+        guard let chars = KeyData.char(forCode: Int(event.keyCode),
+                                       shift: isShift, option: isOption) else {
             commitPending()
             return false
         }
 
-        // Double-press: same char arrives while it's still in composition.
+        #if DEBUG
+        log.debug("key=\(event.keyCode) shift=\(isShift) opt=\(isOption) → \"\(chars)\"")
+        #endif
+
         if let pending = pendingPrimary, chars == pending,
            let secondary = KeyData.secondary(for: chars) {
             cancelTimer()
             pendingPrimary = nil
+            #if DEBUG
+            log.debug("double-press \"\(chars)\" → \"\(secondary)\"")
+            #endif
             insert(secondary, into: sender)
             PairCollector.shared.recordDoublePress(primary: chars, secondary: secondary)
             return true
         }
 
-        // Commit any existing composition before handling this new character.
         commitPending()
 
         if KeyData.secondary(for: chars) != nil {
-            // Hold in composition so a quick second press can substitute.
             startComposition(char: chars, sender: sender)
         } else {
             insert(chars, into: sender)
@@ -87,8 +96,10 @@ final class LSDInputController: IMKInputController {
         commitPending()
     }
 
-    // Called when this input method is deactivated (user switched away).
     override func deactivateServer(_ sender: Any!) {
+        #if DEBUG
+        log.debug("deactivateServer — flushing corpus")
+        #endif
         CorpusLogger.shared.flush()
         commitPending()
     }
@@ -97,6 +108,9 @@ final class LSDInputController: IMKInputController {
 
     private func startComposition(char: String, sender: Any?) {
         pendingPrimary = char
+        #if DEBUG
+        log.debug("startComposition \"\(char)\"")
+        #endif
 
         let client = textClient(sender)
         client?.setMarkedText(
@@ -117,15 +131,19 @@ final class LSDInputController: IMKInputController {
         guard let char = pendingPrimary else { return }
         cancelTimer()
         pendingPrimary = nil
+        #if DEBUG
+        log.debug("commitPending \"\(char)\"")
+        #endif
         insert(char, into: client())
     }
 
-    // Discard the pending composition without inserting anything.
     private func cancelPending() {
-        guard pendingPrimary != nil else { return }
+        guard let char = pendingPrimary else { return }
         cancelTimer()
         pendingPrimary = nil
-        // Clear the marked text so the underline disappears.
+        #if DEBUG
+        log.debug("cancelPending \"\(char)\"")
+        #endif
         textClient(client())?.setMarkedText(
             NSAttributedString(string: ""),
             selectionRange: NSRange(location: 0, length: 0),
@@ -141,6 +159,9 @@ final class LSDInputController: IMKInputController {
     // MARK: - Text insertion
 
     private func insert(_ text: String, into sender: Any?) {
+        #if DEBUG
+        log.debug("insert \"\(text)\"")
+        #endif
         CorpusLogger.shared.record(text)
         textClient(sender)?.insertText(
             text,

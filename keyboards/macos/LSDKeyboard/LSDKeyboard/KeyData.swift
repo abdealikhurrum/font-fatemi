@@ -90,6 +90,86 @@ extension KeyData {
     }
 }
 
+// MARK: - Key-code → character mapping
+
+extension KeyData {
+
+    // Returns the Arabic/Urdu character for a physical key code + modifier combination,
+    // honouring the currently selected layout. Returns nil for unmapped keys (function
+    // keys, arrows, modifier-only presses, etc.) so the IME can pass them through.
+    static func char(forCode code: Int, shift: Bool, option: Bool) -> String? {
+        let base: [Int: String]
+        switch (shift, option) {
+        case (true,  true):  base = shiftOptionLayer
+        case (false, true):  base = optionLayer
+        case (true,  false): base = shiftLayer
+        default:             base = normalLayer
+        }
+        guard var ch = base[code] else { return nil }
+        if KeyboardSettings.selectedLayout == .crulpUrdu,
+           let swapped = crulpPrimarySwap[ch] { ch = swapped }
+        return ch
+    }
+
+    // Characters that differ between LSD and CRULP Urdu in the primary layer.
+    private static let crulpPrimarySwap: [String: String] = [
+        "ه": "ہ", "ك": "ک", "ة": "ۃ", "ي": "ی",
+    ]
+
+    // Layer 2 (no modifier) — sourced from the LSD Mac keylayout
+    private static let normalLayer: [Int: String] = [
+        0: "ش",  1: "س",  2: "ي",  3: "ب",  4: "ا",  5: "ل",
+        6: "ظ",  7: "ط",  8: "ذ",  9: "د",  11: "ز",
+        12: "ض", 13: "ص", 14: "ث", 15: "ق", 16: "غ", 17: "ف",
+        18: "١", 19: "٢", 20: "٣", 21: "٤", 22: "٦", 23: "٥",
+        24: "=",  25: "٩", 26: "٧", 27: "-",  28: "٨", 29: "٠",
+        30: "ة", 31: "خ", 32: "ع", 33: "ج",  34: "ه", 35: "ح",
+        37: "م", 38: "ت", 39: "؛", 40: "ن",  41: "ك",
+        42: "\\", 43: "،", 44: "/",  45: "ر", 46: "و", 47: ".",
+        50: "ـ",
+    ]
+
+    // Layer 3 (shift) — sourced from the LSD Mac keylayout
+    private static let shiftLayer: [Int: String] = [
+        0: "»",  1: "«",  2: "ى",  4: "آ",  6: "'",
+        8: "ئ",  9: "ء",  11: "أ",
+        12: "\u{064E}", 13: "\u{064B}", 14: "\u{0650}",
+        15: "\u{064D}", 16: "\u{064C}", 17: "\u{064F}",
+        18: "!", 19: "@",  20: "#",  21: "$", 22: "^",  23: "٪",
+        24: "+", 25: ")",  26: "&",  27: "ـ", 28: "*",  29: "(",
+        30: "{", 31: "\u{0652}", 32: "\u{0652}", 33: "}",
+        34: "\u{0651}", 35: "[",
+        37: "\u{066C}", 39: "\"", 40: "\u{066B}",
+        41: ":", 42: "|",  43: ">", 44: "؟", 45: "إ", 46: "ؤ", 47: "<",
+    ]
+
+    // Layer 4 (option) — sourced from the LSD Mac keylayout
+    private static let optionLayer: [Int: String] = [
+        0: "\u{0614}",
+        1: "ے",  2: "ی",  3: "پ",
+        4: "\u{0670}", 5: "\u{0653}", 6: "\u{06DA}", 7: "\u{06E8}",
+        8: "ڈ",  9: "ڑ",  11: "ژ",
+        12: "\u{2018}", 13: "\u{2019}", 14: "\u{201C}", 15: "\u{201D}",
+        16: "\u{0657}", 17: "ڤ",
+        19: "\u{0610}", 22: "\u{0671}",
+        25: "ۂ",  26: "۞",  27: "_",  28: "\u{0655}",
+        30: "ۃ",  31: "ہ",  32: "\u{0611}", 33: "چ",  34: "ھ",
+        38: "ٹ",  40: "ں",  41: "گ",
+        44: "÷",  45: "\u{0613}", 46: "\u{0656}",
+    ]
+
+    // Layer 5 (shift+option) — sourced from the LSD Mac keylayout
+    private static let shiftOptionLayer: [Int: String] = [
+        1: "ے",  2: "ی",  3: "پ",
+        8: "ڈ",  9: "ڑ",  11: "ژ",
+        17: "ڤ", 18: "ظ",
+        27: "_",
+        31: "\u{06D5}", 32: "\u{06D5}", 33: "چ",
+        38: "ٹ",  40: "ں",  41: "ک",
+        44: "÷",
+    ]
+}
+
 // MARK: - Full layout (retained for reference; not rendered on macOS)
 
 struct KeyboardLayer {
