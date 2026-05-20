@@ -15,18 +15,22 @@ import Foundation
 
 enum CRULPUrduLayoutData {
 
-    static let defaultLayer = KeyboardLayer(id: "crulp", rows: [
+    // Computed so the yeh character reflects the current setting without restarting.
+    static var defaultLayer: KeyboardLayer {
+        let yeh       = KeyboardSettings.urduYehStyle == .farsiYeh ? "ی" : "ي"
+        let yehAlt    = KeyboardSettings.urduYehStyle == .farsiYeh ? "ي" : "ی"
+        return KeyboardLayer(id: "crulp", rows: [
         // Row 1 — 10 keys (QWERTYUIOP)
         [
             KeyData("ق"),
             KeyData("و", alternates: ["ؤ"]),
-            KeyData("ع", secondary: "غ"),                          // عع → غ
-            KeyData("ر", secondary: "ڑ"),                          // رر → ڑ
-            KeyData("ت", secondary: "ٹ"),                          // تت → ٹ
+            KeyData("ع", secondary: "غ"),                               // عع → غ
+            KeyData("ر", secondary: "ڑ"),                               // رر → ڑ
+            KeyData("ت", secondary: "ٹ"),                               // تت → ٹ
             KeyData("ے", alternates: ["ئ", "ى"]),
             KeyData("ء"),
-            KeyData("ح", secondary: "خ"),                          // حح → خ
-            KeyData("ی", alternates: ["ئ", "ى"]),
+            KeyData("ح", secondary: "خ"),                               // حح → خ
+            KeyData(yeh, alternates: ["ئ", "ى", yehAlt]),               // alternate = other yeh
             KeyData("پ"),
         ],
         // Row 2 — 9 keys (ASDFGHJKL)
@@ -60,5 +64,6 @@ enum CRULPUrduLayoutData {
             KeyData("َ",   type: .diacritic, width: .fixed(36)),
             KeyData("↵",   type: .enter,    width: .fixed(52)),
         ],
-    ])
+        ])
+    }
 }

@@ -39,6 +39,17 @@ enum KeyboardSettings {
         set { UserDefaults.standard.set(newValue, forKey: "double_tap_delay") }
     }
 
+    // CRULP Urdu yeh: Farsi yeh ی (no dots, U+06CC) vs Arabic yeh ي (two dots, U+064A).
+    enum UrduYehStyle: String {
+        case farsiYeh  = "farsi_yeh"    // ی  default — standard in Urdu/Farsi
+        case arabicYeh = "arabic_yeh"   // ي
+    }
+
+    static var urduYehStyle: UrduYehStyle {
+        get { UrduYehStyle(rawValue: UserDefaults.standard.string(forKey: "urdu_yeh_style") ?? "") ?? .farsiYeh }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "urdu_yeh_style") }
+    }
+
     // Double alef (اا) produces either اٰ (alef with kharo zabar) or آ (alef madda).
     enum DoubleAlefStyle: String {
         case kharoZabar = "kharo_zabar"   // اٰ  default

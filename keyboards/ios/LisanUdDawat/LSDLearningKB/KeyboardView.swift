@@ -10,12 +10,11 @@ struct KeyboardMetrics {
     let barHeight: CGFloat        // predictive/suggestion bar
 
     static let portrait = KeyboardMetrics(
-        keyH: 46, rowSpacing: 12, topPadding: 12, bottomPadding: 5, calloutOverflow: 44, barHeight: 44
+        keyH: 46, rowSpacing: 12, topPadding: 12, bottomPadding: 5, calloutOverflow: 0, barHeight: 44
     )
     // Shorter keys + tighter spacing free up screen real-estate in landscape.
-    // calloutOverflow ≥ keyH + 8 (pointer height) ensures callout bubbles aren't clipped.
     static let landscape = KeyboardMetrics(
-        keyH: 34, rowSpacing: 8, topPadding: 6, bottomPadding: 4, calloutOverflow: 38, barHeight: 36
+        keyH: 34, rowSpacing: 8, topPadding: 6, bottomPadding: 4, calloutOverflow: 0, barHeight: 36
     )
 }
 
