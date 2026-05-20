@@ -6,6 +6,9 @@ PROJECT="$SCRIPT_DIR/LSDKeyboard/LSDKeyboard.xcodeproj"
 INSTALL_DIR="$HOME/Library/Input Methods"
 APP_NAME="LSDKeyboard.app"
 
+echo "=== Cleaning previous build artifacts ==="
+rm -rf /tmp/LSDKeyboard-build
+
 echo "=== Building LSDKeyboard ==="
 xcodebuild \
     -project "$PROJECT" \
@@ -29,6 +32,16 @@ echo "=== Installing to ~/Library/Input Methods/ ==="
 mkdir -p "$INSTALL_DIR"
 rm -rf "$INSTALL_DIR/$APP_NAME"
 cp -r "$BUILT_APP" "$INSTALL_DIR/$APP_NAME"
+
+echo "=== Verifying installed plist ==="
+PLIST="$INSTALL_DIR/$APP_NAME/Contents/Info.plist"
+BID=$(/usr/libexec/PlistBuddy -c "Print :CFBundleIdentifier" "$PLIST" 2>&1)
+CNX=$(/usr/libexec/PlistBuddy -c "Print :InputMethodConnectionName" "$PLIST" 2>&1)
+echo "  CFBundleIdentifier:        $BID"
+echo "  InputMethodConnectionName: $CNX"
+if [ "$BID" != "$CNX" ]; then
+    echo "WARNING: connection name does not match bundle ID — imklaunchagent will refuse"
+fi
 
 echo "=== Signing (ad-hoc) ==="
 codesign --force --sign - --deep "$INSTALL_DIR/$APP_NAME"
