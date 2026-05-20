@@ -26,8 +26,6 @@
 	<string>LSDInputController</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>13.0</string>
-	<key>LSUIElement</key>
-	<true/>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>ComponentInputModeDict</key>
@@ -55,5 +53,7 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>LSBackgroundOnly</key>
+	<true/>
 </dict>
 </plist>
