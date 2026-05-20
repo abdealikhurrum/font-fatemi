@@ -59,12 +59,15 @@ final class LSDInputController: IMKInputController {
         let isOption = mods.contains(.option)
         guard let chars = KeyData.char(forCode: Int(event.keyCode),
                                        shift: isShift, option: isOption) else {
+            #if DEBUG
+            log.debug("no-map code=\(event.keyCode, privacy: .public) shift=\(isShift, privacy: .public) opt=\(isOption, privacy: .public)")
+            #endif
             commitPending()
             return false
         }
 
         #if DEBUG
-        log.debug("key=\(event.keyCode) shift=\(isShift) opt=\(isOption) → \"\(chars)\"")
+        log.debug("mapped code=\(event.keyCode, privacy: .public) shift=\(isShift, privacy: .public) opt=\(isOption, privacy: .public) → \"\(chars, privacy: .public)\"")
         #endif
 
         if let pending = pendingPrimary, chars == pending,
@@ -72,7 +75,7 @@ final class LSDInputController: IMKInputController {
             cancelTimer()
             pendingPrimary = nil
             #if DEBUG
-            log.debug("double-press \"\(chars)\" → \"\(secondary)\"")
+            log.debug("double-press \"\(chars, privacy: .public)\" → \"\(secondary, privacy: .public)\"")
             #endif
             insert(secondary, into: sender)
             PairCollector.shared.recordDoublePress(primary: chars, secondary: secondary)
@@ -109,7 +112,7 @@ final class LSDInputController: IMKInputController {
     private func startComposition(char: String, sender: Any?) {
         pendingPrimary = char
         #if DEBUG
-        log.debug("startComposition \"\(char)\"")
+        log.debug("startComposition \"\(char, privacy: .public)\"")
         #endif
 
         let client = textClient(sender)
@@ -132,7 +135,7 @@ final class LSDInputController: IMKInputController {
         cancelTimer()
         pendingPrimary = nil
         #if DEBUG
-        log.debug("commitPending \"\(char)\"")
+        log.debug("commitPending \"\(char, privacy: .public)\"")
         #endif
         insert(char, into: client())
     }
@@ -142,7 +145,7 @@ final class LSDInputController: IMKInputController {
         cancelTimer()
         pendingPrimary = nil
         #if DEBUG
-        log.debug("cancelPending \"\(char)\"")
+        log.debug("cancelPending \"\(char, privacy: .public)\"")
         #endif
         textClient(client())?.setMarkedText(
             NSAttributedString(string: ""),
@@ -159,11 +162,12 @@ final class LSDInputController: IMKInputController {
     // MARK: - Text insertion
 
     private func insert(_ text: String, into sender: Any?) {
+        let client = textClient(sender)
         #if DEBUG
-        log.debug("insert \"\(text)\"")
+        log.debug("insert \"\(text, privacy: .public)\" hasClient=\(client != nil, privacy: .public)")
         #endif
         CorpusLogger.shared.record(text)
-        textClient(sender)?.insertText(
+        client?.insertText(
             text,
             replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
         )
