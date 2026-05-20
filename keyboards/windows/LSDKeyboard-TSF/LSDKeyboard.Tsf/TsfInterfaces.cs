@@ -140,6 +140,59 @@ public interface ITfThreadMgr
 }
 
 // ----------------------------------------------------------------------------
+// TF_SELECTION — returned by ITfContext.GetSelection.
+// Contains an ITfRange* pointer and a style descriptor.
+
+[StructLayout(LayoutKind.Sequential)]
+public struct TF_SELECTIONSTYLE
+{
+    public uint ase;           // TfActiveSelEnd
+    public int  fInterimChar;  // BOOL
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public struct TF_SELECTION
+{
+    public IntPtr            range;  // ITfRange*
+    public TF_SELECTIONSTYLE style;
+}
+
+// ----------------------------------------------------------------------------
+// ITfRange  {AA80E7EB-2021-11D2-93E0-0060B067B86E}
+//
+// Represents a span of text in a document. Methods are declared in exact
+// vtable order; stubs cover slots we never call to keep subsequent offsets
+// correct. We use GetText (for inspection), SetText (to overwrite the
+// primary character with the secondary), and ShiftStart (to extend the
+// range one character to the left to cover the primary).
+
+[ComImport]
+[Guid("AA80E7EB-2021-11D2-93E0-0060B067B86E")]
+[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+public interface ITfRange
+{
+    // vtable[3]
+    [PreserveSig]
+    int GetText(uint ec, uint dwFlags,
+        [Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] char[] pchText,
+        uint cchMax, out uint pcch);
+
+    // vtable[4]
+    [PreserveSig]
+    int SetText(uint ec, uint dwFlags,
+        [MarshalAs(UnmanagedType.LPWStr)] string pchText, int cch);
+
+    // vtable[5–7] — stubs (GetFormattedText, GetEmbedded, InsertEmbedded)
+    [PreserveSig] int GetFormattedText(uint ec, IntPtr ppDataObject);
+    [PreserveSig] int GetEmbedded(uint ec, in Guid rguidService, in Guid riid, out IntPtr ppunk);
+    [PreserveSig] int InsertEmbedded(uint ec, uint dwFlags, IntPtr pDataObject);
+
+    // vtable[8]
+    [PreserveSig]
+    int ShiftStart(uint ec, int cchReq, out int pcch, IntPtr pHalt);
+}
+
+// ----------------------------------------------------------------------------
 // ITfContext  {AA80E7FD-2021-11D2-93E0-0060B067B86E}
 //
 // Represents the focused text document. The key method for us is
@@ -159,7 +212,7 @@ public interface ITfContext
     // Vtable stubs — TfContext has many methods; declare the ones below
     // RequestEditSession as stubs to keep offsets valid if you need them later.
     [PreserveSig] int InWriteSession(uint tid, [MarshalAs(UnmanagedType.Bool)] out bool pfWriteSession);
-    [PreserveSig] int GetSelection(uint ec, uint ulIndex, uint ulCount, IntPtr pSelection, out uint pcFetched);
+    [PreserveSig] int GetSelection(uint ec, uint ulIndex, uint ulCount, out TF_SELECTION pSelection, out uint pcFetched);
     [PreserveSig] int SetSelection(uint ec, uint ulCount, IntPtr pSelection);
     [PreserveSig] int GetStart(uint ec, IntPtr ppStart);
     [PreserveSig] int GetEnd(uint ec, IntPtr ppEnd);

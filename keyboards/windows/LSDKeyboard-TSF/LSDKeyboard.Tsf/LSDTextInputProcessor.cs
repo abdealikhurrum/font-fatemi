@@ -149,51 +149,53 @@ public sealed class LSDTextInputProcessor : ITfTextInputProcessor, ITfKeyEventSi
         // RCW from the raw pointer TSF gave us.
         var context = (ITfContext)Marshal.GetObjectForIUnknown(pic);
 
-        var session = new InsertSession(_clientId, secondary);
+        var session = new InsertSession(_clientId, secondary, context);
         context.RequestEditSession(_clientId, session, TF_ES_SYNC | TF_ES_READWRITE,
             out _);
     }
 
     // -------------------------------------------------------------------------
     // Edit session implementation
+    //
+    // Strategy: get the current cursor selection, extend its start one character
+    // to the left (covering the primary that was already inserted on the first
+    // key press), then overwrite that range with the secondary string.
 
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [Guid("B7C2D3E4-F5A6-7890-BCDE-F01234567890")]
     private sealed class InsertSession : ITfEditSession
     {
-        private readonly uint   _clientId;
-        private readonly string _secondary;
+        private readonly uint       _clientId;
+        private readonly string     _secondary;
+        private readonly ITfContext _context;
 
-        internal InsertSession(uint clientId, string secondary)
+        // TF_DEFAULT_SELECTION — retrieve the active selection (defined as (ULONG)-1).
+        private const uint TF_DEFAULT_SELECTION = uint.MaxValue;
+
+        internal InsertSession(uint clientId, string secondary, ITfContext context)
         {
             _clientId  = clientId;
             _secondary = secondary;
+            _context   = context;
         }
 
         // ec = edit cookie — valid only for the duration of this call.
         public int DoEditSession(uint ec)
         {
-            // TODO: Implement full delete-previous + insert-secondary.
-            //
-            // Outline:
-            //   1. QI the ITfContext for ITfInsertAtSelection.
-            //   2. Call InsertTextAtSelection(ec, TF_IAS_QUERYONLY, ...) to get the
-            //      current selection range (ITfRange*).
-            //   3. ShiftStart(ec, -1, out actualShift, pHaltRange=null) to extend the
-            //      range one code-unit to the left (covers the primary char).
-            //   4. Call range.SetText(ec, 0, secondary, secondary.Length) to replace
-            //      that range with the secondary string.
-            //
-            // Alternatively, use TF_IAS_NOQUERY and call InsertTextAtSelection
-            // directly — TSF replaces the selection. Then separately delete the
-            // char before the cursor (step 3→4 above using an empty replacement).
-            //
-            // Key interfaces still to declare in TsfInterfaces.cs:
-            //   ITfRange  {AA80E7EB-2021-11D2-93E0-0060B067B86E}
-            //     SetText(ec, dwFlags, pchText, cch) → replaces range content
-            //     ShiftStart(ec, cchReq, out cchActual, pHalt) → moves start left/right
-            //   ITfInsertAtSelection  already declared — use to get initial range
+            // Get the current cursor position as a zero-width ITfRange.
+            int hr = _context.GetSelection(ec, TF_DEFAULT_SELECTION, 1,
+                out var sel, out uint fetched);
+            if (hr != 0 || fetched == 0 || sel.range == IntPtr.Zero)
+                return hr == 0 ? -1 : hr; // E_FAIL if range unavailable
+
+            var range = (ITfRange)Marshal.GetObjectForIUnknown(sel.range);
+
+            // Extend the range start one code-unit left to cover the primary char.
+            range.ShiftStart(ec, -1, out _, IntPtr.Zero);
+
+            // Replace the primary character with the secondary string.
+            range.SetText(ec, 0, _secondary, _secondary.Length);
 
             return 0; // S_OK
         }
