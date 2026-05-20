@@ -23,7 +23,7 @@ final class LSDInputController: IMKInputController {
     private var pendingTimer: Timer?
 
     #if DEBUG
-    private let log = Logger(subsystem: "com.exordiumnetworks.lsdkeyboard.macos", category: "IME")
+    private let log = Logger(subsystem: "com.exordiumnetworks.inputmethod.lsdkeyboard", category: "IME")
     #endif
 
     // MARK: - Key event handling
@@ -72,7 +72,7 @@ final class LSDInputController: IMKInputController {
             cancelTimer()
             pendingPrimary = nil
             #if DEBUG
-            log.debug("double-press \"\(chars)\" → \"\(secondary)\"")
+            log.debug("double-press \(chars) → \(secondary)")
             #endif
             insert(secondary, into: sender)
             PairCollector.shared.recordDoublePress(primary: chars, secondary: secondary)
