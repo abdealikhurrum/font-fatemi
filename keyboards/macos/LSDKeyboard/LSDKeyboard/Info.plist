@@ -21,7 +21,7 @@
 	<key>CFBundleVersion</key>
 	<string>1.11</string>
 	<key>InputMethodConnectionName</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)_Connection</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>InputMethodServerControllerClass</key>
 	<string>LSDInputController</string>
 	<key>LSMinimumSystemVersion</key>
