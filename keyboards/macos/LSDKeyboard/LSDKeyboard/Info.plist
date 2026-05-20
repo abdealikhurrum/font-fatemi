@@ -26,8 +26,6 @@
     <string>LSDKeyboard_Connection</string>
     <key>InputMethodServerControllerClass</key>
     <string>LSDInputController</string>
-    <key>LSBackgroundOnly</key>
-    <true/>
     <key>LSUIElement</key>
     <true/>
     <key>LSMinimumSystemVersion</key>
