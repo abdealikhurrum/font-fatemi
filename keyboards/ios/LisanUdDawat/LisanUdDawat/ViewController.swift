@@ -62,7 +62,7 @@ final class ViewController: UIViewController {
         let v = cardContainer(title: "FatemiMaqala Font")
 
         let preview = UILabel()
-        preview.text = "اَلْبَيَانُ مِنَ الْإِيمَان"
+        preview.text = "كيم چهو؟!"
         preview.font = UIFont(name: "FatemiMaqala-Regular", size: 24) ?? UIFont.systemFont(ofSize: 24)
         preview.textAlignment = .center
         v.addArrangedSubview(preview)
@@ -93,8 +93,7 @@ final class ViewController: UIViewController {
         v.addArrangedSubview(installButton)
 
         v.addArrangedSubview(bodyLabel(
-            "To uninstall: Settings → General → VPN & Device Management → FatemiMaqala Font → Remove Profile.\n" +
-            "Note: profile installation is not available in the iOS Simulator."
+            "To uninstall: Settings → General → VPN & Device Management → FatemiMaqala Font → Remove Profile.\n" 
         ))
 
         return v

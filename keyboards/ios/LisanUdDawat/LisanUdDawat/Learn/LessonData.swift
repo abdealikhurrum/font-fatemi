@@ -40,7 +40,7 @@ enum LessonCatalog {
             LessonStep(
                 heading: "پ — double-press ث",
                 body: "Tap ث twice quickly. The keyboard will replace ث with پ.",
-                target: "پانی",
+                target: "پاني",
                 keyHint: "ث ث → پ"
             ),
             LessonStep(
@@ -52,7 +52,7 @@ enum LessonCatalog {
             LessonStep(
                 heading: "چ — double-press ح",
                 body: "Tap ح twice quickly to get چ.",
-                target: "چائے",
+                target: "چائي",
                 keyHint: "ح ح → چ"
             ),
             LessonStep(
@@ -64,25 +64,25 @@ enum LessonCatalog {
             LessonStep(
                 heading: "ں — double-press ط",
                 body: "Tap ط twice quickly to get the nasal ں.",
-                target: "ہاں",
+                target: "هاں",
                 keyHint: "ط ط → ں"
             ),
             LessonStep(
                 heading: "ہ — double-press ظ",
                 body: "Tap ظ twice quickly to get ہ (do-chashmi he).",
-                target: "ہمیشہ",
+                target: "همیشہ",
                 keyHint: "ظ ظ → ہ"
             ),
             LessonStep(
                 heading: "ھ — double-press ه",
                 body: "Tap ه twice quickly to get the aspiration marker ھ.",
-                target: "بھائی",
+                target: "بھائي",
                 keyHint: "ه ه → ھ"
             ),
             LessonStep(
                 heading: "ڑ — double-press ر",
                 body: "Tap ر twice quickly to get the retroflex ڑ.",
-                target: "لڑکی",
+                target: "پهاڑو",
                 keyHint: "ر ر → ڑ"
             ),
             LessonStep(
@@ -99,7 +99,7 @@ enum LessonCatalog {
             ),
             LessonStep(
                 heading: "اٰ — double-press ا",
-                body: "Tap ا twice quickly to get alef with madda above اٰ, used in words like اٰمین.",
+                body: "Tap ا twice quickly to get alef + kharo zabar or alef with madda above اٰ (changeable in settings), used in words like اٰمین.",
                 target: "اٰمین",
                 keyHint: "ا ا → اٰ"
             ),
