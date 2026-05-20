@@ -71,6 +71,10 @@
                 <true/>
                 <key>tsInputModeScriptKey</key>
                 <integer>4</integer>
+                <key>tsInputModeLanguageKey</key>
+                <array>
+                    <string>ar</string>
+                </array>
             </dict>
         </dict>
     </dict>
