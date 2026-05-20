@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Lisan ud Dawat</string>
 	<key>CFBundleExecutable</key>
-	<string>LSDKeyboard-2</string>
+	<string>LSDKeyboard</string>
 	<key>CFBundleIconFile</key>
 	<string>LSDKeyboard</string>
 	<key>CFBundleIdentifier</key>
@@ -17,34 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.11</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>ComponentInputModeDict</key>
-	<dict>
-		<key>tsInputModeListKey</key>
-		<dict>
-			<key>com.exordiumnetworks.lsdkeyboard.macos.Arabic</key>
-			<dict>
-				<key>tsInputModeAlternateMenuItemNameKey</key>
-				<string>Lisan ud Dawat</string>
-				<key>tsInputModeDefaultStateKey</key>
-				<true/>
-				<key>tsInputModeIconFileKey</key>
-				<string>LSDKeyboard.icns</string>
-				<key>tsInputModeIsVisibleKey</key>
-				<true/>
-				<key>tsInputModeLanguageKey</key>
-				<array>
-					<string>ar</string>
-				</array>
-				<key>tsInputModePrimaryInScriptKey</key>
-				<true/>
-				<key>tsInputModeScriptKey</key>
-				<integer>4</integer>
-			</dict>
-		</dict>
-	</dict>
+	<string>1.11</string>
 	<key>InputMethodConnectionName</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)_Connection</string>
 	<key>InputMethodServerControllerClass</key>
@@ -55,7 +30,36 @@
 	<true/>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>LSBackgroundOnly</key>
-	<true/>
+	<key>ComponentInputModeDict</key>
+	<dict>
+		<key>tsVisibleInputModeOrderedArrayKey</key>
+		<array>
+			<string>com.exordiumnetworks.inputmethod.lsdkeyboard.Main</string>
+		</array>
+		<key>tsInputModeListKey</key>
+		<dict>
+			<key>com.exordiumnetworks.inputmethod.lsdkeyboard.Main</key>
+			<dict>
+				<key>TISInputSourceID</key>
+				<string>com.exordiumnetworks.inputmethod.lsdkeyboard.Main</string>
+				<key>TISIntendedLanguage</key>
+				<string>ar</string>
+				<key>tsInputModeScriptKey</key>
+				<string>smArabic</string>
+				<key>tsInputModePrimaryInScriptKey</key>
+				<true/>
+				<key>tsInputModeDefaultStateKey</key>
+				<true/>
+				<key>tsInputModeIsVisibleKey</key>
+				<true/>
+				<key>tsInputModeMenuIconFileKey</key>
+				<string>LSDKeyboard.icns</string>
+			</dict>
+		</dict>
+	</dict>
+	<key>tsInputMethodCharacterRepertoireKey</key>
+	<array>
+		<string>ar</string>
+	</array>
 </dict>
 </plist>
