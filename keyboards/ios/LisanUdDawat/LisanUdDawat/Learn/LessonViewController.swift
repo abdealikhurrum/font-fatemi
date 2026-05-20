@@ -180,6 +180,16 @@ final class LessonViewController: UIViewController, UITextViewDelegate {
         scratchView.spellCheckingType      = .no
         scratchView.isScrollEnabled = false
         scratchView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Toolbar shown above the keyboard — "Done" dismisses it
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
+        toolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissScratchKeyboard)),
+        ]
+        toolbar.sizeToFit()
+        scratchView.inputAccessoryView = toolbar
+
         scratchCard.addSubview(scratchView)
 
         NSLayoutConstraint.activate([
@@ -234,6 +244,10 @@ final class LessonViewController: UIViewController, UITextViewDelegate {
 
     @objc private func clearScratch() {
         resetScratch()
+        scratchView.resignFirstResponder()
+    }
+
+    @objc private func dismissScratchKeyboard() {
         scratchView.resignFirstResponder()
     }
 
