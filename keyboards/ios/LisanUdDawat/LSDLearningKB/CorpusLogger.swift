@@ -108,9 +108,29 @@ final class CorpusLogger {
     }
 
     func persistOffsets() {
-        guard offsetsDirty, let data = memCache else { return }
+        guard offsetsDirty, var data = memCache else { return }
         offsetsDirty = false
+        maybeSnapshot(&data)
+        memCache = data
         writeToDisk(data)
+    }
+
+    private static let snapshotLimit = 30
+    private static let snapshotDateFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd"
+        return f
+    }()
+
+    private func maybeSnapshot(_ data: inout CorpusData) {
+        guard !data.offsets.isEmpty else { return }
+        let today = Self.snapshotDateFormatter.string(from: Date())
+        guard data.snapshots[today] == nil else { return }
+        data.snapshots[today] = data.offsets
+        if data.snapshots.count > Self.snapshotLimit {
+            let oldest = data.snapshots.keys.sorted().prefix(data.snapshots.count - Self.snapshotLimit)
+            for key in oldest { data.snapshots.removeValue(forKey: key) }
+        }
     }
 
     // MARK: - Correction tracking
@@ -218,10 +238,11 @@ final class CorpusLogger {
 // MARK: - Data model
 
 struct CorpusData: Codable {
-    var words:       [String]                = []
-    var bigrams:     [String: [String: Int]] = [:]  // prev → next → count
-    var offsets:     [String: OffsetStats]   = [:]  // key primary → running mean offset
-    var corrections: [String: Int]           = [:]  // char → immediate-backspace count
+    var words:       [String]                        = []
+    var bigrams:     [String: [String: Int]]         = [:]  // prev → next → count
+    var offsets:     [String: OffsetStats]           = [:]  // key primary → running mean offset
+    var corrections: [String: Int]                   = [:]  // char → immediate-backspace count
+    var snapshots:   [String: [String: OffsetStats]] = [:]  // "yyyy-MM-dd" → key → stats
 }
 
 struct OffsetStats: Codable {
