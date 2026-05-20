@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Standard bundle identity -->
+    <key>CFBundleIdentifier</key>
+    <string>com.exordiumnetworks.lsdkeyboard.macos</string>
+    <key>CFBundleName</key>
+    <string>LSDKeyboard</string>
+    <key>CFBundleDisplayName</key>
+    <string>Lisan ud Dawat</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleExecutable</key>
+    <string>LSDKeyboard</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+
+    <!-- InputMethodKit — these two keys are required -->
+    <!-- ConnectionName must be unique system-wide; used as the Mach port name. -->
+    <key>InputMethodConnectionName</key>
+    <string>LSDKeyboard_Connection</string>
+    <!-- Must exactly match the Swift class name of your IMKInputController subclass. -->
+    <key>InputMethodServerControllerClass</key>
+    <string>LSDInputController</string>
+
+    <!-- Run as a faceless background agent (no Dock icon, no menu bar) -->
+    <key>LSBackgroundOnly</key>
+    <true/>
+    <key>LSUIElement</key>
+    <true/>
+
+    <!-- Minimum macOS version -->
+    <key>LSMinimumSystemVersion</key>
+    <string>13.0</string>
+
+    <!-- Declares the script(s) this input method handles.
+         Shown in System Settings → Keyboard → Input Sources. -->
+    <key>tsInputMethodCharacterSubsets</key>
+    <array>
+        <string>Arabic</string>
+    </array>
+
+    <!-- Human-readable name shown in the Input Sources list -->
+    <key>tsVisibleName</key>
+    <string>Lisan ud Dawat</string>
+</dict>
+</plist>

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>LSDKeyboard.Tsf</RootNamespace>
+    <AssemblyName>LSDKeyboard.Tsf</AssemblyName>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+
+    <!--
+      EnableComHosting generates LSDKeyboard.Tsf.comhost.dll alongside the
+      main assembly. That comhost is what gets registered as InProcServer32 —
+      it bootstraps the .NET 8 runtime and delegates to this assembly.
+      Registration: regsvr32 LSDKeyboard.Tsf.comhost.dll
+    -->
+    <EnableComHosting>true</EnableComHosting>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+
+</Project>

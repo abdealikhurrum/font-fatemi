@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LSD Verb Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0f0f12;
+    color: #e8e8ed;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px;
+  }
+
+  .arabic {
+    font-family: 'Noto Naskh Arabic', serif;
+    direction: rtl;
+  }
+
+  /* ── Progress ── */
+  .progress-bar {
+    width: 100%;
+    max-width: 560px;
+    height: 4px;
+    background: #2c2c2e;
+    border-radius: 2px;
+    margin-bottom: 8px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #636aff;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .progress-label {
+    font-size: 12px;
+    color: #636366;
+    text-align: left;
+    direction: ltr;
+    margin-bottom: 32px;
+    width: 100%;
+    max-width: 560px;
+  }
+
+  /* ── Card ── */
+  .card {
+    background: #1c1c1e;
+    border: 1px solid #2c2c2e;
+    border-radius: 16px;
+    padding: 32px;
+    width: 100%;
+    max-width: 560px;
+    margin-bottom: 24px;
+  }
+
+  .verb-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 24px;
+    direction: ltr;
+  }
+  .verb-infinitive {
+    font-size: 28px;
+    font-weight: 600;
+  }
+  .verb-meaning {
+    font-size: 14px;
+    color: #8e8e93;
+  }
+  .form-label {
+    display: inline-block;
+    background: #2c2c2e;
+    color: #aeaeb2;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    direction: ltr;
+    margin-bottom: 16px;
+  }
+  .urdu-form {
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .urdu-roman {
+    font-size: 15px;
+    color: #636366;
+    direction: ltr;
+  }
+
+  /* ── Input area ── */
+  .input-section {
+    background: #1c1c1e;
+    border: 1px solid #2c2c2e;
+    border-radius: 16px;
+    padding: 24px;
+    width: 100%;
+    max-width: 560px;
+    margin-bottom: 16px;
+  }
+  .input-label {
+    font-size: 12px;
+    color: #636366;
+    direction: ltr;
+    margin-bottom: 8px;
+  }
+  .lsd-input {
+    width: 100%;
+    background: #0f0f12;
+    border: 1px solid #3a3a3c;
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 32px;
+    color: #e8e8ed;
+    direction: rtl;
+    text-align: right;
+    outline: none;
+    transition: border-color 0.15s;
+    margin-bottom: 12px;
+  }
+  .lsd-input:focus { border-color: #636aff; }
+  .roman-input {
+    width: 100%;
+    background: #0f0f12;
+    border: 1px solid #3a3a3c;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 15px;
+    color: #aeaeb2;
+    direction: ltr;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .roman-input:focus { border-color: #636aff; }
+
+  /* ── Keyboard ── */
+  .keyboard-toggle {
+    font-size: 12px;
+    color: #636366;
+    background: none;
+    border: none;
+    cursor: pointer;
+    direction: ltr;
+    padding: 0;
+    margin-bottom: 12px;
+    text-decoration: underline;
+  }
+  .keyboard-toggle:hover { color: #aeaeb2; }
+
+  .keyboard {
+    direction: ltr;
+    user-select: none;
+    margin-bottom: 4px;
+  }
+  .keyboard.hidden { display: none; }
+  .kb-row {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 5px;
+  }
+  .kb-key {
+    background: #3a3a3c;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 42px;
+    padding: 2px 4px;
+    transition: background 0.1s;
+  }
+  .kb-key:hover  { background: #545456; }
+  .kb-key:active { background: #636366; }
+  .kb-key.wide   { min-width: 56px; }
+  .kb-key.wider  { min-width: 90px; }
+  .kb-primary {
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 17px;
+    color: #e8e8ed;
+    line-height: 1;
+  }
+  .kb-secondary {
+    font-family: 'Noto Naskh Arabic', serif;
+    font-size: 9px;
+    color: #8e8e93;
+    line-height: 1;
+  }
+  .kb-shift {
+    background: #545456;
+    font-size: 11px;
+    color: #aeaeb2;
+  }
+  .kb-shift.active { background: #636aff; color: #fff; }
+  .kb-bksp {
+    background: #545456;
+    font-size: 15px;
+    color: #aeaeb2;
+  }
+
+  /* ── Buttons ── */
+  .actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 560px;
+    direction: ltr;
+  }
+  .btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn-primary { background: #636aff; color: #fff; }
+  .btn-skip    { background: #2c2c2e; color: #8e8e93; }
+
+  /* ── Done state ── */
+  .done-card {
+    text-align: center;
+    padding: 48px 32px;
+  }
+  .done-card h2 { font-size: 24px; margin-bottom: 8px; }
+  .done-card p  { color: #8e8e93; font-size: 15px; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-label" id="progressLabel">Loading…</div>
+
+<div class="card" id="promptCard">
+  <div class="verb-header">
+    <span class="arabic verb-infinitive" id="verbInfinitive"></span>
+    <span class="verb-meaning" id="verbMeaning"></span>
+  </div>
+  <span class="form-label" id="formLabel"></span>
+  <div class="arabic urdu-form" id="urduWord"></div>
+  <div class="urdu-roman" id="urduRoman"></div>
+</div>
+
+<div class="input-section">
+  <div class="input-label">LSD equivalent</div>
+  <input class="lsd-input arabic" id="lsdInput" type="text"
+         placeholder="اللهم صل علیٰ…" autocomplete="off" spellcheck="false">
+  <input class="roman-input" id="romanInput" type="text"
+         placeholder="romanisation" autocomplete="off" spellcheck="false">
+
+  <button class="keyboard-toggle" id="kbToggle">⌨ show keyboard</button>
+  <div class="keyboard hidden" id="keyboard"></div>
+</div>
+
+<div class="actions">
+  <button class="btn btn-skip"    id="skipBtn">Skip</button>
+  <button class="btn btn-primary" id="submitBtn">Submit ↵</button>
+</div>
+
+<script>
+// ── LSD key map (from lsd.kmn) ──────────────────────────────────────────────
+const NORMAL = {
+  q:'ض', w:'ص', e:'ث', r:'ق', t:'ف', y:'غ', u:'ع', i:'ه', o:'خ', p:'ح',
+  a:'ش', s:'س', d:'ي', f:'ب', g:'ل', h:'ا', j:'ت', k:'ن', l:'م',
+  z:'ئ', x:'ء', c:'ؤ', v:'ر', b:'ال', n:'ى', m:'ة',
+  ',':'و', '.':'ز', '/':'ظ', "'": 'ط', '[':'ج', ']':'د',
+  '`':'ذ', '-':'-', '=':'='
+};
+const SHIFTED = {
+  q:'َ', w:'ُ', e:'ٗ', r:'ؕ', t:'ڤ', y:'إ', u:'ژ', i:'ھ', o:'ہ', p:'چھے',
+  a:'ِ', s:'', d:'ے', f:'پ', g:'اٰ', h:'أ', j:'ـ', k:'،', l:'ں',
+  z:'ٖ', x:'ْ', c:'ۚ', v:'', b:'', n:'آ', m:'ۃ',
+  '/':'؟', '.':'.', ',':'/', "'": '"',
+  '[':'چ', ']':'د', '`':'ّ',
+  '1':'!', '2':'@', '3':'#', '4':'$', '5':'%', '6':'>', '7':'<',
+  '8':'۞', '9':')', '0':'('
+};
+
+// Visual keyboard rows (primary, secondary)
+const KB_ROWS = [
+  [['ض','ٹ'],['ص'],['ث','پ'],['ق'],['ف'],['غ'],['ع'],['ه','ھ'],['خ'],['ح','چ'],['ج','چھے']],
+  [['ش'],['س','ے'],['ي','ئ'],['ب'],['ل'],['ا','اٰ'],['ت'],['ن'],['م'],['ك','گ'],['ط','ں']],
+  [['ئ'],['ء'],['ؤ'],['ر','ڑ'],['ى'],['ة','ۃ'],['و'],['ز'],['د','ڈ'],['ظ','ہ']],
+];
+
+// ── State ───────────────────────────────────────────────────────────────────
+let currentPrompt = null;
+let shiftOn = false;
+
+// ── DOM ─────────────────────────────────────────────────────────────────────
+const lsdInput   = document.getElementById('lsdInput');
+const romanInput = document.getElementById('romanInput');
+const submitBtn  = document.getElementById('submitBtn');
+const skipBtn    = document.getElementById('skipBtn');
+const kbToggle   = document.getElementById('kbToggle');
+const keyboard   = document.getElementById('keyboard');
+
+// ── Keyboard intercept ──────────────────────────────────────────────────────
+lsdInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); submit(); return; }
+  if (e.key === 'Escape') { e.preventDefault(); skip(); return; }
+  if (e.key === 'Backspace') return; // let browser handle
+
+  const map = e.shiftKey ? SHIFTED : NORMAL;
+  const ch  = map[e.key.toLowerCase()] ?? map[e.key];
+  if (ch !== undefined) {
+    e.preventDefault();
+    insertAt(lsdInput, ch);
+  }
+});
+
+function insertAt(input, ch) {
+  const start = input.selectionStart;
+  const end   = input.selectionEnd;
+  input.value = input.value.slice(0, start) + ch + input.value.slice(end);
+  input.selectionStart = input.selectionEnd = start + ch.length;
+  input.dispatchEvent(new Event('input'));
+}
+
+// ── Virtual keyboard ────────────────────────────────────────────────────────
+function buildKeyboard() {
+  keyboard.innerHTML = '';
+  KB_ROWS.forEach(row => {
+    const div = document.createElement('div');
+    div.className = 'kb-row';
+    row.forEach(([primary, secondary]) => {
+      const btn = document.createElement('button');
+      btn.className = 'kb-key';
+      btn.innerHTML =
+        `<span class="kb-primary">${primary}</span>` +
+        (secondary ? `<span class="kb-secondary">${secondary}</span>` : '');
+      btn.addEventListener('mousedown', e => {
+        e.preventDefault();
+        insertAt(lsdInput, shiftOn ? (secondary || primary) : primary);
+        lsdInput.focus();
+      });
+      div.appendChild(btn);
+    });
+    // Backspace on last row
+    if (row === KB_ROWS[KB_ROWS.length - 1]) {
+      const bk = document.createElement('button');
+      bk.className = 'kb-key wide kb-bksp';
+      bk.textContent = '⌫';
+      bk.addEventListener('mousedown', e => {
+        e.preventDefault();
+        const s = lsdInput.selectionStart, end = lsdInput.selectionEnd;
+        if (s !== end) lsdInput.value = lsdInput.value.slice(0, s) + lsdInput.value.slice(end);
+        else if (s > 0) lsdInput.value = lsdInput.value.slice(0, s-1) + lsdInput.value.slice(s);
+        lsdInput.dispatchEvent(new Event('input'));
+        lsdInput.focus();
+      });
+      div.appendChild(bk);
+    }
+    keyboard.appendChild(div);
+  });
+
+  // Bottom row: shift + space
+  const btm = document.createElement('div');
+  btm.className = 'kb-row';
+
+  const shiftBtn = document.createElement('button');
+  shiftBtn.className = 'kb-key wider kb-shift';
+  shiftBtn.id = 'shiftBtn';
+  shiftBtn.textContent = '⇧ shift';
+  shiftBtn.addEventListener('mousedown', e => {
+    e.preventDefault();
+    shiftOn = !shiftOn;
+    shiftBtn.classList.toggle('active', shiftOn);
+    lsdInput.focus();
+  });
+
+  const spaceBtn = document.createElement('button');
+  spaceBtn.className = 'kb-key wider';
+  spaceBtn.innerHTML = '<span class="kb-primary" style="font-family:Inter;font-size:13px">space</span>';
+  spaceBtn.addEventListener('mousedown', e => {
+    e.preventDefault();
+    insertAt(lsdInput, ' ');
+    lsdInput.focus();
+  });
+
+  btm.appendChild(shiftBtn);
+  btm.appendChild(spaceBtn);
+  keyboard.appendChild(btm);
+}
+
+kbToggle.addEventListener('click', () => {
+  const hidden = keyboard.classList.toggle('hidden');
+  kbToggle.textContent = hidden ? '⌨ show keyboard' : '⌨ hide keyboard';
+  if (!hidden && !keyboard.children.length) buildKeyboard();
+});
+
+// ── Game logic ───────────────────────────────────────────────────────────────
+async function loadNext() {
+  const res  = await fetch('/api/next');
+  const data = await res.json();
+
+  const pct = data.total ? (data.completed / data.total * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent =
+    `${data.completed} of ${data.total} forms`;
+
+  if (data.done) {
+    document.getElementById('promptCard').innerHTML =
+      '<div class="done-card"><h2>All done!</h2><p>Run --analyse to see derived rules.</p></div>';
+    document.querySelector('.input-section').style.display = 'none';
+    document.querySelector('.actions').style.display = 'none';
+    return;
+  }
+
+  currentPrompt = data.prompt;
+  document.getElementById('verbInfinitive').textContent = data.prompt.infinitive;
+  document.getElementById('verbMeaning').textContent    = data.prompt.meaning;
+  document.getElementById('formLabel').textContent      = data.prompt.label;
+  document.getElementById('urduWord').textContent       = data.prompt.urdu_word;
+  document.getElementById('urduRoman').textContent      = data.prompt.urdu_roman;
+  lsdInput.value   = '';
+  romanInput.value = '';
+  lsdInput.focus();
+}
+
+async function submit() {
+  if (!currentPrompt || !lsdInput.value.trim()) return;
+  await fetch('/api/submit', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      ...currentPrompt,
+      lsd_word:  lsdInput.value.trim(),
+      lsd_roman: romanInput.value.trim(),
+    })
+  });
+  loadNext();
+}
+
+async function skip() {
+  if (!currentPrompt) return;
+  await fetch('/api/skip', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(currentPrompt)
+  });
+  loadNext();
+}
+
+submitBtn.addEventListener('click', submit);
+skipBtn.addEventListener('click', skip);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.activeElement !== lsdInput) submit();
+});
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+loadNext();
+</script>
+</body>
+</html>
