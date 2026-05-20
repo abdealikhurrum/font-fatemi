@@ -35,6 +35,7 @@ final class KeyboardViewController: UIInputViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         CorpusLogger.shared.flush()
+        CorpusLogger.shared.persistOffsets()
     }
 
     private static var fontsRegistered = false
@@ -138,6 +139,12 @@ final class KeyboardViewController: UIInputViewController {
     }
 
     private func deleteBack() {
+        if let char = lastInsertedCharacter,
+           char.isLetter,
+           let t = lastInsertTime,
+           Date().timeIntervalSince(t) < 0.6 {
+            CorpusLogger.shared.recordCorrection(for: String(char))
+        }
         textDocumentProxy.deleteBackward()
         lastInsertedCharacter = nil
         CorpusLogger.shared.recordBackspace()
@@ -151,12 +158,14 @@ final class KeyboardViewController: UIInputViewController {
             predictiveBar.update(suggestions: [])
             return
         }
-        let context = textDocumentProxy.documentContextBeforeInput ?? ""
-        let word    = context.components(separatedBy: .whitespaces).last ?? ""
+        let context  = textDocumentProxy.documentContextBeforeInput ?? ""
+        let parts    = context.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
+        let word     = parts.last ?? ""
+        let previous = parts.count >= 2 ? parts[parts.count - 2] : ""
         if word.isEmpty {
             predictiveBar.update(suggestions: [])
         } else {
-            predictiveBar.update(suggestions: CorpusLogger.shared.suggestions(for: word, limit: 3))
+            predictiveBar.update(suggestions: CorpusLogger.shared.suggestions(for: word, after: previous, limit: 3))
         }
     }
 }
@@ -256,6 +265,14 @@ extension KeyboardViewController: KeyboardViewDelegate {
         updatePredictions()
     }
 
+    func keyTapped(_ key: KeyData, touchOffset: CGPoint) {
+        CorpusLogger.shared.recordTouchOffset(
+            for: key.primary,
+            dx:  Float(touchOffset.x),
+            dy:  Float(touchOffset.y)
+        )
+    }
+
     // Pair collection hooks
     func transliterationAccepted(lsd: String, roman: String) {
         PairCollector.shared.recordAccepted(lsd: lsd, roman: roman)
@@ -284,10 +301,6 @@ extension KeyboardViewController: PredictiveBarDelegate {
                 self?.currentLayer = .default
             }
             self?.applyLayer()
-        }
-        menu.onExportCorpus = {
-            let text = CorpusLogger.shared.exportText()
-            UIPasteboard.general.string = text.isEmpty ? "" : text
         }
     }
 }

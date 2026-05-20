@@ -6,7 +6,6 @@ import UIKit
 final class KeyboardMenuView: UIView {
 
     var onDismiss: (() -> Void)?
-    var onExportCorpus: (() -> Void)?
 
     private weak var customDelayRow: UIView?
     private weak var customValueLabel: UILabel?
@@ -83,7 +82,8 @@ final class KeyboardMenuView: UIView {
         addActionRow(to: stack,
             label: "Copy corpus to clipboard  (\(CorpusLogger.shared.wordCount) words)",
             action: { [weak self] in
-                self?.onExportCorpus?()
+                let text = CorpusLogger.shared.exportText()
+                UIPasteboard.general.string = text.isEmpty ? "" : text
                 self?.dismissTapped()
             }
         )

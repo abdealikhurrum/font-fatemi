@@ -23,6 +23,7 @@ protocol KeyboardViewDelegate: AnyObject {
     func doubleTapPressed(on key: KeyData)
     func longPressAlternateSelected(_ character: String)
     func backspaceWordPressed()
+    func keyTapped(_ key: KeyData, touchOffset: CGPoint)
 }
 
 final class KeyboardView: UIView {
@@ -56,6 +57,9 @@ final class KeyboardView: UIView {
     private var lastTappedKey: KeyButton?
     private var lastTapTime: Date?
     private var doubleTapWindow: TimeInterval { KeyboardSettings.doubleTapDelay }
+
+    // Touch offset tracking — record where the finger first lands (touchesBegan)
+    private var activeTouchBeganPoint: CGPoint?
 
     // MARK: - Callout
 
@@ -207,12 +211,18 @@ final class KeyboardView: UIView {
             && lastTapTime.map { Date().timeIntervalSince($0) < doubleTapWindow } == true
 
         if isDouble {
-            lastTappedKey = nil
-            lastTapTime   = nil
+            lastTappedKey         = nil
+            lastTapTime           = nil
+            activeTouchBeganPoint = nil
             delegate?.doubleTapPressed(on: key.keyData)
         } else {
             lastTappedKey = key.keyData.type == .character ? key : nil
             lastTapTime   = key.keyData.type == .character ? Date() : nil
+            if key.keyData.type == .character, let pt = activeTouchBeganPoint {
+                let offset = CGPoint(x: pt.x - key.frame.midX, y: pt.y - key.frame.midY)
+                delegate?.keyTapped(key.keyData, touchOffset: offset)
+            }
+            activeTouchBeganPoint = nil
             delegate?.keyPressed(key.keyData)
         }
     }
@@ -222,13 +232,15 @@ final class KeyboardView: UIView {
         dismissCallout()
         dismissPopup()
         activeKey?.setHighlighted(false)
-        activeKey = nil
+        activeKey             = nil
+        activeTouchBeganPoint = nil
     }
 
     // MARK: - Activation
 
     private func activate(key: KeyButton, touch: UITouch) {
         activeKey = key
+        activeTouchBeganPoint = touch.location(in: self)
         key.setHighlighted(true)
 
         // Show callout for regular character keys (not special keys)
