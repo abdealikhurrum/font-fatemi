@@ -15,6 +15,7 @@ import os.log
 //
 // Keys without secondaries are committed immediately (no delay, no marking).
 
+@objc(LSDInputController)
 final class LSDInputController: IMKInputController {
 
     private var doublePressWindow: TimeInterval { KeyboardSettings.doublePressDelay }

@@ -23,7 +23,7 @@
 	<key>InputMethodConnectionName</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>InputMethodServerControllerClass</key>
-	<string>$(PRODUCT_MODULE_NAME).LSDInputController</string>
+	<string>LSDInputController</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>13.0</string>
 	<key>LSUIElement</key>
