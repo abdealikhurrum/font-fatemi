@@ -43,9 +43,6 @@ if [ "$BID" != "$CNX" ]; then
     echo "WARNING: connection name does not match bundle ID — imklaunchagent will refuse"
 fi
 
-echo "=== Signing (ad-hoc) ==="
-codesign --force --sign - --deep "$INSTALL_DIR/$APP_NAME"
-
 echo "=== Clearing quarantine ==="
 xattr -dr com.apple.quarantine "$INSTALL_DIR/$APP_NAME" 2>/dev/null || true
 
