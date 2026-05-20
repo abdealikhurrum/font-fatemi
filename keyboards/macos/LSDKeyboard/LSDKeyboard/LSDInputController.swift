@@ -36,6 +36,7 @@ final class LSDInputController: IMKInputController {
 
         switch event.keyCode {
         case 51:        // Delete / Backspace
+            CorpusLogger.shared.recordBackspace()
             cancelPending()             // discard composition, don't commit
             return false                // let the app handle the delete
         case 36, 76:    // Return / Enter
@@ -87,6 +88,7 @@ final class LSDInputController: IMKInputController {
 
     // Called when this input method is deactivated (user switched away).
     override func deactivateServer(_ sender: Any!) {
+        CorpusLogger.shared.flush()
         commitPending()
     }
 
@@ -138,6 +140,7 @@ final class LSDInputController: IMKInputController {
     // MARK: - Text insertion
 
     private func insert(_ text: String, into sender: Any?) {
+        CorpusLogger.shared.record(text)
         textClient(sender)?.insertText(
             text,
             replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
