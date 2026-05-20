@@ -1,18 +1,34 @@
 namespace LSDKeyboard.Tsf;
 
-// Identical secondary map to iOS / macOS / Android / Windows hook.
-// Kept as a separate file so it can be updated from one source of truth.
+// Settings-aware secondary map — identical logic to the hook project's KeyData.cs.
 
 public static class KeyData
 {
-    private static readonly Dictionary<string, string> SecondaryMap = new()
+    public static string? SecondaryFor(string ch)
     {
-        ["ض"] = "ٹ",    ["ث"] = "پ",    ["ه"] = "ھ",    ["ح"] = "چ",
-        ["ج"] = "چھے",   ["س"] = "ے",    ["ي"] = "ئ",    ["ا"] = "اٰ",
-        ["ك"] = "گ",    ["ط"] = "ں",    ["ر"] = "ڑ",    ["ة"] = "ۃ",
-        ["د"] = "ڈ",    ["ظ"] = "ہ",
-    };
+        if (!LSDSettings.Instance.DoublePressEnabled) return null;
 
-    public static string? SecondaryFor(string ch) =>
-        SecondaryMap.TryGetValue(ch, out var s) && s.Length > 0 ? s : null;
+        return LSDSettings.Instance.SelectedLayout == "crulp_urdu"
+            ? CrulpSecondaryFor(ch)
+            : LsdSecondaryFor(ch);
+    }
+
+    private static string? LsdSecondaryFor(string ch)
+    {
+        var alef = LSDSettings.Instance.DoubleAlefStyle == "alef_madda" ? "آ" : "اٰ";
+        return ch switch
+        {
+            "ض" => "ٹ",    "ث" => "پ",    "ه" => "ھ",    "ح" => "چ",
+            "ج" => "چھے",  "س" => "ے",    "ي" => "ئ",    "ا" => alef,
+            "ك" => "گ",    "ط" => "ں",    "ر" => "ڑ",    "ة" => "ۃ",
+            "د" => "ڈ",    "ظ" => "ہ",    _   => null,
+        };
+    }
+
+    private static string? CrulpSecondaryFor(string ch) => ch switch
+    {
+        "ع" => "غ",    "ر" => "ڑ",    "ت" => "ٹ",    "ح" => "خ",
+        "د" => "ڈ",    "ہ" => "ھ",    "ز" => "ذ",    "ش" => "ض",
+        "ن" => "ں",    _   => null,
+    };
 }

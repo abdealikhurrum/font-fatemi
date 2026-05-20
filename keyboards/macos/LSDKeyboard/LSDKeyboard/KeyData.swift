@@ -29,37 +29,64 @@ struct KeyData {
     }
 }
 
-// MARK: - Double-press lookup (O(1), built once at launch)
+// MARK: - Double-press lookup
 //
-// Secondaries — two tiers (same as iOS):
-//   Official LSD double-press rules (lsd.kmn lines 57-64):
-//     سس→ے  ضض→ٹ  طط→ں  ظظ→ہ  حح→چ  ثث→پ  كك→گ
-//   Extended quick-access secondaries:
-//     اا→اٰ  هه→ھ  يي→ئ  رر→ڑ  دد→ڈ  ةة→ۃ  جج→چھے
+// Returns the secondary character for a double-press, honouring current settings:
+//   - doublePressEnabled    — returns nil for everything when off
+//   - selectedLayout        — switches between LSD/Arabic-Standard map and CRULP map
+//   - doubleAlefStyle       — اا → اٰ (kharo zabar, default) or آ (alef madda)
+//   - urduYehStyle          — which code-point is "yeh" in the CRULP map
+//
+// LSD / Arabic-Standard secondaries:
+//   Official rules (lsd.kmn):  سس→ے  ضض→ٹ  طط→ں  ظظ→ہ  حح→چ  ثث→پ  كك→گ
+//   Extended:                  اا→اٰ  هه→ھ  يي→ئ  رر→ڑ  دد→ڈ  ةة→ۃ  جج→چھے
+//
+// CRULP Urdu secondaries (phonetic positions):
+//   عع→غ  رر→ڑ  تت→ٹ  حح→خ  دد→ڈ  ہہ→ھ  زز→ذ  شش→ض  نن→ں
 
 extension KeyData {
-    private static let secondaryMap: [String: String] = [
-        "ض": "ٹ",
-        "ث": "پ",
-        "ه": "ھ",
-        "ح": "چ",
-        "ج": "چھے",
-        "س": "ے",
-        "ي": "ئ",
-        "ا": "اٰ",
-        "ك": "گ",
-        "ط": "ں",
-        "ر": "ڑ",
-        "ة": "ۃ",
-        "و": "",       // no secondary
-        "د": "ڈ",
-        "ظ": "ہ",
-    ]
-
-    /// Returns the double-press secondary for `char`, or nil if none.
     static func secondary(for char: String) -> String? {
-        guard let val = secondaryMap[char], !val.isEmpty else { return nil }
-        return val
+        guard KeyboardSettings.doublePressEnabled else { return nil }
+        switch KeyboardSettings.selectedLayout {
+        case .crulpUrdu: return crulpSecondary(for: char)
+        default:         return lsdSecondary(for: char)
+        }
+    }
+
+    private static func lsdSecondary(for char: String) -> String? {
+        let alef = KeyboardSettings.doubleAlefStyle == .alefMadda ? "آ" : "اٰ"
+        switch char {
+        case "ض": return "ٹ"
+        case "ث": return "پ"
+        case "ه": return "ھ"
+        case "ح": return "چ"
+        case "ج": return "چھے"
+        case "س": return "ے"
+        case "ي": return "ئ"
+        case "ا": return alef
+        case "ك": return "گ"
+        case "ط": return "ں"
+        case "ر": return "ڑ"
+        case "ة": return "ۃ"
+        case "د": return "ڈ"
+        case "ظ": return "ہ"
+        default:  return nil
+        }
+    }
+
+    private static func crulpSecondary(for char: String) -> String? {
+        switch char {
+        case "ع": return "غ"
+        case "ر": return "ڑ"
+        case "ت": return "ٹ"
+        case "ح": return "خ"
+        case "د": return "ڈ"
+        case "ہ": return "ھ"   // U+06C1 he goal → do chashmi he
+        case "ز": return "ذ"
+        case "ش": return "ض"
+        case "ن": return "ں"
+        default:  return nil
+        }
     }
 }
 

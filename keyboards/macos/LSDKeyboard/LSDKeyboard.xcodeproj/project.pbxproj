@@ -12,6 +12,7 @@
 		AA000022 /* KeyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000012 /* KeyData.swift */; };
 		AA000023 /* PairCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000013 /* PairCollector.swift */; };
 		AA000024 /* CorpusLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000018 /* CorpusLogger.swift */; };
+		AA000028 /* KeyboardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000019 /* KeyboardSettings.swift */; };
 		AA000025 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA000016 /* InputMethodKit.framework */; };
 		AA000026 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA000017 /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -22,6 +23,7 @@
 		AA000012 /* KeyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyData.swift; sourceTree = "<group>"; };
 		AA000013 /* PairCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCollector.swift; sourceTree = "<group>"; };
 		AA000018 /* CorpusLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpusLogger.swift; sourceTree = "<group>"; };
+		AA000019 /* KeyboardSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettings.swift; sourceTree = "<group>"; };
 		AA000014 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA000015 /* LSDKeyboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LSDKeyboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA000016 /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = System/Library/Frameworks/InputMethodKit.framework; sourceTree = SDKROOT; };
@@ -58,6 +60,7 @@
 				AA000012 /* KeyData.swift */,
 				AA000013 /* PairCollector.swift */,
 				AA000018 /* CorpusLogger.swift */,
+				AA000019 /* KeyboardSettings.swift */,
 				AA000014 /* Info.plist */,
 			);
 			path = LSDKeyboard;
@@ -153,6 +156,7 @@
 				AA000022 /* KeyData.swift in Sources */,
 				AA000023 /* PairCollector.swift in Sources */,
 				AA000024 /* CorpusLogger.swift in Sources */,
+				AA000028 /* KeyboardSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

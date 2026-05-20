@@ -16,7 +16,8 @@ import InputMethodKit
 
 final class LSDInputController: IMKInputController {
 
-    private static let doublePressWindow: TimeInterval = 0.35
+    // Reads the current setting on each use so changes take effect immediately.
+    private var doublePressWindow: TimeInterval { KeyboardSettings.doublePressDelay }
 
     // Character currently held in marked-text composition, if any.
     private var pendingPrimary: String?
@@ -105,7 +106,7 @@ final class LSDInputController: IMKInputController {
         )
 
         pendingTimer = Timer.scheduledTimer(
-            withTimeInterval: Self.doublePressWindow,
+            withTimeInterval: doublePressWindow,
             repeats: false
         ) { [weak self] _ in
             self?.commitPending()
@@ -149,5 +150,125 @@ final class LSDInputController: IMKInputController {
 
     private func textClient(_ sender: Any?) -> (IMKTextInput & NSObjectProtocol)? {
         sender as? (IMKTextInput & NSObjectProtocol)
+    }
+
+    // MARK: - Settings menu
+    //
+    // Appears when the user clicks "Lisan ud Dawat" in the Input Sources menu bar item.
+
+    override func menu() -> NSMenu! {
+        let menu = NSMenu(title: "Lisan ud Dawat")
+
+        let header = NSMenuItem(title: "Lisan ud Dawat", action: nil, keyEquivalent: "")
+        header.isEnabled = false
+        menu.addItem(header)
+        menu.addItem(.separator())
+
+        // Layout
+        let layoutItem = NSMenuItem(title: "Layout", action: nil, keyEquivalent: "")
+        let layoutMenu = NSMenu()
+        for layout in KeyboardSettings.LayoutType.allCases {
+            let item = NSMenuItem(title: layout.label, action: #selector(setLayout(_:)),
+                                  keyEquivalent: "")
+            item.representedObject = layout.rawValue
+            item.state = KeyboardSettings.selectedLayout == layout ? .on : .off
+            item.target = self
+            layoutMenu.addItem(item)
+        }
+        layoutItem.submenu = layoutMenu
+        menu.addItem(layoutItem)
+
+        menu.addItem(.separator())
+
+        // Double-press enabled
+        let dpItem = NSMenuItem(title: "Double-press", action: #selector(toggleDoublePress(_:)),
+                                keyEquivalent: "")
+        dpItem.state  = KeyboardSettings.doublePressEnabled ? .on : .off
+        dpItem.target = self
+        menu.addItem(dpItem)
+
+        // Double-press delay
+        let delayItem = NSMenuItem(title: "Double-press delay", action: nil, keyEquivalent: "")
+        let delayMenu = NSMenu()
+        for preset in KeyboardSettings.DelayPreset.allCases {
+            let item = NSMenuItem(title: preset.label, action: #selector(setDelay(_:)),
+                                  keyEquivalent: "")
+            item.representedObject = preset.rawValue
+            item.state  = KeyboardSettings.doublePressDelayPreset == preset ? .on : .off
+            item.target = self
+            delayMenu.addItem(item)
+        }
+        delayItem.submenu = delayMenu
+        menu.addItem(delayItem)
+
+        menu.addItem(.separator())
+
+        // Double alef style
+        let alefItem = NSMenuItem(title: "Double alef (اا)", action: nil, keyEquivalent: "")
+        let alefMenu = NSMenu()
+        let alefOptions: [(KeyboardSettings.DoubleAlefStyle, String)] = [
+            (.kharoZabar, "اٰ  kharo zabar (default)"),
+            (.alefMadda,  "آ  alef madda"),
+        ]
+        for (style, label) in alefOptions {
+            let item = NSMenuItem(title: label, action: #selector(setDoubleAlef(_:)),
+                                  keyEquivalent: "")
+            item.representedObject = style.rawValue
+            item.state  = KeyboardSettings.doubleAlefStyle == style ? .on : .off
+            item.target = self
+            alefMenu.addItem(item)
+        }
+        alefItem.submenu = alefMenu
+        menu.addItem(alefItem)
+
+        // Urdu yeh style
+        let yehItem = NSMenuItem(title: "Urdu yeh  (CRULP)", action: nil, keyEquivalent: "")
+        let yehMenu = NSMenu()
+        let yehOptions: [(KeyboardSettings.UrduYehStyle, String)] = [
+            (.farsiYeh,  "ی  Farsi yeh  (default)"),
+            (.arabicYeh, "ي  Arabic yeh"),
+        ]
+        for (style, label) in yehOptions {
+            let item = NSMenuItem(title: label, action: #selector(setUrduYeh(_:)),
+                                  keyEquivalent: "")
+            item.representedObject = style.rawValue
+            item.state  = KeyboardSettings.urduYehStyle == style ? .on : .off
+            item.target = self
+            yehMenu.addItem(item)
+        }
+        yehItem.submenu = yehMenu
+        menu.addItem(yehItem)
+
+        return menu
+    }
+
+    @objc private func setLayout(_ sender: NSMenuItem) {
+        guard let raw    = sender.representedObject as? String,
+              let layout = KeyboardSettings.LayoutType(rawValue: raw) else { return }
+        KeyboardSettings.selectedLayout = layout
+    }
+
+    @objc private func toggleDoublePress(_ sender: NSMenuItem) {
+        KeyboardSettings.doublePressEnabled.toggle()
+        // Discard any pending composition so the new state takes effect immediately.
+        cancelPending()
+    }
+
+    @objc private func setDelay(_ sender: NSMenuItem) {
+        guard let raw    = sender.representedObject as? String,
+              let preset = KeyboardSettings.DelayPreset(rawValue: raw) else { return }
+        KeyboardSettings.doublePressDelayPreset = preset
+    }
+
+    @objc private func setDoubleAlef(_ sender: NSMenuItem) {
+        guard let raw   = sender.representedObject as? String,
+              let style = KeyboardSettings.DoubleAlefStyle(rawValue: raw) else { return }
+        KeyboardSettings.doubleAlefStyle = style
+    }
+
+    @objc private func setUrduYeh(_ sender: NSMenuItem) {
+        guard let raw   = sender.representedObject as? String,
+              let style = KeyboardSettings.UrduYehStyle(rawValue: raw) else { return }
+        KeyboardSettings.urduYehStyle = style
     }
 }

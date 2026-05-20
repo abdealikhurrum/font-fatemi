@@ -39,7 +39,7 @@ public sealed class KeyboardHook : IDisposable
     private const uint VK_CONTROL = 0x11;
     private const uint VK_MENU    = 0x12;  // Alt
 
-    private static readonly TimeSpan DoublePressWindow = TimeSpan.FromMilliseconds(350);
+    private TimeSpan DoublePressWindow => LSDSettings.Instance.DoublePressDelay;
 
     // Diacritic mode: VK code → diacritic character.
     // Keys are QWERTY positions regardless of the active Arabic keyboard layout.

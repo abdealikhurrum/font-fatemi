@@ -11,7 +11,7 @@ internal enum DoublePressResult { NotTracked, FirstPress, DoublePress }
 
 internal sealed class DoublePressTracker
 {
-    private static readonly TimeSpan Window = TimeSpan.FromMilliseconds(350);
+    private TimeSpan Window => LSDSettings.Instance.DoublePressDelay;
 
     private string?  _lastChar;
     private DateTime _lastTime;
@@ -60,7 +60,11 @@ internal sealed class DoublePressTracker
         return DoublePressResult.FirstPress;
     }
 
-    public void Reset() => _lastChar = null;
+    public void Reset()
+    {
+        _lastChar = null;
+        LSDSettings.Instance.Reload(); // pick up any changes from the tray settings app
+    }
 
     // -------------------------------------------------------------------------
     // VK → Unicode via ToUnicodeEx
