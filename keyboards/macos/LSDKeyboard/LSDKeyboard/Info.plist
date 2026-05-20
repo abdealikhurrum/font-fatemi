@@ -26,6 +26,8 @@
 	<string>LSDInputController</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>13.0</string>
+	<key>LSBackgroundOnly</key>
+	<true/>
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSPrincipalClass</key>
