@@ -50,5 +50,29 @@
     <!-- Human-readable name shown in the Input Sources list -->
     <key>tsVisibleName</key>
     <string>Lisan ud Dawat</string>
+
+    <!-- Required for the IME to appear in System Settings → Keyboard →
+         Input Sources. Without this key macOS won't enumerate the IME
+         in the picker even though the bundle is in ~/Library/Input Methods/.
+         Script code 4 = Arabic (Mac OS script code kTextEncodingMacArabic). -->
+    <key>ComponentInputModeDict</key>
+    <dict>
+        <key>tsInputModeListKey</key>
+        <dict>
+            <key>com.exordiumnetworks.lsdkeyboard.macos.Arabic</key>
+            <dict>
+                <key>tsInputModeAlternateMenuItemNameKey</key>
+                <string>Lisan ud Dawat</string>
+                <key>tsInputModeDefaultStateKey</key>
+                <true/>
+                <key>tsInputModeIsVisibleKey</key>
+                <true/>
+                <key>tsInputModePrimaryInScriptKey</key>
+                <true/>
+                <key>tsInputModeScriptKey</key>
+                <integer>4</integer>
+            </dict>
+        </dict>
+    </dict>
 </dict>
 </plist>
