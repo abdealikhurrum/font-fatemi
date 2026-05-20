@@ -1,5 +1,24 @@
 import UIKit
 
+// Sizing constants that vary between portrait and landscape.
+struct KeyboardMetrics {
+    let keyH: CGFloat
+    let rowSpacing: CGFloat
+    let topPadding: CGFloat
+    let bottomPadding: CGFloat
+    let calloutOverflow: CGFloat  // transparent headroom so top-row callouts are never clipped
+    let barHeight: CGFloat        // predictive/suggestion bar
+
+    static let portrait = KeyboardMetrics(
+        keyH: 46, rowSpacing: 12, topPadding: 12, bottomPadding: 5, calloutOverflow: 44, barHeight: 44
+    )
+    // Shorter keys + tighter spacing free up screen real-estate in landscape.
+    // calloutOverflow ≥ keyH + 8 (pointer height) ensures callout bubbles aren't clipped.
+    static let landscape = KeyboardMetrics(
+        keyH: 34, rowSpacing: 8, topPadding: 6, bottomPadding: 4, calloutOverflow: 38, barHeight: 36
+    )
+}
+
 protocol KeyboardViewDelegate: AnyObject {
     func keyPressed(_ key: KeyData)
     func doubleTapPressed(on key: KeyData)
@@ -13,15 +32,17 @@ final class KeyboardView: UIView {
 
     // MARK: - Layout constants
 
-    private static let rowSpacing:     CGFloat = 12
-    private static let keySpacing:     CGFloat = 6
-    private static let sidePadding:    CGFloat = 3
-    private static let topPadding:     CGFloat = 12
-    private static let bottomPadding:  CGFloat = 5
-    private static let standardKeyH:   CGFloat = 46
-    // Extra transparent space at the top of the keyboard view so callout bubbles
-    // for top-row keys remain within the view's bounds and are never clipped.
-    private static let calloutOverflow: CGFloat = 44
+    // These two are screen-width-independent and don't change with orientation.
+    private static let keySpacing:  CGFloat = 6
+    private static let sidePadding: CGFloat = 3
+
+    // Orientation-sensitive metrics; updated by KeyboardViewController on rotation.
+    var metrics: KeyboardMetrics = .portrait {
+        didSet {
+            invalidateIntrinsicContentSize()
+            setNeedsLayout()
+        }
+    }
 
     // MARK: - Touch tracking
     // All touch logic lives here — gives us cross-key sliding for free.
@@ -97,26 +118,27 @@ final class KeyboardView: UIView {
         super.layoutSubviews()
         guard !keyButtons.isEmpty else { return }
 
+        let m       = metrics
         let rows    = groupedRows()
         let sidePad = KeyboardView.sidePadding
         let availW  = bounds.width - sidePad * 2
-        let keyH    = KeyboardView.standardKeyH
-        // Keys start below the callout overflow zone
-        var y       = KeyboardView.calloutOverflow + KeyboardView.topPadding
+        let keyH    = m.keyH
+        var y       = m.calloutOverflow + m.topPadding
 
         for row in rows {
             layoutRow(row, y: y, availableWidth: availW, sidePad: sidePad, keyH: keyH)
-            y += keyH + KeyboardView.rowSpacing
+            y += keyH + m.rowSpacing
         }
     }
 
     override var intrinsicContentSize: CGSize {
+        let m = metrics
         let n = CGFloat(currentRows.count)
-        let h = KeyboardView.calloutOverflow
-            + KeyboardView.topPadding
-            + n * KeyboardView.standardKeyH
-            + max(0, n - 1) * KeyboardView.rowSpacing
-            + KeyboardView.bottomPadding
+        let h = m.calloutOverflow
+            + m.topPadding
+            + n * m.keyH
+            + max(0, n - 1) * m.rowSpacing
+            + m.bottomPadding
         return CGSize(width: UIView.noIntrinsicMetric, height: h)
     }
 
@@ -384,7 +406,7 @@ final class KeyboardView: UIView {
     // with vertical distance compressed — row-boundary misses resolve to the closer row.
     private func keyButton(at point: CGPoint) -> KeyButton? {
         guard !keyButtons.isEmpty else { return nil }
-        guard point.y >= KeyboardView.calloutOverflow else { return nil }
+        guard point.y >= metrics.calloutOverflow else { return nil }
 
         if let direct = keyButtons.first(where: { $0.frame.insetBy(dx: -3, dy: -3).contains(point) }) {
             return direct

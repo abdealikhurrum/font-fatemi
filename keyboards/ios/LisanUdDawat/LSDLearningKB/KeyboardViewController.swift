@@ -15,6 +15,7 @@ final class KeyboardViewController: UIInputViewController {
 
     private var keyboardView  = KeyboardView()
     private var predictiveBar = PredictiveBar()
+    private var predictiveBarHeightConstraint: NSLayoutConstraint?
 
     // MARK: - Double-space tracking
 
@@ -62,9 +63,23 @@ final class KeyboardViewController: UIInputViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let keyH  = keyboardView.intrinsicContentSize.height
+        updateLayout(for: UIScreen.main.bounds.size)
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { [weak self] _ in
+            self?.updateLayout(for: size)
+        })
+    }
+
+    private func updateLayout(for screenSize: CGSize) {
+        let isLandscape = screenSize.width > screenSize.height
+        let m = isLandscape ? KeyboardMetrics.landscape : KeyboardMetrics.portrait
+        keyboardView.metrics = m
+        predictiveBarHeightConstraint?.constant = m.barHeight
         let safeB = view.safeAreaInsets.bottom
-        view.frame.size.height = keyH + PredictiveBar.height + safeB
+        view.frame.size.height = keyboardView.intrinsicContentSize.height + m.barHeight + safeB
     }
 
     // MARK: - Setup
@@ -80,11 +95,14 @@ final class KeyboardViewController: UIInputViewController {
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(keyboardView)
 
+        let barH = predictiveBar.heightAnchor.constraint(equalToConstant: PredictiveBar.height)
+        predictiveBarHeightConstraint = barH
+
         NSLayoutConstraint.activate([
             predictiveBar.topAnchor.constraint(equalTo: view.topAnchor),
             predictiveBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             predictiveBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            predictiveBar.heightAnchor.constraint(equalToConstant: PredictiveBar.height),
+            barH,
 
             keyboardView.topAnchor.constraint(equalTo: predictiveBar.bottomAnchor),
             keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
