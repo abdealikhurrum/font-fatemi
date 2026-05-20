@@ -77,7 +77,7 @@ final class LSDInputController: IMKInputController {
             #if DEBUG
             log.debug("double-press \"\(chars, privacy: .public)\" → \"\(secondary, privacy: .public)\"")
             #endif
-            insert(secondary, into: sender)
+            insert(secondary)
             PairCollector.shared.recordDoublePress(primary: chars, secondary: secondary)
             return true
         }
@@ -85,9 +85,9 @@ final class LSDInputController: IMKInputController {
         commitPending()
 
         if KeyData.secondary(for: chars) != nil {
-            startComposition(char: chars, sender: sender)
+            startComposition(char: chars)
         } else {
-            insert(chars, into: sender)
+            insert(chars)
         }
 
         return true
@@ -109,14 +109,13 @@ final class LSDInputController: IMKInputController {
 
     // MARK: - Composition lifecycle
 
-    private func startComposition(char: String, sender: Any?) {
+    private func startComposition(char: String) {
         pendingPrimary = char
         #if DEBUG
         log.debug("startComposition \"\(char, privacy: .public)\"")
         #endif
 
-        let client = textClient(sender)
-        client?.setMarkedText(
+        activeClient?.setMarkedText(
             NSAttributedString(string: char),
             selectionRange: NSRange(location: char.utf16.count, length: 0),
             replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
@@ -137,7 +136,7 @@ final class LSDInputController: IMKInputController {
         #if DEBUG
         log.debug("commitPending \"\(char, privacy: .public)\"")
         #endif
-        insert(char, into: client())
+        insert(char)
     }
 
     private func cancelPending() {
@@ -147,7 +146,7 @@ final class LSDInputController: IMKInputController {
         #if DEBUG
         log.debug("cancelPending \"\(char, privacy: .public)\"")
         #endif
-        textClient(client())?.setMarkedText(
+        activeClient?.setMarkedText(
             NSAttributedString(string: ""),
             selectionRange: NSRange(location: 0, length: 0),
             replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
@@ -161,20 +160,20 @@ final class LSDInputController: IMKInputController {
 
     // MARK: - Text insertion
 
-    private func insert(_ text: String, into sender: Any?) {
-        let client = textClient(sender)
+    // Always use self.client() — the live accessor that IMKInputController
+    // maintains per connection — rather than casting the `sender` parameter,
+    // which can be a stale XPC proxy after a connection invalidation.
+    private var activeClient: (IMKTextInput & NSObjectProtocol)? { self.client() }
+
+    private func insert(_ text: String) {
         #if DEBUG
-        log.debug("insert \"\(text, privacy: .public)\" hasClient=\(client != nil, privacy: .public)")
+        log.debug("insert \"\(text, privacy: .public)\" hasClient=\(activeClient != nil, privacy: .public)")
         #endif
         CorpusLogger.shared.record(text)
-        client?.insertText(
+        activeClient?.insertText(
             text,
             replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
         )
-    }
-
-    private func textClient(_ sender: Any?) -> (IMKTextInput & NSObjectProtocol)? {
-        sender as? (IMKTextInput & NSObjectProtocol)
     }
 
     // MARK: - Settings menu

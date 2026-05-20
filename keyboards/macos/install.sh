@@ -36,6 +36,9 @@ codesign --force --sign - --deep "$INSTALL_DIR/$APP_NAME"
 echo "=== Clearing quarantine ==="
 xattr -dr com.apple.quarantine "$INSTALL_DIR/$APP_NAME" 2>/dev/null || true
 
+echo "=== Killing old process (if running) ==="
+killall LSDKeyboard 2>/dev/null || true
+
 echo "=== Refreshing Input Method system ==="
 killall -9 TextInputMenuAgent 2>/dev/null || true
 sleep 1
@@ -43,8 +46,7 @@ open -a /System/Library/CoreServices/TextInputMenuAgent.app 2>/dev/null || \
     /System/Library/CoreServices/TextInputMenuAgent.app/Contents/MacOS/TextInputMenuAgent &
 
 echo ""
-echo "Done. Wait a few seconds, then:"
-echo "  System Settings → Keyboard → Input Sources → +"
-echo "  Search for 'Lisan' — it should appear under Arabic."
+echo "Done. Switch away from 'Lisan ud Dawat' in the input menu and back"
+echo "to force a fresh process launch, then try typing."
 echo ""
-echo "If it doesn't appear, log out and back in, then check again."
+echo "If the keyboard is not listed, log out and back in, then check again."
