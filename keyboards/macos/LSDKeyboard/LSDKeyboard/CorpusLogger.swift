@@ -80,7 +80,7 @@ final class CorpusLogger {
         previousWord = word
         unigramCache = nil
         save(data)
-        print("[CorpusLogger] saved "\(word)"  (total: \(data.words.count) words)")
+        print("[CorpusLogger] saved \(word)  (total: \(data.words.count) words)")
     }
 
     func resetPending() {
