@@ -273,14 +273,6 @@ extension KeyboardViewController: KeyboardViewDelegate {
         )
     }
 
-    // Pair collection hooks
-    func transliterationAccepted(lsd: String, roman: String) {
-        PairCollector.shared.recordAccepted(lsd: lsd, roman: roman)
-    }
-
-    func transliterationCorrected(lsd: String, suggested: String, corrected: String) {
-        PairCollector.shared.recordCorrection(lsd: lsd, suggestedRoman: suggested, correctedRoman: corrected)
-    }
 }
 
 // MARK: - PredictiveBarDelegate

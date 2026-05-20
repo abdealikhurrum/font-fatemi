@@ -24,11 +24,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         learn.tabBarItem = UITabBarItem(
             title: "Learn", image: UIImage(systemName: "graduationcap"), tag: 2)
 
-        let contribute = UINavigationController(rootViewController: FederationSettingsViewController())
-        contribute.tabBarItem = UITabBarItem(
-            title: "Contribute", image: UIImage(systemName: "arrow.triangle.2.circlepath"), tag: 3)
-
-        tabs.viewControllers = [setup, notepad, learn, contribute]
+        tabs.viewControllers = [setup, notepad, learn]
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = tabs

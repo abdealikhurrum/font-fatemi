@@ -1,6 +1,6 @@
 import UIKit
 
-final class LessonViewController: UIViewController {
+final class LessonViewController: UIViewController, UITextViewDelegate {
 
     private let module: LessonModule
     private var stepIndex = 0
@@ -13,9 +13,14 @@ final class LessonViewController: UIViewController {
     private let bodyLabel     = UILabel()
     private let targetLabel   = UILabel()
     private let hintBadge     = UILabel()
+    private let scratchCard   = UIView()
+    private let scratchView   = UITextView()
+    private let clearButton   = UIButton(type: .system)
     private let bottomBar     = UIView()
     private let prevButton    = UIButton(type: .system)
     private let nextButton    = UIButton(type: .system)
+
+    private static let scratchPlaceholder = "Try typing here…"
 
     init(module: LessonModule) {
         self.module = module
@@ -32,6 +37,14 @@ final class LessonViewController: UIViewController {
         view.backgroundColor = .systemGroupedBackground
         buildUI()
         render()
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(keyboardWillChange(_:)),
+            name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        scratchView.resignFirstResponder()
     }
 
     // MARK: - Build UI
@@ -39,6 +52,7 @@ final class LessonViewController: UIViewController {
     private func buildUI() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.alwaysBounceVertical = true
+        scrollView.keyboardDismissMode  = .interactive
         view.addSubview(scrollView)
 
         contentStack.axis = .vertical
@@ -63,7 +77,6 @@ final class LessonViewController: UIViewController {
         bodyLabel.textAlignment = .natural
         bodyLabel.textColor = .secondaryLabel
 
-        // Target: displayed as a large reference example, not a typing prompt
         targetLabel.font = UIFont(name: "FatemiMaqala-Regular", size: 42)
             ?? UIFont.systemFont(ofSize: 42)
         targetLabel.textAlignment = .center
@@ -79,10 +92,13 @@ final class LessonViewController: UIViewController {
         hintBadge.textColor = module.accent
         hintBadge.backgroundColor = module.accent.withAlphaComponent(0.12)
 
-        [progressLabel, headingLabel, bodyLabel, targetLabel, hintBadge]
+        buildScratchCard()
+
+        [progressLabel, headingLabel, bodyLabel, targetLabel, hintBadge, scratchCard]
             .forEach { contentStack.addArrangedSubview($0) }
 
-        contentStack.setCustomSpacing(4, after: targetLabel)
+        contentStack.setCustomSpacing(4,  after: targetLabel)
+        contentStack.setCustomSpacing(20, after: hintBadge)
 
         // Bottom bar
         bottomBar.backgroundColor = .systemBackground
@@ -134,6 +150,53 @@ final class LessonViewController: UIViewController {
         ])
     }
 
+    private func buildScratchCard() {
+        scratchCard.backgroundColor    = .secondarySystemGroupedBackground
+        scratchCard.layer.cornerRadius = 12
+        scratchCard.layer.masksToBounds = true
+        scratchCard.translatesAutoresizingMaskIntoConstraints = false
+
+        let label = UILabel()
+        label.text      = "Practice"
+        label.font      = UIFont.systemFont(ofSize: 12, weight: .medium)
+        label.textColor = .tertiaryLabel
+        label.translatesAutoresizingMaskIntoConstraints = false
+        scratchCard.addSubview(label)
+
+        clearButton.setTitle("Clear", for: .normal)
+        clearButton.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        clearButton.translatesAutoresizingMaskIntoConstraints = false
+        clearButton.addTarget(self, action: #selector(clearScratch), for: .touchUpInside)
+        scratchCard.addSubview(clearButton)
+
+        scratchView.delegate        = self
+        scratchView.font            = UIFont(name: "FatemiMaqala-Regular", size: 28) ?? UIFont.systemFont(ofSize: 28)
+        scratchView.textAlignment   = .right
+        scratchView.backgroundColor = .clear
+        scratchView.text            = Self.scratchPlaceholder
+        scratchView.textColor       = .placeholderText
+        scratchView.autocorrectionType     = .no
+        scratchView.autocapitalizationType = .none
+        scratchView.spellCheckingType      = .no
+        scratchView.isScrollEnabled = false
+        scratchView.translatesAutoresizingMaskIntoConstraints = false
+        scratchCard.addSubview(scratchView)
+
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: scratchCard.topAnchor, constant: 10),
+            label.leadingAnchor.constraint(equalTo: scratchCard.leadingAnchor, constant: 12),
+
+            clearButton.topAnchor.constraint(equalTo: scratchCard.topAnchor, constant: 6),
+            clearButton.trailingAnchor.constraint(equalTo: scratchCard.trailingAnchor, constant: -8),
+
+            scratchView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 4),
+            scratchView.leadingAnchor.constraint(equalTo: scratchCard.leadingAnchor, constant: 8),
+            scratchView.trailingAnchor.constraint(equalTo: scratchCard.trailingAnchor, constant: -8),
+            scratchView.bottomAnchor.constraint(equalTo: scratchCard.bottomAnchor, constant: -8),
+            scratchView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80),
+        ])
+    }
+
     // MARK: - Render step
 
     private func render() {
@@ -147,8 +210,10 @@ final class LessonViewController: UIViewController {
         targetLabel.isHidden = step.target.isEmpty
         hintBadge.isHidden   = step.keyHint.isEmpty
 
-        if !step.target.isEmpty  { targetLabel.text   = step.target }
-        if !step.keyHint.isEmpty { hintBadge.text = "  \(step.keyHint)  " }
+        if !step.target.isEmpty  { targetLabel.text       = step.target }
+        if !step.keyHint.isEmpty { hintBadge.text         = "  \(step.keyHint)  " }
+
+        resetScratch()
 
         prevButton.isEnabled = stepIndex > 0
         prevButton.alpha     = stepIndex > 0 ? 1 : 0.3
@@ -160,9 +225,37 @@ final class LessonViewController: UIViewController {
         scrollView.setContentOffset(.zero, animated: true)
     }
 
+    // MARK: - Scratch pad
+
+    private func resetScratch() {
+        scratchView.text      = Self.scratchPlaceholder
+        scratchView.textColor = .placeholderText
+    }
+
+    @objc private func clearScratch() {
+        resetScratch()
+        scratchView.resignFirstResponder()
+    }
+
+    // MARK: - UITextViewDelegate
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .placeholderText {
+            textView.text      = ""
+            textView.textColor = .label
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            resetScratch()
+        }
+    }
+
     // MARK: - Navigation
 
     @objc private func nextTapped() {
+        scratchView.resignFirstResponder()
         if stepIndex < module.steps.count - 1 {
             stepIndex += 1
             render()
@@ -173,7 +266,24 @@ final class LessonViewController: UIViewController {
 
     @objc private func prevTapped() {
         guard stepIndex > 0 else { return }
+        scratchView.resignFirstResponder()
         stepIndex -= 1
         render()
+    }
+
+    // MARK: - Keyboard avoidance
+
+    @objc private func keyboardWillChange(_ note: Notification) {
+        guard
+            let frame    = note.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+            let duration = note.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+            let curve    = note.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
+        else { return }
+        let overlap = max(0, view.bounds.maxY - frame.minY)
+        UIView.animate(withDuration: duration, delay: 0,
+                       options: UIView.AnimationOptions(rawValue: curve << 16)) {
+            self.scrollView.contentInset.bottom = overlap
+            self.scrollView.verticalScrollIndicatorInsets.bottom = overlap
+        }
     }
 }
