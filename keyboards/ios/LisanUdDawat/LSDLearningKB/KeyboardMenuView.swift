@@ -81,10 +81,10 @@ final class KeyboardMenuView: UIView {
         addDoubleTapSection(to: stack)
         addSeparator(to: stack)
         addActionRow(to: stack,
-            label: "Share corpus  (\(CorpusLogger.shared.wordCount) words)",
+            label: "Copy corpus to clipboard  (\(CorpusLogger.shared.wordCount) words)",
             action: { [weak self] in
-                self?.dismissTapped()
                 self?.onExportCorpus?()
+                self?.dismissTapped()
             }
         )
 

@@ -285,13 +285,9 @@ extension KeyboardViewController: PredictiveBarDelegate {
             }
             self?.applyLayer()
         }
-        menu.onExportCorpus = { [weak self] in
-            guard let self else { return }
-            let ac = UIActivityViewController(
-                activityItems: [CorpusLogger.shared.exportURL],
-                applicationActivities: nil
-            )
-            self.present(ac, animated: true)
+        menu.onExportCorpus = {
+            let text = CorpusLogger.shared.exportText()
+            UIPasteboard.general.string = text.isEmpty ? "" : text
         }
     }
 }
