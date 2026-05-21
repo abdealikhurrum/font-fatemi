@@ -28,8 +28,6 @@
 	<string>13.0</string>
 	<key>LSUIElement</key>
 	<true/>
-	<key>LSUIElement</key>
-	<true/>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>ComponentInputModeDict</key>
@@ -50,14 +48,12 @@
 				<integer>4</integer>
 				<key>tsInputModeLanguageKey</key>
 				<array>
-					<string>ar</string>
+					<string>arab</string>
 				</array>
 				<key>tsInputModeIconFileKey</key>
 				<string>LSDKeyboard.icns</string>
 			</dict>
 		</dict>
 	</dict>
-	<key>LSBackgroundOnly</key>
-	<true/>
 </dict>
 </plist>
