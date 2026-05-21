@@ -89,7 +89,7 @@ object KeyboardLayoutData {
             KeyData("🌐",   type = KeyType.GLOBE,     width = KeyWidth.Fixed(44f)),
             KeyData(" ",    type = KeyType.SPACE,     width = KeyWidth.Flexible,
                             alternates = listOf(" ", "‌", "ـ")),
-            KeyData("َ",    type = KeyType.DIACRITIC, width = KeyWidth.Fixed(44f)),
+            KeyData("تشكيل", type = KeyType.DIACRITIC, width = KeyWidth.Fixed(52f)),
             KeyData("↵",    type = KeyType.ENTER,     width = KeyWidth.Fixed(52f)),
         ),
     ))
@@ -158,12 +158,12 @@ object KeyboardLayoutData {
             KeyData("⌫", type = KeyType.BACKSPACE, width = KeyWidth.Wide),
         ),
         listOf(
-            KeyData("ا ب ج", type = KeyType.ABC,          width = KeyWidth.Fixed(72f)),
             KeyData("🌐",     type = KeyType.GLOBE,         width = KeyWidth.Fixed(44f)),
             KeyData("←",      type = KeyType.CURSOR_RIGHT,  width = KeyWidth.Fixed(44f)),
             KeyData(" ",      type = KeyType.SPACE,         width = KeyWidth.Flexible,
                               alternates = listOf(" ", "‌", "ـ")),
             KeyData("→",      type = KeyType.CURSOR_LEFT,   width = KeyWidth.Fixed(44f)),
+            KeyData("ا ب ج", type = KeyType.ABC,           width = KeyWidth.Fixed(52f)),
             KeyData("↵",      type = KeyType.ENTER,         width = KeyWidth.Fixed(52f)),
         ),
     ))

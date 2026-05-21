@@ -59,12 +59,18 @@ class LessonActivity : AppCompatActivity() {
             setPadding(dp(8), dp(8), dp(8), dp(8))
             elevation   = dp(2).toFloat()
         }
-        val backBtn = Button(this).apply {
-            text     = "‹ Back"
-            textSize = 16f
+        val backBtn = TextView(this).apply {
+            text      = "‹ Back"
+            textSize  = 16f
             setTextColor(0xFF007AFF.toInt())
-            background = null
+            setPadding(dp(8), dp(8), dp(8), dp(8))
+            isClickable = true
+            isFocusable = true
             setOnClickListener { finish() }
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
         }
         val titleView = TextView(this).apply {
             text     = module.title
@@ -76,9 +82,9 @@ class LessonActivity : AppCompatActivity() {
         }
         topBar.addView(backBtn)
         topBar.addView(titleView)
-        // spacer to balance back button
+        // Fixed-width spacer that mirrors the back button to keep title centered
         topBar.addView(View(this).apply {
-            layoutParams = LinearLayout.LayoutParams(backBtn.layoutParams?.width ?: dp(80), 1)
+            layoutParams = LinearLayout.LayoutParams(dp(72), 1)
         })
         root.addView(topBar)
 
