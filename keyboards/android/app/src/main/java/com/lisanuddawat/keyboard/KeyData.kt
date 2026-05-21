@@ -68,6 +68,7 @@ object KeyboardLayoutData {
         // Row 4 — utility row
         listOf(
             KeyData("١٢٣", type = KeyType.NUMERIC, width = KeyWidth.fixed(80f)),
+            KeyData("🌐", type = KeyType.GLOBE, width = KeyWidth.fixed(44f)),
             KeyData("ى"),
             KeyData("اعراب", alternates = listOf("َ", "ِ", "ُ", "ْ", "ٰ", "ً", "ٍ", "ٌ"), width = KeyWidth.fixed(70f)),
             KeyData(" ", type = KeyType.SPACE, width = KeyWidth.FLEXIBLE),
@@ -96,6 +97,7 @@ object KeyboardLayoutData {
         ),
         listOf(
             KeyData("١٢٣", type = KeyType.NUMERIC, width = KeyWidth.fixed(80f)),
+            KeyData("🌐", type = KeyType.GLOBE, width = KeyWidth.fixed(44f)),
             KeyData(" ", type = KeyType.SPACE, width = KeyWidth.FLEXIBLE),
             KeyData("۞"),
             KeyData("↵", type = KeyType.ENTER, width = KeyWidth.fixed(80f))
@@ -127,6 +129,7 @@ object KeyboardLayoutData {
         ),
         listOf(
             KeyData("ا ب ج", type = KeyType.ABC, width = KeyWidth.fixed(80f)),
+            KeyData("🌐", type = KeyType.GLOBE, width = KeyWidth.fixed(44f)),
             KeyData(" ", type = KeyType.SPACE, width = KeyWidth.FLEXIBLE),
             KeyData("↵", type = KeyType.ENTER, width = KeyWidth.fixed(80f))
         )
