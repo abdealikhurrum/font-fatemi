@@ -129,7 +129,7 @@ class LessonActivity : AppCompatActivity() {
         bodyView = TextView(this).apply {
             textSize = 15f
             setTextColor(0xFF3C3C43.toInt())
-            lineSpacingMultiplier = 1.4f
+            //lineSpacingMultiplier = 1.4f
             setPadding(0, 0, 0, dp(20))
         }
         content.addView(bodyView)
