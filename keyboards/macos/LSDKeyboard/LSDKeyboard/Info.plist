@@ -38,14 +38,14 @@
 	<dict>
 		<key>tsInputModeListKey</key>
 		<dict>
-			<key>com.exordiumnetworks.inputmethod.lsdkeyboard.Arabic</key>
+			<key>com.exordiumnetworks.inputmethod.lsdkeyboard.LSDWindows</key>
 			<dict>
 				<key>TISIntendedLanguage</key>
 				<string>ar</string>
 				<key>tsInputModeCharacterRepertoireKey</key>
 				<string>ar</string>
 				<key>tsInputModeAlternateMenuItemNameKey</key>
-				<string>Lisan ud Dawat</string>
+				<string>LSD</string>
 				<key>tsInputModeDefaultStateKey</key>
 				<true/>
 				<key>tsInputModeIsVisibleKey</key>
@@ -57,6 +57,52 @@
 				<key>tsInputModeLanguageKey</key>
 				<array>
 					<string>ar</string>
+				</array>
+				<key>tsInputModeIconFileKey</key>
+				<string>LSDKeyboard.icns</string>
+			</dict>
+			<key>com.exordiumnetworks.inputmethod.lsdkeyboard.LSDMac</key>
+			<dict>
+				<key>TISIntendedLanguage</key>
+				<string>ar</string>
+				<key>tsInputModeCharacterRepertoireKey</key>
+				<string>ar</string>
+				<key>tsInputModeAlternateMenuItemNameKey</key>
+				<string>LSD-Mac</string>
+				<key>tsInputModeDefaultStateKey</key>
+				<false/>
+				<key>tsInputModeIsVisibleKey</key>
+				<true/>
+				<key>tsInputModePrimaryInScriptKey</key>
+				<false/>
+				<key>tsInputModeScriptKey</key>
+				<string>smArabic</string>
+				<key>tsInputModeLanguageKey</key>
+				<array>
+					<string>ar</string>
+				</array>
+				<key>tsInputModeIconFileKey</key>
+				<string>LSDKeyboard.icns</string>
+			</dict>
+			<key>com.exordiumnetworks.inputmethod.lsdkeyboard.CRULP</key>
+			<dict>
+				<key>TISIntendedLanguage</key>
+				<string>ur</string>
+				<key>tsInputModeCharacterRepertoireKey</key>
+				<string>ur</string>
+				<key>tsInputModeAlternateMenuItemNameKey</key>
+				<string>CRULP</string>
+				<key>tsInputModeDefaultStateKey</key>
+				<false/>
+				<key>tsInputModeIsVisibleKey</key>
+				<true/>
+				<key>tsInputModePrimaryInScriptKey</key>
+				<false/>
+				<key>tsInputModeScriptKey</key>
+				<string>smArabic</string>
+				<key>tsInputModeLanguageKey</key>
+				<array>
+					<string>ur</string>
 				</array>
 				<key>tsInputModeIconFileKey</key>
 				<string>LSDKeyboard.icns</string>

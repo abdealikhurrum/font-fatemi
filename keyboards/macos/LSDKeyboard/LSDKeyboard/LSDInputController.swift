@@ -185,9 +185,34 @@ final class LSDInputController: IMKInputController {
         )
     }
 
+    // MARK: - Mode switching
+    //
+    // Called by the system when the user switches between registered input modes
+    // (LSDWindows / LSDMac / CRULP). Syncs the TIS mode into KeyboardSettings so
+    // KeyData picks up the right layout layers immediately.
+
+    override func setValue(_ value: Any!, forTag tag: Int, client sender: Any!) {
+        if let modeID = value as? String {
+            switch modeID {
+            case _ where modeID.hasSuffix(".LSDWindows"):
+                KeyboardSettings.selectedLayout = .lsd
+            case _ where modeID.hasSuffix(".LSDMac"):
+                KeyboardSettings.selectedLayout = .macLsd
+            case _ where modeID.hasSuffix(".CRULP"):
+                KeyboardSettings.selectedLayout = .crulpUrdu
+            default:
+                break
+            }
+            log.info("mode → \(modeID, privacy: .public) layout=\(KeyboardSettings.selectedLayout.rawValue, privacy: .public)")
+        }
+        super.setValue(value, forTag: tag, client: sender)
+    }
+
     // MARK: - Settings menu
     //
-    // Appears when the user clicks "Lisan ud Dawat" in the Input Sources menu bar item.
+    // Appears when the user clicks the input source name in the menu bar.
+    // Layout switching is handled by the system (TIS modes in Info.plist);
+    // this menu covers per-mode behaviour settings only.
 
     override func menu() -> NSMenu! {
         let menu = NSMenu(title: "Lisan ud Dawat")
@@ -195,22 +220,6 @@ final class LSDInputController: IMKInputController {
         let header = NSMenuItem(title: "Lisan ud Dawat", action: nil, keyEquivalent: "")
         header.isEnabled = false
         menu.addItem(header)
-        menu.addItem(.separator())
-
-        // Layout
-        let layoutItem = NSMenuItem(title: "Layout", action: nil, keyEquivalent: "")
-        let layoutMenu = NSMenu()
-        for layout in KeyboardSettings.LayoutType.allCases {
-            let item = NSMenuItem(title: layout.label, action: #selector(setLayout(_:)),
-                                  keyEquivalent: "")
-            item.representedObject = layout.rawValue
-            item.state = KeyboardSettings.selectedLayout == layout ? .on : .off
-            item.target = self
-            layoutMenu.addItem(item)
-        }
-        layoutItem.submenu = layoutMenu
-        menu.addItem(layoutItem)
-
         menu.addItem(.separator())
 
         // Double-press enabled
@@ -273,12 +282,6 @@ final class LSDInputController: IMKInputController {
         menu.addItem(yehItem)
 
         return menu
-    }
-
-    @objc private func setLayout(_ sender: NSMenuItem) {
-        guard let raw    = sender.representedObject as? String,
-              let layout = KeyboardSettings.LayoutType(rawValue: raw) else { return }
-        KeyboardSettings.selectedLayout = layout
     }
 
     @objc private func toggleDoublePress(_ sender: NSMenuItem) {
