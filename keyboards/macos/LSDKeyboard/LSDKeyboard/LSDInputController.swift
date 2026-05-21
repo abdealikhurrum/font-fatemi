@@ -237,10 +237,10 @@ final class LSDInputController: IMKInputController {
         // Double-press delay
         let delayItem = NSMenuItem(title: "Double-press delay", action: nil, keyEquivalent: "")
         let delayMenu = NSMenu()
-        for preset in KeyboardSettings.DelayPreset.allCases {
+        for (index, preset) in KeyboardSettings.DelayPreset.allCases.enumerated() {
             let item = NSMenuItem(title: preset.label, action: #selector(setDelay(_:)),
                                   keyEquivalent: "")
-            item.representedObject = preset.rawValue
+            item.tag    = index
             item.state  = KeyboardSettings.doublePressDelayPreset == preset ? .on : .off
             item.target = self
             delayMenu.addItem(item)
@@ -257,10 +257,10 @@ final class LSDInputController: IMKInputController {
             (.kharoZabar, "اٰ  kharo zabar (default)"),
             (.alefMadda,  "آ  alef madda"),
         ]
-        for (style, label) in alefOptions {
+        for (index, (style, label)) in alefOptions.enumerated() {
             let item = NSMenuItem(title: label, action: #selector(setDoubleAlef(_:)),
                                   keyEquivalent: "")
-            item.representedObject = style.rawValue
+            item.tag    = index
             item.state  = KeyboardSettings.doubleAlefStyle == style ? .on : .off
             item.target = self
             alefMenu.addItem(item)
@@ -275,10 +275,10 @@ final class LSDInputController: IMKInputController {
             (.farsiYeh,  "ی  Farsi yeh  (default)"),
             (.arabicYeh, "ي  Arabic yeh"),
         ]
-        for (style, label) in yehOptions {
+        for (index, (style, label)) in yehOptions.enumerated() {
             let item = NSMenuItem(title: label, action: #selector(setUrduYeh(_:)),
                                   keyEquivalent: "")
-            item.representedObject = style.rawValue
+            item.tag    = index
             item.state  = KeyboardSettings.urduYehStyle == style ? .on : .off
             item.target = self
             yehMenu.addItem(item)
@@ -295,20 +295,20 @@ final class LSDInputController: IMKInputController {
     }
 
     @objc private func setDelay(_ sender: NSMenuItem) {
-        guard let raw    = sender.representedObject as? String,
-              let preset = KeyboardSettings.DelayPreset(rawValue: raw) else { return }
-        KeyboardSettings.doublePressDelayPreset = preset
+        let presets = KeyboardSettings.DelayPreset.allCases
+        guard sender.tag < presets.count else { return }
+        KeyboardSettings.doublePressDelayPreset = presets[sender.tag]
     }
 
     @objc private func setDoubleAlef(_ sender: NSMenuItem) {
-        guard let raw   = sender.representedObject as? String,
-              let style = KeyboardSettings.DoubleAlefStyle(rawValue: raw) else { return }
-        KeyboardSettings.doubleAlefStyle = style
+        let options: [KeyboardSettings.DoubleAlefStyle] = [.kharoZabar, .alefMadda]
+        guard sender.tag < options.count else { return }
+        KeyboardSettings.doubleAlefStyle = options[sender.tag]
     }
 
     @objc private func setUrduYeh(_ sender: NSMenuItem) {
-        guard let raw   = sender.representedObject as? String,
-              let style = KeyboardSettings.UrduYehStyle(rawValue: raw) else { return }
-        KeyboardSettings.urduYehStyle = style
+        let options: [KeyboardSettings.UrduYehStyle] = [.farsiYeh, .arabicYeh]
+        guard sender.tag < options.count else { return }
+        KeyboardSettings.urduYehStyle = options[sender.tag]
     }
 }

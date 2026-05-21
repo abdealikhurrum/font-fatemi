@@ -115,9 +115,13 @@ extension KeyData {
     }
 
     // Characters that differ between LSD (Windows PC) and CRULP Urdu in the primary layer.
-    private static let crulpPrimarySwap: [String: String] = [
-        "ه": "ہ", "ك": "ک", "ة": "ۃ", "ي": "ی",
-    ]
+    // Yeh entry is conditional on urduYehStyle: farsi yeh (U+06CC) is default; arabic yeh
+    // (U+064A) leaves the base character unchanged, so we omit it from the swap map.
+    private static var crulpPrimarySwap: [String: String] {
+        var map: [String: String] = ["ه": "ہ", "ك": "ک", "ة": "ۃ"]
+        if KeyboardSettings.urduYehStyle == .farsiYeh { map["ي"] = "ی" }
+        return map
+    }
 
     // MARK: Windows LSD layers (default — maqalaAra.klc)
 
