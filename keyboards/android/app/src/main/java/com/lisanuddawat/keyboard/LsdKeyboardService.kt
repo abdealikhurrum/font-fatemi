@@ -17,6 +17,7 @@ class LsdKeyboardService : InputMethodService() {
 
     private var keyboardView: KeyboardView? = null
     private var predictiveBar: PredictiveBar? = null
+    private var menuView: KeyboardMenuView? = null
 
     // Double-space tracking (for period insertion)
     private var lastInsertedChar: Char? = null
@@ -26,9 +27,8 @@ class LsdKeyboardService : InputMethodService() {
     // Double-press tracking (for secondary character)
     private var lastPressedPrimary: String? = null
     private var lastKeyPressTime: Long = 0
-    private val doublePressWindowMs = 400L
 
-    // ------------------------------------------------------------------  lifecycle
+    // ── Lifecycle ────────────────────────────────────────────────────────
 
     override fun onCreateInputView(): View {
         val root = FrameLayout(this)
@@ -45,9 +45,8 @@ class LsdKeyboardService : InputMethodService() {
                 PredictiveBar.heightPx(this@LsdKeyboardService)
             )
             delegate = object : PredictiveBarDelegate {
-                override fun predictiveBarDidSelect(suggestion: String) {
-                    insertSuggestion(suggestion)
-                }
+                override fun predictiveBarDidSelect(suggestion: String) { insertSuggestion(suggestion) }
+                override fun predictiveBarSettingsTapped() { showMenu(root) }
             }
         }
         predictiveBar = bar
@@ -71,17 +70,32 @@ class LsdKeyboardService : InputMethodService() {
         return root
     }
 
-    // ------------------------------------------------------------------  layer
+    // ── Layer ─────────────────────────────────────────────────────────────
 
     private fun applyLayer() {
-        when (currentLayer) {
-            Layer.DEFAULT   -> keyboardView?.configure(KeyboardLayoutData.defaultLayer)
-            Layer.NUMERIC   -> keyboardView?.configure(KeyboardLayoutData.numericLayer)
-            Layer.DIACRITIC -> keyboardView?.configure(KeyboardLayoutData.diacriticLayer)
+        val layer = when (currentLayer) {
+            Layer.DEFAULT -> when (KeyboardSettings.getLayout(this)) {
+                KeyboardSettings.LayoutType.LSD            -> KeyboardLayoutData.defaultLayer
+                KeyboardSettings.LayoutType.ARABIC_STANDARD -> ArabicStandardLayoutData.defaultLayer
+                KeyboardSettings.LayoutType.CRULP_URDU      -> CRULPUrduLayoutData.defaultLayer(this)
+            }
+            Layer.NUMERIC   -> KeyboardLayoutData.numericLayer
+            Layer.DIACRITIC -> KeyboardLayoutData.diacriticLayer
+        }
+        keyboardView?.configure(layer)
+    }
+
+    // ── Settings menu ─────────────────────────────────────────────────────
+
+    private fun showMenu(root: FrameLayout) {
+        if (menuView != null) return
+        menuView = KeyboardMenuView.show(root) {
+            menuView = null
+            if (currentLayer == Layer.DEFAULT) applyLayer()
         }
     }
 
-    // ------------------------------------------------------------------  text operations
+    // ── Text operations ───────────────────────────────────────────────────
 
     private fun insert(text: String) {
         currentInputConnection?.commitText(text, 1)
@@ -104,11 +118,15 @@ class LsdKeyboardService : InputMethodService() {
     }
 
     private fun updatePredictions() {
+        if (!KeyboardSettings.getPredictions(this)) {
+            predictiveBar?.update(emptyList())
+            return
+        }
         val before = currentInputConnection?.getTextBeforeCursor(100, 0)?.toString() ?: ""
         val word   = before.split(" ", "\n").lastOrNull() ?: ""
         predictiveBar?.update(
             if (word.isEmpty()) emptyList()
-            else listOf(word, "${word}ا", "${word}ه")   // placeholder — replace with model
+            else listOf(word, "${word}ا", "${word}ه")
         )
     }
 
@@ -118,25 +136,33 @@ class LsdKeyboardService : InputMethodService() {
         currentInputConnection?.sendKeyEvent(KeyEvent(now, now, KeyEvent.ACTION_UP,   keyCode, 0))
     }
 
-    // ------------------------------------------------------------------  key handling
+    // ── Key handling ──────────────────────────────────────────────────────
 
     private fun handleKey(key: KeyData) {
         when (key.type) {
 
             KeyType.CHARACTER -> {
-                val now = System.currentTimeMillis()
+                val now       = System.currentTimeMillis()
                 val secondary = key.secondary
+                val window    = KeyboardSettings.getDoublePressWindowMs(this)
 
-                // Double-press: if the same primary was just inserted, replace it with secondary.
-                if (secondary.isNotEmpty() && now - lastKeyPressTime < doublePressWindowMs) {
+                if (secondary.isNotEmpty()
+                    && KeyboardSettings.getDoublePressEnabled(this)
+                    && now - lastKeyPressTime < window) {
                     val before = currentInputConnection
                         ?.getTextBeforeCursor(key.primary.length, 0)?.toString()
                     if (before == key.primary) {
                         repeat(key.primary.length) {
                             currentInputConnection?.deleteSurroundingText(1, 0)
                         }
-                        insert(secondary)
-                        // Reset so a third press starts fresh
+                        // Honour the doubleAlef setting when ا → اٰ
+                        val toInsert = if (key.primary == "ا" && secondary == "اٰ" &&
+                            KeyboardSettings.getDoubleAlefStyle(this) == KeyboardSettings.DoubleAlefStyle.ALEF_MADDA) {
+                            "آ"
+                        } else {
+                            secondary
+                        }
+                        insert(toInsert)
                         lastPressedPrimary = null
                         lastKeyPressTime   = 0L
                         return
@@ -150,8 +176,7 @@ class LsdKeyboardService : InputMethodService() {
 
             KeyType.SPACE -> {
                 val now = System.currentTimeMillis()
-                // Double-space → period + space: fires only when the previous insert was
-                // also a space (i.e. user pressed space twice quickly), not on every word.
+                // Double-space → period + space: fires only when the previous insert was also a space
                 if (lastInsertedChar == ' ' && now - lastInsertTime < doubleSpaceWindowMs) {
                     val before = currentInputConnection?.getTextBeforeCursor(2, 0)?.toString() ?: ""
                     if (before.length >= 2 && before[before.length - 2].isLetter()) {
@@ -182,7 +207,6 @@ class LsdKeyboardService : InputMethodService() {
 
             KeyType.ABC -> currentLayer = Layer.DEFAULT
 
-            // In RTL text: visual ← moves cursor toward the end of the string (DPAD_RIGHT)
             KeyType.CURSOR_LEFT  -> moveCursor(KeyEvent.KEYCODE_DPAD_RIGHT)
             KeyType.CURSOR_RIGHT -> moveCursor(KeyEvent.KEYCODE_DPAD_LEFT)
 
@@ -196,7 +220,7 @@ class LsdKeyboardService : InputMethodService() {
                 }
             }
 
-            KeyType.EMOJI -> { /* no-op — no layer defined yet */ }
+            KeyType.EMOJI -> { /* no-op */ }
         }
     }
 }

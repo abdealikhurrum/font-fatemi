@@ -11,14 +11,15 @@ import android.widget.TextView
 
 interface PredictiveBarDelegate {
     fun predictiveBarDidSelect(suggestion: String)
+    fun predictiveBarSettingsTapped()
 }
 
-// The three-suggestion strip above the keyboard rows.
-// Feed real predictions from the transliteration model here later.
+// Three-suggestion strip with a gear button that opens the settings panel.
 class PredictiveBar(context: Context) : LinearLayout(context) {
 
     companion object {
         fun heightPx(context: Context) = (44 * context.resources.displayMetrics.density).toInt()
+        private const val SETTINGS_W_DP = 40
     }
 
     var delegate: PredictiveBarDelegate? = null
@@ -27,10 +28,10 @@ class PredictiveBar(context: Context) : LinearLayout(context) {
     init {
         orientation = HORIZONTAL
         setBackgroundColor(KeyboardColors.predictiveBar(context))
-        buildButtons()
+        buildSuggestions()
+        buildGearButton()
     }
 
-    // Supply up to 3 suggestions; pass fewer or empty to clear.
     fun update(suggestions: List<String>) {
         for ((i, btn) in buttons.withIndex()) {
             val text = if (i < suggestions.size) suggestions[i] else ""
@@ -39,10 +40,10 @@ class PredictiveBar(context: Context) : LinearLayout(context) {
         }
     }
 
-    private fun buildButtons() {
+    private fun buildSuggestions() {
         for (i in 0 until 3) {
             val btn = TextView(context).apply {
-                gravity   = Gravity.CENTER
+                gravity       = Gravity.CENTER
                 setTextColor(KeyboardColors.keyLabel(context))
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)
                 isSingleLine  = true
@@ -59,17 +60,32 @@ class PredictiveBar(context: Context) : LinearLayout(context) {
             addView(btn)
             buttons.add(btn)
 
-            if (i < 2) {
-                addView(View(context).apply {
-                    setBackgroundColor(KeyboardColors.separator(context))
-                    layoutParams = LayoutParams(1, LayoutParams.MATCH_PARENT).apply {
-                        topMargin    = dp(8)
-                        bottomMargin = dp(8)
-                    }
-                })
-            }
+            if (i < 2) addView(separatorView())
         }
         update(emptyList())
+    }
+
+    private fun buildGearButton() {
+        addView(separatorView())
+        addView(TextView(context).apply {
+            text      = "⚙"
+            textSize  = 16f
+            gravity   = Gravity.CENTER
+            setTextColor(KeyboardColors.keyLabel(context))
+            alpha     = 0.55f
+            isClickable = true
+            isFocusable = true
+            setOnClickListener { delegate?.predictiveBarSettingsTapped() }
+            layoutParams = LayoutParams(dp(SETTINGS_W_DP), LayoutParams.MATCH_PARENT)
+        })
+    }
+
+    private fun separatorView() = View(context).apply {
+        setBackgroundColor(KeyboardColors.separator(context))
+        layoutParams = LayoutParams(1, LayoutParams.MATCH_PARENT).apply {
+            topMargin    = dp(8)
+            bottomMargin = dp(8)
+        }
     }
 
     private fun dp(v: Int) = (v * resources.displayMetrics.density).toInt()
