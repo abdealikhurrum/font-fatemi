@@ -86,15 +86,15 @@ enum KeyboardSettings {
     // MARK: - Layout
 
     enum LayoutType: String, CaseIterable {
-        case lsd            = "lsd"
-        case arabicStandard = "arabic_standard"
-        case crulpUrdu      = "crulp_urdu"
+        case lsd       = "lsd"
+        case macLsd    = "mac_lsd"
+        case crulpUrdu = "crulp_urdu"
 
         var label: String {
             switch self {
-            case .lsd:            return "LSD (default)"
-            case .arabicStandard: return "Arabic Standard"
-            case .crulpUrdu:      return "CRULP Urdu"
+            case .lsd:       return "LSD (Windows PC)"
+            case .macLsd:    return "LSD (Mac)"
+            case .crulpUrdu: return "CRULP Urdu"
             }
         }
     }

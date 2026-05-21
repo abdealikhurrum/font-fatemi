@@ -98,25 +98,30 @@ extension KeyData {
     // honouring the currently selected layout. Returns nil for unmapped keys (function
     // keys, arrows, modifier-only presses, etc.) so the IME can pass them through.
     static func char(forCode code: Int, shift: Bool, option: Bool) -> String? {
+        let layout = KeyboardSettings.selectedLayout
+        let normalBase = layout == .macLsd ? macLsdNormalLayer : normalLayer
+        let shiftBase  = layout == .macLsd ? macLsdShiftLayer  : shiftLayer
         let base: [Int: String]
         switch (shift, option) {
         case (true,  true):  base = shiftOptionLayer
         case (false, true):  base = optionLayer
-        case (true,  false): base = shiftLayer
-        default:             base = normalLayer
+        case (true,  false): base = shiftBase
+        default:             base = normalBase
         }
         guard var ch = base[code] else { return nil }
-        if KeyboardSettings.selectedLayout == .crulpUrdu,
+        if layout == .crulpUrdu,
            let swapped = crulpPrimarySwap[ch] { ch = swapped }
         return ch
     }
 
-    // Characters that differ between LSD and CRULP Urdu in the primary layer.
+    // Characters that differ between LSD (Windows PC) and CRULP Urdu in the primary layer.
     private static let crulpPrimarySwap: [String: String] = [
         "ه": "ہ", "ك": "ک", "ة": "ۃ", "ي": "ی",
     ]
 
-    // Layer 2 (no modifier) — sourced from the Windows LSD keyboard (maqalaAra.klc, keyMap index 2)
+    // MARK: Windows LSD layers (default — maqalaAra.klc)
+
+    // Layer 2 (no modifier) — Windows LSD / maqalaAra.klc
     private static let normalLayer: [Int: String] = [
         0: "ش",  1: "س",  2: "ي",  3: "ب",  4: "ا",  5: "ل",
         6: "ئ",  7: "ء",  8: "ؤ",  9: "ر",  11: "لا",
@@ -177,6 +182,35 @@ extension KeyData {
         31: "\u{06D5}", 32: "\u{06D5}", 33: "چ",
         38: "ٹ",  40: "ں",  41: "ک",
         44: "÷",
+    ]
+
+    // MARK: Mac LSD layers (Lisan ud Dawat - Mac.keylayout)
+
+    // Layer 2 (no modifier) — Mac LSD keylayout index 2
+    private static let macLsdNormalLayer: [Int: String] = [
+        0: "ش",  1: "س",  2: "ي",  3: "ب",  4: "ا",  5: "ل",
+        6: "ظ",  7: "ط",  8: "ذ",  9: "د",  11: "ز",
+        12: "ض", 13: "ص", 14: "ث", 15: "ق", 16: "غ", 17: "ف",
+        18: "١", 19: "٢", 20: "٣", 21: "٤", 22: "٦", 23: "٥",
+        24: "=",  25: "٩", 26: "٧", 27: "-",  28: "٨", 29: "٠",
+        30: "ة", 31: "خ", 32: "ع", 33: "ج",  34: "ه", 35: "ح",
+        37: "م", 38: "ت", 39: "؛", 40: "ن",  41: "ك",
+        42: "\\", 43: "،", 44: "/",  45: "ر", 46: "و", 47: ".",
+        50: "ـ",
+    ]
+
+    // Layer 3 (shift) — Mac LSD keylayout index 3
+    private static let macLsdShiftLayer: [Int: String] = [
+        0: "»",  1: "«",  2: "ى",  4: "آ",  6: "'",
+        8: "ئ",  9: "ء",  11: "أ",
+        12: "\u{064E}", 13: "\u{064B}", 14: "\u{0650}",
+        15: "\u{064D}", 16: "\u{064C}", 17: "\u{064F}",
+        18: "!", 19: "@",  20: "#",  21: "$", 22: "^",  23: "٪",
+        24: "+", 25: ")",  26: "&",  27: "ـ", 28: "*",  29: "(",
+        30: "{", 31: "\u{0652}", 32: "\u{0652}", 33: "}",
+        34: "\u{0651}", 35: "[",
+        37: "\u{066C}", 39: "\"", 40: "\u{066B}",
+        41: ":", 42: "|",  43: ">", 44: "؟", 45: "إ", 46: "ؤ", 47: "<",
     ]
 
     // MARK: - Diacritic mode layers (Caps Lock)
