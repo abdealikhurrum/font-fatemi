@@ -71,4 +71,12 @@ object KeyboardSettings {
 
     fun setYehStyle(ctx: Context, v: YehStyle) =
         prefs(ctx).edit().putString("urdu_yeh_style", v.key).apply()
+
+    // ── BiDi tooltip ─────────────────────────────────────────────────────
+
+    fun getBiDiTooltipShown(ctx: Context): Boolean =
+        prefs(ctx).getBoolean("bidi_tooltip_shown", false)
+
+    fun setBiDiTooltipShown(ctx: Context) =
+        prefs(ctx).edit().putBoolean("bidi_tooltip_shown", true).apply()
 }

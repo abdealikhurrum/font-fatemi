@@ -18,6 +18,7 @@ class LsdKeyboardService : InputMethodService() {
     private var keyboardView: KeyboardView? = null
     private var predictiveBar: PredictiveBar? = null
     private var menuView: KeyboardMenuView? = null
+    private var biDiMenu: BiDiFixMenu? = null
 
     // Double-space tracking (for period insertion)
     private var lastInsertedChar: Char? = null
@@ -47,6 +48,7 @@ class LsdKeyboardService : InputMethodService() {
             delegate = object : PredictiveBarDelegate {
                 override fun predictiveBarDidSelect(suggestion: String) { insertSuggestion(suggestion) }
                 override fun predictiveBarSettingsTapped() { showMenu(root) }
+                override fun predictiveBarBiDiTapped(issue: BiDiAnalyzer.Issue) { showBiDiMenu(root, issue) }
             }
         }
         predictiveBar = bar
@@ -95,6 +97,15 @@ class LsdKeyboardService : InputMethodService() {
         }
     }
 
+    // ── BiDi fix menu ─────────────────────────────────────────────────────
+
+    private fun showBiDiMenu(root: FrameLayout, issue: BiDiAnalyzer.Issue) {
+        if (biDiMenu != null) return
+        biDiMenu = BiDiFixMenu.show(root, issue, { currentInputConnection }) {
+            biDiMenu = null
+        }
+    }
+
     // ── Text operations ───────────────────────────────────────────────────
 
     private fun insert(text: String) {
@@ -102,12 +113,14 @@ class LsdKeyboardService : InputMethodService() {
         lastInsertedChar = text.lastOrNull()
         lastInsertTime   = System.currentTimeMillis()
         updatePredictions()
+        updateBiDi()
     }
 
     private fun deleteBack() {
         currentInputConnection?.deleteSurroundingText(1, 0)
         lastInsertedChar = null
         updatePredictions()
+        updateBiDi()
     }
 
     private fun insertSuggestion(suggestion: String) {
@@ -115,6 +128,11 @@ class LsdKeyboardService : InputMethodService() {
         val partial = before.split(" ", "\n").lastOrNull() ?: ""
         currentInputConnection?.deleteSurroundingText(partial.length, 0)
         insert("$suggestion ")
+    }
+
+    private fun updateBiDi() {
+        val text = currentInputConnection?.getTextBeforeCursor(200, 0)?.toString() ?: ""
+        predictiveBar?.updateBiDi(text)
     }
 
     private fun updatePredictions() {
