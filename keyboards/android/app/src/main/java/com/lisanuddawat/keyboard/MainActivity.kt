@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.provider.Settings
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -29,14 +30,14 @@ class MainActivity : AppCompatActivity() {
         content.addView(TextView(this).apply {
             text      = "بسم الله الرحمن الرحيم"
             textSize  = 28f
-            textAlignment = TEXT_ALIGNMENT_CENTER
+            textAlignment = View.TEXT_ALIGNMENT_CENTER
             typeface  = fatemiTypeface
             setPadding(0, 0, 0, dp(8))
         })
         content.addView(TextView(this).apply {
             text      = "الفاتمي مقالة"
             textSize  = 18f
-            textAlignment = TEXT_ALIGNMENT_CENTER
+            textAlignment = View.TEXT_ALIGNMENT_CENTER
             typeface  = fatemiTypeface
             setTextColor(0xFF555555.toInt())
             setPadding(0, 0, 0, dp(32))

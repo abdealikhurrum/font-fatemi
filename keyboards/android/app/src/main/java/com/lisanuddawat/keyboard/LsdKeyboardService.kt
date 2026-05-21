@@ -1,6 +1,7 @@
 package com.lisanuddawat.keyboard
 
 import android.inputmethodservice.InputMethodService
+import android.os.Build
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -177,7 +178,15 @@ class LsdKeyboardService : InputMethodService() {
                 shiftLocked  = false
             }
 
-            KeyType.GLOBE -> switchToNextInputMethod()
+            KeyType.GLOBE -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    switchToNextInputMethod(false)
+                } else {
+                    @Suppress("DEPRECATION")
+                    (getSystemService(INPUT_METHOD_SERVICE) as? android.view.inputmethod.InputMethodManager)
+                        ?.switchToNextInputMethod(window?.window?.attributes?.token, false)
+                }
+            }
         }
     }
 

@@ -103,7 +103,7 @@ class LongPressPopupView(
         }
         private val bgPaint2 = Paint(Paint.ANTI_ALIAS_FLAG)
 
-        fun setSelected(on: Boolean) { selected = on; invalidate() }
+        override fun setSelected(on: Boolean) { selected = on; invalidate() }
 
         override fun onDraw(canvas: Canvas) {
             val w = width.toFloat(); val h = height.toFloat()
