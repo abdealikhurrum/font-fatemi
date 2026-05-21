@@ -127,7 +127,7 @@ final class LongPressPopupView: UIView {
     // Invisible control characters get a short descriptive label instead.
     private func visibleTitle(_ text: String) -> String {
         switch text {
-        case "\u{200D}": return "ZWJ"
+        case "\u{00A0}": return "NBSP"
         case "\u{200C}": return "ZWNJ"
         default: break
         }
