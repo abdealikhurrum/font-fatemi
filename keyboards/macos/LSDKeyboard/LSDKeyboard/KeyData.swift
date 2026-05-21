@@ -116,31 +116,41 @@ extension KeyData {
         "ه": "ہ", "ك": "ک", "ة": "ۃ", "ي": "ی",
     ]
 
-    // Layer 2 (no modifier) — sourced from the LSD Mac keylayout
+    // Layer 2 (no modifier) — sourced from the Windows LSD keyboard (maqalaAra.klc, keyMap index 2)
     private static let normalLayer: [Int: String] = [
         0: "ش",  1: "س",  2: "ي",  3: "ب",  4: "ا",  5: "ل",
-        6: "ظ",  7: "ط",  8: "ذ",  9: "د",  11: "ز",
-        12: "ض", 13: "ص", 14: "ث", 15: "ق", 16: "غ", 17: "ف",
+        6: "ئ",  7: "ء",  8: "ؤ",  9: "ر",  11: "لا",
+        12: "ض", 13: "ص", 14: "ث", 15: "ق", 16: "ف", 17: "غ",
         18: "١", 19: "٢", 20: "٣", 21: "٤", 22: "٦", 23: "٥",
         24: "=",  25: "٩", 26: "٧", 27: "-",  28: "٨", 29: "٠",
-        30: "ة", 31: "خ", 32: "ع", 33: "ج",  34: "ه", 35: "ح",
-        37: "م", 38: "ت", 39: "؛", 40: "ن",  41: "ك",
-        42: "\\", 43: "،", 44: "/",  45: "ر", 46: "و", 47: ".",
-        50: "ـ",
+        30: "د", 31: "خ", 32: "ع", 33: "ج",  34: "ه", 35: "ح",
+        37: "م", 38: "ت", 39: "ط", 40: "ن",  41: "ك",
+        42: "\\", 43: "و", 44: "ظ",  45: "ى", 46: "ة", 47: "ز",
+        50: "ذ",
     ]
 
-    // Layer 3 (shift) — sourced from the LSD Mac keylayout
+    // Layer 3 (shift) — sourced from the Windows LSD keyboard (maqalaAra.klc)
     private static let shiftLayer: [Int: String] = [
-        0: "»",  1: "«",  2: "ى",  4: "آ",  6: "'",
-        8: "ئ",  9: "ء",  11: "أ",
-        12: "\u{064E}", 13: "\u{064B}", 14: "\u{0650}",
-        15: "\u{064D}", 16: "\u{064C}", 17: "\u{064F}",
-        18: "!", 19: "@",  20: "#",  21: "$", 22: "^",  23: "٪",
-        24: "+", 25: ")",  26: "&",  27: "ـ", 28: "*",  29: "(",
-        30: "{", 31: "\u{0652}", 32: "\u{0652}", 33: "}",
-        34: "\u{0651}", 35: "[",
-        37: "\u{066C}", 39: "\"", 40: "\u{066B}",
-        41: ":", 42: "|",  43: ">", 44: "؟", 45: "إ", 46: "ؤ", 47: "<",
+        // QWERTY row
+        12: "\u{064E}", 13: "\u{064B}", 14: "\u{064F}", 15: "\u{064C}",
+        16: "\u{06A4}", 17: "\u{0625}",
+        32: "\u{0657}", 34: "\u{06BE}",
+        31: "\u{0679}", 35: "\u{06C1}",
+        33: "\u{0686}", 30: "\u{0688}",
+        // ASDF row
+        0: "\u{0650}", 1: "\u{064D}", 2: "\u{06D2}", 3: "\u{067E}",
+        4: "\u{0623}", 38: "\u{0640}", 40: "\u{060C}", 37: "\u{06BA}",
+        41: "\u{06AF}", 39: "\"",
+        // Backtick
+        50: "\u{0651}",
+        // ZXCV row
+        6: "\u{0670}", 7: "\u{0652}", 8: "\u{0656}",
+        9: "\u{0691}", 11: ":", 45: "\u{0622}", 46: "\u{06C3}",
+        43: "\u{0613}", 47: ".", 44: "\u{061F}",
+        42: "|",
+        // Number row shifts
+        18: "!", 19: "@", 20: "#", 21: "$", 22: "^", 23: "٪",
+        24: "+", 25: ")", 26: "&", 27: "_", 28: "*", 29: "(",
     ]
 
     // Layer 4 (option) — sourced from the LSD Mac keylayout
@@ -168,6 +178,60 @@ extension KeyData {
         38: "ٹ",  40: "ں",  41: "ک",
         44: "÷",
     ]
+
+    // MARK: - Diacritic mode layers (Caps Lock)
+
+    // diacriticLayer: symmetric — each diacritic available on both halves of the keyboard.
+    // Symmetric pairings (left ↔ right, Mac codes):
+    //   A(0)  ↔ ;(41)   S(1)  ↔ L(37)   D(2)  ↔ K(40)   F(3)  ↔ J(38)   G(5)  ↔ H(4)
+    //   Q(12) ↔ P(35)   W(13) ↔ O(31)   E(14) ↔ I(34)   R(15) ↔ U(32)   T(16) ↔ Y(17)
+    //   [(33) ↔ ](30)   B(11) ↔ N(45)
+    private static let diacriticLayer: [Int: String] = [
+        // A / ;  — fatha
+        0: "\u{064E}", 41: "\u{064E}",
+        // S / L  — kasra
+        1: "\u{0650}", 37: "\u{0650}",
+        // D / K  — damma
+        2: "\u{064F}", 40: "\u{064F}",
+        // F / J  — sukun
+        3: "\u{0652}", 38: "\u{0652}",
+        // G / H  — shadda
+        5: "\u{0651}", 4: "\u{0651}",
+        // Q / P  — fathatan
+        12: "\u{064B}", 35: "\u{064B}",
+        // W / O  — kasratan
+        13: "\u{064D}", 31: "\u{064D}",
+        // E / I  — dammatan
+        14: "\u{064C}", 34: "\u{064C}",
+        // R / U  — kharo zabar (superscript alef)
+        15: "\u{0670}", 32: "\u{0670}",
+        // T / Y  — maddah
+        16: "\u{0653}", 17: "\u{0653}",
+        // [ / ]  — hamza above
+        33: "\u{0654}", 30: "\u{0654}",
+        // B / N  — hamza below
+        11: "\u{0655}", 45: "\u{0655}",
+    ]
+
+    // diacriticArrowLayer: maps code to NSResponder selector string (symmetric).
+    //   Z(6)  / /(44) → moveLeft:
+    //   X(7)  / .(47) → moveUp:
+    //   C(8)  / ,(43) → moveDown:
+    //   V(9)  / M(46) → moveRight:
+    private static let diacriticArrowLayer: [Int: String] = [
+        6: "moveLeft:",  44: "moveLeft:",
+        7: "moveUp:",    47: "moveUp:",
+        8: "moveDown:",  43: "moveDown:",
+        9: "moveRight:", 46: "moveRight:",
+    ]
+
+    static func diacriticChar(forCode code: Int) -> String? {
+        return diacriticLayer[code]
+    }
+
+    static func diacriticArrow(forCode code: Int) -> String? {
+        return diacriticArrowLayer[code]
+    }
 }
 
 // MARK: - Full layout (retained for reference; not rendered on macOS)

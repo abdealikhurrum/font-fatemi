@@ -22,13 +22,23 @@ final class LSDInputController: IMKInputController {
 
     private var pendingPrimary: String?
     private var pendingTimer: Timer?
+    private var isDiacriticMode = false
 
     private let log = Logger(subsystem: "com.exordiumnetworks.inputmethod.lsdkeyboard", category: "IME")
 
     // MARK: - Key event handling
 
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
-        guard let event, event.type == .keyDown else { return false }
+        guard let event else { return false }
+
+        // Handle Caps Lock toggle → diacritic mode
+        if event.type == .flagsChanged && event.keyCode == 57 {
+            isDiacriticMode = event.modifierFlags.contains(.capsLock)
+            log.info("capsLock \(self.isDiacriticMode ? "ON→diacriticMode" : "OFF→normalMode", privacy: .public)")
+            return true
+        }
+
+        guard event.type == .keyDown else { return false }
 
         let mods = event.modifierFlags
         if mods.contains(.command) || mods.contains(.control) {
@@ -52,6 +62,22 @@ final class LSDInputController: IMKInputController {
             return false
         default:
             break
+        }
+
+        if isDiacriticMode && !mods.contains(.shift) && !mods.contains(.option) {
+            let code = Int(event.keyCode)
+            if let selector = KeyData.diacriticArrow(forCode: code) {
+                commitPending()
+                activeClient?.doCommandBySelector(NSSelectorFromString(selector))
+                return true
+            }
+            if let char = KeyData.diacriticChar(forCode: code) {
+                commitPending()
+                insert(char)
+                return true
+            }
+            // unmapped key in diacritic mode — pass through
+            return false
         }
 
         let isShift  = mods.contains(.shift)
