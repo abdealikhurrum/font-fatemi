@@ -120,16 +120,16 @@ class MainActivity : AppCompatActivity() {
             }
         )))
 
-        // Yeh style — always visible, note that it only affects the Urdu layout
+        // Yeh style — global, applies to all layouts
         card.addView(hairline())
-        card.addView(settingRow("Default yeh (Urdu)", segControl(
+        card.addView(settingRow("Default yeh", segControl(
             items    = listOf("ی", "ي"),
-            current  = if (KeyboardSettings.getUrduYehStyle(this) == KeyboardSettings.UrduYehStyle.FARSI_YEH) 0 else 1,
+            current  = if (KeyboardSettings.getYehStyle(this) == KeyboardSettings.YehStyle.FARSI_YEH) 0 else 1,
             font     = fatemiTypeface,
             onSelect = { idx ->
-                KeyboardSettings.setUrduYehStyle(this,
-                    if (idx == 0) KeyboardSettings.UrduYehStyle.FARSI_YEH
-                    else          KeyboardSettings.UrduYehStyle.ARABIC_YEH)
+                KeyboardSettings.setYehStyle(this,
+                    if (idx == 0) KeyboardSettings.YehStyle.FARSI_YEH
+                    else          KeyboardSettings.YehStyle.ARABIC_YEH)
             }
         )))
 

@@ -18,8 +18,8 @@ object CRULPUrduLayoutData {
 
     // Computed so the yeh character reflects the current setting without restarting.
     fun defaultLayer(ctx: Context): KeyboardLayer {
-        val yeh    = if (KeyboardSettings.getUrduYehStyle(ctx) == KeyboardSettings.UrduYehStyle.FARSI_YEH) "ی" else "ي"
-        val yehAlt = if (KeyboardSettings.getUrduYehStyle(ctx) == KeyboardSettings.UrduYehStyle.FARSI_YEH) "ي" else "ی"
+        val yeh    = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ی" else "ي"
+        val yehAlt = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ي" else "ی"
         return KeyboardLayer("crulp", listOf(
             // Row 1 — 10 keys (QWERTYUIOP)
             listOf(

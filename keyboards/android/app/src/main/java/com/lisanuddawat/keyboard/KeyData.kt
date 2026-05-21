@@ -1,5 +1,7 @@
 package com.lisanuddawat.keyboard
 
+import android.content.Context
+
 // Ported from iOS LSDLearningKB/KeyData.swift
 // KeyWidth.Fixed values are in dp.
 
@@ -44,7 +46,10 @@ data class KeyboardLayer(val id: String, val rows: List<List<KeyData>>)
 
 object KeyboardLayoutData {
 
-    val defaultLayer = KeyboardLayer("default", listOf(
+    fun defaultLayer(ctx: Context): KeyboardLayer {
+        val yeh    = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ی" else "ي"
+        val yehAlt = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ي" else "ی"
+        return KeyboardLayer("default", listOf(
         listOf(
             KeyData("ض", secondary = "ٹ"),
             KeyData("ص"),
@@ -61,7 +66,7 @@ object KeyboardLayoutData {
         listOf(
             KeyData("ش"),
             KeyData("س", secondary = "ے"),
-            KeyData("ي", secondary = "ئ",  alternates = listOf("ے")),
+            KeyData(yeh, secondary = "ئ",   alternates = listOf(yehAlt, "ے")),
             KeyData("ب"),
             KeyData("ل", alternates = listOf("لا", "لأ", "لإ", "لآ", "لاٰ")),
             KeyData("ا", secondary = "اٰ", alternates = listOf("أ", "آ", "إ")),
@@ -93,7 +98,8 @@ object KeyboardLayoutData {
             KeyData("تشكيل", type = KeyType.DIACRITIC, width = KeyWidth.Fixed(52f)),
             KeyData("↵",    type = KeyType.ENTER,     width = KeyWidth.Fixed(52f)),
         ),
-    ))
+        ))
+    }
 
     val numericLayer = KeyboardLayer("numeric", listOf(
         listOf(

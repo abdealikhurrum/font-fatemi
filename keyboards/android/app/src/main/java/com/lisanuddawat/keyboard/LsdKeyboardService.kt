@@ -75,8 +75,8 @@ class LsdKeyboardService : InputMethodService() {
     private fun applyLayer() {
         val layer = when (currentLayer) {
             Layer.DEFAULT -> when (KeyboardSettings.getLayout(this)) {
-                KeyboardSettings.LayoutType.LSD            -> KeyboardLayoutData.defaultLayer
-                KeyboardSettings.LayoutType.ARABIC_STANDARD -> ArabicStandardLayoutData.defaultLayer
+                KeyboardSettings.LayoutType.LSD            -> KeyboardLayoutData.defaultLayer(this)
+                KeyboardSettings.LayoutType.ARABIC_STANDARD -> ArabicStandardLayoutData.defaultLayer(this)
                 KeyboardSettings.LayoutType.CRULP_URDU      -> CRULPUrduLayoutData.defaultLayer(this)
             }
             Layer.NUMERIC   -> KeyboardLayoutData.numericLayer

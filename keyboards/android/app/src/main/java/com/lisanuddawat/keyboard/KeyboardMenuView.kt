@@ -82,19 +82,18 @@ class KeyboardMenuView(context: Context) : FrameLayout(context) {
     private fun buildContent(c: LinearLayout) {
         addLayoutRow(c)
 
-        // Yeh sub-row (only visible when Urdu/CRULP is selected)
+        // Yeh style — global, applies to all layouts
         yehStyleRow = addSubRow(c,
             label  = "Default yeh",
             items  = listOf("ی", "ي"),
             useArabicFont = true,
-            current = if (KeyboardSettings.getUrduYehStyle(context) == KeyboardSettings.UrduYehStyle.FARSI_YEH) 0 else 1
+            current = if (KeyboardSettings.getYehStyle(context) == KeyboardSettings.YehStyle.FARSI_YEH) 0 else 1
         ) { idx ->
-            KeyboardSettings.setUrduYehStyle(context,
-                if (idx == 0) KeyboardSettings.UrduYehStyle.FARSI_YEH
-                else          KeyboardSettings.UrduYehStyle.ARABIC_YEH)
+            KeyboardSettings.setYehStyle(context,
+                if (idx == 0) KeyboardSettings.YehStyle.FARSI_YEH
+                else          KeyboardSettings.YehStyle.ARABIC_YEH)
             onApplyLayer?.invoke()
         }
-        yehStyleRow?.visibility = if (KeyboardSettings.getLayout(context) == KeyboardSettings.LayoutType.CRULP_URDU) VISIBLE else GONE
 
         c.addView(hairline())
 
@@ -123,7 +122,6 @@ class KeyboardMenuView(context: Context) : FrameLayout(context) {
         row.addView(segControl(labels, types.indexOf(current)) { idx ->
             val t = types[idx]
             KeyboardSettings.setLayout(context, t)
-            yehStyleRow?.visibility = if (t == KeyboardSettings.LayoutType.CRULP_URDU) VISIBLE else GONE
             onApplyLayer?.invoke()
         })
         c.addView(row)

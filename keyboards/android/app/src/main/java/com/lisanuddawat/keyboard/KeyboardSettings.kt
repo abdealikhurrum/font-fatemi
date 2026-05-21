@@ -57,18 +57,18 @@ object KeyboardSettings {
     fun setDoubleAlefStyle(ctx: Context, v: DoubleAlefStyle) =
         prefs(ctx).edit().putString("double_alef_style", v.key).apply()
 
-    // ── Urdu yeh style (CRULP layout only) ──────────────────────────────
+    // ── Yeh style (all layouts) ──────────────────────────────────────────
 
-    enum class UrduYehStyle(val key: String) {
+    enum class YehStyle(val key: String) {
         FARSI_YEH("farsi_yeh"),    // ی  default — standard in Urdu/Farsi
         ARABIC_YEH("arabic_yeh")  // ي
     }
 
-    fun getUrduYehStyle(ctx: Context): UrduYehStyle =
-        UrduYehStyle.values().firstOrNull {
+    fun getYehStyle(ctx: Context): YehStyle =
+        YehStyle.values().firstOrNull {
             it.key == prefs(ctx).getString("urdu_yeh_style", "farsi_yeh")
-        } ?: UrduYehStyle.FARSI_YEH
+        } ?: YehStyle.FARSI_YEH
 
-    fun setUrduYehStyle(ctx: Context, v: UrduYehStyle) =
+    fun setYehStyle(ctx: Context, v: YehStyle) =
         prefs(ctx).edit().putString("urdu_yeh_style", v.key).apply()
 }
