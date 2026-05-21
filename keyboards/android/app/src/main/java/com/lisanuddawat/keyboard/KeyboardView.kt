@@ -43,9 +43,10 @@ class KeyboardView(context: Context) : ViewGroup(context) {
     private var calloutView: KeyCalloutView? = null
     private var activePopup: LongPressPopupView? = null
 
-    // Store popup position in overlay so touch transforms work
-    private var popupOverlayX = 0f
-    private var popupOverlayY = 0f
+    // Popup-repeat chaining: mirrors iOS schedulePopupRepeat().
+    // After 500 ms holding on a selected alternate, repeat it every 100 ms.
+    private var popupRepeatInitial: Runnable? = null
+    private var popupRepeatTick: Runnable? = null
 
     private val vibrator: Vibrator? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         (context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as? VibratorManager)?.defaultVibrator
@@ -160,13 +161,18 @@ class KeyboardView(context: Context) : ViewGroup(context) {
             MotionEvent.ACTION_MOVE -> {
                 val popup = activePopup
                 if (popup != null) {
-                    // Route movement into popup — convert from KeyboardView coords to popup coords
                     val kbLoc = IntArray(2).also { getLocationOnScreen(it) }
                     val pxLoc = IntArray(2).also { popup.getLocationOnScreen(it) }
+                    val prev = popup.currentSelectedCharacter
                     popup.updateSelection(
                         event.x + kbLoc[0] - pxLoc[0],
                         event.y + kbLoc[1] - pxLoc[1]
                     )
+                    val next = popup.currentSelectedCharacter
+                    if (next != prev) {
+                        cancelPopupRepeat()
+                        if (next != null) schedulePopupRepeat(next)
+                    }
                     return true
                 }
 
@@ -295,8 +301,36 @@ class KeyboardView(context: Context) : ViewGroup(context) {
     }
 
     private fun dismissPopup() {
+        cancelPopupRepeat()
         activePopup?.let { (it.parent as? ViewGroup)?.removeView(it) }
         activePopup = null
+    }
+
+    // ------------------------------------------------------------------  popup repeat (chaining)
+
+    private fun schedulePopupRepeat(character: String) {
+        val initial = Runnable {
+            delegate?.longPressAlternateSelected(character)
+            val tick = object : Runnable {
+                override fun run() {
+                    // Use live selection in case user has slid to a different alternate
+                    val current = activePopup?.currentSelectedCharacter ?: return
+                    delegate?.longPressAlternateSelected(current)
+                    handler.postDelayed(this, 100)
+                }
+            }
+            popupRepeatTick = tick
+            handler.postDelayed(tick, 100)
+        }
+        popupRepeatInitial = initial
+        handler.postDelayed(initial, 500)
+    }
+
+    private fun cancelPopupRepeat() {
+        popupRepeatInitial?.let { handler.removeCallbacks(it) }
+        popupRepeatTick?.let   { handler.removeCallbacks(it) }
+        popupRepeatInitial = null
+        popupRepeatTick    = null
     }
 
     // ------------------------------------------------------------------  backspace repeat

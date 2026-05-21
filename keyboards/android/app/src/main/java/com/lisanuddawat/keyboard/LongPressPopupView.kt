@@ -31,6 +31,10 @@ class LongPressPopupView(
     private val itemViews = mutableListOf<ItemView>()
     private var selectedIndex: Int? = null
 
+    // Exposed so KeyboardView can schedule repeat chaining when selection changes.
+    val currentSelectedCharacter: String?
+        get() = selectedIndex?.let { alternates[it] }
+
     private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     private val fatemiTypeface: Typeface? = runCatching {
@@ -95,11 +99,21 @@ class LongPressPopupView(
 
     inner class ItemView(context: Context, val character: String) : View(context) {
 
+        // Invisible control characters get readable Latin labels for display.
+        private val displayLabel = when (character) {
+            "‍" -> "ZWJ"
+            "‌" -> "ZWNJ"
+            else      -> character
+        }
+
         private var selected = false
         private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             textAlign = Paint.Align.CENTER
-            textSize  = sp(20f)
-            typeface  = fatemiTypeface ?: Typeface.DEFAULT
+            // Latin labels need a smaller size to fit; Arabic/single chars use full size.
+            textSize  = if (displayLabel.length > 1 && displayLabel.all { it.code < 128 })
+                            sp(10f) else sp(20f)
+            typeface  = if (displayLabel == character) fatemiTypeface ?: Typeface.DEFAULT
+                        else Typeface.DEFAULT_BOLD
         }
         private val bgPaint2 = Paint(Paint.ANTI_ALIAS_FLAG)
 
@@ -113,7 +127,7 @@ class LongPressPopupView(
             }
             textPaint.color = if (selected) Color.WHITE else KeyboardColors.popupText(context)
             val textY = h / 2f - (textPaint.ascent() + textPaint.descent()) / 2f
-            canvas.drawText(character, w / 2f, textY, textPaint)
+            canvas.drawText(displayLabel, w / 2f, textY, textPaint)
         }
 
         private fun dp(v: Float) = v * resources.displayMetrics.density
