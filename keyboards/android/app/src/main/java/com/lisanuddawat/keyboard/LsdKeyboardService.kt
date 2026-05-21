@@ -150,12 +150,12 @@ class LsdKeyboardService : InputMethodService() {
 
             KeyType.SPACE -> {
                 val now = System.currentTimeMillis()
-                val lc  = lastInsertedChar
-                // Double-space → period + space, matching iOS native behaviour
-                if (lc != null && lc != ' ' && lc != '\n'
-                    && now - lastInsertTime < doubleSpaceWindowMs) {
-                    val before = currentInputConnection?.getTextBeforeCursor(1, 0)?.toString() ?: ""
-                    if (before.lastOrNull()?.isLetter() == true) {
+                // Double-space → period + space: fires only when the previous insert was
+                // also a space (i.e. user pressed space twice quickly), not on every word.
+                if (lastInsertedChar == ' ' && now - lastInsertTime < doubleSpaceWindowMs) {
+                    val before = currentInputConnection?.getTextBeforeCursor(2, 0)?.toString() ?: ""
+                    if (before.length >= 2 && before[before.length - 2].isLetter()) {
+                        currentInputConnection?.deleteSurroundingText(1, 0)
                         currentInputConnection?.commitText(". ", 1)
                         lastInsertedChar = ' '
                         lastInsertTime   = now

@@ -275,7 +275,10 @@ class KeyboardView(context: Context) : ViewGroup(context) {
         dismissPopup()
         val overlay = overlayContainer ?: return
 
-        val popup = LongPressPopupView(context, key.keyData.alternates, key.width, key.height)
+        // Cap item width so space-bar (flexible, very wide) doesn't produce an
+        // enormous popup that overflows the screen — mirrors iOS min(keySize.width, 52).
+        val itemWidth = minOf(key.width, dp(52f).toInt())
+        val popup = LongPressPopupView(context, key.keyData.alternates, itemWidth, key.height)
         popup.delegate = object : LongPressPopupDelegate {
             override fun popupDidSelect(character: String) {
                 delegate?.longPressAlternateSelected(character)
