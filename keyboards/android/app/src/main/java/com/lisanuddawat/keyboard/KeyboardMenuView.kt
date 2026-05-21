@@ -148,20 +148,17 @@ class KeyboardMenuView(context: Context) : FrameLayout(context) {
         val curWindow    = KeyboardSettings.getDoublePressWindowMs(context)
         val winIdx       = windowValues.indexOfFirst { it == curWindow }.coerceAtLeast(1)
 
-        val winRow = addSubRow(c, "Window", windowLabels, false, winIdx) { idx ->
+        addSubRow(sub, "Window", windowLabels, false, winIdx) { idx ->
             KeyboardSettings.setDoublePressWindowMs(context, windowValues[idx])
         }
 
-        val alefRow = addSubRow(c, "Double ا", listOf("اٰ", "آ"), true,
+        addSubRow(sub, "Double ا", listOf("اٰ", "آ"), true,
             if (KeyboardSettings.getDoubleAlefStyle(context) == KeyboardSettings.DoubleAlefStyle.KHARO_ZABAR) 0 else 1
         ) { idx ->
             KeyboardSettings.setDoubleAlefStyle(context,
                 if (idx == 0) KeyboardSettings.DoubleAlefStyle.KHARO_ZABAR
                 else          KeyboardSettings.DoubleAlefStyle.ALEF_MADDA)
         }
-
-        sub.addView(winRow)
-        sub.addView(alefRow)
 
         val sw = Switch(context).apply {
             isChecked = KeyboardSettings.getDoublePressEnabled(context)
