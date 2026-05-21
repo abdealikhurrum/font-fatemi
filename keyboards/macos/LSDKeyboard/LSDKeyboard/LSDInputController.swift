@@ -68,7 +68,7 @@ final class LSDInputController: IMKInputController {
             let code = Int(event.keyCode)
             if let selector = KeyData.diacriticArrow(forCode: code) {
                 commitPending()
-                activeClient?.doCommandBySelector(NSSelectorFromString(selector))
+                NSApp.sendAction(NSSelectorFromString(selector), to: nil, from: self)
                 return true
             }
             if let char = KeyData.diacriticChar(forCode: code) {
