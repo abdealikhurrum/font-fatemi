@@ -20,6 +20,10 @@
 	<string>1.11</string>
 	<key>CFBundleVersion</key>
 	<string>1.11</string>
+	<key>TISIntendedLanguage</key>
+	<string>ar</string>
+	<key>tsInputMethodCharacterRepertoireKey</key>
+	<string>ar</string>
 	<key>InputMethodConnectionName</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>InputMethodServerControllerClass</key>
@@ -36,6 +40,10 @@
 		<dict>
 			<key>com.exordiumnetworks.inputmethod.lsdkeyboard.Arabic</key>
 			<dict>
+				<key>TISIntendedLanguage</key>
+				<string>ar</string>
+				<key>tsInputModeCharacterRepertoireKey</key>
+				<string>ar</string>
 				<key>tsInputModeAlternateMenuItemNameKey</key>
 				<string>Lisan ud Dawat</string>
 				<key>tsInputModeDefaultStateKey</key>
@@ -45,7 +53,7 @@
 				<key>tsInputModePrimaryInScriptKey</key>
 				<true/>
 				<key>tsInputModeScriptKey</key>
-				<integer>4</integer>
+				<string>smArabic</string>
 				<key>tsInputModeLanguageKey</key>
 				<array>
 					<string>ar</string>
