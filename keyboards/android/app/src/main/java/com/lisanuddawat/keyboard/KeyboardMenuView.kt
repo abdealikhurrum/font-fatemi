@@ -252,6 +252,7 @@ class KeyboardMenuView(context: Context) : FrameLayout(context) {
     fun dismiss() {
         animate().translationY(height.toFloat()).setDuration(180).withEndAction {
             (parent as? android.view.ViewGroup)?.removeView(this)
+            onApplyLayer?.invoke()
         }.start()
     }
 
