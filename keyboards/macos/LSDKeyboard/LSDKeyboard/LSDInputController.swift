@@ -28,6 +28,11 @@ final class LSDInputController: IMKInputController {
 
     // MARK: - Key event handling
 
+    override func recognizedEvents(_ sender: Any!) -> Int {
+        let events: NSEvent.EventTypeMask = [.keyDown, .flagsChanged]
+        return Int(events.rawValue)
+    }
+
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
         guard let event else { return false }
 
