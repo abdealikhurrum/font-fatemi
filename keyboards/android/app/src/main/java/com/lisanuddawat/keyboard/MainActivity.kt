@@ -28,14 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         // Font preview
         content.addView(TextView(this).apply {
-            text      = "بسم الله الرحمن الرحيم"
-            textSize  = 28f
-            textAlignment = View.TEXT_ALIGNMENT_CENTER
-            typeface  = fatemiTypeface
-            setPadding(0, 0, 0, dp(8))
-        })
-        content.addView(TextView(this).apply {
-            text      = "الفاتمي مقالة"
+            text      = "كيم چھو؟"
             textSize  = 18f
             textAlignment = View.TEXT_ALIGNMENT_CENTER
             typeface  = fatemiTypeface
