@@ -85,6 +85,16 @@ class MainActivity : AppCompatActivity() {
             "FatemiMaqala is bundled inside this app — no separate font installation is needed on Android. " +
             "The keyboard renders all Arabic/Urdu characters using this font automatically."
         ))
+
+        // Learn / Practice
+        content.addView(makeStep(
+            "Practice",
+            "Use the interactive lesson modules to learn double-press characters, diacritics, and special keys."
+        ))
+        content.addView(Button(this).apply {
+            text = "Open Lessons"
+            setOnClickListener { startActivity(Intent(this@MainActivity, LearnActivity::class.java)) }
+        })
     }
 
     private fun makeStep(title: String, body: String): LinearLayout =

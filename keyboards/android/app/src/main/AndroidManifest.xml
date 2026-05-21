@@ -19,6 +19,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".LearnActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
+
+        <activity
+            android:name=".LessonActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
+
         <service
             android:name=".LsdKeyboardService"
             android:exported="true"
