@@ -80,6 +80,7 @@ object KeyboardLayoutData {
             KeyData("ة", secondary = "ۃ"),
             KeyData("و"),
             KeyData("ز", alternates = listOf("ژ", "ذ")),
+            KeyData(primary= "ذ"),
             KeyData("د", secondary = "ڈ",  alternates = listOf("ڈ")),
             KeyData("ظ", secondary = "ہ"),
             KeyData("⌫", type = KeyType.BACKSPACE, width = KeyWidth.Wide),

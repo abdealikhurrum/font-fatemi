@@ -101,7 +101,7 @@ class LongPressPopupView(
 
         // Invisible control characters get readable Latin labels for display.
         private val displayLabel = when (character) {
-            " "  -> "NBSP"
+            "NBSP"  -> "NBSP"
             "‌" -> "ZWNJ"
             else       -> character
         }
