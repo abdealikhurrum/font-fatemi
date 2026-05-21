@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <name>org.freedesktop.IBus.LSD</name>
+  <description>Lisan ud Dawat keyboard (LSD)</description>
+  <exec>/usr/lib/ibus-lsd/ibus-engine-lsd --ibus</exec>
+  <version>1.0.0</version>
+  <author>Exordium Networks</author>
+  <license>MIT</license>
+  <homepage>https://github.com/abdealikhurrum/font-fatemi</homepage>
+  <textdomain>ibus-lsd</textdomain>
+
+  <engines>
+    <engine>
+      <name>LSD</name>
+      <longname>Lisan ud Dawat</longname>
+      <description>LSD keyboard with double-press substitution rules</description>
+      <language>ara</language>
+      <license>MIT</license>
+      <author>Exordium Networks</author>
+      <icon>/usr/share/ibus-lsd/lsd-icon.svg</icon>
+      <layout>ara</layout>
+      <rank>0</rank>
+    </engine>
+  </engines>
+</component>
