@@ -74,10 +74,8 @@ class KeyboardView(context: Context) : ViewGroup(context) {
         requestLayout()
     }
 
-    fun updateShiftAppearance(active: Boolean, locked: Boolean) {
-        keyButtons.firstOrNull { it.keyData.type == KeyType.SHIFT }
-            ?.updateShiftState(active, locked)
-    }
+    // No shift key in current layout — kept for API compatibility.
+    fun updateShiftAppearance(active: Boolean, locked: Boolean) = Unit
 
     // ------------------------------------------------------------------  measure / layout
 
@@ -114,12 +112,12 @@ class KeyboardView(context: Context) : ViewGroup(context) {
         val stdW = standardKeyWidth(row, availW)
 
         val rawWidths = row.map { btn ->
-            when (btn.keyData.width.type) {
-                KeyWidthType.STANDARD   -> stdW
-                KeyWidthType.WIDE       -> stdW * 1.5f
-                KeyWidthType.EXTRA_WIDE -> stdW * 2.5f
-                KeyWidthType.FIXED      -> dp(btn.keyData.width.fixedDp)
-                KeyWidthType.FLEXIBLE   -> 0f
+            when (val w = btn.keyData.width) {
+                is KeyWidth.Standard  -> stdW
+                is KeyWidth.Wide      -> stdW * 1.5f
+                is KeyWidth.ExtraWide -> stdW * 2.5f
+                is KeyWidth.Fixed     -> dp(w.dp)
+                is KeyWidth.Flexible  -> 0f
             }
         }
 
@@ -139,12 +137,12 @@ class KeyboardView(context: Context) : ViewGroup(context) {
         val sp = dp(KEY_SPACING_DP)
         var slots = 0f; var fixedUsed = 0f
         for (btn in row) {
-            when (btn.keyData.width.type) {
-                KeyWidthType.STANDARD   -> slots += 1f
-                KeyWidthType.WIDE       -> slots += 1.5f
-                KeyWidthType.EXTRA_WIDE -> slots += 2.5f
-                KeyWidthType.FIXED      -> fixedUsed += dp(btn.keyData.width.fixedDp)
-                KeyWidthType.FLEXIBLE   -> Unit
+            when (val w = btn.keyData.width) {
+                is KeyWidth.Standard  -> slots += 1f
+                is KeyWidth.Wide      -> slots += 1.5f
+                is KeyWidth.ExtraWide -> slots += 2.5f
+                is KeyWidth.Fixed     -> fixedUsed += dp(w.dp)
+                is KeyWidth.Flexible  -> Unit
             }
         }
         val totalSpacing = (row.size - 1) * sp

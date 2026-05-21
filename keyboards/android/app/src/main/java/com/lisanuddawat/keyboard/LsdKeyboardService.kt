@@ -2,33 +2,35 @@ package com.lisanuddawat.keyboard
 
 import android.inputmethodservice.InputMethodService
 import android.os.Build
+import android.os.SystemClock
+import android.view.KeyEvent
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 
 class LsdKeyboardService : InputMethodService() {
 
-    private enum class Layer { DEFAULT, SHIFT, NUMERIC }
+    private enum class Layer { DEFAULT, NUMERIC, DIACRITIC }
 
     private var currentLayer = Layer.DEFAULT
         set(value) { field = value; applyLayer() }
 
-    private var shiftActive = false
-        set(value) { field = value; keyboardView?.updateShiftAppearance(value, shiftLocked) }
-
-    private var shiftLocked = false
-
     private var keyboardView: KeyboardView? = null
     private var predictiveBar: PredictiveBar? = null
 
+    // Double-space tracking (for period insertion)
     private var lastInsertedChar: Char? = null
     private var lastInsertTime: Long = 0
     private val doubleSpaceWindowMs = 400L
 
+    // Double-press tracking (for secondary character)
+    private var lastPressedPrimary: String? = null
+    private var lastKeyPressTime: Long = 0
+    private val doublePressWindowMs = 400L
+
     // ------------------------------------------------------------------  lifecycle
 
     override fun onCreateInputView(): View {
-        // Root FrameLayout — keyboard content sits inside; callout/popup overlays float on top
         val root = FrameLayout(this)
 
         val content = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
@@ -58,7 +60,7 @@ class LsdKeyboardService : InputMethodService() {
             )
             delegate = object : KeyboardViewDelegate {
                 override fun keyPressed(key: KeyData) { handleKey(key) }
-                override fun longPressAlternateSelected(character: String) { handleLongPress(character) }
+                override fun longPressAlternateSelected(character: String) { insert(character) }
             }
             overlayContainer = root
         }
@@ -73,11 +75,10 @@ class LsdKeyboardService : InputMethodService() {
 
     private fun applyLayer() {
         when (currentLayer) {
-            Layer.DEFAULT -> keyboardView?.configure(KeyboardLayoutData.defaultLayer)
-            Layer.SHIFT   -> keyboardView?.configure(KeyboardLayoutData.shiftLayer)
-            Layer.NUMERIC -> keyboardView?.configure(KeyboardLayoutData.numericLayer)
+            Layer.DEFAULT   -> keyboardView?.configure(KeyboardLayoutData.defaultLayer)
+            Layer.NUMERIC   -> keyboardView?.configure(KeyboardLayoutData.numericLayer)
+            Layer.DIACRITIC -> keyboardView?.configure(KeyboardLayoutData.diacriticLayer)
         }
-        keyboardView?.updateShiftAppearance(shiftActive, shiftLocked)
     }
 
     // ------------------------------------------------------------------  text operations
@@ -111,17 +112,40 @@ class LsdKeyboardService : InputMethodService() {
         )
     }
 
-    // ------------------------------------------------------------------  key handling (mirrors iOS KeyboardViewController)
+    private fun moveCursor(keyCode: Int) {
+        val now = SystemClock.uptimeMillis()
+        currentInputConnection?.sendKeyEvent(KeyEvent(now, now, KeyEvent.ACTION_DOWN, keyCode, 0))
+        currentInputConnection?.sendKeyEvent(KeyEvent(now, now, KeyEvent.ACTION_UP,   keyCode, 0))
+    }
+
+    // ------------------------------------------------------------------  key handling
 
     private fun handleKey(key: KeyData) {
         when (key.type) {
 
             KeyType.CHARACTER -> {
-                insert(key.primary)
-                if (shiftActive && !shiftLocked) {
-                    shiftActive  = false
-                    currentLayer = Layer.DEFAULT
+                val now = System.currentTimeMillis()
+                val secondary = key.secondary
+
+                // Double-press: if the same primary was just inserted, replace it with secondary.
+                if (secondary.isNotEmpty() && now - lastKeyPressTime < doublePressWindowMs) {
+                    val before = currentInputConnection
+                        ?.getTextBeforeCursor(key.primary.length, 0)?.toString()
+                    if (before == key.primary) {
+                        repeat(key.primary.length) {
+                            currentInputConnection?.deleteSurroundingText(1, 0)
+                        }
+                        insert(secondary)
+                        // Reset so a third press starts fresh
+                        lastPressedPrimary = null
+                        lastKeyPressTime   = 0L
+                        return
+                    }
                 }
+
+                insert(key.primary)
+                lastPressedPrimary = key.primary
+                lastKeyPressTime   = now
             }
 
             KeyType.SPACE -> {
@@ -132,7 +156,6 @@ class LsdKeyboardService : InputMethodService() {
                     && now - lastInsertTime < doubleSpaceWindowMs) {
                     val before = currentInputConnection?.getTextBeforeCursor(1, 0)?.toString() ?: ""
                     if (before.lastOrNull()?.isLetter() == true) {
-                        currentInputConnection?.deleteSurroundingText(0, 0)
                         currentInputConnection?.commitText(". ", 1)
                         lastInsertedChar = ' '
                         lastInsertTime   = now
@@ -140,43 +163,28 @@ class LsdKeyboardService : InputMethodService() {
                     }
                 }
                 insert(" ")
+                lastPressedPrimary = null
             }
 
-            KeyType.BACKSPACE -> deleteBack()
-
-            KeyType.ENTER -> insert("\n")
-
-            KeyType.SHIFT -> when {
-                currentLayer == Layer.DEFAULT && !shiftActive -> {
-                    currentLayer = Layer.SHIFT
-                    shiftActive  = true
-                    shiftLocked  = false
-                }
-                currentLayer == Layer.SHIFT && shiftActive && !shiftLocked -> {
-                    // Second tap: caps lock
-                    shiftLocked = true
-                    keyboardView?.updateShiftAppearance(true, true)
-                }
-                currentLayer == Layer.SHIFT && shiftActive && shiftLocked -> {
-                    // Third tap: off
-                    currentLayer = Layer.DEFAULT
-                    shiftActive  = false
-                    shiftLocked  = false
-                }
-                else -> Unit
+            KeyType.BACKSPACE -> {
+                deleteBack()
+                lastPressedPrimary = null
             }
 
-            KeyType.NUMERIC -> {
-                currentLayer = Layer.NUMERIC
-                shiftActive  = false
-                shiftLocked  = false
+            KeyType.ENTER -> {
+                insert("\n")
+                lastPressedPrimary = null
             }
 
-            KeyType.ABC -> {
-                currentLayer = Layer.DEFAULT
-                shiftActive  = false
-                shiftLocked  = false
-            }
+            KeyType.DIACRITIC -> currentLayer = Layer.DIACRITIC
+
+            KeyType.NUMERIC -> currentLayer = Layer.NUMERIC
+
+            KeyType.ABC -> currentLayer = Layer.DEFAULT
+
+            // In RTL text: visual ← moves cursor toward the end of the string (DPAD_RIGHT)
+            KeyType.CURSOR_LEFT  -> moveCursor(KeyEvent.KEYCODE_DPAD_RIGHT)
+            KeyType.CURSOR_RIGHT -> moveCursor(KeyEvent.KEYCODE_DPAD_LEFT)
 
             KeyType.GLOBE -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -187,14 +195,8 @@ class LsdKeyboardService : InputMethodService() {
                         ?.switchToNextInputMethod(window?.window?.attributes?.token, false)
                 }
             }
-        }
-    }
 
-    private fun handleLongPress(character: String) {
-        insert(character)
-        if (shiftActive && !shiftLocked) {
-            shiftActive  = false
-            currentLayer = Layer.DEFAULT
+            KeyType.EMOJI -> { /* no-op — no layer defined yet */ }
         }
     }
 }
