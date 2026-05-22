@@ -80,6 +80,21 @@ object KeyboardSettings {
     fun setBiDiTooltipShown(ctx: Context) =
         prefs(ctx).edit().putBoolean("bidi_tooltip_shown", true).apply()
 
+    // ── Long-press behaviour ─────────────────────────────────────────────
+
+    fun getLongPressDelayMs(ctx: Context): Long =
+        prefs(ctx).getLong("long_press_delay_ms", 350L)
+
+    fun setLongPressDelayMs(ctx: Context, v: Long) =
+        prefs(ctx).edit().putLong("long_press_delay_ms", v).apply()
+
+    // 0 = repeat disabled
+    fun getPopupRepeatIntervalMs(ctx: Context): Long =
+        prefs(ctx).getLong("popup_repeat_interval_ms", 100L)
+
+    fun setPopupRepeatIntervalMs(ctx: Context, v: Long) =
+        prefs(ctx).edit().putLong("popup_repeat_interval_ms", v).apply()
+
     // ── Latin key tooltip ─────────────────────────────────────────────────
 
     fun getLatinKeyTooltipShown(ctx: Context): Boolean =

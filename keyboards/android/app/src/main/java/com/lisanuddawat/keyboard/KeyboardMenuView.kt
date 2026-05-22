@@ -104,6 +104,10 @@ class KeyboardMenuView(context: Context) : FrameLayout(context) {
         c.addView(hairline())
 
         addDoublePressSection(c)
+
+        c.addView(hairline())
+
+        addKeyBehaviourSection(c)
     }
 
     // ── Row builders ─────────────────────────────────────────────────────
@@ -173,6 +177,26 @@ class KeyboardMenuView(context: Context) : FrameLayout(context) {
         c.addView(mainRow)
         c.addView(sub)
         doublePressSubSection = sub
+    }
+
+    private fun addKeyBehaviourSection(c: LinearLayout) {
+        val delayLabels = listOf("Short", "Normal", "Long")
+        val delayValues = listOf(200L, 350L, 500L)
+        val curDelay    = KeyboardSettings.getLongPressDelayMs(context)
+        val delayIdx    = delayValues.indexOfFirst { it == curDelay }.coerceAtLeast(1)
+
+        addSubRow(c, "Long-press", delayLabels, false, delayIdx) { idx ->
+            KeyboardSettings.setLongPressDelayMs(context, delayValues[idx])
+        }
+
+        val repeatLabels = listOf("Off", "Slow", "Fast")
+        val repeatValues = listOf(0L, 250L, 100L)
+        val curRepeat    = KeyboardSettings.getPopupRepeatIntervalMs(context)
+        val repeatIdx    = repeatValues.indexOfFirst { it == curRepeat }.coerceAtLeast(2)
+
+        addSubRow(c, "Repeat", repeatLabels, false, repeatIdx) { idx ->
+            KeyboardSettings.setPopupRepeatIntervalMs(context, repeatValues[idx])
+        }
     }
 
     /** Builds an indented sub-row with a thin separator above it. Returns the wrapper view. */

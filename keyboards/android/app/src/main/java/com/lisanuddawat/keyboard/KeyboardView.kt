@@ -226,9 +226,10 @@ class KeyboardView(context: Context) : ViewGroup(context) {
         }
 
         if (key.keyData.alternates.isNotEmpty()) {
+            val delay = KeyboardSettings.getLongPressDelayMs(context)
             val lp = Runnable { dismissCallout(); showPopup(key) }
             longPressRunnable = lp
-            handler.postDelayed(lp, 350)
+            handler.postDelayed(lp, delay)
             return
         }
 
@@ -325,18 +326,20 @@ class KeyboardView(context: Context) : ViewGroup(context) {
     // ------------------------------------------------------------------  popup repeat (chaining)
 
     private fun schedulePopupRepeat(character: String) {
+        val intervalMs = KeyboardSettings.getPopupRepeatIntervalMs(context)
+        if (intervalMs <= 0L) return
+
         val initial = Runnable {
             delegate?.longPressAlternateSelected(character)
             val tick = object : Runnable {
                 override fun run() {
-                    // Use live selection in case user has slid to a different alternate
                     val current = activePopup?.currentSelectedCharacter ?: return
                     delegate?.longPressAlternateSelected(current)
-                    handler.postDelayed(this, 100)
+                    handler.postDelayed(this, intervalMs)
                 }
             }
             popupRepeatTick = tick
-            handler.postDelayed(tick, 100)
+            handler.postDelayed(tick, intervalMs)
         }
         popupRepeatInitial = initial
         handler.postDelayed(initial, 500)
