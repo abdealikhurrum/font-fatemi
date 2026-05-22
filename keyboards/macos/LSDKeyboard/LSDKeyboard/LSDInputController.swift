@@ -1,5 +1,6 @@
 import Foundation
 import InputMethodKit
+import CoreGraphics
 import os.log
 
 // MARK: - LSDInputController
@@ -104,10 +105,7 @@ final class LSDInputController: IMKInputController {
             let code = Int(event.keyCode)
             if let selector = KeyData.diacriticArrow(forCode: code) {
                 commitPending()
-                // Route through the IMK client proxy so the command reaches
-                // the focused text view in the client app cross-process.
-                _ = (activeClient as? NSObject)?
-                        .perform(NSSelectorFromString(selector), with: nil)
+                sendArrow(selector)
                 return true
             }
             if let char = KeyData.diacriticChar(forCode: code) {
@@ -332,6 +330,28 @@ final class LSDInputController: IMKInputController {
             text,
             replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
         )
+    }
+
+    // Synthesises an arrow-key CGEvent and posts it to the session so the
+    // focused app's text view moves the cursor.  Using CGEvent instead of
+    // perform(selector:) on the IMK proxy because the proxy does not forward
+    // arbitrary NSResponder selectors cross-process on modern macOS.
+    private func sendArrow(_ selector: String) {
+        let vk: CGKeyCode
+        switch selector {
+        case "moveLeft:":  vk = 0x7B
+        case "moveRight:": vk = 0x7C
+        case "moveDown:":  vk = 0x7D
+        case "moveUp:":    vk = 0x7E
+        default: return
+        }
+        let src = CGEventSource(stateID: .combinedSessionState)
+        if let dn = CGEvent(keyboardEventSource: src, virtualKey: vk, keyDown: true) {
+            dn.post(tap: .cgAnnotatedSessionEventTap)
+        }
+        if let up = CGEvent(keyboardEventSource: src, virtualKey: vk, keyDown: false) {
+            up.post(tap: .cgAnnotatedSessionEventTap)
+        }
     }
 
     // MARK: - Mode switching

@@ -16,13 +16,14 @@ final class DiacriticOverlayPanel: NSPanel {
             backing:     .buffered,
             defer:       false
         )
-        isFloatingPanel     = true
-        level               = .floating
-        backgroundColor     = .clear
-        isOpaque            = false
-        hasShadow           = true
-        hidesOnDeactivate   = false
-        collectionBehavior  = [.canJoinAllSpaces, .stationary]
+        isFloatingPanel        = true
+        level                  = .popUpMenu
+        backgroundColor        = .clear
+        isOpaque               = false
+        hasShadow              = true
+        hidesOnDeactivate      = false
+        isReleasedWhenClosed   = false
+        collectionBehavior     = [.canJoinAllSpaces, .stationary]
 
         let content = buildContent()
         contentView = content
@@ -36,7 +37,7 @@ final class DiacriticOverlayPanel: NSPanel {
         let vis = screen.visibleFrame
         setFrameOrigin(NSPoint(x: vis.maxX - frame.width - 16,
                                y: vis.minY + 16))
-        orderFront(nil)
+        orderFrontRegardless()
     }
 
     func hideOverlay() { orderOut(nil) }
@@ -64,10 +65,12 @@ final class DiacriticOverlayPanel: NSPanel {
         tv.textContainer?.containerSize =
             NSSize(width: colW, height: .greatestFiniteMagnitude)
         tv.textContainer?.widthTracksTextView = false
+        // Set an initial frame so the layout manager has a valid drawing context.
+        tv.frame = NSRect(x: pad, y: pad, width: colW, height: 2000)
         tv.textStorage?.setAttributedString(makeContent())
         tv.layoutManager?.ensureLayout(for: tv.textContainer!)
         let usedH = ceil(
-            tv.layoutManager?.usedRect(for: tv.textContainer!).height ?? 0
+            tv.layoutManager?.usedRect(for: tv.textContainer!).height ?? 400
         )
 
         tv.frame  = NSRect(x: pad, y: pad, width: colW, height: usedH)
