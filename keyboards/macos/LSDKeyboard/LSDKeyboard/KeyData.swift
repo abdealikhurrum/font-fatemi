@@ -164,6 +164,7 @@ extension KeyData {
 
     // Layer 4 (option) — sourced from the LSD Mac keylayout
     private static let optionLayer: [Int: String] = [
+        49: "\u{00A0}",   // Option+Space → NBSP (non-breaking space)
         0: "\u{0614}",
         1: "ے",  2: "ی",  3: "پ",
         4: "\u{0670}", 5: "\u{0653}", 6: "\u{06DA}", 7: "\u{06E8}",
@@ -179,6 +180,7 @@ extension KeyData {
 
     // Layer 5 (shift+option) — sourced from the LSD Mac keylayout
     private static let shiftOptionLayer: [Int: String] = [
+        49: "\u{200C}",   // Shift+Option+Space → ZWNJ (zero-width non-joiner)
         1: "ے",  2: "ی",  3: "پ",
         8: "ڈ",  9: "ڑ",  11: "ژ",
         17: "ڤ", 18: "ظ",
@@ -219,11 +221,15 @@ extension KeyData {
 
     // MARK: - Diacritic mode layers (Caps Lock)
 
-    // diacriticLayer: symmetric — each diacritic available on both halves of the keyboard.
-    // Symmetric pairings (left ↔ right, Mac codes):
+    // diacriticLayer: letter rows hold diacritics (symmetric); number row holds BiDi controls.
+    //
+    // Letter key pairings (left ↔ right, Mac key codes):
     //   A(0)  ↔ ;(41)   S(1)  ↔ L(37)   D(2)  ↔ K(40)   F(3)  ↔ J(38)   G(5)  ↔ H(4)
     //   Q(12) ↔ P(35)   W(13) ↔ O(31)   E(14) ↔ I(34)   R(15) ↔ U(32)   T(16) ↔ Y(17)
     //   [(33) ↔ ](30)   B(11) ↔ N(45)
+    //
+    // Number row (physical position → code):  1→18  2→19  3→20  4→21  5→23  6→22  7→26
+    //   Keys 8(28) and 9(25) are Sanah/Safha subtending triggers (see diacriticSubtendingLayer).
     private static let diacriticLayer: [Int: String] = [
         // A / ;  — fatha
         0: "\u{064E}", 41: "\u{064E}",
@@ -249,7 +255,27 @@ extension KeyData {
         33: "\u{0654}", 30: "\u{0654}",
         // B / N  — hamza below
         11: "\u{0655}", 45: "\u{0655}",
+        // Number row — BiDi control characters
+        18: "\u{200E}",   // 1 → LRM  (Left-to-Right Mark)
+        19: "\u{200F}",   // 2 → RLM  (Right-to-Left Mark)
+        20: "\u{2066}",   // 3 → LRI  (Left-to-Right Isolate)
+        21: "\u{2067}",   // 4 → RLI  (Right-to-Left Isolate)
+        23: "\u{2069}",   // 5 → PDI  (Pop Directional Isolate)
+        22: "\u{200D}",   // 6 → ZWJ  (Zero Width Joiner)
+        26: "\u{200C}",   // 7 → ZWNJ (Zero Width Non-Joiner)
     ]
+
+    // Subtending mark triggers (Caps Lock + 8 / 9).
+    // Inserting one of these characters puts the IME into digit-collection mode;
+    // the mark visually subtends over the following digit sequence.
+    private static let diacriticSubtendingLayer: [Int: String] = [
+        28: "\u{0601}",   // 8 → U+0601 ARABIC SIGN SANAH  (year subtending mark)
+        25: "\u{0603}",   // 9 → U+0603 ARABIC SIGN SAFHA  (page subtending mark)
+    ]
+
+    static func diacriticSubtending(forCode code: Int) -> String? {
+        return diacriticSubtendingLayer[code]
+    }
 
     // diacriticArrowLayer: maps code to NSResponder selector string (symmetric).
     //   Z(6)  / /(44) → moveLeft:

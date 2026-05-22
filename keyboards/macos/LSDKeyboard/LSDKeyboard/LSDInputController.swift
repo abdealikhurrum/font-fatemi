@@ -14,6 +14,17 @@ import os.log
 //      then process the new key.
 //
 // Keys without secondaries are committed immediately (no delay, no marking).
+//
+// Caps Lock — diacritic mode:
+//   Letter keys → diacritics (symmetric across both keyboard halves).
+//   Z/X/C/V and mirror keys → cursor movement.
+//   Number row 1–7 → BiDi control characters (LRM RLM LRI RLI PDI ZWJ ZWNJ).
+//   Number key 8 → begin Sanah (U+0601) subtending composition.
+//   Number key 9 → begin Safha (U+0603) subtending composition.
+//
+// Subtending mark composition (triggered from diacritic mode):
+//   After the trigger, digit keys accumulate inside marked text.
+//   Space/Return commits mark + digits; Escape cancels; Backspace erases last digit.
 
 @objc(LSDInputController)
 final class LSDInputController: IMKInputController {
@@ -23,6 +34,9 @@ final class LSDInputController: IMKInputController {
     private var pendingPrimary: String?
     private var pendingTimer: Timer?
     private var isDiacriticMode = false
+
+    private var pendingSubtendingMark: String?
+    private var subtendingDigits = ""
 
     private let log = Logger(subsystem: "com.exordiumnetworks.inputmethod.lsdkeyboard", category: "IME")
 
@@ -36,7 +50,7 @@ final class LSDInputController: IMKInputController {
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
         guard let event else { return false }
 
-        // Handle Caps Lock toggle → diacritic mode
+        // Caps Lock toggle → diacritic mode
         if event.type == .flagsChanged && event.keyCode == 57 {
             isDiacriticMode = event.modifierFlags.contains(.capsLock)
             log.info("capsLock \(self.isDiacriticMode ? "ON→diacriticMode" : "OFF→normalMode", privacy: .public)")
@@ -48,8 +62,20 @@ final class LSDInputController: IMKInputController {
         let mods = event.modifierFlags
         if mods.contains(.command) || mods.contains(.control) {
             commitPending()
+            commitSubtending()
             return false
         }
+
+        if pendingSubtendingMark != nil {
+            return handleSubtendingKey(event)
+        }
+
+        return processKey(event)
+    }
+
+    // Handles all keyDown events when not in subtending mode.
+    private func processKey(_ event: NSEvent) -> Bool {
+        let mods = event.modifierFlags
 
         switch event.keyCode {
         case 51:        // Delete / Backspace
@@ -71,6 +97,11 @@ final class LSDInputController: IMKInputController {
 
         if isDiacriticMode && !mods.contains(.shift) && !mods.contains(.option) {
             let code = Int(event.keyCode)
+            if let mark = KeyData.diacriticSubtending(forCode: code) {
+                commitPending()
+                startSubtending(mark: mark)
+                return true
+            }
             if let selector = KeyData.diacriticArrow(forCode: code) {
                 commitPending()
                 NSApp.sendAction(NSSelectorFromString(selector), to: nil, from: self)
@@ -117,19 +148,67 @@ final class LSDInputController: IMKInputController {
         return true
     }
 
+    // Handles keyDown events while a subtending mark is being composed.
+    private func handleSubtendingKey(_ event: NSEvent) -> Bool {
+        switch event.keyCode {
+        case 51:        // Backspace — erase last digit or cancel
+            if subtendingDigits.isEmpty {
+                cancelSubtending()
+            } else {
+                subtendingDigits = String(subtendingDigits.dropLast())
+                updateSubtendingMarkedText()
+            }
+            return true
+        case 36, 76:    // Return / Enter — commit, pass key to app
+            commitSubtending()
+            return false
+        case 48:        // Tab — commit, pass key to app
+            commitSubtending()
+            return false
+        case 53:        // Escape — cancel
+            cancelSubtending()
+            return true
+        default:
+            break
+        }
+
+        if let digit = subtendingDigit(from: event) {
+            subtendingDigits += digit
+            updateSubtendingMarkedText()
+            return true
+        }
+
+        // Non-digit: commit composition then process the key normally.
+        commitSubtending()
+        return processKey(event)
+    }
+
+    // Returns an Arabic-Indic digit string if the event maps to a digit key,
+    // nil otherwise.  Always produces Arabic-Indic so the composed text is
+    // consistent with the rest of the LSD output.
+    private func subtendingDigit(from event: NSEvent) -> String? {
+        let arabicDigits: [Int: String] = [
+            18: "١", 19: "٢", 20: "٣", 21: "٤", 23: "٥",
+            22: "٦", 26: "٧", 28: "٨", 25: "٩", 29: "٠",
+        ]
+        return arabicDigits[Int(event.keyCode)]
+    }
+
     // Called by the system when it needs the IME to finalize any open composition
     // (e.g., the user clicked elsewhere, the app requested it).
     override func commitComposition(_ sender: Any!) {
         commitPending()
+        commitSubtending()
     }
 
     override func deactivateServer(_ sender: Any!) {
         log.info("deactivateServer — flushing corpus")
         CorpusLogger.shared.flush()
         commitPending()
+        commitSubtending()
     }
 
-    // MARK: - Composition lifecycle
+    // MARK: - Double-press composition lifecycle
 
     private func startComposition(char: String) {
         pendingPrimary = char
@@ -172,6 +251,46 @@ final class LSDInputController: IMKInputController {
     private func cancelTimer() {
         pendingTimer?.invalidate()
         pendingTimer = nil
+    }
+
+    // MARK: - Subtending mark composition lifecycle
+
+    private func startSubtending(mark: String) {
+        pendingSubtendingMark = mark
+        subtendingDigits = ""
+        log.info("startSubtending \"\(mark, privacy: .public)\"")
+        updateSubtendingMarkedText()
+    }
+
+    private func updateSubtendingMarkedText() {
+        guard let mark = pendingSubtendingMark else { return }
+        let composed = mark + subtendingDigits
+        activeClient?.setMarkedText(
+            NSAttributedString(string: composed),
+            selectionRange: NSRange(location: composed.utf16.count, length: 0),
+            replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
+        )
+    }
+
+    private func commitSubtending() {
+        guard let mark = pendingSubtendingMark else { return }
+        let text = mark + subtendingDigits
+        pendingSubtendingMark = nil
+        subtendingDigits = ""
+        log.info("commitSubtending \"\(text, privacy: .public)\"")
+        insert(text)
+    }
+
+    private func cancelSubtending() {
+        guard pendingSubtendingMark != nil else { return }
+        pendingSubtendingMark = nil
+        subtendingDigits = ""
+        log.info("cancelSubtending")
+        activeClient?.setMarkedText(
+            NSAttributedString(string: ""),
+            selectionRange: NSRange(location: 0, length: 0),
+            replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
+        )
     }
 
     // MARK: - Text insertion
