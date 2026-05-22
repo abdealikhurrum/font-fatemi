@@ -229,7 +229,6 @@ extension KeyData {
     //   [(33) ↔ ](30)   B(11) ↔ N(45)
     //
     // Number row (physical position → code):  1→18  2→19  3→20  4→21  5→23  6→22  7→26
-    //   Keys 8(28) and 9(25) are Sanah/Safha subtending triggers (see diacriticSubtendingLayer).
     private static let diacriticLayer: [Int: String] = [
         // A / ;  — fatha
         0: "\u{064E}", 41: "\u{064E}",
@@ -265,16 +264,16 @@ extension KeyData {
         26: "\u{200C}",   // 7 → ZWNJ (Zero Width Non-Joiner)
     ]
 
-    // Subtending mark triggers (Caps Lock + 8 / 9).
-    // Inserting one of these characters puts the IME into digit-collection mode;
-    // the mark visually subtends over the following digit sequence.
-    private static let diacriticSubtendingLayer: [Int: String] = [
-        28: "\u{0601}",   // 8 → U+0601 ARABIC SIGN SANAH  (year subtending mark)
-        25: "\u{0603}",   // 9 → U+0603 ARABIC SIGN SAFHA  (page subtending mark)
+    // Subtending mark triggers (Option layer, independent of Caps Lock).
+    // Pressing one of these puts the IME into digit-collection mode;
+    // the mark visually subtends over the following Arabic-Indic digit sequence.
+    private static let optionSubtendingLayer: [Int: String] = [
+        37: "\u{0601}",   // Option+L → U+0601 ARABIC SIGN SANAH  (year subtending mark)
+        35: "\u{0603}",   // Option+P → U+0603 ARABIC SIGN SAFHA  (page subtending mark)
     ]
 
-    static func diacriticSubtending(forCode code: Int) -> String? {
-        return diacriticSubtendingLayer[code]
+    static func optionSubtending(forCode code: Int) -> String? {
+        return optionSubtendingLayer[code]
     }
 
     // diacriticArrowLayer: maps code to NSResponder selector string (symmetric).

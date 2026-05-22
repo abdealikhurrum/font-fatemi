@@ -19,12 +19,12 @@ import os.log
 //   Letter keys → diacritics (symmetric across both keyboard halves).
 //   Z/X/C/V and mirror keys → cursor movement.
 //   Number row 1–7 → BiDi control characters (LRM RLM LRI RLI PDI ZWJ ZWNJ).
-//   Number key 8 → begin Sanah (U+0601) subtending composition.
-//   Number key 9 → begin Safha (U+0603) subtending composition.
 //
-// Subtending mark composition (triggered from diacritic mode):
-//   After the trigger, digit keys accumulate inside marked text.
-//   Space/Return commits mark + digits; Escape cancels; Backspace erases last digit.
+// Subtending mark composition (Option layer, independent of Caps Lock):
+//   Option+L → begin Sanah (U+0601, Arabic year sign) composition.
+//   Option+P → begin Safha (U+0603, Arabic page sign) composition.
+//   After the trigger, digit keys (Arabic-Indic) accumulate in marked text.
+//   Return/Space commits mark + digits; Escape cancels; Backspace erases last digit.
 
 @objc(LSDInputController)
 final class LSDInputController: IMKInputController {
@@ -50,10 +50,15 @@ final class LSDInputController: IMKInputController {
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
         guard let event else { return false }
 
-        // Caps Lock toggle → diacritic mode
+        // Caps Lock toggle → diacritic mode + overlay
         if event.type == .flagsChanged && event.keyCode == 57 {
             isDiacriticMode = event.modifierFlags.contains(.capsLock)
             log.info("capsLock \(self.isDiacriticMode ? "ON→diacriticMode" : "OFF→normalMode", privacy: .public)")
+            if isDiacriticMode {
+                DiacriticOverlayPanel.shared.showOverlay()
+            } else {
+                DiacriticOverlayPanel.shared.hideOverlay()
+            }
             return true
         }
 
@@ -97,14 +102,12 @@ final class LSDInputController: IMKInputController {
 
         if isDiacriticMode && !mods.contains(.shift) && !mods.contains(.option) {
             let code = Int(event.keyCode)
-            if let mark = KeyData.diacriticSubtending(forCode: code) {
-                commitPending()
-                startSubtending(mark: mark)
-                return true
-            }
             if let selector = KeyData.diacriticArrow(forCode: code) {
                 commitPending()
-                NSApp.sendAction(NSSelectorFromString(selector), to: nil, from: self)
+                // Route through the IMK client proxy so the command reaches
+                // the focused text view in the client app cross-process.
+                _ = (activeClient as? NSObject)?
+                        .perform(NSSelectorFromString(selector), with: nil)
                 return true
             }
             if let char = KeyData.diacriticChar(forCode: code) {
@@ -118,6 +121,14 @@ final class LSDInputController: IMKInputController {
 
         let isShift  = mods.contains(.shift)
         let isOption = mods.contains(.option)
+
+        if isOption, !isShift,
+           let mark = KeyData.optionSubtending(forCode: Int(event.keyCode)) {
+            commitPending()
+            startSubtending(mark: mark)
+            return true
+        }
+
         guard let chars = KeyData.char(forCode: Int(event.keyCode),
                                        shift: isShift, option: isOption) else {
             log.info("no-map code=\(event.keyCode, privacy: .public) shift=\(isShift, privacy: .public) opt=\(isOption, privacy: .public)")
@@ -206,6 +217,7 @@ final class LSDInputController: IMKInputController {
         CorpusLogger.shared.flush()
         commitPending()
         commitSubtending()
+        DiacriticOverlayPanel.shared.hideOverlay()
     }
 
     // MARK: - Double-press composition lifecycle
