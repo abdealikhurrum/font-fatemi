@@ -17,6 +17,9 @@
 		AA000028 /* KeyboardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000019 /* KeyboardSettings.swift */; };
 		AA00002A /* LSDKeyboard.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA000029 /* LSDKeyboard.icns */; };
 		AA00002C /* DiacriticOverlayPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00002B /* DiacriticOverlayPanel.swift */; };
+		AA00002E /* LSDWindows.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA00002D /* LSDWindows.icns */; };
+		AA000030 /* LSDMac.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA00002F /* LSDMac.icns */; };
+		AA000032 /* CRULP.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA000031 /* CRULP.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		AA000019 /* KeyboardSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettings.swift; sourceTree = "<group>"; };
 		AA000029 /* LSDKeyboard.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = LSDKeyboard.icns; sourceTree = "<group>"; };
 		AA00002B /* DiacriticOverlayPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiacriticOverlayPanel.swift; sourceTree = "<group>"; };
+		AA00002D /* LSDWindows.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = LSDWindows.icns; sourceTree = "<group>"; };
+		AA00002F /* LSDMac.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = LSDMac.icns; sourceTree = "<group>"; };
+		AA000031 /* CRULP.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = CRULP.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -72,6 +78,9 @@
 				AA000019 /* KeyboardSettings.swift */,
 				AA00002B /* DiacriticOverlayPanel.swift */,
 				AA000029 /* LSDKeyboard.icns */,
+				AA00002D /* LSDWindows.icns */,
+				AA00002F /* LSDMac.icns */,
+				AA000031 /* CRULP.icns */,
 				AA000014 /* Info.plist */,
 			);
 			path = LSDKeyboard;
@@ -156,6 +165,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA00002A /* LSDKeyboard.icns in Resources */,
+				AA00002E /* LSDWindows.icns in Resources */,
+				AA000030 /* LSDMac.icns in Resources */,
+				AA000032 /* CRULP.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
