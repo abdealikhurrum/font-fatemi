@@ -1,0 +1,369 @@
+import Foundation
+
+// MARK: - Layout data (ported from iOS LSDLearningKB/KeyData.swift)
+// The macOS IME operates on a physical Arabic keyboard, so KeyType and KeyWidth
+// are retained for completeness but only .character keys participate in the
+// double-press lookup; all other keys are passed through to the app.
+
+enum KeyType {
+    case character
+    case backspace, space, enter
+    case numeric, abc, globe, emoji, diacritic
+    case cursorLeft, cursorRight
+}
+
+struct KeyData {
+    let primary: String
+    let secondary: String
+    let alternates: [String]
+    let type: KeyType
+
+    init(_ primary: String,
+         secondary: String = "",
+         alternates: [String] = [],
+         type: KeyType = .character) {
+        self.primary    = primary
+        self.secondary  = secondary
+        self.alternates = alternates
+        self.type       = type
+    }
+}
+
+// MARK: - Double-press lookup
+//
+// Returns the secondary character for a double-press, honouring current settings:
+//   - doublePressEnabled    \u{2014} returns nil for everything when off
+//   - selectedLayout        \u{2014} switches between LSD/Arabic-Standard map and CRULP map
+//   - doubleAlefStyle       \u{2014} \u{0627}\u{0627} \u{2192} \u{0627}\u{0670} (kharo zabar, default) or \u{0622} (alef madda)
+//   - urduYehStyle          \u{2014} which code-point is "yeh" in the CRULP map
+//
+// LSD / Arabic-Standard secondaries:
+//   Official rules (lsd.kmn):  \u{0633}\u{0633}\u{2192}\u{06D2}  \u{0636}\u{0636}\u{2192}\u{0679}  \u{0637}\u{0637}\u{2192}\u{06BA}  \u{0638}\u{0638}\u{2192}\u{06C1}  \u{062D}\u{062D}\u{2192}\u{0686}  \u{062B}\u{062B}\u{2192}\u{067E}  \u{0643}\u{0643}\u{2192}\u{06AF}
+//   Extended:                  \u{0627}\u{0627}\u{2192}\u{0627}\u{0670}  \u{0647}\u{0647}\u{2192}\u{06BE}  \u{064A}\u{064A}\u{2192}\u{0626}  \u{0631}\u{0631}\u{2192}\u{0691}  \u{062F}\u{062F}\u{2192}\u{0688}  \u{0629}\u{0629}\u{2192}\u{06C3}  \u{062C}\u{062C}\u{2192}\u{0686}\u{06BE}\u{06D2}
+//
+// CRULP Urdu secondaries (phonetic positions):
+//   \u{0639}\u{0639}\u{2192}\u{063A}  \u{0631}\u{0631}\u{2192}\u{0691}  \u{062A}\u{062A}\u{2192}\u{0679}  \u{062D}\u{062D}\u{2192}\u{062E}  \u{062F}\u{062F}\u{2192}\u{0688}  \u{06C1}\u{06C1}\u{2192}\u{06BE}  \u{0632}\u{0632}\u{2192}\u{0630}  \u{0634}\u{0634}\u{2192}\u{0636}  \u{0646}\u{0646}\u{2192}\u{06BA}
+
+extension KeyData {
+    static func secondary(for char: String) -> String? {
+        guard KeyboardSettings.doublePressEnabled else { return nil }
+        switch KeyboardSettings.selectedLayout {
+        case .crulpUrdu: return crulpSecondary(for: char)
+        default:         return lsdSecondary(for: char)
+        }
+    }
+
+    private static func lsdSecondary(for char: String) -> String? {
+        let alef = KeyboardSettings.doubleAlefStyle == .alefMadda ? "\u{0622}" : "\u{0627}\u{0670}"
+        switch char {
+        case "\u{0636}": return "\u{0679}"
+        case "\u{062B}": return "\u{067E}"
+        case "\u{0647}": return "\u{06BE}"
+        case "\u{062D}": return "\u{0686}"
+        case "\u{062C}": return "\u{0686}\u{06BE}\u{06D2}"
+        case "\u{0633}": return "\u{06D2}"
+        case "\u{064A}": return "\u{0626}"
+        case "\u{0627}": return alef
+        case "\u{0643}": return "\u{06AF}"
+        case "\u{0637}": return "\u{06BA}"
+        case "\u{0631}": return "\u{0691}"
+        case "\u{0629}": return "\u{06C3}"
+        case "\u{062F}": return "\u{0688}"
+        case "\u{0638}": return "\u{06C1}"
+        default:  return nil
+        }
+    }
+
+    private static func crulpSecondary(for char: String) -> String? {
+        switch char {
+        case "\u{0639}": return "\u{063A}"
+        case "\u{0631}": return "\u{0691}"
+        case "\u{062A}": return "\u{0679}"
+        case "\u{062D}": return "\u{062E}"
+        case "\u{062F}": return "\u{0688}"
+        case "\u{06C1}": return "\u{06BE}"   // U+06C1 he goal \u{2192} do chashmi he
+        case "\u{0632}": return "\u{0630}"
+        case "\u{0634}": return "\u{0636}"
+        case "\u{0646}": return "\u{06BA}"
+        default:  return nil
+        }
+    }
+}
+
+// MARK: - Key-code \u{2192} character mapping
+
+extension KeyData {
+
+    // Returns the Arabic/Urdu character for a physical key code + modifier combination,
+    // honouring the currently selected layout. Returns nil for unmapped keys (function
+    // keys, arrows, modifier-only presses, etc.) so the IME can pass them through.
+    static func char(forCode code: Int, shift: Bool, option: Bool) -> String? {
+        let layout = KeyboardSettings.selectedLayout
+        let normalBase = layout == .macLsd ? macLsdNormalLayer : normalLayer
+        let shiftBase  = layout == .macLsd ? macLsdShiftLayer  : shiftLayer
+        let base: [Int: String]
+        switch (shift, option) {
+        case (true,  true):  base = shiftOptionLayer
+        case (false, true):  base = optionLayer
+        case (true,  false): base = shiftBase
+        default:             base = normalBase
+        }
+        guard var ch = base[code] else { return nil }
+        if layout == .crulpUrdu,
+           let swapped = crulpPrimarySwap[ch] { ch = swapped }
+        return ch
+    }
+
+    // Characters that differ between LSD (Windows PC) and CRULP Urdu in the primary layer.
+    // Yeh entry is conditional on urduYehStyle: farsi yeh (U+06CC) is default; arabic yeh
+    // (U+064A) leaves the base character unchanged, so we omit it from the swap map.
+    private static var crulpPrimarySwap: [String: String] {
+        var map: [String: String] = ["\u{0647}": "\u{06C1}", "\u{0643}": "\u{06A9}", "\u{0629}": "\u{06C3}"]
+        if KeyboardSettings.urduYehStyle == .farsiYeh { map["\u{064A}"] = "\u{06CC}" }
+        return map
+    }
+
+    // MARK: Windows LSD layers (default \u{2014} maqalaAra.klc)
+
+    // Layer 2 (no modifier) \u{2014} Windows LSD / maqalaAra.klc
+    private static let normalLayer: [Int: String] = [
+        0: "\u{0634}",  1: "\u{0633}",  2: "\u{064A}",  3: "\u{0628}",  4: "\u{0627}",  5:"\u{0644}",
+        6: "\u{0626}",  7: "\u{0621}",  8: "\u{0624}",  9: "\u{0631}",  11: "\u{0644}\u{0627}",
+        12: "\u{0636}", 13: "\u{0635}", 14: "\u{062B}", 15: "\u{0642}", 16: "\u{0641}",17: "\u{063A}",
+        18: "\u{0661}", 19: "\u{0662}", 20: "\u{0663}", 21: "\u{0664}", 22: "\u{0666}", 23: "\u{0665}",
+        24: "=",  25: "\u{0669}", 26: "\u{0667}", 27: "-",  28: "\u{0668}", 29: "\u{0660}",
+        30: "\u{062F}", 31: "\u{062E}", 32: "\u{0639}", 33: "\u{062C}",  34: "\u{0647}", 35: "\u{062D}",
+        37: "\u{0645}", 38: "\u{062A}", 39: "\u{0637}", 40: "\u{0646}",  41: "\u{0643}",
+        42: "\\", 43: "\u{0648}", 44: "\u{0638}",  45: "\u{0649}", 46: "\u{0629}", 47: "\u{0632}",
+        50: "\u{0630}",
+    ]
+
+    // Layer 3 (shift) \u{2014} sourced from the Windows LSD keyboard (maqalaAra.klc)
+    private static let shiftLayer: [Int: String] = [
+        // QWERTY row
+        12: "\u{064E}", 13: "\u{064B}", 14: "\u{064F}", 15: "\u{064C}",
+        16: "\u{06A4}", 17: "\u{0625}",
+        32: "\u{0657}", 34: "\u{06BE}",
+        31: "\u{0679}", 35: "\u{06C1}",
+        33: "\u{0686}", 30: "\u{0688}",
+        // ASDF row
+        0: "\u{0650}", 1: "\u{064D}", 2: "\u{06D2}", 3: "\u{067E}",
+        4: "\u{0623}", 38: "\u{0640}", 40: "\u{060C}", 37: "\u{06BA}",
+        41: "\u{06AF}", 39: "\"",
+        // Backtick
+        50: "\u{0651}",
+        // ZXCV row
+        6: "\u{0670}", 7: "\u{0652}", 8: "\u{0656}",
+        9: "\u{0691}", 11: ":", 45: "\u{0622}", 46: "\u{06C3}",
+        43: "\u{0613}", 47: ".", 44: "\u{061F}",
+        42: "|",
+        // Number row shifts
+        18: "!", 19: "@", 20: "#", 21: "$", 22: "^", 23: "\u{066A}",
+        24: "+", 25: ")", 26: "&", 27: "_", 28: "*", 29: "(",
+    ]
+
+    // Layer 4 (option) \u{2014} sourced from the LSD Mac keylayout
+    private static let optionLayer: [Int: String] = [
+        49: "\u{00A0}",   // Option+Space \u{2192} NBSP (non-breaking space)
+        0: "\u{0614}",
+        1: "\u{06D2}",  2: "\u{06CC}",  3: "\u{067E}",
+        4: "\u{0670}", 5: "\u{0653}", 6: "\u{06DA}", 7: "\u{06E8}",
+        8: "\u{0688}",  9: "\u{0691}",  11: "\u{0698}",
+        12: "\u{2018}", 13: "\u{2019}", 14: "\u{201C}", 15: "\u{201D}",
+        16: "\u{0657}", 17: "\u{06A4}",
+        19: "\u{0610}", 22: "\u{0671}",
+        25: "\u{06C2}",  26: "\u{06DE}",  27: "_",  28: "\u{0655}",
+        30: "\u{06C3}",  31: "\u{06C1}",  32: "\u{0611}", 33: "\u{0686}",  34: "\u{06BE}",
+        38: "\u{0679}",  40: "\u{06BA}",  41: "\u{06AF}",
+        44: "\u{00F7}",  45: "\u{0613}", 46: "\u{0656}",
+    ]
+
+    // Layer 5 (shift+option) \u{2014} sourced from the LSD Mac keylayout
+    private static let shiftOptionLayer: [Int: String] = [
+        49: "\u{200C}",   // Shift+Option+Space \u{2192} ZWNJ (zero-width non-joiner)
+        1: "\u{06D2}",  2: "\u{06CC}",  3: "\u{067E}",
+        8: "\u{0688}",  9: "\u{0691}",  11: "\u{0698}",
+        17: "\u{06A4}", 18: "\u{0638}",
+        27: "_",
+        31: "\u{06D5}", 32: "\u{06D5}", 33: "\u{0686}",
+        38: "\u{0679}",  40: "\u{06BA}",  41: "\u{06A9}",
+        44: "\u{00F7}",
+    ]
+
+    // MARK: Mac LSD layers (Lisan ud Dawat - Mac.keylayout)
+
+    // Layer 2 (no modifier) \u{2014} Mac LSD keylayout index 2
+    private static let macLsdNormalLayer: [Int: String] = [
+        0: "\u{0634}",  1: "\u{0633}",  2: "\u{064A}",  3: "\u{0628}",  4: "\u{0627}",  5: "\u{0644}",
+        6: "\u{0638}",  7: "\u{0637}",  8: "\u{0630}",  9: "\u{062F}",  11: "\u{0632}",
+        12: "\u{0636}", 13: "\u{0635}", 14: "\u{062B}", 15: "\u{0642}", 16: "\u{063A}", 17: "\u{0641}",
+        18: "\u{0661}", 19: "\u{0662}", 20: "\u{0663}", 21: "\u{0664}", 22: "\u{0666}", 23: "\u{0665}",
+        24: "=",  25: "\u{0669}", 26: "\u{0667}", 27: "-",  28: "\u{0668}", 29: "\u{0660}",
+        30: "\u{0629}", 31: "\u{062E}", 32: "\u{0639}", 33: "\u{062C}",  34: "\u{0647}", 35: "\u{062D}",
+        37: "\u{0645}", 38: "\u{062A}", 39: "\u{061B}", 40: "\u{0646}",  41: "\u{0643}",
+        42: "\\", 43: "\u{060C}", 44: "/",  45: "\u{0631}", 46: "\u{0648}", 47: ".",
+        50: "\u{0640}",
+    ]
+
+    // Layer 3 (shift) \u{2014} Mac LSD keylayout index 3
+    private static let macLsdShiftLayer: [Int: String] = [
+        0: "\u{00BB}",  1: "\u{00AB}",  2: "\u{0649}",  4: "\u{0622}",  6: "'",
+        8: "\u{0626}",  9: "\u{0621}",  11: "\u{0623}",
+        12: "\u{064E}", 13: "\u{064B}", 14: "\u{0650}",
+        15: "\u{064D}", 16: "\u{064C}", 17: "\u{064F}",
+        18: "!", 19: "@",  20: "#",  21: "$", 22: "^",  23: "\u{066A}",
+        24: "+", 25: ")",  26: "&",  27: "\u{0640}", 28: "*",  29: "(",
+        30: "{", 31: "\u{0652}", 32: "\u{0652}", 33: "}",
+        34: "\u{0651}", 35: "[",
+        37: "\u{066C}", 39: "\"", 40: "\u{066B}",
+        41: ":", 42: "|",  43: ">", 44: "\u{061F}", 45: "\u{0625}", 46: "\u{0624}", 47: "<",
+    ]
+
+    // MARK: - Diacritic mode layers (Caps Lock)
+    //
+    // Layout philosophy: all base harakat reachable from the LEFT hand alone.
+    //
+    //   Left QWERTY:  Q=fatha  W=fathatan  E=damma  R=dammatan  T=hamza-above
+    //   Left ASDF:    A=kasra  S=kasratan  D=maddah  F=kharo-zabar  G=hamza-below
+    //   Left ZXCV:    Z=shadda  X=sukun  C=inv-damma  V=tatweel  B=ZWJ
+    //   Backtick:     takhallus
+    //
+    //   Right QWERTY: small Quranic diacritics (Y U I O P [ ])
+    //   Right ASDF:   small Quranic diacritics (H J K L) + SAWS/AS marks (; ')
+    //   Right ZXCV:   document marks (N=ayah  M=rub-el-hizb  ,=sajda  .=sanah  /=safha)
+    //   Number row:   Quranic pause/decoration marks (U+06D6 \u{2013} U+06E8)
+    //
+    // Mac virtual key codes used below:
+    //   `=50  1=18 2=19 3=20 4=21 5=23 6=22 7=26 8=28 9=25 0=29 -=27 ==24
+    //   Q=12 W=13 E=14 R=15 T=16 Y=17 U=32 I=34 O=31 P=35 [=33 ]=30
+    //   A=0  S=1  D=2  F=3  G=5  H=4  J=38 K=40 L=37 ;=41 '=39
+    //   Z=6  X=7  C=8  V=9  B=11 N=45 M=46 ,=43 .=47 /=44
+    private static let diacriticLayer: [Int: String] = [
+        // \u{2500}\u{2500} Number row \u{2014} Quranic pause/decoration marks \u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}
+        18: "\u{06D6}",   // 1 \u{2192} small high lig \u{1E63}ad-lam-alef-maksura
+        19: "\u{06D7}",   // 2 \u{2192} small high lig qaf-lam-alef-maksura
+        20: "\u{06D8}",   // 3 \u{2192} small high meem initial form
+        21: "\u{06D9}",   // 4 \u{2192} small high lam alef
+        23: "\u{06DA}",   // 5 \u{2192} small high jeem
+        22: "\u{06DB}",   // 6 \u{2192} small high three dots
+        26: "\u{06DC}",   // 7 \u{2192} small high seen
+        28: "\u{06DF}",   // 8 \u{2192} small high rounded zero
+        25: "\u{06E0}",   // 9 \u{2192} small high upright rectangular zero
+        29: "\u{06E1}",   // 0 \u{2192} small high dotless head of khah
+        27: "\u{06E2}",   // - \u{2192} small high meem isolated
+        24: "\u{06E8}",   // = \u{2192} small high noon
+
+        // \u{2500}\u{2500} QWERTY row \u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}
+        // Left hand \u{2014} base harakat
+        12: "\u{064E}",   // Q \u{2192} fatha
+        13: "\u{064B}",   // W \u{2192} fathatan
+        14: "\u{064F}",   // E \u{2192} damma
+        15: "\u{064C}",   // R \u{2192} dammatan
+        16: "\u{0654}",   // T \u{2192} hamza above
+        // Right hand \u{2014} small Quranic diacritics
+        17: "\u{0618}",   // Y \u{2192} arabic small fatha
+        32: "\u{061A}",   // U \u{2192} arabic small kasra
+        34: "\u{0619}",   // I \u{2192} arabic small damma
+        31: "\u{0615}",   // O \u{2192} arabic small high tah
+        35: "\u{06E4}",   // P \u{2192} arabic small high madda
+        33: "\u{06E3}",   // [ \u{2192} arabic small low seen
+        30: "\u{06ED}",   // ] \u{2192} arabic small low meem
+
+        // \u{2500}\u{2500} ASDF row \u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}
+        // Left hand \u{2014} base harakat (continued)
+        0:  "\u{0650}",   // A \u{2192} kasra
+        1:  "\u{064D}",   // S \u{2192} kasratan
+        2:  "\u{0653}",   // D \u{2192} maddah above
+        3:  "\u{0670}",   // F \u{2192} kharo zabar (superscript alef)
+        5:  "\u{0655}",   // G \u{2192} hamza below
+        // Right hand \u{2014} small Quranic diacritics (continued) + marks
+        4:  "\u{06E7}",   // H \u{2192} arabic small high yeh
+        38: "\u{06E5}",   // J \u{2192} arabic small waw
+        40: "\u{06E6}",   // K \u{2192} arabic small yeh
+        37: "\u{0616}",   // L \u{2192} arabic small high lig alef-lam-yeh
+        41: "\u{0610}",   // ; \u{2192} SAWS mark
+        39: "\u{0611}",   // ' \u{2192} AS mark
+
+        // \u{2500}\u{2500} ZXCV row \u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}\u{2500}
+        50: "\u{0614}",   // ` \u{2192} takhallus (U+0614 arabic sign high waqf)
+        // Left hand \u{2014} base harakat (continued) + common joiners
+        6:  "\u{0651}",   // Z \u{2192} shadda (tashdeed)
+        7:  "\u{0652}",   // X \u{2192} sukun
+        8:  "\u{0657}",   // C \u{2192} arabic inverted damma
+        9:  "\u{0640}",   // V \u{2192} tatweel (kashida)
+        11: "\u{200D}",   // B \u{2192} ZWJ (zero-width joiner)
+        // Right hand \u{2014} document marks
+        45: "\u{06DD}",   // N \u{2192} end of ayah
+        46: "\u{06DE}",   // M \u{2192} rub el hizb
+        43: "^\u{0635}\u{0639}",   // , \u{2192} SA
+        47: "\u{0613}",   // . \u{2192} radia allah anhu/ridwan ullah alayhi
+        44: "^\u{0637}\u{0639}",   // / \u{2192} Taa Ayn with caret for easy find and replace
+    ]
+
+    // Subtending mark triggers (Option layer, independent of Caps Lock).
+    // Pressing one of these puts the IME into digit-collection mode;
+    // the mark visually subtends over the following Arabic-Indic digit sequence.
+    private static let optionSubtendingLayer: [Int: String] = [
+        37: "\u{0601}",   // Option+L \u{2192} U+0601 ARABIC SIGN SANAH  (year subtending mark)
+        35: "\u{0603}",   // Option+P \u{2192} U+0603 ARABIC SIGN SAFHA  (page subtending mark)
+    ]
+
+    static func optionSubtending(forCode code: Int) -> String? {
+        return optionSubtendingLayer[code]
+    }
+
+    static func diacriticChar(forCode code: Int) -> String? {
+        return diacriticLayer[code]
+    }
+}
+
+// MARK: - Full layout (retained for reference; not rendered on macOS)
+
+struct KeyboardLayer {
+    let id: String
+    let rows: [[KeyData]]
+}
+
+enum KeyboardLayoutData {
+
+    static let defaultLayer = KeyboardLayer(id: "default", rows: [
+        [
+            KeyData("\u{0636}", secondary: "\u{0679}"),
+            KeyData("\u{0635}"),
+            KeyData("\u{062B}", secondary: "\u{067E}"),
+            KeyData("\u{0642}"),
+            KeyData("\u{0641}"),
+            KeyData("\u{063A}"),
+            KeyData("\u{0639}"),
+            KeyData("\u{0647}", secondary: "\u{06BE}",  alternates: ["\u{0640}\u{06C1}\u{0640}", "\u{0640}\u{06C1}", "\u{06C2}"]),
+            KeyData("\u{062E}"),
+            KeyData("\u{062D}", secondary: "\u{0686}"),
+            KeyData("\u{062C}", secondary: "\u{0686}\u{06BE}\u{06D2}"),
+        ],
+        [
+            KeyData("\u{0634}"),
+            KeyData("\u{0633}", secondary: "\u{06D2}"),
+            KeyData("\u{064A}", secondary: "\u{0626}",  alternates: ["\u{06D2}"]),
+            KeyData("\u{0628}"),
+            KeyData("\u{0644}", alternates: ["\u{0644}\u{0627}", "\u{0644}\u{0623}", "\u{0644}\u{0625}", "\u{0644}\u{0622}", "\u{0644}\u{0627}\u{0670}"]),
+            KeyData("\u{0627}", secondary: "\u{0627}\u{0670}", alternates: ["\u{0623}", "\u{0622}", "\u{0625}"]),
+            KeyData("\u{062A}"),
+            KeyData("\u{0646}"),
+            KeyData("\u{0645}"),
+            KeyData("\u{0643}", secondary: "\u{06AF}",  alternates: ["\u{06AF}"]),
+            KeyData("\u{0637}", secondary: "\u{06BA}"),
+        ],
+        [
+            KeyData("\u{0626}"),
+            KeyData("\u{0621}"),
+            KeyData("\u{0624}", alternates: ["\u{06DA}", "\u{06E8}"]),
+            KeyData("\u{0631}", secondary: "\u{0691}",  alternates: ["\u{0691}"]),
+            KeyData("\u{0649}"),
+            KeyData("\u{0629}", secondary: "\u{06C3}"),
+            KeyData("\u{0648}"),
+            KeyData("\u{0632}", alternates: ["\u{0698}", "\u{0630}"]),
+            KeyData("\u{062F}", secondary: "\u{0688}",  alternates: ["\u{0688}"]),
+            KeyData("\u{0638}", secondary: "\u{06C1}"),
+        ],
+    ])
+}
