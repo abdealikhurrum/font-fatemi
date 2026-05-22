@@ -16,7 +16,7 @@ final class DiacriticOverlayPanel: NSPanel {
     private init() {
         super.init(
             contentRect: .zero,
-            styleMask:   [.nonactivatingPanel, .fullSizeContentView],
+            styleMask:   [.nonactivatingPanel],
             backing:     .buffered,
             defer:       false
         )
@@ -30,8 +30,15 @@ final class DiacriticOverlayPanel: NSPanel {
         collectionBehavior     = [.canJoinAllSpaces, .stationary]
 
         let content = buildContent()
-        contentView = content
-        setContentSize(content.frame.size)
+        // Capture size BEFORE assigning contentView: AppKit will resize the
+        // content view to match the window's current (zero) content rect the
+        // moment it is assigned, so reading content.frame.size afterwards
+        // returns zero.  setContentSize then corrects both the window frame
+        // and the content-view frame to the value measured in buildContent().
+        let panelSize = content.frame.size
+        contentView   = content
+        setContentSize(panelSize)
+        log.info("init panelSize=\(NSStringFromSize(panelSize), privacy: .public)")
     }
 
     // MARK: - Show / Hide
