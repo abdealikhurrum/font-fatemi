@@ -52,9 +52,9 @@ enum ArabicStandardLayoutData {
         // Row 4
         [
             KeyData("١٢٣", type: .numeric,  width: .fixed(44)),
-            KeyData(" ",   alternates: ["\u{200D}", "\u{200C}", "\u{0640}"],
+            KeyData(" ",   alternates: ["\u{00A0}", "\u{200C}", "\u{0640}"],
                            type: .space,    width: .flexible),
-            KeyData("َ",   type: .diacritic, width: .fixed(36)),
+            KeyData("تشكيل", type: .diacritic, width: .fixed(52)),
             KeyData("↵",   type: .enter,    width: .fixed(52)),
         ],
     ])

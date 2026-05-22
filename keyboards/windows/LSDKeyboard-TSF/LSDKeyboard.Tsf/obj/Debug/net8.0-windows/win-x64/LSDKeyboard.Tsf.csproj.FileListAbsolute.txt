@@ -1,0 +1,14 @@
+/Users/abdealikhurrum/fmbApps/windows/LSDKeyboard-TSF/LSDKeyboard.Tsf/obj/Debug/net8.0-windows/win-x64/LSDKeyboard.Tsf.GeneratedMSBuildEditorConfig.editorconfig
+/Users/abdealikhurrum/fmbApps/windows/LSDKeyboard-TSF/LSDKeyboard.Tsf/obj/Debug/net8.0-windows/win-x64/LSDKeyboard.Tsf.AssemblyInfoInputs.cache
+/Users/abdealikhurrum/fmbApps/windows/LSDKeyboard-TSF/LSDKeyboard.Tsf/obj/Debug/net8.0-windows/win-x64/LSDKeyboard.Tsf.AssemblyInfo.cs
+/Users/abdealikhurrum/fmbApps/windows/LSDKeyboard-TSF/LSDKeyboard.Tsf/obj/Debug/net8.0-windows/win-x64/LSDKeyboard.Tsf.csproj.CoreCompileInputs.cache
+/Users/abdealikhurrum/fmbApps/windows/LSDKeyboard-TSF/LSDKeyboard.Tsf/bin/Debug/net8.0-windows/win-x64/LSDKeyboard.Tsf.comhost.dll
+/Users/abdealikhurrum/fmbApps/windows/LSDKeyboard-TSF/LSDKeyboard.Tsf/bin/Debug/net8.0-windows/win-x64/LSDKeyboard.Tsf.deps.json
+/Users/abdealikhurrum/fmbApps/windows/LSDKeyboard-TSF/LSDKeyboard.Tsf/bin/Debug/net8.0-windows/win-x64/LSDKeyboard.Tsf.runtimeconfig.json
+/Users/abdealikhurrum/fmbApps/windows/LSDKeyboard-TSF/LSDKeyboard.Tsf/bin/Debug/net8.0-windows/win-x64/LSDKeyboard.Tsf.dll
+/Users/abdealikhurrum/fmbApps/windows/LSDKeyboard-TSF/LSDKeyboard.Tsf/bin/Debug/net8.0-windows/win-x64/LSDKeyboard.Tsf.pdb
+/Users/abdealikhurrum/fmbApps/windows/LSDKeyboard-TSF/LSDKeyboard.Tsf/obj/Debug/net8.0-windows/win-x64/LSDKeyboard.Tsf.dll
+/Users/abdealikhurrum/fmbApps/windows/LSDKeyboard-TSF/LSDKeyboard.Tsf/obj/Debug/net8.0-windows/win-x64/refint/LSDKeyboard.Tsf.dll
+/Users/abdealikhurrum/fmbApps/windows/LSDKeyboard-TSF/LSDKeyboard.Tsf/obj/Debug/net8.0-windows/win-x64/LSDKeyboard.Tsf.pdb
+/Users/abdealikhurrum/fmbApps/windows/LSDKeyboard-TSF/LSDKeyboard.Tsf/obj/Debug/net8.0-windows/win-x64/LSDKeyboard.Tsf.genruntimeconfig.cache
+/Users/abdealikhurrum/fmbApps/windows/LSDKeyboard-TSF/LSDKeyboard.Tsf/obj/Debug/net8.0-windows/win-x64/ref/LSDKeyboard.Tsf.dll
