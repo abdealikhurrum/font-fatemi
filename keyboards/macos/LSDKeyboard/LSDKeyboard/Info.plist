@@ -58,8 +58,10 @@
 				<array>
 					<string>ar</string>
 				</array>
-				<key>tsInputModeIconFileKey</key>
-				<string>LSDWindows</string>
+				<key>tsInputModeMenuIconFileKey</key>
+				<string>LSDWindows.png</string>
+				<key>tsInputModePaletteIconFileKey</key>
+				<string>LSDWindows.png</string>
 			</dict>
 			<key>com.exordiumnetworks.inputmethod.lsdkeyboard.LSDMac</key>
 			<dict>
@@ -81,8 +83,10 @@
 				<array>
 					<string>ar</string>
 				</array>
-				<key>tsInputModeIconFileKey</key>
-				<string>LSDMac</string>
+				<key>tsInputModeMenuIconFileKey</key>
+				<string>LSDMac.png</string>
+				<key>tsInputModePaletteIconFileKey</key>
+				<string>LSDMac.png</string>
 			</dict>
 			<key>com.exordiumnetworks.inputmethod.lsdkeyboard.CRULP</key>
 			<dict>
@@ -104,8 +108,10 @@
 				<array>
 					<string>ur</string>
 				</array>
-				<key>tsInputModeIconFileKey</key>
-				<string>CRULP</string>
+				<key>tsInputModeMenuIconFileKey</key>
+				<string>CRULP.png</string>
+				<key>tsInputModePaletteIconFileKey</key>
+				<string>CRULP.png</string>
 			</dict>
 		</dict>
 	</dict>
