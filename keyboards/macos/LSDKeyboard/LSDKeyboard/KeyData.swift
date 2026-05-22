@@ -221,65 +221,83 @@ extension KeyData {
 
     // MARK: - Diacritic mode layers (Caps Lock)
     //
-    // Four zones (Mac key codes):
-    //   Number row  — Quranic pause/decoration marks (U+06D6–U+06E8)
-    //   QWERTY row  — Primary harakat
-    //   ASDF row    — Secondary / small Quranic diacritics
-    //   ZXCV row    — Document & literary marks (takhallus, ayah, sanah, safha …)
+    // Layout philosophy: all base harakat reachable from the LEFT hand alone.
+    //
+    //   Left QWERTY:  Q=fatha  W=fathatan  E=damma  R=dammatan  T=hamza-above
+    //   Left ASDF:    A=kasra  S=kasratan  D=maddah  F=kharo-zabar  G=hamza-below
+    //   Left ZXCV:    Z=shadda  X=sukun  C=inv-damma  V=tatweel  B=ZWJ
+    //   Backtick:     takhallus
+    //
+    //   Right QWERTY: small Quranic diacritics (Y U I O P [ ])
+    //   Right ASDF:   small Quranic diacritics (H J K L) + SAWS/AS marks (; ')
+    //   Right ZXCV:   document marks (N=ayah  M=rub-el-hizb  ,=sajda  .=sanah  /=safha)
+    //   Number row:   Quranic pause/decoration marks (U+06D6 – U+06E8)
+    //
+    // Mac virtual key codes used below:
+    //   `=50  1=18 2=19 3=20 4=21 5=23 6=22 7=26 8=28 9=25 0=29 -=27 ==24
+    //   Q=12 W=13 E=14 R=15 T=16 Y=17 U=32 I=34 O=31 P=35 [=33 ]=30
+    //   A=0  S=1  D=2  F=3  G=5  H=4  J=38 K=40 L=37 ;=41 '=39
+    //   Z=6  X=7  C=8  V=9  B=11 N=45 M=46 ,=43 .=47 /=44
     private static let diacriticLayer: [Int: String] = [
-        // ── Number row — Quranic marks ────────────────────────────────────
-        18: "\u{06D6}",   // 1 → U+06D6 small high ligature sad-lam-alef-maksura
-        19: "\u{06D7}",   // 2 → U+06D7 small high ligature qaf-lam-alef-maksura
-        20: "\u{06D8}",   // 3 → U+06D8 small high meem initial form
-        21: "\u{06D9}",   // 4 → U+06D9 small high lam alef
-        23: "\u{06DA}",   // 5 → U+06DA small high jeem
-        22: "\u{06DB}",   // 6 → U+06DB small high three dots
-        26: "\u{06DC}",   // 7 → U+06DC small high seen
-        28: "\u{06DF}",   // 8 → U+06DF small high rounded zero
-        25: "\u{06E0}",   // 9 → U+06E0 small high upright rectangular zero
-        29: "\u{06E1}",   // 0 → U+06E1 small high dotless head of khah
-        27: "\u{06E2}",   // - → U+06E2 small high meem isolated form
-        24: "\u{06E8}",   // = → U+06E8 small high noon
+        // ── Number row — Quranic pause/decoration marks ───────────────────
+        18: "\u{06D6}",   // 1 → small high lig ṣad-lam-alef-maksura
+        19: "\u{06D7}",   // 2 → small high lig qaf-lam-alef-maksura
+        20: "\u{06D8}",   // 3 → small high meem initial form
+        21: "\u{06D9}",   // 4 → small high lam alef
+        23: "\u{06DA}",   // 5 → small high jeem
+        22: "\u{06DB}",   // 6 → small high three dots
+        26: "\u{06DC}",   // 7 → small high seen
+        28: "\u{06DF}",   // 8 → small high rounded zero
+        25: "\u{06E0}",   // 9 → small high upright rectangular zero
+        29: "\u{06E1}",   // 0 → small high dotless head of khah
+        27: "\u{06E2}",   // - → small high meem isolated
+        24: "\u{06E8}",   // = → small high noon
 
-        // ── QWERTY row — primary harakat ──────────────────────────────────
+        // ── QWERTY row ────────────────────────────────────────────────────
+        // Left hand — base harakat
         12: "\u{064E}",   // Q → fatha
         13: "\u{064B}",   // W → fathatan
         14: "\u{064F}",   // E → damma
         15: "\u{064C}",   // R → dammatan
-        16: "\u{0650}",   // T → kasra
-        17: "\u{064D}",   // Y → kasratan
-        32: "\u{0652}",   // U → sukun
-        34: "\u{0651}",   // I → shadda
-        31: "\u{0653}",   // O → maddah above
-        35: "\u{0670}",   // P → kharo zabar (superscript alef)
-        33: "\u{0654}",   // [ → hamza above
-        30: "\u{0655}",   // ] → hamza below
+        16: "\u{0654}",   // T → hamza above
+        // Right hand — small Quranic diacritics
+        17: "\u{0618}",   // Y → arabic small fatha
+        32: "\u{061A}",   // U → arabic small kasra
+        34: "\u{0619}",   // I → arabic small damma
+        31: "\u{0615}",   // O → arabic small high tah
+        35: "\u{06E4}",   // P → arabic small high madda
+        33: "\u{06E3}",   // [ → arabic small low seen
+        30: "\u{06ED}",   // ] → arabic small low meem
 
-        // ── ASDF row — secondary / small Quranic diacritics ───────────────
-        0:  "\u{0618}",   // A → arabic small fatha
-        1:  "\u{061A}",   // S → arabic small kasra
-        2:  "\u{0619}",   // D → arabic small damma
-        3:  "\u{0615}",   // F → arabic small high tah
-        5:  "\u{06E4}",   // G → arabic small high madda
-        4:  "\u{06E3}",   // H → arabic small low seen
-        38: "\u{06E7}",   // J → arabic small high yeh
-        40: "\u{06E5}",   // K → arabic small waw
-        37: "\u{06E6}",   // L → arabic small yeh
-        41: "\u{06ED}",   // ; → arabic small low meem
-        39: "\u{0616}",   // ' → arabic small high lig alef-lam-yeh
+        // ── ASDF row ──────────────────────────────────────────────────────
+        // Left hand — base harakat (continued)
+        0:  "\u{0650}",   // A → kasra
+        1:  "\u{064D}",   // S → kasratan
+        2:  "\u{0653}",   // D → maddah above
+        3:  "\u{0670}",   // F → kharo zabar (superscript alef)
+        5:  "\u{0655}",   // G → hamza below
+        // Right hand — small Quranic diacritics (continued) + marks
+        4:  "\u{06E7}",   // H → arabic small high yeh
+        38: "\u{06E5}",   // J → arabic small waw
+        40: "\u{06E6}",   // K → arabic small yeh
+        37: "\u{0616}",   // L → arabic small high lig alef-lam-yeh
+        41: "\u{0610}",   // ; → SAWS mark
+        39: "\u{0611}",   // ' → AS mark
 
-        // ── ZXCV row — document & literary marks ──────────────────────────
+        // ── ZXCV row ──────────────────────────────────────────────────────
         50: "\u{0614}",   // ` → takhallus (U+0614 arabic sign high waqf)
-        6:  "\u{06DD}",   // Z → end of ayah
-        7:  "\u{06DE}",   // X → rub el hizb
-        8:  "\u{06E9}",   // C → place of sajda
-        9:  "\u{0601}",   // V → sanah (year sign)
-        11: "\u{0603}",   // B → safha (page sign)
-        45: "\u{0610}",   // N → SAWS mark (☮ on prophet's name)
-        46: "\u{0611}",   // M → AS mark (on companion's name)
-        43: "\u{0640}",   // , → tatweel (kashida)
-        47: "\u{200D}",   // . → ZWJ (zero-width joiner)
-        44: "\u{200C}",   // / → ZWNJ (zero-width non-joiner)
+        // Left hand — base harakat (continued) + common joiners
+        6:  "\u{0651}",   // Z → shadda (tashdeed)
+        7:  "\u{0652}",   // X → sukun
+        8:  "\u{0657}",   // C → arabic inverted damma
+        9:  "\u{0640}",   // V → tatweel (kashida)
+        11: "\u{200D}",   // B → ZWJ (zero-width joiner)
+        // Right hand — document marks
+        45: "\u{06DD}",   // N → end of ayah
+        46: "\u{06DE}",   // M → rub el hizb
+        43: "\u{06E9}",   // , → place of sajda
+        47: "\u{0601}",   // . → sanah (year sign)
+        44: "\u{0603}",   // / → safha (page sign)
     ]
 
     // Subtending mark triggers (Option layer, independent of Caps Lock).

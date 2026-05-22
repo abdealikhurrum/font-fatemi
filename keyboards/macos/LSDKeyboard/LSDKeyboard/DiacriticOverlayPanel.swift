@@ -59,8 +59,8 @@ final class DiacriticOverlayPanel: NSPanel {
     // MARK: - Layout
 
     private func buildContent() -> NSView {
-        let pad: CGFloat  = 12
-        let colW: CGFloat = 400
+        let pad: CGFloat  = 14
+        let colW: CGFloat = 440
 
         let tv = NSTextView()
         tv.isEditable         = false
@@ -84,7 +84,7 @@ final class DiacriticOverlayPanel: NSPanel {
         let box = NSView(frame: NSRect(x: 0, y: 0,
                                       width:  colW + 2 * pad,
                                       height: usedH + 2 * pad))
-        box.wantsLayer         = true
+        box.wantsLayer             = true
         box.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
         box.addSubview(tv)
         return box
@@ -95,25 +95,25 @@ final class DiacriticOverlayPanel: NSPanel {
     private func makeContent() -> NSAttributedString {
         let out = NSMutableAttributedString()
 
-        let accent  = NSColor.controlAccentColor
-        let label   = NSColor.labelColor
-        let sec     = NSColor.secondaryLabelColor
-        let ter     = NSColor.tertiaryLabelColor
+        let accent = NSColor.controlAccentColor
+        let label  = NSColor.labelColor
+        let sec    = NSColor.secondaryLabelColor
+        let ter    = NSColor.tertiaryLabelColor
 
-        let secF  = NSFont.systemFont(ofSize:  9, weight: .semibold)
-        let keyF  = NSFont.monospacedSystemFont(ofSize: 10, weight: .regular)
-        let charF = NSFont.systemFont(ofSize: 12, weight: .regular)
-        let descF = NSFont.systemFont(ofSize: 10, weight: .regular)
+        let secF  = NSFont.systemFont(ofSize: 10, weight: .semibold)
+        let keyF  = NSFont.monospacedSystemFont(ofSize: 13, weight: .regular)
+        let charF = NSFont.systemFont(ofSize: 16, weight: .regular)
+        let descF = NSFont.systemFont(ofSize: 12, weight: .regular)
 
-        // Tab stops: key | char | desc ⇥ key | char | desc
+        // Tab stops: key ⇥ char ⇥ desc ⇥ key ⇥ char ⇥ desc
         let rowPS: NSParagraphStyle = {
             let ps = NSMutableParagraphStyle()
             ps.tabStops = [
-                NSTextTab(textAlignment: .left, location:  46, options: [:]),
-                NSTextTab(textAlignment: .left, location:  66, options: [:]),
-                NSTextTab(textAlignment: .left, location: 200, options: [:]),
-                NSTextTab(textAlignment: .left, location: 246, options: [:]),
-                NSTextTab(textAlignment: .left, location: 266, options: [:]),
+                NSTextTab(textAlignment: .left, location:  50, options: [:]),
+                NSTextTab(textAlignment: .left, location:  76, options: [:]),
+                NSTextTab(textAlignment: .left, location: 224, options: [:]),
+                NSTextTab(textAlignment: .left, location: 274, options: [:]),
+                NSTextTab(textAlignment: .left, location: 300, options: [:]),
             ]
             return ps
         }()
@@ -144,52 +144,52 @@ final class DiacriticOverlayPanel: NSPanel {
             out.append(r)
         }
 
-        func section(_ label: String) {
-            out.append(frag(label + "\n", secF, ter))
+        func section(_ title: String) {
+            out.append(frag(title + "\n", secF, ter))
         }
 
         func spacer() {
             out.append(frag("\n", descF, .clear))
         }
 
+        // ── Harakat — left hand ───────────────────────────────────────────
+        section("HARAKAT  (left hand)")
+        row2("Q", "\u{064E}", "fatha",       "A", "\u{0650}", "kasra")
+        row2("W", "\u{064B}", "fathatan",    "S", "\u{064D}", "kasratan")
+        row2("E", "\u{064F}", "damma",       "D", "\u{0653}", "maddah")
+        row2("R", "\u{064C}", "dammatan",    "F", "\u{0670}", "kharo zabar")
+        row2("Z", "\u{0651}", "shadda",      "X", "\u{0652}", "sukun")
+        row2("C", "\u{0657}", "inv. damma",  "T", "\u{0654}", "hamza above")
+        row2("G", "\u{0655}", "hamza below", "V", "\u{0640}", "tatweel")
+        row1("B", "\u{200D}", "ZWJ")
+        spacer()
+
+        // ── Small Quranic diacritics — right hand ─────────────────────────
+        section("SMALL QURANIC DIACRITICS  (right hand)")
+        row2("Y", "\u{0618}", "sm. fatha",        "U", "\u{061A}", "sm. kasra")
+        row2("I", "\u{0619}", "sm. damma",        "O", "\u{0615}", "sm. high tah")
+        row2("P", "\u{06E4}", "sm. high madda",   "[", "\u{06E3}", "sm. low seen")
+        row2("]", "\u{06ED}", "sm. low meem",     "H", "\u{06E7}", "sm. high yeh")
+        row2("J", "\u{06E5}", "sm. waw",          "K", "\u{06E6}", "sm. yeh")
+        row1("L", "\u{0616}", "sm. high lig alef-lam-yeh")
+        spacer()
+
+        // ── Document & literary marks ─────────────────────────────────────
+        section("DOCUMENT MARKS")
+        row2("`", "\u{0614}", "takhallus",    ";", "\u{0610}", "SAWS mark")
+        row2("'", "\u{0611}", "AS mark",      "N", "\u{06DD}", "end of ayah")
+        row2("M", "\u{06DE}", "rub el hizb",  ",", "\u{06E9}", "sajda")
+        row2(".", "\u{0601}", "sanah",         "/", "\u{0603}", "safha")
+        spacer()
+
         // ── Number row — Quranic marks ────────────────────────────────────
         section("QURANIC MARKS  (number row)")
-        row2("1", "\u{06D6}", "high lig ṣ-l-ā",     "2", "\u{06D7}", "high lig q-l-ā")
-        row2("3", "\u{06D8}", "high meem init",       "4", "\u{06D9}", "high lam alef")
-        row2("5", "\u{06DA}", "high jeem",             "6", "\u{06DB}", "high 3 dots")
-        row2("7", "\u{06DC}", "high seen",             "8", "\u{06DF}", "high round zero")
-        row2("9", "\u{06E0}", "high rect zero",        "0", "\u{06E1}", "high dotless khah")
-        row2("-", "\u{06E2}", "high meem isolated",   "=", "\u{06E8}", "high noon")
-        spacer()
-
-        // ── QWERTY row — primary harakat ──────────────────────────────────
-        section("HARAKAT  (QWERTY row)")
-        row2("Q", "\u{064E}", "fatha",      "W", "\u{064B}", "fathatan")
-        row2("E", "\u{064F}", "damma",      "R", "\u{064C}", "dammatan")
-        row2("T", "\u{0650}", "kasra",      "Y", "\u{064D}", "kasratan")
-        row2("U", "\u{0652}", "sukun",      "I", "\u{0651}", "shadda")
-        row2("O", "\u{0653}", "maddah",     "P", "\u{0670}", "kharo zabar")
-        row2("[", "\u{0654}", "hamza above","  ]", "\u{0655}", "hamza below")
-        spacer()
-
-        // ── ASDF row — secondary / small Quranic diacritics ───────────────
-        section("SMALL QURANIC DIACRITICS  (ASDF row)")
-        row2("A", "\u{0618}", "sm. fatha",   "S", "\u{061A}", "sm. kasra")
-        row2("D", "\u{0619}", "sm. damma",   "F", "\u{0615}", "sm. high tah")
-        row2("G", "\u{06E4}", "sm. high madda","H", "\u{06E3}", "sm. low seen")
-        row2("J", "\u{06E7}", "sm. high yeh", "K", "\u{06E5}", "sm. waw")
-        row2("L", "\u{06E6}", "sm. yeh",      ";", "\u{06ED}", "sm. low meem")
-        row1("'", "\u{0616}", "sm. high lig alef-lam-yeh")
-        spacer()
-
-        // ── ZXCV row — document & literary marks ──────────────────────────
-        section("DOCUMENT MARKS  (ZXCV row)")
-        row2("`", "\u{0614}", "takhallus",   "Z", "\u{06DD}", "end of ayah")
-        row2("X", "\u{06DE}", "rub el hizb", "C", "\u{06E9}", "sajda mark")
-        row2("V", "\u{0601}", "sanah",        "B", "\u{0603}", "safha")
-        row2("N", "\u{0610}", "SAWS mark",    "M", "\u{0611}", "AS mark")
-        row2(",", "\u{0640}", "tatweel",       ".", "\u{200D}", "ZWJ")
-        row1("/", "\u{200C}", "ZWNJ")
+        row2("1", "\u{06D6}", "high lig ṣ-l-ā",    "2", "\u{06D7}", "high lig q-l-ā")
+        row2("3", "\u{06D8}", "high meem init",      "4", "\u{06D9}", "high lam alef")
+        row2("5", "\u{06DA}", "high jeem",            "6", "\u{06DB}", "high 3 dots")
+        row2("7", "\u{06DC}", "high seen",            "8", "\u{06DF}", "high round zero")
+        row2("9", "\u{06E0}", "high rect zero",       "0", "\u{06E1}", "high dotless khah")
+        row2("-", "\u{06E2}", "high meem isolated",  "=", "\u{06E8}", "high noon")
 
         return out
     }

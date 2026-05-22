@@ -353,8 +353,16 @@ final class LSDInputController: IMKInputController {
     // Appears when the user clicks the input source name in the menu bar.
     // Layout switching is handled by the system (TIS modes in Info.plist);
     // this menu covers per-mode behaviour settings only.
+    //
+    // IMPORTANT: menu item targets must point to a persistent object.
+    // LSDInputController instances are created/destroyed per text context, so
+    // `target = self` causes submenu actions to be dropped if the instance that
+    // built the menu has since been deallocated.  MenuActions.shared is a
+    // process-lifetime singleton that is never deallocated.
 
     override func menu() -> NSMenu! {
+        let t = MenuActions.shared
+
         let menu = NSMenu(title: "Lisan ud Dawat")
 
         let header = NSMenuItem(title: "Lisan ud Dawat", action: nil, keyEquivalent: "")
@@ -363,21 +371,21 @@ final class LSDInputController: IMKInputController {
         menu.addItem(.separator())
 
         // Double-press enabled
-        let dpItem = NSMenuItem(title: "Double-press", action: #selector(toggleDoublePress(_:)),
+        let dpItem = NSMenuItem(title: "Double-press", action: #selector(MenuActions.toggleDoublePress(_:)),
                                 keyEquivalent: "")
         dpItem.state  = KeyboardSettings.doublePressEnabled ? .on : .off
-        dpItem.target = self
+        dpItem.target = t
         menu.addItem(dpItem)
 
         // Double-press delay
         let delayItem = NSMenuItem(title: "Double-press delay", action: nil, keyEquivalent: "")
         let delayMenu = NSMenu()
         for (index, preset) in KeyboardSettings.DelayPreset.allCases.enumerated() {
-            let item = NSMenuItem(title: preset.label, action: #selector(setDelay(_:)),
+            let item = NSMenuItem(title: preset.label, action: #selector(MenuActions.setDelay(_:)),
                                   keyEquivalent: "")
             item.tag    = index
             item.state  = KeyboardSettings.doublePressDelayPreset == preset ? .on : .off
-            item.target = self
+            item.target = t
             delayMenu.addItem(item)
         }
         delayItem.submenu = delayMenu
@@ -393,11 +401,11 @@ final class LSDInputController: IMKInputController {
             (.alefMadda,  "آ  alef madda"),
         ]
         for (index, (style, label)) in alefOptions.enumerated() {
-            let item = NSMenuItem(title: label, action: #selector(setDoubleAlef(_:)),
+            let item = NSMenuItem(title: label, action: #selector(MenuActions.setDoubleAlef(_:)),
                                   keyEquivalent: "")
             item.tag    = index
             item.state  = KeyboardSettings.doubleAlefStyle == style ? .on : .off
-            item.target = self
+            item.target = t
             alefMenu.addItem(item)
         }
         alefItem.submenu = alefMenu
@@ -411,11 +419,11 @@ final class LSDInputController: IMKInputController {
             (.arabicYeh, "ي  Arabic yeh"),
         ]
         for (index, (style, label)) in yehOptions.enumerated() {
-            let item = NSMenuItem(title: label, action: #selector(setUrduYeh(_:)),
+            let item = NSMenuItem(title: label, action: #selector(MenuActions.setUrduYeh(_:)),
                                   keyEquivalent: "")
             item.tag    = index
             item.state  = KeyboardSettings.urduYehStyle == style ? .on : .off
-            item.target = self
+            item.target = t
             yehMenu.addItem(item)
         }
         yehItem.submenu = yehMenu
@@ -423,25 +431,33 @@ final class LSDInputController: IMKInputController {
 
         return menu
     }
+}
 
-    @objc private func toggleDoublePress(_ sender: NSMenuItem) {
+// MARK: - MenuActions
+//
+// Process-lifetime singleton that receives settings menu actions.
+// Must outlive any LSDInputController instance — stored as a static let.
+final class MenuActions: NSObject {
+    static let shared = MenuActions()
+    private override init() {}
+
+    @objc func toggleDoublePress(_ sender: NSMenuItem) {
         KeyboardSettings.doublePressEnabled.toggle()
-        cancelPending()
     }
 
-    @objc private func setDelay(_ sender: NSMenuItem) {
+    @objc func setDelay(_ sender: NSMenuItem) {
         let presets = KeyboardSettings.DelayPreset.allCases
         guard sender.tag < presets.count else { return }
         KeyboardSettings.doublePressDelayPreset = presets[sender.tag]
     }
 
-    @objc private func setDoubleAlef(_ sender: NSMenuItem) {
+    @objc func setDoubleAlef(_ sender: NSMenuItem) {
         let options: [KeyboardSettings.DoubleAlefStyle] = [.kharoZabar, .alefMadda]
         guard sender.tag < options.count else { return }
         KeyboardSettings.doubleAlefStyle = options[sender.tag]
     }
 
-    @objc private func setUrduYeh(_ sender: NSMenuItem) {
+    @objc func setUrduYeh(_ sender: NSMenuItem) {
         let options: [KeyboardSettings.UrduYehStyle] = [.farsiYeh, .arabicYeh]
         guard sender.tag < options.count else { return }
         KeyboardSettings.urduYehStyle = options[sender.tag]
