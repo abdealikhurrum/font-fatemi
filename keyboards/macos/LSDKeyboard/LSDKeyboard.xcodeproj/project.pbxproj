@@ -15,11 +15,7 @@
 		AA000025 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA000016 /* InputMethodKit.framework */; };
 		AA000026 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA000017 /* Cocoa.framework */; };
 		AA000028 /* KeyboardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000019 /* KeyboardSettings.swift */; };
-		AA00002A /* LSDKeyboard.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA000029 /* LSDKeyboard.icns */; };
 		AA00002C /* DiacriticOverlayPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00002B /* DiacriticOverlayPanel.swift */; };
-		AA00002E /* LSDWindows.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA00002D /* LSDWindows.icns */; };
-		AA000060 /* LSDMac.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA00002F /* LSDMac.icns */; };
-		AA000061 /* CRULP.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA000062 /* CRULP.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,11 +29,7 @@
 		AA000017 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AA000018 /* CorpusLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpusLogger.swift; sourceTree = "<group>"; };
 		AA000019 /* KeyboardSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettings.swift; sourceTree = "<group>"; };
-		AA000029 /* LSDKeyboard.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = LSDKeyboard.icns; sourceTree = "<group>"; };
 		AA00002B /* DiacriticOverlayPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiacriticOverlayPanel.swift; sourceTree = "<group>"; };
-		AA00002D /* LSDWindows.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = LSDWindows.icns; sourceTree = "<group>"; };
-		AA00002F /* LSDMac.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = LSDMac.icns; sourceTree = "<group>"; };
-		AA000062 /* CRULP.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = CRULP.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -77,10 +69,6 @@
 				AA000018 /* CorpusLogger.swift */,
 				AA000019 /* KeyboardSettings.swift */,
 				AA00002B /* DiacriticOverlayPanel.swift */,
-				AA000029 /* LSDKeyboard.icns */,
-				AA00002D /* LSDWindows.icns */,
-				AA00002F /* LSDMac.icns */,
-				AA000062 /* CRULP.icns */,
 				AA000014 /* Info.plist */,
 			);
 			path = LSDKeyboard;
@@ -164,10 +152,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA00002A /* LSDKeyboard.icns in Resources */,
-				AA00002E /* LSDWindows.icns in Resources */,
-				AA000060 /* LSDMac.icns in Resources */,
-				AA000061 /* CRULP.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
