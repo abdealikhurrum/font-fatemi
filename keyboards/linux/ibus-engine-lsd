@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+"""
+Entry point for the LSD IBus engine.
+
+Usage:
+  ibus-engine-lsd --ibus        # launched by IBus daemon
+  ibus-engine-lsd               # standalone (registers component manually)
+"""
+
+import sys
+import os
+
+# Allow running from the source tree without installing.
+sys.path.insert(0, os.path.dirname(__file__))
+
+import gi
+
+gi.require_version("IBus", "1.0")
+from gi.repository import IBus, GLib
+
+from lsd_ibus.engine import LSDEngine
+
+
+def main() -> None:
+    IBus.init()
+    bus = IBus.Bus()
+
+    if not bus.is_connected():
+        print("error: cannot connect to IBus daemon", file=sys.stderr)
+        print("hint:  start IBus with 'ibus-daemon -drx' first", file=sys.stderr)
+        sys.exit(1)
+
+    factory = IBus.Factory.new(bus.get_connection())
+    factory.add_engine("LSD", GLib.type_from_name("LSDEngine"))
+
+    if "--ibus" in sys.argv:
+        bus.request_name("org.freedesktop.IBus.LSD", 0)
+    else:
+        component = IBus.Component.new_from_file(
+            "/usr/share/ibus/component/lsd.xml"
+        )
+        bus.register_component(component)
+
+    GLib.MainLoop().run()
+
+
+if __name__ == "__main__":
+    main()
