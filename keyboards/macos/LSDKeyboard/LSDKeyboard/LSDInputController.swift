@@ -50,14 +50,23 @@ final class LSDInputController: IMKInputController {
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
         guard let event else { return false }
 
-        // Caps Lock toggle → diacritic mode + overlay
-        if event.type == .flagsChanged && event.keyCode == 57 {
-            isDiacriticMode = event.modifierFlags.contains(.capsLock)
-            log.info("capsLock \(self.isDiacriticMode ? "ON→diacriticMode" : "OFF→normalMode", privacy: .public)")
-            if isDiacriticMode {
-                DiacriticOverlayPanel.shared.showOverlay()
-            } else {
-                DiacriticOverlayPanel.shared.hideOverlay()
+        // Modifier changes — handle Caps Lock and Option
+        if event.type == .flagsChanged {
+            let flags   = event.modifierFlags
+            let capOn   = flags.contains(.capsLock)
+            let optOn   = flags.contains(.option)
+
+            if event.keyCode == 57 {            // Caps Lock key
+                isDiacriticMode = capOn
+                log.info("capsLock \(capOn ? "ON" : "OFF", privacy: .public)")
+                if capOn {
+                    DiacriticOverlayPanel.shared.showOverlay(optionMode: optOn)
+                } else {
+                    DiacriticOverlayPanel.shared.hideOverlay()
+                }
+            } else if isDiacriticMode && (event.keyCode == 58 || event.keyCode == 61) {
+                // Left or right Option pressed/released while in diacritic mode
+                DiacriticOverlayPanel.shared.showOverlay(optionMode: optOn)
             }
             return true
         }

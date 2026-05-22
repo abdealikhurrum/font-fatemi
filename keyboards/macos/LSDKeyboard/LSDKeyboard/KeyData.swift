@@ -163,19 +163,30 @@ extension KeyData {
     ]
 
     // Layer 4 (option) — sourced from the LSD Mac keylayout
+    // Number row 1-7 carries BiDi control characters (same slot as old diacritic-mode BiDi).
     private static let optionLayer: [Int: String] = [
-        49: "\u{00A0}",   // Option+Space → NBSP (non-breaking space)
+        49: "\u{00A0}",   // Option+Space  → NBSP (non-breaking space)
+        // Number row — BiDi controls
+        18: "\u{200E}",   // ⌥1 → LRM   left-to-right mark
+        19: "\u{200F}",   // ⌥2 → RLM   right-to-left mark
+        20: "\u{2066}",   // ⌥3 → LRI   left-to-right isolate
+        21: "\u{2067}",   // ⌥4 → RLI   right-to-left isolate
+        23: "\u{2069}",   // ⌥5 → PDI   pop directional isolate
+        22: "\u{200D}",   // ⌥6 → ZWJ   zero-width joiner
+        26: "\u{200C}",   // ⌥7 → ZWNJ  zero-width non-joiner
+        // ASDF / ZXCV rows
         0: "\u{0614}",
-        1: "ے",  2: "ی",  3: "پ",
+        1: "\u{06D2}",  2: "\u{06CC}",  3: "\u{067E}",
         4: "\u{0670}", 5: "\u{0653}", 6: "\u{06DA}", 7: "\u{06E8}",
-        8: "ڈ",  9: "ڑ",  11: "ژ",
+        8: "\u{0688}",  9: "\u{0691}",  11: "\u{0698}",
         12: "\u{2018}", 13: "\u{2019}", 14: "\u{201C}", 15: "\u{201D}",
-        16: "\u{0657}", 17: "ڤ",
-        19: "\u{0610}", 22: "\u{0671}",
-        25: "ۂ",  26: "۞",  27: "_",  28: "\u{0655}",
-        30: "ۃ",  31: "ہ",  32: "\u{0611}", 33: "چ",  34: "ھ",
-        38: "ٹ",  40: "ں",  41: "گ",
-        44: "÷",  45: "\u{0613}", 46: "\u{0656}",
+        16: "\u{0657}", 17: "\u{06A4}",
+        25: "\u{06C2}",  26: "\u{06DE}",  27: "_",  28: "\u{0655}",
+        30: "\u{06C3}",  31: "\u{06C1}", 32: "\u{0611}", 33: "\u{0686}",  34: "\u{06BE}",
+        38: "\u{0679}",  40: "\u{06BA}",  41: "\u{06AF}",
+        44: "\u{00F7}",  45: "\u{0613}", 46: "\u{0656}",
+        37: "\u{0601}",   // ⌥L → sanah subtending (also opens digit-collection mode)
+        35: "\u{0603}",   // ⌥P → safha subtending (also opens digit-collection mode)
     ]
 
     // Layer 5 (shift+option) — sourced from the LSD Mac keylayout
