@@ -4,23 +4,26 @@ double_press_convert.py
 Convert LSD double-press Arabic text to proper Unicode.
 
 When typing on an LSD keyboard, secondary characters are entered by pressing
-the same key twice quickly (سس → ے, جج → چھے, etc.).  Old Word documents
-may contain these literal repeated-character sequences instead of the
-correct Unicode characters.  This tool replaces them in-place.
+the same key twice quickly (سس → ے, جج → چھے, etc.).  Old documents may
+contain these literal repeated-character sequences instead of the correct
+Unicode characters.  This tool replaces them in-place.
 
 Modes
 -----
   python3 double_press_convert.py input.docx [output.docx]   # Word doc
-  echo "سسضض" | python3 double_press_convert.py              # plain text
+  python3 double_press_convert.py input.pptx [output.pptx]   # PowerPoint
+  python3 double_press_convert.py input.txt [output.txt]     # plain text file
+  echo "سسضض" | python3 double_press_convert.py              # stdin → stdout
   cat file.txt | python3 double_press_convert.py
 
-If output path is omitted the input file is overwritten (docx mode).
+Options
+-------
+  -t, --tags TAGS         comma-separated tags to include
+  -x, --exclude-tags TAGS comma-separated tags to exclude
+  -r, --reverse           reverse conversion (Unicode → LSD sequences)
 
-Substitution tables (LSD layout, default)
-------------------------------------------
-  جج → چھے    سس → ے    ضض → ٹ    ثث → پ    هه → ھ    حح → چ
-  يي → ئ     اا → اٰ    كك → گ    طط → ں    رر → ڑ    ةة → ۃ
-  دد → ڈ     ظظ → ہ
+If output path is omitted the input file is overwritten.
+
 """
 
 import sys
@@ -65,6 +68,10 @@ _LSD_SINGLES = [
     ('\u062F'+'\u064C', '\u06BE'),  #dal-toDdaa د + ً → ڈ
     (' \u061B', '\u0686'+'\u06BE'+'\u06D2') #semicolon-toChe space + arabic semicolon → چھے
 ]
+
+_ARABIC_WORD_CHARS = "\u0621-\u06FF"
+_REVERSE_ISOLATED_CHEH_HEH_YEH = re.compile(rf"(?<![{_ARABIC_WORD_CHARS}])\u0686\u06BE\u06D2(?![{_ARABIC_WORD_CHARS}])")
+_REVERSE_YEH_WORD_END = re.compile(rf"\u06D2(?=(?:[^{_ARABIC_WORD_CHARS}]|$))")
 
 
 def _parse_annotated_substitutions() -> Tuple[List[Tuple[str, str, List[str]]], List[Tuple[str, str, List[str]]]]:
@@ -136,7 +143,39 @@ def _apply_tag_filter(include: Iterable[str] = None, exclude: Iterable[str] = No
 
     _lsd_replace = _make_replacer(_ACTIVE_DOUBLES)
     _lsd_singles_replace = _make_singles_replacer(_ACTIVE_SINGLES)
+    # rebuild reverse replacers when active lists change
+    global _rev_double_replace, _rev_single_replace, _REV_DOUBLE_LOOKUP, _REV_SINGLE_LOOKUP
+    _rev_double_replace, _rev_single_replace, _REV_DOUBLE_LOOKUP, _REV_SINGLE_LOOKUP = _make_reverse_replacers(_ACTIVE_DOUBLES, _ACTIVE_SINGLES)
 
+
+def _make_reverse_replacers(doubles, singles):
+    """Create reverse replacers mapping outputs back to original sequences."""
+    # For doubles: dst -> src+src, excluding yeh because it's context-sensitive.
+    rev_doubles = [(dst, c + c) for c, dst in doubles if dst != '\u06D2']
+    # For singles: dst -> src, excluding cheh_heh_yeh because it's context-sensitive.
+    rev_singles = [(dst, src) for src, dst in singles if dst != '\u0686\u06BE\u06D2']
+
+    def _build_pattern(items):
+        # longest-first to avoid partial matches
+        alts = sorted([re.escape(a) for a, _ in items], key=len, reverse=True)
+        if not alts:
+            return re.compile("$")
+        pattern = "|".join(alts)
+        # only reverse these doubles at a word boundary/end to avoid mis-reverting normal text
+        return re.compile(rf"(?:{pattern})(?=(?:[^{_ARABIC_WORD_CHARS}]|$))")
+
+    def _make(items):
+        lookup = {a: b for a, b in items}
+        pattern = _build_pattern(items)
+
+        def replace(text: str) -> str:
+            return pattern.sub(lambda m: lookup[m.group(0)], text)
+
+        return replace, lookup
+
+    rev_d_replacer, rev_d_lookup = _make(rev_doubles)
+    rev_s_replacer, rev_s_lookup = _make(rev_singles)
+    return rev_d_replacer, rev_s_replacer, rev_d_lookup, rev_s_lookup
 
 # Initialize active lists to defaults (all substitutions enabled)
 _ACTIVE_DOUBLES = _LSD_DOUBLES[:]
@@ -179,6 +218,9 @@ def _make_singles_replacer(singles):
 
 _lsd_singles_replace = _make_singles_replacer(_ACTIVE_SINGLES)
 
+# initialize reverse replacers based on active lists
+_rev_double_replace, _rev_single_replace, _REV_DOUBLE_LOOKUP, _REV_SINGLE_LOOKUP = _make_reverse_replacers(_ACTIVE_DOUBLES, _ACTIVE_SINGLES)
+
 
 def convert_text(text: str, crulp: bool = False) -> str:
     """Apply double-press substitutions to a plain string."""
@@ -186,6 +228,17 @@ def convert_text(text: str, crulp: bool = False) -> str:
     text = _lsd_replace(text)
     # single-sequence replacements (e.g. char+diacritic → single glyph)
     text = _lsd_singles_replace(text)
+    return text
+
+
+def convert_text_reverse(text: str) -> str:
+    """Reverse substitutions applied by convert_text."""
+    # Apply context-sensitive reverse rules first.
+    text = _REVERSE_ISOLATED_CHEH_HEH_YEH.sub(' \u061B', text)
+    text = _REVERSE_YEH_WORD_END.sub('سس', text)
+    # then apply generic reverse mappings for remaining substitutions.
+    text = _rev_single_replace(text)
+    text = _rev_double_replace(text)
     return text
 
 
@@ -267,10 +320,55 @@ def convert_docx(src_path: str, dst_path: str):
     return changed
 
 
+def _fix_paragraph_reverse(para):
+    runs = para.runs
+    if not runs:
+        return
+
+    # Within-run reverse substitution
+    for run in runs:
+        if run.text:
+            run.text = convert_text_reverse(run.text)
+
+    # Cross-run boundary reverse pass
+    for i in range(len(runs) - 1):
+        a, b = runs[i], runs[i + 1]
+        if not a.text or not b.text:
+            continue
+        for key, repl in {**_REV_DOUBLE_LOOKUP, **_REV_SINGLE_LOOKUP}.items():
+            L = len(key)
+            for k in range(1, L):
+                if a.text.endswith(key[:k]) and b.text.startswith(key[k:]):
+                    a.text = a.text[:-k] + repl
+                    b.text = b.text[L-k:]
+                    break
+
+
+def convert_docx_reverse(src_path: str, dst_path: str):
+    doc = docx.Document(src_path)
+    changed = 0
+    for para in _all_paragraphs(doc):
+        before = "".join(r.text for r in para.runs)
+        _fix_paragraph_reverse(para)
+        after = "".join(r.text for r in para.runs)
+        if before != after:
+            changed += 1
+    doc.save(dst_path)
+    return changed
+
+
 def convert_txt(src_path: str, dst_path: str):
     """Convert a plain text file in-place or to a new file."""
     text = Path(src_path).read_text(encoding="utf8")
     out = convert_text(text)
+    changed = 1 if out != text else 0
+    Path(dst_path).write_text(out, encoding="utf8")
+    return changed
+
+
+def convert_txt_reverse(src_path: str, dst_path: str):
+    text = Path(src_path).read_text(encoding="utf8")
+    out = convert_text_reverse(text)
     changed = 1 if out != text else 0
     Path(dst_path).write_text(out, encoding="utf8")
     return changed
@@ -325,6 +423,57 @@ def convert_pptx(src_path: str, dst_path: str):
     return changed
 
 
+def convert_pptx_reverse(src_path: str, dst_path: str):
+    if not PPTX_AVAILABLE:
+        raise RuntimeError("python-pptx not installed")
+    prs = Presentation(src_path)
+    changed = 0
+    for slide in prs.slides:
+        for shape in slide.shapes:
+            if not hasattr(shape, 'has_text_frame') or not shape.has_text_frame:
+                continue
+            for para in shape.text_frame.paragraphs:
+                before = "".join(r.text for r in para.runs)
+                # Within-run reverse replacements
+                for run in para.runs:
+                    if run.text:
+                        run.text = convert_text_reverse(run.text)
+
+                # Cross-run boundary reverse passes
+                # handle reverse-doubles (dst -> src+src)
+                for i in range(len(para.runs) - 1):
+                    a, b = para.runs[i], para.runs[i + 1]
+                    if not a.text or not b.text:
+                        continue
+                    # try all reverse-double keys split across runs
+                    for key, repl in _REV_DOUBLE_LOOKUP.items():
+                        L = len(key)
+                        for k in range(1, L):
+                            if a.text.endswith(key[:k]) and b.text.startswith(key[k:]):
+                                a.text = a.text[:-k] + repl
+                                b.text = b.text[L-k:]
+                                break
+
+                # handle reverse-singles
+                for i in range(len(para.runs) - 1):
+                    a, b = para.runs[i], para.runs[i + 1]
+                    if not a.text or not b.text:
+                        continue
+                    for key, repl in _REV_SINGLE_LOOKUP.items():
+                        L = len(key)
+                        for k in range(1, L):
+                            if a.text.endswith(key[:k]) and b.text.startswith(key[k:]):
+                                a.text = a.text[:-k] + repl
+                                b.text = b.text[L-k:]
+                                break
+
+                after = "".join(r.text for r in para.runs)
+                if before != after:
+                    changed += 1
+    prs.save(dst_path)
+    return changed
+
+
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
@@ -334,6 +483,7 @@ def main(argv: Sequence[str]):
                                      description='Convert LSD double-press Arabic text to proper Unicode.')
     parser.add_argument('-t', '--tags', help='Comma-separated list of tags to include')
     parser.add_argument('-x', '--exclude-tags', help='Comma-separated list of tags to exclude')
+    parser.add_argument('-r', '--reverse', action='store_true', help='Run reverse conversion (Unicode -> LSD sequences)')
     parser.add_argument('src', nargs='?', help='Source .docx file or omitted for stdin')
     parser.add_argument('dst', nargs='?', help='Destination .docx file (optional)')
 
@@ -341,6 +491,7 @@ def main(argv: Sequence[str]):
 
     include = ns.tags.split(',') if ns.tags else None
     exclude = ns.exclude_tags.split(',') if ns.exclude_tags else None
+    reverse = bool(ns.reverse)
     # apply tag filtering (no-op if include/exclude are None)
     _apply_tag_filter(include, exclude)
 
@@ -363,26 +514,30 @@ def main(argv: Sequence[str]):
         if not DOCX_AVAILABLE:
             print("Error: python-docx not installed.  Run: pip install python-docx", file=sys.stderr)
             sys.exit(1)
-        n = convert_docx(src, dst)
+        if reverse:
+            n = convert_docx_reverse(src, dst)
+        else:
+            n = convert_docx(src, dst)
     elif lower.endswith('.pptx'):
         if not PPTX_AVAILABLE:
             print("Error: python-pptx not installed.  Run: pip install python-pptx", file=sys.stderr)
             sys.exit(1)
-        n = convert_pptx(src, dst)
+        if reverse:
+            n = convert_pptx_reverse(src, dst)
+        else:
+            n = convert_pptx(src, dst)
     elif lower.endswith('.txt'):
-        n = convert_txt(src, dst)
+        if reverse:
+            n = convert_txt_reverse(src, dst)
+        else:
+            n = convert_txt(src, dst)
     else:
         print(f"Error: unsupported file type: {src}", file=sys.stderr)
         sys.exit(1)
 
-    if not DOCX_AVAILABLE:
-        print("Error: python-docx not installed.  Run: pip install python-docx",
-              file=sys.stderr)
-        sys.exit(1)
-
-    if not src.lower().endswith(".docx"):
-        print(f"Error: expected a .docx file, got: {src}", file=sys.stderr)
-        sys.exit(1)
+    layout = "LSD"
+    action = "overwritten" if dst == src else f"saved to {dst!r}"
+    print(f"{layout}: {n} paragraph(s) changed — {action}")
 
     layout = "LSD"
     action = "overwritten" if dst == src else f"saved to {dst!r}"
