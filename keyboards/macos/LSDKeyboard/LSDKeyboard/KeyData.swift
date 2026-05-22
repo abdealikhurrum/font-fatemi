@@ -124,7 +124,11 @@ extension KeyData {
     }
 
     // MARK: Windows LSD layers (default \u{2014} maqalaAra.klc)  // —
-
+    // Mac virtual key codes used below:
+    //   `=50  1=18 2=19 3=20 4=21 5=23 6=22 7=26 8=28 9=25 0=29 -=27 ==24
+    //   Q=12 W=13 E=14 R=15 T=16 Y=17 U=32 I=34 O=31 P=35 [=33 ]=30
+    //   A=0  S=1  D=2  F=3  G=5  H=4  J=38 K=40 L=37 ;=41 '=39
+    //   Z=6  X=7  C=8  V=9  B=11 N=45 M=46 ,=43 .=47 /=44
     // Layer 2 (no modifier) \u{2014} Windows LSD / maqalaAra.klc  // —
     private static let normalLayer: [Int: String] = [
         0: "\u{0634}",  1: "\u{0633}",  2: "\u{064A}",  3: "\u{0628}",  4: "\u{0627}",  5: "\u{0644}",  // ش س ي ب ا ل
