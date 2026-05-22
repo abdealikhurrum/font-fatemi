@@ -19,6 +19,8 @@ FILTER  (pipe a file through — auto-detected when stdin is not a tty)
 import sys
 import unicodedata
 
+OPTION_KEY_GLYPH = "⌥"
+
 
 def lookup(text: str) -> str:
     """Per-character breakdown with Unicode names."""
@@ -42,6 +44,9 @@ def filter_escape(text: str, annotate: bool = False) -> str:
     if not annotate:
         out = []
         for ch in text:
+            if ch == OPTION_KEY_GLYPH:
+                out.append(ch)
+                continue
             cp = ord(ch)
             out.append(f"\\u{{{cp:04X}}}" if cp >= 0x80 else ch)
         return "".join(out)
@@ -53,6 +58,9 @@ def filter_escape(text: str, annotate: bool = False) -> str:
         out = []
         seen = []           # preserve insertion order, deduplicate
         for ch in line:
+            if ch == OPTION_KEY_GLYPH:
+                out.append(ch)
+                continue
             cp = ord(ch)
             if cp >= 0x80:
                 out.append(f"\\u{{{cp:04X}}}")
@@ -65,8 +73,6 @@ def filter_escape(text: str, annotate: bool = False) -> str:
             escaped += "  // " + " ".join(seen)
         result.append(escaped)
     return "\n".join(result)
-
-
 def main():
     args = sys.argv[1:]
     annotate = "--annotate" in args or "-a" in args

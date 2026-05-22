@@ -382,9 +382,17 @@ def convert_pptx(src_path: str, dst_path: str):
     changed = 0
     for slide in prs.slides:
         for shape in slide.shapes:
-            if not hasattr(shape, 'has_text_frame') or not shape.has_text_frame:
+            if not getattr(shape, 'has_text_frame', False):
                 continue
-            for para in shape.text_frame.paragraphs:
+            try:
+                text_frame = shape.text_frame
+            except Exception:
+                # some shape types (group shapes, legacy placeholders) may
+                # raise when accessing text_frame; skip them safely.
+                continue
+            if text_frame is None:
+                continue
+            for para in text_frame.paragraphs:
                 before = "".join(r.text for r in para.runs)
                 # Within-run replacements
                 for run in para.runs:
@@ -430,9 +438,15 @@ def convert_pptx_reverse(src_path: str, dst_path: str):
     changed = 0
     for slide in prs.slides:
         for shape in slide.shapes:
-            if not hasattr(shape, 'has_text_frame') or not shape.has_text_frame:
+            if not getattr(shape, 'has_text_frame', False):
                 continue
-            for para in shape.text_frame.paragraphs:
+            try:
+                text_frame = shape.text_frame
+            except Exception:
+                continue
+            if text_frame is None:
+                continue
+            for para in text_frame.paragraphs:
                 before = "".join(r.text for r in para.runs)
                 # Within-run reverse replacements
                 for run in para.runs:
