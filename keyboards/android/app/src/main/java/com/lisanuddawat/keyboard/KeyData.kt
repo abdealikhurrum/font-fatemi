@@ -8,7 +8,8 @@ import android.content.Context
 enum class KeyType {
     CHARACTER, BACKSPACE, SPACE, ENTER,
     NUMERIC, ABC, GLOBE, EMOJI, DIACRITIC,
-    CURSOR_LEFT, CURSOR_RIGHT
+    CURSOR_LEFT, CURSOR_RIGHT,
+    LATIN, SHIFT
 }
 
 sealed class KeyWidth {
@@ -24,7 +25,8 @@ data class KeyData(
     val secondary: String = "",
     val alternates: List<String> = emptyList(),
     val type: KeyType = KeyType.CHARACTER,
-    val width: KeyWidth = KeyWidth.Standard
+    val width: KeyWidth = KeyWidth.Standard,
+    val longPressType: KeyType? = null
 ) {
     companion object {
         // Double-press secondaries — identical to iOS and macOS.
@@ -92,7 +94,8 @@ object KeyboardLayoutData {
         ),
         listOf(
             KeyData("١٢٣", type = KeyType.NUMERIC,   width = KeyWidth.Fixed(44f)),
-            KeyData("🌐",   type = KeyType.GLOBE,     width = KeyWidth.Fixed(44f)),
+            KeyData("AaBb", type = KeyType.LATIN,     width = KeyWidth.Fixed(44f),
+                            longPressType = KeyType.GLOBE),
             KeyData(" ",    type = KeyType.SPACE,     width = KeyWidth.Flexible,
                             alternates = listOf(" ", "‌", "ـ")),
             KeyData("تشكيل", type = KeyType.DIACRITIC, width = KeyWidth.Fixed(52f)),

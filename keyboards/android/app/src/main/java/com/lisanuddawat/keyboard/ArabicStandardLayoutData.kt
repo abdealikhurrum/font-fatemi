@@ -56,7 +56,8 @@ object ArabicStandardLayoutData {
             // Row 4
             listOf(
                 KeyData("١٢٣",   type = KeyType.NUMERIC,   width = KeyWidth.Fixed(44f)),
-                KeyData("🌐",     type = KeyType.GLOBE,     width = KeyWidth.Fixed(44f)),
+                KeyData("AaBb",  type = KeyType.LATIN,     width = KeyWidth.Fixed(44f),
+                             longPressType = KeyType.GLOBE),
                 KeyData(" ",      type = KeyType.SPACE,     width = KeyWidth.Flexible,
                                   alternates = listOf(" ", "‌", "ـ")),
                 KeyData("تشكيل", type = KeyType.DIACRITIC, width = KeyWidth.Fixed(52f)),

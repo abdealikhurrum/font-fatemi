@@ -79,4 +79,12 @@ object KeyboardSettings {
 
     fun setBiDiTooltipShown(ctx: Context) =
         prefs(ctx).edit().putBoolean("bidi_tooltip_shown", true).apply()
+
+    // ── Latin key tooltip ─────────────────────────────────────────────────
+
+    fun getLatinKeyTooltipShown(ctx: Context): Boolean =
+        prefs(ctx).getBoolean("latin_key_tooltip_shown", false)
+
+    fun setLatinKeyTooltipShown(ctx: Context) =
+        prefs(ctx).edit().putBoolean("latin_key_tooltip_shown", true).apply()
 }

@@ -229,6 +229,19 @@ class KeyboardView(context: Context) : ViewGroup(context) {
             val lp = Runnable { dismissCallout(); showPopup(key) }
             longPressRunnable = lp
             handler.postDelayed(lp, 350)
+            return
+        }
+
+        val lpt = key.keyData.longPressType
+        if (lpt != null) {
+            val lp = Runnable {
+                dismissCallout()
+                key.isKeyHighlighted = false
+                activeKey = null
+                delegate?.keyPressed(KeyData("", type = lpt))
+            }
+            longPressRunnable = lp
+            handler.postDelayed(lp, 500)
         }
     }
 

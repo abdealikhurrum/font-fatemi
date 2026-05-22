@@ -10,10 +10,15 @@ import android.widget.LinearLayout
 
 class LsdKeyboardService : InputMethodService() {
 
-    private enum class Layer { DEFAULT, NUMERIC, DIACRITIC }
+    private enum class Layer { DEFAULT, NUMERIC, DIACRITIC, LATIN }
 
     private var currentLayer = Layer.DEFAULT
         set(value) { field = value; applyLayer() }
+
+    private var latinShifted  = false
+    private var latinCapsLock = false
+    private var lastShiftTime = 0L
+    private var priorToModal  = Layer.DEFAULT
 
     private var keyboardView: KeyboardView? = null
     private var predictiveBar: PredictiveBar? = null
@@ -83,6 +88,8 @@ class LsdKeyboardService : InputMethodService() {
             }
             Layer.NUMERIC   -> KeyboardLayoutData.numericLayer
             Layer.DIACRITIC -> KeyboardLayoutData.diacriticLayer
+            Layer.LATIN     -> if (latinShifted) LatinLayoutData.upperLayer
+                               else              LatinLayoutData.lowerLayer
         }
         keyboardView?.configure(layer)
     }
@@ -193,6 +200,11 @@ class LsdKeyboardService : InputMethodService() {
                 insert(key.primary)
                 lastPressedPrimary = key.primary
                 lastKeyPressTime   = now
+
+                if (currentLayer == Layer.LATIN && latinShifted && !latinCapsLock) {
+                    latinShifted = false
+                    applyLayer()
+                }
             }
 
             KeyType.SPACE -> {
@@ -222,11 +234,38 @@ class LsdKeyboardService : InputMethodService() {
                 lastPressedPrimary = null
             }
 
-            KeyType.DIACRITIC -> currentLayer = Layer.DIACRITIC
+            KeyType.DIACRITIC -> {
+                priorToModal  = currentLayer
+                currentLayer  = Layer.DIACRITIC
+            }
 
-            KeyType.NUMERIC -> currentLayer = Layer.NUMERIC
+            KeyType.NUMERIC -> {
+                priorToModal  = currentLayer
+                currentLayer  = Layer.NUMERIC
+            }
 
-            KeyType.ABC -> currentLayer = Layer.DEFAULT
+            KeyType.ABC -> currentLayer = priorToModal.takeIf { it != Layer.NUMERIC && it != Layer.DIACRITIC } ?: Layer.DEFAULT
+
+            KeyType.LATIN -> {
+                currentLayer = Layer.LATIN
+                if (!KeyboardSettings.getLatinKeyTooltipShown(this)) {
+                    KeyboardSettings.setLatinKeyTooltipShown(this)
+                    predictiveBar?.showBriefMessage(
+                        "Hold  AaBb  to switch keyboard", durationMs = 3500)
+                }
+            }
+
+            KeyType.SHIFT -> {
+                val now = System.currentTimeMillis()
+                if (now - lastShiftTime < 350L) {
+                    latinCapsLock = !latinCapsLock
+                    latinShifted  = latinCapsLock
+                } else {
+                    if (!latinCapsLock) latinShifted = !latinShifted
+                }
+                lastShiftTime = now
+                applyLayer()
+            }
 
             KeyType.CURSOR_LEFT  -> moveCursor(KeyEvent.KEYCODE_DPAD_RIGHT)
             KeyType.CURSOR_RIGHT -> moveCursor(KeyEvent.KEYCODE_DPAD_LEFT)

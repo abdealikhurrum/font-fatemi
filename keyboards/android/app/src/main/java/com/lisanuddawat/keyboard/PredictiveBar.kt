@@ -66,7 +66,7 @@ class PredictiveBar(context: Context) : LinearLayout(context) {
         }
     }
 
-    fun showBriefMessage(msg: String) {
+    fun showBriefMessage(msg: String, durationMs: Long = 2000) {
         tooltipLabel.text       = msg
         tooltipLabel.setTextColor(KeyboardColors.keyLabel(context))
         tooltipLabel.visibility = VISIBLE
@@ -77,7 +77,7 @@ class PredictiveBar(context: Context) : LinearLayout(context) {
             tooltipLabel.animate().alpha(0f).setDuration(200).withEndAction {
                 tooltipLabel.visibility = GONE
             }.start()
-        }, 2000)
+        }, durationMs)
     }
 
     fun updateBiDi(text: String) {
