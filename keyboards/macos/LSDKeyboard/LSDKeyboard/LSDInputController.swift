@@ -212,12 +212,25 @@ final class LSDInputController: IMKInputController {
         commitSubtending()
     }
 
+    override func activateServer(_ sender: Any!) {
+        isDiacriticMode = NSEvent.modifierFlags.contains(.capsLock)
+        if isDiacriticMode {
+            DiacriticOverlayPanel.shared.showOverlay()
+        } else {
+            DiacriticOverlayPanel.shared.hideOverlay()
+        }
+    }
+
     override func deactivateServer(_ sender: Any!) {
         log.info("deactivateServer — flushing corpus")
         CorpusLogger.shared.flush()
         commitPending()
         commitSubtending()
         DiacriticOverlayPanel.shared.hideOverlay()
+    }
+
+    deinit {
+        cancelTimer()
     }
 
     // MARK: - Double-press composition lifecycle
