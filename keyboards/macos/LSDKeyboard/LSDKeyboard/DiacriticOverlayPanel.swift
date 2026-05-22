@@ -176,10 +176,10 @@ final class DiacriticOverlayPanel: NSPanel {
 
         // ── Document & literary marks ─────────────────────────────────────
         section("DOCUMENT MARKS")
-        row2("`", "\u{0614}", "takhallus",    ";", "\u{0610}", "SAWS mark")
+        row2("`", "\u{0614}", "takhallus",    ";", "\u{0610}", "SAW")
         row2("'", "\u{0611}", "AS mark",      "N", "\u{06DD}", "end of ayah")
-        row2("M", "\u{06DE}", "rub el hizb",  ",", "\u{06E9}", "sajda")
-        row2(".", "\u{0601}", "sanah",         "/", "\u{0603}", "safha")
+        row2("M", "\u{06DE}", "rub el hizb",  ",", "^صع", "SA")
+        row2(".", "\u{0613}", "RA",         "/", "^طع", "Taa Ayn with caret")
         spacer()
 
         // ── Number row — Quranic marks ────────────────────────────────────
