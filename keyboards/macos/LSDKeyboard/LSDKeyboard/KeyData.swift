@@ -295,9 +295,9 @@ extension KeyData {
         // Right hand — document marks
         45: "\u{06DD}",   // N → end of ayah
         46: "\u{06DE}",   // M → rub el hizb
-        43: "\u{06E9}",   // , → place of sajda
-        47: "\u{0601}",   // . → sanah (year sign)
-        44: "\u{0603}",   // / → safha (page sign)
+        43: "^صع",   // , → SA
+        47: "\u{0613}",   // . → radia allah anhu/ridwan ullah alayhi
+        44: "^طع",   // / → Taa Ayn with caret for easy find and replace
     ]
 
     // Subtending mark triggers (Option layer, independent of Caps Lock).
