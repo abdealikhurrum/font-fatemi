@@ -59,7 +59,7 @@
 					<string>ar</string>
 				</array>
 				<key>tsInputModeIconFileKey</key>
-				<string>LSDWindows.icns</string>
+				<string>LSDWindows</string>
 			</dict>
 			<key>com.exordiumnetworks.inputmethod.lsdkeyboard.LSDMac</key>
 			<dict>
@@ -82,7 +82,7 @@
 					<string>ar</string>
 				</array>
 				<key>tsInputModeIconFileKey</key>
-				<string>LSDMac.icns</string>
+				<string>LSDMac</string>
 			</dict>
 			<key>com.exordiumnetworks.inputmethod.lsdkeyboard.CRULP</key>
 			<dict>
@@ -105,7 +105,7 @@
 					<string>ur</string>
 				</array>
 				<key>tsInputModeIconFileKey</key>
-				<string>CRULP.icns</string>
+				<string>CRULP</string>
 			</dict>
 		</dict>
 	</dict>
