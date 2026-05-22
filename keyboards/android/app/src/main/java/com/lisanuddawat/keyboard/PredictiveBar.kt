@@ -66,6 +66,20 @@ class PredictiveBar(context: Context) : LinearLayout(context) {
         }
     }
 
+    fun showBriefMessage(msg: String) {
+        tooltipLabel.text       = msg
+        tooltipLabel.setTextColor(KeyboardColors.keyLabel(context))
+        tooltipLabel.visibility = VISIBLE
+        tooltipLabel.alpha      = 0f
+        tooltipLabel.animate().alpha(1f).setDuration(150).start()
+        tooltipLabel.removeCallbacks(null)
+        tooltipLabel.postDelayed({
+            tooltipLabel.animate().alpha(0f).setDuration(200).withEndAction {
+                tooltipLabel.visibility = GONE
+            }.start()
+        }, 2000)
+    }
+
     fun updateBiDi(text: String) {
         val issue = BiDiAnalyzer.analyze(text)
         val wasNull = currentIssue == null

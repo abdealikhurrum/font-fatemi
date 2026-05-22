@@ -69,16 +69,32 @@ object BiDiAnalyzer {
 
     fun applySmartFix(issue: Issue, ic: InputConnection) {
         when (issue.type) {
-            IssueType.TRAILING_LTR, IssueType.EMBEDDED_LTR -> insertRlmAtCursor(ic)
-            IssueType.WRONG_START                          -> insertRlmAtStart(ic)
+            IssueType.TRAILING_LTR -> fixAtTrailingBoundary(ic)
+            IssueType.EMBEDDED_LTR -> insertRlmAtCursor(ic)
+            IssueType.WRONG_START  -> insertRlmAtLineStart(ic)
         }
     }
 
-    fun insertRlmAtStart(ic: InputConnection) {
-        val before = ic.getTextBeforeCursor(10000, 0)?.toString() ?: return
-        val after  = ic.getTextAfterCursor(10000, 0)?.toString()  ?: ""
-        ic.deleteSurroundingText(before.length, after.length)
-        ic.commitText("‏$before$after", 1)
+    // Inserts RLM at the RTL→LTR boundary, not at the cursor end.
+    // e.g. "سلام 123|" → scans back past "123", re-inserts as "سلام ‏123"
+    private fun fixAtTrailingBoundary(ic: InputConnection) {
+        val before = ic.getTextBeforeCursor(200, 0)?.toString() ?: return
+        var i = before.length - 1
+        while (i >= 0 && (isLTR(before[i]) || before[i].isDigit() || before[i] == '.' || before[i] == '-')) i--
+        val ltrRun = before.substring(i + 1)
+        if (ltrRun.isEmpty()) { insertRlmAtCursor(ic); return }
+        ic.deleteSurroundingText(ltrRun.length, 0)
+        ic.commitText("‏$ltrRun", 1)
+    }
+
+    // Inserts RLM at the start of the current line only (back to last \n).
+    // Never touches text on other lines.
+    fun insertRlmAtLineStart(ic: InputConnection) {
+        val before = ic.getTextBeforeCursor(500, 0)?.toString() ?: return
+        val lineContent = before.substring(before.lastIndexOf('\n') + 1)
+        if (lineContent.isEmpty()) { ic.commitText("‏", 1); return }
+        ic.deleteSurroundingText(lineContent.length, 0)
+        ic.commitText("‏$lineContent", 1)
     }
 
     fun insertRlmAtCursor(ic: InputConnection) {

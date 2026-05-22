@@ -18,12 +18,14 @@ class BiDiFixMenu(context: Context) : FrameLayout(context) {
             parent: FrameLayout,
             issue: BiDiAnalyzer.Issue?,
             getIc: () -> InputConnection?,
+            onFixApplied: () -> Unit,
             onDismiss: () -> Unit
         ): BiDiFixMenu {
             val menu = BiDiFixMenu(parent.context)
-            menu.currentIssue = issue
-            menu.getIc        = getIc
-            menu.onDismiss    = onDismiss
+            menu.currentIssue  = issue
+            menu.getIc         = getIc
+            menu.onFixApplied  = onFixApplied
+            menu.onDismiss     = onDismiss
             parent.addView(menu, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
             val startY = parent.height.toFloat().coerceAtLeast(300f)
             menu.translationY = startY
@@ -34,19 +36,26 @@ class BiDiFixMenu(context: Context) : FrameLayout(context) {
 
     private var currentIssue: BiDiAnalyzer.Issue? = null
     private var getIc: (() -> InputConnection?)? = null
+    private var onFixApplied: (() -> Unit)? = null
     private var onDismiss: (() -> Unit)? = null
 
     init { buildUi() }
 
+    private fun applyAndDismiss(action: (InputConnection) -> Unit) {
+        val ic = getIc?.invoke() ?: return
+        action(ic)
+        onFixApplied?.invoke()
+        dismiss()
+    }
+
     private fun buildUi() {
-        // Transparent top area dismisses on tap
         setOnClickListener { dismiss() }
         setBackgroundColor(Color.TRANSPARENT)
 
         val panel = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
             setBackgroundColor(KeyboardColors.background(context))
-            setOnClickListener { /* consume — don't dismiss */ }
+            setOnClickListener { /* consume */ }
         }
         val panelLp = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         panelLp.gravity = Gravity.BOTTOM
@@ -61,7 +70,7 @@ class BiDiFixMenu(context: Context) : FrameLayout(context) {
         }
         panel.addView(content)
 
-        // Prominent Fix button
+        // Smart Fix button
         val fixBtn = TextView(context).apply {
             text      = "Fix"
             textSize  = 16f
@@ -74,9 +83,7 @@ class BiDiFixMenu(context: Context) : FrameLayout(context) {
             }
             isClickable = true; isFocusable = true
             setOnClickListener {
-                val ic = getIc?.invoke() ?: return@setOnClickListener
-                currentIssue?.let { BiDiAnalyzer.applySmartFix(it, ic) }
-                dismiss()
+                applyAndDismiss { ic -> currentIssue?.let { BiDiAnalyzer.applySmartFix(it, ic) } }
             }
         }
         val fixLp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48))
@@ -84,22 +91,22 @@ class BiDiFixMenu(context: Context) : FrameLayout(context) {
         content.addView(fixBtn, fixLp)
 
         content.addView(hairline())
-        addManualRow(content, "Fix whole message",
-            "Adds a direction mark at the very start") {
-            getIc?.invoke()?.let { BiDiAnalyzer.insertRlmAtStart(it) }
-            dismiss()
+        addManualRow(content,
+            "Fix this line",
+            "Adds a direction mark at the start of this line") {
+            applyAndDismiss { BiDiAnalyzer.insertRlmAtLineStart(it) }
         }
         content.addView(hairline())
-        addManualRow(content, "Fix at cursor",
-            "Adds a direction mark at the cursor") {
-            getIc?.invoke()?.let { BiDiAnalyzer.insertRlmAtCursor(it) }
-            dismiss()
+        addManualRow(content,
+            "Fix at cursor",
+            "Adds a direction mark at the cursor position") {
+            applyAndDismiss { BiDiAnalyzer.insertRlmAtCursor(it) }
         }
         content.addView(hairline())
-        addManualRow(content, "Mark selection as left-to-right",
-            "Isolates the selected text in LTR") {
-            getIc?.invoke()?.let { BiDiAnalyzer.wrapSelectionAsLtr(it) }
-            dismiss()
+        addManualRow(content,
+            "Mark selection as left-to-right",
+            "Wraps the selected text so it reads left-to-right") {
+            applyAndDismiss { BiDiAnalyzer.wrapSelectionAsLtr(it) }
         }
     }
 

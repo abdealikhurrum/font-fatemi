@@ -101,9 +101,12 @@ class LsdKeyboardService : InputMethodService() {
 
     private fun showBiDiMenu(root: FrameLayout, issue: BiDiAnalyzer.Issue) {
         if (biDiMenu != null) return
-        biDiMenu = BiDiFixMenu.show(root, issue, { currentInputConnection }) {
-            biDiMenu = null
-        }
+        biDiMenu = BiDiFixMenu.show(
+            root, issue,
+            getIc        = { currentInputConnection },
+            onFixApplied = { predictiveBar?.showBriefMessage("Direction mark added  ·  backspace to undo") },
+            onDismiss    = { biDiMenu = null }
+        )
     }
 
     // ── Text operations ───────────────────────────────────────────────────
