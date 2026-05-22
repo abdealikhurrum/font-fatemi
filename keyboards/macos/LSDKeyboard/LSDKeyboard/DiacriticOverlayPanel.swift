@@ -1,4 +1,5 @@
 import AppKit
+import os.log
 
 // MARK: - DiacriticOverlayPanel
 //
@@ -8,6 +9,9 @@ import AppKit
 final class DiacriticOverlayPanel: NSPanel {
 
     static let shared = DiacriticOverlayPanel()
+
+    private let log = Logger(subsystem: "com.exordiumnetworks.inputmethod.lsdkeyboard",
+                             category: "overlay")
 
     private init() {
         super.init(
@@ -33,14 +37,22 @@ final class DiacriticOverlayPanel: NSPanel {
     // MARK: - Show / Hide
 
     func showOverlay() {
-        guard let screen = NSScreen.main else { return }
+        guard let screen = NSScreen.main else {
+            log.error("showOverlay: NSScreen.main is nil")
+            return
+        }
         let vis = screen.visibleFrame
-        setFrameOrigin(NSPoint(x: vis.maxX - frame.width - 16,
-                               y: vis.minY + 16))
+        let origin = NSPoint(x: vis.maxX - frame.width - 16, y: vis.minY + 16)
+        setFrameOrigin(origin)
+        log.info("showOverlay frame=\(NSStringFromRect(self.frame), privacy: .public) screen=\(NSStringFromRect(vis), privacy: .public)")
         orderFrontRegardless()
+        log.info("showOverlay isVisible=\(self.isVisible, privacy: .public) level=\(self.level.rawValue, privacy: .public)")
     }
 
-    func hideOverlay() { orderOut(nil) }
+    func hideOverlay() {
+        log.info("hideOverlay")
+        orderOut(nil)
+    }
 
     // MARK: - Layout
 
@@ -72,6 +84,7 @@ final class DiacriticOverlayPanel: NSPanel {
         let usedH = ceil(
             tv.layoutManager?.usedRect(for: tv.textContainer!).height ?? 400
         )
+        log.info("buildContent usedH=\(usedH, privacy: .public) colW=\(colW, privacy: .public)")
 
         tv.frame  = NSRect(x: pad, y: pad, width: colW, height: usedH)
         vev.frame = NSRect(x: 0,   y: 0,
