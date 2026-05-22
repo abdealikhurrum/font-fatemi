@@ -1,6 +1,5 @@
 import Foundation
 import InputMethodKit
-import CoreGraphics
 import os.log
 
 // MARK: - LSDInputController
@@ -17,9 +16,9 @@ import os.log
 // Keys without secondaries are committed immediately (no delay, no marking).
 //
 // Caps Lock — diacritic mode:
-//   Letter keys → diacritics (symmetric across both keyboard halves).
-//   Z/X/C/V and mirror keys → cursor movement.
-//   Number row 1–7 → BiDi control characters (LRM RLM LRI RLI PDI ZWJ ZWNJ).
+//   QWERTY row → primary harakat.  ASDF row → secondary/Quranic diacritics.
+//   ZXCV row  → document/literary marks (takhallus, ayah, sanah, safha …).
+//   Number row → Quranic pause/decoration marks (U+06D6–U+06E8).
 //
 // Subtending mark composition (Option layer, independent of Caps Lock):
 //   Option+L → begin Sanah (U+0601, Arabic year sign) composition.
@@ -103,17 +102,11 @@ final class LSDInputController: IMKInputController {
 
         if isDiacriticMode && !mods.contains(.shift) && !mods.contains(.option) {
             let code = Int(event.keyCode)
-            if let selector = KeyData.diacriticArrow(forCode: code) {
-                commitPending()
-                sendArrow(selector)
-                return true
-            }
             if let char = KeyData.diacriticChar(forCode: code) {
                 commitPending()
                 insert(char)
                 return true
             }
-            // unmapped key in diacritic mode — pass through
             return false
         }
 
@@ -330,28 +323,6 @@ final class LSDInputController: IMKInputController {
             text,
             replacementRange: NSRange(location: NSNotFound, length: NSNotFound)
         )
-    }
-
-    // Synthesises an arrow-key CGEvent and posts it to the session so the
-    // focused app's text view moves the cursor.  Using CGEvent instead of
-    // perform(selector:) on the IMK proxy because the proxy does not forward
-    // arbitrary NSResponder selectors cross-process on modern macOS.
-    private func sendArrow(_ selector: String) {
-        let vk: CGKeyCode
-        switch selector {
-        case "moveLeft:":  vk = 0x7B
-        case "moveRight:": vk = 0x7C
-        case "moveDown:":  vk = 0x7D
-        case "moveUp:":    vk = 0x7E
-        default: return
-        }
-        let src = CGEventSource(stateID: .combinedSessionState)
-        if let dn = CGEvent(keyboardEventSource: src, virtualKey: vk, keyDown: true) {
-            dn.post(tap: .cgAnnotatedSessionEventTap)
-        }
-        if let up = CGEvent(keyboardEventSource: src, virtualKey: vk, keyDown: false) {
-            up.post(tap: .cgAnnotatedSessionEventTap)
-        }
     }
 
     // MARK: - Mode switching

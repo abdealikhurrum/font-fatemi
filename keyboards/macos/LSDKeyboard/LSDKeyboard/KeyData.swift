@@ -220,48 +220,66 @@ extension KeyData {
     ]
 
     // MARK: - Diacritic mode layers (Caps Lock)
-
-    // diacriticLayer: letter rows hold diacritics (symmetric); number row holds BiDi controls.
     //
-    // Letter key pairings (left ↔ right, Mac key codes):
-    //   A(0)  ↔ ;(41)   S(1)  ↔ L(37)   D(2)  ↔ K(40)   F(3)  ↔ J(38)   G(5)  ↔ H(4)
-    //   Q(12) ↔ P(35)   W(13) ↔ O(31)   E(14) ↔ I(34)   R(15) ↔ U(32)   T(16) ↔ Y(17)
-    //   [(33) ↔ ](30)   B(11) ↔ N(45)
-    //
-    // Number row (physical position → code):  1→18  2→19  3→20  4→21  5→23  6→22  7→26
+    // Four zones (Mac key codes):
+    //   Number row  — Quranic pause/decoration marks (U+06D6–U+06E8)
+    //   QWERTY row  — Primary harakat
+    //   ASDF row    — Secondary / small Quranic diacritics
+    //   ZXCV row    — Document & literary marks (takhallus, ayah, sanah, safha …)
     private static let diacriticLayer: [Int: String] = [
-        // A / ;  — fatha
-        0: "\u{064E}", 41: "\u{064E}",
-        // S / L  — kasra
-        1: "\u{0650}", 37: "\u{0650}",
-        // D / K  — damma
-        2: "\u{064F}", 40: "\u{064F}",
-        // F / J  — sukun
-        3: "\u{0652}", 38: "\u{0652}",
-        // G / H  — shadda
-        5: "\u{0651}", 4: "\u{0651}",
-        // Q / P  — fathatan
-        12: "\u{064B}", 35: "\u{064B}",
-        // W / O  — kasratan
-        13: "\u{064D}", 31: "\u{064D}",
-        // E / I  — dammatan
-        14: "\u{064C}", 34: "\u{064C}",
-        // R / U  — kharo zabar (superscript alef)
-        15: "\u{0670}", 32: "\u{0670}",
-        // T / Y  — maddah
-        16: "\u{0653}", 17: "\u{0653}",
-        // [ / ]  — hamza above
-        33: "\u{0654}", 30: "\u{0654}",
-        // B / N  — hamza below
-        11: "\u{0655}", 45: "\u{0655}",
-        // Number row — BiDi control characters
-        18: "\u{200E}",   // 1 → LRM  (Left-to-Right Mark)
-        19: "\u{200F}",   // 2 → RLM  (Right-to-Left Mark)
-        20: "\u{2066}",   // 3 → LRI  (Left-to-Right Isolate)
-        21: "\u{2067}",   // 4 → RLI  (Right-to-Left Isolate)
-        23: "\u{2069}",   // 5 → PDI  (Pop Directional Isolate)
-        22: "\u{200D}",   // 6 → ZWJ  (Zero Width Joiner)
-        26: "\u{200C}",   // 7 → ZWNJ (Zero Width Non-Joiner)
+        // ── Number row — Quranic marks ────────────────────────────────────
+        18: "\u{06D6}",   // 1 → U+06D6 small high ligature sad-lam-alef-maksura
+        19: "\u{06D7}",   // 2 → U+06D7 small high ligature qaf-lam-alef-maksura
+        20: "\u{06D8}",   // 3 → U+06D8 small high meem initial form
+        21: "\u{06D9}",   // 4 → U+06D9 small high lam alef
+        23: "\u{06DA}",   // 5 → U+06DA small high jeem
+        22: "\u{06DB}",   // 6 → U+06DB small high three dots
+        26: "\u{06DC}",   // 7 → U+06DC small high seen
+        28: "\u{06DF}",   // 8 → U+06DF small high rounded zero
+        25: "\u{06E0}",   // 9 → U+06E0 small high upright rectangular zero
+        29: "\u{06E1}",   // 0 → U+06E1 small high dotless head of khah
+        27: "\u{06E2}",   // - → U+06E2 small high meem isolated form
+        24: "\u{06E8}",   // = → U+06E8 small high noon
+
+        // ── QWERTY row — primary harakat ──────────────────────────────────
+        12: "\u{064E}",   // Q → fatha
+        13: "\u{064B}",   // W → fathatan
+        14: "\u{064F}",   // E → damma
+        15: "\u{064C}",   // R → dammatan
+        16: "\u{0650}",   // T → kasra
+        17: "\u{064D}",   // Y → kasratan
+        32: "\u{0652}",   // U → sukun
+        34: "\u{0651}",   // I → shadda
+        31: "\u{0653}",   // O → maddah above
+        35: "\u{0670}",   // P → kharo zabar (superscript alef)
+        33: "\u{0654}",   // [ → hamza above
+        30: "\u{0655}",   // ] → hamza below
+
+        // ── ASDF row — secondary / small Quranic diacritics ───────────────
+        0:  "\u{0618}",   // A → arabic small fatha
+        1:  "\u{061A}",   // S → arabic small kasra
+        2:  "\u{0619}",   // D → arabic small damma
+        3:  "\u{0615}",   // F → arabic small high tah
+        5:  "\u{06E4}",   // G → arabic small high madda
+        4:  "\u{06E3}",   // H → arabic small low seen
+        38: "\u{06E7}",   // J → arabic small high yeh
+        40: "\u{06E5}",   // K → arabic small waw
+        37: "\u{06E6}",   // L → arabic small yeh
+        41: "\u{06ED}",   // ; → arabic small low meem
+        39: "\u{0616}",   // ' → arabic small high lig alef-lam-yeh
+
+        // ── ZXCV row — document & literary marks ──────────────────────────
+        50: "\u{0614}",   // ` → takhallus (U+0614 arabic sign high waqf)
+        6:  "\u{06DD}",   // Z → end of ayah
+        7:  "\u{06DE}",   // X → rub el hizb
+        8:  "\u{06E9}",   // C → place of sajda
+        9:  "\u{0601}",   // V → sanah (year sign)
+        11: "\u{0603}",   // B → safha (page sign)
+        45: "\u{0610}",   // N → SAWS mark (☮ on prophet's name)
+        46: "\u{0611}",   // M → AS mark (on companion's name)
+        43: "\u{0640}",   // , → tatweel (kashida)
+        47: "\u{200D}",   // . → ZWJ (zero-width joiner)
+        44: "\u{200C}",   // / → ZWNJ (zero-width non-joiner)
     ]
 
     // Subtending mark triggers (Option layer, independent of Caps Lock).
@@ -276,24 +294,8 @@ extension KeyData {
         return optionSubtendingLayer[code]
     }
 
-    // diacriticArrowLayer: maps code to NSResponder selector string (symmetric).
-    //   Z(6)  / /(44) → moveLeft:
-    //   X(7)  / .(47) → moveUp:
-    //   C(8)  / ,(43) → moveDown:
-    //   V(9)  / M(46) → moveRight:
-    private static let diacriticArrowLayer: [Int: String] = [
-        6: "moveLeft:",  44: "moveLeft:",
-        7: "moveUp:",    47: "moveUp:",
-        8: "moveDown:",  43: "moveDown:",
-        9: "moveRight:", 46: "moveRight:",
-    ]
-
     static func diacriticChar(forCode code: Int) -> String? {
         return diacriticLayer[code]
-    }
-
-    static func diacriticArrow(forCode code: Int) -> String? {
-        return diacriticArrowLayer[code]
     }
 }
 
