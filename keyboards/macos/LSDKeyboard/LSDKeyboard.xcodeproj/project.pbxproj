@@ -16,6 +16,8 @@
 		AA000026 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA000017 /* Cocoa.framework */; };
 		AA000028 /* KeyboardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000019 /* KeyboardSettings.swift */; };
 		AA00002C /* DiacriticOverlayPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00002B /* DiacriticOverlayPanel.swift */; };
+		AA000062 /* Lisan ud Dawat - Mac.keylayout in Resources */ = {isa = PBXBuildFile; fileRef = AA000060 /* Lisan ud Dawat - Mac.keylayout */; };
+		AA000063 /* Lisan ud Dawat - AK.keylayout in Resources */ = {isa = PBXBuildFile; fileRef = AA000061 /* Lisan ud Dawat - AK.keylayout */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		AA000018 /* CorpusLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpusLogger.swift; sourceTree = "<group>"; };
 		AA000019 /* KeyboardSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettings.swift; sourceTree = "<group>"; };
 		AA00002B /* DiacriticOverlayPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiacriticOverlayPanel.swift; sourceTree = "<group>"; };
+		AA000060 /* Lisan ud Dawat - Mac.keylayout */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lisan ud Dawat - Mac.keylayout"; sourceTree = "<group>"; };
+		AA000061 /* Lisan ud Dawat - AK.keylayout */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lisan ud Dawat - AK.keylayout"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -69,6 +73,8 @@
 				AA000018 /* CorpusLogger.swift */,
 				AA000019 /* KeyboardSettings.swift */,
 				AA00002B /* DiacriticOverlayPanel.swift */,
+				AA000060 /* Lisan ud Dawat - Mac.keylayout */,
+				AA000061 /* Lisan ud Dawat - AK.keylayout */,
 				AA000014 /* Info.plist */,
 			);
 			path = LSDKeyboard;
@@ -152,6 +158,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA000062 /* Lisan ud Dawat - Mac.keylayout in Resources */,
+				AA000063 /* Lisan ud Dawat - AK.keylayout in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

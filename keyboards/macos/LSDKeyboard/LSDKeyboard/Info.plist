@@ -46,6 +46,8 @@
 				<string>ar</string>
 				<key>tsInputModeAlternateMenuItemNameKey</key>
 				<string>LSD</string>
+				<key>tsInputModeKeyLayoutKey</key>
+				<string>Lisan ud Dawat - AK</string>
 				<key>tsInputModeDefaultStateKey</key>
 				<true/>
 				<key>tsInputModeIsVisibleKey</key>
@@ -71,6 +73,8 @@
 				<string>ar</string>
 				<key>tsInputModeAlternateMenuItemNameKey</key>
 				<string>LSD-Mac</string>
+				<key>tsInputModeKeyLayoutKey</key>
+				<string>Lisan ud Dawat - Mac</string>
 				<key>tsInputModeDefaultStateKey</key>
 				<false/>
 				<key>tsInputModeIsVisibleKey</key>
@@ -96,6 +100,8 @@
 				<string>ur</string>
 				<key>tsInputModeAlternateMenuItemNameKey</key>
 				<string>CRULP</string>
+				<key>tsInputModeKeyLayoutKey</key>
+				<string>Lisan ud Dawat - AK</string>
 				<key>tsInputModeDefaultStateKey</key>
 				<false/>
 				<key>tsInputModeIsVisibleKey</key>
