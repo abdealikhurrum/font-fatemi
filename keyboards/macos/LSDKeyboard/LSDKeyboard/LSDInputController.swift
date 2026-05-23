@@ -384,64 +384,68 @@ final class LSDInputController: IMKInputController {
         menu.addItem(header)
         menu.addItem(.separator())
 
-        // Double-press enabled
+        // Double-press enabled toggle
         let dpItem = NSMenuItem(title: "Double-press", action: #selector(MenuActions.toggleDoublePress(_:)),
                                 keyEquivalent: "")
         dpItem.state  = KeyboardSettings.doublePressEnabled ? .on : .off
         dpItem.target = t
         menu.addItem(dpItem)
 
-        // Double-press delay
-        let delayItem = NSMenuItem(title: "Double-press delay", action: nil, keyEquivalent: "")
-        let delayMenu = NSMenu()
+        menu.addItem(.separator())
+
+        // Double-press delay — flat items (submenus are unreliable in IMKit)
+        let delayHeader = NSMenuItem(title: "Double-press delay", action: nil, keyEquivalent: "")
+        delayHeader.isEnabled = false
+        menu.addItem(delayHeader)
         for (index, preset) in KeyboardSettings.DelayPreset.allCases.enumerated() {
             let item = NSMenuItem(title: preset.label, action: #selector(MenuActions.setDelay(_:)),
                                   keyEquivalent: "")
-            item.tag    = index
-            item.state  = KeyboardSettings.doublePressDelayPreset == preset ? .on : .off
-            item.target = t
-            delayMenu.addItem(item)
+            item.tag              = index
+            item.state            = KeyboardSettings.doublePressDelayPreset == preset ? .on : .off
+            item.target           = t
+            item.indentationLevel = 1
+            menu.addItem(item)
         }
-        delayItem.submenu = delayMenu
-        menu.addItem(delayItem)
 
         menu.addItem(.separator())
 
-        // Double alef style
-        let alefItem = NSMenuItem(title: "Double alef (اا)", action: nil, keyEquivalent: "")
-        let alefMenu = NSMenu()
+        // Double alef style — flat items
+        let alefHeader = NSMenuItem(title: "Double alef (\u{0627}\u{0627})", action: nil, keyEquivalent: "")
+        alefHeader.isEnabled = false
+        menu.addItem(alefHeader)
         let alefOptions: [(KeyboardSettings.DoubleAlefStyle, String)] = [
-            (.kharoZabar, "اٰ  kharo zabar (default)"),
-            (.alefMadda,  "آ  alef madda"),
+            (.kharoZabar, "\u{0627}\u{0670}  kharo zabar (default)"),
+            (.alefMadda,  "\u{0622}  alef madda"),
         ]
         for (index, (style, label)) in alefOptions.enumerated() {
             let item = NSMenuItem(title: label, action: #selector(MenuActions.setDoubleAlef(_:)),
                                   keyEquivalent: "")
-            item.tag    = index
-            item.state  = KeyboardSettings.doubleAlefStyle == style ? .on : .off
-            item.target = t
-            alefMenu.addItem(item)
+            item.tag              = index
+            item.state            = KeyboardSettings.doubleAlefStyle == style ? .on : .off
+            item.target           = t
+            item.indentationLevel = 1
+            menu.addItem(item)
         }
-        alefItem.submenu = alefMenu
-        menu.addItem(alefItem)
 
-        // Urdu yeh style
-        let yehItem = NSMenuItem(title: "Urdu yeh  (CRULP)", action: nil, keyEquivalent: "")
-        let yehMenu = NSMenu()
+        menu.addItem(.separator())
+
+        // Urdu yeh style — flat items
+        let yehHeader = NSMenuItem(title: "Urdu yeh  (CRULP)", action: nil, keyEquivalent: "")
+        yehHeader.isEnabled = false
+        menu.addItem(yehHeader)
         let yehOptions: [(KeyboardSettings.UrduYehStyle, String)] = [
-            (.farsiYeh,  "ی  Farsi yeh  (default)"),
-            (.arabicYeh, "ي  Arabic yeh"),
+            (.farsiYeh,  "\u{06CC}  Farsi yeh  (default)"),
+            (.arabicYeh, "\u{064A}  Arabic yeh"),
         ]
         for (index, (style, label)) in yehOptions.enumerated() {
             let item = NSMenuItem(title: label, action: #selector(MenuActions.setUrduYeh(_:)),
                                   keyEquivalent: "")
-            item.tag    = index
-            item.state  = KeyboardSettings.urduYehStyle == style ? .on : .off
-            item.target = t
-            yehMenu.addItem(item)
+            item.tag              = index
+            item.state            = KeyboardSettings.urduYehStyle == style ? .on : .off
+            item.target           = t
+            item.indentationLevel = 1
+            menu.addItem(item)
         }
-        yehItem.submenu = yehMenu
-        menu.addItem(yehItem)
 
         return menu
     }
