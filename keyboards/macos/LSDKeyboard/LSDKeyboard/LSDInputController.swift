@@ -397,13 +397,13 @@ final class LSDInputController: IMKInputController {
         let delayHeader = NSMenuItem(title: "Double-press delay", action: nil, keyEquivalent: "")
         delayHeader.isEnabled = false
         menu.addItem(delayHeader)
-        for (index, preset) in KeyboardSettings.DelayPreset.allCases.enumerated() {
+        for preset in KeyboardSettings.DelayPreset.allCases {
             let item = NSMenuItem(title: preset.label, action: #selector(MenuActions.setDelay(_:)),
                                   keyEquivalent: "")
-            item.tag              = index
-            item.state            = KeyboardSettings.doublePressDelayPreset == preset ? .on : .off
-            item.target           = t
-            item.indentationLevel = 1
+            item.representedObject = preset.rawValue
+            item.state             = KeyboardSettings.doublePressDelayPreset == preset ? .on : .off
+            item.target            = t
+            item.indentationLevel  = 1
             menu.addItem(item)
         }
 
@@ -417,13 +417,13 @@ final class LSDInputController: IMKInputController {
             (.kharoZabar, "\u{0627}\u{0670}  kharo zabar (default)"),
             (.alefMadda,  "\u{0622}  alef madda"),
         ]
-        for (index, (style, label)) in alefOptions.enumerated() {
+        for (style, label) in alefOptions {
             let item = NSMenuItem(title: label, action: #selector(MenuActions.setDoubleAlef(_:)),
                                   keyEquivalent: "")
-            item.tag              = index
-            item.state            = KeyboardSettings.doubleAlefStyle == style ? .on : .off
-            item.target           = t
-            item.indentationLevel = 1
+            item.representedObject = style.rawValue
+            item.state             = KeyboardSettings.doubleAlefStyle == style ? .on : .off
+            item.target            = t
+            item.indentationLevel  = 1
             menu.addItem(item)
         }
 
@@ -437,13 +437,13 @@ final class LSDInputController: IMKInputController {
             (.farsiYeh,  "\u{06CC}  Farsi/Urdu yeh  (default)"),
             (.arabicYeh, "\u{064A}  Arabic yeh"),
         ]
-        for (index, (style, label)) in yehOptions.enumerated() {
+        for (style, label) in yehOptions {
             let item = NSMenuItem(title: label, action: #selector(MenuActions.setUrduYeh(_:)),
                                   keyEquivalent: "")
-            item.tag              = index
-            item.state            = KeyboardSettings.urduYehStyle == style ? .on : .off
-            item.target           = t
-            item.indentationLevel = 1
+            item.representedObject = style.rawValue
+            item.state             = KeyboardSettings.urduYehStyle == style ? .on : .off
+            item.target            = t
+            item.indentationLevel  = 1
             menu.addItem(item)
         }
 
@@ -457,13 +457,13 @@ final class LSDInputController: IMKInputController {
             (.arabicKaaf, "\u{0643}  Arabic kaaf  (default)"),
             (.urduKaaf,   "\u{06A9}  Urdu kaaf"),
         ]
-        for (index, (style, label)) in kaafOptions.enumerated() {
+        for (style, label) in kaafOptions {
             let item = NSMenuItem(title: label, action: #selector(MenuActions.setUrduKaaf(_:)),
                                   keyEquivalent: "")
-            item.tag              = index
-            item.state            = KeyboardSettings.urduKaafStyle == style ? .on : .off
-            item.target           = t
-            item.indentationLevel = 1
+            item.representedObject = style.rawValue
+            item.state             = KeyboardSettings.urduKaafStyle == style ? .on : .off
+            item.target            = t
+            item.indentationLevel  = 1
             menu.addItem(item)
         }
 
@@ -477,13 +477,13 @@ final class LSDInputController: IMKInputController {
             (.arabicHaa, "\u{0647}  Arabic haa  (default)"),
             (.heGoal,    "\u{06C1}  Urdu he goal"),
         ]
-        for (index, (style, label)) in haaOptions.enumerated() {
+        for (style, label) in haaOptions {
             let item = NSMenuItem(title: label, action: #selector(MenuActions.setUrduHaa(_:)),
                                   keyEquivalent: "")
-            item.tag              = index
-            item.state            = KeyboardSettings.urduHaaStyle == style ? .on : .off
-            item.target           = t
-            item.indentationLevel = 1
+            item.representedObject = style.rawValue
+            item.state             = KeyboardSettings.urduHaaStyle == style ? .on : .off
+            item.target            = t
+            item.indentationLevel  = 1
             menu.addItem(item)
         }
 
@@ -497,13 +497,13 @@ final class LSDInputController: IMKInputController {
             (.arabicTaaMarbuta, "\u{0629}  Arabic taa marbuta  (default)"),
             (.urduTaaMarbuta,   "\u{06C3}  Urdu taa marbuta"),
         ]
-        for (index, (style, label)) in taaOptions.enumerated() {
+        for (style, label) in taaOptions {
             let item = NSMenuItem(title: label, action: #selector(MenuActions.setUrduTaaMarbuta(_:)),
                                   keyEquivalent: "")
-            item.tag              = index
-            item.state            = KeyboardSettings.urduTaaMarbutaStyle == style ? .on : .off
-            item.target           = t
-            item.indentationLevel = 1
+            item.representedObject = style.rawValue
+            item.state             = KeyboardSettings.urduTaaMarbutaStyle == style ? .on : .off
+            item.target            = t
+            item.indentationLevel  = 1
             menu.addItem(item)
         }
 
@@ -524,38 +524,38 @@ final class MenuActions: NSObject {
     }
 
     @objc func setDelay(_ sender: NSMenuItem) {
-        let presets = KeyboardSettings.DelayPreset.allCases
-        guard sender.tag < presets.count else { return }
-        KeyboardSettings.doublePressDelayPreset = presets[sender.tag]
+        guard let raw = sender.representedObject as? String,
+              let preset = KeyboardSettings.DelayPreset(rawValue: raw) else { return }
+        KeyboardSettings.doublePressDelayPreset = preset
     }
 
     @objc func setDoubleAlef(_ sender: NSMenuItem) {
-        let options: [KeyboardSettings.DoubleAlefStyle] = [.kharoZabar, .alefMadda]
-        guard sender.tag < options.count else { return }
-        KeyboardSettings.doubleAlefStyle = options[sender.tag]
+        guard let raw = sender.representedObject as? String,
+              let style = KeyboardSettings.DoubleAlefStyle(rawValue: raw) else { return }
+        KeyboardSettings.doubleAlefStyle = style
     }
 
     @objc func setUrduYeh(_ sender: NSMenuItem) {
-        let options: [KeyboardSettings.UrduYehStyle] = [.farsiYeh, .arabicYeh]
-        guard sender.tag < options.count else { return }
-        KeyboardSettings.urduYehStyle = options[sender.tag]
+        guard let raw = sender.representedObject as? String,
+              let style = KeyboardSettings.UrduYehStyle(rawValue: raw) else { return }
+        KeyboardSettings.urduYehStyle = style
     }
 
     @objc func setUrduKaaf(_ sender: NSMenuItem) {
-        let options: [KeyboardSettings.UrduKaafStyle] = [.arabicKaaf, .urduKaaf]
-        guard sender.tag < options.count else { return }
-        KeyboardSettings.urduKaafStyle = options[sender.tag]
+        guard let raw = sender.representedObject as? String,
+              let style = KeyboardSettings.UrduKaafStyle(rawValue: raw) else { return }
+        KeyboardSettings.urduKaafStyle = style
     }
 
     @objc func setUrduHaa(_ sender: NSMenuItem) {
-        let options: [KeyboardSettings.UrduHaaStyle] = [.arabicHaa, .heGoal]
-        guard sender.tag < options.count else { return }
-        KeyboardSettings.urduHaaStyle = options[sender.tag]
+        guard let raw = sender.representedObject as? String,
+              let style = KeyboardSettings.UrduHaaStyle(rawValue: raw) else { return }
+        KeyboardSettings.urduHaaStyle = style
     }
 
     @objc func setUrduTaaMarbuta(_ sender: NSMenuItem) {
-        let options: [KeyboardSettings.UrduTaaMarbutaStyle] = [.arabicTaaMarbuta, .urduTaaMarbuta]
-        guard sender.tag < options.count else { return }
-        KeyboardSettings.urduTaaMarbutaStyle = options[sender.tag]
+        guard let raw = sender.representedObject as? String,
+              let style = KeyboardSettings.UrduTaaMarbutaStyle(rawValue: raw) else { return }
+        KeyboardSettings.urduTaaMarbutaStyle = style
     }
 }
