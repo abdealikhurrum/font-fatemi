@@ -68,10 +68,14 @@ enum KeyboardSettings {
         set { UserDefaults.standard.set(newValue.rawValue, forKey: "double_alef_style") }
     }
 
-    // MARK: - Urdu yeh style
+    // MARK: - Character style toggles
+    //
+    // Each setting swaps an Arabic base codepoint for its Urdu/Farsi variant.
+    // Applies to ALL layouts (LSD Windows, LSD Mac, CRULP).
 
+    // Yeh: ي U+064A (Arabic) ↔ ی U+06CC (Farsi/Urdu, default)
     enum UrduYehStyle: String {
-        case farsiYeh  = "farsi_yeh"    // ی  U+06CC  (default — standard Urdu/Farsi)
+        case farsiYeh  = "farsi_yeh"    // ی  U+06CC  (default)
         case arabicYeh = "arabic_yeh"   // ي  U+064A
     }
 
@@ -81,6 +85,48 @@ enum KeyboardSettings {
                 forKey: "urdu_yeh_style") ?? "") ?? .farsiYeh
         }
         set { UserDefaults.standard.set(newValue.rawValue, forKey: "urdu_yeh_style") }
+    }
+
+    // Kaaf: ك U+0643 (Arabic, default) ↔ ک U+06A9 (Urdu)
+    enum UrduKaafStyle: String {
+        case arabicKaaf = "arabic_kaaf"  // ك  U+0643  (default)
+        case urduKaaf   = "urdu_kaaf"    // ک  U+06A9
+    }
+
+    static var urduKaafStyle: UrduKaafStyle {
+        get {
+            UrduKaafStyle(rawValue: UserDefaults.standard.string(
+                forKey: "urdu_kaaf_style") ?? "") ?? .arabicKaaf
+        }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "urdu_kaaf_style") }
+    }
+
+    // Haa: ه U+0647 (Arabic, default) ↔ ہ U+06C1 (Urdu he goal)
+    enum UrduHaaStyle: String {
+        case arabicHaa = "arabic_haa"  // ه  U+0647  (default)
+        case heGoal    = "he_goal"     // ہ  U+06C1
+    }
+
+    static var urduHaaStyle: UrduHaaStyle {
+        get {
+            UrduHaaStyle(rawValue: UserDefaults.standard.string(
+                forKey: "urdu_haa_style") ?? "") ?? .arabicHaa
+        }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "urdu_haa_style") }
+    }
+
+    // Taa marbuta: ة U+0629 (Arabic, default) ↔ ۃ U+06C3 (Urdu)
+    enum UrduTaaMarbutaStyle: String {
+        case arabicTaaMarbuta = "arabic_taa_marbuta"  // ة  U+0629  (default)
+        case urduTaaMarbuta   = "urdu_taa_marbuta"    // ۃ  U+06C3
+    }
+
+    static var urduTaaMarbutaStyle: UrduTaaMarbutaStyle {
+        get {
+            UrduTaaMarbutaStyle(rawValue: UserDefaults.standard.string(
+                forKey: "urdu_taa_marbuta_style") ?? "") ?? .arabicTaaMarbuta
+        }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "urdu_taa_marbuta_style") }
     }
 
     // MARK: - Layout

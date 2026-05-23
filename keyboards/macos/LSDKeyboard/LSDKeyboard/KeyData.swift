@@ -45,11 +45,34 @@ struct KeyData {
 //   \u{0639}\u{0639}\u{2192}\u{063A}  \u{0631}\u{0631}\u{2192}\u{0691}  \u{062A}\u{062A}\u{2192}\u{0679}  \u{062D}\u{062D}\u{2192}\u{062E}  \u{062F}\u{062F}\u{2192}\u{0688}  \u{06C1}\u{06C1}\u{2192}\u{06BE}  \u{0632}\u{0632}\u{2192}\u{0630}  \u{0634}\u{0634}\u{2192}\u{0636}  \u{0646}\u{0646}\u{2192}\u{06BA}  // ع → غ ر ڑ ت ٹ ح خ د ڈ ہ ھ ز ذ ش ض ن ں
 
 extension KeyData {
+    // Applies active character-style settings to an output character.
+    // Runs for every layout so the user can mix Urdu/Arabic codepoints as needed.
+    static func applyCharStyle(_ ch: String) -> String {
+        var r = ch
+        if KeyboardSettings.urduYehStyle      == .farsiYeh       { r = r.replacingOccurrences(of: "\u{064A}", with: "\u{06CC}") }  // ي→ی
+        if KeyboardSettings.urduKaafStyle     == .urduKaaf        { r = r.replacingOccurrences(of: "\u{0643}", with: "\u{06A9}") }  // ك→ک
+        if KeyboardSettings.urduHaaStyle      == .heGoal          { r = r.replacingOccurrences(of: "\u{0647}", with: "\u{06C1}") }  // ه→ہ
+        if KeyboardSettings.urduTaaMarbutaStyle == .urduTaaMarbuta { r = r.replacingOccurrences(of: "\u{0629}", with: "\u{06C3}") }  // ة→ۃ
+        return r
+    }
+
+    // Reverses applyCharStyle so that the secondary lookup always receives
+    // the Arabic base codepoint, regardless of active style toggles.
+    private static func unapplyCharStyle(_ ch: String) -> String {
+        var r = ch
+        if KeyboardSettings.urduYehStyle      == .farsiYeh       { r = r.replacingOccurrences(of: "\u{06CC}", with: "\u{064A}") }  // ی→ي
+        if KeyboardSettings.urduKaafStyle     == .urduKaaf        { r = r.replacingOccurrences(of: "\u{06A9}", with: "\u{0643}") }  // ک→ك
+        if KeyboardSettings.urduHaaStyle      == .heGoal          { r = r.replacingOccurrences(of: "\u{06C1}", with: "\u{0647}") }  // ہ→ه
+        if KeyboardSettings.urduTaaMarbutaStyle == .urduTaaMarbuta { r = r.replacingOccurrences(of: "\u{06C3}", with: "\u{0629}") }  // ۃ→ة
+        return r
+    }
+
     static func secondary(for char: String) -> String? {
         guard KeyboardSettings.doublePressEnabled else { return nil }
+        let base = unapplyCharStyle(char)   // always look up Arabic base forms
         switch KeyboardSettings.selectedLayout {
-        case .crulpUrdu: return crulpSecondary(for: char)
-        default:         return lsdSecondary(for: char)
+        case .crulpUrdu: return crulpSecondary(for: base)
+        default:         return lsdSecondary(for: base)
         }
     }
 
@@ -81,7 +104,7 @@ extension KeyData {
         case "\u{062A}": return "\u{0679}"  // ت ٹ
         case "\u{062D}": return "\u{062E}"  // ح خ
         case "\u{062F}": return "\u{0688}"  // د ڈ
-        case "\u{06C1}": return "\u{06BE}"   // U+06C1 he goal \u{2192} do chashmi he  // ہ ھ →
+        case "\u{0647}": return "\u{06BE}"  // ه ھ  (receives Arabic base after unapplyCharStyle)
         case "\u{0632}": return "\u{0630}"  // ز ذ
         case "\u{0634}": return "\u{0636}"  // ش ض
         case "\u{0646}": return "\u{06BA}"  // ن ں
@@ -108,19 +131,8 @@ extension KeyData {
         case (true,  false): base = shiftBase
         default:             base = normalBase
         }
-        guard var ch = base[code] else { return nil }
-        if layout == .crulpUrdu,
-           let swapped = crulpPrimarySwap[ch] { ch = swapped }
-        return ch
-    }
-
-    // Characters that differ between LSD (Windows PC) and CRULP Urdu in the primary layer.
-    // Yeh entry is conditional on urduYehStyle: farsi yeh (U+06CC) is default; arabic yeh
-    // (U+064A) leaves the base character unchanged, so we omit it from the swap map.
-    private static var crulpPrimarySwap: [String: String] {
-        var map: [String: String] = ["\u{0647}": "\u{06C1}", "\u{0643}": "\u{06A9}", "\u{0629}": "\u{06C3}"]  // ه ہ ك ک ة ۃ
-        if KeyboardSettings.urduYehStyle == .farsiYeh { map["\u{064A}"] = "\u{06CC}" }  // ي ی
-        return map
+        guard let ch = base[code] else { return nil }
+        return applyCharStyle(ch)   // apply yeh/kaaf/haa/taa-marbuta style swaps (all layouts)
     }
 
     // MARK: Windows LSD layers (default \u{2014} maqalaAra.klc)  // —
@@ -166,31 +178,60 @@ extension KeyData {
         24: "+", 25: ")", 26: "&", 27: "_", 28: "*", 29: "(",
     ]
 
-    // Layer 4 (option) \u{2014} sourced from the LSD Mac keylayout  // —
-    // Number row 1-7 carries BiDi control characters (same slot as old diacritic-mode BiDi).
+    // Layer 4 (option) — punctuation, brackets, dashes, quotation marks, BiDi controls.
+    // Keys 37 (L) and 35 (P) are intercepted by optionSubtendingLayer before this layer
+    // is consulted, so those entries are documentational only (never reached).
     private static let optionLayer: [Int: String] = [
-        49: "\u{00A0}",   // Option+Space  \u{2192} NBSP (non-breaking space)  // →
-        // Number row \u{2014} BiDi controls  // —
+        49: "\u{00A0}",   // \u{2325}Space \u{2192} NBSP  non-breaking space  // ⌥ →
+
+        // Number row \u{2014} BiDi controls on 1\u{20137}, dashes on - and =  // — –
         18: "\u{200E}",   // \u{2325}1 \u{2192} LRM   left-to-right mark  // ⌥ →
         19: "\u{200F}",   // \u{2325}2 \u{2192} RLM   right-to-left mark  // ⌥ →
         20: "\u{2066}",   // \u{2325}3 \u{2192} LRI   left-to-right isolate  // ⌥ →
         21: "\u{2067}",   // \u{2325}4 \u{2192} RLI   right-to-left isolate  // ⌥ →
         23: "\u{2069}",   // \u{2325}5 \u{2192} PDI   pop directional isolate  // ⌥ →
-        22: "\u{200C}",   // \u{2325}6 \u{2192} ZWNJ  zero-width non-joiner  // ⌥ →
-        //26: "\u{200C}",   // \u{2325}7 \u{2192}  // ⌥ →
-        // ASDF / ZXCV rows
-        0: "\u{0614}",
-        1: "\u{06D2}",  2: "\u{06CC}",  3: "\u{067E}",
-        4: "\u{0670}", 5: "\u{0653}", 6: "\u{06DA}", 7: "\u{06E8}",
-        8: "\u{0688}",  9: "\u{0691}",  11: "\u{0698}",
-        12: "\u{2018}", 13: "\u{2019}", 14: "\u{201C}", 15: "\u{201D}",
-        16: "\u{06A4}", 17: "\u{0657}",  // Y=ڤ  T=inv.damma  (16=Y 17=T)
-        25: "\u{06C2}",  26: "\u{06DE}",  27: "_",  28: "\u{0655}",
-        30: "\u{06C3}",  31: "\u{06C1}", 32: "\u{0611}", 33: "\u{0686}",  34: "\u{06BE}",
-        38: "\u{0679}",  40: "\u{06BA}",  41: "\u{06AF}",
-        44: "\u{00F7}",  45: "\u{0613}", 46: "\u{0656}",
-        37: "\u{0601}",   // \u{2325}L \u{2192} sanah subtending (also opens digit-collection mode)  // ⌥ →
-        35: "\u{0603}",   // \u{2325}P \u{2192} safha subtending (also opens digit-collection mode)  // ⌥ →
+        22: "\u{200D}",   // \u{2325}6 \u{2192} ZWJ   zero-width joiner  // ⌥ →
+        26: "\u{200C}",   // \u{2325}7 \u{2192} ZWNJ  zero-width non-joiner  // ⌥ →
+        27: "\u{2013}",   // \u{2325}- \u{2192} \u{2013}  en dash  // ⌥ → –
+        24: "\u{2014}",   // \u{2325}= \u{2192} \u{2014}  em dash  // ⌥ → —
+
+        // QWERTY row \u{2014} paired quotation marks and guillemets  // —
+        12: "\u{2018}",   // \u{2325}Q \u{2192} \u{2018}  left single quotation mark  // ⌥ → '
+        13: "\u{2019}",   // \u{2325}W \u{2192} \u{2019}  right single quotation mark  // ⌥ → '
+        14: "\u{201C}",   // \u{2325}E \u{2192} \u{201C}  left double quotation mark  // ⌥ → "
+        15: "\u{201D}",   // \u{2325}R \u{2192} \u{201D}  right double quotation mark  // ⌥ → "
+        17: "\u{2026}",   // \u{2325}T \u{2192} \u{2026}  ellipsis  // ⌥ → …
+        16: "\u{2022}",   // \u{2325}Y \u{2192} \u{2022}  bullet  // ⌥ → •
+        32: "\u{2039}",   // \u{2325}U \u{2192} \u{2039}  single guillemet \u{2190}  // ⌥ → ‹ ←
+        34: "\u{203A}",   // \u{2325}I \u{2192} \u{203A}  single guillemet \u{2192}  // ⌥ → › →
+        31: "\u{00AB}",   // \u{2325}O \u{2192} \u{00AB}  double guillemet \u{2190}  // ⌥ → « ←
+        // 35 (P) \u{2192} safha subtending (optionSubtendingLayer takes priority)  // →
+        33: "\u{FD3E}",   // \u{2325}[ \u{2192} \u{FD3E}  Arabic ornate left parenthesis  // ⌥ → ﴾
+        30: "\u{FD3F}",   // \u{2325}] \u{2192} \u{FD3F}  Arabic ornate right parenthesis  // ⌥ → ﴿
+
+        // ASDF row \u{2014} bracket pairs and Arabic punctuation  // —
+        0:  "\u{007B}",   // \u{2325}A \u{2192} {  left curly bracket  // ⌥ →
+        1:  "\u{007D}",   // \u{2325}S \u{2192} }  right curly bracket  // ⌥ →
+        2:  "\u{005B}",   // \u{2325}D \u{2192} [  left square bracket  // ⌥ →
+        3:  "\u{005D}",   // \u{2325}F \u{2192} ]  right square bracket  // ⌥ →
+        5:  "\u{003C}",   // \u{2325}G \u{2192} <  left angle  // ⌥ →
+        4:  "\u{003E}",   // \u{2325}H \u{2192} >  right angle  // ⌥ →
+        38: "\u{00A9}",   // \u{2325}J \u{2192} \u{00A9}  copyright  // ⌥ → ©
+        40: "\u{00AE}",   // \u{2325}K \u{2192} \u{00AE}  registered  // ⌥ → ®
+        // 37 (L) \u{2192} sanah subtending (optionSubtendingLayer takes priority)  // →
+        41: "\u{061B}",   // \u{2325}; \u{2192} \u{061B}  Arabic semicolon  // ⌥ → ؛
+
+        // ZXCV row \u{2014} typographic symbols and Arabic punctuation  // —
+        6:  "\u{2015}",   // \u{2325}Z \u{2192} \u{2015}  horizontal bar  // ⌥ → ―
+        7:  "\u{00B0}",   // \u{2325}X \u{2192} \u{00B0}  degree sign  // ⌥ → °
+        8:  "\u{2122}",   // \u{2325}C \u{2192} \u{2122}  trademark  // ⌥ → ™
+        9:  "\u{00B1}",   // \u{2325}V \u{2192} \u{00B1}  plus-minus  // ⌥ → ±
+        11: "\u{00D7}",   // \u{2325}B \u{2192} \u{00D7}  multiplication sign  // ⌥ → ×
+        45: "\u{00F7}",   // \u{2325}N \u{2192} \u{00F7}  division sign  // ⌥ → ÷
+        46: "\u{00B7}",   // \u{2325}M \u{2192} \u{00B7}  middle dot  // ⌥ → ·
+        43: "\u{060C}",   // \u{2325}, \u{2192} \u{060C}  Arabic comma  // ⌥ → ،
+        44: "\u{061F}",   // \u{2325}/ \u{2192} \u{061F}  Arabic question mark  // ⌥ → ؟
+        50: "\u{0640}",   // \u{2325}` \u{2192} \u{0640}  tatweel (kashida)  // ⌥ → ـ
     ]
 
     // Layer 5 (shift+option) \u{2014} sourced from the LSD Mac keylayout  // —

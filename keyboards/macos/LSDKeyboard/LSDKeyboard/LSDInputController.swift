@@ -429,12 +429,12 @@ final class LSDInputController: IMKInputController {
 
         menu.addItem(.separator())
 
-        // Urdu yeh style — flat items
-        let yehHeader = NSMenuItem(title: "Urdu yeh  (CRULP)", action: nil, keyEquivalent: "")
+        // Yeh style — flat items (applies to all layouts)
+        let yehHeader = NSMenuItem(title: "Yeh", action: nil, keyEquivalent: "")
         yehHeader.isEnabled = false
         menu.addItem(yehHeader)
         let yehOptions: [(KeyboardSettings.UrduYehStyle, String)] = [
-            (.farsiYeh,  "\u{06CC}  Farsi yeh  (default)"),
+            (.farsiYeh,  "\u{06CC}  Farsi/Urdu yeh  (default)"),
             (.arabicYeh, "\u{064A}  Arabic yeh"),
         ]
         for (index, (style, label)) in yehOptions.enumerated() {
@@ -442,6 +442,66 @@ final class LSDInputController: IMKInputController {
                                   keyEquivalent: "")
             item.tag              = index
             item.state            = KeyboardSettings.urduYehStyle == style ? .on : .off
+            item.target           = t
+            item.indentationLevel = 1
+            menu.addItem(item)
+        }
+
+        menu.addItem(.separator())
+
+        // Kaaf style — flat items
+        let kaafHeader = NSMenuItem(title: "Kaaf", action: nil, keyEquivalent: "")
+        kaafHeader.isEnabled = false
+        menu.addItem(kaafHeader)
+        let kaafOptions: [(KeyboardSettings.UrduKaafStyle, String)] = [
+            (.arabicKaaf, "\u{0643}  Arabic kaaf  (default)"),
+            (.urduKaaf,   "\u{06A9}  Urdu kaaf"),
+        ]
+        for (index, (style, label)) in kaafOptions.enumerated() {
+            let item = NSMenuItem(title: label, action: #selector(MenuActions.setUrduKaaf(_:)),
+                                  keyEquivalent: "")
+            item.tag              = index
+            item.state            = KeyboardSettings.urduKaafStyle == style ? .on : .off
+            item.target           = t
+            item.indentationLevel = 1
+            menu.addItem(item)
+        }
+
+        menu.addItem(.separator())
+
+        // Haa style — flat items
+        let haaHeader = NSMenuItem(title: "Haa", action: nil, keyEquivalent: "")
+        haaHeader.isEnabled = false
+        menu.addItem(haaHeader)
+        let haaOptions: [(KeyboardSettings.UrduHaaStyle, String)] = [
+            (.arabicHaa, "\u{0647}  Arabic haa  (default)"),
+            (.heGoal,    "\u{06C1}  Urdu he goal"),
+        ]
+        for (index, (style, label)) in haaOptions.enumerated() {
+            let item = NSMenuItem(title: label, action: #selector(MenuActions.setUrduHaa(_:)),
+                                  keyEquivalent: "")
+            item.tag              = index
+            item.state            = KeyboardSettings.urduHaaStyle == style ? .on : .off
+            item.target           = t
+            item.indentationLevel = 1
+            menu.addItem(item)
+        }
+
+        menu.addItem(.separator())
+
+        // Taa marbuta style — flat items
+        let taaHeader = NSMenuItem(title: "Taa marbuta", action: nil, keyEquivalent: "")
+        taaHeader.isEnabled = false
+        menu.addItem(taaHeader)
+        let taaOptions: [(KeyboardSettings.UrduTaaMarbutaStyle, String)] = [
+            (.arabicTaaMarbuta, "\u{0629}  Arabic taa marbuta  (default)"),
+            (.urduTaaMarbuta,   "\u{06C3}  Urdu taa marbuta"),
+        ]
+        for (index, (style, label)) in taaOptions.enumerated() {
+            let item = NSMenuItem(title: label, action: #selector(MenuActions.setUrduTaaMarbuta(_:)),
+                                  keyEquivalent: "")
+            item.tag              = index
+            item.state            = KeyboardSettings.urduTaaMarbutaStyle == style ? .on : .off
             item.target           = t
             item.indentationLevel = 1
             menu.addItem(item)
@@ -479,5 +539,23 @@ final class MenuActions: NSObject {
         let options: [KeyboardSettings.UrduYehStyle] = [.farsiYeh, .arabicYeh]
         guard sender.tag < options.count else { return }
         KeyboardSettings.urduYehStyle = options[sender.tag]
+    }
+
+    @objc func setUrduKaaf(_ sender: NSMenuItem) {
+        let options: [KeyboardSettings.UrduKaafStyle] = [.arabicKaaf, .urduKaaf]
+        guard sender.tag < options.count else { return }
+        KeyboardSettings.urduKaafStyle = options[sender.tag]
+    }
+
+    @objc func setUrduHaa(_ sender: NSMenuItem) {
+        let options: [KeyboardSettings.UrduHaaStyle] = [.arabicHaa, .heGoal]
+        guard sender.tag < options.count else { return }
+        KeyboardSettings.urduHaaStyle = options[sender.tag]
+    }
+
+    @objc func setUrduTaaMarbuta(_ sender: NSMenuItem) {
+        let options: [KeyboardSettings.UrduTaaMarbutaStyle] = [.arabicTaaMarbuta, .urduTaaMarbuta]
+        guard sender.tag < options.count else { return }
+        KeyboardSettings.urduTaaMarbutaStyle = options[sender.tag]
     }
 }
