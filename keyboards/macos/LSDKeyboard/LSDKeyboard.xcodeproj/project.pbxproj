@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A97A9362FC15F2600A5E4A0 /* IMKSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7A97A9352FC15F2600A5E4A0 /* IMKSwift */; };
 		AA000020 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000010 /* main.swift */; };
 		AA000021 /* LSDInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000011 /* LSDInputController.swift */; };
 		AA000022 /* KeyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000012 /* KeyData.swift */; };
@@ -32,8 +33,8 @@
 		AA000018 /* CorpusLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpusLogger.swift; sourceTree = "<group>"; };
 		AA000019 /* KeyboardSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettings.swift; sourceTree = "<group>"; };
 		AA00002B /* DiacriticOverlayPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiacriticOverlayPanel.swift; sourceTree = "<group>"; };
-		AA000060 /* Lisan ud Dawat - Mac.keylayout */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lisan ud Dawat - Mac.keylayout"; sourceTree = "<group>"; };
-		AA000061 /* Lisan ud Dawat - AK.keylayout */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lisan ud Dawat - AK.keylayout"; sourceTree = "<group>"; };
+		AA000060 /* Lisan ud Dawat - Mac.keylayout */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Lisan ud Dawat - Mac.keylayout"; sourceTree = "<group>"; };
+		AA000061 /* Lisan ud Dawat - AK.keylayout */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Lisan ud Dawat - AK.keylayout"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -47,6 +48,7 @@
 			files = (
 				AA000025 /* InputMethodKit.framework in Frameworks */,
 				AA000026 /* Cocoa.framework in Frameworks */,
+				7A97A9362FC15F2600A5E4A0 /* IMKSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +146,9 @@
 				Base,
 			);
 			mainGroup = AA000003;
+			packageReferences = (
+				7A97A9342FC15F2600A5E4A0 /* XCRemoteSwiftPackageReference "IMKSwift" */,
+			);
 			productRefGroup = AA000007 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -346,6 +351,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7A97A9342FC15F2600A5E4A0 /* XCRemoteSwiftPackageReference "IMKSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vChewing/IMKSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 26.3.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7A97A9352FC15F2600A5E4A0 /* IMKSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7A97A9342FC15F2600A5E4A0 /* XCRemoteSwiftPackageReference "IMKSwift" */;
+			productName = IMKSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AA000001 /* Project object */;
 }

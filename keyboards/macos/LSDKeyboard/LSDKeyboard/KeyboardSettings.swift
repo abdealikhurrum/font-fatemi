@@ -73,16 +73,16 @@ enum KeyboardSettings {
     // Each setting swaps an Arabic base codepoint for its Urdu/Farsi variant.
     // Applies to ALL layouts (LSD Windows, LSD Mac, CRULP).
 
-    // Yeh: ي U+064A (Arabic) ↔ ی U+06CC (Farsi/Urdu, default)
+    // Yeh: ي U+064A (Arabic, default) ↔ ی U+06CC (Farsi/Urdu)
     enum UrduYehStyle: String {
-        case farsiYeh  = "farsi_yeh"    // ی  U+06CC  (default)
-        case arabicYeh = "arabic_yeh"   // ي  U+064A
+        case farsiYeh  = "farsi_yeh"    // ی  U+06CC
+        case arabicYeh = "arabic_yeh"   // ي  U+064A (default)
     }
 
     static var urduYehStyle: UrduYehStyle {
         get {
             UrduYehStyle(rawValue: UserDefaults.standard.string(
-                forKey: "urdu_yeh_style") ?? "") ?? .farsiYeh
+                forKey: "urdu_yeh_style") ?? "") ?? .arabicYeh
         }
         set { UserDefaults.standard.set(newValue.rawValue, forKey: "urdu_yeh_style") }
     }
