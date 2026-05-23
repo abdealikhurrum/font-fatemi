@@ -52,9 +52,9 @@ final class LSDInputController: IMKInputController {
 
         // Modifier changes — handle Caps Lock and Option
         if event.type == .flagsChanged {
-            let flags   = event.modifierFlags
-            let capOn   = flags.contains(.capsLock)
-            let optOn   = flags.contains(.option)
+            let flags = event.modifierFlags
+            let capOn = flags.contains(.capsLock)
+            let optOn = flags.contains(.option)
 
             if event.keyCode == 57 {            // Caps Lock key
                 isDiacriticMode = capOn
@@ -64,11 +64,16 @@ final class LSDInputController: IMKInputController {
                 } else {
                     DiacriticOverlayPanel.shared.hideOverlay()
                 }
-            } else if isDiacriticMode && (event.keyCode == 58 || event.keyCode == 61) {
+                return true
+            }
+
+            if isDiacriticMode && (event.keyCode == 58 || event.keyCode == 61) {
                 // Left or right Option pressed/released while in diacritic mode
                 DiacriticOverlayPanel.shared.showOverlay(optionMode: optOn)
+                return true
             }
-            return true
+
+            return false   // pass all other modifier events (Shift, Cmd, Ctrl…) to the app
         }
 
         guard event.type == .keyDown else { return false }
