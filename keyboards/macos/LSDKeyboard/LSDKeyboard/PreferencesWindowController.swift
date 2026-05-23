@@ -3,8 +3,7 @@ import Cocoa
 // MARK: - PreferencesWindowController
 //
 // Process-lifetime singleton that owns the preferences window.
-// Called from the IMKit menu via MenuActions.shared — avoids the cross-process
-// target-action reliability issues with custom menu item targets.
+// Triggered from AppDelegate's NSStatusItem — in-process, always reliable.
 
 final class PreferencesWindowController: NSObject, NSWindowDelegate {
     static let shared = PreferencesWindowController()
@@ -24,8 +23,11 @@ final class PreferencesWindowController: NSObject, NSWindowDelegate {
     func showWindow() {
         if window == nil { window = makeWindow() }
         refreshControls()
-        NSApp.activate(ignoringOtherApps: true)
+        // Float above whatever app is active — LSUIElement apps don't own the
+        // key focus normally, so .floating ensures the window is visible.
+        window?.level = .floating
         window?.center()
+        NSApp.activate(ignoringOtherApps: true)
         window?.makeKeyAndOrderFront(nil)
     }
 
