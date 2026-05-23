@@ -375,187 +375,27 @@ final class LSDInputController: IMKInputController {
     // process-lifetime singleton that is never deallocated.
 
     override func menu() -> NSMenu! {
-        let t = MenuActions.shared
-
         let menu = NSMenu(title: "Lisan ud Dawat")
-
-        let header = NSMenuItem(title: "Lisan ud Dawat", action: nil, keyEquivalent: "")
-        header.isEnabled = false
-        menu.addItem(header)
-        menu.addItem(.separator())
-
-        // Double-press enabled toggle
-        let dpItem = NSMenuItem(title: "Double-press", action: #selector(MenuActions.toggleDoublePress(_:)),
-                                keyEquivalent: "")
-        dpItem.state  = KeyboardSettings.doublePressEnabled ? .on : .off
-        dpItem.target = t
-        menu.addItem(dpItem)
-
-        menu.addItem(.separator())
-
-        // Double-press delay — flat items (submenus are unreliable in IMKit)
-        let delayHeader = NSMenuItem(title: "Double-press delay", action: nil, keyEquivalent: "")
-        delayHeader.isEnabled = false
-        menu.addItem(delayHeader)
-        for preset in KeyboardSettings.DelayPreset.allCases {
-            let item = NSMenuItem(title: preset.label, action: #selector(MenuActions.setDelay(_:)),
-                                  keyEquivalent: "")
-            item.representedObject = preset.rawValue
-            item.state             = KeyboardSettings.doublePressDelayPreset == preset ? .on : .off
-            item.target            = t
-            item.indentationLevel  = 1
-            menu.addItem(item)
-        }
-
-        menu.addItem(.separator())
-
-        // Double alef style — flat items
-        let alefHeader = NSMenuItem(title: "Double alef (\u{0627}\u{0627})", action: nil, keyEquivalent: "")
-        alefHeader.isEnabled = false
-        menu.addItem(alefHeader)
-        let alefOptions: [(KeyboardSettings.DoubleAlefStyle, String)] = [
-            (.kharoZabar, "\u{0627}\u{0670}  kharo zabar (default)"),
-            (.alefMadda,  "\u{0622}  alef madda"),
-        ]
-        for (style, label) in alefOptions {
-            let item = NSMenuItem(title: label, action: #selector(MenuActions.setDoubleAlef(_:)),
-                                  keyEquivalent: "")
-            item.representedObject = style.rawValue
-            item.state             = KeyboardSettings.doubleAlefStyle == style ? .on : .off
-            item.target            = t
-            item.indentationLevel  = 1
-            menu.addItem(item)
-        }
-
-        menu.addItem(.separator())
-
-        // Yeh style — flat items (applies to all layouts)
-        let yehHeader = NSMenuItem(title: "Yeh", action: nil, keyEquivalent: "")
-        yehHeader.isEnabled = false
-        menu.addItem(yehHeader)
-        let yehOptions: [(KeyboardSettings.UrduYehStyle, String)] = [
-            (.farsiYeh,  "\u{06CC}  Farsi/Urdu yeh  (default)"),
-            (.arabicYeh, "\u{064A}  Arabic yeh"),
-        ]
-        for (style, label) in yehOptions {
-            let item = NSMenuItem(title: label, action: #selector(MenuActions.setUrduYeh(_:)),
-                                  keyEquivalent: "")
-            item.representedObject = style.rawValue
-            item.state             = KeyboardSettings.urduYehStyle == style ? .on : .off
-            item.target            = t
-            item.indentationLevel  = 1
-            menu.addItem(item)
-        }
-
-        menu.addItem(.separator())
-
-        // Kaaf style — flat items
-        let kaafHeader = NSMenuItem(title: "Kaaf", action: nil, keyEquivalent: "")
-        kaafHeader.isEnabled = false
-        menu.addItem(kaafHeader)
-        let kaafOptions: [(KeyboardSettings.UrduKaafStyle, String)] = [
-            (.arabicKaaf, "\u{0643}  Arabic kaaf  (default)"),
-            (.urduKaaf,   "\u{06A9}  Urdu kaaf"),
-        ]
-        for (style, label) in kaafOptions {
-            let item = NSMenuItem(title: label, action: #selector(MenuActions.setUrduKaaf(_:)),
-                                  keyEquivalent: "")
-            item.representedObject = style.rawValue
-            item.state             = KeyboardSettings.urduKaafStyle == style ? .on : .off
-            item.target            = t
-            item.indentationLevel  = 1
-            menu.addItem(item)
-        }
-
-        menu.addItem(.separator())
-
-        // Haa style — flat items
-        let haaHeader = NSMenuItem(title: "Haa", action: nil, keyEquivalent: "")
-        haaHeader.isEnabled = false
-        menu.addItem(haaHeader)
-        let haaOptions: [(KeyboardSettings.UrduHaaStyle, String)] = [
-            (.arabicHaa, "\u{0647}  Arabic haa  (default)"),
-            (.heGoal,    "\u{06C1}  Urdu he goal"),
-        ]
-        for (style, label) in haaOptions {
-            let item = NSMenuItem(title: label, action: #selector(MenuActions.setUrduHaa(_:)),
-                                  keyEquivalent: "")
-            item.representedObject = style.rawValue
-            item.state             = KeyboardSettings.urduHaaStyle == style ? .on : .off
-            item.target            = t
-            item.indentationLevel  = 1
-            menu.addItem(item)
-        }
-
-        menu.addItem(.separator())
-
-        // Taa marbuta style — flat items
-        let taaHeader = NSMenuItem(title: "Taa marbuta", action: nil, keyEquivalent: "")
-        taaHeader.isEnabled = false
-        menu.addItem(taaHeader)
-        let taaOptions: [(KeyboardSettings.UrduTaaMarbutaStyle, String)] = [
-            (.arabicTaaMarbuta, "\u{0629}  Arabic taa marbuta  (default)"),
-            (.urduTaaMarbuta,   "\u{06C3}  Urdu taa marbuta"),
-        ]
-        for (style, label) in taaOptions {
-            let item = NSMenuItem(title: label, action: #selector(MenuActions.setUrduTaaMarbuta(_:)),
-                                  keyEquivalent: "")
-            item.representedObject = style.rawValue
-            item.state             = KeyboardSettings.urduTaaMarbutaStyle == style ? .on : .off
-            item.target            = t
-            item.indentationLevel  = 1
-            menu.addItem(item)
-        }
-
+        let item = NSMenuItem(title: "Preferences\u{2026}",
+                              action: #selector(MenuActions.openPreferences(_:)),
+                              keyEquivalent: "")
+        item.target = MenuActions.shared
+        menu.addItem(item)
         return menu
     }
 }
 
 // MARK: - MenuActions
 //
-// Process-lifetime singleton that receives settings menu actions.
-// Must outlive any LSDInputController instance — stored as a static let.
+// Process-lifetime singleton — target for the single "Preferences…" menu item.
+// Using a persistent singleton avoids the issue where an LSDInputController
+// instance (which is per-text-context) may be deallocated before the menu
+// action fires across the TextInputMenuAgent process boundary.
 final class MenuActions: NSObject {
     static let shared = MenuActions()
     private override init() {}
 
-    @objc func toggleDoublePress(_ sender: NSMenuItem) {
-        KeyboardSettings.doublePressEnabled.toggle()
-    }
-
-    @objc func setDelay(_ sender: NSMenuItem) {
-        guard let raw = sender.representedObject as? String,
-              let preset = KeyboardSettings.DelayPreset(rawValue: raw) else { return }
-        KeyboardSettings.doublePressDelayPreset = preset
-    }
-
-    @objc func setDoubleAlef(_ sender: NSMenuItem) {
-        guard let raw = sender.representedObject as? String,
-              let style = KeyboardSettings.DoubleAlefStyle(rawValue: raw) else { return }
-        KeyboardSettings.doubleAlefStyle = style
-    }
-
-    @objc func setUrduYeh(_ sender: NSMenuItem) {
-        guard let raw = sender.representedObject as? String,
-              let style = KeyboardSettings.UrduYehStyle(rawValue: raw) else { return }
-        KeyboardSettings.urduYehStyle = style
-    }
-
-    @objc func setUrduKaaf(_ sender: NSMenuItem) {
-        guard let raw = sender.representedObject as? String,
-              let style = KeyboardSettings.UrduKaafStyle(rawValue: raw) else { return }
-        KeyboardSettings.urduKaafStyle = style
-    }
-
-    @objc func setUrduHaa(_ sender: NSMenuItem) {
-        guard let raw = sender.representedObject as? String,
-              let style = KeyboardSettings.UrduHaaStyle(rawValue: raw) else { return }
-        KeyboardSettings.urduHaaStyle = style
-    }
-
-    @objc func setUrduTaaMarbuta(_ sender: NSMenuItem) {
-        guard let raw = sender.representedObject as? String,
-              let style = KeyboardSettings.UrduTaaMarbutaStyle(rawValue: raw) else { return }
-        KeyboardSettings.urduTaaMarbutaStyle = style
+    @objc func openPreferences(_ sender: Any?) {
+        PreferencesWindowController.shared.showWindow()
     }
 }
