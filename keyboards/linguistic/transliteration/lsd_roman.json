@@ -1,0 +1,132 @@
+{
+  "_comment": "LSD → Roman transliteration rules for Lisan ud Dawat. Used for corpus labelling, search normalisation, and wordlist derivation. Scheme is practical phonemic romanisation, not ALA-LC academic notation, so that it matches what community members naturally type.",
+
+  "version": "1.0",
+
+  "graphemes": {
+    "ا": "a",
+    "أ": "a",
+    "آ": "aa",
+    "إ": "a",
+    "اٰ": "aa",
+    "ع": "",
+    "ء": "",
+    "ؤ": "w",
+    "ئ": "y",
+
+    "ب": "b",
+    "پ": "p",
+    "ت": "t",
+    "ٹ": "t",
+    "ث": "s",
+    "ج": "j",
+    "چ": "ch",
+    "ح": "h",
+    "خ": "kh",
+    "د": "d",
+    "ڈ": "d",
+    "ذ": "z",
+    "ر": "r",
+    "ڑ": "r",
+    "ز": "z",
+    "ژ": "zh",
+    "س": "s",
+    "ش": "sh",
+    "ص": "s",
+    "ض": "z",
+    "ط": "t",
+    "ظ": "z",
+    "غ": "gh",
+    "ف": "f",
+    "ق": "q",
+    "ك": "k",
+    "ک": "k",
+    "گ": "g",
+    "ل": "l",
+    "م": "m",
+    "ن": "n",
+    "ں": "n",
+    "ه": "h",
+    "ہ": "h",
+    "ھ": "h",
+    "و": "w",
+    "ي": "y",
+    "ی": "y",
+    "ے": "e",
+    "ة": "t",
+    "ۃ": "t",
+    "ى": "a",
+
+    "لا": "la",
+    "لأ": "la",
+    "لآ": "laa",
+    "لإ": "la",
+    "لاٰ": "laa"
+  },
+
+  "diacritics": {
+    "َ":  "a",
+    "ِ":  "i",
+    "ُ":  "u",
+    "ْ":  "",
+    "ّ":  "",
+    "ً":  "an",
+    "ٍ":  "in",
+    "ٌ":  "un",
+    "ٰ":  "aa",
+    "ٓ":  "",
+    "ٔ":  "",
+    "ٕ":  ""
+  },
+
+  "context_rules": [
+    {
+      "_comment": "و as a long vowel (oo/u) at end of word or after a vowel",
+      "grapheme": "و",
+      "context": "end_of_word",
+      "roman": "u"
+    },
+    {
+      "_comment": "ی / ي at end of word is usually long-i",
+      "grapheme": "ی",
+      "context": "end_of_word",
+      "roman": "i"
+    },
+    {
+      "_comment": "ھ after a consonant indicates aspiration, not a separate h sound",
+      "grapheme": "ھ",
+      "context": "after_consonant",
+      "roman": "h"
+    }
+  ],
+
+  "honorifics": {
+    "_comment": "Ligature codepoints that should be expanded in transliteration",
+    "ﷺ": "sallallahu alayhi wa sallam",
+    "ﷻ": "jalla jalaluhu",
+    "ؓ": "razi allahu anhu",
+    "ؒ": "rahmatullahi alayh",
+    "ؑ": "alayhis salam",
+    "ؐ": "sallallahu alayhi wa sallam"
+  },
+
+  "numerals": {
+    "٠": "0",
+    "١": "1",
+    "٢": "2",
+    "٣": "3",
+    "٤": "4",
+    "٥": "5",
+    "٦": "6",
+    "٧": "7",
+    "٨": "8",
+    "٩": "9"
+  },
+
+  "punctuation": {
+    "،": ",",
+    "؟": "?",
+    "؛": ";",
+    "۔": "."
+  }
+}

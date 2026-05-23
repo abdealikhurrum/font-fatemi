@@ -1,6 +1,7 @@
 fatemimaqala/lsd.fea
 UserInterfaceState
-# Xcode
+
+# ─── Xcode ────────────────────────────────────────────────────────────────────
 */*.xcuser*/*
 *.xcuserstate
 *.xcuserdatad/
@@ -19,12 +20,14 @@ DerivedData/
 *.ipa
 *.dSYM.zip
 *.dSYM
+*.xccheckout
+*.xcscmblueprint
 
 # Xcode build output
 *build/
 *Build/
 
-# CocoaPods (if using)
+# CocoaPods
 Pods/
 # Uncomment if you commit the Podfile.lock:
 # !Podfile.lock
@@ -35,21 +38,103 @@ Pods/
 # Keep this if you want reproducible builds:
 # !Package.resolved
 
-# Fastlane (if using)
+# Carthage
+Carthage/Build/
+
+# Fastlane
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 
-# macOS
+# ─── Android ──────────────────────────────────────────────────────────────────
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Gradle
+.gradle/
+**/build/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+# Android Studio / IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Android keystore (credentials)
+*.jks
+*.keystore
+
+# NDK / CMake
+*.so
+obj/
+
+# ─── Windows ──────────────────────────────────────────────────────────────────
+# Build output
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.filters
+*.vcxproj.user
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.opendb
+
+# MSBuild / NuGet
+project.lock.json
+project.fragment.lock.json
+artifacts/
+packages/
+*.nupkg
+*.snupkg
+
+# Windows OS artifacts
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ─── macOS ────────────────────────────────────────────────────────────────────
 .DS_Store
 **/.DS_Store
 *.DS_Store*
 .AppleDouble
 .LSOverride
-Thumbs.db
+._*
 
-# Credentials / secrets (important!)
+# ─── Credentials / secrets ────────────────────────────────────────────────────
 *.p12
 *.mobileprovision
 *.certSigningRequest

@@ -1,0 +1,188 @@
+[
+  {
+    "infinitive": "کرنا",
+    "roman": "karna",
+    "meaning": "to do",
+    "forms": [
+      { "label": "stem",             "word": "کر",      "roman": "kar"      },
+      { "label": "present-m-sg",     "word": "کرتا",    "roman": "karta"    },
+      { "label": "present-f-sg",     "word": "کرتی",    "roman": "karti"    },
+      { "label": "present-pl",       "word": "کرتے",    "roman": "karte"    },
+      { "label": "past-m-sg",        "word": "کیا",     "roman": "kiya"     },
+      { "label": "past-f-sg",        "word": "کی",      "roman": "ki"       },
+      { "label": "past-pl",          "word": "کیے",     "roman": "kiye"     },
+      { "label": "future-m-sg",      "word": "کرے گا",  "roman": "karega"   },
+      { "label": "future-f-sg",      "word": "کرے گی",  "roman": "karegi"   },
+      { "label": "future-pl",        "word": "کریں گے", "roman": "karenge"  },
+      { "label": "imperative-inf",   "word": "کر",      "roman": "kar"      },
+      { "label": "imperative-mid",   "word": "کرو",     "roman": "karo"     },
+      { "label": "imperative-form",  "word": "کریں",    "roman": "karen"    },
+      { "label": "subjunctive",      "word": "کرے",     "roman": "kare"     },
+      { "label": "infinitive",       "word": "کرنا",    "roman": "karna"    }
+    ]
+  },
+  {
+    "infinitive": "ہونا",
+    "roman": "hona",
+    "meaning": "to be",
+    "forms": [
+      { "label": "present-m-sg",     "word": "ہے",      "roman": "hai"      },
+      { "label": "present-pl",       "word": "ہیں",     "roman": "hain"     },
+      { "label": "past-m-sg",        "word": "تھا",     "roman": "tha"      },
+      { "label": "past-f-sg",        "word": "تھی",     "roman": "thi"      },
+      { "label": "past-pl",          "word": "تھے",     "roman": "the"      },
+      { "label": "future-m-sg",      "word": "ہو گا",   "roman": "hoga"     },
+      { "label": "future-f-sg",      "word": "ہو گی",   "roman": "hogi"     },
+      { "label": "subjunctive",      "word": "ہو",      "roman": "ho"       },
+      { "label": "imperative-mid",   "word": "ہو",      "roman": "ho"       },
+      { "label": "imperative-form",  "word": "ہوں",     "roman": "hon"      }
+    ]
+  },
+  {
+    "infinitive": "جانا",
+    "roman": "jana",
+    "meaning": "to go",
+    "forms": [
+      { "label": "stem",             "word": "جا",      "roman": "ja"       },
+      { "label": "present-m-sg",     "word": "جاتا",    "roman": "jata"     },
+      { "label": "present-f-sg",     "word": "جاتی",    "roman": "jati"     },
+      { "label": "present-pl",       "word": "جاتے",    "roman": "jate"     },
+      { "label": "past-m-sg",        "word": "گیا",     "roman": "gaya"     },
+      { "label": "past-f-sg",        "word": "گئی",     "roman": "gayi"     },
+      { "label": "past-pl",          "word": "گئے",     "roman": "gaye"     },
+      { "label": "future-m-sg",      "word": "جائے گا", "roman": "jayega"   },
+      { "label": "future-f-sg",      "word": "جائے گی", "roman": "jayegi"   },
+      { "label": "imperative-inf",   "word": "جا",      "roman": "ja"       },
+      { "label": "imperative-mid",   "word": "جاؤ",     "roman": "jao"      },
+      { "label": "imperative-form",  "word": "جائیں",   "roman": "jayen"    },
+      { "label": "subjunctive",      "word": "جائے",    "roman": "jaye"     }
+    ]
+  },
+  {
+    "infinitive": "آنا",
+    "roman": "ana",
+    "meaning": "to come",
+    "forms": [
+      { "label": "stem",             "word": "آ",       "roman": "a"        },
+      { "label": "present-m-sg",     "word": "آتا",     "roman": "ata"      },
+      { "label": "present-f-sg",     "word": "آتی",     "roman": "ati"      },
+      { "label": "present-pl",       "word": "آتے",     "roman": "ate"      },
+      { "label": "past-m-sg",        "word": "آیا",     "roman": "aya"      },
+      { "label": "past-f-sg",        "word": "آئی",     "roman": "ayi"      },
+      { "label": "past-pl",          "word": "آئے",     "roman": "aye"      },
+      { "label": "future-m-sg",      "word": "آئے گا",  "roman": "ayega"    },
+      { "label": "imperative-inf",   "word": "آ",       "roman": "a"        },
+      { "label": "imperative-mid",   "word": "آؤ",      "roman": "ao"       },
+      { "label": "imperative-form",  "word": "آئیں",    "roman": "ayen"     },
+      { "label": "subjunctive",      "word": "آئے",     "roman": "aye"      }
+    ]
+  },
+  {
+    "infinitive": "کہنا",
+    "roman": "kehna",
+    "meaning": "to say",
+    "forms": [
+      { "label": "stem",             "word": "کہ",      "roman": "keh"      },
+      { "label": "present-m-sg",     "word": "کہتا",    "roman": "kehta"    },
+      { "label": "present-f-sg",     "word": "کہتی",    "roman": "kehti"    },
+      { "label": "present-pl",       "word": "کہتے",    "roman": "kehte"    },
+      { "label": "past-m-sg",        "word": "کہا",     "roman": "kaha"     },
+      { "label": "past-f-sg",        "word": "کہی",     "roman": "kahi"     },
+      { "label": "past-pl",          "word": "کہے",     "roman": "kahe"     },
+      { "label": "future-m-sg",      "word": "کہے گا",  "roman": "kahega"   },
+      { "label": "imperative-mid",   "word": "کہو",     "roman": "kaho"     },
+      { "label": "imperative-form",  "word": "کہیں",    "roman": "kahen"    },
+      { "label": "subjunctive",      "word": "کہے",     "roman": "kahe"     }
+    ]
+  },
+  {
+    "infinitive": "دیکھنا",
+    "roman": "dekhna",
+    "meaning": "to see",
+    "forms": [
+      { "label": "stem",             "word": "دیکھ",    "roman": "dekh"     },
+      { "label": "present-m-sg",     "word": "دیکھتا",  "roman": "dekhta"   },
+      { "label": "present-f-sg",     "word": "دیکھتی",  "roman": "dekhti"   },
+      { "label": "present-pl",       "word": "دیکھتے",  "roman": "dekhte"   },
+      { "label": "past-m-sg",        "word": "دیکھا",   "roman": "dekha"    },
+      { "label": "past-f-sg",        "word": "دیکھی",   "roman": "dekhi"    },
+      { "label": "past-pl",          "word": "دیکھے",   "roman": "dekhe"    },
+      { "label": "future-m-sg",      "word": "دیکھے گا","roman": "dekhega"  },
+      { "label": "imperative-mid",   "word": "دیکھو",   "roman": "dekho"    },
+      { "label": "imperative-form",  "word": "دیکھیں",  "roman": "dekhen"   },
+      { "label": "subjunctive",      "word": "دیکھے",   "roman": "dekhe"    }
+    ]
+  },
+  {
+    "infinitive": "لینا",
+    "roman": "lena",
+    "meaning": "to take",
+    "forms": [
+      { "label": "stem",             "word": "لے",      "roman": "le"       },
+      { "label": "present-m-sg",     "word": "لیتا",    "roman": "leta"     },
+      { "label": "present-f-sg",     "word": "لیتی",    "roman": "leti"     },
+      { "label": "present-pl",       "word": "لیتے",    "roman": "lete"     },
+      { "label": "past-m-sg",        "word": "لیا",     "roman": "liya"     },
+      { "label": "past-f-sg",        "word": "لی",      "roman": "li"       },
+      { "label": "past-pl",          "word": "لیے",     "roman": "liye"     },
+      { "label": "future-m-sg",      "word": "لے گا",   "roman": "lega"     },
+      { "label": "imperative-mid",   "word": "لو",      "roman": "lo"       },
+      { "label": "imperative-form",  "word": "لیں",     "roman": "len"      },
+      { "label": "subjunctive",      "word": "لے",      "roman": "le"       }
+    ]
+  },
+  {
+    "infinitive": "دینا",
+    "roman": "dena",
+    "meaning": "to give",
+    "forms": [
+      { "label": "stem",             "word": "دے",      "roman": "de"       },
+      { "label": "present-m-sg",     "word": "دیتا",    "roman": "deta"     },
+      { "label": "present-f-sg",     "word": "دیتی",    "roman": "deti"     },
+      { "label": "present-pl",       "word": "دیتے",    "roman": "dete"     },
+      { "label": "past-m-sg",        "word": "دیا",     "roman": "diya"     },
+      { "label": "past-f-sg",        "word": "دی",      "roman": "di"       },
+      { "label": "past-pl",          "word": "دیے",     "roman": "diye"     },
+      { "label": "future-m-sg",      "word": "دے گا",   "roman": "dega"     },
+      { "label": "imperative-mid",   "word": "دو",      "roman": "do"       },
+      { "label": "imperative-form",  "word": "دیں",     "roman": "den"      },
+      { "label": "subjunctive",      "word": "دے",      "roman": "de"       }
+    ]
+  },
+  {
+    "infinitive": "رہنا",
+    "roman": "rehna",
+    "meaning": "to stay / to be (continuous)",
+    "forms": [
+      { "label": "stem",             "word": "رہ",      "roman": "reh"      },
+      { "label": "present-m-sg",     "word": "رہتا",    "roman": "rehta"    },
+      { "label": "present-f-sg",     "word": "رہتی",    "roman": "rehti"    },
+      { "label": "present-pl",       "word": "رہتے",    "roman": "rehte"    },
+      { "label": "past-m-sg",        "word": "رہا",     "roman": "raha"     },
+      { "label": "past-f-sg",        "word": "رہی",     "roman": "rahi"     },
+      { "label": "past-pl",          "word": "رہے",     "roman": "rahe"     },
+      { "label": "future-m-sg",      "word": "رہے گا",  "roman": "rahega"   },
+      { "label": "imperative-mid",   "word": "رہو",     "roman": "raho"     },
+      { "label": "imperative-form",  "word": "رہیں",    "roman": "rahen"    },
+      { "label": "subjunctive",      "word": "رہے",     "roman": "rahe"     }
+    ]
+  },
+  {
+    "infinitive": "سمجھنا",
+    "roman": "samajhna",
+    "meaning": "to understand",
+    "forms": [
+      { "label": "stem",             "word": "سمجھ",    "roman": "samajh"   },
+      { "label": "present-m-sg",     "word": "سمجھتا",  "roman": "samajhta" },
+      { "label": "present-f-sg",     "word": "سمجھتی",  "roman": "samajhti" },
+      { "label": "present-pl",       "word": "سمجھتے",  "roman": "samajhte" },
+      { "label": "past-m-sg",        "word": "سمجھا",   "roman": "samajha"  },
+      { "label": "past-f-sg",        "word": "سمجھی",   "roman": "samajhi"  },
+      { "label": "past-pl",          "word": "سمجھے",   "roman": "samajhe"  },
+      { "label": "future-m-sg",      "word": "سمجھے گا","roman": "samajhega"},
+      { "label": "imperative-mid",   "word": "سمجھو",   "roman": "samajho"  },
+      { "label": "imperative-form",  "word": "سمجھیں",  "roman": "samajhen" },
+      { "label": "subjunctive",      "word": "سمجھے",   "roman": "samajhe"  }
+    ]
+  }
+]

@@ -1,0 +1,139 @@
+[
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "stem",
+    "urdu_word": "کر",
+    "urdu_roman": "kar",
+    "lsd_word": "كروو",
+    "lsd_roman": "karvu"
+  },
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "present-m-sg",
+    "urdu_word": "کرتا",
+    "urdu_roman": "karta",
+    "lsd_word": "كرتا",
+    "lsd_roman": "karta"
+  },
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "present-f-sg",
+    "urdu_word": "کرتی",
+    "urdu_roman": "karti",
+    "lsd_word": "كرے",
+    "lsd_roman": "kare"
+  },
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "present-pl",
+    "urdu_word": "کرتے",
+    "urdu_roman": "karte",
+    "lsd_word": "كرے",
+    "lsd_roman": "kare"
+  },
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "past-m-sg",
+    "urdu_word": "کیا",
+    "urdu_roman": "kiya",
+    "lsd_word": "كيدو",
+    "lsd_roman": "kidu"
+  },
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "past-f-sg",
+    "urdu_word": "کی",
+    "urdu_roman": "ki",
+    "lsd_word": "كيدي",
+    "lsd_roman": "kidi"
+  },
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "past-pl",
+    "urdu_word": "کیے",
+    "urdu_roman": "kiye",
+    "lsd_word": "كيدا",
+    "lsd_roman": "kida"
+  },
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "future-m-sg",
+    "urdu_word": "کرے گا",
+    "urdu_roman": "karega",
+    "lsd_word": "كرسے",
+    "lsd_roman": "karse"
+  },
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "future-f-sg",
+    "urdu_word": "کرے گی",
+    "urdu_roman": "karegi",
+    "lsd_word": "كرسے",
+    "lsd_roman": "karse"
+  },
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "future-pl",
+    "urdu_word": "کریں گے",
+    "urdu_roman": "karenge",
+    "lsd_word": "كرسے",
+    "lsd_roman": "karse"
+  },
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "imperative-inf",
+    "urdu_word": "کر",
+    "urdu_roman": "kar",
+    "lsd_word": "كر",
+    "lsd_roman": "kar"
+  },
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "imperative-mid",
+    "urdu_word": "کرو",
+    "urdu_roman": "karo",
+    "lsd_word": "كرو",
+    "lsd_roman": "karo"
+  },
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "imperative-form",
+    "urdu_word": "کریں",
+    "urdu_roman": "karen",
+    "lsd_word": "كرو",
+    "lsd_roman": "karo"
+  },
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "subjunctive",
+    "urdu_word": "کرے",
+    "urdu_roman": "kare",
+    "lsd_word": null,
+    "lsd_roman": null,
+    "skipped": true
+  },
+  {
+    "urdu_infinitive": "کرنا",
+    "urdu_meaning": "to do",
+    "urdu_label": "infinitive",
+    "urdu_word": "کرنا",
+    "urdu_roman": "karna",
+    "lsd_word": null,
+    "lsd_roman": null,
+    "skipped": true
+  }
+]
