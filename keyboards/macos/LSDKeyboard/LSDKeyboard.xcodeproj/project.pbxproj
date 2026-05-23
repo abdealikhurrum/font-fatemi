@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A97A9362FC15F2600A5E4A0 /* IMKSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7A97A9352FC15F2600A5E4A0 /* IMKSwift */; };
 		AA000020 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000010 /* main.swift */; };
 		AA000021 /* LSDInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000011 /* LSDInputController.swift */; };
 		AA000022 /* KeyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000012 /* KeyData.swift */; };
@@ -15,6 +16,11 @@
 		AA000025 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA000016 /* InputMethodKit.framework */; };
 		AA000026 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA000017 /* Cocoa.framework */; };
 		AA000028 /* KeyboardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000019 /* KeyboardSettings.swift */; };
+		AA00002C /* DiacriticOverlayPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00002B /* DiacriticOverlayPanel.swift */; };
+		AA000064 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000065 /* PreferencesWindowController.swift */; };
+		AA000066 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000067 /* AppDelegate.swift */; };
+		AA000062 /* Lisan ud Dawat - Mac.keylayout in Resources */ = {isa = PBXBuildFile; fileRef = AA000060 /* Lisan ud Dawat - Mac.keylayout */; };
+		AA000063 /* Lisan ud Dawat - AK.keylayout in Resources */ = {isa = PBXBuildFile; fileRef = AA000061 /* Lisan ud Dawat - AK.keylayout */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +34,16 @@
 		AA000017 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		AA000018 /* CorpusLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpusLogger.swift; sourceTree = "<group>"; };
 		AA000019 /* KeyboardSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettings.swift; sourceTree = "<group>"; };
+		AA00002B /* DiacriticOverlayPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiacriticOverlayPanel.swift; sourceTree = "<group>"; };
+		AA000065 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		AA000067 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA000060 /* Lisan ud Dawat - Mac.keylayout */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Lisan ud Dawat - Mac.keylayout"; sourceTree = "<group>"; };
+		AA000061 /* Lisan ud Dawat - AK.keylayout */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Lisan ud Dawat - AK.keylayout"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		7A49A04C2FBDB00400F796F1 /* Contents */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Contents; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		AA000032 /* Frameworks */ = {
@@ -37,6 +52,7 @@
 			files = (
 				AA000025 /* InputMethodKit.framework in Frameworks */,
 				AA000026 /* Cocoa.framework in Frameworks */,
+				7A97A9362FC15F2600A5E4A0 /* IMKSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,12 +71,18 @@
 		AA000004 /* LSDKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				7A49A04C2FBDB00400F796F1 /* Contents */,
 				AA000010 /* main.swift */,
 				AA000011 /* LSDInputController.swift */,
 				AA000012 /* KeyData.swift */,
 				AA000013 /* PairCollector.swift */,
 				AA000018 /* CorpusLogger.swift */,
 				AA000019 /* KeyboardSettings.swift */,
+				AA00002B /* DiacriticOverlayPanel.swift */,
+				AA000065 /* PreferencesWindowController.swift */,
+				AA000067 /* AppDelegate.swift */,
+				AA000060 /* Lisan ud Dawat - Mac.keylayout */,
+				AA000061 /* Lisan ud Dawat - AK.keylayout */,
 				AA000014 /* Info.plist */,
 			);
 			path = LSDKeyboard;
@@ -98,6 +120,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				7A49A04C2FBDB00400F796F1 /* Contents */,
+			);
 			name = LSDKeyboard;
 			productName = LSDKeyboard;
 			productReference = AA000015 /* LSDKeyboard.app */;
@@ -127,6 +152,9 @@
 				Base,
 			);
 			mainGroup = AA000003;
+			packageReferences = (
+				7A97A9342FC15F2600A5E4A0 /* XCRemoteSwiftPackageReference "IMKSwift" */,
+			);
 			productRefGroup = AA000007 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -141,6 +169,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA000062 /* Lisan ud Dawat - Mac.keylayout in Resources */,
+				AA000063 /* Lisan ud Dawat - AK.keylayout in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +187,9 @@
 				AA000023 /* PairCollector.swift in Sources */,
 				AA000024 /* CorpusLogger.swift in Sources */,
 				AA000028 /* KeyboardSettings.swift in Sources */,
+				AA00002C /* DiacriticOverlayPanel.swift in Sources */,
+				AA000064 /* PreferencesWindowController.swift in Sources */,
+				AA000066 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +227,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = K52KL4RVGR;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -215,6 +248,7 @@
 				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -234,7 +268,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = K52KL4RVGR;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -249,6 +283,7 @@
 				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
@@ -256,10 +291,13 @@
 		AA000042 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = K52KL4RVGR;
+				ENABLE_APP_SANDBOX = NO;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = LSDKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -267,8 +305,9 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.exordiumnetworks.lsdkeyboard.macos;
+				PRODUCT_BUNDLE_IDENTIFIER = com.exordiumnetworks.inputmethod.lsdkeyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -277,10 +316,12 @@
 		AA000043 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = K52KL4RVGR;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = LSDKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -288,8 +329,9 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.exordiumnetworks.lsdkeyboard.macos;
+				PRODUCT_BUNDLE_IDENTIFIER = com.exordiumnetworks.inputmethod.lsdkeyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -317,6 +359,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7A97A9342FC15F2600A5E4A0 /* XCRemoteSwiftPackageReference "IMKSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vChewing/IMKSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 26.3.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7A97A9352FC15F2600A5E4A0 /* IMKSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7A97A9342FC15F2600A5E4A0 /* XCRemoteSwiftPackageReference "IMKSwift" */;
+			productName = IMKSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AA000001 /* Project object */;
 }
