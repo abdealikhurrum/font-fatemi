@@ -45,9 +45,13 @@ final class DiacriticOverlayPanel: NSPanel {
 
     // MARK: - Show / Hide
 
-    func showOverlay(optionMode: Bool = false) {
+    func showOverlay(optionMode: Bool = false, locked: Bool = false) {
         let newContent = optionMode ? optionContent : diacriticContent
-        title = optionMode ? "Option Mode  (⌥)" : "Diacritic Mode  (⇪)"
+        if optionMode {
+            title = locked ? "Option Mode  (⌥⌥ locked)" : "Option Mode  (⌥)"
+        } else {
+            title = "Diacritic Mode  (⇪)"
+        }
 
         if contentView !== newContent {
             let sz = newContent.frame.size

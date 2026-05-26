@@ -38,6 +38,11 @@ final class LSDInputController: IMKInputController {
     private var pendingSubtendingMark: String?
     private var subtendingDigits = ""
 
+    private var isOptionHeld             = false
+    private var optionOverlayLocked      = false
+    private var optionLockedPressPending = false
+    private var optionDoublePressTimer: Timer?
+
     private let log = Logger(subsystem: "com.exordiumnetworks.inputmethod.lsdkeyboard", category: "IME")
 
     // MARK: - Key event handling
@@ -58,6 +63,7 @@ final class LSDInputController: IMKInputController {
 
             if event.keyCode == 57 {            // Caps Lock key
                 isDiacriticMode = capOn
+                cancelOptionOverlay()
                 log.info("capsLock \(capOn ? "ON" : "OFF", privacy: .public)")
                 if capOn {
                     DiacriticOverlayPanel.shared.showOverlay(optionMode: optOn)
@@ -67,10 +73,13 @@ final class LSDInputController: IMKInputController {
                 return true
             }
 
-            if isDiacriticMode && (event.keyCode == 58 || event.keyCode == 61) {
-                // Left or right Option pressed/released while in diacritic mode
-                DiacriticOverlayPanel.shared.showOverlay(optionMode: optOn)
-                return true
+            if event.keyCode == 58 || event.keyCode == 61 {  // Left or right Option
+                if isDiacriticMode {
+                    DiacriticOverlayPanel.shared.showOverlay(optionMode: optOn)
+                    return true
+                }
+                if optOn { handleOptionKeyDown() } else { handleOptionKeyUp() }
+                return false
             }
 
             return false   // pass all other modifier events (Shift, Cmd, Ctrl…) to the app
@@ -219,6 +228,7 @@ final class LSDInputController: IMKInputController {
 
     override func activateServer(_ sender: Any!) {
         isDiacriticMode = NSEvent.modifierFlags.contains(.capsLock)
+        cancelOptionOverlay()
         if isDiacriticMode {
             DiacriticOverlayPanel.shared.showOverlay()
         } else {
@@ -231,11 +241,13 @@ final class LSDInputController: IMKInputController {
         CorpusLogger.shared.flush()
         commitPending()
         commitSubtending()
+        cancelOptionOverlay()
         DiacriticOverlayPanel.shared.hideOverlay()
     }
 
     deinit {
         cancelTimer()
+        cancelOptionDoublePressTimer()
     }
 
     // MARK: - Double-press composition lifecycle
@@ -281,6 +293,61 @@ final class LSDInputController: IMKInputController {
     private func cancelTimer() {
         pendingTimer?.invalidate()
         pendingTimer = nil
+    }
+
+    // MARK: - Option-layer overlay
+    //
+    // Single press: show overlay while held, hide on release.
+    // Double press (down → up → down within doublePressWindow): lock overlay.
+    // Press once while locked: unlock and hide on release.
+
+    private func handleOptionKeyDown() {
+        isOptionHeld = true
+        if optionOverlayLocked {
+            optionLockedPressPending = true
+        } else if optionDoublePressTimer != nil {
+            cancelOptionDoublePressTimer()
+            optionOverlayLocked = true
+            DiacriticOverlayPanel.shared.showOverlay(optionMode: true, locked: true)
+        } else {
+            DiacriticOverlayPanel.shared.showOverlay(optionMode: true)
+            startOptionDoublePressTimer()
+        }
+    }
+
+    private func handleOptionKeyUp() {
+        isOptionHeld = false
+        if optionOverlayLocked {
+            if optionLockedPressPending {
+                optionLockedPressPending = false
+                optionOverlayLocked = false
+                DiacriticOverlayPanel.shared.hideOverlay()
+            }
+            // else: first UP after locking — overlay stays
+        } else {
+            DiacriticOverlayPanel.shared.hideOverlay()
+        }
+    }
+
+    private func startOptionDoublePressTimer() {
+        optionDoublePressTimer = Timer.scheduledTimer(
+            withTimeInterval: doublePressWindow,
+            repeats: false
+        ) { [weak self] _ in
+            self?.optionDoublePressTimer = nil
+        }
+    }
+
+    private func cancelOptionDoublePressTimer() {
+        optionDoublePressTimer?.invalidate()
+        optionDoublePressTimer = nil
+    }
+
+    private func cancelOptionOverlay() {
+        cancelOptionDoublePressTimer()
+        isOptionHeld             = false
+        optionOverlayLocked      = false
+        optionLockedPressPending = false
     }
 
     // MARK: - Subtending mark composition lifecycle
