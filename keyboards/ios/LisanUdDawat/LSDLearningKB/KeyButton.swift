@@ -23,9 +23,6 @@ final class KeyButton: UIView {
     private let secondaryLabel = UILabel()  // small char in top-left; double-tap inserts it
     private let badge = UIView()            // dot indicating long-press alternates exist
 
-    // Radial gradient that simulates a forward-tilted physical key face.
-    private let depthGradient = CAGradientLayer()
-
     private var isHighlighted = false {
         didSet { applyHighlight() }
     }
@@ -115,7 +112,8 @@ final class KeyButton: UIView {
             addSubview(badge)
         }
 
-        setupDepthLayers()
+        // Redraw pyramid facets when bounds change (rotation etc.)
+        contentMode = .redraw
     }
 
     override func layoutSubviews() {
@@ -129,11 +127,6 @@ final class KeyButton: UIView {
         if !keyData.alternates.isEmpty && keyData.secondary.isEmpty && keyData.type == .character {
             badge.frame = CGRect(x: bounds.width - 8, y: 4, width: 4, height: 4)
         }
-
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        depthGradient.frame = bounds
-        CATransaction.commit()
     }
 
     private func labelFont() -> UIFont {
@@ -178,46 +171,62 @@ final class KeyButton: UIView {
         backgroundColor = isHighlighted ? pressedBackground : normalBackground
     }
 
-    // MARK: - Depth layers
+    // MARK: - Pyramid facets
 
-    private func setupDepthLayers() {
-        depthGradient.type          = .radial
-        depthGradient.cornerRadius  = 5
-        depthGradient.masksToBounds = true
-        layer.addSublayer(depthGradient)
-        applyDepthColors()
-    }
+    // Four flat triangles meeting at the key centre, drawn as semi-transparent black
+    // overlays on top of the base background colour.  Each facet has a constant shade,
+    // so the seam lines between them are sharp — the "pyramidal key" look.
+    //
+    // Facet shading model (black overlay alpha):
+    //   top    — always darkest: the face that points away from the viewer
+    //   bottom — always zero:    the face pointing toward the viewer (highlight)
+    //   left   — scales with column: 0 for leftmost key (toward left thumb), max for rightmost
+    //   right  — inverse:            max for leftmost key, 0 for rightmost key
+    //
+    // Upper rows receive stronger shading to reflect the steeper physical tilt of
+    // keys that sit higher on a curved keyboard body.
 
-    private func applyDepthColors() {
-        let enabled = KeyboardSettings.angledKeysEnabled
-        depthGradient.isHidden = !enabled
-        guard enabled else { return }
+    override func draw(_ rect: CGRect) {
+        guard KeyboardSettings.angledKeysEnabled else { return }
+        guard let ctx = UIGraphicsGetCurrentContext() else { return }
 
-        // Normalised horizontal position: 0 = leftmost key, 1 = rightmost.
-        let nc = totalCols > 1 ? Double(colIndex) / Double(totalCols - 1) : 0.5
+        // Clip to the rounded key shape so facet corners don't bleed outside.
+        UIBezierPath(roundedRect: rect, cornerRadius: 5).addClip()
 
-        // Shadow corner: left-thumb keys shadow upper-right; right-thumb keys shadow
-        // upper-left; centre keys shadow top-centre.  The gradient radiates outward
-        // from that corner to the diagonally opposite (highlight) corner.
-        let shadowX = CGFloat(1 - nc)
-        depthGradient.startPoint = CGPoint(x: shadowX,     y: 0)
-        depthGradient.endPoint   = CGPoint(x: 1 - shadowX, y: 1)
+        let nc          = totalCols > 1 ? CGFloat(colIndex) / CGFloat(totalCols - 1) : 0.5
+        let rowFraction = totalRows > 1 ? CGFloat(rowIndex) / CGFloat(totalRows - 1) : 0
+        let base        = CGFloat(0.18 - Double(rowFraction) * 0.06) // 0.18 → 0.12
 
-        // Upper rows tilt more steeply toward the viewer on a curved physical keyboard.
-        let rowFraction = totalRows > 1 ? Double(rowIndex) / Double(totalRows - 1) : 0
-        let intensity   = CGFloat(0.20 - rowFraction * 0.08)  // 0.20 top row → 0.12 bottom
+        let tl = CGPoint(x: rect.minX, y: rect.minY)
+        let tr = CGPoint(x: rect.maxX, y: rect.minY)
+        let br = CGPoint(x: rect.maxX, y: rect.maxY)
+        let bl = CGPoint(x: rect.minX, y: rect.maxY)
+        let c  = CGPoint(x: rect.midX, y: rect.midY)
 
-        depthGradient.colors    = [UIColor(white: 0, alpha: intensity).cgColor,
-                                    UIColor(white: 0, alpha: 0).cgColor]
-        depthGradient.locations = [0, 1]
+        // (corner-a, corner-b, overlay-alpha) — triangle is c → a → b
+        let facets: [(CGPoint, CGPoint, CGFloat)] = [
+            (tl, tr, base),              // top face:   always shadowed
+            (tr, br, base * (1 - nc)),   // right face: bright for right-thumb keys
+            (br, bl, 0),                 // bottom face: highlight, never darkened
+            (bl, tl, base * nc),         // left face:  bright for left-thumb keys
+        ]
+
+        for (a, b, alpha) in facets {
+            ctx.setFillColor(UIColor(white: 0, alpha: alpha).cgColor)
+            ctx.beginPath()
+            ctx.move(to: c)
+            ctx.addLine(to: a)
+            ctx.addLine(to: b)
+            ctx.closePath()
+            ctx.fillPath()
+        }
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             backgroundColor = normalBackground
-            // CGColor values don't resolve dynamically — recompute on mode switch.
-            applyDepthColors()
+            setNeedsDisplay()
         }
     }
 }
