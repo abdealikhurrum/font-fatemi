@@ -46,7 +46,7 @@ enum KeyboardSettings {
     }
 
     static var urduYehStyle: UrduYehStyle {
-        get { UrduYehStyle(rawValue: UserDefaults.standard.string(forKey: "urdu_yeh_style") ?? "") ?? .farsiYeh }
+        get { UrduYehStyle(rawValue: UserDefaults.standard.string(forKey: "urdu_yeh_style") ?? "") ?? .arabicYeh }
         set { UserDefaults.standard.set(newValue.rawValue, forKey: "urdu_yeh_style") }
     }
 
@@ -61,6 +61,39 @@ enum KeyboardSettings {
         set { UserDefaults.standard.set(newValue.rawValue, forKey: "double_alef_style") }
     }
 
+    // Kaaf style: Arabic ك (U+0643) vs Urdu/Farsi ک (U+06A9).
+    enum KaafStyle: String {
+        case arabic = "arabic_kaaf"   // ك  default
+        case urdu   = "urdu_kaaf"     // ک
+    }
+
+    static var kaafStyle: KaafStyle {
+        get { KaafStyle(rawValue: UserDefaults.standard.string(forKey: "kaaf_style") ?? "") ?? .arabic }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "kaaf_style") }
+    }
+
+    // Haa style: Arabic ه (U+0647) vs Urdu He Goal ہ (U+06C1).
+    enum HaaStyle: String {
+        case arabic = "arabic_haa"    // ه  default
+        case urdu   = "urdu_haa"      // ہ
+    }
+
+    static var haaStyle: HaaStyle {
+        get { HaaStyle(rawValue: UserDefaults.standard.string(forKey: "haa_style") ?? "") ?? .arabic }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "haa_style") }
+    }
+
+    // Taa marbuta style: Arabic ة (U+0629) vs Urdu ۃ (U+06C3).
+    enum TaaMarbuta: String {
+        case arabic = "arabic_taa"    // ة  default
+        case urdu   = "urdu_taa"      // ۃ
+    }
+
+    static var taaMarbuta: TaaMarbuta {
+        get { TaaMarbuta(rawValue: UserDefaults.standard.string(forKey: "taa_marbuta") ?? "") ?? .arabic }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "taa_marbuta") }
+    }
+
     // Active keyboard layout.
     enum LayoutType: String {
         case lsd            = "lsd"
@@ -71,5 +104,37 @@ enum KeyboardSettings {
     static var selectedLayout: LayoutType {
         get { LayoutType(rawValue: UserDefaults.standard.string(forKey: "selected_layout") ?? "lsd") ?? .lsd }
         set { UserDefaults.standard.set(newValue.rawValue, forKey: "selected_layout") }
+    }
+
+    // Long-press delay before the alternate-characters popup appears.
+    // Presented as Short (0.20s) / Normal (0.35s) / Long (0.50s) in settings.
+    static var longPressDelay: TimeInterval {
+        get {
+            let v = UserDefaults.standard.double(forKey: "long_press_delay")
+            return v > 0 ? v : 0.35
+        }
+        set { UserDefaults.standard.set(newValue, forKey: "long_press_delay") }
+    }
+
+    // Interval at which a held long-press alternate auto-repeats. 0 = disabled.
+    // Presented as Off / Slow (0.25s) / Fast (0.10s) in settings.
+    static var popupRepeatInterval: TimeInterval {
+        get {
+            guard UserDefaults.standard.object(forKey: "popup_repeat_interval") != nil else { return 0.1 }
+            return UserDefaults.standard.double(forKey: "popup_repeat_interval")
+        }
+        set { UserDefaults.standard.set(newValue, forKey: "popup_repeat_interval") }
+    }
+
+    // One-time tooltip for the BiDi fix button.
+    static var biDiTooltipShown: Bool {
+        get { UserDefaults.standard.bool(forKey: "bidi_tooltip_shown") }
+        set { UserDefaults.standard.set(newValue, forKey: "bidi_tooltip_shown") }
+    }
+
+    // One-time tooltip for the Latin (AaBb) key.
+    static var latinKeyTooltipShown: Bool {
+        get { UserDefaults.standard.bool(forKey: "latin_key_tooltip_shown") }
+        set { UserDefaults.standard.set(newValue, forKey: "latin_key_tooltip_shown") }
     }
 }

@@ -46,7 +46,8 @@ final class KeyButton: UIView {
         case .character, .space:
             return KeyboardColors.characterKey
         case .backspace, .numeric, .abc, .globe, .emoji,
-             .diacritic, .cursorLeft, .cursorRight, .enter:
+             .diacritic, .cursorLeft, .cursorRight, .enter,
+             .latin, .shift:
             return KeyboardColors.specialKey
         }
     }
@@ -117,6 +118,8 @@ final class KeyButton: UIView {
             return KeyButton.fatemiFont24
         case .backspace, .enter, .cursorLeft, .cursorRight:
             return UIFont.systemFont(ofSize: 16)
+        case .shift:
+            return UIFont.systemFont(ofSize: 18)
         default:
             return UIFont.systemFont(ofSize: 14, weight: .medium)
         }

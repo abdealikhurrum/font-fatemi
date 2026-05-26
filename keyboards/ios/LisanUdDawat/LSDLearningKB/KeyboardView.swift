@@ -83,11 +83,16 @@ final class KeyboardView: UIView {
     private var keyButtons: [KeyButton] = []
     private var currentRows: [[KeyData]] = []
 
+    // MARK: - Haptic
+
+    private let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+
     // MARK: - Init
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = KeyboardColors.background
+        feedbackGenerator.prepare()
     }
 
     required init?(coder: NSCoder) { fatalError() }
@@ -242,6 +247,7 @@ final class KeyboardView: UIView {
         activeKey = key
         activeTouchBeganPoint = touch.location(in: self)
         key.setHighlighted(true)
+        feedbackGenerator.impactOccurred()
 
         // Show callout for regular character keys (not special keys)
         if key.keyData.type == .character && !key.keyData.primary.isEmpty {
@@ -256,9 +262,11 @@ final class KeyboardView: UIView {
             return
         }
 
+        let lpDelay = KeyboardSettings.longPressDelay
+
         // Long-press for character keys: show popup (if alternates exist) then fall through to repeat
         if key.keyData.type == .character {
-            longPressTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) { [weak self] _ in
+            longPressTimer = Timer.scheduledTimer(withTimeInterval: lpDelay, repeats: false) { [weak self] _ in
                 guard let self else { return }
                 self.dismissCallout()
                 if !key.keyData.alternates.isEmpty {
@@ -271,9 +279,18 @@ final class KeyboardView: UIView {
             }
         } else if !key.keyData.alternates.isEmpty {
             // Non-character keys with alternates (space bar) — popup only, no base repeat
-            longPressTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) { [weak self] _ in
+            longPressTimer = Timer.scheduledTimer(withTimeInterval: lpDelay, repeats: false) { [weak self] _ in
                 guard let self else { return }
                 self.showPopup(for: key)
+            }
+        } else if let lpt = key.keyData.longPressType {
+            // Keys with a long-press action (e.g. AaBb → globe, ع → globe)
+            longPressTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [weak self] _ in
+                guard let self else { return }
+                self.dismissCallout()
+                key.setHighlighted(false)
+                self.activeKey = nil
+                self.delegate?.keyPressed(KeyData("", type: lpt))
             }
         }
     }
@@ -351,13 +368,16 @@ final class KeyboardView: UIView {
     }
 
     // After the user holds on a popup item for 0.5s, insert it once, then keep
-    // inserting every 0.1s until the finger lifts (same feel as held backspace).
+    // inserting every `popupRepeatInterval` until the finger lifts.
+    // If the interval is 0, repeat is disabled.
     private func schedulePopupRepeat() {
+        let interval = KeyboardSettings.popupRepeatInterval
+        guard interval > 0 else { return }
         popupRepeatInitialTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [weak self] _ in
             guard let self, let char = self.activePopup?.selectedCharacter else { return }
             self.popupRepeatFired = true
             self.delegate?.longPressAlternateSelected(char)
-            self.popupRepeatTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+            self.popupRepeatTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
                 guard let self, let c = self.activePopup?.selectedCharacter else {
                     self?.cancelPopupRepeatTimers()
                     return

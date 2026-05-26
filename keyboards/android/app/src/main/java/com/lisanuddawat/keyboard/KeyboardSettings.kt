@@ -57,6 +57,48 @@ object KeyboardSettings {
     fun setDoubleAlefStyle(ctx: Context, v: DoubleAlefStyle) =
         prefs(ctx).edit().putString("double_alef_style", v.key).apply()
 
+    // ── Kaaf style ───────────────────────────────────────────────────────
+
+    enum class KaafStyle(val key: String) {
+        ARABIC_KAAF("arabic_kaaf"),   // ك  default
+        URDU_KAAF("urdu_kaaf")        // ک
+    }
+
+    fun getKaafStyle(ctx: Context): KaafStyle =
+        KaafStyle.values().firstOrNull { it.key == prefs(ctx).getString("kaaf_style", "arabic_kaaf") }
+            ?: KaafStyle.ARABIC_KAAF
+
+    fun setKaafStyle(ctx: Context, v: KaafStyle) =
+        prefs(ctx).edit().putString("kaaf_style", v.key).apply()
+
+    // ── Haa style ────────────────────────────────────────────────────────
+
+    enum class HaaStyle(val key: String) {
+        ARABIC_HAA("arabic_haa"),     // ه  default
+        URDU_HAA("urdu_haa")          // ہ
+    }
+
+    fun getHaaStyle(ctx: Context): HaaStyle =
+        HaaStyle.values().firstOrNull { it.key == prefs(ctx).getString("haa_style", "arabic_haa") }
+            ?: HaaStyle.ARABIC_HAA
+
+    fun setHaaStyle(ctx: Context, v: HaaStyle) =
+        prefs(ctx).edit().putString("haa_style", v.key).apply()
+
+    // ── Taa marbuta style ────────────────────────────────────────────────
+
+    enum class TaaMarbuta(val key: String) {
+        ARABIC_TAA("arabic_taa"),     // ة  default
+        URDU_TAA("urdu_taa")          // ۃ
+    }
+
+    fun getTaaMarbuta(ctx: Context): TaaMarbuta =
+        TaaMarbuta.values().firstOrNull { it.key == prefs(ctx).getString("taa_marbuta", "arabic_taa") }
+            ?: TaaMarbuta.ARABIC_TAA
+
+    fun setTaaMarbuta(ctx: Context, v: TaaMarbuta) =
+        prefs(ctx).edit().putString("taa_marbuta", v.key).apply()
+
     // ── Yeh style (all layouts) ──────────────────────────────────────────
 
     enum class YehStyle(val key: String) {
@@ -66,8 +108,8 @@ object KeyboardSettings {
 
     fun getYehStyle(ctx: Context): YehStyle =
         YehStyle.values().firstOrNull {
-            it.key == prefs(ctx).getString("urdu_yeh_style", "farsi_yeh")
-        } ?: YehStyle.FARSI_YEH
+            it.key == prefs(ctx).getString("urdu_yeh_style", "arabic_yeh")
+        } ?: YehStyle.ARABIC_YEH
 
     fun setYehStyle(ctx: Context, v: YehStyle) =
         prefs(ctx).edit().putString("urdu_yeh_style", v.key).apply()

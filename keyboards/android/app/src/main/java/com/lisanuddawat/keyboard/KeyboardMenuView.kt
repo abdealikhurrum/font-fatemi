@@ -15,7 +15,6 @@ class KeyboardMenuView(context: Context) : FrameLayout(context) {
     /** Called when a setting that requires a layout reload changes. */
     var onApplyLayer: (() -> Unit)? = null
 
-    private var yehStyleRow: View? = null
     private var doublePressSubSection: LinearLayout? = null
 
     companion object {
@@ -82,19 +81,6 @@ class KeyboardMenuView(context: Context) : FrameLayout(context) {
     private fun buildContent(c: LinearLayout) {
         addLayoutRow(c)
 
-        // Yeh style — global, applies to all layouts
-        yehStyleRow = addSubRow(c,
-            label  = "Default yeh",
-            items  = listOf("ی", "ي"),
-            useArabicFont = true,
-            current = if (KeyboardSettings.getYehStyle(context) == KeyboardSettings.YehStyle.FARSI_YEH) 0 else 1
-        ) { idx ->
-            KeyboardSettings.setYehStyle(context,
-                if (idx == 0) KeyboardSettings.YehStyle.FARSI_YEH
-                else          KeyboardSettings.YehStyle.ARABIC_YEH)
-            onApplyLayer?.invoke()
-        }
-
         c.addView(hairline())
 
         addToggleRow(c, "Word predictions",
@@ -104,6 +90,10 @@ class KeyboardMenuView(context: Context) : FrameLayout(context) {
         c.addView(hairline())
 
         addDoublePressSection(c)
+
+        c.addView(hairline())
+
+        addCharacterStylesSection(c)
 
         c.addView(hairline())
 
@@ -156,14 +146,6 @@ class KeyboardMenuView(context: Context) : FrameLayout(context) {
             KeyboardSettings.setDoublePressWindowMs(context, windowValues[idx])
         }
 
-        addSubRow(sub, "Double ا", listOf("اٰ", "آ"), true,
-            if (KeyboardSettings.getDoubleAlefStyle(context) == KeyboardSettings.DoubleAlefStyle.KHARO_ZABAR) 0 else 1
-        ) { idx ->
-            KeyboardSettings.setDoubleAlefStyle(context,
-                if (idx == 0) KeyboardSettings.DoubleAlefStyle.KHARO_ZABAR
-                else          KeyboardSettings.DoubleAlefStyle.ALEF_MADDA)
-        }
-
         val sw = Switch(context).apply {
             isChecked = KeyboardSettings.getDoublePressEnabled(context)
             setOnCheckedChangeListener { _, v ->
@@ -177,6 +159,48 @@ class KeyboardMenuView(context: Context) : FrameLayout(context) {
         c.addView(mainRow)
         c.addView(sub)
         doublePressSubSection = sub
+    }
+
+    private fun addCharacterStylesSection(c: LinearLayout) {
+        addSubRow(c, "Double ا",     listOf("اٰ", "آ"), true,
+            if (KeyboardSettings.getDoubleAlefStyle(context) == KeyboardSettings.DoubleAlefStyle.KHARO_ZABAR) 0 else 1
+        ) { idx ->
+            KeyboardSettings.setDoubleAlefStyle(context,
+                if (idx == 0) KeyboardSettings.DoubleAlefStyle.KHARO_ZABAR
+                else          KeyboardSettings.DoubleAlefStyle.ALEF_MADDA)
+        }
+        addSubRow(c, "Yeh",          listOf("ي", "ی"), true,
+            if (KeyboardSettings.getYehStyle(context) == KeyboardSettings.YehStyle.ARABIC_YEH) 0 else 1
+        ) { idx ->
+            KeyboardSettings.setYehStyle(context,
+                if (idx == 0) KeyboardSettings.YehStyle.ARABIC_YEH
+                else          KeyboardSettings.YehStyle.FARSI_YEH)
+            onApplyLayer?.invoke()
+        }
+        addSubRow(c, "Kaaf",         listOf("ك", "ک"), true,
+            if (KeyboardSettings.getKaafStyle(context) == KeyboardSettings.KaafStyle.ARABIC_KAAF) 0 else 1
+        ) { idx ->
+            KeyboardSettings.setKaafStyle(context,
+                if (idx == 0) KeyboardSettings.KaafStyle.ARABIC_KAAF
+                else          KeyboardSettings.KaafStyle.URDU_KAAF)
+            onApplyLayer?.invoke()
+        }
+        addSubRow(c, "Haa",          listOf("ه", "ہ"), true,
+            if (KeyboardSettings.getHaaStyle(context) == KeyboardSettings.HaaStyle.ARABIC_HAA) 0 else 1
+        ) { idx ->
+            KeyboardSettings.setHaaStyle(context,
+                if (idx == 0) KeyboardSettings.HaaStyle.ARABIC_HAA
+                else          KeyboardSettings.HaaStyle.URDU_HAA)
+            onApplyLayer?.invoke()
+        }
+        addSubRow(c, "Taa marbuta",  listOf("ة", "ۃ"), true,
+            if (KeyboardSettings.getTaaMarbuta(context) == KeyboardSettings.TaaMarbuta.ARABIC_TAA) 0 else 1
+        ) { idx ->
+            KeyboardSettings.setTaaMarbuta(context,
+                if (idx == 0) KeyboardSettings.TaaMarbuta.ARABIC_TAA
+                else          KeyboardSettings.TaaMarbuta.URDU_TAA)
+            onApplyLayer?.invoke()
+        }
     }
 
     private fun addKeyBehaviourSection(c: LinearLayout) {

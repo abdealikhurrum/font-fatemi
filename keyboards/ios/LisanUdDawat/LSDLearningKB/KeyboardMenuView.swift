@@ -9,8 +9,6 @@ final class KeyboardMenuView: UIView {
 
     private weak var customDelayRow: UIView?
     private weak var customValueLabel: UILabel?
-    private weak var alefStyleRow: UIView?
-    private weak var yehStyleRow: UIView?
 
     // MARK: - Init
 
@@ -63,7 +61,6 @@ final class KeyboardMenuView: UIView {
         scrollView.addSubview(stack)
 
         addLayoutPicker(to: stack)
-        addYehStyleRow(to: stack)
         addSeparator(to: stack)
         addToggle(to: stack,
             label: "Word predictions",
@@ -78,6 +75,10 @@ final class KeyboardMenuView: UIView {
         )
         addSeparator(to: stack)
         addDoubleTapSection(to: stack)
+        addSeparator(to: stack)
+        addCharacterStylesSection(to: stack)
+        addSeparator(to: stack)
+        addKeyBehaviourSection(to: stack)
         addSeparator(to: stack)
         addActionRow(to: stack,
             label: "Copy corpus to clipboard  (\(CorpusLogger.shared.wordCount) words)",
@@ -137,14 +138,13 @@ final class KeyboardMenuView: UIView {
         case .arabicStandard: seg.selectedSegmentIndex = 1
         case .crulpUrdu:      seg.selectedSegmentIndex = 2
         }
-        seg.addAction(UIAction { [weak self] _ in
+        seg.addAction(UIAction { _ in
             switch seg.selectedSegmentIndex {
             case 0: KeyboardSettings.selectedLayout = .lsd
             case 1: KeyboardSettings.selectedLayout = .arabicStandard
             case 2: KeyboardSettings.selectedLayout = .crulpUrdu
             default: break
             }
-            self?.yehStyleRow?.isHidden = KeyboardSettings.selectedLayout != .crulpUrdu
         }, for: .valueChanged)
 
         row.addSubview(lbl)
@@ -158,51 +158,6 @@ final class KeyboardMenuView: UIView {
             lbl.trailingAnchor.constraint(lessThanOrEqualTo: seg.leadingAnchor, constant: -8),
         ])
         stack.addArrangedSubview(row)
-    }
-
-    private func addYehStyleRow(to stack: UIStackView) {
-        let row = UIView()
-        row.translatesAutoresizingMaskIntoConstraints = false
-        row.isHidden = KeyboardSettings.selectedLayout != .crulpUrdu
-
-        let subSep = UIView()
-        subSep.backgroundColor = KeyboardColors.separator.withAlphaComponent(0.4)
-        subSep.translatesAutoresizingMaskIntoConstraints = false
-        row.addSubview(subSep)
-
-        let lbl = UILabel()
-        lbl.text = "Default yeh"
-        lbl.font = .systemFont(ofSize: 14)
-        lbl.textColor = .secondaryLabel
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-
-        // Use FatemiMaqala so the glyphs render correctly with and without dots
-        let arabicFont = UIFont(name: "FatemiMaqala-Regular", size: 18) ?? UIFont.systemFont(ofSize: 18)
-        let seg = UISegmentedControl(items: ["ی", "ي"])
-        seg.setTitleTextAttributes([.font: arabicFont], for: .normal)
-        seg.selectedSegmentIndex = KeyboardSettings.urduYehStyle == .farsiYeh ? 0 : 1
-        seg.translatesAutoresizingMaskIntoConstraints = false
-        seg.addAction(UIAction { _ in
-            KeyboardSettings.urduYehStyle = seg.selectedSegmentIndex == 0 ? .farsiYeh : .arabicYeh
-        }, for: .valueChanged)
-
-        row.addSubview(lbl)
-        row.addSubview(seg)
-        NSLayoutConstraint.activate([
-            subSep.topAnchor.constraint(equalTo: row.topAnchor),
-            subSep.leadingAnchor.constraint(equalTo: row.leadingAnchor),
-            subSep.trailingAnchor.constraint(equalTo: row.trailingAnchor),
-            subSep.heightAnchor.constraint(equalToConstant: 0.5),
-
-            row.heightAnchor.constraint(equalToConstant: 44),
-            lbl.leadingAnchor.constraint(equalTo: row.leadingAnchor),
-            lbl.centerYAnchor.constraint(equalTo: row.centerYAnchor),
-            seg.trailingAnchor.constraint(equalTo: row.trailingAnchor),
-            seg.centerYAnchor.constraint(equalTo: row.centerYAnchor),
-            lbl.trailingAnchor.constraint(lessThanOrEqualTo: seg.leadingAnchor, constant: -8),
-        ])
-        stack.addArrangedSubview(row)
-        yehStyleRow = row
     }
 
     private func addToggle(
@@ -245,6 +200,62 @@ final class KeyboardMenuView: UIView {
         sep.translatesAutoresizingMaskIntoConstraints = false
         sep.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         stack.addArrangedSubview(sep)
+    }
+
+    private func addKeyBehaviourSection(to stack: UIStackView) {
+        addSubRow(to: stack,
+            label: "Long-press delay",
+            items: ["Short", "Normal", "Long"],
+            values: [0.20, 0.35, 0.50],
+            current: { KeyboardSettings.longPressDelay },
+            apply: { KeyboardSettings.longPressDelay = $0 }
+        )
+        addSeparator(to: stack)
+        addSubRow(to: stack,
+            label: "Popup repeat",
+            items: ["Off", "Slow", "Fast"],
+            values: [0.0, 0.25, 0.10],
+            current: { KeyboardSettings.popupRepeatInterval },
+            apply: { KeyboardSettings.popupRepeatInterval = $0 }
+        )
+    }
+
+    private func addSubRow(
+        to stack: UIStackView,
+        label: String,
+        items: [String],
+        values: [Double],
+        current: () -> Double,
+        apply: @escaping (Double) -> Void
+    ) {
+        let row = UIView()
+        row.translatesAutoresizingMaskIntoConstraints = false
+
+        let lbl = UILabel()
+        lbl.text = label
+        lbl.font = .systemFont(ofSize: 15)
+        lbl.textColor = .label
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+
+        let currentVal = current()
+        let selectedIdx = values.firstIndex(where: { abs($0 - currentVal) < 0.001 }) ?? 1
+        let seg = UISegmentedControl(items: items)
+        seg.selectedSegmentIndex = selectedIdx
+        seg.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12)], for: .normal)
+        seg.translatesAutoresizingMaskIntoConstraints = false
+        seg.addAction(UIAction { _ in apply(values[seg.selectedSegmentIndex]) }, for: .valueChanged)
+
+        row.addSubview(lbl)
+        row.addSubview(seg)
+        NSLayoutConstraint.activate([
+            row.heightAnchor.constraint(equalToConstant: 44),
+            lbl.leadingAnchor.constraint(equalTo: row.leadingAnchor),
+            lbl.centerYAnchor.constraint(equalTo: row.centerYAnchor),
+            seg.trailingAnchor.constraint(equalTo: row.trailingAnchor),
+            seg.centerYAnchor.constraint(equalTo: row.centerYAnchor),
+            lbl.trailingAnchor.constraint(lessThanOrEqualTo: seg.leadingAnchor, constant: -8),
+        ])
+        stack.addArrangedSubview(row)
     }
 
     private func addActionRow(to stack: UIStackView, label: String, action: @escaping () -> Void) {
@@ -294,18 +305,14 @@ final class KeyboardMenuView: UIView {
         ])
         stack.addArrangedSubview(row)
 
-        // Sub-rows (delay + alef style) — hidden when double-tap is off
+        // Sub-rows (delay) — hidden when double-tap is off
         addDelaySection(to: stack)
-        addAlefStyleRow(to: stack)
 
         let updateSubRows: (Bool) -> Void = { [weak self] on in
             KeyboardSettings.doubleTapEnabled = on
             let hidden = !on
             self?.customDelayRow?.isHidden = hidden || KeyboardSettings.doubleTapDelayPreset != .custom
-            self?.alefStyleRow?.isHidden   = hidden
-            // hide/show the whole delay section rows individually
             stack.arrangedSubviews.forEach { view in
-                // Only the views that belong to the delay sub-section carry a tag of 1
                 if view.tag == 1 { view.isHidden = hidden }
             }
         }
@@ -318,10 +325,40 @@ final class KeyboardMenuView: UIView {
         }
     }
 
-    private func addAlefStyleRow(to stack: UIStackView) {
+    private func addCharacterStylesSection(to stack: UIStackView) {
+        let arabicFont = UIFont(name: "FatemiMaqala-Regular", size: 18) ?? UIFont.systemFont(ofSize: 18)
+        // Double alef
+        addCharStyleRow(to: stack, label: "Double ا produces", items: ["اٰ", "آ"], font: arabicFont,
+            selected: { KeyboardSettings.doubleAlefStyle == .kharoZabar ? 0 : 1 },
+            apply: { KeyboardSettings.doubleAlefStyle = $0 == 0 ? .kharoZabar : .alefMadda })
+        // Yeh
+        addCharStyleRow(to: stack, label: "Yeh", items: ["ي", "ی"], font: arabicFont,
+            selected: { KeyboardSettings.urduYehStyle == .arabicYeh ? 0 : 1 },
+            apply: { KeyboardSettings.urduYehStyle = $0 == 0 ? .arabicYeh : .farsiYeh })
+        // Kaaf
+        addCharStyleRow(to: stack, label: "Kaaf", items: ["ك", "ک"], font: arabicFont,
+            selected: { KeyboardSettings.kaafStyle == .arabic ? 0 : 1 },
+            apply: { KeyboardSettings.kaafStyle = $0 == 0 ? .arabic : .urdu })
+        // Haa
+        addCharStyleRow(to: stack, label: "Haa", items: ["ه", "ہ"], font: arabicFont,
+            selected: { KeyboardSettings.haaStyle == .arabic ? 0 : 1 },
+            apply: { KeyboardSettings.haaStyle = $0 == 0 ? .arabic : .urdu })
+        // Taa marbuta
+        addCharStyleRow(to: stack, label: "Taa marbuta", items: ["ة", "ۃ"], font: arabicFont,
+            selected: { KeyboardSettings.taaMarbuta == .arabic ? 0 : 1 },
+            apply: { KeyboardSettings.taaMarbuta = $0 == 0 ? .arabic : .urdu })
+    }
+
+    private func addCharStyleRow(
+        to stack: UIStackView,
+        label: String,
+        items: [String],
+        font: UIFont,
+        selected: () -> Int,
+        apply: @escaping (Int) -> Void
+    ) {
         let row = UIView()
         row.translatesAutoresizingMaskIntoConstraints = false
-        row.tag = 1   // marks it as a double-tap sub-row
 
         let subSep = UIView()
         subSep.backgroundColor = KeyboardColors.separator.withAlphaComponent(0.4)
@@ -329,20 +366,16 @@ final class KeyboardMenuView: UIView {
         row.addSubview(subSep)
 
         let lbl = UILabel()
-        lbl.text = "Double ا produces"
+        lbl.text = label
         lbl.font = .systemFont(ofSize: 14)
         lbl.textColor = .secondaryLabel
         lbl.translatesAutoresizingMaskIntoConstraints = false
 
-        let seg = UISegmentedControl(items: ["اٰ", "آ"])
-        seg.setTitleTextAttributes(
-            [.font: UIFont(name: "FatemiMaqala-Regular", size: 16) ?? UIFont.systemFont(ofSize: 16)],
-            for: .normal)
-        seg.selectedSegmentIndex = KeyboardSettings.doubleAlefStyle == .kharoZabar ? 0 : 1
+        let seg = UISegmentedControl(items: items)
+        seg.setTitleTextAttributes([.font: font], for: .normal)
+        seg.selectedSegmentIndex = selected()
         seg.translatesAutoresizingMaskIntoConstraints = false
-        seg.addAction(UIAction { _ in
-            KeyboardSettings.doubleAlefStyle = seg.selectedSegmentIndex == 0 ? .kharoZabar : .alefMadda
-        }, for: .valueChanged)
+        seg.addAction(UIAction { _ in apply(seg.selectedSegmentIndex) }, for: .valueChanged)
 
         row.addSubview(lbl)
         row.addSubview(seg)
@@ -360,7 +393,6 @@ final class KeyboardMenuView: UIView {
             lbl.trailingAnchor.constraint(lessThanOrEqualTo: seg.leadingAnchor, constant: -8),
         ])
         stack.addArrangedSubview(row)
-        alefStyleRow = row
     }
 
     private func addDelaySection(to stack: UIStackView) {
