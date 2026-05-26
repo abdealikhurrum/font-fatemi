@@ -39,10 +39,13 @@ final class LearnViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let module = LessonCatalog.modules[indexPath.row]
-        if module.isVerbTraining {
-            navigationController?.pushViewController(VerbTrainingViewController(), animated: true)
-        } else {
+        switch module.kind {
+        case .lesson:
             navigationController?.pushViewController(LessonViewController(module: module), animated: true)
+        case .verbTraining:
+            navigationController?.pushViewController(VerbTrainingViewController(), animated: true)
+        case .sentenceTraining(let language):
+            navigationController?.pushViewController(SentenceTrainingViewController(language: language), animated: true)
         }
     }
 }
@@ -117,8 +120,18 @@ private final class ModuleCell: UITableViewCell {
         titleLabel.text = module.title
         subtitleLabel.text = module.subtitle
 
-        let count = module.isVerbTraining ? VerbPrompts.all.count : module.stepCount
-        badgeLabel.text = module.isVerbTraining ? "\(count) prompts" : "\(count) steps"
+        let (count, unit): (Int, String)
+        switch module.kind {
+        case .lesson:
+            (count, unit) = (module.stepCount, "steps")
+        case .verbTraining:
+            (count, unit) = (VerbPrompts.all.count, "prompts")
+        case .sentenceTraining(let language):
+            let n = language == "urdu" ? SentencePrompts.urduSentences.count
+                                       : SentencePrompts.englishSentences.count
+            (count, unit) = (n, "sentences")
+        }
+        badgeLabel.text = "\(count) \(unit)"
         badgeLabel.textColor = module.accent
         badgeLabel.backgroundColor = module.accent.withAlphaComponent(0.15)
     }
