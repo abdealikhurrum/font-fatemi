@@ -43,6 +43,7 @@ final class ViewController: UIViewController {
 
         stackView.addArrangedSubview(keyboardCard())
         stackView.addArrangedSubview(fontCard())
+        stackView.addArrangedSubview(corpusCard())
     }
 
     // MARK: - Cards
@@ -99,6 +100,18 @@ final class ViewController: UIViewController {
         return v
     }
 
+    private func corpusCard() -> UIView {
+        let v = cardContainer(title: "Typing Data")
+        v.addArrangedSubview(bodyLabel(
+            "Exports lsd_corpus_words.json from the shared app group — " +
+            "contains touch offsets, correction counts, and daily snapshots " +
+            "tagged with the angled-keys condition."
+        ))
+        v.addArrangedSubview(actionButton("Export JSON", color: .systemGreen,
+                                          target: self, action: #selector(exportCorpus)))
+        return v
+    }
+
     // MARK: - Actions
 
     @objc private func openSettings() {
@@ -127,6 +140,42 @@ final class ViewController: UIViewController {
 
         let share = UIActivityViewController(activityItems: [dest], applicationActivities: nil)
         share.popoverPresentationController?.sourceView = installButton
+        present(share, animated: true)
+    }
+
+    @objc private func exportCorpus() {
+        let groupID  = "group.com.exordiumnetworks.lsdkeyboard"
+        let fileName = "lsd_corpus_words.json"
+
+        // Prefer the shared App Group container; fall back to the extension's Documents.
+        let candidates: [URL] = [
+            FileManager.default
+                .containerURL(forSecurityApplicationGroupIdentifier: groupID)?
+                .appendingPathComponent(fileName),
+            FileManager.default
+                .urls(for: .documentDirectory, in: .userDomainMask).first?
+                .appendingPathComponent(fileName),
+        ].compactMap { $0 }
+
+        guard let source = candidates.first(where: { FileManager.default.fileExists(atPath: $0.path) }) else {
+            alert("No corpus data found yet — type a few words with the keyboard first.")
+            return
+        }
+
+        // Copy to a temp location with a timestamped name so repeated exports are distinct.
+        let stamp = ISO8601DateFormatter().string(from: Date()).prefix(10)
+        let dest  = FileManager.default.temporaryDirectory
+            .appendingPathComponent("lsd_corpus_\(stamp).json")
+        try? FileManager.default.removeItem(at: dest)
+        do {
+            try FileManager.default.copyItem(at: source, to: dest)
+        } catch {
+            alert("Could not copy corpus file: \(error.localizedDescription)")
+            return
+        }
+
+        let share = UIActivityViewController(activityItems: [dest], applicationActivities: nil)
+        share.popoverPresentationController?.sourceView = view
         present(share, animated: true)
     }
 
