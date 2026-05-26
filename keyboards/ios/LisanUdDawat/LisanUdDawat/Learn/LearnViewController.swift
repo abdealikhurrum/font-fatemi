@@ -39,8 +39,11 @@ final class LearnViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let module = LessonCatalog.modules[indexPath.row]
-        let vc = LessonViewController(module: module)
-        navigationController?.pushViewController(vc, animated: true)
+        if module.isVerbTraining {
+            navigationController?.pushViewController(VerbTrainingViewController(), animated: true)
+        } else {
+            navigationController?.pushViewController(LessonViewController(module: module), animated: true)
+        }
     }
 }
 
@@ -114,8 +117,8 @@ private final class ModuleCell: UITableViewCell {
         titleLabel.text = module.title
         subtitleLabel.text = module.subtitle
 
-        let count = module.stepCount
-        badgeLabel.text = "\(count) steps"
+        let count = module.isVerbTraining ? VerbPrompts.all.count : module.stepCount
+        badgeLabel.text = module.isVerbTraining ? "\(count) prompts" : "\(count) steps"
         badgeLabel.textColor = module.accent
         badgeLabel.backgroundColor = module.accent.withAlphaComponent(0.15)
     }

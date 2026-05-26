@@ -14,13 +14,24 @@ struct LessonModule {
     let systemImage: String
     let accent: UIColor
     let steps: [LessonStep]
+    var isVerbTraining: Bool = false
 
     var stepCount: Int { steps.count }
 }
 
 enum LessonCatalog {
 
-    static let modules: [LessonModule] = [doublePress, diacritics, joiners]
+    static let modules: [LessonModule] = [verbTraining, doublePress, diacritics, joiners]
+
+    static let verbTraining = LessonModule(
+        id: "verb_training",
+        title: "Verb Training",
+        subtitle: "Type the LSD equivalent of each Urdu verb form to build the linguistic corpus",
+        systemImage: "square.and.pencil",
+        accent: .systemOrange,
+        steps: [],
+        isVerbTraining: true
+    )
 
     // MARK: - Module 1: Double-press characters
 
