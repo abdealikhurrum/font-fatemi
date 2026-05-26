@@ -43,7 +43,7 @@ object CRULPUrduLayoutData {
                 KeyData("گ"),
                 KeyData("ہ", secondary = "ھ", alternates = listOf("ۃ")),
                 KeyData("ج", alternates = listOf("چ")),
-                KeyData("ک", alternates = listOf("ق")),
+                KeyData("ك", alternates = listOf("ک", "ق")),
                 KeyData("ل", alternates = listOf("لا", "لأ", "لإ", "لآ")),
             ),
             // Row 3 — 7 alpha + backspace (ZXCVBNM)

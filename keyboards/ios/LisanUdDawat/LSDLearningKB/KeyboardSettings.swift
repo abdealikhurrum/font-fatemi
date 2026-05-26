@@ -46,7 +46,7 @@ enum KeyboardSettings {
     }
 
     static var urduYehStyle: UrduYehStyle {
-        get { UrduYehStyle(rawValue: UserDefaults.standard.string(forKey: "urdu_yeh_style") ?? "") ?? .farsiYeh }
+        get { UrduYehStyle(rawValue: UserDefaults.standard.string(forKey: "urdu_yeh_style") ?? "") ?? .arabicYeh }
         set { UserDefaults.standard.set(newValue.rawValue, forKey: "urdu_yeh_style") }
     }
 

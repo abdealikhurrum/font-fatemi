@@ -42,7 +42,7 @@ enum CRULPUrduLayoutData {
             KeyData("گ"),
             KeyData("ہ", secondary: "ھ",  alternates: ["ۃ"]),      // ہہ → ھ
             KeyData("ج", alternates: ["چ"]),
-            KeyData("ک", alternates: ["ق"]),
+            KeyData("ك", alternates: ["ک", "ق"]),
             KeyData("ل", alternates: ["لا", "لأ", "لإ", "لآ"]),
         ],
         // Row 3 — 7 alpha + backspace (ZXCVBNM)

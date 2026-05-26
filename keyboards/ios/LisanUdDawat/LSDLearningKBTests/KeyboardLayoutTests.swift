@@ -25,8 +25,8 @@ final class KeyboardLayoutTests: XCTestCase {
         // ── Row 1 primaries ────────────────────────────────────────────────
         "ض", "ص", "ث", "ق", "ف", "غ", "ع", "ه", "خ", "ح", "ج",
         // ── Row 2 primaries ────────────────────────────────────────────────
-        // Default yeh style is Farsi Yeh (ی, U+06CC); Arabic yeh (ي) accessible via long-press.
-        "ش", "س", "ی", "ب", "ل", "ا", "ت", "ن", "م", "ك", "ط",
+        // Default yeh style is Arabic Yeh (ي, U+064A); Farsi yeh (ی) accessible via long-press.
+        "ش", "س", "ي", "ب", "ل", "ا", "ت", "ن", "م", "ك", "ط",
         // ── Row 3 primaries ────────────────────────────────────────────────
         "ئ", "ء", "ؤ", "ر", "ى", "ة", "و", "ز", "ذ", "د", "ظ",
         // ── Double-tap secondaries (official LSD rules + extended) ─────────

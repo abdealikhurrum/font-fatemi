@@ -66,8 +66,8 @@ object KeyboardSettings {
 
     fun getYehStyle(ctx: Context): YehStyle =
         YehStyle.values().firstOrNull {
-            it.key == prefs(ctx).getString("urdu_yeh_style", "farsi_yeh")
-        } ?: YehStyle.FARSI_YEH
+            it.key == prefs(ctx).getString("urdu_yeh_style", "arabic_yeh")
+        } ?: YehStyle.ARABIC_YEH
 
     fun setYehStyle(ctx: Context, v: YehStyle) =
         prefs(ctx).edit().putString("urdu_yeh_style", v.key).apply()
