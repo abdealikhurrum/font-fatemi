@@ -137,4 +137,11 @@ enum KeyboardSettings {
         get { UserDefaults.standard.bool(forKey: "latin_key_tooltip_shown") }
         set { UserDefaults.standard.set(newValue, forKey: "latin_key_tooltip_shown") }
     }
+
+    // Depth-gradient bevel on keys to simulate a forward-tilted physical surface.
+    // Top of each key face is slightly shadowed; intensity varies by row.
+    static var angledKeysEnabled: Bool {
+        get { UserDefaults.standard.object(forKey: "angled_keys_enabled") as? Bool ?? true }
+        set { UserDefaults.standard.set(newValue, forKey: "angled_keys_enabled") }
+    }
 }

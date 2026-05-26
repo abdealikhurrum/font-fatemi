@@ -106,9 +106,9 @@ final class KeyboardView: UIView {
         lastTappedKey = nil
         lastTapTime = nil
 
-        for row in layer.rows {
+        for (rowIdx, row) in layer.rows.enumerated() {
             for keyData in row {
-                let btn = KeyButton(keyData: keyData)
+                let btn = KeyButton(keyData: keyData, rowIndex: rowIdx, totalRows: layer.rows.count)
                 addSubview(btn)
                 keyButtons.append(btn)
             }
