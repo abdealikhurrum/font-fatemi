@@ -5,17 +5,28 @@ final class KeyboardViewController: UIInputViewController {
 
     // MARK: - Layer state
 
-    private enum Layer { case `default`, numeric, diacritic }
+    private enum Layer { case `default`, numeric, diacritic, latin }
 
     private var currentLayer: Layer = .default {
         didSet { applyLayer() }
     }
+
+    // Remembers the layer that was active before entering numeric/diacritic,
+    // so ABC returns to latin rather than default when appropriate.
+    private var priorToModal: Layer = .default
+
+    // MARK: - Latin layer shift / caps-lock state
+
+    private var latinShifted  = false
+    private var latinCapsLock = false
+    private var lastShiftTime: Date?
 
     // MARK: - Views
 
     private var keyboardView  = KeyboardView()
     private var predictiveBar = PredictiveBar()
     private var predictiveBarHeightConstraint: NSLayoutConstraint?
+    private var biDiMenu: BiDiFixMenu?
 
     // MARK: - Double-space tracking
 
@@ -114,9 +125,14 @@ final class KeyboardViewController: UIInputViewController {
 
     private func applyLayer() {
         switch currentLayer {
-        case .default:   keyboardView.configure(with: activeDefaultLayer())
-        case .numeric:   keyboardView.configure(with: KeyboardLayoutData.numericLayer)
-        case .diacritic: keyboardView.configure(with: KeyboardLayoutData.diacriticLayer)
+        case .default:
+            keyboardView.configure(with: activeDefaultLayer())
+        case .numeric:
+            keyboardView.configure(with: KeyboardLayoutData.numericLayer)
+        case .diacritic:
+            keyboardView.configure(with: KeyboardLayoutData.diacriticLayer)
+        case .latin:
+            keyboardView.configure(with: latinShifted ? LatinLayoutData.upperLayer : LatinLayoutData.lowerLayer)
         }
     }
 
@@ -136,6 +152,7 @@ final class KeyboardViewController: UIInputViewController {
         lastInsertTime = Date()
         if KeyboardSettings.corpusEnabled { CorpusLogger.shared.record(text) }
         updatePredictions()
+        updateBiDi()
     }
 
     private func deleteBack() {
@@ -149,6 +166,7 @@ final class KeyboardViewController: UIInputViewController {
         lastInsertedCharacter = nil
         CorpusLogger.shared.recordBackspace()
         updatePredictions()
+        updateBiDi()
     }
 
     // MARK: - Predictions
@@ -168,6 +186,52 @@ final class KeyboardViewController: UIInputViewController {
             predictiveBar.update(suggestions: CorpusLogger.shared.suggestions(for: word, after: previous, limit: 3))
         }
     }
+
+    // MARK: - BiDi
+
+    private func updateBiDi() {
+        let text = textDocumentProxy.documentContextBeforeInput ?? ""
+        predictiveBar.updateBiDi(text)
+    }
+
+    private func showBiDiMenu(issue: BiDiAnalyzer.Issue) {
+        guard biDiMenu == nil else { return }
+        let menu = BiDiFixMenu.show(in: view, issue: issue)
+        menu.onFixApplied = { [weak self] fix in
+            guard let self else { return }
+            switch fix {
+            case .smart:
+                BiDiAnalyzer.applySmartFix(issue: issue, proxy: self)
+            case .fixLine:
+                BiDiAnalyzer.insertRlmAtLineStart(proxy: self)
+            case .fixAtCursor:
+                BiDiAnalyzer.insertRlmAtCursor(proxy: self)
+            case .markSelectionLTR:
+                BiDiAnalyzer.wrapSelectionAsLtr(proxy: self)
+            }
+            self.predictiveBar.showBriefMessage("Direction mark added  ·  backspace to undo")
+            self.updateBiDi()
+        }
+        menu.onDismiss = { [weak self] in self?.biDiMenu = nil }
+        biDiMenu = menu
+    }
+}
+
+// MARK: - BiDiTextProxy
+
+extension KeyboardViewController: BiDiTextProxy {
+    var textBeforeCursor: String {
+        textDocumentProxy.documentContextBeforeInput ?? ""
+    }
+    var selectedText: String? {
+        textDocumentProxy.selectedText
+    }
+    func deleteBeforeCursor(_ count: Int) {
+        for _ in 0..<count { textDocumentProxy.deleteBackward() }
+    }
+    func insertAtCursor(_ text: String) {
+        textDocumentProxy.insertText(text)
+    }
 }
 
 // MARK: - KeyboardViewDelegate
@@ -179,14 +243,17 @@ extension KeyboardViewController: KeyboardViewDelegate {
 
         case .character:
             insert(key.primary)
+            // Auto-unshift after one letter in non-caps shifted Latin mode
+            if currentLayer == .latin && latinShifted && !latinCapsLock {
+                latinShifted = false
+                applyLayer()
+            }
 
         case .space:
-            // Double-space → period + space (user pressed space twice quickly)
             let now = Date()
             if lastInsertedCharacter == " ",
                let lastTime = lastInsertTime,
                now.timeIntervalSince(lastTime) < Self.doubleSpaceWindow {
-                // Confirm the char before the already-inserted space is a letter
                 let ctx = textDocumentProxy.documentContextBeforeInput ?? ""
                 if ctx.dropLast().last?.isLetter == true {
                     textDocumentProxy.deleteBackward()
@@ -205,13 +272,37 @@ extension KeyboardViewController: KeyboardViewDelegate {
             insert("\n")
 
         case .numeric:
+            priorToModal = currentLayer
             currentLayer = .numeric
 
         case .diacritic:
+            priorToModal = currentLayer
             currentLayer = .diacritic
 
         case .abc:
-            currentLayer = .default
+            if priorToModal != .numeric && priorToModal != .diacritic {
+                currentLayer = priorToModal
+            } else {
+                currentLayer = .default
+            }
+
+        case .latin:
+            currentLayer = .latin
+            if !KeyboardSettings.latinKeyTooltipShown {
+                KeyboardSettings.latinKeyTooltipShown = true
+                predictiveBar.showBriefMessage("Hold  AaBb  to switch keyboard", duration: 3.5)
+            }
+
+        case .shift:
+            let now = Date()
+            if let last = lastShiftTime, now.timeIntervalSince(last) < 0.35 {
+                latinCapsLock = !latinCapsLock
+                latinShifted  = latinCapsLock
+            } else {
+                if !latinCapsLock { latinShifted = !latinShifted }
+            }
+            lastShiftTime = now
+            applyLayer()
 
         case .cursorLeft:
             textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
@@ -233,7 +324,6 @@ extension KeyboardViewController: KeyboardViewDelegate {
             return
         }
         deleteBack()
-        // اا produces آ or اٰ depending on the setting
         let secondary = (key.primary == "ا" && key.secondary == "اٰ" && KeyboardSettings.doubleAlefStyle == .alefMadda)
             ? "آ"
             : key.secondary
@@ -261,8 +351,9 @@ extension KeyboardViewController: KeyboardViewDelegate {
         }
         for _ in 0..<deleteCount { textDocumentProxy.deleteBackward() }
         lastInsertedCharacter = nil
-        CorpusLogger.shared.resetPending()   // word-delete may erase the in-progress word
+        CorpusLogger.shared.resetPending()
         updatePredictions()
+        updateBiDi()
     }
 
     func keyTapped(_ key: KeyData, touchOffset: CGPoint) {
@@ -272,7 +363,6 @@ extension KeyboardViewController: KeyboardViewDelegate {
             dy:  Float(touchOffset.y)
         )
     }
-
 }
 
 // MARK: - PredictiveBarDelegate
@@ -294,5 +384,9 @@ extension KeyboardViewController: PredictiveBarDelegate {
             }
             self?.applyLayer()
         }
+    }
+
+    func predictiveBarDidTapBiDi(_ bar: PredictiveBar, issue: BiDiAnalyzer.Issue) {
+        showBiDiMenu(issue: issue)
     }
 }

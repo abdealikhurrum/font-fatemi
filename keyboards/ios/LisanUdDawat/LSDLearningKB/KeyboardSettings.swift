@@ -72,4 +72,36 @@ enum KeyboardSettings {
         get { LayoutType(rawValue: UserDefaults.standard.string(forKey: "selected_layout") ?? "lsd") ?? .lsd }
         set { UserDefaults.standard.set(newValue.rawValue, forKey: "selected_layout") }
     }
+
+    // Long-press delay before the alternate-characters popup appears.
+    // Presented as Short (0.20s) / Normal (0.35s) / Long (0.50s) in settings.
+    static var longPressDelay: TimeInterval {
+        get {
+            let v = UserDefaults.standard.double(forKey: "long_press_delay")
+            return v > 0 ? v : 0.35
+        }
+        set { UserDefaults.standard.set(newValue, forKey: "long_press_delay") }
+    }
+
+    // Interval at which a held long-press alternate auto-repeats. 0 = disabled.
+    // Presented as Off / Slow (0.25s) / Fast (0.10s) in settings.
+    static var popupRepeatInterval: TimeInterval {
+        get {
+            guard UserDefaults.standard.object(forKey: "popup_repeat_interval") != nil else { return 0.1 }
+            return UserDefaults.standard.double(forKey: "popup_repeat_interval")
+        }
+        set { UserDefaults.standard.set(newValue, forKey: "popup_repeat_interval") }
+    }
+
+    // One-time tooltip for the BiDi fix button.
+    static var biDiTooltipShown: Bool {
+        get { UserDefaults.standard.bool(forKey: "bidi_tooltip_shown") }
+        set { UserDefaults.standard.set(newValue, forKey: "bidi_tooltip_shown") }
+    }
+
+    // One-time tooltip for the Latin (AaBb) key.
+    static var latinKeyTooltipShown: Bool {
+        get { UserDefaults.standard.bool(forKey: "latin_key_tooltip_shown") }
+        set { UserDefaults.standard.set(newValue, forKey: "latin_key_tooltip_shown") }
+    }
 }

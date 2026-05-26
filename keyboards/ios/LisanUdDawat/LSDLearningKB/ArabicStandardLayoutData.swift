@@ -6,7 +6,11 @@ import Foundation
 
 enum ArabicStandardLayoutData {
 
-    static let defaultLayer = KeyboardLayer(id: "arabic", rows: [
+    static var defaultLayer: KeyboardLayer {
+        let farsiYeh = KeyboardSettings.urduYehStyle == .farsiYeh
+        let yeh    = farsiYeh ? "ی" : "ي"
+        let yehAlt = farsiYeh ? "ي" : "ی"
+        return KeyboardLayer(id: "arabic", rows: [
         // Row 1 — 11 keys
         [
             KeyData("ض", secondary: "ٹ"),
@@ -25,7 +29,7 @@ enum ArabicStandardLayoutData {
         [
             KeyData("ش"),
             KeyData("س", secondary: "ے"),
-            KeyData("ي", secondary: "ئ",  alternates: ["ے"]),
+            KeyData(yeh, secondary: "ئ",  alternates: [yehAlt, "ے"]),
             KeyData("ب"),
             KeyData("ل", alternates: ["لا", "لأ", "لإ", "لآ", "لاٰ"]),
             KeyData("ا", secondary: "اٰ", alternates: ["أ", "آ", "إ"]),
@@ -51,11 +55,13 @@ enum ArabicStandardLayoutData {
         ],
         // Row 4
         [
-            KeyData("١٢٣", type: .numeric,  width: .fixed(44)),
-            KeyData(" ",   alternates: ["\u{00A0}", "\u{200C}", "\u{0640}"],
-                           type: .space,    width: .flexible),
+            KeyData("١٢٣",  type: .numeric,   width: .fixed(44)),
+            KeyData("AaBb", type: .latin,     width: .fixed(44), longPressType: .globe),
+            KeyData(" ",    alternates: ["\u{00A0}", "\u{200C}", "\u{0640}"],
+                            type: .space,     width: .flexible),
             KeyData("تشكيل", type: .diacritic, width: .fixed(52)),
-            KeyData("↵",   type: .enter,    width: .fixed(52)),
+            KeyData("↵",    type: .enter,     width: .fixed(52)),
         ],
-    ])
+        ])
+    }
 }

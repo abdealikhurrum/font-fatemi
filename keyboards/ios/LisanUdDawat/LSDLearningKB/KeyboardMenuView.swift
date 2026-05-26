@@ -79,6 +79,8 @@ final class KeyboardMenuView: UIView {
         addSeparator(to: stack)
         addDoubleTapSection(to: stack)
         addSeparator(to: stack)
+        addKeyBehaviourSection(to: stack)
+        addSeparator(to: stack)
         addActionRow(to: stack,
             label: "Copy corpus to clipboard  (\(CorpusLogger.shared.wordCount) words)",
             action: { [weak self] in
@@ -137,14 +139,13 @@ final class KeyboardMenuView: UIView {
         case .arabicStandard: seg.selectedSegmentIndex = 1
         case .crulpUrdu:      seg.selectedSegmentIndex = 2
         }
-        seg.addAction(UIAction { [weak self] _ in
+        seg.addAction(UIAction { _ in
             switch seg.selectedSegmentIndex {
             case 0: KeyboardSettings.selectedLayout = .lsd
             case 1: KeyboardSettings.selectedLayout = .arabicStandard
             case 2: KeyboardSettings.selectedLayout = .crulpUrdu
             default: break
             }
-            self?.yehStyleRow?.isHidden = KeyboardSettings.selectedLayout != .crulpUrdu
         }, for: .valueChanged)
 
         row.addSubview(lbl)
@@ -163,7 +164,6 @@ final class KeyboardMenuView: UIView {
     private func addYehStyleRow(to stack: UIStackView) {
         let row = UIView()
         row.translatesAutoresizingMaskIntoConstraints = false
-        row.isHidden = KeyboardSettings.selectedLayout != .crulpUrdu
 
         let subSep = UIView()
         subSep.backgroundColor = KeyboardColors.separator.withAlphaComponent(0.4)
@@ -245,6 +245,62 @@ final class KeyboardMenuView: UIView {
         sep.translatesAutoresizingMaskIntoConstraints = false
         sep.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         stack.addArrangedSubview(sep)
+    }
+
+    private func addKeyBehaviourSection(to stack: UIStackView) {
+        addSubRow(to: stack,
+            label: "Long-press delay",
+            items: ["Short", "Normal", "Long"],
+            values: [0.20, 0.35, 0.50],
+            current: { KeyboardSettings.longPressDelay },
+            apply: { KeyboardSettings.longPressDelay = $0 }
+        )
+        addSeparator(to: stack)
+        addSubRow(to: stack,
+            label: "Popup repeat",
+            items: ["Off", "Slow", "Fast"],
+            values: [0.0, 0.25, 0.10],
+            current: { KeyboardSettings.popupRepeatInterval },
+            apply: { KeyboardSettings.popupRepeatInterval = $0 }
+        )
+    }
+
+    private func addSubRow(
+        to stack: UIStackView,
+        label: String,
+        items: [String],
+        values: [Double],
+        current: () -> Double,
+        apply: @escaping (Double) -> Void
+    ) {
+        let row = UIView()
+        row.translatesAutoresizingMaskIntoConstraints = false
+
+        let lbl = UILabel()
+        lbl.text = label
+        lbl.font = .systemFont(ofSize: 15)
+        lbl.textColor = .label
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+
+        let currentVal = current()
+        let selectedIdx = values.firstIndex(where: { abs($0 - currentVal) < 0.001 }) ?? 1
+        let seg = UISegmentedControl(items: items)
+        seg.selectedSegmentIndex = selectedIdx
+        seg.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 12)], for: .normal)
+        seg.translatesAutoresizingMaskIntoConstraints = false
+        seg.addAction(UIAction { _ in apply(values[seg.selectedSegmentIndex]) }, for: .valueChanged)
+
+        row.addSubview(lbl)
+        row.addSubview(seg)
+        NSLayoutConstraint.activate([
+            row.heightAnchor.constraint(equalToConstant: 44),
+            lbl.leadingAnchor.constraint(equalTo: row.leadingAnchor),
+            lbl.centerYAnchor.constraint(equalTo: row.centerYAnchor),
+            seg.trailingAnchor.constraint(equalTo: row.trailingAnchor),
+            seg.centerYAnchor.constraint(equalTo: row.centerYAnchor),
+            lbl.trailingAnchor.constraint(lessThanOrEqualTo: seg.leadingAnchor, constant: -8),
+        ])
+        stack.addArrangedSubview(row)
     }
 
     private func addActionRow(to stack: UIStackView, label: String, action: @escaping () -> Void) {

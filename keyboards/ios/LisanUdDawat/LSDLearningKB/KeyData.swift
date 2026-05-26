@@ -14,6 +14,8 @@ enum KeyType {
     case diacritic    // switch to diacritics / eraab layer
     case cursorLeft   // move cursor one position left
     case cursorRight  // move cursor one position right
+    case latin        // switch to Latin / QWERTY layer
+    case shift        // shift / caps-lock in Latin layer
 }
 
 // MARK: - Key Width
@@ -34,19 +36,22 @@ struct KeyData {
     let alternates: [String]    // long-press popup
     let type: KeyType
     let width: KeyWidth
+    let longPressType: KeyType? // key type fired on long-press (e.g. globe on AaBb)
 
     init(
         _ primary: String,
         secondary: String = "",
         alternates: [String] = [],
         type: KeyType = .character,
-        width: KeyWidth = .standard
+        width: KeyWidth = .standard,
+        longPressType: KeyType? = nil
     ) {
-        self.primary    = primary
-        self.secondary  = secondary
-        self.alternates = alternates
-        self.type       = type
-        self.width      = width
+        self.primary       = primary
+        self.secondary     = secondary
+        self.alternates    = alternates
+        self.type          = type
+        self.width         = width
+        self.longPressType = longPressType
     }
 }
 
@@ -73,7 +78,11 @@ enum KeyboardLayoutData {
 
     // ------------------------------------------------------------------ default
 
-    static let defaultLayer = KeyboardLayer(id: "default", rows: [
+    static var defaultLayer: KeyboardLayer {
+        let farsiYeh = KeyboardSettings.urduYehStyle == .farsiYeh
+        let yeh    = farsiYeh ? "ی" : "ي"
+        let yehAlt = farsiYeh ? "ي" : "ی"
+        return KeyboardLayer(id: "default", rows: [
         // Row 1 — 11 keys  (matches PC Arabic row 1: Q–[)
         [
             KeyData("ض", secondary: "ٹ"),                                       // ضض → ٹ
@@ -92,7 +101,7 @@ enum KeyboardLayoutData {
         [
             KeyData("ش"),
             KeyData("س", secondary: "ے"),                                       // سس → ے
-            KeyData("ي", secondary: "ئ",  alternates: ["ے"]),                   // يي → ئ
+            KeyData(yeh, secondary: "ئ",  alternates: [yehAlt, "ے"]),          // يي → ئ
             KeyData("ب"),
             KeyData("ل", alternates: ["لا", "لأ", "لإ", "لآ", "لاٰ"]),
             KeyData("ا", secondary: "اٰ", alternates: ["أ", "آ", "إ"]),        // اا → اٰ
@@ -119,13 +128,15 @@ enum KeyboardLayoutData {
         ],
         // Row 4
         [
-            KeyData("١٢٣", type: .numeric,  width: .fixed(44)),
-            KeyData(" ",   alternates: ["\u{00A0}", "\u{200C}", "\u{0640}"],
-                           type: .space,    width: .flexible),
+            KeyData("١٢٣",  type: .numeric,   width: .fixed(44)),
+            KeyData("AaBb", type: .latin,     width: .fixed(44), longPressType: .globe),
+            KeyData(" ",    alternates: ["\u{00A0}", "\u{200C}", "\u{0640}"],
+                            type: .space,     width: .flexible),
             KeyData("تشكيل", type: .diacritic, width: .fixed(52)),
-            KeyData("↵",   type: .enter,    width: .fixed(52)),
+            KeyData("↵",    type: .enter,     width: .fixed(52)),
         ],
-    ])
+        ])
+    }
 
     // ------------------------------------------------------------------ numeric
 
