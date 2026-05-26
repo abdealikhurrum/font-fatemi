@@ -42,6 +42,7 @@ final class ViewController: UIViewController {
         ])
 
         stackView.addArrangedSubview(keyboardCard())
+        stackView.addArrangedSubview(appearanceCard())
         stackView.addArrangedSubview(fontCard())
         stackView.addArrangedSubview(corpusCard())
     }
@@ -97,6 +98,33 @@ final class ViewController: UIViewController {
             "To uninstall: Settings → General → VPN & Device Management → FatemiMaqala Font → Remove Profile.\n" 
         ))
 
+        return v
+    }
+
+    private func appearanceCard() -> UIView {
+        let sharedDefaults = UserDefaults(suiteName: "group.com.exordiumnetworks.lsdkeyboard")
+        let v = cardContainer(title: "Keyboard Appearance")
+
+        let row = UIStackView()
+        row.axis = .horizontal
+        row.alignment = .center
+
+        let lbl = UILabel()
+        lbl.text = "Angled keys"
+        lbl.font = UIFont.systemFont(ofSize: 15)
+        lbl.setContentHuggingPriority(.defaultLow, for: .horizontal)
+
+        let toggle = UISwitch()
+        let stored = sharedDefaults?.object(forKey: "angled_keys_enabled") as? Bool
+        toggle.isOn = stored ?? true
+        toggle.addAction(UIAction { _ in
+            sharedDefaults?.set(toggle.isOn, forKey: "angled_keys_enabled")
+        }, for: .valueChanged)
+
+        row.addArrangedSubview(lbl)
+        row.addArrangedSubview(toggle)
+        v.addArrangedSubview(row)
+        v.addArrangedSubview(bodyLabel("Takes effect the next time the keyboard loads."))
         return v
     }
 

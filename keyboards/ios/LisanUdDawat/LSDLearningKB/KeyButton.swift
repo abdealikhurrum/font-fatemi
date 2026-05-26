@@ -127,6 +127,10 @@ final class KeyButton: UIView {
         if !keyData.alternates.isEmpty && keyData.secondary.isEmpty && keyData.type == .character {
             badge.frame = CGRect(x: bounds.width - 8, y: 4, width: 4, height: 4)
         }
+
+        // Explicit shadow path avoids per-frame rasterisation of the view content
+        // to infer the shape — meaningful on lower-end GPUs.
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 5).cgPath
     }
 
     private func labelFont() -> UIFont {
