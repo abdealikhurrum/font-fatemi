@@ -61,6 +61,39 @@ enum KeyboardSettings {
         set { UserDefaults.standard.set(newValue.rawValue, forKey: "double_alef_style") }
     }
 
+    // Kaaf style: Arabic ك (U+0643) vs Urdu/Farsi ک (U+06A9).
+    enum KaafStyle: String {
+        case arabic = "arabic_kaaf"   // ك  default
+        case urdu   = "urdu_kaaf"     // ک
+    }
+
+    static var kaafStyle: KaafStyle {
+        get { KaafStyle(rawValue: UserDefaults.standard.string(forKey: "kaaf_style") ?? "") ?? .arabic }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "kaaf_style") }
+    }
+
+    // Haa style: Arabic ه (U+0647) vs Urdu He Goal ہ (U+06C1).
+    enum HaaStyle: String {
+        case arabic = "arabic_haa"    // ه  default
+        case urdu   = "urdu_haa"      // ہ
+    }
+
+    static var haaStyle: HaaStyle {
+        get { HaaStyle(rawValue: UserDefaults.standard.string(forKey: "haa_style") ?? "") ?? .arabic }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "haa_style") }
+    }
+
+    // Taa marbuta style: Arabic ة (U+0629) vs Urdu ۃ (U+06C3).
+    enum TaaMarbuta: String {
+        case arabic = "arabic_taa"    // ة  default
+        case urdu   = "urdu_taa"      // ۃ
+    }
+
+    static var taaMarbuta: TaaMarbuta {
+        get { TaaMarbuta(rawValue: UserDefaults.standard.string(forKey: "taa_marbuta") ?? "") ?? .arabic }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "taa_marbuta") }
+    }
+
     // Active keyboard layout.
     enum LayoutType: String {
         case lsd            = "lsd"

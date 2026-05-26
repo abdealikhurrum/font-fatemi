@@ -80,50 +80,59 @@ enum KeyboardLayoutData {
 
     static var defaultLayer: KeyboardLayer {
         let farsiYeh = KeyboardSettings.urduYehStyle == .farsiYeh
-        let yeh    = farsiYeh ? "ی" : "ي"
-        let yehAlt = farsiYeh ? "ي" : "ی"
+        let yeh      = farsiYeh ? "ی" : "ي"
+        let yehAlt   = farsiYeh ? "ي" : "ی"
+        let arabicHaa = KeyboardSettings.haaStyle == .arabic
+        let haa       = arabicHaa ? "ه" : "ہ"
+        let haaAlt    = arabicHaa ? "ہ" : "ه"
+        let arabicKaaf = KeyboardSettings.kaafStyle == .arabic
+        let kaaf       = arabicKaaf ? "ك" : "ک"
+        let kaafAlt    = arabicKaaf ? "ک" : "ك"
+        let arabicTaa = KeyboardSettings.taaMarbuta == .arabic
+        let taa        = arabicTaa ? "ة" : "ۃ"
+        let taaAlt     = arabicTaa ? "ۃ" : "ة"
         return KeyboardLayer(id: "default", rows: [
         // Row 1 — 11 keys  (matches PC Arabic row 1: Q–[)
         [
-            KeyData("ض", secondary: "ٹ"),                                       // ضض → ٹ
+            KeyData("ض", secondary: "ٹ"),                                           // ضض → ٹ
             KeyData("ص"),
-            KeyData("ث", secondary: "پ"),                                       // ثث → پ
+            KeyData("ث", secondary: "پ"),                                           // ثث → پ
             KeyData("ق"),
             KeyData("ف"),
             KeyData("غ"),
             KeyData("ع"),
-            KeyData("ه", secondary: "ھ",  alternates: ["ـہـ", "ـہ", "ۂ"]),    // هه → ھ
+            KeyData(haa, secondary: "ھ",  alternates: [haaAlt, "ـہـ", "ـہ", "ۂ"]), // هه → ھ
             KeyData("خ"),
-            KeyData("ح", secondary: "چ"),                                       // حح → چ
+            KeyData("ح", secondary: "چ"),                                           // حح → چ
             KeyData("ج", secondary: "چھے"),
         ],
         // Row 2 — 11 keys  (matches PC Arabic row 2: A–' ; ط added at end)
         [
             KeyData("ش"),
-            KeyData("س", secondary: "ے"),                                       // سس → ے
-            KeyData(yeh, secondary: "ئ",  alternates: [yehAlt, "ے"]),          // يي → ئ
+            KeyData("س", secondary: "ے"),                                           // سس → ے
+            KeyData(yeh, secondary: "ئ",  alternates: [yehAlt, "ے"]),              // يي → ئ
             KeyData("ب"),
             KeyData("ل", alternates: ["لا", "لأ", "لإ", "لآ", "لاٰ"]),
-            KeyData("ا", secondary: "اٰ", alternates: ["أ", "آ", "إ"]),        // اا → اٰ
+            KeyData("ا", secondary: "اٰ", alternates: ["أ", "آ", "إ"]),            // اا → اٰ
             KeyData("ت"),
             KeyData("ن"),
             KeyData("م"),
-            KeyData("ك", secondary: "گ",  alternates: ["گ"]),                   // كك → گ
-            KeyData("ط", secondary: "ں"),                                       // طط → ں  (PC: ' key)
+            KeyData(kaaf, secondary: "گ", alternates: [kaafAlt]),                   // كك → گ
+            KeyData("ط", secondary: "ں"),                                           // طط → ں  (PC: ' key)
         ],
         // Row 3 — 10 alpha + backspace  (matches PC Arabic row 3: Z–/)
         [
             KeyData("ئ"),
             KeyData("ء"),
             KeyData("ؤ", alternates: ["ۚ", "ۨ"]),
-            KeyData("ر", secondary: "ڑ",  alternates: ["ڑ"]),                   // رر → ڑ
+            KeyData("ر", secondary: "ڑ",  alternates: ["ڑ"]),                       // رر → ڑ
             KeyData("ى"),
-            KeyData("ة", secondary: "ۃ"),                                       // ةة → ۃ
+            KeyData(taa, secondary: taaAlt),                                         // ةة → ۃ
             KeyData("و"),
             KeyData("ز", alternates: ["ژ"]),
             KeyData("ذ"),
-            KeyData("د", secondary: "ڈ",  alternates: ["ڈ"]),                   // دد → ڈ
-            KeyData("ظ", secondary: "ہ"),                                       // ظظ → ہ
+            KeyData("د", secondary: "ڈ",  alternates: ["ڈ"]),                       // دد → ڈ
+            KeyData("ظ", secondary: "ہ"),                                           // ظظ → ہ
             KeyData("⌫", type: .backspace, width: .wide),
         ],
         // Row 4

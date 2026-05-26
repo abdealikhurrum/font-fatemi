@@ -15,34 +15,41 @@ import Foundation
 
 enum CRULPUrduLayoutData {
 
-    // Computed so the yeh character reflects the current setting without restarting.
+    // Computed so all character styles reflect current settings without restarting.
     static var defaultLayer: KeyboardLayer {
-        let yeh       = KeyboardSettings.urduYehStyle == .farsiYeh ? "ی" : "ي"
-        let yehAlt    = KeyboardSettings.urduYehStyle == .farsiYeh ? "ي" : "ی"
+        let yeh        = KeyboardSettings.urduYehStyle == .farsiYeh ? "ی" : "ي"
+        let yehAlt     = KeyboardSettings.urduYehStyle == .farsiYeh ? "ي" : "ی"
+        let arabicHaa  = KeyboardSettings.haaStyle == .arabic
+        let haa        = arabicHaa ? "ه" : "ہ"
+        let haaAlt     = arabicHaa ? "ہ" : "ه"
+        let arabicKaaf = KeyboardSettings.kaafStyle == .arabic
+        let kaaf       = arabicKaaf ? "ك" : "ک"
+        let kaafAlt    = arabicKaaf ? "ک" : "ك"
+        let taa        = KeyboardSettings.taaMarbuta == .arabic ? "ة" : "ۃ"
         return KeyboardLayer(id: "crulp", rows: [
         // Row 1 — 10 keys (QWERTYUIOP)
         [
             KeyData("ق"),
             KeyData("و", alternates: ["ؤ"]),
-            KeyData("ع", secondary: "غ"),                               // عع → غ
-            KeyData("ر", secondary: "ڑ"),                               // رر → ڑ
-            KeyData("ت", secondary: "ٹ"),                               // تت → ٹ
+            KeyData("ع", secondary: "غ"),                                    // عع → غ
+            KeyData("ر", secondary: "ڑ"),                                    // رر → ڑ
+            KeyData("ت", secondary: "ٹ"),                                    // تت → ٹ
             KeyData("ے", alternates: ["ئ", "ى"]),
             KeyData("ء"),
-            KeyData("ح", secondary: "خ"),                               // حح → خ
-            KeyData(yeh, alternates: ["ئ", "ى", yehAlt]),               // alternate = other yeh
+            KeyData("ح", secondary: "خ"),                                    // حح → خ
+            KeyData(yeh, alternates: ["ئ", "ى", yehAlt]),                    // alternate = other yeh
             KeyData("پ"),
         ],
         // Row 2 — 9 keys (ASDFGHJKL)
         [
             KeyData("ا", alternates: ["آ", "أ", "إ", "اٰ"]),
             KeyData("س", alternates: ["ص", "ث"]),
-            KeyData("د", secondary: "ڈ"),                          // دد → ڈ
+            KeyData("د", secondary: "ڈ"),                               // دد → ڈ
             KeyData("ف"),
             KeyData("گ"),
-            KeyData("ہ", secondary: "ھ",  alternates: ["ۃ"]),      // ہہ → ھ
+            KeyData(haa, secondary: "ھ", alternates: [haaAlt, taa]),    // ہہ → ھ; taa marbuta accessible here
             KeyData("ج", alternates: ["چ"]),
-            KeyData("ك", alternates: ["ک", "ق"]),
+            KeyData(kaaf, alternates: [kaafAlt, "ق"]),
             KeyData("ل", alternates: ["لا", "لأ", "لإ", "لآ"]),
         ],
         // Row 3 — 7 alpha + backspace (ZXCVBNM)

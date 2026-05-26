@@ -8,8 +8,17 @@ import android.content.Context
 object ArabicStandardLayoutData {
 
     fun defaultLayer(ctx: Context): KeyboardLayer {
-        val yeh    = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ی" else "ي"
-        val yehAlt = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ي" else "ی"
+        val yeh        = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ی" else "ي"
+        val yehAlt     = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ي" else "ی"
+        val arabicHaa  = KeyboardSettings.getHaaStyle(ctx) == KeyboardSettings.HaaStyle.ARABIC_HAA
+        val haa        = if (arabicHaa) "ه" else "ہ"
+        val haaAlt     = if (arabicHaa) "ہ" else "ه"
+        val arabicKaaf = KeyboardSettings.getKaafStyle(ctx) == KeyboardSettings.KaafStyle.ARABIC_KAAF
+        val kaaf       = if (arabicKaaf) "ك" else "ک"
+        val kaafAlt    = if (arabicKaaf) "ک" else "ك"
+        val arabicTaa  = KeyboardSettings.getTaaMarbuta(ctx) == KeyboardSettings.TaaMarbuta.ARABIC_TAA
+        val taa        = if (arabicTaa) "ة" else "ۃ"
+        val taaAlt     = if (arabicTaa) "ۃ" else "ة"
         return KeyboardLayer("arabic", listOf(
             // Row 1 — 11 keys
             listOf(
@@ -20,7 +29,7 @@ object ArabicStandardLayoutData {
                 KeyData("ف"),
                 KeyData("غ"),
                 KeyData("ع"),
-                KeyData("ه", secondary = "ھ",  alternates = listOf("ـہـ", "ـہ", "ۂ")),
+                KeyData(haa, secondary = "ھ", alternates = listOf(haaAlt, "ـہـ", "ـہ", "ۂ")),
                 KeyData("خ"),
                 KeyData("ح", secondary = "چ"),
                 KeyData("ج", secondary = "چھے"),
@@ -36,8 +45,8 @@ object ArabicStandardLayoutData {
                 KeyData("ت"),
                 KeyData("ن"),
                 KeyData("م"),
-                KeyData("ك", secondary = "گ",  alternates = listOf("گ")),
-                KeyData("ة", secondary = "ۃ"),
+                KeyData(kaaf, secondary = "گ", alternates = listOf(kaafAlt)),
+                KeyData(taa, secondary = taaAlt),
             ),
             // Row 3 — 10 alpha + backspace
             listOf(

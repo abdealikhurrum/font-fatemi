@@ -49,8 +49,17 @@ data class KeyboardLayer(val id: String, val rows: List<List<KeyData>>)
 object KeyboardLayoutData {
 
     fun defaultLayer(ctx: Context): KeyboardLayer {
-        val yeh    = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ی" else "ي"
-        val yehAlt = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ي" else "ی"
+        val yeh        = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ی" else "ي"
+        val yehAlt     = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ي" else "ی"
+        val arabicHaa  = KeyboardSettings.getHaaStyle(ctx) == KeyboardSettings.HaaStyle.ARABIC_HAA
+        val haa        = if (arabicHaa) "ه" else "ہ"
+        val haaAlt     = if (arabicHaa) "ہ" else "ه"
+        val arabicKaaf = KeyboardSettings.getKaafStyle(ctx) == KeyboardSettings.KaafStyle.ARABIC_KAAF
+        val kaaf       = if (arabicKaaf) "ك" else "ک"
+        val kaafAlt    = if (arabicKaaf) "ک" else "ك"
+        val arabicTaa  = KeyboardSettings.getTaaMarbuta(ctx) == KeyboardSettings.TaaMarbuta.ARABIC_TAA
+        val taa        = if (arabicTaa) "ة" else "ۃ"
+        val taaAlt     = if (arabicTaa) "ۃ" else "ة"
         return KeyboardLayer("default", listOf(
         listOf(
             KeyData("ض", secondary = "ٹ"),
@@ -60,7 +69,7 @@ object KeyboardLayoutData {
             KeyData("ف"),
             KeyData("غ"),
             KeyData("ع"),
-            KeyData("ه", secondary = "ھ",  alternates = listOf("ـہـ", "ـہ", "ۂ")),
+            KeyData(haa, secondary = "ھ", alternates = listOf(haaAlt, "ـہـ", "ـہ", "ۂ")),
             KeyData("خ"),
             KeyData("ح", secondary = "چ"),
             KeyData("ج", secondary = "چھے"),
@@ -75,7 +84,7 @@ object KeyboardLayoutData {
             KeyData("ت"),
             KeyData("ن"),
             KeyData("م"),
-            KeyData("ك", secondary = "گ",  alternates = listOf("گ")),
+            KeyData(kaaf, secondary = "گ", alternates = listOf(kaafAlt)),
             KeyData("ط", secondary = "ں"),
         ),
         listOf(
@@ -84,7 +93,7 @@ object KeyboardLayoutData {
             KeyData("ؤ", alternates = listOf("ۚ", "ۨ")),
             KeyData("ر", secondary = "ڑ",  alternates = listOf("ڑ")),
             KeyData("ى"),
-            KeyData("ة", secondary = "ۃ"),
+            KeyData(taa, secondary = taaAlt),
             KeyData("و"),
             KeyData("ز", alternates = listOf("ژ", "ذ")),
             KeyData(primary= "ذ"),

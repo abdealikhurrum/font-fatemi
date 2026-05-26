@@ -16,10 +16,17 @@ import android.content.Context
 //        ز ش  چ  ط  ب  ن  م
 object CRULPUrduLayoutData {
 
-    // Computed so the yeh character reflects the current setting without restarting.
+    // Computed so all character styles reflect current settings without restarting.
     fun defaultLayer(ctx: Context): KeyboardLayer {
-        val yeh    = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ی" else "ي"
-        val yehAlt = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ي" else "ی"
+        val yeh        = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ی" else "ي"
+        val yehAlt     = if (KeyboardSettings.getYehStyle(ctx) == KeyboardSettings.YehStyle.FARSI_YEH) "ي" else "ی"
+        val arabicHaa  = KeyboardSettings.getHaaStyle(ctx) == KeyboardSettings.HaaStyle.ARABIC_HAA
+        val haa        = if (arabicHaa) "ه" else "ہ"
+        val haaAlt     = if (arabicHaa) "ہ" else "ه"
+        val arabicKaaf = KeyboardSettings.getKaafStyle(ctx) == KeyboardSettings.KaafStyle.ARABIC_KAAF
+        val kaaf       = if (arabicKaaf) "ك" else "ک"
+        val kaafAlt    = if (arabicKaaf) "ک" else "ك"
+        val taa        = if (KeyboardSettings.getTaaMarbuta(ctx) == KeyboardSettings.TaaMarbuta.ARABIC_TAA) "ة" else "ۃ"
         return KeyboardLayer("crulp", listOf(
             // Row 1 — 10 keys (QWERTYUIOP)
             listOf(
@@ -41,9 +48,9 @@ object CRULPUrduLayoutData {
                 KeyData("د", secondary = "ڈ"),
                 KeyData("ف"),
                 KeyData("گ"),
-                KeyData("ہ", secondary = "ھ", alternates = listOf("ۃ")),
+                KeyData(haa, secondary = "ھ", alternates = listOf(haaAlt, taa)),
                 KeyData("ج", alternates = listOf("چ")),
-                KeyData("ك", alternates = listOf("ک", "ق")),
+                KeyData(kaaf, alternates = listOf(kaafAlt, "ق")),
                 KeyData("ل", alternates = listOf("لا", "لأ", "لإ", "لآ")),
             ),
             // Row 3 — 7 alpha + backspace (ZXCVBNM)

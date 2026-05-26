@@ -8,8 +8,17 @@ enum ArabicStandardLayoutData {
 
     static var defaultLayer: KeyboardLayer {
         let farsiYeh = KeyboardSettings.urduYehStyle == .farsiYeh
-        let yeh    = farsiYeh ? "ی" : "ي"
-        let yehAlt = farsiYeh ? "ي" : "ی"
+        let yeh      = farsiYeh ? "ی" : "ي"
+        let yehAlt   = farsiYeh ? "ي" : "ی"
+        let arabicHaa = KeyboardSettings.haaStyle == .arabic
+        let haa       = arabicHaa ? "ه" : "ہ"
+        let haaAlt    = arabicHaa ? "ہ" : "ه"
+        let arabicKaaf = KeyboardSettings.kaafStyle == .arabic
+        let kaaf       = arabicKaaf ? "ك" : "ک"
+        let kaafAlt    = arabicKaaf ? "ک" : "ك"
+        let arabicTaa = KeyboardSettings.taaMarbuta == .arabic
+        let taa        = arabicTaa ? "ة" : "ۃ"
+        let taaAlt     = arabicTaa ? "ۃ" : "ة"
         return KeyboardLayer(id: "arabic", rows: [
         // Row 1 — 11 keys
         [
@@ -20,7 +29,7 @@ enum ArabicStandardLayoutData {
             KeyData("ف"),
             KeyData("غ"),
             KeyData("ع"),
-            KeyData("ه", secondary: "ھ",  alternates: ["ـہـ", "ـہ", "ۂ"]),
+            KeyData(haa, secondary: "ھ",  alternates: [haaAlt, "ـہـ", "ـہ", "ۂ"]),
             KeyData("خ"),
             KeyData("ح", secondary: "چ"),
             KeyData("ج", secondary: "چھے"),
@@ -36,8 +45,8 @@ enum ArabicStandardLayoutData {
             KeyData("ت"),
             KeyData("ن"),
             KeyData("م"),
-            KeyData("ك", secondary: "گ",  alternates: ["گ"]),
-            KeyData("ة", secondary: "ۃ"),
+            KeyData(kaaf, secondary: "گ", alternates: [kaafAlt]),
+            KeyData(taa, secondary: taaAlt),
         ],
         // Row 3 — 11 alpha + backspace
         [
