@@ -12,15 +12,19 @@ final class KeyButton: UIView {
     let rowIndex: Int
     let totalRows: Int
 
+    // Column position within the row — drives the left/right thumb shadow corner.
+    // Col 0 = leftmost visible key, totalCols - 1 = rightmost.
+    let colIndex:  Int
+    let totalCols: Int
+
     // MARK: - Appearance
 
     private let label = UILabel()
     private let secondaryLabel = UILabel()  // small char in top-left; double-tap inserts it
     private let badge = UIView()            // dot indicating long-press alternates exist
 
-    // Depth-gradient layers that simulate a forward-tilted physical key face.
+    // Radial gradient that simulates a forward-tilted physical key face.
     private let depthGradient = CAGradientLayer()
-    private let topEdgeStrip  = CALayer()
 
     private var isHighlighted = false {
         didSet { applyHighlight() }
@@ -64,10 +68,12 @@ final class KeyButton: UIView {
 
     // MARK: - Init
 
-    init(keyData: KeyData, rowIndex: Int = 0, totalRows: Int = 4) {
+    init(keyData: KeyData, rowIndex: Int = 0, totalRows: Int = 4, colIndex: Int = 0, totalCols: Int = 1) {
         self.keyData   = keyData
         self.rowIndex  = rowIndex
         self.totalRows = totalRows
+        self.colIndex  = colIndex
+        self.totalCols = totalCols
         super.init(frame: .zero)
         setupView()
     }
@@ -127,7 +133,6 @@ final class KeyButton: UIView {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         depthGradient.frame = bounds
-        topEdgeStrip.frame  = CGRect(x: 0, y: 0, width: bounds.width, height: 3)
         CATransaction.commit()
     }
 
@@ -176,54 +181,42 @@ final class KeyButton: UIView {
     // MARK: - Depth layers
 
     private func setupDepthLayers() {
-        // Gradient covers the full key face; fades from a shadow at the top to
-        // transparent at ~55% of the way down.  This mimics the shadow you would see
-        // on a physical key face that is tilted slightly toward the viewer.
-        depthGradient.startPoint = CGPoint(x: 0.5, y: 0)
-        depthGradient.endPoint   = CGPoint(x: 0.5, y: 1)
-        depthGradient.locations  = [0, 0.55]
-        // Rounded top corners only — the bottom fades to transparent anyway.
-        depthGradient.cornerRadius    = 5
-        depthGradient.maskedCorners   = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        depthGradient.masksToBounds   = true
+        depthGradient.type          = .radial
+        depthGradient.cornerRadius  = 5
+        depthGradient.masksToBounds = true
         layer.addSublayer(depthGradient)
-
-        // Thin strip representing the "back wall" of a physically angled key —
-        // the edge that faces away from you and catches the least light.
-        topEdgeStrip.cornerRadius  = 5
-        topEdgeStrip.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        topEdgeStrip.masksToBounds = true
-        layer.addSublayer(topEdgeStrip)
-
         applyDepthColors()
     }
 
     private func applyDepthColors() {
         let enabled = KeyboardSettings.angledKeysEnabled
         depthGradient.isHidden = !enabled
-        topEdgeStrip.isHidden  = !enabled
         guard enabled else { return }
 
-        // Top rows are physically tilted more toward the viewer on a physical
-        // keyboard, so they get a slightly stronger shadow gradient.
-        let fraction  = totalRows > 1 ? Double(rowIndex) / Double(totalRows - 1) : 0
-        let intensity = CGFloat(0.14 - fraction * 0.06)  // 0.14 at row 0 → 0.08 at last row
+        // Normalised horizontal position: 0 = leftmost key, 1 = rightmost.
+        let nc = totalCols > 1 ? Double(colIndex) / Double(totalCols - 1) : 0.5
 
-        depthGradient.colors = [
-            UIColor(white: 0, alpha: intensity).cgColor,
-            UIColor(white: 0, alpha: 0).cgColor,
-        ]
+        // Shadow corner: left-thumb keys shadow upper-right; right-thumb keys shadow
+        // upper-left; centre keys shadow top-centre.  The gradient radiates outward
+        // from that corner to the diagonally opposite (highlight) corner.
+        let shadowX = CGFloat(1 - nc)
+        depthGradient.startPoint = CGPoint(x: shadowX,     y: 0)
+        depthGradient.endPoint   = CGPoint(x: 1 - shadowX, y: 1)
 
-        // Strip is slightly more pronounced in dark mode where the ambient contrast
-        // between key face and background is lower.
-        let stripAlpha: CGFloat = traitCollection.userInterfaceStyle == .dark ? 0.22 : 0.13
-        topEdgeStrip.backgroundColor = UIColor(white: 0, alpha: stripAlpha).cgColor
+        // Upper rows tilt more steeply toward the viewer on a curved physical keyboard.
+        let rowFraction = totalRows > 1 ? Double(rowIndex) / Double(totalRows - 1) : 0
+        let intensity   = CGFloat(0.20 - rowFraction * 0.08)  // 0.20 top row → 0.12 bottom
+
+        depthGradient.colors    = [UIColor(white: 0, alpha: intensity).cgColor,
+                                    UIColor(white: 0, alpha: 0).cgColor]
+        depthGradient.locations = [0, 1]
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             backgroundColor = normalBackground
+            // CGColor values don't resolve dynamically — recompute on mode switch.
             applyDepthColors()
         }
     }
