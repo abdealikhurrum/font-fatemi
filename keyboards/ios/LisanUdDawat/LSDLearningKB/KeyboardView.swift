@@ -100,6 +100,18 @@ final class KeyboardView: UIView {
     // MARK: - Configure
 
     func configure(with layer: KeyboardLayer) {
+        // Rebuilding the key views invalidates any KeyButton a repeat timer may
+        // still be holding. Tear all touch state down first so an in-flight
+        // repeat (e.g. a layer switch mid-hold) can't fire against a removed key.
+        cancelTimers()
+        dismissCallout()
+        dismissPopup()
+        activeKey?.setHighlighted(false)
+        activeKey             = nil
+        activeTouchBeganPoint = nil
+        keyRepeatFired        = false
+        popupRepeatFired      = false
+
         keyButtons.forEach { $0.removeFromSuperview() }
         keyButtons = []
         currentRows = layer.rows
@@ -159,6 +171,18 @@ final class KeyboardView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
 
+        // A previous touch sequence can be interrupted without a matching
+        // touchesEnded/touchesCancelled (host-app interruption, keyboard resize,
+        // control centre, etc.). Reassigning the timer ivars in activate() does
+        // NOT invalidate an already-scheduled Timer, so any orphaned repeat would
+        // keep firing under the new touch. Clear everything defensively first.
+        cancelTimers()
+        dismissCallout()
+        dismissPopup()
+        activeKey?.setHighlighted(false)
+        activeKey      = nil
+        keyRepeatFired = false
+
         if let key = keyButton(at: touch.location(in: self)) {
             activate(key: key, touch: touch)
         }
@@ -197,6 +221,14 @@ final class KeyboardView: UIView {
         if let popup = activePopup {
             if !popupRepeatFired { popup.confirmSelection() }
             dismissPopup()
+            // Reset the rest of the touch state too — otherwise activeKey (and its
+            // highlight) leak past finger-up, leaving the source key looking held
+            // and any activeKey-gated timer able to fire later.
+            cancelTimers()
+            activeKey?.setHighlighted(false)
+            activeKey             = nil
+            activeTouchBeganPoint = nil
+            keyRepeatFired        = false
             return
         }
 
@@ -362,7 +394,15 @@ final class KeyboardView: UIView {
         keyRepeatFired = true
         delegate?.keyPressed(key.keyData)
         keyRepeatTimer = Timer.scheduledTimer(withTimeInterval: 0.08, repeats: true) { [weak self] _ in
-            self?.delegate?.keyPressed(key.keyData)
+            // Only repeat while this exact key is still the one being held. If the
+            // touch ended/was interrupted without us being torn down (orphaned
+            // timer), activeKey no longer points here — stop and invalidate so we
+            // never type a character with no finger down.
+            guard let self, self.activeKey === key else {
+                self?.cancelKeyRepeatTimers()
+                return
+            }
+            self.delegate?.keyPressed(key.keyData)
         }
     }
 
@@ -403,7 +443,11 @@ final class KeyboardView: UIView {
     private func startBackspaceRepeat() {
         backspaceDeleteCount = 0
         backspaceRepeatTimer = Timer.scheduledTimer(withTimeInterval: 0.075, repeats: true) { [weak self] _ in
-            guard let self, let key = self.activeKey else { return }
+            guard let self, let key = self.activeKey, key.keyData.type == .backspace else {
+                self?.backspaceRepeatTimer?.invalidate()
+                self?.backspaceRepeatTimer = nil
+                return
+            }
             self.backspaceDeleteCount += 1
             if self.backspaceDeleteCount > 10 {
                 self.backspaceRepeatTimer?.invalidate()
@@ -417,7 +461,11 @@ final class KeyboardView: UIView {
 
     private func startWordRepeat() {
         backspaceRepeatTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: true) { [weak self] _ in
-            guard let self, self.activeKey != nil else { return }
+            guard let self, let key = self.activeKey, key.keyData.type == .backspace else {
+                self?.backspaceRepeatTimer?.invalidate()
+                self?.backspaceRepeatTimer = nil
+                return
+            }
             self.delegate?.backspaceWordPressed()
         }
     }
