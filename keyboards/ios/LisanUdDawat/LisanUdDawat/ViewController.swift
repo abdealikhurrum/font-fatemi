@@ -53,7 +53,7 @@ final class ViewController: UIViewController {
         let v = cardContainer(title: "Enable Keyboard")
         v.addArrangedSubview(bodyLabel(
             "Settings → General → Keyboard → Keyboards → " +
-            "Add New Keyboard… → Lisan ud Dawat"
+            "Add New Keyboard… → LigaCheh Keyboard"
         ))
         v.addArrangedSubview(actionButton("Open Settings", color: .systemBlue,
                                           target: self, action: #selector(openSettings)))
@@ -225,10 +225,10 @@ final class ViewController: UIViewController {
     private func buildMobileconfig(fontData: Data) -> Data? {
         let fontPayload: [String: Any] = [
             "Font":                fontData,
-            "PayloadDescription":  "FatemiMaqala typeface for Lisan ud Dawat",
+            "PayloadDescription":  "FatemiMaqala typeface for LigaCheh",
             "PayloadDisplayName":  "FatemiMaqala",
             "PayloadIdentifier":   "com.exordiumnetworks.LisanUdDawat.font.FatemiMaqala",
-            "PayloadOrganization": "Lisan ud Dawat",
+            "PayloadOrganization": "LigaCheh",
             "PayloadType":         "com.apple.font",
             "PayloadUUID":         "B2C3D4E5-F6A7-8901-BCDE-F01234567890",
             "PayloadVersion":      1,
@@ -238,7 +238,7 @@ final class ViewController: UIViewController {
             "PayloadDescription":      "Installs FatemiMaqala so it is available in all apps",
             "PayloadDisplayName":      "FatemiMaqala Font",
             "PayloadIdentifier":       "com.exordiumnetworks.LisanUdDawat.fontprofile",
-            "PayloadOrganization":     "Lisan ud Dawat",
+            "PayloadOrganization":     "LigaCheh",
             "PayloadRemovalDisallowed": false,
             "PayloadType":             "Configuration",
             "PayloadUUID":             "A1B2C3D4-E5F6-7890-ABCD-EF1234567890",
