@@ -280,7 +280,14 @@ extension KeyboardViewController: KeyboardViewDelegate {
             currentLayer = .diacritic
 
         case .abc:
-            if priorToModal != .numeric && priorToModal != .diacritic {
+            // ع on the Latin layer always returns to Arabic letters. priorToModal
+            // becomes .latin whenever 123/diacritics are opened from Latin (e.g.
+            // Latin → 123 → ABC lands back in Latin). Without this special case the
+            // line below would set currentLayer = priorToModal = .latin, so the ع
+            // key would no-op and leave the keyboard stuck in English.
+            if currentLayer == .latin {
+                currentLayer = .default
+            } else if priorToModal != .numeric && priorToModal != .diacritic {
                 currentLayer = priorToModal
             } else {
                 currentLayer = .default
