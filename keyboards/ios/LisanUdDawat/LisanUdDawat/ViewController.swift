@@ -148,22 +148,35 @@ final class ViewController: UIViewController {
     }
 
     @objc private func saveProfile() {
-        guard
-            let fontURL  = Bundle.main.url(forResource: "FatemiMaqala-Regular", withExtension: "ttf"),
-            let fontData = try? Data(contentsOf: fontURL),
-            let profile  = buildMobileconfig(fontData: fontData)
-        else {
-            alert("Font file not found in app bundle.")
-            return
-        }
-
         let dest = FileManager.default.temporaryDirectory
             .appendingPathComponent("FatemiMaqala.mobileconfig")
-        do {
-            try profile.write(to: dest, options: .atomic)
-        } catch {
-            alert("Could not write profile: \(error.localizedDescription)")
-            return
+        try? FileManager.default.removeItem(at: dest)
+
+        if let signed = Bundle.main.url(forResource: "FatemiMaqala", withExtension: "mobileconfig") {
+            // A pre-signed profile is bundled (see submission/sign-profile.sh) —
+            // ship it as-is so the install screen shows "Verified".
+            do {
+                try FileManager.default.copyItem(at: signed, to: dest)
+            } catch {
+                alert("Could not prepare profile: \(error.localizedDescription)")
+                return
+            }
+        } else {
+            // No signed profile bundled — generate an unsigned one on the fly.
+            guard
+                let fontURL  = Bundle.main.url(forResource: "FatemiMaqala-Regular", withExtension: "ttf"),
+                let fontData = try? Data(contentsOf: fontURL),
+                let profile  = buildMobileconfig(fontData: fontData)
+            else {
+                alert("Font file not found in app bundle.")
+                return
+            }
+            do {
+                try profile.write(to: dest, options: .atomic)
+            } catch {
+                alert("Could not write profile: \(error.localizedDescription)")
+                return
+            }
         }
 
         let share = UIActivityViewController(activityItems: [dest], applicationActivities: nil)
