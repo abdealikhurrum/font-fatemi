@@ -7,6 +7,16 @@ final class KeyButton: UIView {
 
     let keyData: KeyData
 
+    // Row position — used to vary depth-gradient intensity across rows.
+    // Row 0 = top of keyboard, totalRows - 1 = bottom (function row).
+    let rowIndex: Int
+    let totalRows: Int
+
+    // Column position within the row — drives the left/right thumb shadow corner.
+    // Col 0 = leftmost visible key, totalCols - 1 = rightmost.
+    let colIndex:  Int
+    let totalCols: Int
+
     // MARK: - Appearance
 
     private let label = UILabel()
@@ -55,8 +65,12 @@ final class KeyButton: UIView {
 
     // MARK: - Init
 
-    init(keyData: KeyData) {
-        self.keyData = keyData
+    init(keyData: KeyData, rowIndex: Int = 0, totalRows: Int = 4, colIndex: Int = 0, totalCols: Int = 1) {
+        self.keyData   = keyData
+        self.rowIndex  = rowIndex
+        self.totalRows = totalRows
+        self.colIndex  = colIndex
+        self.totalCols = totalCols
         super.init(frame: .zero)
         setupView()
     }
@@ -97,6 +111,9 @@ final class KeyButton: UIView {
             badge.layer.cornerRadius = 2
             addSubview(badge)
         }
+
+        // Redraw pyramid facets when bounds change (rotation etc.)
+        contentMode = .redraw
     }
 
     override func layoutSubviews() {
@@ -110,6 +127,10 @@ final class KeyButton: UIView {
         if !keyData.alternates.isEmpty && keyData.secondary.isEmpty && keyData.type == .character {
             badge.frame = CGRect(x: bounds.width - 8, y: 4, width: 4, height: 4)
         }
+
+        // Explicit shadow path avoids per-frame rasterisation of the view content
+        // to infer the shape — meaningful on lower-end GPUs.
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 5).cgPath
     }
 
     private func labelFont() -> UIFont {
@@ -152,5 +173,64 @@ final class KeyButton: UIView {
 
     private func applyHighlight() {
         backgroundColor = isHighlighted ? pressedBackground : normalBackground
+    }
+
+    // MARK: - Pyramid facets
+
+    // Four flat triangles meeting at the key centre, drawn as semi-transparent black
+    // overlays on top of the base background colour.  Each facet has a constant shade,
+    // so the seam lines between them are sharp — the "pyramidal key" look.
+    //
+    // Facet shading model (black overlay alpha):
+    //   top    — always darkest: the face that points away from the viewer
+    //   bottom — always zero:    the face pointing toward the viewer (highlight)
+    //   left   — scales with column: 0 for leftmost key (toward left thumb), max for rightmost
+    //   right  — inverse:            max for leftmost key, 0 for rightmost key
+    //
+    // Upper rows receive stronger shading to reflect the steeper physical tilt of
+    // keys that sit higher on a curved keyboard body.
+
+    override func draw(_ rect: CGRect) {
+        guard KeyboardSettings.angledKeysEnabled else { return }
+        guard let ctx = UIGraphicsGetCurrentContext() else { return }
+
+        // Clip to the rounded key shape so facet corners don't bleed outside.
+        UIBezierPath(roundedRect: rect, cornerRadius: 5).addClip()
+
+        let nc          = totalCols > 1 ? CGFloat(colIndex) / CGFloat(totalCols - 1) : 0.5
+        let rowFraction = totalRows > 1 ? CGFloat(rowIndex) / CGFloat(totalRows - 1) : 0
+        let base        = CGFloat(0.18 - Double(rowFraction) * 0.06) // 0.18 → 0.12
+
+        let tl = CGPoint(x: rect.minX, y: rect.minY)
+        let tr = CGPoint(x: rect.maxX, y: rect.minY)
+        let br = CGPoint(x: rect.maxX, y: rect.maxY)
+        let bl = CGPoint(x: rect.minX, y: rect.maxY)
+        let c  = CGPoint(x: rect.midX, y: rect.midY)
+
+        // (corner-a, corner-b, overlay-alpha) — triangle is c → a → b
+        let facets: [(CGPoint, CGPoint, CGFloat)] = [
+            (tl, tr, base),              // top face:   always shadowed
+            (tr, br, base * (1 - nc)),   // right face: bright for right-thumb keys
+            (br, bl, 0),                 // bottom face: highlight, never darkened
+            (bl, tl, base * nc),         // left face:  bright for left-thumb keys
+        ]
+
+        for (a, b, alpha) in facets {
+            ctx.setFillColor(UIColor(white: 0, alpha: alpha).cgColor)
+            ctx.beginPath()
+            ctx.move(to: c)
+            ctx.addLine(to: a)
+            ctx.addLine(to: b)
+            ctx.closePath()
+            ctx.fillPath()
+        }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            backgroundColor = normalBackground
+            setNeedsDisplay()
+        }
     }
 }

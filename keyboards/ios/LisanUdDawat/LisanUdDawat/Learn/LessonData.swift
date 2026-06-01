@@ -7,6 +7,12 @@ struct LessonStep {
     let keyHint: String   // badge below the target, e.g. "ث ث → پ"
 }
 
+enum ModuleKind {
+    case lesson
+    case verbTraining
+    case sentenceTraining(language: String)
+}
+
 struct LessonModule {
     let id: String
     let title: String
@@ -14,13 +20,47 @@ struct LessonModule {
     let systemImage: String
     let accent: UIColor
     let steps: [LessonStep]
+    var kind: ModuleKind = .lesson
 
     var stepCount: Int { steps.count }
 }
 
 enum LessonCatalog {
 
-    static let modules: [LessonModule] = [doublePress, diacritics, joiners]
+    static let modules: [LessonModule] = [
+        verbTraining, englishSentences, urduSentences,
+        doublePress, diacritics, joiners,
+    ]
+
+    static let verbTraining = LessonModule(
+        id: "verb_training",
+        title: "Verb Training",
+        subtitle: "Type the LSD equivalent of each Urdu verb form to build the linguistic corpus",
+        systemImage: "square.and.pencil",
+        accent: .systemOrange,
+        steps: [],
+        kind: .verbTraining
+    )
+
+    static let englishSentences = LessonModule(
+        id: "sentence_english",
+        title: "English → LSD",
+        subtitle: "Translate 40 everyday English sentences into Lisan ud Dawat",
+        systemImage: "character.bubble",
+        accent: .systemBlue,
+        steps: [],
+        kind: .sentenceTraining(language: "english")
+    )
+
+    static let urduSentences = LessonModule(
+        id: "sentence_urdu",
+        title: "Urdu → LSD",
+        subtitle: "Translate 40 everyday Urdu sentences into Lisan ud Dawat",
+        systemImage: "text.bubble",
+        accent: .systemPurple,
+        steps: [],
+        kind: .sentenceTraining(language: "urdu")
+    )
 
     // MARK: - Module 1: Double-press characters
 

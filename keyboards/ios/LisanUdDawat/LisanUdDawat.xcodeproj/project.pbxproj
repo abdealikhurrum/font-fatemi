@@ -466,6 +466,8 @@
 				DEVELOPMENT_TEAM = K52KL4RVGR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = LigaCheh;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -502,6 +504,8 @@
 				DEVELOPMENT_TEAM = K52KL4RVGR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = LigaCheh;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -536,7 +540,7 @@
 				DEVELOPMENT_TEAM = K52KL4RVGR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LSDLearningKB/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LSDLearningKB;
+				INFOPLIST_KEY_CFBundleDisplayName = "LigaCheh Keyboard";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -568,7 +572,7 @@
 				DEVELOPMENT_TEAM = K52KL4RVGR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LSDLearningKB/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LSDLearningKB;
+				INFOPLIST_KEY_CFBundleDisplayName = "LigaCheh Keyboard";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (

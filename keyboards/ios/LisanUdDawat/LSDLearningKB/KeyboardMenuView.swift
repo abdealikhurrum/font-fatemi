@@ -80,6 +80,12 @@ final class KeyboardMenuView: UIView {
         addSeparator(to: stack)
         addKeyBehaviourSection(to: stack)
         addSeparator(to: stack)
+        addToggle(to: stack,
+            label: "Angled keys",
+            getValue: { KeyboardSettings.angledKeysEnabled },
+            setValue: { KeyboardSettings.angledKeysEnabled = $0 }
+        )
+        addSeparator(to: stack)
         addActionRow(to: stack,
             label: "Copy corpus to clipboard  (\(CorpusLogger.shared.wordCount) words)",
             action: { [weak self] in

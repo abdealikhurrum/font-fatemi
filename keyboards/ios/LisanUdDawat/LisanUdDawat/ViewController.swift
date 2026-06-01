@@ -42,7 +42,9 @@ final class ViewController: UIViewController {
         ])
 
         stackView.addArrangedSubview(keyboardCard())
+        stackView.addArrangedSubview(appearanceCard())
         stackView.addArrangedSubview(fontCard())
+        stackView.addArrangedSubview(corpusCard())
     }
 
     // MARK: - Cards
@@ -51,7 +53,7 @@ final class ViewController: UIViewController {
         let v = cardContainer(title: "Enable Keyboard")
         v.addArrangedSubview(bodyLabel(
             "Settings → General → Keyboard → Keyboards → " +
-            "Add New Keyboard… → Lisan ud Dawat"
+            "Add New Keyboard… → LigaCheh Keyboard"
         ))
         v.addArrangedSubview(actionButton("Open Settings", color: .systemBlue,
                                           target: self, action: #selector(openSettings)))
@@ -99,6 +101,45 @@ final class ViewController: UIViewController {
         return v
     }
 
+    private func appearanceCard() -> UIView {
+        let sharedDefaults = UserDefaults(suiteName: "group.com.exordiumnetworks.lsdkeyboard")
+        let v = cardContainer(title: "Keyboard Appearance")
+
+        let row = UIStackView()
+        row.axis = .horizontal
+        row.alignment = .center
+
+        let lbl = UILabel()
+        lbl.text = "Angled keys"
+        lbl.font = UIFont.systemFont(ofSize: 15)
+        lbl.setContentHuggingPriority(.defaultLow, for: .horizontal)
+
+        let toggle = UISwitch()
+        let stored = sharedDefaults?.object(forKey: "angled_keys_enabled") as? Bool
+        toggle.isOn = stored ?? true
+        toggle.addAction(UIAction { _ in
+            sharedDefaults?.set(toggle.isOn, forKey: "angled_keys_enabled")
+        }, for: .valueChanged)
+
+        row.addArrangedSubview(lbl)
+        row.addArrangedSubview(toggle)
+        v.addArrangedSubview(row)
+        v.addArrangedSubview(bodyLabel("Takes effect the next time the keyboard loads."))
+        return v
+    }
+
+    private func corpusCard() -> UIView {
+        let v = cardContainer(title: "Typing Data")
+        v.addArrangedSubview(bodyLabel(
+            "Exports lsd_corpus_words.json from the shared app group — " +
+            "contains touch offsets, correction counts, and daily snapshots " +
+            "tagged with the angled-keys condition."
+        ))
+        v.addArrangedSubview(actionButton("Export JSON", color: .systemGreen,
+                                          target: self, action: #selector(exportCorpus)))
+        return v
+    }
+
     // MARK: - Actions
 
     @objc private func openSettings() {
@@ -107,26 +148,75 @@ final class ViewController: UIViewController {
     }
 
     @objc private func saveProfile() {
-        guard
-            let fontURL  = Bundle.main.url(forResource: "FatemiMaqala-Regular", withExtension: "ttf"),
-            let fontData = try? Data(contentsOf: fontURL),
-            let profile  = buildMobileconfig(fontData: fontData)
-        else {
-            alert("Font file not found in app bundle.")
-            return
-        }
-
         let dest = FileManager.default.temporaryDirectory
             .appendingPathComponent("FatemiMaqala.mobileconfig")
-        do {
-            try profile.write(to: dest, options: .atomic)
-        } catch {
-            alert("Could not write profile: \(error.localizedDescription)")
-            return
+        try? FileManager.default.removeItem(at: dest)
+
+        if let signed = Bundle.main.url(forResource: "FatemiMaqala", withExtension: "mobileconfig") {
+            // A pre-signed profile is bundled (see submission/sign-profile.sh) —
+            // ship it as-is so the install screen shows "Verified".
+            do {
+                try FileManager.default.copyItem(at: signed, to: dest)
+            } catch {
+                alert("Could not prepare profile: \(error.localizedDescription)")
+                return
+            }
+        } else {
+            // No signed profile bundled — generate an unsigned one on the fly.
+            guard
+                let fontURL  = Bundle.main.url(forResource: "FatemiMaqala-Regular", withExtension: "ttf"),
+                let fontData = try? Data(contentsOf: fontURL),
+                let profile  = buildMobileconfig(fontData: fontData)
+            else {
+                alert("Font file not found in app bundle.")
+                return
+            }
+            do {
+                try profile.write(to: dest, options: .atomic)
+            } catch {
+                alert("Could not write profile: \(error.localizedDescription)")
+                return
+            }
         }
 
         let share = UIActivityViewController(activityItems: [dest], applicationActivities: nil)
         share.popoverPresentationController?.sourceView = installButton
+        present(share, animated: true)
+    }
+
+    @objc private func exportCorpus() {
+        let groupID  = "group.com.exordiumnetworks.lsdkeyboard"
+        let fileName = "lsd_corpus_words.json"
+
+        // Prefer the shared App Group container; fall back to the extension's Documents.
+        let candidates: [URL] = [
+            FileManager.default
+                .containerURL(forSecurityApplicationGroupIdentifier: groupID)?
+                .appendingPathComponent(fileName),
+            FileManager.default
+                .urls(for: .documentDirectory, in: .userDomainMask).first?
+                .appendingPathComponent(fileName),
+        ].compactMap { $0 }
+
+        guard let source = candidates.first(where: { FileManager.default.fileExists(atPath: $0.path) }) else {
+            alert("No corpus data found yet — type a few words with the keyboard first.")
+            return
+        }
+
+        // Copy to a temp location with a timestamped name so repeated exports are distinct.
+        let stamp = ISO8601DateFormatter().string(from: Date()).prefix(10)
+        let dest  = FileManager.default.temporaryDirectory
+            .appendingPathComponent("lsd_corpus_\(stamp).json")
+        try? FileManager.default.removeItem(at: dest)
+        do {
+            try FileManager.default.copyItem(at: source, to: dest)
+        } catch {
+            alert("Could not copy corpus file: \(error.localizedDescription)")
+            return
+        }
+
+        let share = UIActivityViewController(activityItems: [dest], applicationActivities: nil)
+        share.popoverPresentationController?.sourceView = view
         present(share, animated: true)
     }
 
@@ -135,10 +225,10 @@ final class ViewController: UIViewController {
     private func buildMobileconfig(fontData: Data) -> Data? {
         let fontPayload: [String: Any] = [
             "Font":                fontData,
-            "PayloadDescription":  "FatemiMaqala typeface for Lisan ud Dawat",
+            "PayloadDescription":  "FatemiMaqala typeface for LigaCheh",
             "PayloadDisplayName":  "FatemiMaqala",
             "PayloadIdentifier":   "com.exordiumnetworks.LisanUdDawat.font.FatemiMaqala",
-            "PayloadOrganization": "Lisan ud Dawat",
+            "PayloadOrganization": "LigaCheh",
             "PayloadType":         "com.apple.font",
             "PayloadUUID":         "B2C3D4E5-F6A7-8901-BCDE-F01234567890",
             "PayloadVersion":      1,
@@ -148,7 +238,7 @@ final class ViewController: UIViewController {
             "PayloadDescription":      "Installs FatemiMaqala so it is available in all apps",
             "PayloadDisplayName":      "FatemiMaqala Font",
             "PayloadIdentifier":       "com.exordiumnetworks.LisanUdDawat.fontprofile",
-            "PayloadOrganization":     "Lisan ud Dawat",
+            "PayloadOrganization":     "LigaCheh",
             "PayloadRemovalDisallowed": false,
             "PayloadType":             "Configuration",
             "PayloadUUID":             "A1B2C3D4-E5F6-7890-ABCD-EF1234567890",

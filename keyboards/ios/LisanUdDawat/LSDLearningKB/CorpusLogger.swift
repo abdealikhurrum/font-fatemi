@@ -127,9 +127,13 @@ final class CorpusLogger {
         let today = Self.snapshotDateFormatter.string(from: Date())
         guard data.snapshots[today] == nil else { return }
         data.snapshots[today] = data.offsets
+        data.snapshotConditions[today] = KeyboardSettings.angledKeysEnabled
         if data.snapshots.count > Self.snapshotLimit {
             let oldest = data.snapshots.keys.sorted().prefix(data.snapshots.count - Self.snapshotLimit)
-            for key in oldest { data.snapshots.removeValue(forKey: key) }
+            for key in oldest {
+                data.snapshots.removeValue(forKey: key)
+                data.snapshotConditions.removeValue(forKey: key)
+            }
         }
     }
 
@@ -238,22 +242,35 @@ final class CorpusLogger {
 // MARK: - Data model
 
 struct CorpusData: Codable {
-    var words:       [String]                        = []
-    var bigrams:     [String: [String: Int]]         = [:]  // prev → next → count
-    var offsets:     [String: OffsetStats]           = [:]  // key primary → running mean offset
-    var corrections: [String: Int]                   = [:]  // char → immediate-backspace count
-    var snapshots:   [String: [String: OffsetStats]] = [:]  // "yyyy-MM-dd" → key → stats
+    var words:              [String]                        = []
+    var bigrams:            [String: [String: Int]]         = [:]  // prev → next → count
+    var offsets:            [String: OffsetStats]           = [:]  // key primary → running stats
+    var corrections:        [String: Int]                   = [:]  // char → immediate-backspace count
+    var snapshots:          [String: [String: OffsetStats]] = [:]  // "yyyy-MM-dd" → key → stats
+    var snapshotConditions: [String: Bool]                  = [:]  // "yyyy-MM-dd" → angledKeysEnabled
 }
 
 struct OffsetStats: Codable {
     var count:  Int   = 0
     var meanDx: Float = 0
     var meanDy: Float = 0
+    // Welford M2 accumulators — sum of squared deviations from the running mean
+    var m2Dx:   Float = 0
+    var m2Dy:   Float = 0
+
+    // Sample standard deviation; 0 when count < 2
+    var stdDx: Float { count > 1 ? sqrtf(m2Dx / Float(count - 1)) : 0 }
+    var stdDy: Float { count > 1 ? sqrtf(m2Dy / Float(count - 1)) : 0 }
 
     mutating func record(_ dx: Float, _ dy: Float) {
         count += 1
-        let n  = Float(count)
-        meanDx += (dx - meanDx) / n   // Welford online mean
-        meanDy += (dy - meanDy) / n
+        let n      = Float(count)
+        let dxDelta = dx - meanDx
+        let dyDelta = dy - meanDy
+        meanDx += dxDelta / n
+        meanDy += dyDelta / n
+        // Second-pass delta uses updated mean — this is what makes Welford numerically stable
+        m2Dx   += dxDelta * (dx - meanDx)
+        m2Dy   += dyDelta * (dy - meanDy)
     }
 }
