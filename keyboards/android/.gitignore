@@ -7,3 +7,14 @@ app/build/
 captures/
 .externalNativeBuild/
 .cxx/
+
+# Release signing — never commit the keystore or its credentials
+keystore.properties
+*.jks
+*.keystore
+
+# Build outputs
+*.apk
+*.aab
+app/debug/
+app/release/
