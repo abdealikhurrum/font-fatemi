@@ -113,7 +113,9 @@ object KeyboardLayoutData {
         ))
     }
 
-    val numericLayer = KeyboardLayer("numeric", listOf(
+    // backLabel is the label for the "return to letters" key — set by the service
+    // to "ABC" when it will return to the Latin layer, or "ا ب ج" for Arabic.
+    fun numericLayer(backLabel: String) = KeyboardLayer("numeric", listOf(
         listOf(
             KeyData("١", alternates = listOf("1", "૧")),
             KeyData("٢", alternates = listOf("2", "૨")),
@@ -151,7 +153,7 @@ object KeyboardLayoutData {
             KeyData("⌫",  type = KeyType.BACKSPACE, width = KeyWidth.Wide),
         ),
         listOf(
-            KeyData("ا ب ج", type = KeyType.ABC,   width = KeyWidth.Fixed(80f)),
+            KeyData(backLabel, type = KeyType.ABC,   width = KeyWidth.Fixed(80f)),
             KeyData("🌐",     type = KeyType.GLOBE,  width = KeyWidth.Fixed(44f)),
             KeyData(" ",      type = KeyType.SPACE,  width = KeyWidth.Flexible,
                               alternates = listOf(" ", "‌", "ـ")),
@@ -159,7 +161,7 @@ object KeyboardLayoutData {
         ),
     ))
 
-    val diacriticLayer = KeyboardLayer("diacritic", listOf(
+    fun diacriticLayer(backLabel: String) = KeyboardLayer("diacritic", listOf(
         listOf(
             KeyData("َ"), KeyData("ِ"), KeyData("ُ"), KeyData("ْ"), KeyData("ّ"),
             KeyData("ً"), KeyData("ٍ"), KeyData("ٌ"), KeyData("ٰ"),
@@ -182,7 +184,7 @@ object KeyboardLayoutData {
             KeyData(" ",      type = KeyType.SPACE,         width = KeyWidth.Flexible,
                               alternates = listOf(" ", "‌", "ـ")),
             KeyData("→",      type = KeyType.CURSOR_LEFT,   width = KeyWidth.Fixed(44f)),
-            KeyData("ا ب ج", type = KeyType.ABC,           width = KeyWidth.Fixed(52f)),
+            KeyData(backLabel, type = KeyType.ABC,           width = KeyWidth.Fixed(52f)),
             KeyData("↵",      type = KeyType.ENTER,         width = KeyWidth.Fixed(52f)),
         ),
     ))

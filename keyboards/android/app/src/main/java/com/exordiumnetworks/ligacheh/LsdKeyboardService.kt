@@ -80,14 +80,17 @@ class LsdKeyboardService : InputMethodService() {
     // ── Layer ─────────────────────────────────────────────────────────────
 
     private fun applyLayer() {
+        // The numeric/diacritic "return to letters" key reflects where it will go:
+        // "ABC" if it came from (and returns to) Latin, otherwise Arabic "ا ب ج".
+        val modalBackLabel = if (priorToModal == Layer.LATIN) "ABC" else "ا ب ج"
         val layer = when (currentLayer) {
             Layer.DEFAULT -> when (KeyboardSettings.getLayout(this)) {
                 KeyboardSettings.LayoutType.LSD            -> KeyboardLayoutData.defaultLayer(this)
                 KeyboardSettings.LayoutType.ARABIC_STANDARD -> ArabicStandardLayoutData.defaultLayer(this)
                 KeyboardSettings.LayoutType.CRULP_URDU      -> CRULPUrduLayoutData.defaultLayer(this)
             }
-            Layer.NUMERIC   -> KeyboardLayoutData.numericLayer
-            Layer.DIACRITIC -> KeyboardLayoutData.diacriticLayer
+            Layer.NUMERIC   -> KeyboardLayoutData.numericLayer(modalBackLabel)
+            Layer.DIACRITIC -> KeyboardLayoutData.diacriticLayer(modalBackLabel)
             Layer.LATIN     -> if (latinShifted) LatinLayoutData.upperLayer
                                else              LatinLayoutData.lowerLayer
         }
