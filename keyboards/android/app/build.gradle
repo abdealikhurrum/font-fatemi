@@ -3,21 +3,44 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+// Release signing is configured via keystore.properties (kept out of version
+// control). Without it, the release build is left unsigned so debug builds and
+// CI still work. See keystore.properties.template / RELEASE.md.
+def keystorePropsFile = rootProject.file("keystore.properties")
+def keystoreProps = new Properties()
+if (keystorePropsFile.exists()) {
+    keystoreProps.load(new FileInputStream(keystorePropsFile))
+}
+
 android {
-    namespace 'com.lisanuddawat.keyboard'
-    compileSdk 34
+    namespace 'com.exordiumnetworks.ligacheh'
+    compileSdk 35
 
     defaultConfig {
-        applicationId "com.lisanuddawat.keyboard"
+        applicationId "com.exordiumnetworks.ligacheh"
         minSdk 26
-        targetSdk 34
+        targetSdk 35
         versionCode 1
         versionName "1.0"
+    }
+
+    signingConfigs {
+        release {
+            if (keystorePropsFile.exists()) {
+                storeFile file(keystoreProps['storeFile'])
+                storePassword keystoreProps['storePassword']
+                keyAlias keystoreProps['keyAlias']
+                keyPassword keystoreProps['keyPassword']
+            }
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            if (keystorePropsFile.exists()) {
+                signingConfig signingConfigs.release
+            }
         }
     }
     compileOptions {
