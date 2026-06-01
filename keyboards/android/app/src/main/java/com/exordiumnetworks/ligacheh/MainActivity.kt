@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
 
         // Layout picker
         card.addView(settingRow("Layout", segControl(
-            items    = listOf("LSD", "Arabic", "Urdu"),
+            items    = listOf("LigaCheh", "Arabic", "Urdu"),
             current  = when (KeyboardSettings.getLayout(this)) {
                 KeyboardSettings.LayoutType.LSD            -> 0
                 KeyboardSettings.LayoutType.ARABIC_STANDARD -> 1
