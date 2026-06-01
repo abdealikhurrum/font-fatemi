@@ -163,6 +163,63 @@ class MainActivity : AppCompatActivity() {
             }
         )))
 
+        // Kaaf style
+        card.addView(hairline())
+        card.addView(settingRow("Kaaf", segControl(
+            items    = listOf("ك", "ک"),
+            current  = if (KeyboardSettings.getKaafStyle(this) == KeyboardSettings.KaafStyle.ARABIC_KAAF) 0 else 1,
+            font     = fatemiTypeface,
+            onSelect = { idx ->
+                KeyboardSettings.setKaafStyle(this,
+                    if (idx == 0) KeyboardSettings.KaafStyle.ARABIC_KAAF
+                    else          KeyboardSettings.KaafStyle.URDU_KAAF)
+            }
+        )))
+
+        // Haa style
+        card.addView(hairline())
+        card.addView(settingRow("Haa", segControl(
+            items    = listOf("ه", "ہ"),
+            current  = if (KeyboardSettings.getHaaStyle(this) == KeyboardSettings.HaaStyle.ARABIC_HAA) 0 else 1,
+            font     = fatemiTypeface,
+            onSelect = { idx ->
+                KeyboardSettings.setHaaStyle(this,
+                    if (idx == 0) KeyboardSettings.HaaStyle.ARABIC_HAA
+                    else          KeyboardSettings.HaaStyle.URDU_HAA)
+            }
+        )))
+
+        // Taa marbuta style
+        card.addView(hairline())
+        card.addView(settingRow("Taa marbuta", segControl(
+            items    = listOf("ة", "ۃ"),
+            current  = if (KeyboardSettings.getTaaMarbuta(this) == KeyboardSettings.TaaMarbuta.ARABIC_TAA) 0 else 1,
+            font     = fatemiTypeface,
+            onSelect = { idx ->
+                KeyboardSettings.setTaaMarbuta(this,
+                    if (idx == 0) KeyboardSettings.TaaMarbuta.ARABIC_TAA
+                    else          KeyboardSettings.TaaMarbuta.URDU_TAA)
+            }
+        )))
+
+        // Long-press delay
+        card.addView(hairline())
+        val delayValues = listOf(200L, 350L, 500L)
+        card.addView(settingRow("Long-press", segControl(
+            items    = listOf("Short", "Normal", "Long"),
+            current  = delayValues.indexOfFirst { it == KeyboardSettings.getLongPressDelayMs(this) }.coerceAtLeast(1),
+            onSelect = { idx -> KeyboardSettings.setLongPressDelayMs(this, delayValues[idx]) }
+        )))
+
+        // Key-repeat interval
+        card.addView(hairline())
+        val repeatValues = listOf(0L, 250L, 100L)
+        card.addView(settingRow("Key repeat", segControl(
+            items    = listOf("Off", "Slow", "Fast"),
+            current  = repeatValues.indexOfFirst { it == KeyboardSettings.getPopupRepeatIntervalMs(this) }.coerceAtLeast(2),
+            onSelect = { idx -> KeyboardSettings.setPopupRepeatIntervalMs(this, repeatValues[idx]) }
+        )))
+
         return card
     }
 
