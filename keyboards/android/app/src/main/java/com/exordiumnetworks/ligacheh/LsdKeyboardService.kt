@@ -80,14 +80,17 @@ class LsdKeyboardService : InputMethodService() {
     // ── Layer ─────────────────────────────────────────────────────────────
 
     private fun applyLayer() {
+        // The numeric/diacritic "return to letters" key reflects where it will go:
+        // "ABC" if it came from (and returns to) Latin, otherwise Arabic "ا ب ج".
+        val modalBackLabel = if (priorToModal == Layer.LATIN) "ABC" else "ا ب ج"
         val layer = when (currentLayer) {
             Layer.DEFAULT -> when (KeyboardSettings.getLayout(this)) {
                 KeyboardSettings.LayoutType.LSD            -> KeyboardLayoutData.defaultLayer(this)
                 KeyboardSettings.LayoutType.ARABIC_STANDARD -> ArabicStandardLayoutData.defaultLayer(this)
                 KeyboardSettings.LayoutType.CRULP_URDU      -> CRULPUrduLayoutData.defaultLayer(this)
             }
-            Layer.NUMERIC   -> KeyboardLayoutData.numericLayer
-            Layer.DIACRITIC -> KeyboardLayoutData.diacriticLayer
+            Layer.NUMERIC   -> KeyboardLayoutData.numericLayer(modalBackLabel)
+            Layer.DIACRITIC -> KeyboardLayoutData.diacriticLayer(modalBackLabel)
             Layer.LATIN     -> if (latinShifted) LatinLayoutData.upperLayer
                                else              LatinLayoutData.lowerLayer
         }
@@ -244,7 +247,13 @@ class LsdKeyboardService : InputMethodService() {
                 currentLayer  = Layer.NUMERIC
             }
 
-            KeyType.ABC -> currentLayer = priorToModal.takeIf { it != Layer.NUMERIC && it != Layer.DIACRITIC } ?: Layer.DEFAULT
+            // ABC serves two keys: the "ا ب ج" in the numeric/diacritic modals returns
+            // to the layer they were entered from (priorToModal); the Latin layer's "ع"
+            // always returns to Arabic. Without the LATIN branch, entering numeric *from*
+            // Latin leaves priorToModal == LATIN, trapping "ع" in the Latin layer.
+            KeyType.ABC -> currentLayer =
+                if (currentLayer == Layer.LATIN) Layer.DEFAULT
+                else priorToModal.takeIf { it != Layer.NUMERIC && it != Layer.DIACRITIC } ?: Layer.DEFAULT
 
             KeyType.LATIN -> {
                 currentLayer = Layer.LATIN
