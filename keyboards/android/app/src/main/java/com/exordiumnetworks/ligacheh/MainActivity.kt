@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         content.addView(TextView(this).apply {
-            text     = "Lisan ud Dawat Keyboard"
+            text     = "LigaCheh Keyboard"
             textSize = 22f
             setTypeface(null, Typeface.BOLD)
             setPadding(0, 0, 0, dp(4))
@@ -54,14 +54,14 @@ class MainActivity : AppCompatActivity() {
 
         // Setup steps
         content.addView(makeStep("1. Enable the keyboard",
-            "Open Android keyboard settings and toggle on \"Lisan ud Dawat\"."))
+            "Open Android keyboard settings and toggle on \"LigaCheh\"."))
         content.addView(Button(this).apply {
             text = "Open Keyboard Settings"
             setOnClickListener { startActivity(Intent(Settings.ACTION_INPUT_METHOD_SETTINGS)) }
         })
 
         content.addView(makeStep("2. Select the keyboard",
-            "Tap the keyboard/globe icon in any text field and pick \"Lisan ud Dawat\"."))
+            "Tap the keyboard/globe icon in any text field and pick \"LigaCheh\"."))
         content.addView(Button(this).apply {
             text = "Switch Input Method"
             setOnClickListener {
