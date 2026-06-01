@@ -18,3 +18,6 @@ keystore.properties
 *.aab
 app/debug/
 app/release/
+
+# Play Store submission kit — local working copy, never committed
+submission/
