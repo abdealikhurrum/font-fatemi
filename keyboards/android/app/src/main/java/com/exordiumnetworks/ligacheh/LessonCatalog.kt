@@ -37,7 +37,7 @@ object LessonCatalog {
         steps = listOf(
             LessonStep(
                 heading = "How double-press works",
-                body = "The LSD keyboard hides extended letters behind a quick double-tap on the same key. Tap a key twice in rapid succession and the second character replaces the first.\n\nEach step below shows the character and which key to double-press."
+                body = "This keyboard hides extended letters behind a quick double-tap on the same key. Tap a key twice in rapid succession and the second character replaces the first.\n\nEach step below shows the character and which key to double-press."
             ),
             LessonStep(
                 heading = "پ — double-press ث",

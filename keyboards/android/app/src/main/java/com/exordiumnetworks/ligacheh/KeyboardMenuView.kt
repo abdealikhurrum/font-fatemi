@@ -107,7 +107,7 @@ class KeyboardMenuView(context: Context) : FrameLayout(context) {
         row.addView(makeLabel("Layout"))
 
         val current = KeyboardSettings.getLayout(context)
-        val labels  = listOf("LSD", "Arabic", "Urdu")
+        val labels  = listOf("LigaCheh", "Arabic", "Urdu")
         val types   = listOf(
             KeyboardSettings.LayoutType.LSD,
             KeyboardSettings.LayoutType.ARABIC_STANDARD,
