@@ -244,7 +244,13 @@ class LsdKeyboardService : InputMethodService() {
                 currentLayer  = Layer.NUMERIC
             }
 
-            KeyType.ABC -> currentLayer = priorToModal.takeIf { it != Layer.NUMERIC && it != Layer.DIACRITIC } ?: Layer.DEFAULT
+            // ABC serves two keys: the "ا ب ج" in the numeric/diacritic modals returns
+            // to the layer they were entered from (priorToModal); the Latin layer's "ع"
+            // always returns to Arabic. Without the LATIN branch, entering numeric *from*
+            // Latin leaves priorToModal == LATIN, trapping "ع" in the Latin layer.
+            KeyType.ABC -> currentLayer =
+                if (currentLayer == Layer.LATIN) Layer.DEFAULT
+                else priorToModal.takeIf { it != Layer.NUMERIC && it != Layer.DIACRITIC } ?: Layer.DEFAULT
 
             KeyType.LATIN -> {
                 currentLayer = Layer.LATIN
