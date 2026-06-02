@@ -7,6 +7,8 @@ import android.view.KeyEvent
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 class LsdKeyboardService : InputMethodService() {
 
@@ -38,6 +40,19 @@ class LsdKeyboardService : InputMethodService() {
 
     override fun onCreateInputView(): View {
         val root = FrameLayout(this)
+        // Fill the area behind the keys (incl. the strip above the nav bar) with the
+        // keyboard background so the inset padding below looks intentional.
+        root.setBackgroundColor(KeyboardColors.background(this))
+        // Targeting API 35 makes the app edge-to-edge, so the IME window now extends
+        // under the system navigation bar. Consume the nav-bar inset and pad the bottom
+        // by it, so the keyboard always sits a consistent distance ABOVE the nav bar
+        // (never flush in the gesture zone, never hidden behind the 3-button bar).
+        // On API ≤34 the system already insets the IME window, so this reports 0 — no-op.
+        ViewCompat.setOnApplyWindowInsetsListener(root) { v, insets ->
+            val navBottom = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+            v.setPadding(v.paddingLeft, v.paddingTop, v.paddingRight, navBottom)
+            insets
+        }
 
         val content = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         root.addView(content, FrameLayout.LayoutParams(
