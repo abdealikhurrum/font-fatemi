@@ -1530,28 +1530,6 @@ feature init {
       lookup InitialForms;
 } init;
 
-feature smcp {
-
- script DFLT;
-     language dflt ;
-      lookup smcp;
-
- script arab;
-     language dflt ;
-      lookup smcp;
-     language URD  exclude_dflt;
-      lookup smcp;
-
- script cyrl;
-     language dflt ;
-      lookup smcp;
-
- script latn;
-     language dflt ;
-      lookup smcp;
-     language TRK  exclude_dflt;
-      lookup smcp;
-} smcp;
 
 feature liga {
 

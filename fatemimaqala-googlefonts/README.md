@@ -15,7 +15,8 @@ Font Bakery `check-googlefonts`, original FatemiMaqala → this project:
 |---|---|---|
 | Original FatemiMaqala-Regular.ttf | **19** | quadratic/raster outlines, nested+transformed components, bad metrics, bad naming, no hinting |
 | Clean source + rehabilitated features | **5** | shaping-complete |
-| + Latin gaps filled from Crimson | **4** | only the tail below remains |
+| + Latin gaps filled from Crimson | **4** | |
+| + dropped Latin smcp (small-caps) | **3** | only the tail below remains |
 
 **Cleared**: nested/transformed/duplicate components, invalid script tags, smart
 dropout (hinting), repo zip hygiene, vertical metrics (win/typo/hhea unified,
@@ -30,9 +31,10 @@ from Crimson (acknowledged in `OFL.txt`).
 - `canonical_filename` — release file named `FatemiMaqala-Regular.ttf` (resolved on release).
 - `googlefonts/glyphsets/shape_languages` — Latin **mark attachment** (e.g. Dutch
   íj́), not missing glyphs; needs Latin combining-mark anchors.
-- `smallcaps_before_ligatures`, `tabular_kerning` — minor Latin niceties; both
-  (and the spurious small-caps build artifact) go away if the optional Latin
-  `smcp`/`c2sc` features are dropped. See `qa/`.
+- `tabular_kerning` — slash/zero kern via kern classes (minor).
+
+The optional Latin `smcp` small-caps feature was dropped, which cleared
+`smallcaps_before_ligatures` and removed a spurious small-caps build artifact.
 
 ## Layout
 - `sources/Fatemi-Maqala-Regular.ufo` — canonical source: cleaned **cubic**
