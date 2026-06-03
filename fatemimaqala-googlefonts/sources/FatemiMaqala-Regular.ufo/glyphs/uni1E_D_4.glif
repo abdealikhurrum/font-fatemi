@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni1ED4" format="2">
   <advance width="1496"/>
-  <unicode hex="1ED4"/>
   <outline>
     <component base="hookabovecomb.cap" xOffset="1586" yOffset="74"/>
     <component base="uni0302.cap" xOffset="1256" yOffset="-46"/>

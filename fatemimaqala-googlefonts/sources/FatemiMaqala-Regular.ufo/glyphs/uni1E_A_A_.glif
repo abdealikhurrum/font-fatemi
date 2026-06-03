@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni1EAA" format="2">
   <advance width="1254"/>
-  <unicode hex="1EAA"/>
   <outline>
     <component base="tildecomb.cap" xScale="0.949829" yScale="0.799988" xOffset="1107" yOffset="520"/>
     <component base="uni0302.cap" yScale="0.909851" xOffset="1154" yOffset="86"/>

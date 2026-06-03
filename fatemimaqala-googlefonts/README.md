@@ -16,7 +16,7 @@ Font Bakery `check-googlefonts`, original FatemiMaqala → this project:
 | Original FatemiMaqala-Regular.ttf | **19** | quadratic/raster outlines, nested+transformed components, bad metrics, bad naming, no hinting |
 | Clean source + rehabilitated features | **5** | shaping-complete |
 | + Latin gaps filled from Crimson | **4** | |
-| + dropped Latin smcp (small-caps) | **3** | only the tail below remains |
+| + dropped Latin smcp; trimmed Latin to GF Latin Core; tabular figures | **1** | only the item below remains |
 
 **Cleared**: nested/transformed/duplicate components, invalid script tags, smart
 dropout (hinting), repo zip hygiene, vertical metrics (win/typo/hhea unified,

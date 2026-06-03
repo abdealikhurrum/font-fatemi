@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <glyph name="bhai" format="2">
   <advance width="611"/>
-  <unicode hex="E833"/>
   <outline>
     <contour>
       <point x="414" y="-259" type="curve" smooth="yes"/>

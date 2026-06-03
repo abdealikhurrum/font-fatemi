@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni1EC0" format="2">
   <advance width="1172"/>
-  <unicode hex="1EC0"/>
   <outline>
     <component base="gravecomb.cap" xScale="0.739868" yScale="0.789917" xOffset="670" yOffset="428"/>
     <component base="uni0302.cap" xOffset="1080" yOffset="-46"/>

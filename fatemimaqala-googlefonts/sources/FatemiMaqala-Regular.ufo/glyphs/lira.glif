@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <glyph name="lira" format="2">
   <advance width="958"/>
-  <unicode hex="20A4"/>
   <outline>
     <contour>
       <point x="630" y="1272" type="curve" smooth="yes"/>

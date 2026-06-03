@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <glyph name="utilde" format="2">
   <advance width="1030"/>
-  <unicode hex="0169"/>
   <outline>
     <component base="tildecomb" xOffset="1021" yOffset="-2"/>
     <component base="u"/>

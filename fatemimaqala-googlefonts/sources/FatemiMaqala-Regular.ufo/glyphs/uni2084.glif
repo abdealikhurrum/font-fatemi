@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni2084" format="2">
   <advance width="684"/>
-  <unicode hex="2084"/>
   <outline>
     <contour>
       <point x="376" y="64" type="curve" smooth="yes"/>

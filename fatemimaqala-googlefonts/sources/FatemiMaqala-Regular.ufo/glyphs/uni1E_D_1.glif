@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni1ED1" format="2">
   <advance width="1036"/>
-  <unicode hex="1ED1"/>
   <outline>
     <component base="acutecomb" xScale="0.899841" yScale="0.729858" xOffset="1248" yOffset="424"/>
     <component base="uni0302" xOffset="1034" yOffset="-10"/>

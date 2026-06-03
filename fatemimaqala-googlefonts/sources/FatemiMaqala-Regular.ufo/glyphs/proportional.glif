@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <glyph name="proportional" format="2">
   <advance width="1430"/>
-  <unicode hex="221D"/>
   <outline>
     <contour>
       <point x="1278" y="86" type="curve" smooth="yes"/>

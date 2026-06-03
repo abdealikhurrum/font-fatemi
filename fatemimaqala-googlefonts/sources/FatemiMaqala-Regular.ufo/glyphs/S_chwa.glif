@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="Schwa" format="2">
   <advance width="1354"/>
-  <unicode hex="04D8"/>
   <outline>
     <contour>
       <point x="658.9633027522935" y="94.13761467889907" type="curve" smooth="yes"/>

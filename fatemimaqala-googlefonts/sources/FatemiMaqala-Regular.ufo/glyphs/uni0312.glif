@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni0312" format="2">
-  <advance width="0"/>
-  <unicode hex="0312"/>
   <outline>
     <contour>
       <point x="-412" y="1106" type="curve" smooth="yes"/>

@@ -2,11 +2,11 @@
     "result": {
         "(not finished)": 0,
         "ERROR": 7,
-        "FAIL": 2,
+        "FAIL": 1,
         "INFO": 6,
-        "PASS": 100,
+        "PASS": 103,
         "SKIP": 102,
-        "WARN": 19
+        "WARN": 17
     },
     "sections": [
         {
@@ -575,7 +575,7 @@
                         {
                             "message": {
                                 "code": "mark-chars",
-                                "message": "The following mark characters could be in the GDEF mark glyph class:\n\t uni031B (U+031B), uni032E (U+032E), uni0331 (U+0331), uni0610 (U+0610), uni0611 (U+0611), uni0613 (U+0613), uni0614 (U+0614), uni0615 (U+0615), uni06D6 (U+06D6), uni06D7 (U+06D7) and 16 more.\n\nUse -F or --full-lists to disable shortening of long lists."
+                                "message": "The following mark characters could be in the GDEF mark glyph class:\n\t uni0610 (U+0610), uni0611 (U+0611), uni0613 (U+0613), uni0614 (U+0614), uni0615 (U+0615), uni06D6 (U+06D6), uni06D7 (U+06D7), uni06D8 (U+06D8), uni06D9 (U+06D9), uni06DA (U+06DA) and 13 more.\n\nUse -F or --full-lists to disable shortening of long lists."
                             },
                             "status": "WARN"
                         }
@@ -2083,10 +2083,10 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "contour-count",
-                                "message": "This check inspects the glyph outlines and detects the total number of contours in each of them. The expected values are infered from the typical ammounts of contours observed in a large collection of reference font families. The divergences listed below may simply indicate a significantly different design on some of your glyphs. On the other hand, some of these may flag actual bugs in the font such as glyphs mapped to an incorrect codepoint. Please consider reviewing the design and codepoint assignment of these to make sure they are correct.\n\nThe following glyphs do not have the recommended number of contours:\n\n\t- Glyph name: uni00AD\tContours detected: 1\tExpected: 0\n\n\t- Glyph name: uni1E56\tContours detected: 2\tExpected: 3\n\n\t- Glyph name: uni00AD\tContours detected: 1\tExpected: 0\n\n\t- Glyph name: uni1E56\tContours detected: 2\tExpected: 3\n"
+                                "code": null,
+                                "message": "All glyphs have the recommended amount of contours"
                             },
-                            "status": "WARN"
+                            "status": "PASS"
                         }
                     ],
                     "module": "contour_count",
@@ -2094,7 +2094,7 @@
                         "https://github.com/fonttools/fontbakery/issues/4829"
                     ],
                     "rationale": "\n        Visually QAing thousands of glyphs by hand is tiring. Most glyphs can only\n        be constructured in a handful of ways. This means a glyph's contour count\n        will only differ slightly amongst different fonts, e.g a 'g' could either\n        be 2 or 3 contours, depending on whether its double story or single story.\n\n        However, a quotedbl should have 2 contours, unless the font belongs\n        to a display family.\n\n        This check currently does not cover variable fonts because there's plenty\n        of alternative ways of constructing glyphs with multiple outlines for each\n        feature in a VarFont. The expected contour count data for this check is\n        currently optimized for the typical construction of glyphs in static fonts.\n    ",
-                    "result": "WARN",
+                    "result": "PASS",
                     "severity": null
                 },
                 {
@@ -2489,7 +2489,7 @@
                         {
                             "message": {
                                 "code": "size-impact",
-                                "message": "Hinting filesize impact:\n\n |               | /tmp/gfwork/repobuild/ttf/FatemiMaqala-Regular.ttf     |\n |:------------- | ---------------:|\n | Dehinted Size | 350.5kb |\n | Hinted Size   | 455.7kb   |\n | Increase      | 105.2kb      |\n | Change        | 30.0 %  |\n"
+                                "message": "Hinting filesize impact:\n\n |               | /tmp/gfwork/repobuild/ttf/FatemiMaqala-Regular.ttf     |\n |:------------- | ---------------:|\n | Dehinted Size | 348.5kb |\n | Hinted Size   | 454.8kb   |\n | Increase      | 106.3kb      |\n | Change        | 30.5 %  |\n"
                             },
                             "status": "INFO"
                         }
@@ -2746,7 +2746,7 @@
                         {
                             "message": {
                                 "code": "width-outliers",
-                                "message": "The most common width is 1084 among a set of 1 math glyphs.\nThe following math glyphs have a different width, though:\n\nWidth = 984:\nless\n\nWidth = 1130:\nequal\n\nWidth = 986:\ngreater\n\nWidth = 1174:\nlogicalnot\n\nWidth = 1096:\nplusminus\n\nWidth = 928:\nmultiply\n\nWidth = 1198:\ndivide\n\nWidth = 1002:\nelement\n\nWidth = 988:\nnotelement\n\nWidth = 1222:\nminus\n\nWidth = 1196:\nuni2213\n\nWidth = 1430:\nproportional\n\nWidth = 1156:\nnotequal\n\nWidth = 1034:\nlessequal\n\nWidth = 1032:\ngreaterequal\n\nWidth = 1016:\npropersubset\n"
+                                "message": "The most common width is 1084 among a set of 1 math glyphs.\nThe following math glyphs have a different width, though:\n\nWidth = 984:\nless\n\nWidth = 1130:\nequal\n\nWidth = 986:\ngreater\n\nWidth = 928:\nmultiply\n\nWidth = 1198:\ndivide\n\nWidth = 1222:\nminus\n"
                             },
                             "status": "WARN"
                         }
@@ -3267,10 +3267,10 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "softhyphen",
-                                "message": "This font has a 'Soft Hyphen' character."
+                                "code": null,
+                                "message": "Looks good!"
                             },
-                            "status": "WARN"
+                            "status": "PASS"
                         }
                     ],
                     "module": "soft_hyphen",
@@ -3279,7 +3279,7 @@
                         "https://github.com/fonttools/fontbakery/issues/3486"
                     ],
                     "rationale": "\n        The 'Soft Hyphen' character (codepoint 0x00AD) is used to mark\n        a hyphenation possibility within a word in the absence of or\n        overriding dictionary hyphenation.\n\n        It is sometimes designed empty with no width (such as a control character),\n        sometimes the same as the traditional hyphen, sometimes double encoded with\n        the hyphen.\n\n        That being said, it is recommended to not include it in the font at all,\n        because discretionary hyphenation should be handled at the level of the\n        shaping engine, not the font. Also, even if present, the software would\n        not display that character.\n\n        More discussion at:\n        https://typedrawers.com/discussion/2046/special-dash-things-softhyphen-horizontalbar\n    ",
-                    "result": "WARN",
+                    "result": "PASS",
                     "severity": null
                 },
                 {
@@ -3403,745 +3403,10 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Aacute and zero is -20, should be 0"
+                                "code": "ok",
+                                "message": "All looks good!"
                             },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Aacute is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Ycircumflex and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Ycircumflex is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and bracketright is -42, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Yacute and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Yacute is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and backslash is -30, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and parenright is -42, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EB2 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EB2 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E7C and zero is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1E7C is -34, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E3A and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni0232 and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni0232 is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Aogonek and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Aogonek is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EF4 and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EF4 is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Aring and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Aring is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EA4 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EA4 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between parenleft and zero is -42, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Lcaron and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Wcircumflex and zero is -24, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Wcircumflex is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E7E and zero is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1E7E is -34, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EA2 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EA2 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between A and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and A is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between slash and zero is -32, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Lslash and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E36 and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Acircumflex and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Acircumflex is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Abreve and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Abreve is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Ydieresis and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Ydieresis is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EA0 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EA0 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Agrave and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Agrave is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E3C and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EB6 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EB6 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between W and zero is -24, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and W is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EB0 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EB0 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Ldot and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EF6 and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EF6 is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E8E and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1E8E is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Wdieresis and zero is -24, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Wdieresis is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Lcommaaccent and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Y and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Y is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Aringacute and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Aringacute is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EAE and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EAE is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Ygrave and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Ygrave is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Lacute and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between V and zero is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and V is -34, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EAA and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EAA is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EB4 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EB4 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Atilde and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Atilde is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EA6 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EA6 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Amacron and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Amacron is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E86 and zero is -24, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1E86 is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni01CD and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni01CD is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E88 and zero is -24, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1E88 is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E38 and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Adieresis and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Adieresis is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Wacute and zero is -24, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Wacute is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between bracketleft and zero is -42, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EF8 and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EF8 is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between L and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Wgrave and zero is -24, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Wgrave is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EA8 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EA8 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EAC and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EAC is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E00 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1E00 is -20, should be 0"
-                            },
-                            "status": "FAIL"
+                            "status": "PASS"
                         }
                     ],
                     "module": "tabular_kerning",
@@ -4149,7 +3414,7 @@
                         "https://github.com/fonttools/fontbakery/issues/4440"
                     ],
                     "rationale": "\n        Tabular glyphs should not have kerning, as they are meant to be used in tables.\n\n        This check looks for kerning in:\n        - all glyphs in a font in combination with tabular numerals;\n        - tabular symbols in combination with tabular numerals.\n\n        \"Tabular symbols\" is defined as:\n        - for fonts with a \"tnum\" feature, all \"tnum\" substitution target glyphs;\n        - for fonts without a \"tnum\" feature, all glyphs that have the same width\n        as the tabular numerals, but limited to numbers, math and currency symbols.\n\n        This check may produce false positives for fonts with no \"tnum\" feature\n        and with equal-width numerals (and other same-width symbols) that are\n        not intended to be used as tabular numerals.\n    ",
-                    "result": "FAIL",
+                    "result": "PASS",
                     "severity": null
                 },
                 {
@@ -4299,7 +3564,7 @@
                         {
                             "message": {
                                 "code": "unreachable-glyphs",
-                                "message": "The following glyphs could not be reached by codepoint or substitution rules:\n\n\t- AE.alt01\n\n\t- NameMe.1114705\n\n\t- NameMe.1114706\n\n\t- NameMe.1114707\n\n\t- NameMe.1114708\n\n\t- NameMe.1114709\n\n\t- NameMe.1114710\n\n\t- NameMe.1114711\n\n\t- NameMe.1114712\n\n\t- NameMe.1114713\n\n\t- 101 more.\n\nUse -F or --full-lists to disable shortening of long lists.\n"
+                                "message": "The following glyphs could not be reached by codepoint or substitution rules:\n\n\t- AE.alt01\n\n\t- AEacute\n\n\t- Aringacute\n\n\t- Ccircumflex\n\n\t- Delta\n\n\t- Ebreve\n\n\t- Eng\n\n\t- Gcaron\n\n\t- Gcircumflex\n\n\t- Hcircumflex\n\n\t- 505 more.\n\nUse -F or --full-lists to disable shortening of long lists.\n"
                             },
                             "status": "WARN"
                         }
@@ -4636,11 +3901,10 @@
             ],
             "result": {
                 "ERROR": 1,
-                "FAIL": 1,
                 "INFO": 2,
-                "PASS": 36,
+                "PASS": 39,
                 "SKIP": 16,
-                "WARN": 10
+                "WARN": 8
             }
         },
         {
@@ -5896,7 +5160,7 @@
                         {
                             "message": {
                                 "code": "unreachable-subsetting",
-                                "message": "The following codepoints supported by the font are not covered by\n    any subsets defined in the font's metadata file, and will never\n    be served. You can solve this by either manually adding additional\n    subset declarations to METADATA.pb, or by editing the glyphset\n    definitions.\n\n * U+02D8 BREVE: try adding one of: canadian-aboriginal, yi\n * U+02D9 DOT ABOVE: try adding one of: canadian-aboriginal, yi\n * U+02DB OGONEK: try adding one of: canadian-aboriginal, yi\n * U+0302 COMBINING CIRCUMFLEX ACCENT: try adding one of: math, tifinagh, cherokee, coptic\n * U+0305 COMBINING OVERLINE: try adding one of: glagolitic, coptic, gothic, math, elbasan\n * U+0306 COMBINING BREVE: try adding one of: tifinagh, old-permic\n * U+0307 COMBINING DOT ABOVE: try adding one of: tifinagh, old-permic, tai-le, syriac, hebrew, malayalam, coptic, math, duployan, todhri, canadian-aboriginal\n * U+030A COMBINING RING ABOVE: try adding one of: duployan, syriac\n * U+030B COMBINING DOUBLE ACUTE ACCENT: try adding one of: osage, cherokee\n * U+030C COMBINING CARON: try adding one of: cherokee, tai-le\n552 more.\n\nUse -F or --full-lists to disable shortening of long lists.\n\nOr you can add the above codepoints to one of the subsets supported by the font: `cyrillic-ext`, `latin`, `latin-ext`, `vietnamese`"
+                                "message": "The following codepoints supported by the font are not covered by\n    any subsets defined in the font's metadata file, and will never\n    be served. You can solve this by either manually adding additional\n    subset declarations to METADATA.pb, or by editing the glyphset\n    definitions.\n\n * U+02D8 BREVE: try adding one of: yi, canadian-aboriginal\n * U+02D9 DOT ABOVE: try adding one of: yi, canadian-aboriginal\n * U+02DB OGONEK: try adding one of: yi, canadian-aboriginal\n * U+0302 COMBINING CIRCUMFLEX ACCENT: try adding one of: coptic, tifinagh, cherokee, math\n * U+0306 COMBINING BREVE: try adding one of: old-permic, tifinagh\n * U+0307 COMBINING DOT ABOVE: try adding one of: canadian-aboriginal, malayalam, syriac, hebrew, todhri, old-permic, duployan, tifinagh, coptic, tai-le, math\n * U+030A COMBINING RING ABOVE: try adding one of: duployan, syriac\n * U+030B COMBINING DOUBLE ACUTE ACCENT: try adding one of: cherokee, osage\n * U+030C COMBINING CARON: try adding one of: tai-le, cherokee\n * U+0326 COMBINING COMMA BELOW: try adding math\n477 more.\n\nUse -F or --full-lists to disable shortening of long lists.\n\nOr you can add the above codepoints to one of the subsets supported by the font: `latin`, `latin-ext`"
                             },
                             "status": "WARN"
                         }
@@ -6139,14 +5403,14 @@
                         {
                             "message": {
                                 "code": "failed-language-shaping",
-                                "message": "GF_Phonetics_SinoExt glyphset:\n| FAIL messages | Languages |\n| :--- | :--- |\n| Mandatory orthography codepoints:\n  Shaper didn't attach acutecomb to J when shaping the text '\u00cdJ\u0301'\n  Shaper didn't attach acutecomb to j when shaping the text '\u00edj\u0301' | nl_Latn (Dutch) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u0186, \u025b, \u019d, \u0254, \u0272, \u0190 | bm_Latn (Bambara) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u025b, \u0254, \u0272, \u0186, \u019d, \u0190 | dyu_Latn (Dyula) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u025b, \u0186, \u0190, \u0254 | fat_Latn (Fanti) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u018a, \u01b3, \u0257, \u0253, \u0181, \u01b4 | ff_Latn (Fulah) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u01b3, \u018a, \u0257, \u0181, \u0253, \u0198, \u0199, \u01b4 | ha_Latn (Hausa) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u0254, \u0186, \u025b, \u0190 | tw_akuapem_Latn (Akuapem Twi) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u01f8, \u01f9\n  The following mark characters are missing from the font: \u0329\n  Shaper didn't attach acutecomb to uni1EB9 when shaping the text '\u1eb9\u0301'\n  Shaper didn't attach acutecomb to uni1EB8 when shaping the text '\u1eb8\u0301'\n  Shaper didn't attach gravecomb to uni1EB9 when shaping the text '\u1eb9\u0300'\n  Shaper didn't attach gravecomb to uni1EB8 when shaping the text '\u1eb8\u0300'\n  Shaper didn't attach gravecomb to m when shaping the text 'm\u0300'\n  Shaper didn't attach gravecomb to M when shaping the text 'M\u0300'\n  Shaper didn't attach acutecomb to uni1ECD when shaping the text '\u1ecd\u0301'\n  Shaper didn't attach acutecomb to uni1ECC when shaping the text '\u1ecc\u0301'\n  Shaper didn't attach gravecomb to uni1ECD when shaping the text '\u1ecd\u0300'\n  Shaper didn't attach gravecomb to uni1ECC when shaping the text '\u1ecc\u0300' | yo_Latn (Yoruba) |\n"
+                                "message": "GF_TransLatin_Arabic glyphset:\n| FAIL messages | Languages |\n| :--- | :--- |\n| Mandatory orthography codepoints:\n  Shaper didn't attach acutecomb to J when shaping the text '\u00cdJ\u0301'\n  Shaper didn't attach acutecomb to j when shaping the text '\u00edj\u0301' | nl_Latn (Dutch) |\n"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "warning-language-shaping",
-                                "message": "GF_Phonetics_SinoExt glyphset:\n| WARN messages | Languages |\n| :--- | :--- |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u01e4\n  The following auxiliary characters are missing from the font: \u021e\n  The following auxiliary characters are missing from the font: \u01e8\n  The following auxiliary characters are missing from the font: \u01b7\n  The following auxiliary characters are missing from the font: \u01ee\n  The following auxiliary characters are missing from the font: \u01e5\n  The following auxiliary characters are missing from the font: \u021f\n  The following auxiliary characters are missing from the font: \u01e9\n  The following auxiliary characters are missing from the font: \u0292\n  The following auxiliary characters are missing from the font: \u01ef | fi_Latn (Finnish) |\n| Auxiliary orthography codepoints:\n  Shaper didn't attach acutecomb to Aogonek when shaping the text '\u0104\u0301'\n  Shaper didn't attach tildecomb to Aogonek when shaping the text '\u0104\u0303'\n  Shaper didn't attach acutecomb to Eogonek when shaping the text '\u0118\u0301'\n  Shaper didn't attach tildecomb to Eogonek when shaping the text '\u0118\u0303'\n  Shaper didn't attach acutecomb to Edotaccent when shaping the text '\u0116\u0301'\n  Shaper didn't attach tildecomb to Edotaccent when shaping the text '\u0116\u0303'\n  Shaper didn't attach acutecomb to Idotaccent when shaping the text 'I\u0307\u0301'\n  Shaper didn't attach acutecomb to Idotaccent when shaping the text '\u0130\u0301'\n  Shaper didn't attach gravecomb to Idotaccent when shaping the text 'I\u0307\u0300'\n  Shaper didn't attach gravecomb to Idotaccent when shaping the text '\u0130\u0300'\n  Shaper didn't attach tildecomb to Idotaccent when shaping the text 'I\u0307\u0303'\n  Shaper didn't attach tildecomb to Idotaccent when shaping the text '\u0130\u0303'\n  Shaper didn't attach acutecomb to Iogonek when shaping the text '\u012e\u0301'\n  Shaper didn't attach uni0307 to Iogonek when shaping the text '\u012e\u0307\u0301'\n  Shaper didn't attach acutecomb to uni0307 when shaping the text '\u012e\u0307\u0301'\n  Shaper didn't attach tildecomb to Iogonek when shaping the text '\u012e\u0303'\n  Shaper didn't attach uni0307 to Iogonek when shaping the text '\u012e\u0307\u0303'\n  Shaper didn't attach tildecomb to uni0307 when shaping the text '\u012e\u0307\u0303'\n  Shaper didn't attach tildecomb to J when shaping the text 'J\u0303'\n  Shaper didn't attach uni0307 to J when shaping the text 'J\u0307\u0303'\n  Shaper didn't attach tildecomb to uni0307 when shaping the text 'J\u0307\u0303'\n  Shaper didn't attach tildecomb to L when shaping the text 'L\u0303'\n  Shaper didn't attach tildecomb to M when shaping the text 'M\u0303'\n  Shaper didn't attach tildecomb to R when shaping the text 'R\u0303'\n  Shaper didn't attach acutecomb to Uogonek when shaping the text '\u0172\u0301'\n  Shaper didn't attach tildecomb to Uogonek when shaping the text '\u0172\u0303'\n  Shaper didn't attach acutecomb to Umacron when shaping the text '\u016a\u0301'\n  Shaper didn't attach tildecomb to Umacron when shaping the text '\u016a\u0303'\n  Shaper didn't attach acutecomb to aogonek when shaping the text '\u0105\u0301'\n  Shaper didn't attach tildecomb to aogonek when shaping the text '\u0105\u0303'\n  Shaper didn't attach acutecomb to eogonek when shaping the text '\u0119\u0301'\n  Shaper didn't attach tildecomb to eogonek when shaping the text '\u0119\u0303'\n  Shaper didn't attach acutecomb to edotaccent when shaping the text '\u0117\u0301'\n  Shaper didn't attach tildecomb to edotaccent when shaping the text '\u0117\u0303'\n  Shaper didn't attach uni0307 to i when shaping the text 'i\u0307\u0301'\n  Shaper didn't attach acutecomb to uni0307 when shaping the text 'i\u0307\u0301'\n  Shaper didn't attach uni0307 to i when shaping the text 'i\u0307\u0300'\n  Shaper didn't attach gravecomb to uni0307 when shaping the text 'i\u0307\u0300'\n  Shaper didn't attach uni0307 to i when shaping the text 'i\u0307\u0303'\n  Shaper didn't attach tildecomb to uni0307 when shaping the text 'i\u0307\u0303'\n  Shaper didn't attach acutecomb to iogonek when shaping the text '\u012f\u0301'\n  Shaper didn't attach uni0307 to iogonek when shaping the text '\u012f\u0307\u0301'\n  Shaper didn't attach acutecomb to uni0307 when shaping the text '\u012f\u0307\u0301'\n  Shaper didn't attach tildecomb to iogonek when shaping the text '\u012f\u0303'\n  Shaper didn't attach uni0307 to iogonek when shaping the text '\u012f\u0307\u0303'\n  Shaper didn't attach tildecomb to uni0307 when shaping the text '\u012f\u0307\u0303'\n  Shaper didn't attach tildecomb to j when shaping the text 'j\u0303'\n  Shaper didn't attach uni0307 to j when shaping the text 'j\u0307\u0303'\n  Shaper didn't attach tildecomb to uni0307 when shaping the text 'j\u0307\u0303'\n  Shaper didn't attach tildecomb to l when shaping the text 'l\u0303'\n  Shaper didn't attach tildecomb to m when shaping the text 'm\u0303'\n  Shaper didn't attach tildecomb to r when shaping the text 'r\u0303'\n  Shaper didn't attach acutecomb to uogonek when shaping the text '\u0173\u0301'\n  Shaper didn't attach tildecomb to uogonek when shaping the text '\u0173\u0303'\n  Shaper didn't attach acutecomb to umacron when shaping the text '\u016b\u0301'\n  Shaper didn't attach tildecomb to umacron when shaping the text '\u016b\u0303' | lt_Latn (Lithuanian) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u069c\n  The following auxiliary characters are missing from the font: \u06a2\n  The following auxiliary characters are missing from the font: \u06a5\n  The following auxiliary characters are missing from the font: \u06a7\n  The following auxiliary characters are missing from the font: \u06a8 | ar_Arab (Arabic) |\n| Auxiliary orthography codepoints:\n  Shaper didn't attach uni064E to uni25CC when shaping the text '\u25cc\u064e'\n  Shaper didn't attach uni0650 to uni25CC when shaping the text '\u25cc\u0650'\n  Shaper didn't attach uni064F to uni25CC when shaping the text '\u25cc\u064f'\n  Shaper didn't attach uni0652 to uni25CC when shaping the text '\u25cc\u0652'\n  Shaper didn't attach uni0656 to the base glyph when shaping the text '\u25cc\u0656'\n  Shaper didn't attach uni0670 to uni25CC when shaping the text '\u25cc\u0670' | fa_Arab (Persian) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u067b\n  The following auxiliary characters are missing from the font: \u067a\n  The following auxiliary characters are missing from the font: \u067c\n  The following auxiliary characters are missing from the font: \u067d\n  Shaper didn't attach uni064B to uni25CC when shaping the text '\u25cc\u064b'\n  Shaper didn't attach uni064C to uni25CC when shaping the text '\u25cc\u064c'\n  Shaper didn't attach uni064D to uni25CC when shaping the text '\u25cc\u064d'\n  Shaper didn't attach uni064E to uni25CC when shaping the text '\u25cc\u064e'\n  Shaper didn't attach uni064F to uni25CC when shaping the text '\u25cc\u064f'\n  Shaper didn't attach uni0650 to uni25CC when shaping the text '\u25cc\u0650'\n  Shaper didn't attach uni0651 to uni25CC when shaping the text '\u25cc\u0651'\n  Shaper didn't attach uni0652 to uni25CC when shaping the text '\u25cc\u0652'\n  Shaper didn't attach uni0654 to uni25CC when shaping the text '\u25cc\u0654'\n  Shaper didn't attach uni0656 to the base glyph when shaping the text '\u25cc\u0656'\n  Shaper didn't attach uni0657 to the base glyph when shaping the text '\u25cc\u0657'\n  Shaper didn't attach uni0658 to the base glyph when shaping the text '\u25cc\u0658'\n  Shaper didn't attach uni0670 to uni25CC when shaping the text '\u25cc\u0670' | ur_Arab (Urdu) |\n| Auxiliary orthography codepoints:\n  Shaper didn't attach tildecomb to r when shaping the text 'r\u0303'\n  Shaper didn't attach tildecomb to R when shaping the text 'R\u0303' | ha_Latn (Hausa) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u01f9\n  The following auxiliary characters are missing from the font: \u01f8\n  The following auxiliary characters are missing from the font: \u025b\n  The following auxiliary characters are missing from the font: \u0190\n  The following auxiliary characters are missing from the font: \u0275\n  The following auxiliary characters are missing from the font: \u019f\n  Shaper didn't attach acutecomb to uni1ECB when shaping the text '\u1ecb\u0301'\n  Shaper didn't attach acutecomb to uni1ECA when shaping the text '\u1eca\u0301'\n  Shaper didn't attach gravecomb to uni1ECB when shaping the text '\u1ecb\u0300'\n  Shaper didn't attach gravecomb to uni1ECA when shaping the text '\u1eca\u0300'\n  Shaper didn't attach gravecomb to m when shaping the text 'm\u0300'\n  Shaper didn't attach gravecomb to M when shaping the text 'M\u0300'\n  Shaper didn't attach acutecomb to uni1ECD when shaping the text '\u1ecd\u0301'\n  Shaper didn't attach acutecomb to uni1ECC when shaping the text '\u1ecc\u0301'\n  Shaper didn't attach gravecomb to uni1ECD when shaping the text '\u1ecd\u0300'\n  Shaper didn't attach gravecomb to uni1ECC when shaping the text '\u1ecc\u0300'\n  Shaper didn't attach acutecomb to uni1EE5 when shaping the text '\u1ee5\u0301'\n  Shaper didn't attach acutecomb to uni1EE4 when shaping the text '\u1ee4\u0301'\n  Shaper didn't attach gravecomb to uni1EE5 when shaping the text '\u1ee5\u0300'\n  Shaper didn't attach gravecomb to uni1EE4 when shaping the text '\u1ee4\u0300' | ig_Latn (Igbo) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: e\u0329\n  The following auxiliary characters are missing from the font: E\u0329\n  The following auxiliary characters are missing from the font: \u00e9\u0329\n  The following auxiliary characters are missing from the font: \u00c9\u0329\n  The following auxiliary characters are missing from the font: \u00e8\u0329\n  The following auxiliary characters are missing from the font: \u00c8\u0329\n  The following auxiliary characters are missing from the font: \u00ea\u0329\n  The following auxiliary characters are missing from the font: \u00ca\u0329\n  The following auxiliary characters are missing from the font: \u011b\u0329\n  The following auxiliary characters are missing from the font: \u011a\u0329\n  The following auxiliary characters are missing from the font: o\u0329\n  The following auxiliary characters are missing from the font: O\u0329\n  The following auxiliary characters are missing from the font: \u00f3\u0329\n  The following auxiliary characters are missing from the font: \u00d3\u0329\n  The following auxiliary characters are missing from the font: \u00f2\u0329\n  The following auxiliary characters are missing from the font: \u00d2\u0329\n  The following auxiliary characters are missing from the font: \u00f4\u0329\n  The following auxiliary characters are missing from the font: \u00d4\u0329\n  The following auxiliary characters are missing from the font: \u01d2\u0329\n  The following auxiliary characters are missing from the font: \u01d1\u0329\n  The following auxiliary characters are missing from the font: s\u0329\n  The following auxiliary characters are missing from the font: S\u0329\n  Shaper didn't attach uni030C to uni1EB9 when shaping the text '\u1eb9\u030c'\n  Shaper didn't attach uni030C to uni1EB8 when shaping the text '\u1eb8\u030c'\n  Shaper didn't attach uni030C to uni1ECD when shaping the text '\u1ecd\u030c'\n  Shaper didn't attach uni030C to uni1ECC when shaping the text '\u1ecc\u030c' | yo_Latn (Yoruba) |\n"
+                                "message": "GF_TransLatin_Arabic glyphset:\n| WARN messages | Languages |\n| :--- | :--- |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u0114\n  The following auxiliary characters are missing from the font: \u012c\n  The following auxiliary characters are missing from the font: \u013f\n  The following auxiliary characters are missing from the font: \u014e\n  The following auxiliary characters are missing from the font: \u014c\n  The following auxiliary characters are missing from the font: \u016c\n  The following auxiliary characters are missing from the font: \u0115\n  The following auxiliary characters are missing from the font: \u012d\n  The following auxiliary characters are missing from the font: \u0140\n  The following auxiliary characters are missing from the font: \u014f\n  The following auxiliary characters are missing from the font: \u014d\n  The following auxiliary characters are missing from the font: \u016d | ca_Latn (Catalan) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u0114\n  The following auxiliary characters are missing from the font: \u012c\n  The following auxiliary characters are missing from the font: \u014e\n  The following auxiliary characters are missing from the font: \u014c\n  The following auxiliary characters are missing from the font: \u016c\n  The following auxiliary characters are missing from the font: \u0115\n  The following auxiliary characters are missing from the font: \u012d\n  The following auxiliary characters are missing from the font: \u014f\n  The following auxiliary characters are missing from the font: \u014d\n  The following auxiliary characters are missing from the font: \u016d | cs_Latn (Czech), cy_Latn (Welsh), es_Latn (Spanish), hu_Latn (Hungarian), pt_Latn (Portuguese), sk_Latn (Slovak) and tr_Latn (Turkish) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u01fe\n  The following auxiliary characters are missing from the font: \u01ff | da_Latn (Danish) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u0114\n  The following auxiliary characters are missing from the font: \u012c\n  The following auxiliary characters are missing from the font: \u014e\n  The following auxiliary characters are missing from the font: \u014c\n  The following auxiliary characters are missing from the font: \u016c\n  The following auxiliary characters are missing from the font: \u0115\n  The following auxiliary characters are missing from the font: \u012d\n  The following auxiliary characters are missing from the font: \u014f\n  The following auxiliary characters are missing from the font: \u014d\n  The following auxiliary characters are missing from the font: \u017f\n  The following auxiliary characters are missing from the font: \u016d | de_Latn (German) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u0114\n  The following auxiliary characters are missing from the font: \u012c\n  The following auxiliary characters are missing from the font: \u014e\n  The following auxiliary characters are missing from the font: \u014c\n  The following auxiliary characters are missing from the font: \u016c\n  The following auxiliary characters are missing from the font: \u0115\n  The following auxiliary characters are missing from the font: \u012d\n  The following auxiliary characters are missing from the font: \u014f\n  The following auxiliary characters are missing from the font: \u014d\n  The following auxiliary characters are missing from the font: \u016d\n  The following auxiliary characters are missing from the font: \u02bb | en_Latn (English) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u01e6\n  The following auxiliary characters are missing from the font: \u01e4\n  The following auxiliary characters are missing from the font: \u021e\n  The following auxiliary characters are missing from the font: \u01e8\n  The following auxiliary characters are missing from the font: \u014a\n  The following auxiliary characters are missing from the font: \u015c\n  The following auxiliary characters are missing from the font: \u0162\n  The following auxiliary characters are missing from the font: \u0166\n  The following auxiliary characters are missing from the font: \u01b7\n  The following auxiliary characters are missing from the font: \u01ee\n  The following auxiliary characters are missing from the font: \u01e7\n  The following auxiliary characters are missing from the font: \u01e5\n  The following auxiliary characters are missing from the font: \u021f\n  The following auxiliary characters are missing from the font: \u01e9\n  The following auxiliary characters are missing from the font: \u014b\n  The following auxiliary characters are missing from the font: \u015d\n  The following auxiliary characters are missing from the font: \u0163\n  The following auxiliary characters are missing from the font: \u0167\n  The following auxiliary characters are missing from the font: \u0292\n  The following auxiliary characters are missing from the font: \u01ef | fi_Latn (Finnish) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u01d3\n  The following auxiliary characters are missing from the font: \u017f\n  The following auxiliary characters are missing from the font: \u01d4 | fr_Latn (French) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u1ebc\n  The following auxiliary characters are missing from the font: \u0128\n  The following auxiliary characters are missing from the font: \u0168\n  The following auxiliary characters are missing from the font: \u1ebd\n  The following auxiliary characters are missing from the font: \u0129\n  The following auxiliary characters are missing from the font: \u0169\n  Shaper didn't attach acutecomb to Aogonek when shaping the text '\u0104\u0301'\n  Shaper didn't attach tildecomb to Aogonek when shaping the text '\u0104\u0303'\n  Shaper didn't attach acutecomb to Eogonek when shaping the text '\u0118\u0301'\n  Shaper didn't attach tildecomb to Eogonek when shaping the text '\u0118\u0303'\n  Shaper didn't attach acutecomb to Edotaccent when shaping the text '\u0116\u0301'\n  Shaper didn't attach tildecomb to Edotaccent when shaping the text '\u0116\u0303'\n  Shaper didn't attach acutecomb to Idotaccent when shaping the text 'I\u0307\u0301'\n  Shaper didn't attach acutecomb to Idotaccent when shaping the text '\u0130\u0301'\n  Shaper didn't attach gravecomb to Idotaccent when shaping the text 'I\u0307\u0300'\n  Shaper didn't attach gravecomb to Idotaccent when shaping the text '\u0130\u0300'\n  Shaper didn't attach tildecomb to Idotaccent when shaping the text 'I\u0307\u0303'\n  Shaper didn't attach tildecomb to Idotaccent when shaping the text '\u0130\u0303'\n  Shaper didn't attach acutecomb to Iogonek when shaping the text '\u012e\u0301'\n  Shaper didn't attach uni0307 to Iogonek when shaping the text '\u012e\u0307\u0301'\n  Shaper didn't attach acutecomb to uni0307 when shaping the text '\u012e\u0307\u0301'\n  Shaper didn't attach tildecomb to Iogonek when shaping the text '\u012e\u0303'\n  Shaper didn't attach uni0307 to Iogonek when shaping the text '\u012e\u0307\u0303'\n  Shaper didn't attach tildecomb to uni0307 when shaping the text '\u012e\u0307\u0303'\n  Shaper didn't attach tildecomb to J when shaping the text 'J\u0303'\n  Shaper didn't attach uni0307 to J when shaping the text 'J\u0307\u0303'\n  Shaper didn't attach tildecomb to uni0307 when shaping the text 'J\u0307\u0303'\n  Shaper didn't attach tildecomb to L when shaping the text 'L\u0303'\n  Shaper didn't attach tildecomb to M when shaping the text 'M\u0303'\n  Shaper didn't attach tildecomb to R when shaping the text 'R\u0303'\n  Shaper didn't attach acutecomb to Uogonek when shaping the text '\u0172\u0301'\n  Shaper didn't attach tildecomb to Uogonek when shaping the text '\u0172\u0303'\n  Shaper didn't attach acutecomb to Umacron when shaping the text '\u016a\u0301'\n  Shaper didn't attach tildecomb to Umacron when shaping the text '\u016a\u0303'\n  Shaper didn't attach acutecomb to aogonek when shaping the text '\u0105\u0301'\n  Shaper didn't attach tildecomb to aogonek when shaping the text '\u0105\u0303'\n  Shaper didn't attach acutecomb to eogonek when shaping the text '\u0119\u0301'\n  Shaper didn't attach tildecomb to eogonek when shaping the text '\u0119\u0303'\n  Shaper didn't attach acutecomb to edotaccent when shaping the text '\u0117\u0301'\n  Shaper didn't attach tildecomb to edotaccent when shaping the text '\u0117\u0303'\n  Shaper didn't attach uni0307 to i when shaping the text 'i\u0307\u0301'\n  Shaper didn't attach acutecomb to uni0307 when shaping the text 'i\u0307\u0301'\n  Shaper didn't attach uni0307 to i when shaping the text 'i\u0307\u0300'\n  Shaper didn't attach gravecomb to uni0307 when shaping the text 'i\u0307\u0300'\n  Shaper didn't attach uni0307 to i when shaping the text 'i\u0307\u0303'\n  Shaper didn't attach tildecomb to uni0307 when shaping the text 'i\u0307\u0303'\n  Shaper didn't attach acutecomb to iogonek when shaping the text '\u012f\u0301'\n  Shaper didn't attach uni0307 to iogonek when shaping the text '\u012f\u0307\u0301'\n  Shaper didn't attach acutecomb to uni0307 when shaping the text '\u012f\u0307\u0301'\n  Shaper didn't attach tildecomb to iogonek when shaping the text '\u012f\u0303'\n  Shaper didn't attach uni0307 to iogonek when shaping the text '\u012f\u0307\u0303'\n  Shaper didn't attach tildecomb to uni0307 when shaping the text '\u012f\u0307\u0303'\n  Shaper didn't attach tildecomb to j when shaping the text 'j\u0303'\n  Shaper didn't attach uni0307 to j when shaping the text 'j\u0307\u0303'\n  Shaper didn't attach tildecomb to uni0307 when shaping the text 'j\u0307\u0303'\n  Shaper didn't attach tildecomb to l when shaping the text 'l\u0303'\n  Shaper didn't attach tildecomb to m when shaping the text 'm\u0303'\n  Shaper didn't attach tildecomb to r when shaping the text 'r\u0303'\n  Shaper didn't attach acutecomb to uogonek when shaping the text '\u0173\u0301'\n  Shaper didn't attach tildecomb to uogonek when shaping the text '\u0173\u0303'\n  Shaper didn't attach acutecomb to umacron when shaping the text '\u016b\u0301'\n  Shaper didn't attach tildecomb to umacron when shaping the text '\u016b\u0303' | lt_Latn (Lithuanian) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u014c\n  The following auxiliary characters are missing from the font: \u0156\n  The following auxiliary characters are missing from the font: \u014d\n  The following auxiliary characters are missing from the font: \u0157 | lv_Latn (Latvian) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u01cd\n  The following auxiliary characters are missing from the font: \u014a\n  The following auxiliary characters are missing from the font: \u0166\n  The following auxiliary characters are missing from the font: \u01ce\n  The following auxiliary characters are missing from the font: \u014b\n  The following auxiliary characters are missing from the font: \u0167 | nb_Latn (Norwegian Bokm\u00e5l) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u0132\n  The following auxiliary characters are missing from the font: \u0133 | nl_Latn (Dutch) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u0162\n  The following auxiliary characters are missing from the font: \u0163 | ro_Latn (Romanian) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u200f\n  The following auxiliary characters are missing from the font: \u069c\n  The following auxiliary characters are missing from the font: \u06a2\n  The following auxiliary characters are missing from the font: \u06a5\n  The following auxiliary characters are missing from the font: \u06a7\n  The following auxiliary characters are missing from the font: \u06a8 | ar_Arab (Arabic) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u0640\u200c\u200d\u200f\n  Shaper didn't attach uni064E to uni25CC when shaping the text '\u25cc\u064e'\n  Shaper didn't attach uni0650 to uni25CC when shaping the text '\u25cc\u0650'\n  Shaper didn't attach uni064F to uni25CC when shaping the text '\u25cc\u064f'\n  Shaper didn't attach uni0652 to uni25CC when shaping the text '\u25cc\u0652'\n  Shaper didn't attach uni0656 to the base glyph when shaping the text '\u25cc\u0656'\n  Shaper didn't attach uni0670 to uni25CC when shaping the text '\u25cc\u0670' | fa_Arab (Persian) |\n| Auxiliary orthography codepoints:\n  The following auxiliary characters are missing from the font: \u0600\u0601\u0602\u0603\u200c\u200d\u200f\n  The following auxiliary characters are missing from the font: \u067b\n  The following auxiliary characters are missing from the font: \u067a\n  The following auxiliary characters are missing from the font: \u067c\n  The following auxiliary characters are missing from the font: \u067d\n  Shaper didn't attach uni064B to uni25CC when shaping the text '\u25cc\u064b'\n  Shaper didn't attach uni064C to uni25CC when shaping the text '\u25cc\u064c'\n  Shaper didn't attach uni064D to uni25CC when shaping the text '\u25cc\u064d'\n  Shaper didn't attach uni064E to uni25CC when shaping the text '\u25cc\u064e'\n  Shaper didn't attach uni064F to uni25CC when shaping the text '\u25cc\u064f'\n  Shaper didn't attach uni0650 to uni25CC when shaping the text '\u25cc\u0650'\n  Shaper didn't attach uni0651 to uni25CC when shaping the text '\u25cc\u0651'\n  Shaper didn't attach uni0652 to uni25CC when shaping the text '\u25cc\u0652'\n  Shaper didn't attach uni0654 to uni25CC when shaping the text '\u25cc\u0654'\n  Shaper didn't attach uni0656 to the base glyph when shaping the text '\u25cc\u0656'\n  Shaper didn't attach uni0657 to the base glyph when shaping the text '\u25cc\u0657'\n  Shaper didn't attach uni0658 to the base glyph when shaping the text '\u25cc\u0658'\n  Shaper didn't attach uni0670 to uni25CC when shaping the text '\u25cc\u0670' | ur_Arab (Urdu) |\n"
                             },
                             "status": "WARN"
                         }
@@ -7292,7 +6556,7 @@
                         {
                             "message": {
                                 "code": "soft-dotted",
-                                "message": "The dot of soft dotted characters used in orthographies _must_ disappear in the following strings: i\u030a i\u030b j\u0300 j\u0301 j\u0303 j\u0304 j\u0308 j\u0311 \u012f\u0300 \u012f\u0301 \u012f\u0302 \u012f\u0303 \u012f\u0304 \u012f\u030c \u1e2d\u0300 \u1e2d\u0301 \u1e2d\u0304 \u1ecb\u0300 \u1ecb\u0301 \u1ecb\u0302 \u1ecb\u0303 \u1ecb\u0304\n\nThe dot of soft dotted characters _should_ disappear in other cases, for example: i\u0305 i\u0307 i\u0311 i\u0312 i\u0314 i\u031b\u0305 i\u031b\u0307 i\u031b\u030a i\u031b\u030b i\u031b\u0311 i\u031b\u0312 i\u031b\u0314 i\u0326\u0305 i\u0326\u0307 i\u0326\u030a i\u0326\u030b i\u0326\u0311 i\u0326\u0312 i\u0326\u0314 i\u0327\u0305"
+                                "message": "The dot of soft dotted characters used in orthographies _must_ disappear in the following strings: i\u030a i\u030b j\u0300 j\u0301 j\u0303 j\u0304 j\u0308 \u012f\u0300 \u012f\u0301 \u012f\u0302 \u012f\u0303 \u012f\u0304 \u012f\u030c\n\nThe dot of soft dotted characters _should_ disappear in other cases, for example: i\u0303 i\u0306 i\u0307 i\u030c i\u0326\u0303 i\u0326\u0306 i\u0326\u0307 i\u0326\u030a i\u0326\u030b i\u0326\u030c i\u0327\u0303 i\u0327\u0306 i\u0327\u0307 i\u0327\u030a i\u0327\u030b i\u0327\u030c j\u0302 j\u0306 j\u0307 j\u030a"
                             },
                             "status": "WARN"
                         }
@@ -7434,7 +6698,7 @@
                         {
                             "message": {
                                 "code": "found-jaggy-segments",
-                                "message": "The following glyphs have jaggy segments:\n\n\t* Aring (U+00C5): B<<767.0,1377.0>-<720.0,1329.0>-<657.0,1324.0>>/B<<657.0,1324.0>-<658.0,1324.0>-<658.0,1324.0>> = 4.537772507906603\n\n\t* Aringacute (U+01FA): B<<767.0,1377.0>-<720.0,1329.0>-<657.0,1324.0>>/B<<657.0,1324.0>-<658.0,1324.0>-<658.0,1324.0>> = 4.537772507906603\n\n\t* Uogonek (U+0172): B<<686.0,-134.0>-<753.0,-49.0>-<838.0,4.0>>/B<<838.0,4.0>-<801.0,-8.0>-<711.0,-8.0>> = 13.975613036046346\n\n\t* at (U+0040): B<<846.0,158.0>-<846.0,211.0>-<860.0,250.0>>/B<<860.0,250.0>-<844.0,219.0>-<815.0,178.0>> = 7.552735605906662\n\n\t* at.sc: B<<634.0,222.0>-<634.0,270.0>-<646.0,294.0>>/B<<646.0,294.0>-<618.0,237.0>-<558.0,172.0>> = 0.4034847350580431\n\n\t* bayyin: B<<1536.0,371.0>-<1536.0,429.0>-<1542.0,493.0>>/B<<1542.0,493.0>-<1486.0,293.0>-<1338.0,281.0>> = 10.286421414353487\n\n\t* beh.init_yehbarree.fina.liga: B<<1079.0,-241.0>-<1081.0,-253.0>-<1081.0,-252.0>>/B<<1081.0,-252.0>-<1075.0,-329.0>-<1037.0,-376.0>> = 4.455602833326257\n\n\t* behmeem.fina: B<<205.0,56.0>-<211.0,66.0>-<210.0,65.0>>/L<<210.0,65.0>--<218.0,77.0>> = 11.309932474020195\n\n\t* chhbarree.isol: B<<2555.0,1013.0>-<2386.0,1013.0>-<2264.0,845.0>>/B<<2264.0,845.0>-<2327.0,987.0>-<2395.0,1066.0>> = 12.061754886350606\n\n\t* chhe.liga: B<<1050.0,1014.0>-<881.0,1014.0>-<759.0,846.0>>/B<<759.0,846.0>-<822.0,988.0>-<890.0,1067.0>> = 12.061754886350606\n\n\t* 64 more.\n\nUse -F or --full-lists to disable shortening of long lists."
+                                "message": "The following glyphs have jaggy segments:\n\n\t* Aring (U+00C5): B<<767.0,1377.0>-<720.0,1329.0>-<657.0,1324.0>>/B<<657.0,1324.0>-<658.0,1324.0>-<658.0,1324.0>> = 4.537772507906603\n\n\t* Aringacute: B<<767.0,1377.0>-<720.0,1329.0>-<657.0,1324.0>>/B<<657.0,1324.0>-<658.0,1324.0>-<658.0,1324.0>> = 4.537772507906603\n\n\t* Uogonek (U+0172): B<<686.0,-134.0>-<753.0,-49.0>-<838.0,4.0>>/B<<838.0,4.0>-<801.0,-8.0>-<711.0,-8.0>> = 13.975613036046346\n\n\t* at (U+0040): B<<846.0,158.0>-<846.0,211.0>-<860.0,250.0>>/B<<860.0,250.0>-<844.0,219.0>-<815.0,178.0>> = 7.552735605906662\n\n\t* at.sc: B<<634.0,222.0>-<634.0,270.0>-<646.0,294.0>>/B<<646.0,294.0>-<618.0,237.0>-<558.0,172.0>> = 0.4034847350580431\n\n\t* bayyin: B<<1536.0,371.0>-<1536.0,429.0>-<1542.0,493.0>>/B<<1542.0,493.0>-<1486.0,293.0>-<1338.0,281.0>> = 10.286421414353487\n\n\t* beh.init_yehbarree.fina.liga: B<<1079.0,-241.0>-<1081.0,-253.0>-<1081.0,-252.0>>/B<<1081.0,-252.0>-<1075.0,-329.0>-<1037.0,-376.0>> = 4.455602833326257\n\n\t* behmeem.fina: B<<205.0,56.0>-<211.0,66.0>-<210.0,65.0>>/L<<210.0,65.0>--<218.0,77.0>> = 11.309932474020195\n\n\t* chhbarree.isol: B<<2555.0,1013.0>-<2386.0,1013.0>-<2264.0,845.0>>/B<<2264.0,845.0>-<2327.0,987.0>-<2395.0,1066.0>> = 12.061754886350606\n\n\t* chhe.liga: B<<1050.0,1014.0>-<881.0,1014.0>-<759.0,846.0>>/B<<759.0,846.0>-<822.0,988.0>-<890.0,1067.0>> = 12.061754886350606\n\n\t* 64 more.\n\nUse -F or --full-lists to disable shortening of long lists."
                             },
                             "status": "WARN"
                         }
@@ -7466,7 +6730,7 @@
                         {
                             "message": {
                                 "code": "found-semi-vertical",
-                                "message": "The following glyphs have semi-vertical/semi-horizontal lines:\n\n\t* NameMe.1821: L<<915.0,-1103.0>--<1984.0,-1111.0>>\n\n\t* NameMe.1823: L<<445.0,-218.0>--<1514.0,-226.0>>\n\n\t* R (U+0052): L<<239.0,232.0>--<238.0,1086.0>>\n\n\t* R (U+0052): L<<412.0,1084.0>--<413.0,666.0>>\n\n\t* Racute (U+0154): L<<239.0,232.0>--<238.0,1086.0>>\n\n\t* Racute (U+0154): L<<412.0,1084.0>--<413.0,666.0>>\n\n\t* Rcaron (U+0158): L<<239.0,232.0>--<238.0,1086.0>>\n\n\t* Rcaron (U+0158): L<<412.0,1084.0>--<413.0,666.0>>\n\n\t* Rcommaaccent (U+0156): L<<239.0,232.0>--<238.0,1086.0>>\n\n\t* Rcommaaccent (U+0156): L<<412.0,1084.0>--<413.0,666.0>>\n\n\t* 75 more.\n\nUse -F or --full-lists to disable shortening of long lists."
+                                "message": "The following glyphs have semi-vertical/semi-horizontal lines:\n\n\t* NameMe.1821: L<<915.0,-1103.0>--<1984.0,-1111.0>>\n\n\t* NameMe.1823: L<<445.0,-218.0>--<1514.0,-226.0>>\n\n\t* R (U+0052): L<<239.0,232.0>--<238.0,1086.0>>\n\n\t* R (U+0052): L<<412.0,1084.0>--<413.0,666.0>>\n\n\t* Racute (U+0154): L<<239.0,232.0>--<238.0,1086.0>>\n\n\t* Racute (U+0154): L<<412.0,1084.0>--<413.0,666.0>>\n\n\t* Rcaron (U+0158): L<<239.0,232.0>--<238.0,1086.0>>\n\n\t* Rcaron (U+0158): L<<412.0,1084.0>--<413.0,666.0>>\n\n\t* Rcommaaccent: L<<239.0,232.0>--<238.0,1086.0>>\n\n\t* Rcommaaccent: L<<412.0,1084.0>--<413.0,666.0>>\n\n\t* 75 more.\n\nUse -F or --full-lists to disable shortening of long lists."
                             },
                             "status": "WARN"
                         }

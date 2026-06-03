@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <glyph name="onedotenleader" format="2">
   <advance width="420"/>
-  <unicode hex="2024"/>
   <outline>
     <contour>
       <point x="96" y="90" type="curve" smooth="yes"/>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni1E5E" format="2">
   <advance width="1242"/>
-  <unicode hex="1E5E"/>
   <outline>
     <component base="uni0304" xOffset="1199" yOffset="-1212"/>
     <component base="R" xOffset="-2"/>

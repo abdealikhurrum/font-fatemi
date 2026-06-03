@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <glyph name="bhaisaheb" format="2">
   <advance width="1315"/>
-  <unicode hex="E834"/>
   <outline>
     <contour>
       <point x="1080" y="-141" type="curve" smooth="yes"/>

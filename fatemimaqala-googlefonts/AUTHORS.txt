@@ -14,6 +14,7 @@ Abdeali Khurrum <akhurrum@exordiumnetworks.com>
 # author's own font software. The originating tradition is acknowledged with
 # gratitude.
 #
-# Latin glyphs are derived from Crimson Text (Copyright 2010 The Crimson Text
-# Project Authors) and Crimson Pro (Copyright 2018 The Crimson Pro Project
-# Authors), both SIL OFL. Their copyright is preserved in OFL.txt.
+# Some Arabic glyphs are derived from Amiri (Copyright 2010-2022 The Amiri
+# Project Authors), and the Latin glyphs from Crimson Text (Copyright 2010 The
+# Crimson Text Project Authors) and Crimson Pro (Copyright 2018 The Crimson Pro
+# Project Authors) — all SIL OFL. Their copyright is preserved in OFL.txt.

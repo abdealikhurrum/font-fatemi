@@ -1,8 +1,11 @@
 Copyright 2026 The Fatemi Maqala Project Authors (https://github.com/abdealikhurrum/fatemimaqala-googlefonts)
 
-Portions of this Font Software (Latin glyphs) are derived from:
-Copyright 2010 The Crimson Text Project Authors (https://github.com/googlefonts/Crimson)
-Copyright 2018 The Crimson Pro Project Authors (https://github.com/Fonthausen/CrimsonPro)
+Portions of this Font Software are derived from other OFL projects:
+- Some Arabic glyphs are derived from Amiri:
+  Copyright 2010-2022 The Amiri Project Authors (https://github.com/aliftype/amiri)
+- Latin glyphs are derived from Crimson:
+  Copyright 2010 The Crimson Text Project Authors (https://github.com/googlefonts/Crimson)
+  Copyright 2018 The Crimson Pro Project Authors (https://github.com/Fonthausen/CrimsonPro)
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:

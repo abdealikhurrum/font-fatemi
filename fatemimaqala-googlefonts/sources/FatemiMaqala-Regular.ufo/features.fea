@@ -2249,13 +2249,13 @@ lookup kernHorizontalKerninginArabiclookup5 {
 lookup kernHorizontalKerninglookup5 {
   lookupflag 0;
     @kc72_first_0 = [\ampersand ];
-    @kc72_first_1 = [\zero \zero.slash \zero.prop ];
-    @kc72_first_2 = [\one.prop ];
-    @kc72_first_3 = [\two.prop ];
-    @kc72_first_4 = [\three.prop ];
-    @kc72_first_5 = [\seven.prop ];
-    @kc72_first_6 = [\eight.prop ];
-    @kc72_first_7 = [\nine.prop ];
+    @kc72_first_1 = [ ];
+    @kc72_first_2 = [ ];
+    @kc72_first_3 = [ ];
+    @kc72_first_4 = [ ];
+    @kc72_first_5 = [ ];
+    @kc72_first_6 = [ ];
+    @kc72_first_7 = [ ];
     @kc72_first_8 = [\exclamdown ];
     @kc72_first_9 = [];
     @kc72_first_10 = [\questiondown ];
@@ -2312,41 +2312,41 @@ lookup kernHorizontalKerninglookup5 {
 	\cdotaccent.sc \ccaron.sc \gcircumflex.sc \gbreve.sc \gdotaccent.sc 
 	\gcommaaccent.sc \omacron.sc \obreve.sc \ohungarumlaut.sc \oe.sc 
 	\uni01D2.sc \oslashacute.sc ];
-    @kc72_second_22 = [\zero \zero.slash \zero.prop ];
+    @kc72_second_22 = [ ];
     @kc72_second_23 = [\d \dcaron \dcroat \uni1E0B \uni1E0D \uni1E0F \uni1E11 \uni1E13 ];
     pos @kc72_first_0 @kc72_second_1 -74;
     pos @kc72_first_0 @kc72_second_2 -60;
     pos @kc72_first_0 @kc72_second_3 -56;
     pos @kc72_first_0 @kc72_second_4 -44;
     pos @kc72_first_0 @kc72_second_5 -68;
-    pos @kc72_first_1 @kc72_second_3 -34;
-    pos @kc72_first_1 @kc72_second_4 -28;
-    pos @kc72_first_1 @kc72_second_5 -44;
-    pos @kc72_first_1 @kc72_second_6 -42;
-    pos @kc72_first_1 @kc72_second_7 -20;
-    pos @kc72_first_1 @kc72_second_8 -30;
-    pos @kc72_first_1 @kc72_second_9 -42;
-    pos @kc72_first_2 @kc72_second_7 18;
-    pos @kc72_first_2 @kc72_second_10 12;
-    pos @kc72_first_3 @kc72_second_3 -28;
-    pos @kc72_first_3 @kc72_second_4 -22;
-    pos @kc72_first_3 @kc72_second_5 -32;
-    pos @kc72_first_4 @kc72_second_3 -30;
-    pos @kc72_first_4 @kc72_second_4 -26;
-    pos @kc72_first_4 @kc72_second_5 -34;
-    pos @kc72_first_5 @kc72_second_3 60;
-    pos @kc72_first_5 @kc72_second_4 56;
-    pos @kc72_first_5 @kc72_second_5 72;
-    pos @kc72_first_5 @kc72_second_7 -82;
-    pos @kc72_first_5 @kc72_second_11 -114;
-    pos @kc72_first_6 @kc72_second_3 -26;
-    pos @kc72_first_6 @kc72_second_4 -22;
-    pos @kc72_first_6 @kc72_second_5 -28;
-    pos @kc72_first_7 @kc72_second_3 -20;
-    pos @kc72_first_7 @kc72_second_5 -26;
-    pos @kc72_first_7 @kc72_second_7 -52;
-    pos @kc72_first_7 @kc72_second_11 -68;
-    pos @kc72_first_7 @kc72_second_12 -22;
+# EMPTYFIG     pos @kc72_first_1 @kc72_second_3 -34;
+# EMPTYFIG     pos @kc72_first_1 @kc72_second_4 -28;
+# EMPTYFIG     pos @kc72_first_1 @kc72_second_5 -44;
+# EMPTYFIG     pos @kc72_first_1 @kc72_second_6 -42;
+# EMPTYFIG     pos @kc72_first_1 @kc72_second_7 -20;
+# EMPTYFIG     pos @kc72_first_1 @kc72_second_8 -30;
+# EMPTYFIG     pos @kc72_first_1 @kc72_second_9 -42;
+# EMPTYFIG     pos @kc72_first_2 @kc72_second_7 18;
+# EMPTYFIG     pos @kc72_first_2 @kc72_second_10 12;
+# EMPTYFIG     pos @kc72_first_3 @kc72_second_3 -28;
+# EMPTYFIG     pos @kc72_first_3 @kc72_second_4 -22;
+# EMPTYFIG     pos @kc72_first_3 @kc72_second_5 -32;
+# EMPTYFIG     pos @kc72_first_4 @kc72_second_3 -30;
+# EMPTYFIG     pos @kc72_first_4 @kc72_second_4 -26;
+# EMPTYFIG     pos @kc72_first_4 @kc72_second_5 -34;
+# EMPTYFIG     pos @kc72_first_5 @kc72_second_3 60;
+# EMPTYFIG     pos @kc72_first_5 @kc72_second_4 56;
+# EMPTYFIG     pos @kc72_first_5 @kc72_second_5 72;
+# EMPTYFIG     pos @kc72_first_5 @kc72_second_7 -82;
+# EMPTYFIG     pos @kc72_first_5 @kc72_second_11 -114;
+# EMPTYFIG     pos @kc72_first_6 @kc72_second_3 -26;
+# EMPTYFIG     pos @kc72_first_6 @kc72_second_4 -22;
+# EMPTYFIG     pos @kc72_first_6 @kc72_second_5 -28;
+# EMPTYFIG     pos @kc72_first_7 @kc72_second_3 -20;
+# EMPTYFIG     pos @kc72_first_7 @kc72_second_5 -26;
+# EMPTYFIG     pos @kc72_first_7 @kc72_second_7 -52;
+# EMPTYFIG     pos @kc72_first_7 @kc72_second_11 -68;
+# EMPTYFIG     pos @kc72_first_7 @kc72_second_12 -22;
     pos @kc72_first_8 @kc72_second_2 -92;
     pos @kc72_first_8 @kc72_second_3 -82;
     pos @kc72_first_8 @kc72_second_4 -66;
@@ -2372,7 +2372,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc72_first_11 @kc72_second_18 -48;
     pos @kc72_first_11 @kc72_second_20 -28;
     pos @kc72_first_11 @kc72_second_21 -24;
-    pos @kc72_first_12 @kc72_second_22 -46;
+# EMPTYFIG     pos @kc72_first_12 @kc72_second_22 -46;
     pos @kc72_first_13 @kc72_second_7 -70;
     pos @kc72_first_13 @kc72_second_17 -118;
     pos @kc72_first_13 @kc72_second_18 -28;
@@ -2424,8 +2424,8 @@ lookup kernHorizontalKerninglookup5 {
     @kc73_second_1 = [\quotedbl \quotesingle ];
     @kc73_second_2 = [];
     @kc73_second_3 = [\hyphen \endash \emdash \uni2015 ];
-    @kc73_second_4 = [\zero \zero.slash \zero.prop ];
-    @kc73_second_5 = [\two.prop ];
+    @kc73_second_4 = [ ];
+    @kc73_second_5 = [ ];
     @kc73_second_6 = [\J \Jcircumflex ];
     @kc73_second_7 = [\C \G \O \Q \Ccedilla \Ograve \Oacute \Ocircumflex \Otilde \Odieresis \Oslash 
 	\Cacute \Ccircumflex \Cdotaccent \Ccaron \Gcircumflex \Gbreve 
@@ -2533,7 +2533,7 @@ lookup kernHorizontalKerninglookup5 {
     @kc73_second_58 = [\ampersand ];
     @kc73_second_59 = [\comma \period \quotesinglbase \quotedblbase \ellipsis ];
     @kc73_second_60 = [\slash ];
-    @kc73_second_61 = [\four.prop ];
+    @kc73_second_61 = [ ];
     @kc73_second_62 = [\colon \semicolon ];
     @kc73_second_63 = [\a \agrave \aacute \acircumflex \atilde \adieresis \aring \ae \amacron \abreve 
 	\aogonek \uni01CE \uni01E3 \aringacute \aeacute \uni1E01 \uni1EA1 
@@ -2545,23 +2545,23 @@ lookup kernHorizontalKerninglookup5 {
 	\uni1E65 \uni1E67 \uni1E69 ];
     @kc73_second_67 = [\s.sc \germandbls.sc \sacute.sc \scircumflex.sc \scedilla.sc \scaron.sc 
 	\scommaaccent.sc ];
-    @kc73_second_68 = [\seven \seven.prop ];
+    @kc73_second_68 = [ ];
     @kc73_second_69 = [\Z \Zacute \Zdotaccent \Zcaron \uni1E90 \uni1E92 \uni1E94 ];
-    @kc73_second_70 = [\one.prop ];
-    @kc73_second_71 = [\three.prop ];
-    @kc73_second_72 = [\five.prop ];
-    @kc73_second_73 = [\six.prop ];
+    @kc73_second_70 = [ ];
+    @kc73_second_71 = [ ];
+    @kc73_second_72 = [ ];
+    @kc73_second_73 = [ ];
     @kc73_second_74 = [\guillemotright \guilsinglright ];
     @kc73_second_75 = [\b \thorn \uni1E03 \uni1E05 \uni1E07 ];
-    @kc73_second_76 = [\eight.prop ];
+    @kc73_second_76 = [ ];
     @kc73_second_77 = [\S \Sacute \Scircumflex \Scedilla \Scaron \Scommaaccent \uni1E60 \uni1E62 
 	\uni1E64 \uni1E66 \uni1E68 ];
     @kc73_second_78 = [\braceright ];
     pos @kc73_first_0 @kc73_second_1 -102;
 # EMPTY     pos @kc73_first_0 @kc73_second_2 -82;
     pos @kc73_first_0 @kc73_second_3 -32;
-    pos @kc73_first_0 @kc73_second_4 -20;
-    pos @kc73_first_0 @kc73_second_5 24;
+# EMPTYFIG     pos @kc73_first_0 @kc73_second_4 -20;
+# EMPTYFIG     pos @kc73_first_0 @kc73_second_5 24;
     pos @kc73_first_0 @kc73_second_6 -20;
     pos @kc73_first_0 @kc73_second_7 -44;
     pos @kc73_first_0 @kc73_second_8 -104;
@@ -2684,7 +2684,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_4 @kc73_second_58 -22;
     pos @kc73_first_4 @kc73_second_59 -96;
     pos @kc73_first_4 @kc73_second_60 -42;
-    pos @kc73_first_4 @kc73_second_61 -26;
+# EMPTYFIG     pos @kc73_first_4 @kc73_second_61 -26;
     pos @kc73_first_4 @kc73_second_62 -16;
     pos @kc73_first_4 @kc73_second_63 -62;
     pos @kc73_first_4 @kc73_second_64 -54;
@@ -2776,7 +2776,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_7 @kc73_second_66 -44;
     pos @kc73_first_7 @kc73_second_67 -32;
     pos @kc73_first_8 @kc73_second_3 -72;
-    pos @kc73_first_8 @kc73_second_5 24;
+# EMPTYFIG     pos @kc73_first_8 @kc73_second_5 24;
     pos @kc73_first_8 @kc73_second_7 -106;
     pos @kc73_first_8 @kc73_second_15 -68;
     pos @kc73_first_8 @kc73_second_16 -62;
@@ -2817,7 +2817,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_9 @kc73_second_34 -58;
     pos @kc73_first_9 @kc73_second_35 -78;
     pos @kc73_first_9 @kc73_second_36 -26;
-    pos @kc73_first_9 @kc73_second_68 -26;
+# EMPTYFIG     pos @kc73_first_9 @kc73_second_68 -26;
     pos @kc73_first_10 @kc73_second_3 -22;
     pos @kc73_first_10 @kc73_second_7 -20;
     pos @kc73_first_10 @kc73_second_15 -38;
@@ -2928,14 +2928,14 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_13 @kc73_second_58 -42;
     pos @kc73_first_13 @kc73_second_59 -142;
     pos @kc73_first_13 @kc73_second_60 -50;
-    pos @kc73_first_13 @kc73_second_61 -38;
+# EMPTYFIG     pos @kc73_first_13 @kc73_second_61 -38;
     pos @kc73_first_13 @kc73_second_63 -38;
     pos @kc73_first_13 @kc73_second_64 -44;
     pos @kc73_first_13 @kc73_second_66 -30;
     pos @kc73_first_13 @kc73_second_67 -18;
 # EMPTY     pos @kc73_first_14 @kc73_second_2 -32;
     pos @kc73_first_14 @kc73_second_3 -18;
-    pos @kc73_first_14 @kc73_second_5 60;
+# EMPTYFIG     pos @kc73_first_14 @kc73_second_5 60;
     pos @kc73_first_14 @kc73_second_6 -12;
     pos @kc73_first_14 @kc73_second_7 -30;
     pos @kc73_first_14 @kc73_second_8 -46;
@@ -2963,11 +2963,11 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_14 @kc73_second_34 -32;
     pos @kc73_first_14 @kc73_second_35 -28;
     pos @kc73_first_14 @kc73_second_60 36;
-    pos @kc73_first_14 @kc73_second_61 -20;
+# EMPTYFIG     pos @kc73_first_14 @kc73_second_61 -20;
     pos @kc73_first_14 @kc73_second_64 -10;
-    pos @kc73_first_14 @kc73_second_70 10;
-    pos @kc73_first_14 @kc73_second_71 34;
-    pos @kc73_first_14 @kc73_second_72 36;
+# EMPTYFIG     pos @kc73_first_14 @kc73_second_70 10;
+# EMPTYFIG     pos @kc73_first_14 @kc73_second_71 34;
+# EMPTYFIG     pos @kc73_first_14 @kc73_second_72 36;
     pos @kc73_first_15 @kc73_second_10 -10;
     pos @kc73_first_15 @kc73_second_11 -10;
     pos @kc73_first_15 @kc73_second_12 -14;
@@ -3029,14 +3029,14 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_16 @kc73_second_58 -44;
     pos @kc73_first_16 @kc73_second_59 -88;
     pos @kc73_first_16 @kc73_second_60 -54;
-    pos @kc73_first_16 @kc73_second_61 -82;
+# EMPTYFIG     pos @kc73_first_16 @kc73_second_61 -82;
     pos @kc73_first_16 @kc73_second_62 -70;
     pos @kc73_first_16 @kc73_second_63 -172;
     pos @kc73_first_16 @kc73_second_64 -172;
     pos @kc73_first_16 @kc73_second_65 -134;
     pos @kc73_first_16 @kc73_second_66 -164;
     pos @kc73_first_16 @kc73_second_67 -148;
-    pos @kc73_first_16 @kc73_second_73 -40;
+# EMPTYFIG     pos @kc73_first_16 @kc73_second_73 -40;
     pos @kc73_first_16 @kc73_second_74 -80;
     pos @kc73_first_17 @kc73_second_3 -18;
     pos @kc73_first_17 @kc73_second_7 -12;
@@ -3082,7 +3082,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_17 @kc73_second_75 16;
     pos @kc73_first_18 @kc73_second_1 16;
     pos @kc73_first_18 @kc73_second_3 -94;
-    pos @kc73_first_18 @kc73_second_4 -28;
+# EMPTYFIG     pos @kc73_first_18 @kc73_second_4 -28;
     pos @kc73_first_18 @kc73_second_7 -46;
     pos @kc73_first_18 @kc73_second_15 -156;
     pos @kc73_first_18 @kc73_second_16 -154;
@@ -3121,20 +3121,20 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_18 @kc73_second_58 -58;
     pos @kc73_first_18 @kc73_second_59 -130;
     pos @kc73_first_18 @kc73_second_60 -76;
-    pos @kc73_first_18 @kc73_second_61 -78;
+# EMPTYFIG     pos @kc73_first_18 @kc73_second_61 -78;
     pos @kc73_first_18 @kc73_second_62 -62;
     pos @kc73_first_18 @kc73_second_63 -162;
     pos @kc73_first_18 @kc73_second_64 -140;
     pos @kc73_first_18 @kc73_second_65 -96;
     pos @kc73_first_18 @kc73_second_66 -150;
     pos @kc73_first_18 @kc73_second_67 -126;
-    pos @kc73_first_18 @kc73_second_73 -60;
+# EMPTYFIG     pos @kc73_first_18 @kc73_second_73 -60;
     pos @kc73_first_18 @kc73_second_74 -62;
     pos @kc73_first_18 @kc73_second_75 76;
-    pos @kc73_first_18 @kc73_second_76 -26;
+# EMPTYFIG     pos @kc73_first_18 @kc73_second_76 -26;
     pos @kc73_first_18 @kc73_second_77 -16;
     pos @kc73_first_19 @kc73_second_3 -70;
-    pos @kc73_first_19 @kc73_second_4 -24;
+# EMPTYFIG     pos @kc73_first_19 @kc73_second_4 -24;
     pos @kc73_first_19 @kc73_second_7 -38;
     pos @kc73_first_19 @kc73_second_15 -114;
     pos @kc73_first_19 @kc73_second_16 -114;
@@ -3172,20 +3172,20 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_19 @kc73_second_58 -54;
     pos @kc73_first_19 @kc73_second_59 -102;
     pos @kc73_first_19 @kc73_second_60 -66;
-    pos @kc73_first_19 @kc73_second_61 -60;
+# EMPTYFIG     pos @kc73_first_19 @kc73_second_61 -60;
     pos @kc73_first_19 @kc73_second_62 -50;
     pos @kc73_first_19 @kc73_second_63 -130;
     pos @kc73_first_19 @kc73_second_64 -108;
     pos @kc73_first_19 @kc73_second_65 -62;
     pos @kc73_first_19 @kc73_second_66 -118;
     pos @kc73_first_19 @kc73_second_67 -96;
-    pos @kc73_first_19 @kc73_second_73 -52;
+# EMPTYFIG     pos @kc73_first_19 @kc73_second_73 -52;
     pos @kc73_first_19 @kc73_second_74 -50;
     pos @kc73_first_19 @kc73_second_75 64;
-    pos @kc73_first_19 @kc73_second_76 -24;
+# EMPTYFIG     pos @kc73_first_19 @kc73_second_76 -24;
     pos @kc73_first_19 @kc73_second_77 -14;
     pos @kc73_first_20 @kc73_second_3 -48;
-    pos @kc73_first_20 @kc73_second_5 12;
+# EMPTYFIG     pos @kc73_first_20 @kc73_second_5 12;
     pos @kc73_first_20 @kc73_second_7 -62;
     pos @kc73_first_20 @kc73_second_15 -58;
     pos @kc73_first_20 @kc73_second_16 -52;
@@ -3204,7 +3204,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_20 @kc73_second_34 -74;
     pos @kc73_first_20 @kc73_second_35 -44;
     pos @kc73_first_21 @kc73_second_3 -112;
-    pos @kc73_first_21 @kc73_second_4 -36;
+# EMPTYFIG     pos @kc73_first_21 @kc73_second_4 -36;
     pos @kc73_first_21 @kc73_second_7 -72;
     pos @kc73_first_21 @kc73_second_15 -184;
     pos @kc73_first_21 @kc73_second_16 -182;
@@ -3242,17 +3242,17 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_21 @kc73_second_58 -56;
     pos @kc73_first_21 @kc73_second_59 -72;
     pos @kc73_first_21 @kc73_second_60 -58;
-    pos @kc73_first_21 @kc73_second_61 -88;
+# EMPTYFIG     pos @kc73_first_21 @kc73_second_61 -88;
     pos @kc73_first_21 @kc73_second_62 -64;
     pos @kc73_first_21 @kc73_second_63 -162;
     pos @kc73_first_21 @kc73_second_64 -154;
     pos @kc73_first_21 @kc73_second_65 -128;
     pos @kc73_first_21 @kc73_second_66 -154;
     pos @kc73_first_21 @kc73_second_67 -132;
-    pos @kc73_first_21 @kc73_second_73 -70;
+# EMPTYFIG     pos @kc73_first_21 @kc73_second_73 -70;
     pos @kc73_first_21 @kc73_second_74 -78;
     pos @kc73_first_21 @kc73_second_75 56;
-    pos @kc73_first_21 @kc73_second_76 -28;
+# EMPTYFIG     pos @kc73_first_21 @kc73_second_76 -28;
     pos @kc73_first_21 @kc73_second_77 -16;
 # EMPTY     pos @kc73_first_22 @kc73_second_2 -24;
     pos @kc73_first_22 @kc73_second_19 -20;
@@ -3481,8 +3481,8 @@ lookup kernHorizontalKerninglookup5 {
     @kc74_second_27 = [\V \uni1E7C \uni1E7E ];
     @kc74_second_28 = [\W \Wcircumflex \Wgrave \Wacute \Wdieresis \uni1E86 \uni1E88 ];
     @kc74_second_29 = [];
-    @kc74_second_30 = [\three.onum ];
-    @kc74_second_31 = [\four.onum ];
+    @kc74_second_30 = [ ];
+    @kc74_second_31 = [ ];
     @kc74_second_32 = [\braceright ];
     @kc74_second_33 = [\h \k \hcircumflex \hbar \kcommaaccent \uni1E23 \uni1E25 \uni1E27 \uni1E29 
 	\uni1E2B \uni1E31 \uni1E33 \uni1E35 \uni1E96 ];
@@ -3611,8 +3611,8 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc74_first_11 @kc74_second_27 -128;
     pos @kc74_first_11 @kc74_second_28 -96;
 # EMPTY     pos @kc74_first_11 @kc74_second_29 -20;
-    pos @kc74_first_11 @kc74_second_30 -24;
-    pos @kc74_first_11 @kc74_second_31 18;
+# EMPTYFIG     pos @kc74_first_11 @kc74_second_30 -24;
+# EMPTYFIG     pos @kc74_first_11 @kc74_second_31 18;
     pos @kc74_first_12 @kc74_second_1 -62;
     pos @kc74_first_12 @kc74_second_3 -50;
     pos @kc74_first_12 @kc74_second_4 -190;
@@ -3815,8 +3815,8 @@ lookup kernHorizontalKerninglookup5 {
     @kc75_second_1 = [\ampersand ];
     @kc75_second_2 = [\comma \period \quotesinglbase \quotedblbase \ellipsis ];
     @kc75_second_3 = [\slash ];
-    @kc75_second_4 = [\four.prop ];
-    @kc75_second_5 = [\six.prop ];
+    @kc75_second_4 = [ ];
+    @kc75_second_5 = [ ];
     @kc75_second_6 = [\at ];
     @kc75_second_7 = [\A \Agrave \Aacute \Acircumflex \Atilde \Adieresis \Aring \Amacron \Abreve 
 	\Aogonek \uni01CD \Aringacute \uni1E00 \uni1EA0 \uni1EA2 \uni1EA4 
@@ -3922,7 +3922,7 @@ lookup kernHorizontalKerninglookup5 {
 	\uni1EE8 \uni1EEA \uni1EEC \uni1EEE \uni1EF0 ];
     @kc75_second_56 = [\quoteleft \quotedblleft ];
     @kc75_second_57 = [\quoteright \quotedblright ];
-    @kc75_second_58 = [\zero \zero.slash \zero.prop ];
+    @kc75_second_58 = [ ];
     @kc75_second_59 = [\S \Sacute \Scircumflex \Scedilla \Scaron \Scommaaccent \uni1E60 \uni1E62 
 	\uni1E64 \uni1E66 \uni1E68 ];
     @kc75_second_60 = [\p \uni1E55 \uni1E57 ];
@@ -3937,8 +3937,8 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc75_first_0 @kc75_second_1 -42;
     pos @kc75_first_0 @kc75_second_2 -160;
     pos @kc75_first_0 @kc75_second_3 -82;
-    pos @kc75_first_0 @kc75_second_4 -90;
-    pos @kc75_first_0 @kc75_second_5 -26;
+# EMPTYFIG     pos @kc75_first_0 @kc75_second_4 -90;
+# EMPTYFIG     pos @kc75_first_0 @kc75_second_5 -26;
     pos @kc75_first_0 @kc75_second_6 -42;
     pos @kc75_first_0 @kc75_second_7 -100;
     pos @kc75_first_0 @kc75_second_8 -24;
@@ -4040,7 +4040,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc75_first_4 @kc75_second_49 -36;
     pos @kc75_first_4 @kc75_second_52 -50;
     pos @kc75_first_4 @kc75_second_54 -36;
-    pos @kc75_first_4 @kc75_second_58 -32;
+# EMPTYFIG     pos @kc75_first_4 @kc75_second_58 -32;
     pos @kc75_first_4 @kc75_second_59 -20;
     pos @kc75_first_4 @kc75_second_60 -34;
     pos @kc75_first_4 @kc75_second_61 -32;
@@ -4143,7 +4143,7 @@ lookup kernHorizontalKerninglookup5 {
     @kc77_first_0 = [\parenleft ];
     @kc77_first_1 = [\bracketleft ];
     @kc77_first_2 = [\braceleft ];
-    @kc77_second_1 = [\zero \zero.slash \zero.prop ];
+    @kc77_second_1 = [ ];
     @kc77_second_2 = [\J \Jcircumflex ];
     @kc77_second_3 = [\C \G \O \Q \Ccedilla \Ograve \Oacute \Ocircumflex \Otilde \Odieresis \Oslash 
 	\Cacute \Ccircumflex \Cdotaccent \Ccaron \Gcircumflex \Gbreve 
@@ -4221,7 +4221,7 @@ lookup kernHorizontalKerninglookup5 {
     @kc77_second_31 = [\i \igrave \iacute \icircumflex \idieresis \itilde \imacron \ibreve \iogonek 
 	\dotlessi \ij \uni01D0 \uni1E2D \uni1E2F \uni1EC9 \uni1ECB ];
     @kc77_second_32 = [\AE \uni01E2 \AEacute ];
-    pos @kc77_first_0 @kc77_second_1 -42;
+# EMPTYFIG     pos @kc77_first_0 @kc77_second_1 -42;
     pos @kc77_first_0 @kc77_second_2 200;
     pos @kc77_first_0 @kc77_second_3 -46;
     pos @kc77_first_0 @kc77_second_4 -24;
@@ -4248,7 +4248,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc77_first_0 @kc77_second_25 -40;
     pos @kc77_first_0 @kc77_second_26 -40;
     pos @kc77_first_0 @kc77_second_27 -34;
-    pos @kc77_first_1 @kc77_second_1 -42;
+# EMPTYFIG     pos @kc77_first_1 @kc77_second_1 -42;
     pos @kc77_first_1 @kc77_second_2 222;
     pos @kc77_first_1 @kc77_second_3 -44;
     pos @kc77_first_1 @kc77_second_4 -34;
