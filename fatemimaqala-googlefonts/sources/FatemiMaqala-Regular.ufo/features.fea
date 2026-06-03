@@ -5191,43 +5191,6 @@ lookup kharoSingle_aboveSingle {
   pos base [\uni0632.alt ] <anchor 202 1364> mark @aboveSingle;
 } kharoSingle_aboveSingle;
 
-lookup kharoSingle_finaAnchor {
-  lookupflag 0;
-  pos base [\uni0621 ] <anchor 74 962> mark @finaAnchor;
-  pos base [\uni0623 ] <anchor -100 1244> mark @finaAnchor;
-  pos base [\uni0624 ] <anchor -244 1208> mark @finaAnchor;
-  pos base [\uni0625 ] <anchor -192 1052> mark @finaAnchor;
-  pos base [\uni0627 ] <anchor -156 1184> mark @finaAnchor;
-  pos base [\uni0628 ] <anchor 174 1163> mark @finaAnchor;
-  pos base [\uni0629 ] <anchor -36 1613> mark @finaAnchor;
-  pos base [\uni062A ] <anchor 132 1452> mark @finaAnchor;
-  pos base [\uni062B ] <anchor 150 1343> mark @finaAnchor;
-  pos base [\uni062C ] <anchor 40 1468> mark @finaAnchor;
-  pos base [\uni062D ] <anchor 40 1396> mark @finaAnchor;
-  pos base [\uni062E ] <anchor 108 1194> mark @finaAnchor;
-  pos base [\uni062F ] <anchor 102 1202> mark @finaAnchor;
-  pos base [\uni0630 ] <anchor 75 1526> mark @finaAnchor;
-  pos base [\uni0631 \uniFEAD ] <anchor -8 980> mark @finaAnchor;
-  pos base [\uni0632 \uniFEAF ] <anchor 6 964> mark @finaAnchor;
-  pos base [\uni0633 ] <anchor 230 914> mark @finaAnchor;
-  pos base [\uni0634 ] <anchor 238 985> mark @finaAnchor;
-  pos base [\uni0635 ] <anchor 414 1112> mark @finaAnchor;
-  pos base [\uni0636 ] <anchor 282 974> mark @finaAnchor;
-  pos base [\uni0637 ] <anchor 117 1361> mark @finaAnchor;
-  pos base [\uni0638 ] <anchor 135 1349> mark @finaAnchor;
-  pos base [\uni0639 ] <anchor 114 1436> mark @finaAnchor;
-  pos base [\uni063A ] <anchor 86 1634> mark @finaAnchor;
-  pos base [\uni0641 ] <anchor 288 1298> mark @finaAnchor;
-  pos base [\uni0642 ] <anchor 258 979> mark @finaAnchor;
-  pos base [\uni0643 ] <anchor 284 1152> mark @finaAnchor;
-  pos base [\uni0644 ] <anchor 298 1194> mark @finaAnchor;
-  pos base [\uni0645 \NameMe.1114728 ] <anchor 153 1394> mark @finaAnchor;
-  pos base [\uni0646 ] <anchor 228 1442> mark @finaAnchor;
-  pos base [\uni0647 ] <anchor 120 1349> mark @finaAnchor;
-  pos base [\uni0648 ] <anchor 18 968> mark @finaAnchor;
-  pos base [\uni0631.alt ] <anchor -140 980> mark @finaAnchor;
-  pos base [\uni0632.alt ] <anchor -130 964> mark @finaAnchor;
-} kharoSingle_finaAnchor;
 
 
 lookup kharoLiga_subLiga {
@@ -7868,7 +7831,6 @@ feature mark {
       lookup kharoSingle_zer;
       lookup kharoSingle_belowSingle;
       lookup kharoSingle_aboveSingle;
-      lookup kharoSingle_finaAnchor;
       lookup kharoLiga_subLiga;
       lookup kharoLiga_supLiga;
       lookup kharoLiga_zerLiga;
@@ -7882,7 +7844,6 @@ feature mark {
       lookup kharoSingle_zer;
       lookup kharoSingle_belowSingle;
       lookup kharoSingle_aboveSingle;
-      lookup kharoSingle_finaAnchor;
       lookup kharoLiga_subLiga;
       lookup kharoLiga_supLiga;
       lookup kharoLiga_zerLiga;
@@ -7894,7 +7855,6 @@ feature mark {
       lookup kharoSingle_zer;
       lookup kharoSingle_belowSingle;
       lookup kharoSingle_aboveSingle;
-      lookup kharoSingle_finaAnchor;
       lookup kharoLiga_subLiga;
       lookup kharoLiga_supLiga;
       lookup kharoLiga_zerLiga;
@@ -7906,7 +7866,6 @@ feature mark {
       lookup kharoSingle_zer;
       lookup kharoSingle_belowSingle;
       lookup kharoSingle_aboveSingle;
-      lookup kharoSingle_finaAnchor;
       lookup kharoLiga_subLiga;
       lookup kharoLiga_supLiga;
       lookup kharoLiga_zerLiga;
@@ -7918,7 +7877,6 @@ feature mark {
       lookup kharoSingle_zer;
       lookup kharoSingle_belowSingle;
       lookup kharoSingle_aboveSingle;
-      lookup kharoSingle_finaAnchor;
       lookup kharoLiga_subLiga;
       lookup kharoLiga_supLiga;
       lookup kharoLiga_zerLiga;
@@ -7930,7 +7888,6 @@ feature mark {
       lookup kharoSingle_zer;
       lookup kharoSingle_belowSingle;
       lookup kharoSingle_aboveSingle;
-      lookup kharoSingle_finaAnchor;
       lookup kharoLiga_subLiga;
       lookup kharoLiga_supLiga;
       lookup kharoLiga_zerLiga;

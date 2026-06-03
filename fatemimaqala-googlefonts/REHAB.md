@@ -49,3 +49,13 @@ build a no-features TTF that contains the full glyph set, then:
 ```
 python3 -c "from fontTools.ttLib import TTFont; from fontTools.feaLib.builder import addOpenTypeFeatures; addOpenTypeFeatures(TTFont('nofeatures.ttf'),'sources/Fatemi-Maqala-Regular.ufo/features.fea'); print('ok')"
 ```
+
+## Mark-positioning fix (finaAnchor)
+
+After the mark-class split, marks belonged to several sub-lookups that all ran,
+and the `kharoSingle_finaAnchor` sub-lookup (a secondary anchor set on 34 base
+glyphs) ran last and **overrode** the correct `aboveSingle` position. On the
+isolated lam this dropped the damma onto the stroke (collision). Removing the
+`finaAnchor` sub-lookup makes every above-mark use its primary `aboveSingle`
+anchor, fixing the lam and regularizing mark positions across the board.
+Connected/voweled text (e.g. the basmala) is unchanged — verified by rendering.
