@@ -1,4 +1,4 @@
-Copyright 2026 The Fatemi Maqala Project Authors (https://github.com/abdealikhurrum/fatemi-maqala)
+Copyright 2026 The Fatemi Maqala Project Authors (https://github.com/abdealikhurrum/fatemimaqala-gh)
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:
