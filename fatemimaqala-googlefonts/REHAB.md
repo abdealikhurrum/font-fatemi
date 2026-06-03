@@ -67,14 +67,22 @@ that inter-character mark collisions are dominated by the **medial kaaf**
 (`uniFEDC`/`uniFEDB`): its arm reaches up-and-right over the preceding letter,
 into that letter's above-mark (damma/shadda overlaps of 1000–2900px).
 
-Fixes (first-pass values, tunable):
-- `markBeforeKaf` (in `mark` feature): when an above-mark precedes a kaaf, shift
-  it **down** ~560 units so it nests under the kaaf arm. Clears the kaaf
-  collisions; matches the calligraphic convention of tucking the mark down.
+Applied:
 - `spaceBeforeAlefHamza` (in `kern`): add space before an isolated alef-hamza-
   below (`uni0625`) after a non-connecting descender (waw/reh/zay); swash reh
   (`uni0631.alt`) gets more.
 
-Known remaining (enumerate via the detector over a corpus, then add rules):
-- shadda+fatha on an initial letter near a *preceding* alef-hamza (e.g. إِيَّاكَ).
-- mark-vs-mark near-misses between adjacent letters (e.g. أَنْعَمْتَ sukun↔fatha).
+Kaaf — deferred to an outline reshape (see below). A contextual "drop the
+preceding mark" rule was prototyped and **backed out**: dropping a lone mark
+works, but (a) for shadda+vowel stacks the drop either re-collides with the kaaf
+or, if dropped far enough to clear, crashes into the base; and (b) on bases with
+composed above-pieces (teh/noon dots, medial yaa-hamza) the dropped mark lands on
+them. The clean fix is to shorten the medial kaaf's arm so it no longer reaches
+over the preceding letter — one outline change resolves every preceding-mark case
+with no mark gymnastics. Left for an interactive design pass.
+
+Known remaining (enumerate via `qa/collision_census.py` over a corpus — see
+`qa/SHARING.md` — then fix by class):
+- above-mark ↔ medial kaaf (`uniFEDC`/`uniFEDB`) — the dominant class.
+- shadda near a *preceding* alef-hamza (e.g. إِيَّاكَ).
+- mark-vs-mark near-misses between adjacent letters (e.g. أَنْعَمْتَ).
