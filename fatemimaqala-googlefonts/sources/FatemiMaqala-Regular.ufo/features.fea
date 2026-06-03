@@ -1705,6 +1705,7 @@ feature calt {
 } calt;
 
 feature ss01 {
+  featureNames { name "Urdu ghunna (noon ghunna)"; };
 
  script DFLT;
      language dflt ;
@@ -1724,6 +1725,7 @@ feature ss01 {
 } ss01;
 
 feature ss02 {
+  featureNames { name "Straight reh"; };
 
  script DFLT;
      language dflt ;

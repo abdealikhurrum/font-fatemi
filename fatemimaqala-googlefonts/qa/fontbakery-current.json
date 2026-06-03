@@ -2,10 +2,10 @@
     "result": {
         "(not finished)": 0,
         "ERROR": 7,
-        "INFO": 6,
-        "PASS": 103,
+        "INFO": 7,
+        "PASS": 105,
         "SKIP": 102,
-        "WARN": 18
+        "WARN": 15
     },
     "sections": [
         {
@@ -1922,10 +1922,10 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "vertical-metrics-not-centered",
-                                "message": "Uppercase glyphs are not vertically centered in the em box."
+                                "code": null,
+                                "message": "Uppercase glyphs are vertically centered in the em box."
                             },
-                            "status": "WARN"
+                            "status": "PASS"
                         }
                     ],
                     "module": "caps_vertically_centered",
@@ -1933,7 +1933,7 @@
                         "https://github.com/fonttools/fontbakery/issues/4139"
                     ],
                     "rationale": "\n        This check suggests one possible approach to designing vertical metrics,\n        but can be ingnored if you follow a different approach.\n        In order to center text in buttons, lists, and grid systems\n        with minimal additional CSS work, the uppercase glyphs should be\n        vertically centered in the em box.\n        This check mainly applies to Latin, Greek, Cyrillic, and other similar scripts.\n        For non-latin scripts like Arabic, this check might not be applicable.\n        There is a detailed description of this subject at:\n        https://x.com/romanshamin_en/status/1562801657691672576\n    ",
-                    "result": "WARN",
+                    "result": "PASS",
                     "severity": null
                 },
                 {
@@ -2488,7 +2488,7 @@
                         {
                             "message": {
                                 "code": "size-impact",
-                                "message": "Hinting filesize impact:\n\n |               | /tmp/gfwork/repobuild/ttf/FatemiMaqala-Regular.ttf     |\n |:------------- | ---------------:|\n | Dehinted Size | 350.5kb |\n | Hinted Size   | 456.7kb   |\n | Increase      | 106.3kb      |\n | Change        | 30.3 %  |\n"
+                                "message": "Hinting filesize impact:\n\n |               | /tmp/gfwork/repobuild/ttf/FatemiMaqala-Regular.ttf     |\n |:------------- | ---------------:|\n | Dehinted Size | 350.7kb |\n | Hinted Size   | 456.9kb   |\n | Increase      | 106.3kb      |\n | Change        | 30.3 %  |\n"
                             },
                             "status": "INFO"
                         }
@@ -3363,17 +3363,10 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "missing-description",
-                                "message": "The stylistic set ss01 lacks a description string on the 'name' table."
+                                "code": "ok",
+                                "message": "All looks good!"
                             },
-                            "status": "WARN"
-                        },
-                        {
-                            "message": {
-                                "code": "missing-description",
-                                "message": "The stylistic set ss02 lacks a description string on the 'name' table."
-                            },
-                            "status": "WARN"
+                            "status": "PASS"
                         }
                     ],
                     "module": "stylisticset_description",
@@ -3381,7 +3374,7 @@
                         "https://github.com/fonttools/fontbakery/issues/3155"
                     ],
                     "rationale": "\n        Stylistic sets should provide description text. Programs such as InDesign,\n        TextEdit and Inkscape use that info to display to the users so that they know\n        what a given stylistic set offers.\n    ",
-                    "result": "WARN",
+                    "result": "PASS",
                     "severity": null
                 },
                 {
@@ -3901,9 +3894,9 @@
             "result": {
                 "ERROR": 1,
                 "INFO": 2,
-                "PASS": 39,
+                "PASS": 41,
                 "SKIP": 16,
-                "WARN": 8
+                "WARN": 6
             }
         },
         {
@@ -5159,7 +5152,7 @@
                         {
                             "message": {
                                 "code": "unreachable-subsetting",
-                                "message": "The following codepoints supported by the font are not covered by\n    any subsets defined in the font's metadata file, and will never\n    be served. You can solve this by either manually adding additional\n    subset declarations to METADATA.pb, or by editing the glyphset\n    definitions.\n\n * U+02D8 BREVE: try adding one of: canadian-aboriginal, yi\n * U+02D9 DOT ABOVE: try adding one of: canadian-aboriginal, yi\n * U+02DB OGONEK: try adding one of: canadian-aboriginal, yi\n * U+0302 COMBINING CIRCUMFLEX ACCENT: try adding one of: tifinagh, math, coptic, cherokee\n * U+0306 COMBINING BREVE: try adding one of: old-permic, tifinagh\n * U+0307 COMBINING DOT ABOVE: try adding one of: tai-le, hebrew, duployan, math, syriac, canadian-aboriginal, malayalam, coptic, tifinagh, todhri, old-permic\n * U+030A COMBINING RING ABOVE: try adding one of: syriac, duployan\n * U+030B COMBINING DOUBLE ACUTE ACCENT: try adding one of: osage, cherokee\n * U+030C COMBINING CARON: try adding one of: tai-le, cherokee\n * U+0326 COMBINING COMMA BELOW: try adding math\n477 more.\n\nUse -F or --full-lists to disable shortening of long lists.\n\nOr you can add the above codepoints to one of the subsets supported by the font: `latin`, `latin-ext`"
+                                "message": "The following codepoints supported by the font are not covered by\n    any subsets defined in the font's metadata file, and will never\n    be served. You can solve this by either manually adding additional\n    subset declarations to METADATA.pb, or by editing the glyphset\n    definitions.\n\n * U+02D8 BREVE: try adding one of: yi, canadian-aboriginal\n * U+02D9 DOT ABOVE: try adding one of: yi, canadian-aboriginal\n * U+02DB OGONEK: try adding one of: yi, canadian-aboriginal\n * U+0302 COMBINING CIRCUMFLEX ACCENT: try adding one of: math, cherokee, coptic, tifinagh\n * U+0306 COMBINING BREVE: try adding one of: old-permic, tifinagh\n * U+0307 COMBINING DOT ABOVE: try adding one of: duployan, syriac, tifinagh, math, old-permic, coptic, hebrew, malayalam, tai-le, todhri, canadian-aboriginal\n * U+030A COMBINING RING ABOVE: try adding one of: duployan, syriac\n * U+030B COMBINING DOUBLE ACUTE ACCENT: try adding one of: cherokee, osage\n * U+030C COMBINING CARON: try adding one of: cherokee, tai-le\n * U+0326 COMBINING COMMA BELOW: try adding math\n477 more.\n\nUse -F or --full-lists to disable shortening of long lists.\n\nOr you can add the above codepoints to one of the subsets supported by the font: `latin`, `latin-ext`"
                             },
                             "status": "WARN"
                         }
@@ -7186,10 +7179,17 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "lacks-meta-table",
-                                "message": "This font file does not have a 'meta' table."
+                                "code": "dlng-tag",
+                                "message": "Arab, Latn"
                             },
-                            "status": "WARN"
+                            "status": "INFO"
+                        },
+                        {
+                            "message": {
+                                "code": "slng-tag",
+                                "message": "Arab, Latn"
+                            },
+                            "status": "INFO"
                         }
                     ],
                     "module": "vendorspecific.googlefonts.meta.script_lang_tags",
@@ -7197,7 +7197,7 @@
                         "https://github.com/fonttools/fontbakery/issues/3349"
                     ],
                     "rationale": "\n        The OpenType 'meta' table originated at Apple. Microsoft added it to OT with\n        just two DataMap records:\n\n        - dlng: comma-separated ScriptLangTags that indicate which scripts,\n          or languages and scripts, with possible variants, the font is designed for.\n\n        - slng: comma-separated ScriptLangTags that indicate which scripts,\n          or languages and scripts, with possible variants, the font supports.\n\n\n        The slng structure is intended to describe which languages and scripts the\n        font overall supports. For example, a Traditional Chinese font that also\n        contains Latin characters, can indicate Hant,Latn, showing that it supports\n        Hant, the Traditional Chinese variant of the Hani script, and it also\n        supports the Latn script.\n\n        The dlng structure is far more interesting. A font may contain various glyphs,\n        but only a particular subset of the glyphs may be truly \"leading\" in the design,\n        while other glyphs may have been included for technical reasons. Such a\n        Traditional Chinese font could only list Hant there, showing that it\u2019s designed\n        for Traditional Chinese, but the font would omit Latn, because the developers\n        don\u2019t think the font is really recommended for purely Latin-script use.\n\n        The tags used in the structures can comprise just script, or also language\n        and script. For example, if a font has Bulgarian Cyrillic alternates in the\n        locl feature for the cyrl BGR OT languagesystem, it could also indicate in\n        dlng explicitly that it supports bul-Cyrl. (Note that the scripts and languages\n        in meta use the ISO language and script codes, not the OpenType ones).\n\n        This check ensures that the font has the meta table containing the\n        slng and dlng structures.\n\n        All families in the Google Fonts collection should contain the 'meta' table.\n        Windows 10 already uses it when deciding on which fonts to fall back to.\n        The Google Fonts API and also other environments could use the data for\n        smarter filtering. Most importantly, those entries should be added\n        to the Noto fonts.\n\n        In the font making process, some environments store this data in external\n        files already. But the meta table provides a convenient way to store this\n        inside the font file, so some tools may add the data, and unrelated tools\n        may read this data. This makes the solution much more portable and universal.\n    ",
-                    "result": "WARN",
+                    "result": "INFO",
                     "severity": 3
                 },
                 {
@@ -7717,10 +7717,10 @@
             ],
             "result": {
                 "ERROR": 5,
-                "INFO": 2,
+                "INFO": 3,
                 "PASS": 14,
                 "SKIP": 6,
-                "WARN": 2
+                "WARN": 1
             }
         }
     ]

@@ -1,28 +1,24 @@
-# Font Bakery (check-googlefonts) — PASSING (0 FAIL)
+# Font Bakery (check-googlefonts): 0 FAIL
 
-| stage | FAIL |
+## Vertical metrics (normalized)
+- typo = hhea = **2500 / −1400**, lineGap 0, **USE_TYPO_METRICS** on → line-height **1.90 em**.
+- win = **3622 / 1710** = the full ink bbox, so the extreme combining marks
+  (`uni06EA` low Quranic stop; `NameMe.1455` high diacritic) never clip.
+- Earlier the metrics were set to the full bbox (2.60 em line-height); retuned so
+  line spacing reflects normal text while win still prevents clipping.
+
+## WARNs remaining (15) — all intentional, inherent, or onboarding-time
+
+| WARN | disposition |
 |---|---|
-| Original FatemiMaqala-Regular.ttf | 19 |
-| Clean source + rehabilitated features | 5 |
-| + Latin gaps filled from Crimson | 4 |
-| + dropped Latin smcp | 3 |
-| + canonical filename | 2 |
-| + trimmed Latin to GF Latin Core | 2 |
-| + figures made non-kerning (tabular) | 1 |
-| + Latin combining-mark attachment | **0** |
+| gdef_mark_chars / gdef_spacing_marks | **intentional** — width-preserved honorifics |
+| arabic_high_hamza, outline_jaggy/semi_vertical, overlapping_path_segments, math_signs_width, caps note | inherent retraced-outline / Crimson-Latin traits |
+| alt_caron, soft_dotted | cosmetic Latin |
+| ligature_carets | cursor-in-ligature positions; low value |
+| unreachable_glyphs | ~11 unencoded Latin kept for kern refs |
+| article/images, metadata/unreachable_subsetting, vendor_id, shape_languages (auxiliary) | resolved at GF onboarding (METADATA.pb / article / vendor registration) |
 
-## Summary of the cleanup
-
-- **Outlines:** quadratic→cubic, overlaps removed, directions corrected.
-- **Feature file rehabilitated** (REHAB.md): compiles under feaLib; Arabic shaping
-  verified pixel-identical to the original.
-- **Metrics/naming/hinting:** GF schema (win=typo=hhea, lineGap 0, USE_TYPO_METRICS),
-  family 'Fatemi Maqala', version, copyright, canonical filename.
-- **Latin scope:** trimmed to exactly GF Latin Core (Arabic-focused); extended/IPA/
-  Cyrillic dropped from cmap. Latin from Crimson; some Arabic from Amiri (OFL.txt).
-- **Figures:** made non-kerning (tabular).
-- **Latin combining-mark attachment:** generated anchors so combining accents attach
-  to Latin bases and the dotted circle (clears shape_languages + dotted_circle).
-
-All `check-googlefonts` FAILs resolved. WARNs remain (e.g. some unreachable
-unencoded glyphs retained for kerning) and can be pruned before submission.
+## Fixed in this pass
+- stylisticset_description: ss01 = 'Urdu ghunna', ss02 = 'Straight reh'.
+- meta/script_lang_tags: added `meta` table (Arab, Latn).
+- caps_vertically_centered: resolved by the metrics retune.
