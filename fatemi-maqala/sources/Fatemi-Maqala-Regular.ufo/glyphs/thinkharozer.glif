@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="thinkharozer" format="2">
+  <advance width="454"/>
+  <anchor x="-217" y="1899" name="_finaAnchor"/>
+  <anchor x="341" y="1447" name="_belowmark"/>
+  <anchor x="327" y="1629" name="_belowLiga"/>
+  <anchor x="328" y="1630" name="_belowSingle"/>
+  <anchor x="330" y="1628" name="_subSingle"/>
+  <anchor x="330" y="1629" name="_subLiga"/>
+  <outline>
+    <component base="thinkharozabar"/>
+  </outline>
+</glyph>

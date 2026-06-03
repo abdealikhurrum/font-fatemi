@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="afii57420.init_hehfinal.liga" format="2">
+  <advance width="2205"/>
+  <anchor x="1350" y="1265" name="aboveLiga"/>
+  <anchor x="1406" y="-886" name="belowLiga"/>
+  <anchor x="846" y="1257" name="aboveLiga"/>
+  <anchor x="854" y="-902" name="belowLiga"/>
+  <outline>
+    <component base="haahehgoal.isol"/>
+    <component base="uniFBB2" xOffset="427" yOffset="-798"/>
+  </outline>
+</glyph>

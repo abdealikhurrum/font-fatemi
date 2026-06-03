@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="zaaDouble.fina" format="2">
+  <advance width="1322"/>
+  <anchor x="1307" y="90" name="_base"/>
+  <anchor x="895" y="1335" name="aboveSingle"/>
+  <anchor x="703" y="-415" name="belowSingle"/>
+  <outline>
+    <component base="uniFBB2" xOffset="86" yOffset="739"/>
+    <component base="uniFEC2" xOffset="74"/>
+  </outline>
+</glyph>

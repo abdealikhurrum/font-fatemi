@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="alefsupalef.fina" format="2">
+  <advance width="406"/>
+  <anchor x="402" y="90" name="_base"/>
+  <outline>
+    <component base="thinkharozabar" xOffset="36" yOffset="-135"/>
+    <component base="uniFE8E" xScale="1.02182" xOffset="-32"/>
+  </outline>
+</glyph>

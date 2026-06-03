@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="sheen.init_yehbarree.fina.liga" format="2">
+  <advance width="1605"/>
+  <outline>
+    <component base="seen.init_yehbarree.fina.liga"/>
+    <component base="uniFBB7" xOffset="500" yOffset="600"/>
+  </outline>
+</glyph>

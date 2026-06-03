@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="NameMe.1812" format="2">
+  <advance width="1024"/>
+  <anchor x="118" y="-757" name="belowLiga"/>
+  <anchor x="194" y="1610" name="aboveLiga"/>
+  <anchor x="824" y="-767" name="belowLiga"/>
+  <anchor x="655" y="1721" name="aboveLiga"/>
+  <anchor x="3" y="88" name="base"/>
+  <outline>
+    <component base="uni0674" xScale="1.52911" yScale="1.52588" xOffset="346" yOffset="-951"/>
+    <component base="uniFBB9" xOffset="-349" yOffset="-803"/>
+    <component base="behhah.init"/>
+  </outline>
+</glyph>

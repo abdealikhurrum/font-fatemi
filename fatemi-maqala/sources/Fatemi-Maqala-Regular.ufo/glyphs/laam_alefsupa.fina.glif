@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="laam_alefsupa.fina" format="2">
+  <advance width="800"/>
+  <anchor x="633" y="1008" name="supLiga"/>
+  <anchor x="526" y="-259" name="subLiga"/>
+  <anchor x="781" y="1376" name="aboveLiga"/>
+  <anchor x="553" y="-228" name="belowLiga"/>
+  <anchor x="132" y="-234" name="subLiga"/>
+  <anchor x="184" y="-228" name="belowLiga"/>
+  <anchor x="67" y="1646" name="aboveLiga"/>
+  <anchor x="306" y="1155" name="supLiga"/>
+  <outline>
+    <component base="uniFEFB"/>
+    <component base="thinkharozabar" xOffset="12" yOffset="-57"/>
+  </outline>
+</glyph>

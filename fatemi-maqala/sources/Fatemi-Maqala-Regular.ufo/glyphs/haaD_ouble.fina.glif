@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="haaDouble.fina" format="2">
+  <advance width="1298"/>
+  <anchor x="1287" y="90" name="_base"/>
+  <anchor x="656" y="1376" name="aboveSingle"/>
+  <anchor x="680" y="-1172" name="belowSingle"/>
+  <outline>
+    <component base="uniFEA2"/>
+  </outline>
+</glyph>

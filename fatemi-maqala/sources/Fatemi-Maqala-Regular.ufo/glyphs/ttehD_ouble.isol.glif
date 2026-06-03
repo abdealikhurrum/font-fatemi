@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="ttehDouble.isol" format="2">
+  <advance width="1400"/>
+  <anchor x="694" y="-453" name="belowLiga"/>
+  <anchor x="727" y="1670" name="aboveLiga"/>
+  <anchor x="672" y="-409" name="belowLiga"/>
+  <anchor x="705" y="1681" name="aboveLiga"/>
+  <outline>
+    <component base="uni0679"/>
+  </outline>
+</glyph>

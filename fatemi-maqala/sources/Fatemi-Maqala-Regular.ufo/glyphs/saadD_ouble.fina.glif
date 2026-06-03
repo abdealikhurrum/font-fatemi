@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="saadDouble.fina" format="2">
+  <advance width="1915"/>
+  <anchor x="1915" y="90" name="_base"/>
+  <anchor x="1030" y="1339" name="aboveSingle"/>
+  <anchor x="928" y="-734" name="belowSingle"/>
+  <outline>
+    <component base="uniFEBA"/>
+  </outline>
+</glyph>

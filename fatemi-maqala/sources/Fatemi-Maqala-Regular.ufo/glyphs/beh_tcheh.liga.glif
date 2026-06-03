@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="beh_tcheh.liga" format="2">
+  <advance width="1299"/>
+  <anchor x="638" y="1377" name="aboveLiga"/>
+  <anchor x="858" y="-756" name="belowLiga"/>
+  <anchor x="176" y="1322" name="aboveLiga"/>
+  <anchor x="264" y="-789" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB2" xOffset="-80" yOffset="-620"/>
+    <component base="behyehbarree.isol"/>
+  </outline>
+</glyph>

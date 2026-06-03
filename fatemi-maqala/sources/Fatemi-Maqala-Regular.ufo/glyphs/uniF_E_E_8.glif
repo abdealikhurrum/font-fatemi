@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFEE8" format="2">
+  <advance width="439"/>
+  <unicode hex="FEE8"/>
+  <anchor x="439" y="90" name="_base"/>
+  <anchor x="0" y="90" name="base"/>
+  <anchor x="181" y="1353" name="aboveSingle"/>
+  <anchor x="205" y="-415" name="belowSingle"/>
+  <outline>
+    <component base="uniFBB2" xOffset="-637" yOffset="532"/>
+    <component base="uni066E.medi" xScale="1.00642" xOffset="-3" yOffset="-5"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.fontlab.hintData</key>
+      <dict>
+        <key>hhints</key>
+        <array>
+          <dict>
+            <key>position</key>
+            <integer>-5</integer>
+            <key>width</key>
+            <integer>179</integer>
+          </dict>
+          <dict>
+            <key>position</key>
+            <integer>641</integer>
+            <key>width</key>
+            <integer>226</integer>
+          </dict>
+        </array>
+        <key>vhints</key>
+        <array>
+          <dict>
+            <key>position</key>
+            <integer>-31</integer>
+            <key>width</key>
+            <integer>470</integer>
+          </dict>
+          <dict>
+            <key>position</key>
+            <integer>82</integer>
+            <key>width</key>
+            <integer>231</integer>
+          </dict>
+        </array>
+      </dict>
+    </dict>
+  </lib>
+</glyph>

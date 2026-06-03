@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>public.glyphOrder</key>
+    <array>
+      <string>NULL</string>
+      <string>uniFEDB.long</string>
+      <string>f_f</string>
+      <string>f_i</string>
+      <string>f_l</string>
+      <string>f_f_i</string>
+      <string>f_f_l</string>
+    </array>
+  </dict>
+</plist>

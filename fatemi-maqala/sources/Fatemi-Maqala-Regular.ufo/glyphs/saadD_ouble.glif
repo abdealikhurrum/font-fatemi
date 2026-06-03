@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="saadDouble" format="2">
+  <advance width="1999"/>
+  <anchor x="1021" y="1340" name="aboveSingle"/>
+  <anchor x="919" y="-733" name="belowSingle"/>
+  <outline>
+    <component base="uniFEB9"/>
+  </outline>
+</glyph>

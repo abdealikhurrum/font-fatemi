@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFB8F" format="2">
+  <advance width="1670"/>
+  <unicode hex="FB8F"/>
+  <anchor x="814" y="-367" name="belowSingle"/>
+  <anchor x="694" y="1433" name="aboveSingle"/>
+  <anchor x="1654" y="90" name="_base"/>
+  <outline>
+    <component base="uniFEDA"/>
+  </outline>
+</glyph>

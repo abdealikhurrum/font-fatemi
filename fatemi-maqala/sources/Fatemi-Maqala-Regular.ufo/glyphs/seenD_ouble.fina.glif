@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="seenDouble.fina" format="2">
+  <advance width="1785"/>
+  <anchor x="1785" y="90" name="_base"/>
+  <anchor x="943" y="1348" name="aboveSingle"/>
+  <anchor x="841" y="-725" name="belowSingle"/>
+  <outline>
+    <component base="uniFEB2"/>
+  </outline>
+</glyph>

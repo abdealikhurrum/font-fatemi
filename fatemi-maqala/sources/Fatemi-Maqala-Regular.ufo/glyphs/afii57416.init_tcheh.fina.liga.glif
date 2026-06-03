@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="afii57416.init_tcheh.fina.liga" format="2">
+  <advance width="1254"/>
+  <anchor x="949" y="1653" name="aboveLiga"/>
+  <anchor x="1053" y="-1282" name="belowLiga"/>
+  <anchor x="245" y="1661" name="aboveLiga"/>
+  <anchor x="381" y="-1314" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB8" xOffset="40" yOffset="-894"/>
+    <component base="behhaa.isol"/>
+    <component base="uniFBB2" xOffset="337" yOffset="-105"/>
+  </outline>
+</glyph>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="yehHamza_barree.fina" format="2">
+  <advance width="1205"/>
+  <anchor x="1193" y="90" name="_base"/>
+  <anchor x="942" y="1092" name="aboveLiga"/>
+  <anchor x="998" y="-1059" name="belowLiga"/>
+  <anchor x="438" y="1084" name="aboveLiga"/>
+  <anchor x="446" y="-1075" name="belowLiga"/>
+  <outline>
+    <component base="uni0674" xScale="1.52911" yScale="1.52588" xOffset="599" yOffset="-1505"/>
+    <component base="behbarree.fina"/>
+  </outline>
+</glyph>

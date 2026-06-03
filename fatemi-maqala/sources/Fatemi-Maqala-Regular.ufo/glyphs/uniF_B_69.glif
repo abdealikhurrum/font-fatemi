@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFB69" format="2">
+  <advance width="432"/>
+  <unicode hex="FB69"/>
+  <anchor x="423" y="90" name="_base"/>
+  <anchor x="1" y="90" name="base"/>
+  <anchor x="202" y="1350" name="aboveSingle"/>
+  <anchor x="202" y="-335" name="belowSingle"/>
+  <outline>
+    <component base="uni066E.medi"/>
+    <component base="uniFBC0" xOffset="-188" yOffset="-262"/>
+  </outline>
+</glyph>

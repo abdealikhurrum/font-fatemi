@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="daadDouble.init" format="2">
+  <advance width="1195"/>
+  <anchor x="-14" y="90" name="base"/>
+  <anchor x="553" y="1358" name="aboveSingle"/>
+  <anchor x="529" y="-433" name="belowSingle"/>
+  <outline>
+    <component base="uniFBB2" xOffset="-264" yOffset="856"/>
+    <component base="uniFEBB"/>
+  </outline>
+</glyph>

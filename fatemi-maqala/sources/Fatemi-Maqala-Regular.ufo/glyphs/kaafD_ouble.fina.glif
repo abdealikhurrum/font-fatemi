@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="kaafDouble.fina" format="2">
+  <advance width="1670"/>
+  <anchor x="1663" y="90" name="_base"/>
+  <anchor x="644" y="1323" name="aboveSingle"/>
+  <anchor x="565" y="-405" name="belowSingle"/>
+  <outline>
+    <component base="uniFEDA"/>
+  </outline>
+</glyph>

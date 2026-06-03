@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFCC9" format="2">
+  <advance width="1199"/>
+  <unicode hex="FCC9"/>
+  <anchor x="3" y="90" name="base"/>
+  <anchor x="902" y="-83" name="subLiga"/>
+  <anchor x="336" y="1171" name="supLiga"/>
+  <anchor x="513" y="-512" name="subLiga"/>
+  <anchor x="136" y="1071" name="supLiga"/>
+  <anchor x="683" y="1631" name="aboveLiga"/>
+  <anchor x="971" y="-476" name="belowLiga"/>
+  <anchor x="235" y="1611" name="aboveLiga"/>
+  <anchor x="156" y="-487" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB2" xOffset="-290" yOffset="-460"/>
+    <component base="uniFCCA"/>
+  </outline>
+</glyph>

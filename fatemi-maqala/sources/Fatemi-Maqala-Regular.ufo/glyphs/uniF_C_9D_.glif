@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFC9D" format="2">
+  <advance width="946"/>
+  <unicode hex="FC9D"/>
+  <anchor x="3" y="90" name="base"/>
+  <anchor x="801" y="1635" name="aboveLiga"/>
+  <anchor x="791" y="-723" name="belowLiga"/>
+  <anchor x="225" y="1567" name="aboveLiga"/>
+  <anchor x="272" y="-757" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB3" xOffset="17" yOffset="-427"/>
+    <component base="behhah.init"/>
+  </outline>
+</glyph>

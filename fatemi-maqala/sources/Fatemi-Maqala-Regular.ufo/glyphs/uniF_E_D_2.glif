@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFED2" format="2">
+  <advance width="1511"/>
+  <unicode hex="FED2"/>
+  <anchor x="1511" y="90" name="_base"/>
+  <anchor x="1201" y="1623" name="aboveSingle"/>
+  <anchor x="643" y="-403" name="belowSingle"/>
+  <outline>
+    <component base="dotlessfeh.fina" xOffset="5" yOffset="-4"/>
+    <component base="uniFBB2" xOffset="333" yOffset="990"/>
+  </outline>
+</glyph>

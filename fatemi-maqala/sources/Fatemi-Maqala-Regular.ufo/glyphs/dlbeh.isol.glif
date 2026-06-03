@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="dlbeh.isol" format="2">
+  <advance width="1400"/>
+  <anchor x="652" y="-380" name="belowLiga"/>
+  <anchor x="677" y="1231" name="aboveLiga"/>
+  <anchor x="630" y="-336" name="belowLiga"/>
+  <anchor x="655" y="1242" name="aboveLiga"/>
+  <outline>
+    <component base="uni066E"/>
+  </outline>
+</glyph>

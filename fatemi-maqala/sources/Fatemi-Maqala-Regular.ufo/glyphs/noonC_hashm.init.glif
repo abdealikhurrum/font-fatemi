@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="noonChashm.init" format="2">
+  <advance width="1073"/>
+  <anchor x="162" y="90" name="base"/>
+  <anchor x="674" y="1585" name="aboveLiga"/>
+  <anchor x="915" y="-345" name="belowLiga"/>
+  <anchor x="274" y="1370" name="aboveLiga"/>
+  <anchor x="327" y="-321" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB3" xOffset="-192" yOffset="1124"/>
+    <component base="behchashheh.init" xOffset="163" yOffset="-6"/>
+  </outline>
+</glyph>

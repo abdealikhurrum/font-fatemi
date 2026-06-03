@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="ttehMeem.isol" format="2">
+  <advance width="1104"/>
+  <anchor x="806" y="-695" name="subLiga"/>
+  <anchor x="665" y="1609" name="supLiga"/>
+  <anchor x="460" y="-396" name="subLiga"/>
+  <anchor x="195" y="1161" name="supLiga"/>
+  <anchor x="827" y="1619" name="aboveLiga"/>
+  <anchor x="967" y="-754" name="belowLiga"/>
+  <anchor x="223" y="1567" name="aboveLiga"/>
+  <anchor x="237" y="-1284" name="belowLiga"/>
+  <outline>
+    <component base="uni0615" xOffset="463" yOffset="45"/>
+    <component base="behmeem.isol"/>
+  </outline>
+</glyph>

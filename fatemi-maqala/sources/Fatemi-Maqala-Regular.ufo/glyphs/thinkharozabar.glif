@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="thinkharozabar" format="2">
+  <advance width="454"/>
+  <anchor x="369" y="1133" name="_abovemark"/>
+  <anchor x="310" y="1107" name="_aboveLiga"/>
+  <anchor x="314" y="1095" name="_aboveSingle"/>
+  <anchor x="330" y="1115" name="_supSingle"/>
+  <anchor x="338" y="1111" name="_supLiga"/>
+  <outline>
+    <contour>
+      <point x="338" y="1070" type="curve"/>
+      <point x="339" y="1102"/>
+      <point x="340" y="1111"/>
+      <point x="340" y="1111" type="curve" smooth="yes"/>
+      <point x="340" y="1122"/>
+      <point x="340" y="1122"/>
+      <point x="340" y="1134" type="curve" smooth="yes"/>
+      <point x="340" y="1221"/>
+      <point x="322" y="1317"/>
+      <point x="287" y="1421" type="curve" smooth="yes"/>
+      <point x="280" y="1434"/>
+      <point x="278" y="1448"/>
+      <point x="281" y="1463" type="curve" smooth="yes"/>
+      <point x="279" y="1466"/>
+      <point x="278" y="1469"/>
+      <point x="278" y="1472" type="curve" smooth="yes"/>
+      <point x="278" y="1489"/>
+      <point x="303" y="1512"/>
+      <point x="352" y="1543" type="curve"/>
+      <point x="364" y="1504"/>
+      <point x="377" y="1451"/>
+      <point x="392" y="1383" type="curve" smooth="yes"/>
+      <point x="407" y="1315"/>
+      <point x="415" y="1254"/>
+      <point x="416" y="1199" type="curve" smooth="yes"/>
+      <point x="417" y="1198"/>
+      <point x="417" y="1196"/>
+      <point x="417" y="1195" type="curve" smooth="yes"/>
+      <point x="417" y="1143"/>
+      <point x="391" y="1101"/>
+    </contour>
+  </outline>
+</glyph>

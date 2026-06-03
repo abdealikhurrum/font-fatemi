@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFBA4" format="2">
+  <advance width="644"/>
+  <unicode hex="FBA4"/>
+  <anchor x="276" y="1642" name="aboveSingle"/>
+  <anchor x="276" y="-421" name="belowSingle"/>
+  <outline>
+    <component base="uni06C2"/>
+  </outline>
+</glyph>

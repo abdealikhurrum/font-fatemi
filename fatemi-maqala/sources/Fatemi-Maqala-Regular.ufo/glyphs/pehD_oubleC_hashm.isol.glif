@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="pehDoubleChashm.isol" format="2">
+  <advance width="1087"/>
+  <anchor x="186" y="90" name="base"/>
+  <anchor x="748" y="1370" name="aboveLiga"/>
+  <anchor x="976" y="-922" name="belowLiga"/>
+  <anchor x="288" y="1370" name="aboveLiga"/>
+  <anchor x="340" y="-936" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB8" xOffset="31" yOffset="-1096"/>
+    <component base="behchashheh.init" xOffset="156"/>
+  </outline>
+</glyph>

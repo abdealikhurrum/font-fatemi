@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFC9F" format="2">
+  <advance width="994"/>
+  <unicode hex="FC9F"/>
+  <anchor x="777" y="1545" name="aboveLiga"/>
+  <anchor x="845" y="-430" name="belowLiga"/>
+  <anchor x="285" y="1561" name="aboveLiga"/>
+  <anchor x="134" y="-457" name="belowLiga"/>
+  <outline>
+    <component base="behmeem.init"/>
+    <component base="uniFBB3" xOffset="29" yOffset="-171"/>
+  </outline>
+</glyph>

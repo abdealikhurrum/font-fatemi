@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniE" format="2">
+  <advance width="1247"/>
+  <anchor x="10" y="90" name="base"/>
+  <anchor x="744" y="1375" name="aboveLiga"/>
+  <anchor x="940" y="-715" name="belowLiga"/>
+  <anchor x="284" y="1375" name="aboveLiga"/>
+  <anchor x="352" y="-691" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB9" xOffset="136" yOffset="-692"/>
+    <component base="uniFCAA"/>
+  </outline>
+</glyph>

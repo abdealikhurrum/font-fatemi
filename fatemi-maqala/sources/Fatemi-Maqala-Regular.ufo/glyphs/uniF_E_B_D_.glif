@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFEBD" format="2">
+  <advance width="1994"/>
+  <unicode hex="FEBD"/>
+  <anchor x="1431" y="1625" name="aboveSingle"/>
+  <anchor x="877" y="-725" name="belowSingle"/>
+  <outline>
+    <component base="uniFBB2" xOffset="601" yOffset="836"/>
+    <component base="uniFEB9"/>
+  </outline>
+</glyph>

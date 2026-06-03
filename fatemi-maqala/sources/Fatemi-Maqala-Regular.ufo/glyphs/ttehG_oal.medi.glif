@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="ttehGoal.medi" format="2">
+  <advance width="1098"/>
+  <anchor x="-3" y="90" name="base"/>
+  <anchor x="1083" y="90" name="_base"/>
+  <anchor x="748" y="1348" name="aboveLiga"/>
+  <anchor x="847" y="-1181" name="belowLiga"/>
+  <anchor x="209" y="1337" name="aboveLiga"/>
+  <anchor x="275" y="-1159" name="belowLiga"/>
+  <outline>
+    <component base="uni0615" xOffset="483" yOffset="-265"/>
+    <component base="glyph598"/>
+  </outline>
+</glyph>

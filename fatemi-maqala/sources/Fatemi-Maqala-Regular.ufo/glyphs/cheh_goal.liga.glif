@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="cheh_goal.liga" format="2">
+  <advance width="2205"/>
+  <anchor x="366" y="-610" name="belowLiga"/>
+  <anchor x="347" y="1495" name="aboveLiga"/>
+  <anchor x="1433" y="1420" name="aboveLiga"/>
+  <anchor x="1503" y="-682" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB8" xOffset="798" yOffset="-799"/>
+    <component base="haahehgoal.isol"/>
+  </outline>
+</glyph>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFC09" format="2">
+  <advance width="1317"/>
+  <unicode hex="FC09"/>
+  <anchor x="895" y="1357" name="aboveLiga"/>
+  <anchor x="1151" y="-1022" name="belowLiga"/>
+  <anchor x="343" y="1365" name="aboveLiga"/>
+  <anchor x="295" y="-1069" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB3" xOffset="308" yOffset="-931"/>
+    <component base="behyaa.isol"/>
+  </outline>
+</glyph>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFBAD" format="2">
+  <advance width="578"/>
+  <unicode hex="FBAD"/>
+  <anchor x="-4" y="90" name="base"/>
+  <anchor x="563" y="90" name="_base"/>
+  <anchor x="272" y="1266" name="aboveSingle"/>
+  <anchor x="338" y="-534" name="belowSingle"/>
+  <outline>
+    <component base="uniFEEC"/>
+  </outline>
+</glyph>

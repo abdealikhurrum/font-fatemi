@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="zerHehHamza" format="2">
+  <advance width="644"/>
+  <anchor x="289" y="-640" name="zer"/>
+  <anchor x="276" y="1642" name="aboveSingle"/>
+  <outline>
+    <component base="uni06C2"/>
+  </outline>
+</glyph>

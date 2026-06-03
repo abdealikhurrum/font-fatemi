@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni1E2E" format="2">
+  <advance width="648"/>
+  <unicode hex="1E2E"/>
+  <outline>
+    <component base="acutecomb.cap" xOffset="959" yOffset="216"/>
+    <component base="Idieresis" xOffset="-2"/>
+  </outline>
+</glyph>

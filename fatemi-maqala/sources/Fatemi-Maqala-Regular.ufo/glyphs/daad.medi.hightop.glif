@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="daad.medi.hightop" format="2">
+  <advance width="1205"/>
+  <anchor x="1201" y="90" name="_base"/>
+  <anchor x="-4" y="90" name="base"/>
+  <anchor x="547" y="1367" name="aboveSingle"/>
+  <anchor x="529" y="-433" name="belowSingle"/>
+  <outline>
+    <component base="uniFBB2" xOffset="-248" yOffset="784"/>
+    <component base="uniFEBC"/>
+  </outline>
+</glyph>

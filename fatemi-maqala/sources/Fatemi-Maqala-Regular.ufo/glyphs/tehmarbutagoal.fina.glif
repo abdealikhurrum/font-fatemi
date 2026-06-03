@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="tehmarbutagoal.fina" format="2">
+  <advance width="937"/>
+  <anchor x="897" y="90" name="_base"/>
+  <anchor x="536" y="1367" name="aboveSingle"/>
+  <anchor x="632" y="-384" name="belowSingle"/>
+  <outline>
+    <component base="uniFBB4" xOffset="-95" yOffset="880"/>
+    <component base="uniFBA7" xOffset="-107" yOffset="-7"/>
+  </outline>
+</glyph>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="pehDoubleNoon.fina" format="2">
+  <advance width="1570"/>
+  <anchor x="1570" y="90" name="_base"/>
+  <anchor x="939" y="1619" name="aboveLiga"/>
+  <anchor x="1079" y="-754" name="belowLiga"/>
+  <anchor x="447" y="1567" name="aboveLiga"/>
+  <anchor x="272" y="-757" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB9" xOffset="463" yOffset="-971"/>
+    <component base="uniFBB2" xOffset="-219" yOffset="750"/>
+    <component base="behnoon.fina"/>
+  </outline>
+</glyph>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFC6C" format="2">
+  <advance width="1107"/>
+  <unicode hex="FC6C"/>
+  <anchor x="1090" y="90" name="_base"/>
+  <anchor x="824" y="-808" name="subLiga"/>
+  <anchor x="792" y="1208" name="supLiga"/>
+  <anchor x="766" y="1345" name="aboveLiga"/>
+  <anchor x="822" y="-806" name="belowLiga"/>
+  <anchor x="452" y="-640" name="subLiga"/>
+  <anchor x="236" y="1132" name="supLiga"/>
+  <anchor x="262" y="1337" name="aboveLiga"/>
+  <anchor x="270" y="-1581" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB2" xOffset="29" yOffset="-723"/>
+    <component base="behmeem.fina"/>
+  </outline>
+</glyph>

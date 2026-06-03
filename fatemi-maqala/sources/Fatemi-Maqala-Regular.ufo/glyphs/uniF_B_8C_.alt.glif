@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFB8C.alt" format="2">
+  <advance width="641"/>
+  <anchor x="426" y="-406" name="belowSingle"/>
+  <anchor x="390" y="1532" name="aboveSingle"/>
+  <outline>
+    <component base="uniFBC0" xOffset="-58" yOffset="11"/>
+    <component base="uniFEAD.alt" xOffset="-56" yOffset="8"/>
+  </outline>
+</glyph>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="kaafDouble" format="2">
+  <advance width="1499"/>
+  <anchor x="1159" y="1632" name="aboveSingle"/>
+  <anchor x="691" y="-415" name="belowSingle"/>
+  <outline>
+    <component base="uniFED9"/>
+  </outline>
+</glyph>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="ttehDouble.medi" format="2">
+  <advance width="432"/>
+  <anchor x="239" y="-387" name="belowLiga"/>
+  <anchor x="220" y="1420" name="aboveLiga"/>
+  <anchor x="217" y="-343" name="belowLiga"/>
+  <anchor x="198" y="1431" name="aboveLiga"/>
+  <anchor x="423" y="90" name="_base"/>
+  <anchor x="1" y="90" name="base"/>
+  <outline>
+    <component base="uni066E.medi"/>
+    <component base="uniFBC0" xOffset="-188" yOffset="-262"/>
+  </outline>
+</glyph>

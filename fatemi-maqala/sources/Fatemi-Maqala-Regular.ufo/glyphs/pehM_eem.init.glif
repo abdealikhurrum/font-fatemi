@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="pehMeem.init" format="2">
+  <advance width="994"/>
+  <anchor x="777" y="1545" name="aboveLiga"/>
+  <anchor x="845" y="-430" name="belowLiga"/>
+  <anchor x="285" y="1561" name="aboveLiga"/>
+  <anchor x="134" y="-457" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB9" xOffset="233" yOffset="-577"/>
+    <component base="behmeem.init"/>
+  </outline>
+</glyph>

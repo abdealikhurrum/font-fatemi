@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFC92" format="2">
+  <advance width="1032"/>
+  <unicode hex="FC92"/>
+  <anchor x="1025" y="90" name="_base"/>
+  <anchor x="816" y="1296" name="aboveLiga"/>
+  <anchor x="808" y="-872" name="belowLiga"/>
+  <anchor x="288" y="1104" name="aboveLiga"/>
+  <anchor x="280" y="-912" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB3" xOffset="-521" yOffset="555"/>
+    <component base="uniFBB4" xOffset="47" yOffset="-620"/>
+    <component base="behreh.fina" xOffset="11"/>
+  </outline>
+</glyph>

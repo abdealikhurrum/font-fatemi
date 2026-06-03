@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="behChashm.init" format="2">
+  <advance width="1075"/>
+  <anchor x="164" y="90" name="base"/>
+  <anchor x="736" y="1370" name="aboveLiga"/>
+  <anchor x="932" y="-720" name="belowLiga"/>
+  <anchor x="276" y="1370" name="aboveLiga"/>
+  <anchor x="344" y="-696" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB3" xOffset="-140" yOffset="-536"/>
+    <component base="behchashheh.init" xOffset="165" yOffset="-6"/>
+  </outline>
+</glyph>

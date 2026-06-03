@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="ghunnaDouble.isol" format="2">
+  <advance width="959"/>
+  <anchor x="526" y="-520" name="belowLiga"/>
+  <anchor x="559" y="1603" name="aboveLiga"/>
+  <anchor x="504" y="-476" name="belowLiga"/>
+  <anchor x="537" y="1614" name="aboveLiga"/>
+  <outline>
+    <component base="uni06BA" xOffset="3"/>
+  </outline>
+</glyph>

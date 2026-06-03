@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="NameMe.1114730" format="2">
+  <advance width="3403"/>
+  <outline>
+    <contour>
+      <point x="992" y="194" type="curve" smooth="yes"/>
+      <point x="1016" y="173"/>
+      <point x="1048" y="162"/>
+      <point x="1085" y="161" type="curve" smooth="yes"/>
+      <point x="1097" y="161" type="line"/>
+      <point x="1106" y="161" type="line"/>
+      <point x="1106" y="158" type="line"/>
+      <point x="1109" y="158"/>
+      <point x="1112" y="158"/>
+      <point x="1115" y="158" type="curve" smooth="yes"/>
+      <point x="1565" y="125"/>
+      <point x="1822" y="108"/>
+      <point x="1887" y="108" type="curve" smooth="yes"/>
+      <point x="1922" y="108"/>
+      <point x="2173" y="127"/>
+      <point x="2640" y="165" type="curve"/>
+      <point x="2642" y="142"/>
+      <point x="2644" y="119"/>
+      <point x="2646" y="96" type="curve" smooth="yes"/>
+      <point x="2646" y="45" type="line"/>
+      <point x="2643" y="6" type="line"/>
+      <point x="2248" y="-20"/>
+      <point x="2006" y="-33"/>
+      <point x="1919" y="-33" type="curve" smooth="yes"/>
+      <point x="1911" y="-33"/>
+      <point x="1904" y="-33"/>
+      <point x="1899" y="-33" type="curve" smooth="yes"/>
+      <point x="1578" y="-22"/>
+      <point x="1314" y="-9"/>
+      <point x="1106" y="6" type="curve"/>
+      <point x="1106" y="0" type="line"/>
+      <point x="1039" y="0"/>
+      <point x="989" y="9"/>
+      <point x="956" y="28" type="curve" smooth="yes"/>
+      <point x="929" y="44"/>
+      <point x="909" y="67"/>
+      <point x="895" y="98" type="curve"/>
+      <point x="833" y="37"/>
+      <point x="771" y="4"/>
+      <point x="708" y="0" type="curve" smooth="yes"/>
+      <point x="691" y="0"/>
+      <point x="683" y="27"/>
+      <point x="683" y="81" type="curve" smooth="yes"/>
+      <point x="683" y="129"/>
+      <point x="691" y="155"/>
+      <point x="708" y="159" type="curve" smooth="yes"/>
+      <point x="815" y="185"/>
+      <point x="884" y="224"/>
+      <point x="915" y="274" type="curve" smooth="yes"/>
+      <point x="929" y="297"/>
+      <point x="938" y="308"/>
+      <point x="941" y="308" type="curve" smooth="yes"/>
+      <point x="945" y="307"/>
+      <point x="949" y="298"/>
+      <point x="951" y="279" type="curve" smooth="yes"/>
+      <point x="956" y="242"/>
+      <point x="969" y="214"/>
+    </contour>
+    <contour>
+      <point x="730" y="700" type="curve"/>
+      <point x="739" y="698"/>
+      <point x="750" y="689"/>
+      <point x="765" y="672" type="curve" smooth="yes"/>
+      <point x="780" y="655"/>
+      <point x="806" y="633"/>
+      <point x="841" y="604" type="curve"/>
+      <point x="842" y="601" type="line"/>
+      <point x="839" y="599"/>
+      <point x="805" y="565"/>
+      <point x="738" y="497" type="curve"/>
+      <point x="700" y="520"/>
+      <point x="665" y="555"/>
+      <point x="633" y="602" type="curve"/>
+      <point x="692" y="660"/>
+      <point x="724" y="692"/>
+    </contour>
+    <component base="NameMe.1114723" xOffset="2628" yOffset="414"/>
+    <component base="NameMe.1114723" xOffset="2022" yOffset="414"/>
+    <component base="NameMe.1114723" xOffset="1416" yOffset="411"/>
+    <component base="NameMe.1114723" xOffset="822" yOffset="399"/>
+    <component base="uniFE94" xScale="0.9" yScale="0.9" xOffset="-91" yOffset="6"/>
+    <component base="uniFEB3" xScale="0.9" yScale="0.9" xOffset="2638" yOffset="-3"/>
+  </outline>
+</glyph>

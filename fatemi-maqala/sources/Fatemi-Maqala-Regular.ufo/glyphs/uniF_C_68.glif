@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFC68" format="2">
+  <advance width="1669"/>
+  <unicode hex="FC68"/>
+  <anchor x="1666" y="90" name="_base"/>
+  <anchor x="1179" y="1635" name="aboveLiga"/>
+  <anchor x="1319" y="-778" name="belowLiga"/>
+  <anchor x="447" y="1567" name="aboveLiga"/>
+  <anchor x="272" y="-757" name="belowLiga"/>
+  <outline>
+    <component base="uni0674" xScale="1.47247" yScale="1.48462" xOffset="850" yOffset="-1223"/>
+    <component base="behyeh.fina" yOffset="10"/>
+  </outline>
+</glyph>

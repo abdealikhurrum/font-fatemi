@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="jalalahtashdeed" format="2">
+  <advance width="1863"/>
+  <anchor x="301" y="-218" name="belowLiga"/>
+  <anchor x="406" y="1009" name="aboveLiga"/>
+  <anchor x="1138" y="-239" name="belowLiga"/>
+  <anchor x="1128" y="868" name="aboveLiga"/>
+  <anchor x="1579" y="-212" name="belowLiga"/>
+  <anchor x="1540" y="1021" name="aboveLiga"/>
+  <outline>
+    <component base="jalaalah.liga"/>
+    <component base="jalaalahtashdeed.liga" xOffset="852"/>
+  </outline>
+</glyph>

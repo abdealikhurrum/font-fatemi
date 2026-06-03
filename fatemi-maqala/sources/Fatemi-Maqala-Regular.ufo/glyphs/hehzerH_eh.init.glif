@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="hehzerHeh.init" format="2">
+  <advance width="798"/>
+  <anchor x="360" y="-640" name="zer"/>
+  <anchor x="-1" y="90" name="base"/>
+  <anchor x="376" y="1409" name="aboveSingle"/>
+  <outline>
+    <component base="uniFEEB"/>
+  </outline>
+</glyph>

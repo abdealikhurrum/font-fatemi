@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="laammedi_alefsupa.fina" format="2">
+  <advance width="1199"/>
+  <anchor x="1195" y="90" name="_base"/>
+  <anchor x="766" y="-259" name="subLiga"/>
+  <anchor x="641" y="1184" name="supLiga"/>
+  <anchor x="840" y="1581" name="aboveLiga"/>
+  <anchor x="816" y="-228" name="belowLiga"/>
+  <anchor x="514" y="1195" name="supLiga"/>
+  <anchor x="372" y="-234" name="subLiga"/>
+  <anchor x="363" y="-252" name="belowLiga"/>
+  <anchor x="219" y="1479" name="aboveLiga"/>
+  <outline>
+    <component base="uniFEFC"/>
+    <component base="thinkharozabar" xOffset="258" yOffset="-66"/>
+  </outline>
+</glyph>

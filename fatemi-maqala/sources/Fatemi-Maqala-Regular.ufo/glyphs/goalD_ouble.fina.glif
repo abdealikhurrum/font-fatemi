@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="goalDouble.fina" format="2">
+  <advance width="1034"/>
+  <anchor x="674" y="-408" name="belowLiga"/>
+  <anchor x="655" y="1015" name="aboveLiga"/>
+  <anchor x="652" y="-364" name="belowLiga"/>
+  <anchor x="633" y="1026" name="aboveLiga"/>
+  <anchor x="1032" y="90" name="_base"/>
+  <outline>
+    <component base="uniFBA7"/>
+  </outline>
+</glyph>

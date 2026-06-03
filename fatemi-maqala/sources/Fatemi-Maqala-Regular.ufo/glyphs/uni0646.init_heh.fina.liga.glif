@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni0646.init_heh.fina.liga" format="2">
+  <advance width="1209"/>
+  <anchor x="733" y="1576" name="aboveLiga"/>
+  <anchor x="866" y="-421" name="belowLiga"/>
+  <anchor x="240" y="1579" name="aboveLiga"/>
+  <anchor x="270" y="-729" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB2" xOffset="-90" yOffset="930"/>
+    <component base="behgoalheh.isol" yOffset="4"/>
+  </outline>
+</glyph>

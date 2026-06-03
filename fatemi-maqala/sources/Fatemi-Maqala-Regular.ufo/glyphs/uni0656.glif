@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni0656" format="2">
+  <advance width="485"/>
+  <unicode hex="0656"/>
+  <anchor x="150" y="295" name="_subLiga"/>
+  <anchor x="162" y="334" name="_zerLiga"/>
+  <anchor x="167" y="335" name="_belowLiga"/>
+  <anchor x="164" y="300" name="_belowSingle"/>
+  <anchor x="172" y="376" name="_belowmark"/>
+  <anchor x="103" y="381" name="_zer"/>
+  <outline>
+    <component base="uni0670" xOffset="-78" yOffset="-1399"/>
+  </outline>
+</glyph>

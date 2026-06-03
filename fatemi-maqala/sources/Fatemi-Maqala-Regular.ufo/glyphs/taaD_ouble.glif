@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="taaDouble" format="2">
+  <advance width="1394"/>
+  <anchor x="951" y="1356" name="aboveSingle"/>
+  <anchor x="529" y="-433" name="belowSingle"/>
+  <outline>
+    <component base="uniFEC1"/>
+  </outline>
+</glyph>

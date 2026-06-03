@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="NameMe.1114728" format="2">
+  <advance width="697"/>
+  <anchor x="153" y="1394" name="finaAnchor"/>
+  <anchor x="343" y="1296" name="aboveSingle"/>
+  <anchor x="231" y="-1432" name="belowSingle"/>
+  <outline>
+    <component base="uniFEE1"/>
+  </outline>
+</glyph>

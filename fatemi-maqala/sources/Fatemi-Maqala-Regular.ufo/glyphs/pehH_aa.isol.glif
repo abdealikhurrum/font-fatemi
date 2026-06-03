@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="pehHaa.isol" format="2">
+  <advance width="1192"/>
+  <anchor x="923" y="1985" name="aboveLiga"/>
+  <anchor x="974" y="-1332" name="belowLiga"/>
+  <anchor x="278" y="1625" name="aboveLiga"/>
+  <anchor x="332" y="-1284" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB9" xOffset="335" yOffset="-567"/>
+    <component base="behhaa.isol"/>
+  </outline>
+</glyph>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="pehMaksura.fina" format="2">
+  <advance width="1678"/>
+  <anchor x="1661" y="90" name="_base"/>
+  <anchor x="1227" y="1171" name="aboveLiga"/>
+  <anchor x="1367" y="-1202" name="belowLiga"/>
+  <anchor x="735" y="1119" name="aboveLiga"/>
+  <anchor x="560" y="-1205" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB9" xOffset="695" yOffset="-1125"/>
+    <component base="behyeh.fina" yOffset="9"/>
+  </outline>
+</glyph>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="ttehDouble.init.lowtop" format="2">
+  <advance width="399"/>
+  <anchor x="-1" y="90" name="base"/>
+  <anchor x="103" y="1476" name="aboveSingle"/>
+  <anchor x="132" y="-167" name="belowSingle"/>
+  <outline>
+    <component base="uni066E.init"/>
+    <component base="uniFBC0" xOffset="-291" yOffset="-48"/>
+  </outline>
+</glyph>

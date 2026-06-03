@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFC94" format="2">
+  <advance width="1574"/>
+  <unicode hex="FC94"/>
+  <anchor x="1565" y="90" name="_base"/>
+  <anchor x="1179" y="1635" name="aboveLiga"/>
+  <anchor x="1287" y="-946" name="belowLiga"/>
+  <anchor x="447" y="1567" name="aboveLiga"/>
+  <anchor x="272" y="-757" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB3" xOffset="-253" yOffset="735"/>
+    <component base="uniFBB4" xOffset="530" yOffset="-884"/>
+    <component base="behnoon.fina"/>
+  </outline>
+</glyph>

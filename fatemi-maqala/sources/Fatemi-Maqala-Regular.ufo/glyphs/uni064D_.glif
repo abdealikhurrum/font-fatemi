@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni064D" format="2">
+  <advance width="389"/>
+  <unicode hex="064D"/>
+  <anchor x="-217" y="1899" name="_finaAnchor"/>
+  <anchor x="218" y="-630" name="_zerLiga"/>
+  <anchor x="204" y="-641" name="_zer"/>
+  <anchor x="232" y="-792" name="_belowmark"/>
+  <anchor x="202" y="-637" name="_belowLiga"/>
+  <anchor x="203" y="-640" name="_belowSingle"/>
+  <outline>
+    <contour>
+      <point x="380" y="-767" type="line"/>
+      <point x="380" y="-811"/>
+      <point x="368" y="-840"/>
+      <point x="345" y="-853" type="curve" smooth="yes"/>
+      <point x="42" y="-1025" type="line"/>
+      <point x="44" y="-998"/>
+      <point x="48" y="-978"/>
+      <point x="56" y="-966" type="curve" smooth="yes"/>
+      <point x="64" y="-954"/>
+      <point x="81" y="-939"/>
+      <point x="108" y="-924" type="curve" smooth="yes"/>
+    </contour>
+    <contour>
+      <point x="380" y="-620" type="line"/>
+      <point x="380" y="-664"/>
+      <point x="368" y="-693"/>
+      <point x="345" y="-706" type="curve" smooth="yes"/>
+      <point x="42" y="-878" type="line"/>
+      <point x="44" y="-851"/>
+      <point x="48" y="-830"/>
+      <point x="56" y="-818" type="curve" smooth="yes"/>
+      <point x="64" y="-806"/>
+      <point x="81" y="-792"/>
+      <point x="108" y="-777" type="curve" smooth="yes"/>
+    </contour>
+  </outline>
+</glyph>

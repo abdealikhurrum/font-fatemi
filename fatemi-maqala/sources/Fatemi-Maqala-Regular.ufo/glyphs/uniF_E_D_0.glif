@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFED0" format="2">
+  <advance width="677"/>
+  <unicode hex="FED0"/>
+  <anchor x="674" y="90" name="_base"/>
+  <anchor x="-25" y="90" name="base"/>
+  <anchor x="331" y="1349" name="aboveSingle"/>
+  <anchor x="337" y="-403" name="belowSingle"/>
+  <outline>
+    <component base="uniFBB2" xOffset="-496" yOffset="760"/>
+    <component base="uniFECC"/>
+  </outline>
+</glyph>

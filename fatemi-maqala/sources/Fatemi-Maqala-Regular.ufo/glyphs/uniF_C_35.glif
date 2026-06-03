@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFC35" format="2">
+  <advance width="1392"/>
+  <unicode hex="FC35"/>
+  <anchor x="927" y="1649" name="aboveLiga"/>
+  <anchor x="887" y="-750" name="belowLiga"/>
+  <anchor x="255" y="1639" name="aboveLiga"/>
+  <anchor x="351" y="-745" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB4" xOffset="244" yOffset="1048"/>
+    <component base="fehyeh.isol" xOffset="-36" yOffset="2"/>
+  </outline>
+</glyph>

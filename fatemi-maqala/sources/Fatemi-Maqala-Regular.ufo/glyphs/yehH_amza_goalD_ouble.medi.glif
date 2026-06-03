@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="yehHamza_goalDouble.medi" format="2">
+  <advance width="1098"/>
+  <anchor x="1083" y="90" name="_base"/>
+  <anchor x="-3" y="90" name="base"/>
+  <anchor x="782" y="-598" name="belowLiga"/>
+  <anchor x="726" y="1553" name="aboveLiga"/>
+  <anchor x="347" y="1495" name="aboveLiga"/>
+  <anchor x="366" y="-610" name="belowLiga"/>
+  <anchor x="286" y="1505" name="aboveLiga"/>
+  <anchor x="286" y="-610" name="belowLiga"/>
+  <outline>
+    <component base="uniFCE0"/>
+  </outline>
+</glyph>

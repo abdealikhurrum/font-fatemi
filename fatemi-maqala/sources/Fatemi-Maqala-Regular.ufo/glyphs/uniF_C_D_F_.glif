@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFCDF" format="2">
+  <advance width="1255"/>
+  <unicode hex="FCDF"/>
+  <anchor x="0" y="90" name="base"/>
+  <anchor x="1155" y="90" name="_base"/>
+  <anchor x="766" y="1625" name="aboveLiga"/>
+  <anchor x="822" y="-806" name="belowLiga"/>
+  <anchor x="262" y="1337" name="aboveLiga"/>
+  <anchor x="270" y="-822" name="belowLiga"/>
+  <outline>
+    <component base="behmeem.medi"/>
+    <component base="uni0674" xScale="1.47247" yScale="1.48462" xOffset="502" yOffset="-1114"/>
+  </outline>
+</glyph>

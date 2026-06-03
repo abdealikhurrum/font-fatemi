@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni1E16" format="2">
+  <advance width="1174"/>
+  <unicode hex="1E16"/>
+  <outline>
+    <component base="acutecomb.cap" xOffset="1110" yOffset="190"/>
+    <component base="Emacron" xOffset="2"/>
+  </outline>
+</glyph>

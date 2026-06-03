@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="dlbeh_goalDouble.medi" format="2">
+  <advance width="1098"/>
+  <anchor x="1083" y="90" name="_base"/>
+  <anchor x="-3" y="90" name="base"/>
+  <anchor x="286" y="-610" name="belowLiga"/>
+  <anchor x="286" y="1505" name="aboveLiga"/>
+  <anchor x="366" y="-610" name="belowLiga"/>
+  <anchor x="336" y="1505" name="aboveLiga"/>
+  <anchor x="687" y="1540" name="aboveLiga"/>
+  <anchor x="710" y="-594" name="belowLiga"/>
+  <anchor x="726" y="1553" name="aboveLiga"/>
+  <anchor x="782" y="-598" name="belowLiga"/>
+  <outline>
+    <component base="glyph598"/>
+  </outline>
+</glyph>

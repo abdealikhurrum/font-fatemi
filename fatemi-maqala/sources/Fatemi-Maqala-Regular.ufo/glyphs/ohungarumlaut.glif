@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="ohungarumlaut" format="2">
+  <advance width="1018"/>
+  <unicode hex="0151"/>
+  <outline>
+    <component base="acutecomb" xOffset="1226" yOffset="-8"/>
+    <component base="acutecomb" xOffset="978" yOffset="-8"/>
+    <component base="o"/>
+  </outline>
+</glyph>

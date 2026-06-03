@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni1ED6" format="2">
+  <advance width="1496"/>
+  <unicode hex="1ED6"/>
+  <outline>
+    <component base="tildecomb.cap" xScale="0.949829" yScale="0.799988" xOffset="1209" yOffset="520"/>
+    <component base="uni0302.cap" yScale="0.909851" xOffset="1256" yOffset="86"/>
+    <component base="O"/>
+  </outline>
+</glyph>

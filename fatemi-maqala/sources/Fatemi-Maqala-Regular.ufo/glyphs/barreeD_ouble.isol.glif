@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="barreeDouble.isol" format="2">
+  <advance width="1453"/>
+  <anchor x="718" y="-536" name="belowLiga"/>
+  <anchor x="751" y="1587" name="aboveLiga"/>
+  <anchor x="696" y="-492" name="belowLiga"/>
+  <anchor x="729" y="1598" name="aboveLiga"/>
+  <outline>
+    <component base="uni06D2"/>
+  </outline>
+</glyph>

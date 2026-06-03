@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFB6A" format="2">
+  <advance width="1410"/>
+  <unicode hex="FB6A"/>
+  <anchor x="1069" y="1640" name="aboveSingle"/>
+  <anchor x="653" y="-407" name="belowSingle"/>
+  <outline>
+    <component base="uniFBB7" xOffset="411" yOffset="576"/>
+    <component base="dotlessfeh.isol"/>
+  </outline>
+</glyph>

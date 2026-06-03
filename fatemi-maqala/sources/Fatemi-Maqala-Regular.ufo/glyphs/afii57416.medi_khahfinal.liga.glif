@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="afii57416.medi_khahfinal.liga" format="2">
+  <advance width="1629"/>
+  <anchor x="1599" y="90" name="_base"/>
+  <anchor x="1158" y="1372" name="aboveLiga"/>
+  <anchor x="1246" y="-1054" name="belowLiga"/>
+  <anchor x="654" y="1593" name="aboveLiga"/>
+  <anchor x="558" y="-1094" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB2" xOffset="505" yOffset="-575"/>
+    <component base="uniFBB2" xOffset="-170" yOffset="1105"/>
+    <component base="behhaa.fina"/>
+  </outline>
+</glyph>

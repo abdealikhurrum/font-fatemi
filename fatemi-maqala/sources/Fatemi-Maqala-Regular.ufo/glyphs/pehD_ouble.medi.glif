@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="pehDouble.medi" format="2">
+  <advance width="436"/>
+  <anchor x="238" y="-1312" name="belowLiga"/>
+  <anchor x="207" y="1347" name="aboveLiga"/>
+  <anchor x="216" y="-1268" name="belowLiga"/>
+  <anchor x="185" y="1358" name="aboveLiga"/>
+  <anchor x="1" y="90" name="base"/>
+  <anchor x="423" y="90" name="_base"/>
+  <outline>
+    <component base="uni066E.medi"/>
+    <component base="uniFBB8" xOffset="-522" yOffset="-987"/>
+  </outline>
+</glyph>

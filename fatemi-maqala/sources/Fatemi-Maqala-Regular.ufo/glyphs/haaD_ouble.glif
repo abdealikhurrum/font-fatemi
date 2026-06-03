@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="haaDouble" format="2">
+  <advance width="1294"/>
+  <anchor x="656" y="1376" name="aboveSingle"/>
+  <anchor x="662" y="-1112" name="belowSingle"/>
+  <outline>
+    <component base="uniFEA1"/>
+  </outline>
+</glyph>

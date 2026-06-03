@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="zerLigaGoal" format="2">
+  <advance width="658"/>
+  <anchor x="306" y="-626" name="zerLiga"/>
+  <anchor x="322" y="-626" name="zerLiga"/>
+  <anchor x="311" y="1179" name="aboveLiga"/>
+  <anchor x="289" y="1190" name="aboveLiga"/>
+  <outline>
+    <component base="uni0647"/>
+  </outline>
+</glyph>

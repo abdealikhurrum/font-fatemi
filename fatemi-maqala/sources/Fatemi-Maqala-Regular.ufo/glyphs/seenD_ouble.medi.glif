@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="seenDouble.medi" format="2">
+  <advance width="1001"/>
+  <anchor x="-12" y="90" name="base"/>
+  <anchor x="998" y="90" name="_base"/>
+  <anchor x="519" y="1361" name="aboveSingle"/>
+  <anchor x="529" y="-433" name="belowSingle"/>
+  <outline>
+    <component base="uniFEB4" xOffset="7"/>
+  </outline>
+</glyph>

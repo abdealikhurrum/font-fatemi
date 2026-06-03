@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFECE" format="2">
+  <advance width="1029"/>
+  <unicode hex="FECE"/>
+  <anchor x="1036" y="90" name="_base"/>
+  <anchor x="631" y="1641" name="aboveSingle"/>
+  <anchor x="641" y="-1529" name="belowSingle"/>
+  <outline>
+    <component base="uniFBB2" xOffset="-240" yOffset="765"/>
+    <component base="uniFECA"/>
+  </outline>
+</glyph>

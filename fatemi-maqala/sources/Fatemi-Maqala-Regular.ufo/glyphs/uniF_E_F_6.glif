@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFEF6" format="2">
+  <advance width="1209"/>
+  <unicode hex="FEF6"/>
+  <anchor x="1193" y="90" name="_base"/>
+  <anchor x="819" y="1728" name="aboveLiga"/>
+  <anchor x="941" y="-394" name="belowLiga"/>
+  <anchor x="211" y="1842" name="aboveLiga"/>
+  <anchor x="333" y="-418" name="belowLiga"/>
+  <outline>
+    <component base="uni0653" xScale="1.49695" yScale="1.61859" xOffset="15" yOffset="-1313"/>
+    <component base="uniFEFC" yOffset="2"/>
+  </outline>
+</glyph>

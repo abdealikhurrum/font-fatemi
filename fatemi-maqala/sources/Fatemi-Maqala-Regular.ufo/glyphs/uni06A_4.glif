@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni06A4" format="2">
+  <advance width="1395"/>
+  <unicode hex="06A4"/>
+  <anchor x="905" y="2033" name="aboveSingle"/>
+  <anchor x="744" y="-611" name="belowSingle"/>
+  <outline>
+    <component base="dotlessfeh.isol"/>
+    <component base="uniFBB6" xOffset="396" yOffset="581"/>
+  </outline>
+</glyph>

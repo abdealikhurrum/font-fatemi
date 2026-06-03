@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="yehHamza_goalHeh.isol" format="2">
+  <advance width="1355"/>
+  <anchor x="894" y="1405" name="aboveLiga"/>
+  <anchor x="942" y="-806" name="belowLiga"/>
+  <anchor x="382" y="1337" name="aboveLiga"/>
+  <anchor x="390" y="-822" name="belowLiga"/>
+  <outline>
+    <component base="uni0674" xScale="1.52911" yScale="1.52588" xOffset="641" yOffset="-1273"/>
+    <component base="behgoalheh.isol" xOffset="120"/>
+  </outline>
+</glyph>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="tehJeh.fina" format="2">
+  <advance width="1064"/>
+  <anchor x="1065" y="90" name="_base"/>
+  <anchor x="729" y="1599" name="aboveLiga"/>
+  <anchor x="869" y="-814" name="belowLiga"/>
+  <anchor x="339" y="1543" name="aboveLiga"/>
+  <anchor x="164" y="-781" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB4" xScale="0.8125" yScale="0.831858" xOffset="247" yOffset="597"/>
+    <component base="uniFBB6" xScale="0.765086" yScale="0.793407" xOffset="-170" yOffset="228"/>
+    <component base="behreh.fina" xOffset="40" yOffset="4"/>
+  </outline>
+</glyph>

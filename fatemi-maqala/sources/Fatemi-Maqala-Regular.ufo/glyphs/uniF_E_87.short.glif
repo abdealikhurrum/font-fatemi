@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFE87.short" format="2">
+  <advance width="332"/>
+  <anchor x="134" y="1590" name="aboveSingle"/>
+  <anchor x="186" y="-1053" name="belowSingle"/>
+  <outline>
+    <component base="uniFE8D" yOffset="-10"/>
+    <component base="uni0674" xScale="1.01648" yScale="1.1405" xOffset="-6" yOffset="-2493"/>
+  </outline>
+</glyph>

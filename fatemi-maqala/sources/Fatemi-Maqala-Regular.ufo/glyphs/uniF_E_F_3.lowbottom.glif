@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFEF3.lowbottom" format="2">
+  <advance width="411"/>
+  <anchor x="-15" y="90" name="base"/>
+  <anchor x="287" y="913" name="aboveSingle"/>
+  <anchor x="185" y="-1161" name="belowSingle"/>
+  <outline>
+    <component base="uniFBB4" xOffset="-462" yOffset="-1045"/>
+    <component base="uni066E.init" yOffset="9"/>
+  </outline>
+</glyph>

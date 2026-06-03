@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="NameMe.1766" format="2">
+  <advance width="1325"/>
+  <outline>
+    <component base="uniFBB4" xOffset="-120" yOffset="-255"/>
+    <component base="uniFBB6" xOffset="-660" yOffset="-368"/>
+    <component base="uniFBB2" yOffset="16"/>
+    <component base="uni0674" xScale="1.52911" yScale="1.52588" xOffset="521" yOffset="-1273"/>
+    <component base="uniFBC0" yOffset="-3"/>
+    <component base="uniFBB8" xOffset="591" yOffset="210"/>
+    <component base="uniFBB6" xOffset="-660" yOffset="-368"/>
+    <component base="uniFBB4" xOffset="-120" yOffset="-255"/>
+    <component base="uniFBB2" yOffset="16"/>
+  </outline>
+</glyph>

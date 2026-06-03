@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uniFB6D" format="2">
+  <advance width="614"/>
+  <unicode hex="FB6D"/>
+  <anchor x="1" y="90" name="base"/>
+  <anchor x="610" y="90" name="_base"/>
+  <anchor x="307" y="1652" name="aboveSingle"/>
+  <anchor x="293" y="-401" name="belowSingle"/>
+  <outline>
+    <component base="dotlessfeh.medi" xOffset="2"/>
+    <component base="uniFBB6" xOffset="-366" yOffset="530"/>
+  </outline>
+</glyph>

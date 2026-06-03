@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="kaafDouble.medi" format="2">
+  <advance width="788"/>
+  <anchor x="784" y="90" name="_base"/>
+  <anchor x="-8" y="90" name="base"/>
+  <anchor x="239" y="1529" name="aboveSingle"/>
+  <anchor x="361" y="-409" name="belowSingle"/>
+  <outline>
+    <component base="uniFEDC"/>
+  </outline>
+</glyph>

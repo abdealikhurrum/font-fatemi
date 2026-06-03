@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="hamzaChashm.init" format="2">
+  <advance width="1108"/>
+  <anchor x="202" y="90" name="base"/>
+  <anchor x="654" y="1855" name="aboveLiga"/>
+  <anchor x="970" y="-720" name="belowLiga"/>
+  <anchor x="314" y="1370" name="aboveLiga"/>
+  <anchor x="382" y="-696" name="belowLiga"/>
+  <outline>
+    <component base="behchashheh.init" xOffset="203" yOffset="-6"/>
+    <component base="uni0674" xScale="1.47247" yScale="1.48462" xOffset="408" yOffset="-871"/>
+  </outline>
+</glyph>

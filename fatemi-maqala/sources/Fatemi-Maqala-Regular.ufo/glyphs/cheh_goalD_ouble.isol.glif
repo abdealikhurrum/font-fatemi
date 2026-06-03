@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="cheh_goalDouble.isol" format="2">
+  <advance width="2205"/>
+  <anchor x="1433" y="1420" name="aboveLiga"/>
+  <anchor x="1503" y="-682" name="belowLiga"/>
+  <anchor x="1406" y="-670" name="belowLiga"/>
+  <anchor x="1327" y="1425" name="aboveLiga"/>
+  <anchor x="400" y="-610" name="belowLiga"/>
+  <anchor x="430" y="1499" name="aboveLiga"/>
+  <anchor x="340" y="1470" name="aboveLiga"/>
+  <anchor x="322" y="-600" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB8" xOffset="749" yOffset="-806"/>
+    <component base="haahehgoal.isol"/>
+  </outline>
+</glyph>

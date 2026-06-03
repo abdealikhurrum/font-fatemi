@@ -1,0 +1,15 @@
+# This is the official list of project authors for copyright purposes.
+# The first name is shown as "Principal design" on Google Fonts.
+#
+# Names should be added as:  Name or Organization <email address>
+
+Abdeali Khurrum <akhurrum@exordiumnetworks.com>
+
+# Provenance / acknowledgement
+# ----------------------------
+# Fatemi Maqala is an original retracing and extension, by the author above,
+# of the Lisan ud Dawat naskh hand that originated within Aljamea-tus-Saifiyah
+# and the Dawoodi Bohra community (administered by Dawat Hadiyah). The outlines
+# in this project were substantially redrawn; this OFL release covers the
+# author's own font software. The originating tradition is acknowledged with
+# gratitude.

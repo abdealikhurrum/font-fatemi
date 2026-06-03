@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="chhe.liga" format="2">
+  <advance width="1769"/>
+  <anchor x="1427" y="1638" name="aboveLiga"/>
+  <anchor x="1567" y="-903" name="belowLiga"/>
+  <anchor x="935" y="1586" name="aboveLiga"/>
+  <anchor x="1016" y="-967" name="belowLiga"/>
+  <anchor x="306" y="1348" name="aboveLiga"/>
+  <anchor x="306" y="-732" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB9" xOffset="492" yOffset="-912"/>
+    <component base="chhbarree.isol" xOffset="-1505" yOffset="1"/>
+  </outline>
+</glyph>

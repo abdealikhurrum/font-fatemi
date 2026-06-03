@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="pehTcheh.init" format="2">
+  <advance width="1024"/>
+  <anchor x="118" y="-757" name="belowLiga"/>
+  <anchor x="293" y="1565" name="aboveLiga"/>
+  <anchor x="824" y="-767" name="belowLiga"/>
+  <anchor x="816" y="1644" name="aboveLiga"/>
+  <anchor x="3" y="88" name="base"/>
+  <outline>
+    <component base="uniFBB9" xScale="0.859914" yScale="0.885057" xOffset="255" yOffset="-585"/>
+    <component base="uniFBB9" xScale="0.795259" yScale="0.795402" xOffset="-242" yOffset="-655"/>
+    <component base="behhah.init"/>
+  </outline>
+</glyph>

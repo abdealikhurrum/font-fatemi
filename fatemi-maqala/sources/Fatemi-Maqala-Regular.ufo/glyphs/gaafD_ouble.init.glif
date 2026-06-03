@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="gaafDouble.init" format="2">
+  <advance width="506"/>
+  <anchor x="58" y="-524" name="belowLiga"/>
+  <anchor x="91" y="1599" name="aboveLiga"/>
+  <anchor x="36" y="-480" name="belowLiga"/>
+  <anchor x="69" y="1610" name="aboveLiga"/>
+  <anchor x="-5" y="90" name="base"/>
+  <outline>
+    <component base="uniFB94"/>
+  </outline>
+</glyph>

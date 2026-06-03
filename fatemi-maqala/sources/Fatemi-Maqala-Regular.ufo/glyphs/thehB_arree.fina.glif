@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="thehBarree.fina" format="2">
+  <advance width="1205"/>
+  <anchor x="1193" y="90" name="_base"/>
+  <anchor x="917" y="1379" name="aboveLiga"/>
+  <anchor x="998" y="-1059" name="belowLiga"/>
+  <anchor x="438" y="1084" name="aboveLiga"/>
+  <anchor x="446" y="-1075" name="belowLiga"/>
+  <outline>
+    <component base="uniFBB6" xOffset="240" yOffset="227"/>
+    <component base="behbarree.fina"/>
+  </outline>
+</glyph>

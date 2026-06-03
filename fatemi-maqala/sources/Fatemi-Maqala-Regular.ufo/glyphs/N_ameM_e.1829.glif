@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="NameMe.1829" format="2">
+  <advance width="1314"/>
+  <anchor x="399" y="923" name="aboveLiga"/>
+  <anchor x="440" y="-1057" name="belowLiga"/>
+  <anchor x="1215" y="-558" name="belowLiga"/>
+  <anchor x="979" y="1739" name="aboveLiga"/>
+  <outline>
+    <contour>
+      <point x="1768" y="1933" type="line"/>
+      <point x="1709" y="1739" type="line"/>
+      <point x="828" y="1201" type="line"/>
+      <point x="875" y="1390" type="line"/>
+    </contour>
+    <component base="uniFBB4" xOffset="-108" yOffset="-1022"/>
+    <component base="NameMe.1822.1"/>
+  </outline>
+</glyph>

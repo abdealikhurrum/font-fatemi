@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="uni0657" format="2">
+  <advance width="540"/>
+  <unicode hex="0657"/>
+  <anchor x="-217" y="1899" name="_finaAnchor"/>
+  <anchor x="269" y="1103" name="_abovemark"/>
+  <anchor x="287" y="1005" name="_aboveLiga"/>
+  <anchor x="299" y="999" name="_aboveSingle"/>
+  <outline>
+    <component base="uni064F" xScale="-1" yScale="-1" xOffset="528" yOffset="3015"/>
+  </outline>
+</glyph>
