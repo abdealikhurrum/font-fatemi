@@ -14,22 +14,25 @@ Font Bakery `check-googlefonts`, original FatemiMaqala → this project:
 | | FAIL | notes |
 |---|---|---|
 | Original FatemiMaqala-Regular.ttf | **19** | quadratic/raster outlines, nested+transformed components, bad metrics, bad naming, no hinting |
-| This build (clean source + rehabilitated features) | **5** | shaping-complete; only glyph-drawing + 2 minor Latin niceties remain |
+| Clean source + rehabilitated features | **5** | shaping-complete |
+| + Latin gaps filled from Crimson | **4** | only the tail below remains |
 
 **Cleared**: nested/transformed/duplicate components, invalid script tags, smart
 dropout (hinting), repo zip hygiene, vertical metrics (win/typo/hhea unified,
-lineGap 0, USE_TYPO_METRICS), family-name compliance (FatemiMaqala → "Fatemi
-Maqala"), copyright, version format, name line-breaks, whitespace widths — **and
-the full feature-file rehabilitation** (see `REHAB.md`): the font now compiles
-and shapes Arabic, verified pixel-identical to the original.
+lineGap 0, USE_TYPO_METRICS), family-name compliance, copyright, version format,
+name line-breaks, whitespace widths; **the full feature-file rehabilitation**
+(see `REHAB.md`) — the font now compiles and shapes Arabic, verified
+pixel-identical to the original; and **glyph coverage + case mapping**, filled by
+importing the missing Latin glyphs (®, ľ, ẞ, ɖ, capital schwa, combining horn)
+from Crimson (acknowledged in `OFL.txt`).
 
-**Remaining FAILs — glyph work, to be filled from Crimson (the Latin source):**
-- `googlefonts/glyph_coverage` — U+00AE ®, U+013E ľ, U+1E9E ẞ
-- `case_mapping` — U+0256 ɖ, U+04D8 Ә
-- `googlefonts/glyphsets/shape_languages` — Latin/phonetics coverage
-
-**Minor (low priority for an Arabic family):** `smallcaps_before_ligatures`
-(GSUB lookup order), `tabular_kerning` (slash/zero).
+**Remaining FAILs (the tail):**
+- `canonical_filename` — release file named `FatemiMaqala-Regular.ttf` (resolved on release).
+- `googlefonts/glyphsets/shape_languages` — Latin **mark attachment** (e.g. Dutch
+  íj́), not missing glyphs; needs Latin combining-mark anchors.
+- `smallcaps_before_ligatures`, `tabular_kerning` — minor Latin niceties; both
+  (and the spurious small-caps build artifact) go away if the optional Latin
+  `smcp`/`c2sc` features are dropped. See `qa/`.
 
 ## Layout
 - `sources/Fatemi-Maqala-Regular.ufo` — canonical source: cleaned **cubic**

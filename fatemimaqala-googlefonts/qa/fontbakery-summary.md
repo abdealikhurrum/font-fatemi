@@ -1,26 +1,26 @@
-# Font Bakery (check-googlefonts) — before vs after
+# Font Bakery (check-googlefonts) — progress
 
-- **Original FatemiMaqala-Regular.ttf:** 19 FAIL
-- **This build (cleaned source + rehabilitated features):** 5 FAIL
+| stage | FAIL |
+|---|---|
+| Original FatemiMaqala-Regular.ttf | 19 |
+| Clean source + rehabilitated features | 5 |
+| + Latin gaps filled from Crimson | 4 |
 
 ## Remaining FAILs
 
-_Genuine glyph work (to be filled from Crimson — see below):_
-- `googlefonts/glyph_coverage` — U+00AE ®, U+013E ľ, U+1E9E ẞ
-- `case_mapping` — U+0256 ɖ, U+04D8 Ә
-- `googlefonts/glyphsets/shape_languages` — Latin/phonetics coverage
+- `canonical_filename` — build emits `Fatemi-Maqala-Regular.ttf`; the committed/
+  release file is named `FatemiMaqala-Regular.ttf` (resolved on release).
+- `googlefonts/glyphsets/shape_languages` — now Latin **mark attachment**
+  (e.g. Dutch íj́: acutecomb not anchored to j/J), not missing glyphs. Needs
+  Latin combining-mark anchors.
+- `smallcaps_before_ligatures` — GSUB lookup order (smcp vs liga).
+- `tabular_kerning` — slash/zero kern via kern classes.
 
-_Minor Latin-feature niceties (low priority for an Arabic family):_
-- `smallcaps_before_ligatures` — GSUB lookup ordering of smcp vs liga
-- `tabular_kerning` — slash/zero kern via kern classes
+All glyph-coverage and case-mapping FAILs are **resolved** by importing the
+missing Latin glyphs (®, ľ, ẞ, ɖ, capital schwa, combining horn) from Crimson.
 
-## What was fixed
-
-- Outlines: quadratic→cubic, overlaps removed, directions corrected.
-- Components: nested/transformed/duplicate decomposed by the build.
-- **Feature file rehabilitated** (see REHAB.md): 24 duplicate substitutions removed,
-  39 empty-class kern pairs removed, and the 3 mark-attachment lookups
-  (kharoSingle/kharoLiga/marktomark) split per mark-class into sub-lookups —
-  verified pixel-identical shaping vs. the original.
-- Metrics unified (win=typo=hhea, lineGap 0, USE_TYPO_METRICS); naming, version,
-  copyright, whitespace, hinting all GF-compliant.
+## Note — spurious small-caps family
+The build also emits `Fatemi-MaqalaSC-Regular.ttf` because of the Latin
+`smcp`/`c2sc` features (inherited with the Crimson Latin). For a Lisan ud Dawat
+family these Latin small-caps are optional; dropping `smcp`/`c2sc` would remove
+the SC artifact AND clear `smallcaps_before_ligatures`. Left as a decision.
