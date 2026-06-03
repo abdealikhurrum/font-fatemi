@@ -45,6 +45,7 @@ final class ViewController: UIViewController {
         stackView.addArrangedSubview(appearanceCard())
         stackView.addArrangedSubview(fontCard())
         stackView.addArrangedSubview(corpusCard())
+        stackView.addArrangedSubview(aboutCard())
     }
 
     // MARK: - Cards
@@ -140,7 +141,22 @@ final class ViewController: UIViewController {
         return v
     }
 
+    private func aboutCard() -> UIView {
+        let v = cardContainer(title: "About")
+        v.addArrangedSubview(bodyLabel(
+            "LigaCheh is open source under the MIT License. View the licenses "
+            + "for the bundled FatemiMaqala font and other components."
+        ))
+        v.addArrangedSubview(actionButton("Acknowledgements", color: .systemGray,
+                                          target: self, action: #selector(showAcknowledgements)))
+        return v
+    }
+
     // MARK: - Actions
+
+    @objc private func showAcknowledgements() {
+        navigationController?.pushViewController(AcknowledgementsViewController(), animated: true)
+    }
 
     @objc private func openSettings() {
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }

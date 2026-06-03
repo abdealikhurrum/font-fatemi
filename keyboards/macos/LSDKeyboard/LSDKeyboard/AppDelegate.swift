@@ -27,6 +27,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                               keyEquivalent: "")
         pref.target = self
         menu.addItem(pref)
+
+        let acks = NSMenuItem(title: "Acknowledgements\u{2026}",
+                              action: #selector(openAcknowledgements(_:)),
+                              keyEquivalent: "")
+        acks.target = self
+        menu.addItem(acks)
+
         item.menu = menu
 
         statusItem = item
@@ -34,5 +41,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc func openPreferences(_ sender: Any?) {
         PreferencesWindowController.shared.showWindow()
+    }
+
+    @objc func openAcknowledgements(_ sender: Any?) {
+        AcknowledgementsWindowController.shared.showWindow()
     }
 }

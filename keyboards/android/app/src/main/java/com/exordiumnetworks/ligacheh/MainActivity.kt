@@ -84,6 +84,17 @@ class MainActivity : AppCompatActivity() {
         // Settings
         content.addView(makeStep("Settings", "Adjust keyboard layout and behaviour."))
         content.addView(buildSettingsCard())
+
+        // About
+        content.addView(makeStep("About",
+            "Open source under the MIT License. View licenses for the bundled " +
+            "FatemiMaqala font and other components."))
+        content.addView(Button(this).apply {
+            text = "Acknowledgements"
+            setOnClickListener {
+                startActivity(Intent(this@MainActivity, AcknowledgementsActivity::class.java))
+            }
+        })
     }
 
     // ── Settings card ─────────────────────────────────────────────────────

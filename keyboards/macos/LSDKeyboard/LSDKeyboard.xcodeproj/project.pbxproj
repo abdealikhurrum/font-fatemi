@@ -19,6 +19,7 @@
 		AA00002C /* DiacriticOverlayPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00002B /* DiacriticOverlayPanel.swift */; };
 		AA000064 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000065 /* PreferencesWindowController.swift */; };
 		AA000066 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000067 /* AppDelegate.swift */; };
+		AA000070 /* AcknowledgementsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000071 /* AcknowledgementsWindowController.swift */; };
 		AA000062 /* Lisan ud Dawat - Mac.keylayout in Resources */ = {isa = PBXBuildFile; fileRef = AA000060 /* Lisan ud Dawat - Mac.keylayout */; };
 		AA000063 /* Lisan ud Dawat - AK.keylayout in Resources */ = {isa = PBXBuildFile; fileRef = AA000061 /* Lisan ud Dawat - AK.keylayout */; };
 /* End PBXBuildFile section */
@@ -37,6 +38,7 @@
 		AA00002B /* DiacriticOverlayPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiacriticOverlayPanel.swift; sourceTree = "<group>"; };
 		AA000065 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		AA000067 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA000071 /* AcknowledgementsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsWindowController.swift; sourceTree = "<group>"; };
 		AA000060 /* Lisan ud Dawat - Mac.keylayout */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Lisan ud Dawat - Mac.keylayout"; sourceTree = "<group>"; };
 		AA000061 /* Lisan ud Dawat - AK.keylayout */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Lisan ud Dawat - AK.keylayout"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +83,7 @@
 				AA00002B /* DiacriticOverlayPanel.swift */,
 				AA000065 /* PreferencesWindowController.swift */,
 				AA000067 /* AppDelegate.swift */,
+				AA000071 /* AcknowledgementsWindowController.swift */,
 				AA000060 /* Lisan ud Dawat - Mac.keylayout */,
 				AA000061 /* Lisan ud Dawat - AK.keylayout */,
 				AA000014 /* Info.plist */,
@@ -190,6 +193,7 @@
 				AA00002C /* DiacriticOverlayPanel.swift in Sources */,
 				AA000064 /* PreferencesWindowController.swift in Sources */,
 				AA000066 /* AppDelegate.swift in Sources */,
+				AA000070 /* AcknowledgementsWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
