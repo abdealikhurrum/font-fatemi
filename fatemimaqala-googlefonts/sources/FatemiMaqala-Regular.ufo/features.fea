@@ -7571,7 +7571,13 @@ feature curs {
       lookup cursCursiveAttachmentinArabiclookup4;
 } curs;
 
+lookup spaceBeforeAlefHamza {
+  pos [\uni0648 \uniFEEE \uni0631 \uniFEAE \uni0632 \uniFEB0] \uni0625 160;
+  pos \uni0631.alt \uni0625 320;
+} spaceBeforeAlefHamza;
+
 feature kern {
+  lookup spaceBeforeAlefHamza;
 
  script DFLT;
      language dflt ;
@@ -7822,6 +7828,11 @@ lookup latnMarks {
     pos base [uni25CC] <anchor 720 834> mark @latnAbove;
 } latnMarks;
 
+lookup markBeforeKaf {
+  pos [\uni064B \uni064C \uni064E \uni064F \uni0652 \uni0651 \uni0670 \uni0657 \uni0658 \uni0653 \uni0654]' <0 -560 0 0> [\uni064B \uni064C \uni064E \uni064F \uni0652 \uni0651 \uni0670 \uni0657 \uni0658 \uni0653 \uni0654] [\uniFEDB \uniFEDC];
+  pos [\uni064B \uni064C \uni064E \uni064F \uni0652 \uni0651 \uni0670 \uni0657 \uni0658 \uni0653 \uni0654]' <0 -560 0 0> [\uniFEDB \uniFEDC];
+} markBeforeKaf;
+
 feature mark {
 
  script DFLT;
@@ -7831,6 +7842,7 @@ feature mark {
       lookup kharoSingle_zer;
       lookup kharoSingle_belowSingle;
       lookup kharoSingle_aboveSingle;
+      lookup markBeforeKaf;
       lookup kharoLiga_subLiga;
       lookup kharoLiga_supLiga;
       lookup kharoLiga_zerLiga;
@@ -7844,6 +7856,7 @@ feature mark {
       lookup kharoSingle_zer;
       lookup kharoSingle_belowSingle;
       lookup kharoSingle_aboveSingle;
+      lookup markBeforeKaf;
       lookup kharoLiga_subLiga;
       lookup kharoLiga_supLiga;
       lookup kharoLiga_zerLiga;
@@ -7855,6 +7868,7 @@ feature mark {
       lookup kharoSingle_zer;
       lookup kharoSingle_belowSingle;
       lookup kharoSingle_aboveSingle;
+      lookup markBeforeKaf;
       lookup kharoLiga_subLiga;
       lookup kharoLiga_supLiga;
       lookup kharoLiga_zerLiga;
@@ -7866,6 +7880,7 @@ feature mark {
       lookup kharoSingle_zer;
       lookup kharoSingle_belowSingle;
       lookup kharoSingle_aboveSingle;
+      lookup markBeforeKaf;
       lookup kharoLiga_subLiga;
       lookup kharoLiga_supLiga;
       lookup kharoLiga_zerLiga;
@@ -7877,6 +7892,7 @@ feature mark {
       lookup kharoSingle_zer;
       lookup kharoSingle_belowSingle;
       lookup kharoSingle_aboveSingle;
+      lookup markBeforeKaf;
       lookup kharoLiga_subLiga;
       lookup kharoLiga_supLiga;
       lookup kharoLiga_zerLiga;
@@ -7888,6 +7904,7 @@ feature mark {
       lookup kharoSingle_zer;
       lookup kharoSingle_belowSingle;
       lookup kharoSingle_aboveSingle;
+      lookup markBeforeKaf;
       lookup kharoLiga_subLiga;
       lookup kharoLiga_supLiga;
       lookup kharoLiga_zerLiga;

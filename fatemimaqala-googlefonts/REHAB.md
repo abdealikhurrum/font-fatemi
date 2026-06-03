@@ -59,3 +59,22 @@ isolated lam this dropped the damma onto the stroke (collision). Removing the
 `finaAnchor` sub-lookup makes every above-mark use its primary `aboveSingle`
 anchor, fixing the lam and regularizing mark positions across the board.
 Connected/voweled text (e.g. the basmala) is unchanged — verified by rendering.
+
+## Inter-character mark collisions (contextual)
+
+A pixel-level collision detector (`qa/collision_check.py`, near-miss aware) found
+that inter-character mark collisions are dominated by the **medial kaaf**
+(`uniFEDC`/`uniFEDB`): its arm reaches up-and-right over the preceding letter,
+into that letter's above-mark (damma/shadda overlaps of 1000–2900px).
+
+Fixes (first-pass values, tunable):
+- `markBeforeKaf` (in `mark` feature): when an above-mark precedes a kaaf, shift
+  it **down** ~560 units so it nests under the kaaf arm. Clears the kaaf
+  collisions; matches the calligraphic convention of tucking the mark down.
+- `spaceBeforeAlefHamza` (in `kern`): add space before an isolated alef-hamza-
+  below (`uni0625`) after a non-connecting descender (waw/reh/zay); swash reh
+  (`uni0631.alt`) gets more.
+
+Known remaining (enumerate via the detector over a corpus, then add rules):
+- shadda+fatha on an initial letter near a *preceding* alef-hamza (e.g. إِيَّاكَ).
+- mark-vs-mark near-misses between adjacent letters (e.g. أَنْعَمْتَ sukun↔fatha).
