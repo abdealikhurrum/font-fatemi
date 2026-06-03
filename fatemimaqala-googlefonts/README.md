@@ -9,32 +9,17 @@ its author. See `AUTHORS.txt` for provenance and acknowledgement.
 
 ## Status — Google Fonts readiness
 
-Font Bakery `check-googlefonts`, original FatemiMaqala → this project:
+**Font Bakery `check-googlefonts`: 0 FAIL** (down from 19 on the original).
 
-| | FAIL | notes |
-|---|---|---|
-| Original FatemiMaqala-Regular.ttf | **19** | quadratic/raster outlines, nested+transformed components, bad metrics, bad naming, no hinting |
-| Clean source + rehabilitated features | **5** | shaping-complete |
-| + Latin gaps filled from Crimson | **4** | |
-| + dropped Latin smcp; trimmed Latin to GF Latin Core; tabular figures | **1** | only the item below remains |
+Cleared across the cleanup: cubic outline repair; full feature-file
+rehabilitation (compiles + shapes Arabic identically to the original — see
+`REHAB.md`); GF vertical metrics, naming, version, copyright, canonical filename,
+hinting; Latin trimmed to exactly **GF Latin Core** (Arabic-focused — extended
+Latin/IPA/Cyrillic dropped from the cmap); tabular (non-kerning) figures; and
+generated Latin combining-mark attachment. See `qa/` for the stage-by-stage
+table. Latin glyphs derive from Crimson and some Arabic from Amiri — both OFL,
+acknowledged in `OFL.txt`.
 
-**Cleared**: nested/transformed/duplicate components, invalid script tags, smart
-dropout (hinting), repo zip hygiene, vertical metrics (win/typo/hhea unified,
-lineGap 0, USE_TYPO_METRICS), family-name compliance, copyright, version format,
-name line-breaks, whitespace widths; **the full feature-file rehabilitation**
-(see `REHAB.md`) — the font now compiles and shapes Arabic, verified
-pixel-identical to the original; and **glyph coverage + case mapping**, filled by
-importing the missing Latin glyphs (®, ľ, ẞ, ɖ, capital schwa, combining horn)
-from Crimson (acknowledged in `OFL.txt`).
-
-**Remaining FAILs (the tail):**
-- `canonical_filename` — release file named `FatemiMaqala-Regular.ttf` (resolved on release).
-- `googlefonts/glyphsets/shape_languages` — Latin **mark attachment** (e.g. Dutch
-  íj́), not missing glyphs; needs Latin combining-mark anchors.
-- `tabular_kerning` — slash/zero kern via kern classes (minor).
-
-The optional Latin `smcp` small-caps feature was dropped, which cleared
-`smallcaps_before_ligatures` and removed a spurious small-caps build artifact.
 
 ## Layout
 - `sources/Fatemi-Maqala-Regular.ufo` — canonical source: cleaned **cubic**

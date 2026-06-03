@@ -1,4 +1,4 @@
-# Font Bakery (check-googlefonts) — progress
+# Font Bakery (check-googlefonts) — PASSING (0 FAIL)
 
 | stage | FAIL |
 |---|---|
@@ -7,20 +7,22 @@
 | + Latin gaps filled from Crimson | 4 |
 | + dropped Latin smcp | 3 |
 | + canonical filename | 2 |
-| + trimmed Latin to GF Latin Core | 2* |
+| + trimmed Latin to GF Latin Core | 2 |
 | + figures made non-kerning (tabular) | 1 |
+| + Latin combining-mark attachment | **0** |
 
-\* the trim dropped the spurious GF Phonetics target; tabular then surfaced as
-the figures-kern issue, now fixed.
+## Summary of the cleanup
 
-## Remaining FAIL (1)
+- **Outlines:** quadratic→cubic, overlaps removed, directions corrected.
+- **Feature file rehabilitated** (REHAB.md): compiles under feaLib; Arabic shaping
+  verified pixel-identical to the original.
+- **Metrics/naming/hinting:** GF schema (win=typo=hhea, lineGap 0, USE_TYPO_METRICS),
+  family 'Fatemi Maqala', version, copyright, canonical filename.
+- **Latin scope:** trimmed to exactly GF Latin Core (Arabic-focused); extended/IPA/
+  Cyrillic dropped from cmap. Latin from Crimson; some Arabic from Amiri (OFL.txt).
+- **Figures:** made non-kerning (tabular).
+- **Latin combining-mark attachment:** generated anchors so combining accents attach
+  to Latin bases and the dotted circle (clears shape_languages + dotted_circle).
 
-- `googlefonts/glyphsets/shape_languages` — under `GF_TransLatin_Arabic`, the only
-  failing item is Dutch `íj́` (combining acute must attach to j/J). Needs Latin
-  combining-mark attachment anchors.
-
-## Scope decision applied
-Latin was trimmed to exactly **GF Latin Core** (the mandatory GF minimum); the
-inherited extended-Latin/IPA/Cyrillic codepoints were dropped from the cmap so
-the font is Arabic-focused and no longer held to the full GF Phonetics glyphset.
-Arabic coverage and shaping are unchanged.
+All `check-googlefonts` FAILs resolved. WARNs remain (e.g. some unreachable
+unencoded glyphs retained for kerning) and can be pruned before submission.
