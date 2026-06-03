@@ -3,7 +3,7 @@
 # The feature file has been rehabilitated (see ../REHAB.md); this builds the
 # shaping-complete font. Vertical metrics are post-patched until folded in.
 sources:
-  - Fatemi-Maqala-Regular.ufo
+  - FatemiMaqala-Regular.ufo
 familyName: Fatemi Maqala
 outputDir: ../fonts
 buildVariable: false

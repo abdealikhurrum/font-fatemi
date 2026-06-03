@@ -2,10 +2,10 @@
     "result": {
         "(not finished)": 0,
         "ERROR": 7,
-        "FAIL": 3,
+        "FAIL": 2,
         "INFO": 6,
-        "PASS": 91,
-        "SKIP": 110,
+        "PASS": 100,
+        "SKIP": 102,
         "WARN": 19
     },
     "sections": [
@@ -15,7 +15,7 @@
                     "description": "Check hhea.caretSlopeRise and hhea.caretSlopeRun",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/caret_slope>",
@@ -47,7 +47,7 @@
                     "description": "Is the CFF2 subr/gsubr call depth > 10?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/cff2_call_depth>",
@@ -79,7 +79,7 @@
                     "description": "Does the font's CFF table top dict strings fit into the ASCII range?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/cff_ascii_strings>",
@@ -111,7 +111,7 @@
                     "description": "Is the CFF subr/gsubr call depth > 10?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/cff_call_depth>",
@@ -143,7 +143,7 @@
                     "description": "Does the font use deprecated CFF operators or operations?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/cff_deprecated_operators>",
@@ -175,7 +175,7 @@
                     "description": "Check code page character ranges",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/code_pages>",
@@ -207,7 +207,7 @@
                     "description": "The font should not need a DSIG table anymore.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/dsig>",
@@ -248,10 +248,10 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "unfulfilled-conditions",
-                                "message": "Unfulfilled Conditions: RIBBI_ttFonts"
+                                "code": "ok",
+                                "message": "All looks good!"
                             },
-                            "status": "SKIP"
+                            "status": "PASS"
                         }
                     ],
                     "module": "opentype.family.bold_italic_unique_for_nameid1",
@@ -259,7 +259,7 @@
                         "https://github.com/fonttools/fontbakery/pull/2388"
                     ],
                     "rationale": "\n        Per the OpenType spec: name ID 1 'is used in combination with Font Subfamily\n        name (name ID 2), and should be shared among at most four fonts that differ\n        only in weight or style.\n\n        This four-way distinction should also be reflected in the OS/2.fsSelection\n        field, using bits 0 and 5.\n    ",
-                    "result": "SKIP",
+                    "result": "PASS",
                     "severity": null
                 },
                 {
@@ -344,7 +344,7 @@
                     "description": "Font follows the family naming recommendations?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/family_naming_recommendations>",
@@ -428,7 +428,7 @@
                     "description": "Checking font version fields (head and name table).",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/font_version>",
@@ -460,7 +460,7 @@
                     "description": "Checking OS/2 fsSelection value.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/fsselection>",
@@ -474,10 +474,10 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "unfulfilled-conditions",
-                                "message": "Unfulfilled Conditions: style"
+                                "code": "ok",
+                                "message": "All looks good!"
                             },
-                            "status": "SKIP"
+                            "status": "PASS"
                         }
                     ],
                     "module": "opentype.fsselection",
@@ -486,14 +486,14 @@
                         "https://github.com/fonttools/fontbakery/pull/2382"
                     ],
                     "rationale": "\n        The OS/2.fsSelection field is a bit field used to specify the stylistic\n        qualities of the font - in particular, it specifies to some operating\n        systems whether the font is italic (bit 0), bold (bit 5) or regular\n        (bit 6).\n\n        This check verifies that the fsSelection field is set correctly for the\n        font style. For a family of static fonts created in GlyphsApp, this is\n        set by using the style linking checkboxes in the exports settings.\n\n        Additionally, the bold and italic bits in OS/2.fsSelection must match the\n        bold and italic bits in head.macStyle per the OpenType spec.\n    ",
-                    "result": "SKIP",
+                    "result": "PASS",
                     "severity": null
                 },
                 {
                     "description": "Axes and named instances fall within correct ranges?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/fvar/axis_ranges_correct>",
@@ -527,7 +527,7 @@
                     "description": "Axes and named instances fall within correct ranges?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/fvar/regular_coords_correct>",
@@ -560,7 +560,7 @@
                     "description": "Check mark characters are in GDEF mark glyph class.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/gdef_mark_chars>",
@@ -592,7 +592,7 @@
                     "description": "Check GDEF mark glyph class doesn't have characters that are not marks.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/gdef_non_mark_chars>",
@@ -624,7 +624,7 @@
                     "description": "Check glyphs in mark glyph class are non-spacing.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/gdef_spacing_marks>",
@@ -656,7 +656,7 @@
                     "description": "Check glyphs do not have duplicate components which have the same x,y coordinates.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/glyf_non_transformed_duplicate_components>",
@@ -688,7 +688,7 @@
                     "description": "Is there any unused data at the end of the glyf table?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/glyf_unused_data>",
@@ -720,7 +720,7 @@
                     "description": "Checking post.italicAngle value.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/italic_angle>",
@@ -734,10 +734,10 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "unfulfilled-conditions",
-                                "message": "Unfulfilled Conditions: style"
+                                "code": null,
+                                "message": "Value of post.italicAngle is 0.0 with style=\"Regular\"."
                             },
-                            "status": "SKIP"
+                            "status": "PASS"
                         }
                     ],
                     "module": "opentype.italic_angle",
@@ -745,14 +745,14 @@
                         "https://github.com/fonttools/fontbakery/issues/4829"
                     ],
                     "rationale": "\n        The 'post' table italicAngle property should be a reasonable amount, likely\n        not more than 30\u00b0. Note that in the OpenType specification, the value is\n        negative for a rightward lean.\n\n        https://docs.microsoft.com/en-us/typography/opentype/spec/post\n    ",
-                    "result": "SKIP",
+                    "result": "PASS",
                     "severity": null
                 },
                 {
                     "description": "Is there a usable \"kern\" table declared in the font?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/kern_table>",
@@ -786,7 +786,7 @@
                     "description": "Does the font have any invalid feature tags?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/layout_valid_feature_tags>",
@@ -818,7 +818,7 @@
                     "description": "Does the font have any invalid language tags?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/layout_valid_language_tags>",
@@ -850,7 +850,7 @@
                     "description": "Does the font have any invalid script tags?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/layout_valid_script_tags>",
@@ -882,7 +882,7 @@
                     "description": "Does the number of glyphs in the loca table match the maxp table?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/loca/maxp_num_glyphs>",
@@ -914,7 +914,7 @@
                     "description": "Checking head.macStyle value.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/mac_style>",
@@ -928,10 +928,17 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "unfulfilled-conditions",
-                                "message": "Unfulfilled Conditions: style"
+                                "code": null,
+                                "message": "head macStyle ITALIC bit is properly set."
                             },
-                            "status": "SKIP"
+                            "status": "PASS"
+                        },
+                        {
+                            "message": {
+                                "code": null,
+                                "message": "head macStyle BOLD bit is properly set."
+                            },
+                            "status": "PASS"
                         }
                     ],
                     "module": "opentype.mac_style",
@@ -939,14 +946,14 @@
                         "https://github.com/fonttools/fontbakery/issues/4829"
                     ],
                     "rationale": "\n        The values of the flags on the macStyle entry on the 'head' OpenType table\n        that describe whether a font is bold and/or italic must be coherent with the\n        actual style of the font as inferred by its filename.\n    ",
-                    "result": "SKIP",
+                    "result": "PASS",
                     "severity": null
                 },
                 {
                     "description": "MaxAdvanceWidth is consistent with values in the Hmtx and Hhea tables?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/maxadvancewidth>",
@@ -978,7 +985,7 @@
                     "description": "Checking correctness of monospaced metadata.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/monospace>",
@@ -1010,7 +1017,7 @@
                     "description": "Check name table for empty records.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/name/empty_records>",
@@ -1042,7 +1049,7 @@
                     "description": "Does full font name begin with the font family name?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/name/match_familyname_fullfont>",
@@ -1074,7 +1081,7 @@
                     "description": "Name table ID 6 (PostScript name) must be consistent across platforms.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/name/postscript_name_consistency>",
@@ -1106,7 +1113,7 @@
                     "description": "CFF table FontName must match name table ID 6 (PostScript name).",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/name/postscript_vs_cff>",
@@ -1138,7 +1145,7 @@
                     "description": "Check for points out of bounds.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/points_out_of_bounds>",
@@ -1170,7 +1177,7 @@
                     "description": "PostScript name follows OpenType specification requirements?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/postscript_name>",
@@ -1202,7 +1209,7 @@
                     "description": "Font has correct post table version?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/post_table_version>",
@@ -1237,7 +1244,7 @@
                     "description": "Checking direction of slnt axis angles.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/slant_direction>",
@@ -1297,7 +1304,7 @@
                     "description": "Checking unitsPerEm value is reasonable.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/unitsperem>",
@@ -1329,7 +1336,7 @@
                     "description": "Are there unwanted Apple tables?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/unwanted_aat_tables>",
@@ -1361,7 +1368,7 @@
                     "description": "Validates that all of the instance records in a given font have distinct data.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/varfont/distinct_instance_records>",
@@ -1419,7 +1426,7 @@
                     "description": "Validate foundry-defined design-variation axis tag names.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/varfont/foundry_defined_tag_name>",
@@ -1451,7 +1458,7 @@
                     "description": "Validates that all of the instance records in a given font have the same size.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/varfont/same_size_instance_records>",
@@ -1483,7 +1490,7 @@
                     "description": "All fvar axes have a correspondent Axis Record on STAT table?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/varfont/STAT_axis_record_for_each_axis>",
@@ -1515,7 +1522,7 @@
                     "description": "Validates subfamilyNameID and postScriptNameID for the default instance record",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/varfont/valid_default_instance_nameids>",
@@ -1547,7 +1554,7 @@
                     "description": "Validates that all of the name IDs in an instance record are within the correct range",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/varfont/valid_nameids>",
@@ -1580,7 +1587,7 @@
                     "description": "Checking OS/2 achVendID against configuration.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/vendor_id>",
@@ -1612,7 +1619,7 @@
                     "description": "Checking if OS/2 usWeightClass matches fvar.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/weight_class_fvar>",
@@ -1644,7 +1651,7 @@
                     "description": "Check if OS/2 xAvgCharWidth is correct.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: OpenType Specification Checks>",
                         "<FontBakeryCheck:opentype/xavgcharwidth>",
@@ -1679,8 +1686,8 @@
                 null
             ],
             "result": {
-                "PASS": 30,
-                "SKIP": 21,
+                "PASS": 34,
+                "SKIP": 17,
                 "WARN": 2
             }
         },
@@ -1690,7 +1697,7 @@
                     "description": "List all superfamily filepaths",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Superfamily Checks>",
                         "<FontBakeryCheck:superfamily/list>",
@@ -1722,7 +1729,7 @@
                     "description": "Each font in set of sibling families must have the same set of vertical metrics values.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Superfamily Checks>",
                         "<FontBakeryCheck:superfamily/vertical_metrics>",
@@ -1767,7 +1774,7 @@
                     "description": "Check accent of Lcaron, dcaron, lcaron, tcaron",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:alt_caron>",
@@ -1806,7 +1813,7 @@
                     "description": "Check that glyph for U+0674 ARABIC LETTER HIGH HAMZA is not a mark.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:arabic_high_hamza>",
@@ -1838,7 +1845,7 @@
                     "description": "Check that Arabic spacing symbols U+FBB2\u2013FBC1 aren't classified as marks.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:arabic_spacing_symbols>",
@@ -1870,7 +1877,7 @@
                     "description": "Check base characters have non-zero advance width.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:base_has_width>",
@@ -1902,7 +1909,7 @@
                     "description": "Check if uppercase glyphs are vertically centered.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:caps_vertically_centered>",
@@ -1934,7 +1941,7 @@
                     "description": "Ensure the font supports case swapping for all its glyphs.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:case_mapping>",
@@ -1966,7 +1973,7 @@
                     "description": "Does the font contain chws and vchw features?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:cjk_chws_feature>",
@@ -1998,7 +2005,7 @@
                     "description": "Any CJK font should contain at least a minimal set of 150 CJK characters.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:cjk_not_enough_glyphs>",
@@ -2030,7 +2037,7 @@
                     "description": "Color layers should have a minimum brightness.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:color_cpal_brightness>",
@@ -2062,7 +2069,7 @@
                     "description": "Check if each glyph has the recommended amount of contours.",
                     "documentation": "This check is useful to assure glyphs aren't incorrectly constructed.\n\nThe desired_glyph_data module contains the 'recommended' countour count\nfor encoded glyphs. The contour counts are derived from fonts which were\nchosen for their quality and unique design decisions for particular glyphs.\n\nIn the future, additional glyph data can be included. A good addition would\nbe the 'recommended' anchor counts for each glyph.",
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:contour_count>",
@@ -2094,7 +2101,7 @@
                     "description": "Does font file include unacceptable control character glyphs?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:control_chars>",
@@ -2126,7 +2133,7 @@
                     "description": "Put an empty glyph on GID 1 right after the .notdef glyph for COLRv0 fonts.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:empty_glyph_on_gid1_for_colrv0>",
@@ -2211,7 +2218,7 @@
                     "description": "Checking OS/2 usWinAscent & usWinDescent.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:family/win_ascent_and_descent>",
@@ -2243,7 +2250,7 @@
                     "description": "All name entries referenced by fvar instances exist on the name table?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:fvar_name_entries>",
@@ -2275,7 +2282,7 @@
                     "description": "Ensure files are not too large.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:file_size>",
@@ -2307,7 +2314,7 @@
                     "description": "Do we have the latest version of FontBakery installed?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:fontbakery_version>",
@@ -2339,7 +2346,7 @@
                     "description": "Familyname must be unique according to namecheck.fontdata.com",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:fontdata_namecheck>",
@@ -2354,7 +2361,7 @@
                         {
                             "message": {
                                 "code": "namecheck-service",
-                                "message": "Failed to access: https://namecheck.fontdata.com/api/?q=Fatemi.\n\t\tThis check relies on the external service http://namecheck.fontdata.com via the internet. While the service cannot be reached or does not respond this check is broken.\n\n\t\tYou can exclude this check with the command line option:\n\t\t-x fontdata_namecheck\n\n\t\tOr you can wait until the service is available again.\n\t\tIf the problem persists please report this issue at: https://github.com/fonttools/fontbakery/issues\n\n\t\tOriginal error message:\n\t\t<class 'requests.exceptions.JSONDecodeError'>"
+                                "message": "Failed to access: https://namecheck.fontdata.com/api/?q=FatemiMaqala.\n\t\tThis check relies on the external service http://namecheck.fontdata.com via the internet. While the service cannot be reached or does not respond this check is broken.\n\n\t\tYou can exclude this check with the command line option:\n\t\t-x fontdata_namecheck\n\n\t\tOr you can wait until the service is available again.\n\t\tIf the problem persists please report this issue at: https://github.com/fonttools/fontbakery/issues\n\n\t\tOriginal error message:\n\t\t<class 'requests.exceptions.JSONDecodeError'>"
                             },
                             "status": "ERROR"
                         }
@@ -2371,7 +2378,7 @@
                     "description": "Ensure that the font can be rasterized by FreeType.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:freetype_rasterizer>",
@@ -2403,7 +2410,7 @@
                     "description": "Ensure no GPOS7 lookups are present.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:gpos7>",
@@ -2435,7 +2442,7 @@
                     "description": "Does GPOS table have kerning information? This check skips monospaced fonts as defined by post.isFixedPitch value",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:gpos_kerning_info>",
@@ -2467,7 +2474,7 @@
                     "description": "Show hinting filesize impact.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:hinting_impact>",
@@ -2482,7 +2489,7 @@
                         {
                             "message": {
                                 "code": "size-impact",
-                                "message": "Hinting filesize impact:\n\n |               | /tmp/gfwork/repobuild/ttf/Fatemi-Maqala-Regular.ttf     |\n |:------------- | ---------------:|\n | Dehinted Size | 350.3kb |\n | Hinted Size   | 455.5kb   |\n | Increase      | 105.2kb      |\n | Change        | 30.0 %  |\n"
+                                "message": "Hinting filesize impact:\n\n |               | /tmp/gfwork/repobuild/ttf/FatemiMaqala-Regular.ttf     |\n |:------------- | ---------------:|\n | Dehinted Size | 350.5kb |\n | Hinted Size   | 455.7kb   |\n | Increase      | 105.2kb      |\n | Change        | 30.0 %  |\n"
                             },
                             "status": "INFO"
                         }
@@ -2499,7 +2506,7 @@
                     "description": "PPEM must be an integer on hinted fonts.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:integer_ppem_if_hinted>",
@@ -2531,7 +2538,7 @@
                     "description": "Detect any interpolation issues in the font.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:interpolation_issues>",
@@ -2563,7 +2570,7 @@
                     "description": "Check that legacy accents aren't used in composite glyphs.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:legacy_accents>",
@@ -2595,7 +2602,7 @@
                     "description": "Are there caret positions declared for every ligature?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:ligature_carets>",
@@ -2627,7 +2634,7 @@
                     "description": "Checking Vertical Metric Linegaps.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:linegaps>",
@@ -2660,7 +2667,7 @@
                     "description": "Ensure variable fonts include an avar table.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:mandatory_avar_table>",
@@ -2692,7 +2699,7 @@
                     "description": "Font contains '.notdef' as its first glyph?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:mandatory_glyphs>",
@@ -2724,7 +2731,7 @@
                     "description": "Check math signs have the same width.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:math_signs_width>",
@@ -2756,7 +2763,7 @@
                     "description": "Ensure small caps glyphs are available.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:missing_small_caps_glyphs>",
@@ -2788,7 +2795,7 @@
                     "description": "Are there disallowed characters in the NAME table?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:name/char_restrictions>",
@@ -2822,7 +2829,7 @@
                     "description": "Combined length of family and style must not exceed 31 characters.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:name/family_and_style_max_length>",
@@ -2855,7 +2862,7 @@
                     "description": "Name table records must not have trailing spaces.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:name/trailing_spaces>",
@@ -2887,7 +2894,7 @@
                     "description": "Description strings in the name table must not contain copyright info.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:name/no_copyright_on_description>",
@@ -2919,7 +2926,7 @@
                     "description": "Check name table IDs 1, 2, 16, 17 to conform to Italic style.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:name/italic_names>",
@@ -2933,8 +2940,8 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "unfulfilled-conditions",
-                                "message": "Unfulfilled Conditions: style"
+                                "code": null,
+                                "message": "Font is not Italic."
                             },
                             "status": "SKIP"
                         }
@@ -2951,7 +2958,7 @@
                     "description": "Ensure glyphs do not have components which are themselves components.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:nested_components>",
@@ -2983,7 +2990,7 @@
                     "description": "Checking OS/2 Metrics match hhea Metrics.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:os2_metrics_match_hhea>",
@@ -3015,7 +3022,7 @@
                     "description": "Checking with ots-sanitize.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:ots>",
@@ -3047,7 +3054,7 @@
                     "description": "Check there are no overlapping path segments",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:overlapping_path_segments>",
@@ -3079,7 +3086,7 @@
                     "description": "Font contains all required tables?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:required_tables>",
@@ -3118,7 +3125,7 @@
                     "description": "Ensure indic fonts have the Indian Rupee Sign glyph.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:rupee>",
@@ -3150,7 +3157,7 @@
                     "description": "Font has the proper sfntVersion value?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:sfnt_version>",
@@ -3182,7 +3189,7 @@
                     "description": "Ensure 'smcp' (small caps) lookups are defined before ligature lookups in the 'GSUB' table.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:smallcaps_before_ligatures>",
@@ -3214,7 +3221,7 @@
                     "description": "Ensure smart dropout control is enabled in \"prep\" table instructions.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:smart_dropout>",
@@ -3246,7 +3253,7 @@
                     "description": "Does the font contain a soft hyphen?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:soft_hyphen>",
@@ -3279,7 +3286,7 @@
                     "description": "Checking STAT table entries in static fonts.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:STAT_in_statics>",
@@ -3311,7 +3318,7 @@
                     "description": "Check correctness of STAT table strings",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:STAT_strings>",
@@ -3343,7 +3350,7 @@
                     "description": "Ensure Stylistic Sets have description.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:stylisticset_description>",
@@ -3382,7 +3389,7 @@
                     "description": "Check tabular widths don't have kerning.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:tabular_kerning>",
@@ -3397,357 +3404,14 @@
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between Ydieresis and zero is -36, should be 0"
+                                "message": "Kerning between Aacute and zero is -20, should be 0"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Ydieresis is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni0232 and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni0232 is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Atilde and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Atilde is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EB0 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EB0 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EA4 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EA4 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EB6 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EB6 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between V and zero is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and V is -34, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E3A and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Wcircumflex and zero is -24, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Wcircumflex is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and backslash is -30, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Lacute and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Aringacute and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Aringacute is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Y and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Y is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Wdieresis and zero is -24, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Wdieresis is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EA2 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EA2 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between parenleft and zero is -42, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EF6 and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EF6 is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Ygrave and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Ygrave is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Wacute and zero is -24, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Wacute is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Abreve and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Abreve is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EF4 and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EF4 is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EAE and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EAE is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Ldot and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EAA and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EAA is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between A and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and A is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EB2 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EB2 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E38 and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Lslash and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between L and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and bracketright is -42, should be 0"
+                                "message": "Kerning between zero and Aacute is -20, should be 0"
                             },
                             "status": "FAIL"
                         },
@@ -3768,6 +3432,55 @@
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and bracketright is -42, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Yacute and zero is -36, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and Yacute is -44, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and backslash is -30, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and parenright is -42, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1EB2 and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1EB2 is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
                                 "message": "Kerning between uni1E7C and zero is -28, should be 0"
                             },
                             "status": "FAIL"
@@ -3782,126 +3495,21 @@
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EF8 and zero is -36, should be 0"
+                                "message": "Kerning between uni1E3A and seven is -26, should be 0"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EF8 is -44, should be 0"
+                                "message": "Kerning between uni0232 and zero is -36, should be 0"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E88 and zero is -24, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1E88 is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EAC and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EAC is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E00 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1E00 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Adieresis and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Adieresis is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E7E and zero is -28, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1E7E is -34, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EA0 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EA0 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EA6 and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EA6 is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E3C and seven is -26, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E36 and seven is -26, should be 0"
+                                "message": "Kerning between zero and uni0232 is -44, should be 0"
                             },
                             "status": "FAIL"
                         },
@@ -3922,70 +3530,133 @@
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between W and zero is -24, should be 0"
+                                "message": "Kerning between uni1EF4 and zero is -36, should be 0"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and W is -28, should be 0"
+                                "message": "Kerning between zero and uni1EF4 is -44, should be 0"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and parenright is -42, should be 0"
+                                "message": "Kerning between Aring and zero is -20, should be 0"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between Lcommaaccent and seven is -26, should be 0"
+                                "message": "Kerning between zero and Aring is -20, should be 0"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between Wgrave and zero is -24, should be 0"
+                                "message": "Kerning between uni1EA4 and zero is -20, should be 0"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Wgrave is -28, should be 0"
+                                "message": "Kerning between zero and uni1EA4 is -20, should be 0"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1EA8 and zero is -20, should be 0"
+                                "message": "Kerning between parenleft and zero is -42, should be 0"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1EA8 is -20, should be 0"
+                                "message": "Kerning between Lcaron and seven is -26, should be 0"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between uni1E8E and zero is -36, should be 0"
+                                "message": "Kerning between Wcircumflex and zero is -24, should be 0"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and uni1E8E is -44, should be 0"
+                                "message": "Kerning between zero and Wcircumflex is -28, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1E7E and zero is -28, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1E7E is -34, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1EA2 and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1EA2 is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between A and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and A is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between slash and zero is -32, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Lslash and seven is -26, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1E36 and seven is -26, should be 0"
                             },
                             "status": "FAIL"
                         },
@@ -4006,6 +3677,258 @@
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
+                                "message": "Kerning between Abreve and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and Abreve is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Ydieresis and zero is -36, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and Ydieresis is -44, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1EA0 and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1EA0 is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Agrave and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and Agrave is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1E3C and seven is -26, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1EB6 and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1EB6 is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between W and zero is -24, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and W is -28, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1EB0 and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1EB0 is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Ldot and seven is -26, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1EF6 and zero is -36, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1EF6 is -44, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1E8E and zero is -36, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1E8E is -44, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Wdieresis and zero is -24, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and Wdieresis is -28, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Lcommaaccent and seven is -26, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Y and zero is -36, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and Y is -44, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Aringacute and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and Aringacute is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1EAE and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1EAE is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Ygrave and zero is -36, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and Ygrave is -44, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Lacute and seven is -26, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between V and zero is -28, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and V is -34, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1EAA and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1EAA is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
                                 "message": "Kerning between uni1EB4 and zero is -20, should be 0"
                             },
                             "status": "FAIL"
@@ -4014,6 +3937,34 @@
                             "message": {
                                 "code": "has-tabular-kerning",
                                 "message": "Kerning between zero and uni1EB4 is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Atilde and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and Atilde is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1EA6 and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1EA6 is -20, should be 0"
                             },
                             "status": "FAIL"
                         },
@@ -4048,62 +3999,6 @@
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between Agrave and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Agrave is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Aacute and zero is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Aacute is -20, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between slash and zero is -32, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between Yacute and zero is -36, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Yacute is -44, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
-                                "message": "Kerning between bracketleft and zero is -42, should be 0"
-                            },
-                            "status": "FAIL"
-                        },
-                        {
-                            "message": {
-                                "code": "has-tabular-kerning",
                                 "message": "Kerning between uni01CD and zero is -20, should be 0"
                             },
                             "status": "FAIL"
@@ -4118,21 +4013,133 @@
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between Aring and zero is -20, should be 0"
+                                "message": "Kerning between uni1E88 and zero is -24, should be 0"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between zero and Aring is -20, should be 0"
+                                "message": "Kerning between zero and uni1E88 is -28, should be 0"
                             },
                             "status": "FAIL"
                         },
                         {
                             "message": {
                                 "code": "has-tabular-kerning",
-                                "message": "Kerning between Lcaron and seven is -26, should be 0"
+                                "message": "Kerning between uni1E38 and seven is -26, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Adieresis and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and Adieresis is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Wacute and zero is -24, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and Wacute is -28, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between bracketleft and zero is -42, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1EF8 and zero is -36, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1EF8 is -44, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between L and seven is -26, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between Wgrave and zero is -24, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and Wgrave is -28, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1EA8 and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1EA8 is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1EAC and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1EAC is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between uni1E00 and zero is -20, should be 0"
+                            },
+                            "status": "FAIL"
+                        },
+                        {
+                            "message": {
+                                "code": "has-tabular-kerning",
+                                "message": "Kerning between zero and uni1E00 is -20, should be 0"
                             },
                             "status": "FAIL"
                         }
@@ -4149,7 +4156,7 @@
                     "description": "Ensure component transforms do not perform scaling or rotation.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:transformed_components>",
@@ -4181,7 +4188,7 @@
                     "description": "Checking with fontTools.ttx",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:ttx_roundtrip>",
@@ -4213,7 +4220,7 @@
                     "description": "Checking that the typoAscender exceeds the yMax of the /Agrave.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:typoascender_exceeds_Agrave>",
@@ -4245,7 +4252,7 @@
                     "description": "Font contains unique glyph names?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:unique_glyphnames>",
@@ -4277,7 +4284,7 @@
                     "description": "Check font contains no unreachable glyphs",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:unreachable_glyphs>",
@@ -4309,7 +4316,7 @@
                     "description": "Glyph names are all valid?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:valid_glyphnames>",
@@ -4342,7 +4349,7 @@
                     "description": "The variable font 'wght' (Weight) axis coordinate must be 700 on the 'Bold' instance.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:varfont/bold_wght_coord>",
@@ -4400,7 +4407,7 @@
                     "description": "Ensure VFs with duplexed axes do not vary horizontal advance.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:varfont/duplexed_axis_reflow>",
@@ -4432,7 +4439,7 @@
                     "description": "Check variable font instances don't have duplicate names",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:varfont/duplicate_instance_names>",
@@ -4464,7 +4471,7 @@
                     "description": "Ensure the font's instances are in the correct order.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:varfont/instances_in_order>",
@@ -4496,7 +4503,7 @@
                     "description": "Ensure VFs do not contain (yet) the ital axis.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:varfont/unsupported_axes>",
@@ -4528,7 +4535,7 @@
                     "description": "Font contains glyphs for whitespace characters?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:whitespace_glyphs>",
@@ -4560,7 +4567,7 @@
                     "description": "Whitespace glyphs have ink?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:whitespace_ink>",
@@ -4592,7 +4599,7 @@
                     "description": "Space and non-breaking space have the same width?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Universal Profile Checks>",
                         "<FontBakeryCheck:whitespace_widths>",
@@ -4642,7 +4649,7 @@
                     "description": "Validate size, and resolution of article images, and ensure article page has minimum length and includes visual assets.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Article Checks>",
                         "<FontBakeryCheck:googlefonts/article/images>",
@@ -4686,7 +4693,7 @@
                     "description": "Validate METADATA.pb axes values are within gf_axisregistry bounds.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/axisregistry_bounds>",
@@ -4718,7 +4725,7 @@
                     "description": "Validate METADATA.pb axes tags are defined in gf_axisregistry.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/axisregistry_valid_tags>",
@@ -4750,7 +4757,7 @@
                     "description": "Does METADATA.pb copyright field contain broken links?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/broken_links>",
@@ -4783,7 +4790,7 @@
                     "description": "METADATA.pb: Font styles are named canonically?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/canonical_style_names>",
@@ -4815,7 +4822,7 @@
                     "description": "METADATA.pb: Check that font weight has a canonical value.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/canonical_weight_value>",
@@ -4847,7 +4854,7 @@
                     "description": "Check samples can be rendered.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/can_render_samples>",
@@ -4880,7 +4887,7 @@
                     "description": "Ensure METADATA.pb category field is valid.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/category>",
@@ -4912,7 +4919,7 @@
                     "description": "Check if category on METADATA.pb matches what can be inferred from the family name.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/category_hints>",
@@ -4944,7 +4951,7 @@
                     "description": "Validate VF axes match the ones declared on METADATA.pb.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/consistent_axis_enumeration>",
@@ -4976,7 +4983,7 @@
                     "description": "METADATA.pb: Check URL on copyright string is the same as in repository_url field.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/consistent_repo_urls>",
@@ -5008,7 +5015,7 @@
                     "description": "Validate 'date_added' field on METADATA.pb.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/date_added>",
@@ -5040,7 +5047,7 @@
                     "description": "METADATA.pb: Designers are listed correctly on the Google Fonts catalog?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/designer_profiles>",
@@ -5072,7 +5079,7 @@
                     "description": "Multiple values in font designer field in METADATA.pb must be separated by commas.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/designer_values>",
@@ -5104,7 +5111,7 @@
                     "description": "At least one designer is declared in METADATA.pb",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/empty_designer>",
@@ -5136,7 +5143,7 @@
                     "description": "Ensure METADATA.pb does not use escaped strings.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/escaped_strings>",
@@ -5168,7 +5175,7 @@
                     "description": "Check font family directory name.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/family_directory_name>",
@@ -5200,7 +5207,7 @@
                     "description": "Check that METADATA.pb family values are all the same.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/familyname>",
@@ -5232,7 +5239,7 @@
                     "description": "METADATA.pb: Font filenames match font.filename entries?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/filenames>",
@@ -5264,7 +5271,7 @@
                     "description": "Ensure there is a regular style defined in METADATA.pb.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/has_regular>",
@@ -5296,7 +5303,7 @@
                     "description": "Check METADATA.pb includes production subsets.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/includes_production_subsets>",
@@ -5328,7 +5335,7 @@
                     "description": "METADATA.pb font.filename and font.post_script_name fields have equivalent values?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/match_filename_postscript>",
@@ -5360,7 +5367,7 @@
                     "description": "METADATA.pb font.full_name and font.post_script_name fields have equivalent values ?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/match_fullname_postscript>",
@@ -5392,7 +5399,7 @@
                     "description": "METADATA.pb: Check font name is the same as family name.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/match_name_familyname>",
@@ -5424,7 +5431,7 @@
                     "description": "METADATA.pb weight matches postScriptName for static fonts.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/match_weight_postscript>",
@@ -5456,7 +5463,7 @@
                     "description": "METADATA.pb should contain at least \"menu\" and \"latin\" subsets.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/menu_and_latin>",
@@ -5489,7 +5496,7 @@
                     "description": "METADATA.pb: Validate family.minisite_url field.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/minisite_url>",
@@ -5521,7 +5528,7 @@
                     "description": "METADATA.pb font.name and font.full_name fields match the values declared on the name table?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/nameid/family_and_full_names>",
@@ -5553,7 +5560,7 @@
                     "description": "METADATA.pb font.name value should be same as the family name declared on the name table.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/nameid/font_name>",
@@ -5568,7 +5575,7 @@
                         {
                             "message": {
                                 "code": "unfulfilled-conditions",
-                                "message": "Unfulfilled Conditions: font_metadata, style"
+                                "message": "Unfulfilled Conditions: font_metadata"
                             },
                             "status": "SKIP"
                         }
@@ -5586,7 +5593,7 @@
                     "description": "Checks METADATA.pb font.post_script_name matches postscript name declared on the name table.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/nameid/post_script_name>",
@@ -5618,7 +5625,7 @@
                     "description": "Check METADATA.pb parse correctly.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/parses>",
@@ -5650,7 +5657,7 @@
                     "description": "METADATA.pb: Check for primary_script",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/primary_script>",
@@ -5682,7 +5689,7 @@
                     "description": "METADATA.pb: Regular should be 400.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/regular_is_400>",
@@ -5714,7 +5721,7 @@
                     "description": "Check METADATA.pb file only contains a single CJK subset.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/single_cjk_subset>",
@@ -5746,7 +5753,7 @@
                     "description": "METADATA.pb subsets should be alphabetically ordered.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/subsets_order>",
@@ -5778,7 +5785,7 @@
                     "description": "Ensure METADATA.pb lists all font binaries.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/undeclared_fonts>",
@@ -5810,7 +5817,7 @@
                     "description": "METADATA.pb: check if fonts field only has unique \"full_name\" values.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/unique_full_name_values>",
@@ -5842,7 +5849,7 @@
                     "description": "METADATA.pb: check if fonts field only contains unique style:weight pairs.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/unique_weight_style_pairs>",
@@ -5874,7 +5881,7 @@
                     "description": "Check for codepoints not covered by METADATA subsets.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/unreachable_subsetting>",
@@ -5889,7 +5896,7 @@
                         {
                             "message": {
                                 "code": "unreachable-subsetting",
-                                "message": "The following codepoints supported by the font are not covered by\n    any subsets defined in the font's metadata file, and will never\n    be served. You can solve this by either manually adding additional\n    subset declarations to METADATA.pb, or by editing the glyphset\n    definitions.\n\n * U+02D8 BREVE: try adding one of: yi, canadian-aboriginal\n * U+02D9 DOT ABOVE: try adding one of: yi, canadian-aboriginal\n * U+02DB OGONEK: try adding one of: yi, canadian-aboriginal\n * U+0302 COMBINING CIRCUMFLEX ACCENT: try adding one of: tifinagh, cherokee, coptic, math\n * U+0305 COMBINING OVERLINE: try adding one of: coptic, math, glagolitic, elbasan, gothic\n * U+0306 COMBINING BREVE: try adding one of: old-permic, tifinagh\n * U+0307 COMBINING DOT ABOVE: try adding one of: tifinagh, coptic, math, tai-le, malayalam, duployan, old-permic, syriac, hebrew, canadian-aboriginal, todhri\n * U+030A COMBINING RING ABOVE: try adding one of: duployan, syriac\n * U+030B COMBINING DOUBLE ACUTE ACCENT: try adding one of: cherokee, osage\n * U+030C COMBINING CARON: try adding one of: cherokee, tai-le\n552 more.\n\nUse -F or --full-lists to disable shortening of long lists.\n\nOr you can add the above codepoints to one of the subsets supported by the font: `cyrillic-ext`, `latin`, `latin-ext`, `vietnamese`"
+                                "message": "The following codepoints supported by the font are not covered by\n    any subsets defined in the font's metadata file, and will never\n    be served. You can solve this by either manually adding additional\n    subset declarations to METADATA.pb, or by editing the glyphset\n    definitions.\n\n * U+02D8 BREVE: try adding one of: canadian-aboriginal, yi\n * U+02D9 DOT ABOVE: try adding one of: canadian-aboriginal, yi\n * U+02DB OGONEK: try adding one of: canadian-aboriginal, yi\n * U+0302 COMBINING CIRCUMFLEX ACCENT: try adding one of: math, tifinagh, cherokee, coptic\n * U+0305 COMBINING OVERLINE: try adding one of: glagolitic, coptic, gothic, math, elbasan\n * U+0306 COMBINING BREVE: try adding one of: tifinagh, old-permic\n * U+0307 COMBINING DOT ABOVE: try adding one of: tifinagh, old-permic, tai-le, syriac, hebrew, malayalam, coptic, math, duployan, todhri, canadian-aboriginal\n * U+030A COMBINING RING ABOVE: try adding one of: duployan, syriac\n * U+030B COMBINING DOUBLE ACUTE ACCENT: try adding one of: osage, cherokee\n * U+030C COMBINING CARON: try adding one of: cherokee, tai-le\n552 more.\n\nUse -F or --full-lists to disable shortening of long lists.\n\nOr you can add the above codepoints to one of the subsets supported by the font: `cyrillic-ext`, `latin`, `latin-ext`, `vietnamese`"
                             },
                             "status": "WARN"
                         }
@@ -5907,7 +5914,7 @@
                     "description": "Check for METADATA subsets with zero support.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/unsupported_subsets>",
@@ -5939,7 +5946,7 @@
                     "description": "METADATA.pb font.filename field contains font name in right format?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/valid_filename_values>",
@@ -5954,7 +5961,7 @@
                         {
                             "message": {
                                 "code": "unfulfilled-conditions",
-                                "message": "Unfulfilled Conditions: style, family_metadata"
+                                "message": "Unfulfilled Conditions: family_metadata"
                             },
                             "status": "SKIP"
                         }
@@ -5971,7 +5978,7 @@
                     "description": "METADATA.pb font.full_name field contains font name in right format?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/valid_full_name_values>",
@@ -5986,7 +5993,7 @@
                         {
                             "message": {
                                 "code": "unfulfilled-conditions",
-                                "message": "Unfulfilled Conditions: style, font_metadata"
+                                "message": "Unfulfilled Conditions: font_metadata"
                             },
                             "status": "SKIP"
                         }
@@ -6003,7 +6010,7 @@
                     "description": "Check name ID 25 to end with \"Italic\" for Italic VFs.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/valid_nameid25>",
@@ -6017,10 +6024,10 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "unfulfilled-conditions",
-                                "message": "Unfulfilled Conditions: style"
+                                "code": "ok",
+                                "message": "All looks good!"
                             },
-                            "status": "SKIP"
+                            "status": "PASS"
                         }
                     ],
                     "module": "vendorspecific.googlefonts.metadata.valid_nameid25",
@@ -6030,14 +6037,14 @@
                         "https://typo.social/@arrowtype/110430680157544757"
                     ],
                     "rationale": "\n        Due to a bug in (at least) Adobe Indesign, name ID 25\n        needs to be different for Italic VFs than their Upright counterparts.\n        Google Fonts chooses to append \"Italic\" here.\n    ",
-                    "result": "SKIP",
+                    "result": "PASS",
                     "severity": null
                 },
                 {
                     "description": "METADATA.pb font.post_script_name field contains font name in right format?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/valid_post_script_name_values>",
@@ -6069,7 +6076,7 @@
                     "description": "Check METADATA.pb font weights are correct.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Metadata Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/weightclass>",
@@ -6106,7 +6113,8 @@
             ],
             "result": {
                 "ERROR": 1,
-                "SKIP": 42,
+                "PASS": 1,
+                "SKIP": 41,
                 "WARN": 1
             }
         },
@@ -6116,7 +6124,7 @@
                     "description": "Shapes languages in all GF glyphsets.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Glyphset Checks>",
                         "<FontBakeryCheck:googlefonts/glyphsets/shape_languages>",
@@ -6131,7 +6139,7 @@
                         {
                             "message": {
                                 "code": "failed-language-shaping",
-                                "message": "GF_Phonetics_SinoExt glyphset:\n| FAIL messages | Languages |\n| :--- | :--- |\n| Mandatory orthography codepoints:\n  Shaper didn't attach acutecomb to J when shaping the text '\u00cdJ\u0301'\n  Shaper didn't attach acutecomb to j when shaping the text '\u00edj\u0301' | nl_Latn (Dutch) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u0190, \u025b, \u0272, \u019d, \u0186, \u0254 | bm_Latn (Bambara) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u0186, \u025b, \u0190, \u0254, \u0272, \u019d | dyu_Latn (Dyula) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u025b, \u0190, \u0254, \u0186 | fat_Latn (Fanti) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u018a, \u01b4, \u0257, \u01b3, \u0181, \u0253 | ff_Latn (Fulah) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u0181, \u01b4, \u0253, \u0257, \u018a, \u0198, \u01b3, \u0199 | ha_Latn (Hausa) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u025b, \u0186, \u0254, \u0190 | tw_akuapem_Latn (Akuapem Twi) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u01f9, \u01f8\n  The following mark characters are missing from the font: \u0329\n  Shaper didn't attach acutecomb to uni1EB9 when shaping the text '\u1eb9\u0301'\n  Shaper didn't attach acutecomb to uni1EB8 when shaping the text '\u1eb8\u0301'\n  Shaper didn't attach gravecomb to uni1EB9 when shaping the text '\u1eb9\u0300'\n  Shaper didn't attach gravecomb to uni1EB8 when shaping the text '\u1eb8\u0300'\n  Shaper didn't attach gravecomb to m when shaping the text 'm\u0300'\n  Shaper didn't attach gravecomb to M when shaping the text 'M\u0300'\n  Shaper didn't attach acutecomb to uni1ECD when shaping the text '\u1ecd\u0301'\n  Shaper didn't attach acutecomb to uni1ECC when shaping the text '\u1ecc\u0301'\n  Shaper didn't attach gravecomb to uni1ECD when shaping the text '\u1ecd\u0300'\n  Shaper didn't attach gravecomb to uni1ECC when shaping the text '\u1ecc\u0300' | yo_Latn (Yoruba) |\n"
+                                "message": "GF_Phonetics_SinoExt glyphset:\n| FAIL messages | Languages |\n| :--- | :--- |\n| Mandatory orthography codepoints:\n  Shaper didn't attach acutecomb to J when shaping the text '\u00cdJ\u0301'\n  Shaper didn't attach acutecomb to j when shaping the text '\u00edj\u0301' | nl_Latn (Dutch) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u0186, \u025b, \u019d, \u0254, \u0272, \u0190 | bm_Latn (Bambara) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u025b, \u0254, \u0272, \u0186, \u019d, \u0190 | dyu_Latn (Dyula) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u025b, \u0186, \u0190, \u0254 | fat_Latn (Fanti) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u018a, \u01b3, \u0257, \u0253, \u0181, \u01b4 | ff_Latn (Fulah) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u01b3, \u018a, \u0257, \u0181, \u0253, \u0198, \u0199, \u01b4 | ha_Latn (Hausa) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u0254, \u0186, \u025b, \u0190 | tw_akuapem_Latn (Akuapem Twi) |\n| Mandatory orthography codepoints:\n  The following base characters are missing from the font: \u01f8, \u01f9\n  The following mark characters are missing from the font: \u0329\n  Shaper didn't attach acutecomb to uni1EB9 when shaping the text '\u1eb9\u0301'\n  Shaper didn't attach acutecomb to uni1EB8 when shaping the text '\u1eb8\u0301'\n  Shaper didn't attach gravecomb to uni1EB9 when shaping the text '\u1eb9\u0300'\n  Shaper didn't attach gravecomb to uni1EB8 when shaping the text '\u1eb8\u0300'\n  Shaper didn't attach gravecomb to m when shaping the text 'm\u0300'\n  Shaper didn't attach gravecomb to M when shaping the text 'M\u0300'\n  Shaper didn't attach acutecomb to uni1ECD when shaping the text '\u1ecd\u0301'\n  Shaper didn't attach acutecomb to uni1ECC when shaping the text '\u1ecc\u0301'\n  Shaper didn't attach gravecomb to uni1ECD when shaping the text '\u1ecd\u0300'\n  Shaper didn't attach gravecomb to uni1ECC when shaping the text '\u1ecc\u0300' | yo_Latn (Yoruba) |\n"
                             },
                             "status": "FAIL"
                         },
@@ -6167,7 +6175,7 @@
                     "description": "Does DESCRIPTION file contain broken links?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Description Checks>",
                         "<FontBakeryCheck:googlefonts/description/broken_links>",
@@ -6200,7 +6208,7 @@
                     "description": "DESCRIPTION.en_us.html should end in a linebreak.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Description Checks>",
                         "<FontBakeryCheck:googlefonts/description/eof_linebreak>",
@@ -6232,7 +6240,7 @@
                     "description": "On a family update, the DESCRIPTION.en_us.html file should ideally also be updated.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Description Checks>",
                         "<FontBakeryCheck:googlefonts/description/family_update>",
@@ -6264,7 +6272,7 @@
                     "description": "Does DESCRIPTION file contain a upstream Git repo URL?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Description Checks>",
                         "<FontBakeryCheck:googlefonts/description/git_url>",
@@ -6296,7 +6304,7 @@
                     "description": "Check for presence of an ARTICLE.en_us.html file",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Description Checks>",
                         "<FontBakeryCheck:googlefonts/description/has_article>",
@@ -6330,7 +6338,7 @@
                     "description": "Check the description doesn't contain unsupported html elements",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Description Checks>",
                         "<FontBakeryCheck:googlefonts/description/has_unsupported_elements>",
@@ -6362,7 +6370,7 @@
                     "description": "DESCRIPTION.en_us.html must have more than 200 bytes.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Description Checks>",
                         "<FontBakeryCheck:googlefonts/description/min_length>",
@@ -6394,7 +6402,7 @@
                     "description": "URLs on DESCRIPTION file must not display http(s) prefix.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Description Checks>",
                         "<FontBakeryCheck:googlefonts/description/urls>",
@@ -6427,7 +6435,7 @@
                     "description": "Is this a proper HTML snippet?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Description Checks>",
                         "<FontBakeryCheck:googlefonts/description/valid_html>",
@@ -6481,10 +6489,10 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "unfulfilled-conditions",
-                                "message": "Unfulfilled Conditions: stylenames_are_canonical"
+                                "code": "ok",
+                                "message": "All looks good!"
                             },
-                            "status": "SKIP"
+                            "status": "PASS"
                         }
                     ],
                     "module": "vendorspecific.googlefonts.family.equal_codepoint_coverage",
@@ -6492,7 +6500,7 @@
                         "https://github.com/fonttools/fontbakery/issues/4180"
                     ],
                     "rationale": "\n        For a given family, all fonts must have the same codepoint coverage.\n        This is because we want to avoid the situation where, for example,\n        a character is present in a regular font but missing in the italic style;\n        turning on italic would cause the character to be rendered either as a\n        fake italic (auto-slanted) or to show tofu.\n    ",
-                    "result": "SKIP",
+                    "result": "PASS",
                     "severity": null
                 },
                 {
@@ -6533,10 +6541,10 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "unfulfilled-conditions",
-                                "message": "Unfulfilled Conditions: RIBBI_ttFonts"
+                                "code": "ok",
+                                "message": "All looks good!"
                             },
-                            "status": "SKIP"
+                            "status": "PASS"
                         }
                     ],
                     "module": "vendorspecific.googlefonts.family.tnum_horizontal_metrics",
@@ -6544,7 +6552,7 @@
                         "https://github.com/fonttools/fontbakery/issues/2278"
                     ],
                     "rationale": "\n        Tabular figures need to have the same metrics in all styles in order to allow\n        tables to be set with proper typographic control, but to maintain the placement\n        of decimals and numeric columns between rows.\n\n        Here's a good explanation of this:\n        https://www.typography.com/techniques/fonts-for-financials/#tabular-figs\n    ",
-                    "result": "SKIP",
+                    "result": "PASS",
                     "severity": null
                 }
             ],
@@ -6554,8 +6562,7 @@
                 null
             ],
             "result": {
-                "PASS": 1,
-                "SKIP": 2
+                "PASS": 3
             }
         },
         {
@@ -6564,7 +6571,7 @@
                     "description": "Check family name for GF Guide compliance.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Name table checks>",
                         "<FontBakeryCheck:googlefonts/family_name_compliance>",
@@ -6596,7 +6603,7 @@
                     "description": "Name table entries should not contain line-breaks.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Name table checks>",
                         "<FontBakeryCheck:googlefonts/name/line_breaks>",
@@ -6640,7 +6647,7 @@
                     "description": "Check font has a license.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Licensing Checks>",
                         "<FontBakeryCheck:googlefonts/family/has_license>",
@@ -6672,7 +6679,7 @@
                     "description": "Copyright notices match canonical pattern in fonts",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Licensing Checks>",
                         "<FontBakeryCheck:googlefonts/font_copyright>",
@@ -6705,7 +6712,7 @@
                     "description": "Check OFL body text is correct.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Licensing Checks>",
                         "<FontBakeryCheck:googlefonts/license/OFL_body_text>",
@@ -6737,7 +6744,7 @@
                     "description": "Check license file has good copyright string.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Licensing Checks>",
                         "<FontBakeryCheck:googlefonts/license/OFL_copyright>",
@@ -6769,7 +6776,7 @@
                     "description": "METADATA.pb: Copyright notice is the same in all fonts?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Licensing Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/copyright>",
@@ -6801,7 +6808,7 @@
                     "description": "METADATA.pb license is \"APACHE2\", \"UFL\" or \"OFL\"?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Licensing Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/license>",
@@ -6833,7 +6840,7 @@
                     "description": "Copyright notice on METADATA.pb should not contain 'Reserved Font Name'.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Licensing Checks>",
                         "<FontBakeryCheck:googlefonts/metadata/reserved_font_name>",
@@ -6865,7 +6872,7 @@
                     "description": "Check copyright namerecords match license file.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Licensing Checks>",
                         "<FontBakeryCheck:googlefonts/name/license>",
@@ -6897,7 +6904,7 @@
                     "description": "License URL matches License text on name table?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Licensing Checks>",
                         "<FontBakeryCheck:googlefonts/name/license_url>",
@@ -6930,7 +6937,7 @@
                     "description": "Name table strings must not contain the string 'Reserved Font Name'.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Licensing Checks>",
                         "<FontBakeryCheck:googlefonts/name/rfn>",
@@ -7001,7 +7008,7 @@
                     "description": "A font repository should not include FontBakery report files",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Repository Checks>",
                         "<FontBakeryCheck:googlefonts/repo/fb_report>",
@@ -7033,7 +7040,7 @@
                     "description": "Check upstream.yaml file contains all required fields",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Repository Checks>",
                         "<FontBakeryCheck:googlefonts/repo/upstream_yaml_has_required_fields>",
@@ -7065,7 +7072,7 @@
                     "description": "A static fonts directory, if present, must contain manually hinted fonts",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Repository Checks>",
                         "<FontBakeryCheck:googlefonts/repo/vf_has_static_fonts>",
@@ -7097,7 +7104,7 @@
                     "description": "A font repository should not include ZIP files",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Repository Checks>",
                         "<FontBakeryCheck:googlefonts/repo/zip_files>",
@@ -7142,7 +7149,7 @@
                     "description": "Ensure dotted circle glyph is present and can attach marks.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Shaping Checks>",
                         "<FontBakeryCheck:dotted_circle>",
@@ -7174,7 +7181,7 @@
                     "description": "Check that no collisions are found while shaping",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Shaping Checks>",
                         "<FontBakeryCheck:shaping/collides>",
@@ -7206,7 +7213,7 @@
                     "description": "Check that no forbidden glyphs are found while shaping",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Shaping Checks>",
                         "<FontBakeryCheck:shaping/forbidden>",
@@ -7238,7 +7245,7 @@
                     "description": "Check that texts shape as per expectation",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Shaping Checks>",
                         "<FontBakeryCheck:shaping/regression>",
@@ -7270,7 +7277,7 @@
                     "description": "Ensure soft_dotted characters lose their dot when combined with marks that replace the dot.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Shaping Checks>",
                         "<FontBakeryCheck:soft_dotted>",
@@ -7316,7 +7323,7 @@
                     "description": "Are there any misaligned on-curve points?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Outline Checks>",
                         "<FontBakeryCheck:outline_alignment_miss>",
@@ -7348,7 +7355,7 @@
                     "description": "Do any segments have colinear vectors?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Outline Checks>",
                         "<FontBakeryCheck:outline_colinear_vectors>",
@@ -7380,7 +7387,7 @@
                     "description": "Check the direction of the outermost contour in each glyph",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Outline Checks>",
                         "<FontBakeryCheck:outline_direction>",
@@ -7412,7 +7419,7 @@
                     "description": "Do outlines contain any jaggy segments?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Outline Checks>",
                         "<FontBakeryCheck:outline_jaggy_segments>",
@@ -7444,7 +7451,7 @@
                     "description": "Do outlines contain any semi-vertical or semi-horizontal lines?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Outline Checks>",
                         "<FontBakeryCheck:outline_semi_vertical>",
@@ -7476,7 +7483,7 @@
                     "description": "Are any segments inordinately short?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Outline Checks>",
                         "<FontBakeryCheck:outline_short_segments>",
@@ -7521,7 +7528,7 @@
                     "description": "Check if the axes match between the font and the Google Fonts version.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/axes_match>",
@@ -7553,7 +7560,7 @@
                     "description": "Validate defaults on fvar table match registered fallback names in GFAxisRegistry.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/axisregistry/fvar_axis_defaults>",
@@ -7585,7 +7592,7 @@
                     "description": "Checking file is named canonically.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/canonical_filename>",
@@ -7599,10 +7606,10 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "bad-filename",
-                                "message": "Expected \"FatemiMaqala-Regular.ttf. Got Fatemi-Maqala-Regular.ttf."
+                                "code": null,
+                                "message": "Font filename is correct, \"FatemiMaqala-Regular.ttf\"."
                             },
-                            "status": "FAIL"
+                            "status": "PASS"
                         }
                     ],
                     "module": "vendorspecific.googlefonts.canonical_filename",
@@ -7610,14 +7617,14 @@
                         "https://github.com/fonttools/fontbakery/issues/4829"
                     ],
                     "rationale": "\n        A font's filename must be composed as \"<familyname>-<stylename>.ttf\":\n\n        - Nunito-Regular.ttf\n\n        - Oswald-BoldItalic.ttf\n\n\n        Variable fonts must list the axis tags in alphabetical order in\n        square brackets and separated by commas:\n\n        - Roboto[wdth,wght].ttf\n\n        - Familyname-Italic[wght].ttf\n    ",
-                    "result": "FAIL",
+                    "result": "PASS",
                     "severity": null
                 },
                 {
                     "description": "Check font follows the Google Fonts CJK vertical metric schema",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/cjk_vertical_metrics>",
@@ -7649,7 +7656,7 @@
                     "description": "Check if the vertical metrics of a CJK family are similar to the same family hosted on Google Fonts.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/cjk_vertical_metrics_regressions>",
@@ -7681,7 +7688,7 @@
                     "description": "Ensure font has the expected color font tables.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/colorfont_tables>",
@@ -7717,7 +7724,7 @@
                     "description": "Check font names are correct",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/font_names>",
@@ -7749,7 +7756,7 @@
                     "description": "Checking OS/2 fsType does not impose restrictions.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/fstype>",
@@ -7781,7 +7788,7 @@
                     "description": "Check variable font instances",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/fvar_instances>",
@@ -7813,7 +7820,7 @@
                     "description": "Is the Grid-fitting and Scan-conversion Procedure ('gasp') table set to optimize rendering?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/gasp>",
@@ -7845,7 +7852,7 @@
                     "description": "Check Google Fonts glyph coverage.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/glyph_coverage>",
@@ -7877,7 +7884,7 @@
                     "description": "Font has ttfautohint params?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/has_ttfautohint_params>",
@@ -7909,7 +7916,7 @@
                     "description": "Ensure fonts have ScriptLangTags declared on the 'meta' table.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/meta/script_lang_tags>",
@@ -7941,7 +7948,7 @@
                     "description": "Description strings in the name table must not exceed 200 characters.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/name/description_max_length>",
@@ -7973,7 +7980,7 @@
                     "description": "Make sure family name does not begin with a digit.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/name/familyname_first_char>",
@@ -8005,7 +8012,7 @@
                     "description": "Font has all mandatory 'name' table entries?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/name/mandatory_entries>",
@@ -8019,10 +8026,10 @@
                     "logs": [
                         {
                             "message": {
-                                "code": "unfulfilled-conditions",
-                                "message": "Unfulfilled Conditions: style"
+                                "code": "ok",
+                                "message": "All looks good!"
                             },
-                            "status": "SKIP"
+                            "status": "PASS"
                         }
                     ],
                     "module": "vendorspecific.googlefonts.name.mandatory_entries",
@@ -8030,14 +8037,14 @@
                         "https://github.com/fonttools/fontbakery/issues/4829"
                     ],
                     "rationale": "\n        We require all fonts to have values for their font family name,\n        font subfamily name, full font name, and postscript name. For RIBBI\n        fonts, we also require values for the typographic family name and\n        typographic subfamily name.\n    ",
-                    "result": "SKIP",
+                    "result": "PASS",
                     "severity": null
                 },
                 {
                     "description": "Version format is correct in 'name' table?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/name/version_format>",
@@ -8069,7 +8076,7 @@
                     "description": "Font has old ttfautohint applied?",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/old_ttfautohint>",
@@ -8101,7 +8108,7 @@
                     "description": "Ensure font can render its own name.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/render_own_name>",
@@ -8142,7 +8149,7 @@
                         {
                             "message": {
                                 "code": "missing-STAT",
-                                "message": "This font does not have a STAT table: Font(file='/tmp/gfwork/repobuild/ttf/Fatemi-Maqala-Regular.ttf', context=CheckRunContext(testables=[...], config={'file_size': {'WARN_SIZE': 1048576, 'FAIL_SIZE': 9437184}, 'custom_order': None, 'explicit_checks': None, 'exclude_checks': None, 'full_lists': False, 'skip_network': False}, is_multithreaded=True))"
+                                "message": "This font does not have a STAT table: Font(file='/tmp/gfwork/repobuild/ttf/FatemiMaqala-Regular.ttf', context=CheckRunContext(testables=[...], config={'file_size': {'WARN_SIZE': 1048576, 'FAIL_SIZE': 9437184}, 'custom_order': None, 'explicit_checks': None, 'exclude_checks': None, 'full_lists': False, 'skip_network': False}, is_multithreaded=True))"
                             },
                             "status": "SKIP"
                         },
@@ -8166,7 +8173,7 @@
                     "description": "Validate STAT particle names and values match the fallback names in GFAxisRegistry.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/STAT/axisregistry>",
@@ -8198,7 +8205,7 @@
                     "description": "Stricter unitsPerEm criteria for Google Fonts.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/unitsperem>",
@@ -8256,7 +8263,7 @@
                     "description": "Check a static ttf can be generated from a variable font.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/varfont/generate_static>",
@@ -8288,7 +8295,7 @@
                     "description": "Check that variable fonts have an HVAR table.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/varfont/has_HVAR>",
@@ -8320,7 +8327,7 @@
                     "description": "Checking OS/2 achVendID.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/vendor_id>",
@@ -8353,7 +8360,7 @@
                     "description": "Check font follows the Google Fonts vertical metric schema",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/vertical_metrics>",
@@ -8386,7 +8393,7 @@
                     "description": "Check if the vertical metrics of a family are similar to the same family hosted on Google Fonts.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/vertical_metrics_regressions>",
@@ -8418,7 +8425,7 @@
                     "description": "Check the OS/2 usWeightClass is appropriate for the font's best SubFamily name.",
                     "documentation": null,
                     "experimental": false,
-                    "filename": "Fatemi-Maqala-Regular.ttf",
+                    "filename": "FatemiMaqala-Regular.ttf",
                     "key": [
                         "<Section: Font File Checks>",
                         "<FontBakeryCheck:googlefonts/weightclass>",
@@ -8454,10 +8461,9 @@
             ],
             "result": {
                 "ERROR": 5,
-                "FAIL": 1,
                 "INFO": 2,
-                "PASS": 12,
-                "SKIP": 7,
+                "PASS": 14,
+                "SKIP": 6,
                 "WARN": 2
             }
         }
