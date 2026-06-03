@@ -14,39 +14,41 @@ Font Bakery `check-googlefonts`, original FatemiMaqala → this project:
 | | FAIL | notes |
 |---|---|---|
 | Original FatemiMaqala-Regular.ttf | **19** | quadratic/raster outlines, nested+transformed components, bad metrics, bad naming, no hinting |
-| Stage-1 structural build (this repo) | **3** | only "needs-drawing" items remain (below) |
+| This build (clean source + rehabilitated features) | **5** | shaping-complete; only glyph-drawing + 2 minor Latin niceties remain |
 
-**Cleared** (via cubic conversion + outline repair + the GF build pipeline +
-metadata): nested/transformed/duplicate components, invalid script tags, smart
-dropout (hinting), tabular kerning, smallcaps order, repo zip hygiene, vertical
-metrics (win/typo/hhea unified, lineGap 0, USE_TYPO_METRICS), family-name
-compliance (FatemiMaqala → "Fatemi Maqala"), copyright, version format, name
-line-breaks, whitespace widths.
+**Cleared**: nested/transformed/duplicate components, invalid script tags, smart
+dropout (hinting), repo zip hygiene, vertical metrics (win/typo/hhea unified,
+lineGap 0, USE_TYPO_METRICS), family-name compliance (FatemiMaqala → "Fatemi
+Maqala"), copyright, version format, name line-breaks, whitespace widths — **and
+the full feature-file rehabilitation** (see `REHAB.md`): the font now compiles
+and shapes Arabic, verified pixel-identical to the original.
 
-**Remaining FAILs — all genuine glyph work:**
-- `googlefonts/glyph_coverage` — draw U+00AE ®, U+013E ľ, U+1E9E ẞ
-- `case_mapping` — add counterparts U+0256 ɖ, U+04D8 Ә
-- `googlefonts/glyphsets/shape_languages` — complete Latin/phonetics coverage
+**Remaining FAILs — glyph work, to be filled from Crimson (the Latin source):**
+- `googlefonts/glyph_coverage` — U+00AE ®, U+013E ľ, U+1E9E ẞ
+- `case_mapping` — U+0256 ɖ, U+04D8 Ә
+- `googlefonts/glyphsets/shape_languages` — Latin/phonetics coverage
 
-**Plus the one large task: feature-file rehabilitation** — see `REHAB.md`. The
-font does not yet shape Arabic in this repo because the inherited feature code
-does not compile under `feaLib`; the stage-1 artifact was built with features
-disabled to validate everything else.
+**Minor (low priority for an Arabic family):** `smallcaps_before_ligatures`
+(GSUB lookup order), `tabular_kerning` (slash/zero).
 
 ## Layout
 - `sources/Fatemi-Maqala-Regular.ufo` — canonical source: cleaned **cubic**
-  outlines (overlaps removed, directions corrected), GF metadata set, and the
-  full `features.fea` (source of truth, pending rehab).
-- `sources/features.full.fea` — standalone copy of the full feature code.
+  outlines (overlaps removed, directions corrected), GF metadata, and the
+  **rehabilitated** `features.fea`.
+- `sources/features.full.fea` — standalone copy of the feature code.
 - `sources/config.yaml` — gftools builder config.
-- `fonts/FatemiMaqala-stage1-structural.ttf` — structural baseline (no shaping
-  features) used for the Font Bakery measurement above. **Not for release.**
+- `fonts/FatemiMaqala-Regular.ttf` — shaping-complete build (vertical metrics
+  post-patched). The committed binary is a convenience snapshot; the source is
+  authoritative.
+- `documentation/specimen.png` — rendered shaping sample.
 
 ## Build
 ```
 pip install -r requirements.txt
-cd sources && gftools builder config.yaml   # green once features are rehabilitated
+cd sources && gftools builder config.yaml
 ```
+The feature file compiles clean; the only post-step is the vertical-metrics
+patch (until folded into the source/config).
 
 ## Provenance / licensing
 Original retracing by the author, released under SIL OFL 1.1 (`OFL.txt`),

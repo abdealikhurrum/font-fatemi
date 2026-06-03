@@ -1,37 +1,26 @@
 # Font Bakery (check-googlefonts) — before vs after
 
 - **Original FatemiMaqala-Regular.ttf:** 19 FAIL
-- **Stage-1 structural build:** 3 FAIL
+- **This build (cleaned source + rehabilitated features):** 5 FAIL
 
-## Cleared (16)
-- family/win_ascent_and_descent
-- googlefonts/family_name_compliance
-- googlefonts/font_copyright
-- googlefonts/name/line_breaks
-- googlefonts/name/version_format
-- googlefonts/repo/zip_files
-- linegaps
-- nested_components
-- opentype/font_version
-- opentype/glyf_non_transformed_duplicate_components
-- opentype/layout_valid_script_tags
-- smallcaps_before_ligatures
-- smart_dropout
-- tabular_kerning
-- transformed_components
-- whitespace_widths
+## Remaining FAILs
 
-## Remaining (3) — all genuine glyph/feature work
-- case_mapping
-- googlefonts/glyph_coverage
-- googlefonts/glyphsets/shape_languages
+_Genuine glyph work (to be filled from Crimson — see below):_
+- `googlefonts/glyph_coverage` — U+00AE ®, U+013E ľ, U+1E9E ẞ
+- `case_mapping` — U+0256 ɖ, U+04D8 Ә
+- `googlefonts/glyphsets/shape_languages` — Latin/phonetics coverage
 
-## Method
+_Minor Latin-feature niceties (low priority for an Arabic family):_
+- `smallcaps_before_ligatures` — GSUB lookup ordering of smcp vs liga
+- `tabular_kerning` — slash/zero kern via kern classes
 
-1. FontForge: convert quadratic→cubic, removeOverlap, correctDirection, round, export UFO.
-2. Add missing glyphs referenced by features (NULL, uniFEDB.long, f-ligatures).
-3. Set GF metadata (family/version/copyright/designer/vendor/license) in UFO.
-4. gftools builder (decompose, remove-overlaps, autohint, fix).
-5. Post-process: unify vertical metrics (win=typo=hhea, lineGap 0, USE_TYPO_METRICS), nbsp=space, strip name newlines.
+## What was fixed
 
-Built with features disabled (see ../REHAB.md); shaping features pending rehabilitation.
+- Outlines: quadratic→cubic, overlaps removed, directions corrected.
+- Components: nested/transformed/duplicate decomposed by the build.
+- **Feature file rehabilitated** (see REHAB.md): 24 duplicate substitutions removed,
+  39 empty-class kern pairs removed, and the 3 mark-attachment lookups
+  (kharoSingle/kharoLiga/marktomark) split per mark-class into sub-lookups —
+  verified pixel-identical shaping vs. the original.
+- Metrics unified (win=typo=hhea, lineGap 0, USE_TYPO_METRICS); naming, version,
+  copyright, whitespace, hinting all GF-compliant.

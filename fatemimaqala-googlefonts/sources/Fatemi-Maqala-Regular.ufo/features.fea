@@ -515,7 +515,7 @@ lookup doublePress {
     sub \thehDouble.init.lowbottom \thehDouble.medi  by \pehDouble.init.lowbottom;
     sub \thehDouble.medi.lowbottom \thehDouble.medi.hightop  by \pehDouble.medi.lowbottom;
     sub \thehDouble.medi.lowbottom \thehDouble.medi  by \pehDouble.medi.lowbottom;
-    sub \daadDouble.init \daad.medi.lowtop  by \ttehDouble.init.lowtop;
+# DUP     sub \daadDouble.init \daad.medi.lowtop  by \ttehDouble.init.lowtop;
     sub \daad.medi.hightop \daadDouble.medi  by \ttehDouble.medi.hightop;
 } doublePress;
 
@@ -840,7 +840,7 @@ lookup jalaalahtashdeed {
 lookup standardArabicLigas {
   lookupflag IgnoreMarks;
     sub \uniFB7C \uniFEE4  by \cheMeem.init;
-    sub \uniFB7C \uniFEE4  by \uniE;
+# DUP     sub \uniFB7C \uniFEE4  by \uniE;
     sub \uniFEE9 \uniFE80  by \uniFBA4;
     sub \uniFEEA \uniFE80  by \uniFBA5;
     sub \uniFE91 \uniFEE2  by \uniFC08;
@@ -1055,8 +1055,8 @@ lookup standardArabicLigas {
     sub \uniFEDF \uniFEE4 \uniFEA4  by \uniFD88;
     sub \uniFEE3 \uniFEA4 \uniFEA0  by \uniFD89;
     sub \uniFE8C.hightop \uniFBA9  by \yehHamza_goalDouble.medi;
-    sub \uniFE8C \uniFEEC  by \yehHamza_goalDouble.medi;
-    sub \uniFE8C \uniFBA9  by \yehHamza_goalDouble.medi;
+# DUP     sub \uniFE8C \uniFEEC  by \yehHamza_goalDouble.medi;
+# DUP     sub \uniFE8C \uniFBA9  by \yehHamza_goalDouble.medi;
     sub \uniFE8C.hightop \uniFEEC  by \yehHamza_goalDouble.medi;
     sub \uniFB7C \uniFBA7  by \cheh_goal.liga;
     sub \uniFEDF \uniFEE0 \uniFEEA  by \jalaalah.liga;
@@ -1067,7 +1067,7 @@ lookup standardArabicLigas {
     sub \uniFE91 \uniFBAB  by \behChashm.init;
     sub \uniFE97 \uniFBAB  by \tehChashm.init;
     sub \uniFEE7 \uniFBAB  by \noonChashm.init;
-    sub \uniFEF3 \uniFBAB  by \yehChashm.init;
+# DUP     sub \uniFEF3 \uniFBAB  by \yehChashm.init;
     sub \uniFB68 \uniFBAB  by \ttehChashm.isol;
     sub \uniFB68 \uniFBAD  by \ttehChashm.init;
     sub \uniFB58.lowbottom \uniFBAD  by \pehChashm.init.lowbottom;
@@ -1076,8 +1076,8 @@ lookup standardArabicLigas {
     sub \uniFB58.lowbottom \uniFBAB  by \pehChashm.isol.lowbottom;
     sub \uniFE91.lowbottom \uniFBAB  by \behChashm.isol.lowbottom;
     sub \uniFEF3.lowbottom \uniFBAB  by \yehChashm.isol.lowbottom;
-    sub \uniFB58 \uniFEF2  by \pehYaa.isol;
-    sub \uniFB59 \uniFEF2  by \pehYaa.fina;
+# DUP     sub \uniFB58 \uniFEF2  by \pehYaa.isol;
+# DUP     sub \uniFB59 \uniFEF2  by \pehYaa.fina;
     sub \uniFB59 \uniFEF0  by \pehMaksura.fina;
     sub \uniFB58 \uniFEF0  by \pehMaksura.isol;
     sub \uniFB58 \uniFE9E  by \pehJeem.isol;
@@ -1112,7 +1112,7 @@ lookup standardArabicLigas {
     sub \uniFB69 \uniFEB0  by \ttehZeh.fina;
     sub \uniFB69 \uniFEE2  by \ttehMeem.fina;
     sub \uniFB69 \uniFEE6  by \ttehNoon.fina;
-    sub \uniFE91 \uniFB7B  by \behTcheh.isol;
+# DUP     sub \uniFE91 \uniFB7B  by \behTcheh.isol;
     sub \uniFE97 \uniFB7B  by \tehTcheh.isol;
     sub \thehDouble.init \uniFB7B  by \thehTcheh.isol;
     sub \uniFE9B \uniFB7B  by \thehTcheh.isol;
@@ -1151,7 +1151,7 @@ lookup standardArabicLigas {
     sub \uniFB59 \uniFBA7  by \pehGoal.fina;
     sub \uniFB69 \uniFBA7  by \ttehGoal.fina;
     sub \uniFE91 \uniFBA7  by \behGoal.isol;
-    sub \thehDouble.medi \uniFBA7  by \thehGoal.isol;
+# DUP     sub \thehDouble.medi \uniFBA7  by \thehGoal.isol;
     sub \uniFE9B \uniFBA7  by \thehGoal.isol;
     sub \uniFB58 \uniFBA7  by \pehGoal.isol;
     sub \uniFB68 \uniFBA7  by \ttehGoal.isol;
@@ -1173,7 +1173,7 @@ lookup standardArabicLigas {
     sub \uniFE8C \uniFB8D  by \NameMe.1813;
     sub \uniFE8C \uniFB8B  by \NameMe.1814;
     sub \uniFE8C \uniFBA7  by \yehHamza_goal.fina;
-    sub \uniFB68 \uniFBAF  by \yehHamza_barree.fina;
+# DUP     sub \uniFB68 \uniFBAF  by \yehHamza_barree.fina;
     sub \uniFEDF \uniFEE3 \uniFEA8  by \NameMe.1826;
     sub \uniFEDF \uniFEE3 \uniFB7D  by \NameMe.1827;
     sub \uniFB90 \uniFEF0  by \NameMe.1820;
@@ -1243,17 +1243,17 @@ lookup DoublePressLigatures {
     sub \uniFE8C \goalDouble.medi  by \uniFCE0;
     sub \uniFEE8 \goalDouble.medi  by \uniFCEF;
     sub \uniFEF4 \goalDouble.medi  by \uniFCF1;
-    sub \uniFE8C \goalDouble.medi  by \yehHamza_goalDouble.medi;
+# DUP     sub \uniFE8C \goalDouble.medi  by \yehHamza_goalDouble.medi;
     sub \pehDouble.init \uniFBAB  by \pehChashm.init;
     sub \ttehDouble.init \uniFBAB  by \ttehChashm.isol;
     sub \uniFB68 \uniFBAD  by \ttehChashm.init;
     sub \pehDouble.init.lowbottom \uniFBAD  by \pehChashm.init.lowbottom;
-    sub \pehDouble.init \uniFBAB  by \pehChashm.isol.lowbottom;
-    sub \pehDouble.init \uniFBAB  by \pehDoubleChashm.isol;
-    sub \pehDouble.init.lowbottom \uniFBAD  by \pehDoubleChashm.init.lowbottom;
+# DUP     sub \pehDouble.init \uniFBAB  by \pehChashm.isol.lowbottom;
+# DUP     sub \pehDouble.init \uniFBAB  by \pehDoubleChashm.isol;
+# DUP     sub \pehDouble.init.lowbottom \uniFBAD  by \pehDoubleChashm.init.lowbottom;
     sub \pehDouble.init \uniFBAD  by \pehDoubleChashm.init;
     sub \pehDouble.init.lowbottom \uniFBAB  by \pehDoubleChashm.isol.lowbottom;
-    sub \ttehDouble.init \uniFBAB  by \ttehDoubleChashm.isol;
+# DUP     sub \ttehDouble.init \uniFBAB  by \ttehDoubleChashm.isol;
     sub \ttehDouble.init \uniFBAD  by \ttehDoubleChashm.init;
     sub \pehDouble.init \uniFEF2  by \pehYaa.isol;
     sub \pehDouble.medi \uniFEF2  by \pehYaa.fina;
@@ -1287,18 +1287,18 @@ lookup DoublePressLigatures {
     sub \pehDouble.medi \uniFEB0  by \pehZeh.fina;
     sub \pehDouble.medi \uniFEE2  by \pehMeem.fina;
     sub \pehDouble.medi \uniFEE6  by \pehNoon.fina;
-    sub \pehDouble.medi \uniFEAE  by \pehDoubleReh.fina;
-    sub \pehDouble.medi \uniFEB0  by \pehDoubleZeh.fina;
-    sub \pehDouble.medi \uniFEE2  by \pehDoubleMeem.fina;
-    sub \pehDouble.medi \uniFEE6  by \pehDoubleNoon.fina;
+# DUP     sub \pehDouble.medi \uniFEAE  by \pehDoubleReh.fina;
+# DUP     sub \pehDouble.medi \uniFEB0  by \pehDoubleZeh.fina;
+# DUP     sub \pehDouble.medi \uniFEE2  by \pehDoubleMeem.fina;
+# DUP     sub \pehDouble.medi \uniFEE6  by \pehDoubleNoon.fina;
     sub \ttehDouble.medi \uniFEAE  by \ttehReh.fina;
     sub \ttehDouble.medi \uniFEB0  by \ttehZeh.fina;
     sub \ttehDouble.medi \uniFEE2  by \ttehMeem.fina;
     sub \ttehDouble.medi \uniFEE6  by \ttehNoon.fina;
-    sub \ttehDouble.medi \uniFEAE  by \ttehDoubleReh.fina;
-    sub \ttehDouble.medi \uniFEB0  by \ttehDoubleZeh.fina;
-    sub \ttehDouble.medi \uniFEE2  by \ttehDoubleMeem.fina;
-    sub \ttehDouble.medi \uniFEE6  by \ttehDoubleNoon.fina;
+# DUP     sub \ttehDouble.medi \uniFEAE  by \ttehDoubleReh.fina;
+# DUP     sub \ttehDouble.medi \uniFEB0  by \ttehDoubleZeh.fina;
+# DUP     sub \ttehDouble.medi \uniFEE2  by \ttehDoubleMeem.fina;
+# DUP     sub \ttehDouble.medi \uniFEE6  by \ttehDoubleNoon.fina;
     sub \uniFE91 \tchehDouble.fina  by \behTcheh.isol;
     sub \uniFE97 \tchehDouble.fina  by \tehTcheh.isol;
     sub \uniFE9B \tchehDouble.fina  by \thehTcheh.isol;
@@ -1338,7 +1338,7 @@ lookup DoublePressLigatures {
     sub \ttehDouble.medi \uniFBA7  by \ttehGoal.fina;
     sub \uniFB69 \goalDouble.fina  by \ttehGoal.fina;
     sub \uniFE91 \goalDouble.fina  by \behGoal.isol;
-    sub \thehDouble.medi \goalDouble.fina  by \thehGoal.isol;
+# DUP     sub \thehDouble.medi \goalDouble.fina  by \thehGoal.isol;
     sub \uniFE9B \goalDouble.fina  by \thehGoal.isol;
     sub \pehDouble.init \uniFBA7  by \pehGoal.isol;
     sub \uniFB58 \goalDouble.fina  by \pehGoal.isol;
@@ -1530,6 +1530,29 @@ feature init {
       lookup InitialForms;
 } init;
 
+feature smcp {
+
+ script DFLT;
+     language dflt ;
+      lookup smcp;
+
+ script arab;
+     language dflt ;
+      lookup smcp;
+     language URD  exclude_dflt;
+      lookup smcp;
+
+ script cyrl;
+     language dflt ;
+      lookup smcp;
+
+ script latn;
+     language dflt ;
+      lookup smcp;
+     language TRK  exclude_dflt;
+      lookup smcp;
+} smcp;
+
 feature liga {
 
  script DFLT;
@@ -1569,28 +1592,6 @@ feature liga {
       lookup latnLigas;
 } liga;
 
-feature smcp {
-
- script DFLT;
-     language dflt ;
-      lookup smcp;
-
- script arab;
-     language dflt ;
-      lookup smcp;
-     language URD  exclude_dflt;
-      lookup smcp;
-
- script cyrl;
-     language dflt ;
-      lookup smcp;
-
- script latn;
-     language dflt ;
-      lookup smcp;
-     language TRK  exclude_dflt;
-      lookup smcp;
-} smcp;
 
 feature rlig {
 
@@ -2375,12 +2376,12 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc72_first_8 @kc72_second_13 136;
     pos @kc72_first_8 @kc72_second_14 -36;
     pos @kc72_first_8 @kc72_second_15 32;
-    pos @kc72_first_9 @kc72_second_5 -26;
-    pos @kc72_first_9 @kc72_second_7 -66;
-    pos @kc72_first_9 @kc72_second_12 -28;
-    pos @kc72_first_9 @kc72_second_16 -22;
-    pos @kc72_first_9 @kc72_second_17 -102;
-    pos @kc72_first_9 @kc72_second_18 -76;
+# EMPTY     pos @kc72_first_9 @kc72_second_5 -26;
+# EMPTY     pos @kc72_first_9 @kc72_second_7 -66;
+# EMPTY     pos @kc72_first_9 @kc72_second_12 -28;
+# EMPTY     pos @kc72_first_9 @kc72_second_16 -22;
+# EMPTY     pos @kc72_first_9 @kc72_second_17 -102;
+# EMPTY     pos @kc72_first_9 @kc72_second_18 -76;
     pos @kc72_first_10 @kc72_second_2 -92;
     pos @kc72_first_10 @kc72_second_3 -74;
     pos @kc72_first_10 @kc72_second_4 -60;
@@ -2579,7 +2580,7 @@ lookup kernHorizontalKerninglookup5 {
 	\uni1E64 \uni1E66 \uni1E68 ];
     @kc73_second_78 = [\braceright ];
     pos @kc73_first_0 @kc73_second_1 -102;
-    pos @kc73_first_0 @kc73_second_2 -82;
+# EMPTY     pos @kc73_first_0 @kc73_second_2 -82;
     pos @kc73_first_0 @kc73_second_3 -32;
     pos @kc73_first_0 @kc73_second_4 -20;
     pos @kc73_first_0 @kc73_second_5 24;
@@ -2601,7 +2602,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_0 @kc73_second_21 -88;
     pos @kc73_first_0 @kc73_second_22 -88;
     pos @kc73_first_0 @kc73_second_23 -86;
-    pos @kc73_first_0 @kc73_second_24 -68;
+# EMPTY     pos @kc73_first_0 @kc73_second_24 -68;
     pos @kc73_first_0 @kc73_second_25 -96;
     pos @kc73_first_0 @kc73_second_26 -90;
     pos @kc73_first_0 @kc73_second_27 -48;
@@ -2817,7 +2818,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_8 @kc73_second_35 -76;
     pos @kc73_first_8 @kc73_second_64 -10;
     pos @kc73_first_9 @kc73_second_1 -138;
-    pos @kc73_first_9 @kc73_second_2 -158;
+# EMPTY     pos @kc73_first_9 @kc73_second_2 -158;
     pos @kc73_first_9 @kc73_second_6 -12;
     pos @kc73_first_9 @kc73_second_8 -150;
     pos @kc73_first_9 @kc73_second_9 -24;
@@ -2829,7 +2830,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_9 @kc73_second_21 -92;
     pos @kc73_first_9 @kc73_second_22 -92;
     pos @kc73_first_9 @kc73_second_23 -90;
-    pos @kc73_first_9 @kc73_second_24 -50;
+# EMPTY     pos @kc73_first_9 @kc73_second_24 -50;
     pos @kc73_first_9 @kc73_second_25 -142;
     pos @kc73_first_9 @kc73_second_26 -146;
     pos @kc73_first_9 @kc73_second_28 -154;
@@ -2850,7 +2851,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_10 @kc73_second_21 -38;
     pos @kc73_first_10 @kc73_second_22 -40;
     pos @kc73_first_10 @kc73_second_23 -40;
-    pos @kc73_first_10 @kc73_second_24 -20;
+# EMPTY     pos @kc73_first_10 @kc73_second_24 -20;
     pos @kc73_first_10 @kc73_second_27 -38;
     pos @kc73_first_10 @kc73_second_29 -20;
     pos @kc73_first_10 @kc73_second_30 -28;
@@ -2927,7 +2928,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_12 @kc73_second_56 -28;
     pos @kc73_first_12 @kc73_second_59 -34;
     pos @kc73_first_12 @kc73_second_69 -10;
-    pos @kc73_first_13 @kc73_second_2 12;
+# EMPTY     pos @kc73_first_13 @kc73_second_2 12;
     pos @kc73_first_13 @kc73_second_3 -88;
     pos @kc73_first_13 @kc73_second_12 -12;
     pos @kc73_first_13 @kc73_second_14 -34;
@@ -2954,7 +2955,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_13 @kc73_second_64 -44;
     pos @kc73_first_13 @kc73_second_66 -30;
     pos @kc73_first_13 @kc73_second_67 -18;
-    pos @kc73_first_14 @kc73_second_2 -32;
+# EMPTY     pos @kc73_first_14 @kc73_second_2 -32;
     pos @kc73_first_14 @kc73_second_3 -18;
     pos @kc73_first_14 @kc73_second_5 60;
     pos @kc73_first_14 @kc73_second_6 -12;
@@ -2974,7 +2975,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_14 @kc73_second_21 -72;
     pos @kc73_first_14 @kc73_second_22 -70;
     pos @kc73_first_14 @kc73_second_23 -72;
-    pos @kc73_first_14 @kc73_second_24 -40;
+# EMPTY     pos @kc73_first_14 @kc73_second_24 -40;
     pos @kc73_first_14 @kc73_second_27 -72;
     pos @kc73_first_14 @kc73_second_28 -32;
     pos @kc73_first_14 @kc73_second_30 -20;
@@ -3275,13 +3276,13 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc73_first_21 @kc73_second_75 56;
     pos @kc73_first_21 @kc73_second_76 -28;
     pos @kc73_first_21 @kc73_second_77 -16;
-    pos @kc73_first_22 @kc73_second_2 -24;
+# EMPTY     pos @kc73_first_22 @kc73_second_2 -24;
     pos @kc73_first_22 @kc73_second_19 -20;
     pos @kc73_first_22 @kc73_second_20 -20;
     pos @kc73_first_22 @kc73_second_21 -84;
     pos @kc73_first_22 @kc73_second_22 -84;
     pos @kc73_first_22 @kc73_second_23 -80;
-    pos @kc73_first_22 @kc73_second_24 -20;
+# EMPTY     pos @kc73_first_22 @kc73_second_24 -20;
     pos @kc73_first_22 @kc73_second_29 -20;
     pos @kc73_first_22 @kc73_second_31 -74;
     pos @kc73_first_22 @kc73_second_32 -18;
@@ -3543,7 +3544,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc74_first_1 @kc74_second_8 -18;
     pos @kc74_first_1 @kc74_second_9 -18;
     pos @kc74_first_1 @kc74_second_10 -52;
-    pos @kc74_first_1 @kc74_second_11 -22;
+# EMPTY     pos @kc74_first_1 @kc74_second_11 -22;
     pos @kc74_first_1 @kc74_second_12 -28;
     pos @kc74_first_1 @kc74_second_13 -42;
     pos @kc74_first_1 @kc74_second_14 -50;
@@ -3631,7 +3632,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc74_first_11 @kc74_second_26 -120;
     pos @kc74_first_11 @kc74_second_27 -128;
     pos @kc74_first_11 @kc74_second_28 -96;
-    pos @kc74_first_11 @kc74_second_29 -20;
+# EMPTY     pos @kc74_first_11 @kc74_second_29 -20;
     pos @kc74_first_11 @kc74_second_30 -24;
     pos @kc74_first_11 @kc74_second_31 18;
     pos @kc74_first_12 @kc74_second_1 -62;
@@ -3643,7 +3644,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc74_first_12 @kc74_second_8 -20;
     pos @kc74_first_12 @kc74_second_9 -22;
     pos @kc74_first_12 @kc74_second_10 -30;
-    pos @kc74_first_12 @kc74_second_11 -16;
+# EMPTY     pos @kc74_first_12 @kc74_second_11 -16;
     pos @kc74_first_12 @kc74_second_12 -20;
     pos @kc74_first_12 @kc74_second_13 -40;
     pos @kc74_first_12 @kc74_second_14 -48;
@@ -3806,7 +3807,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc74_first_27 @kc74_second_7 88;
     pos @kc74_first_27 @kc74_second_8 88;
     pos @kc74_first_27 @kc74_second_9 88;
-    pos @kc74_first_27 @kc74_second_11 80;
+# EMPTY     pos @kc74_first_27 @kc74_second_11 80;
     pos @kc74_first_27 @kc74_second_14 44;
     pos @kc74_first_27 @kc74_second_35 18;
     pos @kc74_first_27 @kc74_second_42 26;
@@ -3815,7 +3816,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc74_first_28 @kc74_second_7 36;
     pos @kc74_first_28 @kc74_second_8 36;
     pos @kc74_first_28 @kc74_second_9 36;
-    pos @kc74_first_28 @kc74_second_11 92;
+# EMPTY     pos @kc74_first_28 @kc74_second_11 92;
     pos @kc74_first_28 @kc74_second_16 34;
     pos @kc74_first_28 @kc74_second_18 -22;
     pos @kc74_first_28 @kc74_second_19 -8;
@@ -3975,16 +3976,16 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc75_first_0 @kc75_second_18 -134;
     pos @kc75_first_0 @kc75_second_19 -48;
     pos @kc75_first_0 @kc75_second_20 -26;
-    pos @kc75_first_1 @kc75_second_7 -80;
-    pos @kc75_first_1 @kc75_second_9 -16;
-    pos @kc75_first_1 @kc75_second_10 -24;
-    pos @kc75_first_1 @kc75_second_15 -134;
-    pos @kc75_first_1 @kc75_second_19 -38;
-    pos @kc75_first_1 @kc75_second_21 48;
-    pos @kc75_first_1 @kc75_second_22 46;
-    pos @kc75_first_1 @kc75_second_23 44;
-    pos @kc75_first_1 @kc75_second_24 28;
-    pos @kc75_first_1 @kc75_second_25 18;
+# EMPTY     pos @kc75_first_1 @kc75_second_7 -80;
+# EMPTY     pos @kc75_first_1 @kc75_second_9 -16;
+# EMPTY     pos @kc75_first_1 @kc75_second_10 -24;
+# EMPTY     pos @kc75_first_1 @kc75_second_15 -134;
+# EMPTY     pos @kc75_first_1 @kc75_second_19 -38;
+# EMPTY     pos @kc75_first_1 @kc75_second_21 48;
+# EMPTY     pos @kc75_first_1 @kc75_second_22 46;
+# EMPTY     pos @kc75_first_1 @kc75_second_23 44;
+# EMPTY     pos @kc75_first_1 @kc75_second_24 28;
+# EMPTY     pos @kc75_first_1 @kc75_second_25 18;
     pos @kc75_first_2 @kc75_second_7 -36;
     pos @kc75_first_2 @kc75_second_15 -64;
     pos @kc75_first_2 @kc75_second_18 -54;
@@ -4416,12 +4417,12 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc79_first_1 @kc79_second_4 -66;
     pos @kc79_first_1 @kc79_second_5 -64;
     pos @kc79_first_1 @kc79_second_6 -46;
-    pos @kc79_first_1 @kc79_second_7 -40;
+# EMPTY     pos @kc79_first_1 @kc79_second_7 -40;
     pos @kc79_first_1 @kc79_second_8 -52;
     pos @kc79_first_1 @kc79_second_9 -118;
     pos @kc79_first_1 @kc79_second_10 -42;
     pos @kc79_first_1 @kc79_second_11 -24;
-    pos @kc79_first_1 @kc79_second_12 -74;
+# EMPTY     pos @kc79_first_1 @kc79_second_12 -74;
     pos @kc79_first_1 @kc79_second_13 -30;
     pos @kc79_first_1 @kc79_second_14 -44;
     pos @kc79_first_1 @kc79_second_15 -44;
@@ -4481,11 +4482,11 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc79_first_10 @kc79_second_4 -64;
     pos @kc79_first_10 @kc79_second_5 -64;
     pos @kc79_first_10 @kc79_second_6 -42;
-    pos @kc79_first_10 @kc79_second_7 -44;
+# EMPTY     pos @kc79_first_10 @kc79_second_7 -44;
     pos @kc79_first_10 @kc79_second_8 -82;
     pos @kc79_first_10 @kc79_second_9 -108;
     pos @kc79_first_10 @kc79_second_10 -50;
-    pos @kc79_first_10 @kc79_second_12 -74;
+# EMPTY     pos @kc79_first_10 @kc79_second_12 -74;
     pos @kc79_first_10 @kc79_second_14 -40;
     pos @kc79_first_10 @kc79_second_15 -38;
     pos @kc79_first_10 @kc79_second_16 -58;
@@ -4533,12 +4534,12 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc79_first_15 @kc79_second_4 -36;
     pos @kc79_first_15 @kc79_second_5 -38;
     pos @kc79_first_15 @kc79_second_6 -26;
-    pos @kc79_first_15 @kc79_second_7 -28;
+# EMPTY     pos @kc79_first_15 @kc79_second_7 -28;
     pos @kc79_first_15 @kc79_second_8 -24;
     pos @kc79_first_15 @kc79_second_9 -100;
     pos @kc79_first_15 @kc79_second_10 -48;
     pos @kc79_first_15 @kc79_second_11 -28;
-    pos @kc79_first_15 @kc79_second_12 -36;
+# EMPTY     pos @kc79_first_15 @kc79_second_12 -36;
     pos @kc79_first_15 @kc79_second_14 -24;
     pos @kc79_first_15 @kc79_second_15 -24;
     pos @kc79_first_15 @kc79_second_16 -40;
@@ -4577,7 +4578,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc79_first_19 @kc79_second_19 -22;
     pos @kc79_first_19 @kc79_second_22 -84;
     pos @kc79_first_19 @kc79_second_26 -64;
-    pos @kc79_first_20 @kc79_second_7 26;
+# EMPTY     pos @kc79_first_20 @kc79_second_7 26;
     pos @kc79_first_20 @kc79_second_8 -38;
     pos @kc79_first_20 @kc79_second_9 -20;
     pos @kc79_first_20 @kc79_second_10 -44;
@@ -4596,7 +4597,7 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc79_first_21 @kc79_second_8 -66;
     pos @kc79_first_21 @kc79_second_16 -44;
     pos @kc79_first_21 @kc79_second_19 -54;
-    pos @kc79_first_22 @kc79_second_7 38;
+# EMPTY     pos @kc79_first_22 @kc79_second_7 38;
     pos @kc79_first_22 @kc79_second_8 -68;
     pos @kc79_first_22 @kc79_second_10 -40;
     pos @kc79_first_22 @kc79_second_16 -46;
@@ -4670,9 +4671,91 @@ lookup kernHorizontalKerninglookup5 {
     pos @kc80_first_6 @kc80_second_8 -28;
 } kernHorizontalKerninglookup5;
 
-lookup kharoSingle {
-  lookupflag 0;
+# --- hoisted mark classes ---
   markClass [\thinkharozer ] <anchor 330 1628> @subSingle;
+  markClass [\thinkharozabar ] <anchor 330 1115> @supSingle;
+  markClass [\uni0670 ] <anchor 280 1276> @supSingle;
+  markClass [\uni064D ] <anchor 204 -641> @zer;
+  markClass [\uni0650 ] <anchor 216 -657> @zer;
+  markClass [\uni0655 ] <anchor 195 -348> @zer;
+  markClass [\uni0656 ] <anchor 103 381> @zer;
+  markClass [\uni064D ] <anchor 203 -640> @belowSingle;
+  markClass [\uni0650 ] <anchor 222 -659> @belowSingle;
+  markClass [\uni0655 ] <anchor 186 -348> @belowSingle;
+  markClass [\thinkharozer ] <anchor 328 1630> @belowSingle;
+  markClass [\uni0656 ] <anchor 164 300> @belowSingle;
+  markClass [\uni064B ] <anchor 243 1417> @aboveSingle;
+  markClass [\uni064C ] <anchor 287 1746> @aboveSingle;
+  markClass [\uni064E ] <anchor 261 1429> @aboveSingle;
+  markClass [\uni064F ] <anchor 218 1339> @aboveSingle;
+  markClass [\uni0651 ] <anchor 256 1400> @aboveSingle;
+  markClass [\uni0652 ] <anchor 169 1069> @aboveSingle;
+  markClass [\uni0653 ] <anchor 152 1550> @aboveSingle;
+  markClass [\uni0654 ] <anchor 235 1344> @aboveSingle;
+  markClass [\uni0657 ] <anchor 299 999> @aboveSingle;
+  markClass [\thinkharozabar ] <anchor 314 1095> @aboveSingle;
+  markClass [\uni06E4 ] <anchor 218 1324> @aboveSingle;
+  markClass [\uniE818 ] <anchor -45 1485> @aboveSingle;
+  markClass [\uniE82A ] <anchor 261 945> @aboveSingle;
+  markClass [\uniE82B ] <anchor 258 680> @aboveSingle;
+  markClass [\uniE82C ] <anchor 261 1023> @aboveSingle;
+  markClass [\uniE82D ] <anchor 190 1183> @aboveSingle;
+  markClass [\NameMe.1455 ] <anchor 478 2600> @aboveSingle;
+  markClass [\NameMe.1456 ] <anchor 439 1640> @aboveSingle;
+  markClass [\uni0658 ] <anchor 489 999> @aboveSingle;
+  markClass [\uni0670 ] <anchor 276 1279> @aboveSingle;
+  markClass [\smalltaa ] <anchor 16 692> @aboveSingle;
+  markClass [\uni0610 ] <anchor 1116 580> @finaAnchor;
+  markClass [\uni0611 \uni0613 ] <anchor 836 720> @finaAnchor;
+  markClass [\uni0615 ] <anchor 443 801> @finaAnchor;
+  markClass [\uni064B ] <anchor -564 1051> @finaAnchor;
+  markClass [\uni064C ] <anchor -412 1009> @finaAnchor;
+  markClass [\uni064D \uni064E \uni064F \uni0650 \uni0651 \uni0652 \uni0653 \uni0654 \uni0655 \thinkharozer \uni0657 \uni0658 ] <anchor -217 1899> @finaAnchor;
+  markClass [\uni0612 ] <anchor 1236 608> @finaAnchor;
+  markClass [\thinkharozer ] <anchor 330 1629> @subLiga;
+  markClass [\uni0656 ] <anchor 150 295> @subLiga;
+  markClass [\thinkharozabar ] <anchor 338 1111> @supLiga;
+  markClass [\uni0670 ] <anchor 280 1284> @supLiga;
+  markClass [\uni064D ] <anchor 218 -630> @zerLiga;
+  markClass [\uni0650 ] <anchor 229 -658> @zerLiga;
+  markClass [\uni0656 ] <anchor 162 334> @zerLiga;
+  markClass [\uni064D ] <anchor 202 -637> @belowLiga;
+  markClass [\uni0650 ] <anchor 221 -660> @belowLiga;
+  markClass [\thinkharozer ] <anchor 327 1629> @belowLiga;
+  markClass [\uni0656 ] <anchor 167 335> @belowLiga;
+  markClass [\uni064B ] <anchor 226 1422> @aboveLiga;
+  markClass [\uni064C ] <anchor 321 1748> @aboveLiga;
+  markClass [\uni064E ] <anchor 244 1444> @aboveLiga;
+  markClass [\uni064F ] <anchor 212 1347> @aboveLiga;
+  markClass [\uni0651 ] <anchor 256 1398> @aboveLiga;
+  markClass [\uni0652 ] <anchor 171 1067> @aboveLiga;
+  markClass [\uni0657 ] <anchor 287 1005> @aboveLiga;
+  markClass [\thinkharozabar ] <anchor 310 1107> @aboveLiga;
+  markClass [\uniE818 ] <anchor -45 1493> @aboveLiga;
+  markClass [\uniE82A ] <anchor 261 953> @aboveLiga;
+  markClass [\uniE82B ] <anchor 256 691> @aboveLiga;
+  markClass [\uniE82C ] <anchor 261 1031> @aboveLiga;
+  markClass [\uniE82D ] <anchor 190 1178> @aboveLiga;
+  markClass [\uni0658 ] <anchor 477 1005> @aboveLiga;
+  markClass [\jalaalahtashdeed.liga ] <anchor 250 881> @aboveLiga;
+  markClass [\uni064D ] <anchor 232 -792> @belowmark;
+  markClass [\uni0650 ] <anchor 246 -819> @belowmark;
+  markClass [\uni0655 ] <anchor 218 -492> @belowmark;
+  markClass [\thinkharozer ] <anchor 341 1447> @belowmark;
+  markClass [\uni0656 ] <anchor 172 376> @belowmark;
+  markClass [\uni064B ] <anchor 224 1539> @abovemark;
+  markClass [\uni064C ] <anchor 279 1838> @abovemark;
+  markClass [\uni064E ] <anchor 193 1489> @abovemark;
+  markClass [\uni064F ] <anchor 208 1460> @abovemark;
+  markClass [\uni0653 ] <anchor 144 1621> @abovemark;
+  markClass [\uni0654 ] <anchor 205 1406> @abovemark;
+  markClass [\uni0657 ] <anchor 269 1103> @abovemark;
+  markClass [\thinkharozabar ] <anchor 369 1133> @abovemark;
+  markClass [\uni0658 ] <anchor 459 1103> @abovemark;
+  markClass [\uni0670 ] <anchor 271 1283> @abovemark;
+
+lookup kharoSingle_subSingle {
+  lookupflag 0;
   pos base [\uni0627 ] <anchor 39 48> mark @subSingle;
   pos base [\uni0644 ] <anchor 522 -568> mark @subSingle;
   pos base [\uniFE8D ] <anchor 92 92> mark @subSingle;
@@ -4683,8 +4766,10 @@ lookup kharoSingle {
   pos base [\uniFEE0 ] <anchor 271 -135> mark @subSingle;
   pos base [\uniFEE1 ] <anchor 472 -112> mark @subSingle;
   pos base [\uniFEE2 ] <anchor 660 -314> mark @subSingle;
-  markClass [\thinkharozabar ] <anchor 330 1115> @supSingle;
-  markClass [\uni0670 ] <anchor 280 1276> @supSingle;
+} kharoSingle_subSingle;
+
+lookup kharoSingle_supSingle {
+  lookupflag 0;
   pos base [\uni0627 ] <anchor 378 1094> mark @supSingle;
   pos base [\uni0644 ] <anchor 502 968> mark @supSingle;
   pos base [\uniFE8D ] <anchor 446 1073> mark @supSingle;
@@ -4695,19 +4780,18 @@ lookup kharoSingle {
   pos base [\uniFEE0 ] <anchor 24 953> mark @supSingle;
   pos base [\uniFEE1 ] <anchor 368 956> mark @supSingle;
   pos base [\uniFEE2 ] <anchor 624 1054> mark @supSingle;
-  markClass [\uni064D ] <anchor 204 -641> @zer;
-  markClass [\uni0650 ] <anchor 216 -657> @zer;
-  markClass [\uni0655 ] <anchor 195 -348> @zer;
-  markClass [\uni0656 ] <anchor 103 381> @zer;
+} kharoSingle_supSingle;
+
+lookup kharoSingle_zer {
+  lookupflag 0;
   pos base [\zerligaheh ] <anchor 298 -640> mark @zer;
   pos base [\zerligataa ] <anchor 349 -645> mark @zer;
   pos base [\zerHehHamza ] <anchor 289 -640> mark @zer;
   pos base [\hehzerHeh.init ] <anchor 360 -640> mark @zer;
-  markClass [\uni064D ] <anchor 203 -640> @belowSingle;
-  markClass [\uni0650 ] <anchor 222 -659> @belowSingle;
-  markClass [\uni0655 ] <anchor 186 -348> @belowSingle;
-  markClass [\thinkharozer ] <anchor 328 1630> @belowSingle;
-  markClass [\uni0656 ] <anchor 164 300> @belowSingle;
+} kharoSingle_zer;
+
+lookup kharoSingle_belowSingle {
+  lookupflag 0;
   pos base [\uni0621 ] <anchor 501 -252> mark @belowSingle;
   pos base [\uni0623 ] <anchor 166 -219> mark @belowSingle;
   pos base [\uni0624 ] <anchor 308 -591> mark @belowSingle;
@@ -4909,27 +4993,10 @@ lookup kharoSingle {
   pos base [\uniFE92.lowbottom ] <anchor 208 -732> mark @belowSingle;
   pos base [\uni0631.alt ] <anchor 232 -660> mark @belowSingle;
   pos base [\uni0632.alt ] <anchor 154 -683> mark @belowSingle;
-  markClass [\uni064B ] <anchor 243 1417> @aboveSingle;
-  markClass [\uni064C ] <anchor 287 1746> @aboveSingle;
-  markClass [\uni064E ] <anchor 261 1429> @aboveSingle;
-  markClass [\uni064F ] <anchor 218 1339> @aboveSingle;
-  markClass [\uni0651 ] <anchor 256 1400> @aboveSingle;
-  markClass [\uni0652 ] <anchor 169 1069> @aboveSingle;
-  markClass [\uni0653 ] <anchor 152 1550> @aboveSingle;
-  markClass [\uni0654 ] <anchor 235 1344> @aboveSingle;
-  markClass [\uni0657 ] <anchor 299 999> @aboveSingle;
-  markClass [\thinkharozabar ] <anchor 314 1095> @aboveSingle;
-  markClass [\uni06E4 ] <anchor 218 1324> @aboveSingle;
-  markClass [\uniE818 ] <anchor -45 1485> @aboveSingle;
-  markClass [\uniE82A ] <anchor 261 945> @aboveSingle;
-  markClass [\uniE82B ] <anchor 258 680> @aboveSingle;
-  markClass [\uniE82C ] <anchor 261 1023> @aboveSingle;
-  markClass [\uniE82D ] <anchor 190 1183> @aboveSingle;
-  markClass [\NameMe.1455 ] <anchor 478 2600> @aboveSingle;
-  markClass [\NameMe.1456 ] <anchor 439 1640> @aboveSingle;
-  markClass [\uni0658 ] <anchor 489 999> @aboveSingle;
-  markClass [\uni0670 ] <anchor 276 1279> @aboveSingle;
-  markClass [\smalltaa ] <anchor 16 692> @aboveSingle;
+} kharoSingle_belowSingle;
+
+lookup kharoSingle_aboveSingle {
+  lookupflag 0;
   pos base [\uni0621 ] <anchor 437 739> mark @aboveSingle;
   pos base [\uni0623 ] <anchor 134 2140> mark @aboveSingle;
   pos base [\uni0624 ] <anchor 276 1616> mark @aboveSingle;
@@ -5142,13 +5209,10 @@ lookup kharoSingle {
   pos base [\uniFBA8 ] <anchor 398 1341> mark @aboveSingle;
   pos base [\uni0631.alt ] <anchor 279 1116> mark @aboveSingle;
   pos base [\uni0632.alt ] <anchor 202 1364> mark @aboveSingle;
-  markClass [\uni0610 ] <anchor 1116 580> @finaAnchor;
-  markClass [\uni0611 \uni0613 ] <anchor 836 720> @finaAnchor;
-  markClass [\uni0615 ] <anchor 443 801> @finaAnchor;
-  markClass [\uni064B ] <anchor -564 1051> @finaAnchor;
-  markClass [\uni064C ] <anchor -412 1009> @finaAnchor;
-  markClass [\uni064D \uni064E \uni064F \uni0650 \uni0651 \uni0652 \uni0653 \uni0654 \uni0655 \thinkharozer \uni0657 \uni0658 ] <anchor -217 1899> @finaAnchor;
-  markClass [\uni0612 ] <anchor 1236 608> @finaAnchor;
+} kharoSingle_aboveSingle;
+
+lookup kharoSingle_finaAnchor {
+  lookupflag 0;
   pos base [\uni0621 ] <anchor 74 962> mark @finaAnchor;
   pos base [\uni0623 ] <anchor -100 1244> mark @finaAnchor;
   pos base [\uni0624 ] <anchor -244 1208> mark @finaAnchor;
@@ -5183,12 +5247,11 @@ lookup kharoSingle {
   pos base [\uni0648 ] <anchor 18 968> mark @finaAnchor;
   pos base [\uni0631.alt ] <anchor -140 980> mark @finaAnchor;
   pos base [\uni0632.alt ] <anchor -130 964> mark @finaAnchor;
-} kharoSingle;
+} kharoSingle_finaAnchor;
 
-lookup kharoLiga {
+
+lookup kharoLiga_subLiga {
   lookupflag 0;
-  markClass [\thinkharozer ] <anchor 330 1629> @subLiga;
-  markClass [\uni0656 ] <anchor 150 295> @subLiga;
   pos ligature \uniFC3F <anchor 880 613> mark @subLiga 
     ligComponent
       <anchor 238 -1452> mark @subLiga ;
@@ -5282,8 +5345,10 @@ lookup kharoLiga {
   pos ligature \ttehDoubleMeem.fina <anchor 824 -808> mark @subLiga 
     ligComponent
       <anchor 452 -640> mark @subLiga ;
-  markClass [\thinkharozabar ] <anchor 338 1111> @supLiga;
-  markClass [\uni0670 ] <anchor 280 1284> @supLiga;
+} kharoLiga_subLiga;
+
+lookup kharoLiga_supLiga {
+  lookupflag 0;
   pos ligature \uniFC3F <anchor 436 901> mark @supLiga 
     ligComponent
       <anchor 256 1087> mark @supLiga ;
@@ -5377,14 +5442,15 @@ lookup kharoLiga {
   pos ligature \ttehDoubleMeem.fina <anchor 792 1208> mark @supLiga 
     ligComponent
       <anchor 236 1132> mark @supLiga ;
-  markClass [\uni064D ] <anchor 218 -630> @zerLiga;
-  markClass [\uni0650 ] <anchor 229 -658> @zerLiga;
-  markClass [\uni0656 ] <anchor 162 334> @zerLiga;
+} kharoLiga_supLiga;
+
+lookup kharoLiga_zerLiga {
+  lookupflag 0;
   pos ligature \zerLigaGoal <anchor 306 -626> mark @zerLiga <anchor 322 -626> mark @zerLiga ;
-  markClass [\uni064D ] <anchor 202 -637> @belowLiga;
-  markClass [\uni0650 ] <anchor 221 -660> @belowLiga;
-  markClass [\thinkharozer ] <anchor 327 1629> @belowLiga;
-  markClass [\uni0656 ] <anchor 167 335> @belowLiga;
+} kharoLiga_zerLiga;
+
+lookup kharoLiga_belowLiga {
+  lookupflag 0;
   pos ligature \cheMeem.init <anchor 940 -719> mark @belowLiga 
     ligComponent
       <anchor 352 -695> mark @belowLiga ;
@@ -6433,21 +6499,10 @@ lookup kharoLiga {
   pos ligature \NameMe.1829 <anchor 1215 -558> mark @belowLiga 
     ligComponent
       <anchor 440 -1057> mark @belowLiga ;
-  markClass [\uni064B ] <anchor 226 1422> @aboveLiga;
-  markClass [\uni064C ] <anchor 321 1748> @aboveLiga;
-  markClass [\uni064E ] <anchor 244 1444> @aboveLiga;
-  markClass [\uni064F ] <anchor 212 1347> @aboveLiga;
-  markClass [\uni0651 ] <anchor 256 1398> @aboveLiga;
-  markClass [\uni0652 ] <anchor 171 1067> @aboveLiga;
-  markClass [\uni0657 ] <anchor 287 1005> @aboveLiga;
-  markClass [\thinkharozabar ] <anchor 310 1107> @aboveLiga;
-  markClass [\uniE818 ] <anchor -45 1493> @aboveLiga;
-  markClass [\uniE82A ] <anchor 261 953> @aboveLiga;
-  markClass [\uniE82B ] <anchor 256 691> @aboveLiga;
-  markClass [\uniE82C ] <anchor 261 1031> @aboveLiga;
-  markClass [\uniE82D ] <anchor 190 1178> @aboveLiga;
-  markClass [\uni0658 ] <anchor 477 1005> @aboveLiga;
-  markClass [\jalaalahtashdeed.liga ] <anchor 250 881> @aboveLiga;
+} kharoLiga_belowLiga;
+
+lookup kharoLiga_aboveLiga {
+  lookupflag 0;
   pos ligature \cheMeem.init <anchor 744 1371> mark @aboveLiga 
     ligComponent
       <anchor 284 1371> mark @aboveLiga ;
@@ -7498,35 +7553,26 @@ lookup kharoLiga {
   pos ligature \NameMe.1829 <anchor 979 1739> mark @aboveLiga 
     ligComponent
       <anchor 399 923> mark @aboveLiga ;
-} kharoLiga;
+} kharoLiga_aboveLiga;
 
-lookup marktomark {
+
+lookup marktomark_belowmark {
   lookupflag IgnoreLigatures;
-  markClass [\uni064D ] <anchor 232 -792> @belowmark;
-  markClass [\uni0650 ] <anchor 246 -819> @belowmark;
-  markClass [\uni0655 ] <anchor 218 -492> @belowmark;
-  markClass [\thinkharozer ] <anchor 341 1447> @belowmark;
-  markClass [\uni0656 ] <anchor 172 376> @belowmark;
   pos mark [\uni064E ] <anchor 259 1379> mark @belowmark;
   pos mark [\uni0650 ] <anchor 246 -956> mark @belowmark;
   pos mark [\uni0654 ] <anchor 273 1283> mark @belowmark;
   pos mark [\uni0655 ] <anchor 232 -928> mark @belowmark;
-  markClass [\uni064B ] <anchor 224 1539> @abovemark;
-  markClass [\uni064C ] <anchor 279 1838> @abovemark;
-  markClass [\uni064E ] <anchor 193 1489> @abovemark;
-  markClass [\uni064F ] <anchor 208 1460> @abovemark;
-  markClass [\uni0653 ] <anchor 144 1621> @abovemark;
-  markClass [\uni0654 ] <anchor 205 1406> @abovemark;
-  markClass [\uni0657 ] <anchor 269 1103> @abovemark;
-  markClass [\thinkharozabar ] <anchor 369 1133> @abovemark;
-  markClass [\uni0658 ] <anchor 459 1103> @abovemark;
-  markClass [\uni0670 ] <anchor 271 1283> @abovemark;
+} marktomark_belowmark;
+
+lookup marktomark_abovemark {
+  lookupflag IgnoreLigatures;
   pos mark [\uni064E ] <anchor 218 1679> mark @abovemark;
   pos mark [\uni0650 ] <anchor 205 -660> mark @abovemark;
   pos mark [\uni0651 ] <anchor 205 1830> mark @abovemark;
   pos mark [\uni0654 ] <anchor 161 1932> mark @abovemark;
   pos mark [\uni0655 ] <anchor 204 -341> mark @abovemark;
-} marktomark;
+} marktomark_abovemark;
+
 
 lookup vkrnVerticalKerninglookup6 {
   lookupflag IgnoreMarks;
@@ -7610,44 +7656,104 @@ feature mark {
 
  script DFLT;
      language dflt ;
-      lookup kharoSingle;
-      lookup kharoLiga;
+      lookup kharoSingle_subSingle;
+      lookup kharoSingle_supSingle;
+      lookup kharoSingle_zer;
+      lookup kharoSingle_belowSingle;
+      lookup kharoSingle_aboveSingle;
+      lookup kharoSingle_finaAnchor;
+      lookup kharoLiga_subLiga;
+      lookup kharoLiga_supLiga;
+      lookup kharoLiga_zerLiga;
+      lookup kharoLiga_belowLiga;
+      lookup kharoLiga_aboveLiga;
 
  script arab;
      language dflt ;
-      lookup kharoSingle;
-      lookup kharoLiga;
+      lookup kharoSingle_subSingle;
+      lookup kharoSingle_supSingle;
+      lookup kharoSingle_zer;
+      lookup kharoSingle_belowSingle;
+      lookup kharoSingle_aboveSingle;
+      lookup kharoSingle_finaAnchor;
+      lookup kharoLiga_subLiga;
+      lookup kharoLiga_supLiga;
+      lookup kharoLiga_zerLiga;
+      lookup kharoLiga_belowLiga;
+      lookup kharoLiga_aboveLiga;
      language ARA  exclude_dflt;
-      lookup kharoSingle;
-      lookup kharoLiga;
+      lookup kharoSingle_subSingle;
+      lookup kharoSingle_supSingle;
+      lookup kharoSingle_zer;
+      lookup kharoSingle_belowSingle;
+      lookup kharoSingle_aboveSingle;
+      lookup kharoSingle_finaAnchor;
+      lookup kharoLiga_subLiga;
+      lookup kharoLiga_supLiga;
+      lookup kharoLiga_zerLiga;
+      lookup kharoLiga_belowLiga;
+      lookup kharoLiga_aboveLiga;
      language FAR  exclude_dflt;
-      lookup kharoSingle;
-      lookup kharoLiga;
+      lookup kharoSingle_subSingle;
+      lookup kharoSingle_supSingle;
+      lookup kharoSingle_zer;
+      lookup kharoSingle_belowSingle;
+      lookup kharoSingle_aboveSingle;
+      lookup kharoSingle_finaAnchor;
+      lookup kharoLiga_subLiga;
+      lookup kharoLiga_supLiga;
+      lookup kharoLiga_zerLiga;
+      lookup kharoLiga_belowLiga;
+      lookup kharoLiga_aboveLiga;
      language PAS  exclude_dflt;
-      lookup kharoSingle;
-      lookup kharoLiga;
+      lookup kharoSingle_subSingle;
+      lookup kharoSingle_supSingle;
+      lookup kharoSingle_zer;
+      lookup kharoSingle_belowSingle;
+      lookup kharoSingle_aboveSingle;
+      lookup kharoSingle_finaAnchor;
+      lookup kharoLiga_subLiga;
+      lookup kharoLiga_supLiga;
+      lookup kharoLiga_zerLiga;
+      lookup kharoLiga_belowLiga;
+      lookup kharoLiga_aboveLiga;
      language URD  exclude_dflt;
-      lookup kharoSingle;
-      lookup kharoLiga;
+      lookup kharoSingle_subSingle;
+      lookup kharoSingle_supSingle;
+      lookup kharoSingle_zer;
+      lookup kharoSingle_belowSingle;
+      lookup kharoSingle_aboveSingle;
+      lookup kharoSingle_finaAnchor;
+      lookup kharoLiga_subLiga;
+      lookup kharoLiga_supLiga;
+      lookup kharoLiga_zerLiga;
+      lookup kharoLiga_belowLiga;
+      lookup kharoLiga_aboveLiga;
 } mark;
 
 feature mkmk {
 
  script DFLT;
      language dflt ;
-      lookup marktomark;
+      lookup marktomark_belowmark;
+      lookup marktomark_abovemark;
 
  script arab;
      language dflt ;
-      lookup marktomark;
+      lookup marktomark_belowmark;
+      lookup marktomark_abovemark;
      language ARA  exclude_dflt;
-      lookup marktomark;
+      lookup marktomark_belowmark;
+      lookup marktomark_abovemark;
      language FAR  exclude_dflt;
-      lookup marktomark;
+      lookup marktomark_belowmark;
+      lookup marktomark_abovemark;
      language PAS  exclude_dflt;
-      lookup marktomark;
+      lookup marktomark_belowmark;
+      lookup marktomark_abovemark;
      language URD  exclude_dflt;
-      lookup marktomark;
+      lookup marktomark_belowmark;
+      lookup marktomark_abovemark;
 } mkmk;
 
 feature  RQD {

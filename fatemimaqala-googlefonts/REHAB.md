@@ -1,37 +1,51 @@
-# Feature-file rehabilitation — the remaining large task
+# Feature-file rehabilitation — COMPLETE
 
-The Arabic shaping, ligatures, honorifics and mark positioning all live in
-`sources/features.fea` (also copied to `sources/features.full.fea`). This code
-was exported from the FontForge `.sfd` and **does not compile under `feaLib`**
-(the compiler fontmake/ufo2ft and Google Fonts use). Until it compiles, the
-built font does not shape Arabic, so the stage-1 artifact ships with features
-disabled.
+The Arabic shaping, ligatures, honorifics and mark positioning live in
+`sources/Fatemi-Maqala-Regular.ufo/features.fea`. As exported from the FontForge
+`.sfd`, this code did **not** compile under `feaLib` (the compiler fontmake /
+Google Fonts use). It has now been rehabilitated and **compiles clean**; the
+built font shapes Arabic correctly — verified pixel-identical to the original
+shipping font across joining, ligatures and full vocalization.
 
-`feaLib` is stricter than FontForge's old compiler. The errors fall into a few
-categories (counts approximate — they cascade, so treat as magnitude):
+## What was wrong and how it was fixed
 
-| Category | ~count | What it is | Suggested remedy |
+| Issue | count | fix | risk |
 |---|---|---|---|
-| Glyph in two classes in one rule | ~400+ | e.g. "Glyph uni064D cannot be in both @zer and @belowSingle"; "thinkharozabar in @supSingle and @…" | The same mark/glyph is listed in overlapping classes used by a single contextual/positioning rule. Restructure the rule or split the classes; do **not** just delete — it changes mark placement. |
-| Empty glyph class in positioning | ~39 | a referenced class resolved to nothing | usually a downstream effect of the above; fixes when classes are corrected |
-| Duplicate substitution | ~24 | "Already defined substitution for X, Y" (e.g. pehDouble.medi, ttehDouble.medi…) | genuine de-duplication: keep the first, remove the redundant rule |
-| Lowercase/blank script tags | a few | `script dflt;`, blank `script ;`, `languagesystem dflt …` | `dflt`→`DFLT` in **script** position only (language `dflt` is correct); delete blank `script ;` |
-| Missing glyph references | 7 (FIXED) | NULL, uniFEDB.long, f_f, f_i, f_f_i, f_l, f_f_l | already added to the UFO: NULL (empty), uniFEDB.long (copy of uniFEDB), f-ligatures (composites) |
+| Lowercase/blank script tags (`dflt`, blank `script ;`) | few | `dflt`→`DFLT` in script position; drop blank | none |
+| Missing glyph references (NULL, uniFEDB.long, f-ligatures) | 7 | added to the UFO (NULL empty; uniFEDB.long = copy of uniFEDB; f-ligs = composites) | none |
+| Duplicate substitutions ("Already defined …") | 24 | kept the first definition, removed the redundant one | none |
+| Empty-class kern pairs | 39 | removed no-op `pos @A @B` rules referencing an empty class | none |
+| **Mark-class overlap** (a mark in 2 mark classes in one lookup) | root cause | **split the 3 mark lookups per mark class** (see below) | verified safe |
 
-## Recommended approach
-1. Do **not** brute-force by commenting offending lines — that cascades into
-   broken multi-line rules (`got SYMBOL <`) and silently changes shaping.
-2. The class-overlap errors are the bulk. They come from contextual mark rules
-   where a glyph legitimately belongs to multiple semantic classes but `feaLib`
-   forbids overlap within a single rule's inputs. Resolve by refactoring those
-   lookups (often: separate lookups per class, or per-glyph rules).
-3. De-duplicate the ~24 duplicate substitutions.
-4. Consider regenerating the joining/positional features cleanly rather than
-   porting the tangled originals, since the positional forms are encoded as
-   presentation-form glyphs (uniFE../uniFB..) mapped in init/medi/fina/isol.
-5. Validate after every change with:
-   `python3 -c "from fontTools.ttLib import TTFont; from fontTools.feaLib.builder import addOpenTypeFeatures; addOpenTypeFeatures(TTFont('test-target.ttf'),'features.fea')"`
-   against a no-features build that contains the full glyph set.
+### The mark-class split (the substantive fix)
+`feaLib` forbids a mark glyph being in two mark classes **within one lookup**.
+FontForge had crammed six mark classes into a single mark-to-base lookup
+(`kharoSingle`, 513 lines), and similarly `kharoLiga` and `marktomark`. The marks
+(fatḥa, kasra, shadda, …) legitimately belong to several same-direction classes
+(`@aboveSingle`/`@aboveLiga`/`@abovemark`/`@finaAnchor`, etc.), so deleting was
+not an option.
 
-This is careful, shaping-affecting work — it was deliberately left for review
-rather than automated.
+Fix: each of the three lookups was split into one sub-lookup **per mark class**,
+the `markClass` definitions hoisted to file scope, and the `mark`/`mkmk` feature
+references rewired to the sub-lookups:
+- `kharoSingle` → 6 sub-lookups (subSingle, supSingle, zer, belowSingle, aboveSingle, finaAnchor)
+- `kharoLiga` → 5 sub-lookups
+- `marktomark` → 2 sub-lookups
+
+Each sub-lookup references exactly one mark class, so there is no within-lookup
+overlap, and because every base keeps its anchor for every mark group (now via
+separate lookups that all run), **mark placement is unchanged** — confirmed by
+rendering.
+
+## Remaining (not feature-related)
+- 3 glyph-coverage / case-mapping / shape-languages FAILs — to be filled from
+  Crimson (the source of the Latin glyphs).
+- 2 minor Latin-feature niceties: `smallcaps_before_ligatures` (GSUB lookup
+  order) and `tabular_kerning` (slash/zero) — low priority for an Arabic family.
+
+## Reproduce
+The rehab is baked into `sources/.../features.fea`. To re-verify it compiles,
+build a no-features TTF that contains the full glyph set, then:
+```
+python3 -c "from fontTools.ttLib import TTFont; from fontTools.feaLib.builder import addOpenTypeFeatures; addOpenTypeFeatures(TTFont('nofeatures.ttf'),'sources/Fatemi-Maqala-Regular.ufo/features.fea'); print('ok')"
+```

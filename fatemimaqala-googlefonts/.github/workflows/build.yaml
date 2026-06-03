@@ -1,9 +1,8 @@
 name: Build font and QA
 
 # Builds the font with the Google Fonts pipeline and runs Font Bakery.
-# NOTE: the full build is expected to fail until the feature file is
-# rehabilitated (see REHAB.md). This workflow is here so CI is wired up;
-# flip `continue-on-error` off once features compile.
+# Builds the font and runs Font Bakery. Feature file is rehabilitated and
+# compiles; remaining FAILs are glyph-coverage items (see qa/).
 
 on:
   push:
@@ -22,7 +21,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Build
-        continue-on-error: true   # remove once REHAB.md is complete
         run: cd sources && gftools builder config.yaml
       - name: Font Bakery
         continue-on-error: true

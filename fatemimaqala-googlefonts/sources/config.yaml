@@ -1,11 +1,7 @@
 # Google Fonts build config (gftools builder).
 #
-# NOTE: building with the full feature set currently fails — the feature code
-# inherited from the FontForge source needs rehabilitation (see ../REHAB.md).
-# The stage-1 structural artifact in ../fonts was built with features disabled
-# to validate outlines/metrics/naming/hinting against Font Bakery. Once the
-# feature file is rehabilitated, point `sources` at the UFO (which carries the
-# full features.fea) and this config builds the shaping-complete font.
+# The feature file has been rehabilitated (see ../REHAB.md); this builds the
+# shaping-complete font. Vertical metrics are post-patched until folded in.
 sources:
   - Fatemi-Maqala-Regular.ufo
 familyName: Fatemi Maqala
