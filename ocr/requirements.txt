@@ -1,0 +1,9 @@
+# Synthetic-data generator dependencies.
+# IMPORTANT: Pillow must be built with libraqm for correct Arabic shaping and
+# diacritic positioning. Install the system library first:
+#   Debian/Ubuntu: sudo apt-get install libraqm0
+#   macOS (brew):  brew install libraqm
+# then: pip install -r ocr/requirements.txt
+# Verify with: python3 -c "from PIL import features; print(features.check('raqm'))"
+Pillow>=10.0
+numpy>=1.24

@@ -1,0 +1,5 @@
+# Generated training data — regenerate with generate.py, don't commit it.
+data/ground-truth/
+*.traineddata
+*.traineddata.gz
+__pycache__/

@@ -1,0 +1,75 @@
+"""
+Text → image rendering via Pillow + HarfBuzz (libraqm).
+
+raqm is what makes this correct rather than approximate: it applies the font's
+own OpenType GSUB/GPOS tables, so the honorific ligatures, the doubled LSD
+letter forms, the Urdu/Persian glyphs, and — crucially — the *positioning of the
+iʿrāb* all come out exactly as the typeface intends. That is the whole reason to
+render with our own fonts instead of scraping images.
+
+Each line is drawn onto an over-sized canvas, then cropped tight to the actual
+ink bounding box (which includes tall mark stacks above the baseline and marks
+that hang below it) plus a margin. The result is black text on white, mode "L".
+"""
+
+from __future__ import annotations
+
+from PIL import Image, ImageDraw, ImageFont, features
+
+if not features.check("raqm"):  # pragma: no cover - environment guard
+    raise SystemExit(
+        "Pillow was built without libraqm. Arabic shaping and diacritic\n"
+        "positioning will be wrong. Install a raqm-enabled Pillow, e.g.:\n"
+        "  Debian/Ubuntu: apt-get install libraqm0\n"
+        "  macOS (brew):  brew install libraqm\n"
+        "then reinstall Pillow (pip install --force-reinstall Pillow)."
+    )
+
+_LAYOUT = ImageFont.Layout.RAQM
+
+# Cache loaded fonts: (path, px) -> ImageFont
+_font_cache: dict[tuple[str, int], ImageFont.FreeTypeFont] = {}
+
+
+def _font(path: str, px: int) -> ImageFont.FreeTypeFont:
+    key = (path, px)
+    if key not in _font_cache:
+        _font_cache[key] = ImageFont.truetype(path, px, layout_engine=_LAYOUT)
+    return _font_cache[key]
+
+
+def render_line(
+    text: str,
+    font_path: str,
+    px: int,
+    *,
+    language: str = "ar",
+    padding: int = 12,
+) -> Image.Image:
+    """Render one line of RTL text to a tightly-cropped grayscale image."""
+    font = _font(font_path, px)
+
+    # Measure on a scratch canvas. anchor "la" + direction rtl gives us the true
+    # ink box including diacritics that overshoot the em.
+    scratch = Image.new("L", (1, 1), 255)
+    draw = ImageDraw.Draw(scratch)
+    bbox = draw.textbbox(
+        (0, 0), text, font=font, direction="rtl", language=language, anchor="la"
+    )
+    left, top, right, bottom = bbox
+    w = max(1, right - left)
+    h = max(1, bottom - top)
+
+    img = Image.new("L", (w + 2 * padding, h + 2 * padding), 255)
+    draw = ImageDraw.Draw(img)
+    # Shift by -left/-top so the ink lands at (padding, padding).
+    draw.text(
+        (padding - left, padding - top),
+        text,
+        font=font,
+        fill=0,
+        direction="rtl",
+        language=language,
+        anchor="la",
+    )
+    return img
