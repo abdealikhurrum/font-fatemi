@@ -147,3 +147,7 @@ keyboards/ios/LisanUdDawat/submission/*
 !keyboards/ios/LisanUdDawat/submission/build-profile.py
 !keyboards/ios/LisanUdDawat/submission/sign-profile.sh
 !keyboards/ios/LisanUdDawat/submission/SIGNING_THE_PROFILE.md
+
+# Python
+__pycache__/
+*.pyc
