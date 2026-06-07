@@ -7,12 +7,19 @@ This walks the dataset produced by `generate.py` all the way to the
 
 ```bash
 python3 ocr/generate.py --corpus your_lsd_corpus.txt --variants 5
+
+# ...or fold in real pages from born-digital PDFs (best data you can get):
+python3 ocr/generate.py --corpus your_lsd_corpus.txt --pdf scans/ --variants 5
 # -> ocr/data/ground-truth/{train,eval}/  (*.png + *.gt.txt pairs)
+# -> ocr/data/ground-truth/needs-ocr/      (text-less pages for transcription)
+# -> ocr/data/ground-truth/verify.png      (QA: check RTL order is correct!)
 ```
 
 Bigger and more representative is better: aim for a corpus in the thousands of
 distinct lines before expecting usable accuracy. Start smaller to validate the
-loop end to end.
+loop end to end. PDF pages with a real text layer give the highest-value samples
+— see the README's "Training from PDFs" section, and always check `verify.png`
+before a large run.
 
 ## 2. Train with tesstrain (Tesseract 5, LSTM)
 

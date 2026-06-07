@@ -35,6 +35,7 @@ import fonts as font_registry
 from augment import augment
 from corpus import load_lines
 from normalize import strip_vocalization
+from pdfsource import collect_pdfs, ingest_pdf
 from render import render_line
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -73,6 +74,29 @@ def parse_args() -> argparse.Namespace:
                    help="If >0, use at most this many corpus lines (for quick tests).")
     p.add_argument("--seed", type=int, default=1424,
                    help="RNG seed for reproducible augmentation.")
+    # PDF ingestion ---------------------------------------------------------
+    p.add_argument("--pdf", type=pathlib.Path, nargs="*", default=None,
+                   help="PDF files or directories to ingest. Pages with a usable "
+                        "text layer become REAL (image, text) training pairs; "
+                        "pages that are garbled or image-only are routed to "
+                        "<out>/needs-ocr/ for OCR or manual transcription.")
+    p.add_argument("--pdf-dpi", type=int, default=200,
+                   help="Resolution to rasterise PDF pages at.")
+    p.add_argument("--pdf-no-convert", action="store_true",
+                   help="Skip double-press → Unicode conversion of extracted "
+                        "text (use if the PDF text is already proper Unicode).")
+    p.add_argument("--pdf-min-arabic", type=float, default=0.5,
+                   help="A page's text layer must be at least this fraction "
+                        "Arabic-script to be trusted; otherwise the page is "
+                        "treated as image-only and sent to needs-ocr.")
+    p.add_argument("--pdf-no-synth", action="store_true",
+                   help="Don't also render PDF-extracted text synthetically in "
+                        "the project fonts (by default we do, for extra variety).")
+    p.add_argument("--pdf-verify", type=int, default=12,
+                   help="Save this many extracted (crop, label) pairs as a "
+                        "<out>/verify.png contact sheet for visual QA. Extraction "
+                        "order for RTL text is producer-dependent — check this "
+                        "before trusting a batch. 0 disables.")
     return p.parse_args()
 
 
@@ -88,15 +112,7 @@ def split_of(line: str, eval_frac: float) -> str:
 def main() -> None:
     args = parse_args()
 
-    if not args.corpus.is_file():
-        raise SystemExit(f"Corpus not found: {args.corpus}")
-
     specs = font_registry.resolve(args.fonts)
-    lines = load_lines(args.corpus, max_words=args.max_words)
-    if args.limit > 0:
-        lines = lines[: args.limit]
-    if not lines:
-        raise SystemExit("Corpus produced no usable lines after normalisation.")
 
     rng = np.random.default_rng(args.seed)
     train_dir = args.out / "train"
@@ -107,7 +123,27 @@ def main() -> None:
     manifest = (args.out / "manifest.jsonl").open("w", encoding="utf-8")
     counts = {"train": 0, "eval": 0}
 
-    print(f"Corpus lines: {len(lines)}  |  fonts: "
+    # PDFs first: they yield REAL pairs written directly, and their extracted
+    # text is fed into the synthetic corpus below (unless --pdf-no-synth).
+    pdf_lines: list[str] = []
+    if args.pdf:
+        pdf_lines = ingest_pdfs(args, manifest, train_dir, eval_dir, counts)
+
+    # Synthetic corpus = text file (if present) + text recovered from PDFs.
+    lines: list[str] = []
+    if args.corpus.is_file():
+        lines = load_lines(args.corpus, max_words=args.max_words)
+        if args.limit > 0:
+            lines = lines[: args.limit]
+    elif not args.pdf:
+        raise SystemExit(f"Corpus not found: {args.corpus} (and no --pdf given)")
+    if pdf_lines and not args.pdf_no_synth:
+        lines = lines + pdf_lines
+
+    if not lines and counts["train"] + counts["eval"] == 0:
+        raise SystemExit("Nothing to generate: empty corpus and no PDF text.")
+
+    print(f"Synthetic corpus lines: {len(lines)}  |  fonts: "
           f"{', '.join(s.name for s in specs)}  |  variants: {args.variants}")
 
     for li, line in enumerate(lines):
@@ -151,6 +187,7 @@ def main() -> None:
                         "split": split,
                         "augmented": v != 0,
                         "vocalized": not drop_marks,
+                        "source": "synthetic",
                     }, ensure_ascii=False) + "\n")
                     counts[split] += 1
 
@@ -158,6 +195,104 @@ def main() -> None:
     print(f"Done. train={counts['train']} eval={counts['eval']} samples")
     print(f"Output: {args.out}")
     print("Next: see ocr/TRAINING.md to build fatemi.traineddata.")
+
+
+def ingest_pdfs(args, manifest, train_dir, eval_dir, counts) -> list[str]:
+    """Ingest every --pdf, writing real (image, label) line pairs straight into
+    the dataset and saving text-less pages to <out>/needs-ocr/. Returns the
+    recovered Unicode text lines so they can also be rendered synthetically."""
+    pdfs = collect_pdfs(args.pdf)
+    if not pdfs:
+        print("No PDF files found under --pdf paths.")
+        return []
+
+    ocr_dir = args.out / "needs-ocr"
+    text_lines: list[str] = []
+    verify: list[tuple] = []  # (crop image, label) pairs for the QA sheet
+    n_real = n_ocr = 0
+
+    for pdf in pdfs:
+        res = ingest_pdf(
+            pdf,
+            dpi=args.pdf_dpi,
+            convert=not args.pdf_no_convert,
+            min_arabic_frac=args.pdf_min_arabic,
+        )
+        stem = pdf.stem.replace(" ", "_")
+
+        for i, pl in enumerate(res.lines):
+            split = split_of(pl.text, args.eval_frac)
+            out_dir = eval_dir if split == "eval" else train_dir
+            name = f"pdf_{stem}_{pl.page:03d}_{i:05d}"
+            png = out_dir / f"{name}.png"
+            pl.image.save(png)
+            (out_dir / f"{name}.gt.txt").write_text(pl.text, encoding="utf-8")
+            manifest.write(json.dumps({
+                "image": str(png.relative_to(args.out)),
+                "text": pl.text,
+                "font": None,            # real PDF rendering, not one of our fonts
+                "px": None,
+                "split": split,
+                "augmented": False,
+                # A printed line carries whatever vocalization it was set with.
+                "vocalized": strip_vocalization(pl.text) != pl.text,
+                "source": "pdf",
+                "pdf": pdf.name,
+                "page": pl.page,
+            }, ensure_ascii=False) + "\n")
+            counts[split] += 1
+            n_real += 1
+            text_lines.append(pl.text)
+            if len(verify) < args.pdf_verify:
+                verify.append((pl.image, pl.text))
+
+        if res.needs_ocr:
+            ocr_dir.mkdir(parents=True, exist_ok=True)
+            for pg in res.needs_ocr:
+                pg.image.save(ocr_dir / f"{stem}_{pg.page:03d}.png")
+                n_ocr += 1
+
+        print(f"  {pdf.name}: {res.n_text_pages} text page(s) → "
+              f"{len(res.lines)} line(s); {res.n_image_pages} image/garbled "
+              f"page(s) → needs-ocr")
+
+    if verify:
+        sheet = args.out / "verify.png"
+        _verify_sheet(verify, sheet)
+        print(f"  QA: wrote {len(verify)} (crop, label) pairs to {sheet} — "
+              f"check the label matches the image before trusting the batch.")
+
+    print(f"PDF ingest: {n_real} real line pair(s); {n_ocr} page(s) need OCR"
+          + (f" (saved to {ocr_dir})" if n_ocr else ""))
+    return text_lines
+
+
+def _verify_sheet(pairs: list[tuple], out_png: pathlib.Path) -> None:
+    """Stack each PDF line crop above the same text re-rendered in FatemiMaqala.
+    If extraction + conversion are right, the two rows read the same."""
+    from PIL import Image, ImageDraw
+
+    fm = str(font_registry.FONTS["fatemimaqala"].path)
+    rows = []
+    for crop, label in pairs:
+        crop = crop.convert("L")
+        try:
+            rendered = render_line(label, fm, 40)
+        except Exception:
+            rendered = Image.new("L", (crop.width, 48), 255)
+        rows.append((crop, rendered))
+
+    pad, gap = 10, 6
+    W = max(max(c.width, r.width) for c, r in rows) + 2 * pad
+    H = sum(c.height + r.height + gap + 18 for c, r in rows) + pad
+    sheet = Image.new("L", (W, H), 255)
+    draw = ImageDraw.Draw(sheet)
+    y = pad
+    for crop, rendered in rows:
+        sheet.paste(crop, (W - crop.width - pad, y)); y += crop.height + gap
+        sheet.paste(rendered, (W - rendered.width - pad, y)); y += rendered.height
+        draw.line([(pad, y + 8), (W - pad, y + 8)], fill=200); y += 18
+    sheet.save(out_png)
 
 
 def spec_id(spec: font_registry.FontSpec) -> str:

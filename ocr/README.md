@@ -24,6 +24,7 @@ on the website (the "Custom: FatemiMaqala" option in `ocr.html`).
 | `fonts.py` | Registry of the typefaces to render, with point sizes. |
 | `normalize.py` | Canonicalises ground-truth text — the one true spelling per word. |
 | `corpus.py` | Loads a UTF-8 corpus into clean, line-level units. |
+| `pdfsource.py` | Ingests PDFs: real (image, text) pairs from text pages, OCR queue for the rest. |
 | `render.py` | Renders a line via Pillow + HarfBuzz (correct shaping & mark placement). |
 | `augment.py` | Scan-like degradation: skew, blur, noise, ink spread, JPEG artifacts. |
 | `generate.py` | CLI that ties it together and writes the dataset. |
@@ -67,6 +68,39 @@ Output goes to `ocr/data/ground-truth/{train,eval}/` as `<stem>.png` +
 `<stem>.gt.txt` pairs (tesstrain format), plus a `manifest.jsonl` describing
 every sample — including a `vocalized` flag, so you can score voweled and plain
 samples separately (and it's handy if you later train a transformer recogniser).
+
+## Training from PDFs
+
+Born-digital PDFs are a shortcut to *real* training data — the actual page image
+paired with correct text, which beats synthetic. Point `--pdf` at files or
+folders:
+
+```bash
+python3 ocr/generate.py --pdf scans/ --corpus data/corpus.txt --variants 3
+```
+
+For each PDF page:
+
+- **Has a usable text layer** (predominantly Arabic-script): each text line is
+  cropped from the rasterised page and labelled with its text. The text is run
+  through the repo's `double_press_convert.convert_text` first, because LSD PDFs
+  usually store the double-press shorthand (e.g. a space + Arabic semicolon for
+  چھے) rather than final Unicode. These real pairs are written straight into the
+  dataset, and the recovered text is *also* rendered synthetically in the
+  project fonts (disable with `--pdf-no-synth`).
+- **Garbled or image-only** (low Arabic-script fraction, or no text at all): no
+  trustworthy label exists, so the page image is saved to `<out>/needs-ocr/` for
+  OCR or manual transcription instead of being given a made-up label.
+
+Useful flags: `--pdf-dpi` (raster resolution), `--pdf-no-convert` (text is
+already proper Unicode), `--pdf-min-arabic` (text/garbled threshold),
+`--pdf-verify N` (QA sheet).
+
+> **Check RTL extraction before a big run.** How a PDF stores reading order is
+> producer-dependent, and getting it backwards silently corrupts every label.
+> `--pdf-verify` writes `<out>/verify.png` — each line crop above the same text
+> re-rendered in FatemiMaqala. If the two rows read the same, extraction and
+> conversion are good; eyeball it before trusting a batch.
 
 ## The two things that decide quality
 
