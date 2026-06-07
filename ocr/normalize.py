@@ -5,8 +5,9 @@ The single subtlest thing in this whole pipeline: the label we train against
 must be *one canonical Unicode spelling* per word. If the corpus contains the
 same word spelled two ways (a literal kashida here, a presentation-form ligature
 there, marks in a different order), the model is asked to learn a contradiction
-and accuracy collapses — especially on the iʿrāb, which is exactly what we care
-about for Lisan ud-Dawat.
+and accuracy collapses. Vocalization (the iʿrāb) is only a *nice-to-have* in
+Lisan ud-Dawat — plenty of text is written unvocalized — but when the marks are
+present they still have to be spelled consistently, or the model learns noise.
 
 This module is deliberately *conservative*. It only fixes things that are
 unambiguously presentation, never spelling:
@@ -50,6 +51,38 @@ _STRIP = {
     "﻿",  # BOM / ZWNBSP
     TATWEEL,
 }
+
+# Vocalization marks (iʿrāb / tashkīl). Removing these yields the unvocalized
+# spelling of a word. We treat hamza-above/below (U+0654/U+0655) as orthography,
+# not vocalization, and keep them — they sit on a letter's seat and can change
+# the word. Everything here is a pure pronunciation mark that LSD text may or may
+# not carry. (Matches the harakat in fatemimaqala/iraab.txt.)
+VOCALIZATION_MARKS = frozenset(
+    "ً"  # fathatan
+    "ٌ"  # dammatan
+    "ٍ"  # kasratan
+    "َ"  # fatha
+    "ُ"  # damma
+    "ِ"  # kasra
+    "ّ"  # shadda
+    "ْ"  # sukun
+    "ٓ"  # maddah above
+    "ٖ"  # subscript alef
+    "ٗ"  # inverted damma
+    "٘"  # mark noon ghunna
+    "ٰ"  # superscript (dagger) alef
+)
+
+
+def strip_vocalization(text: str) -> str:
+    """Return `text` with the iʿrāb removed — its unvocalized spelling.
+
+    Used by the generator to render a share of the dataset unvocalized, so the
+    recogniser handles plain text as well as fully-voweled text. Run after
+    normalize() so combining marks are already NFC-ordered.
+    """
+    return "".join(ch for ch in text if ch not in VOCALIZATION_MARKS)
+
 
 # House spelling rules: map any codepoint you consider non-canonical to its
 # canonical form. Empty by default on purpose — add entries only when you have

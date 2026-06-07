@@ -49,9 +49,12 @@ letters. Watch the training CER; push iterations up if it's still falling.
 ## 3. Evaluate on real pages
 
 Synthetic CER is optimistic. Hold back a handful of **real** scans/photos with
-hand-typed ground truth and measure CER/WER on those, reporting letters and
-diacritics separately — diacritics are where the value is and where stock OCR
-fails.
+hand-typed ground truth and measure CER/WER on those. Report two numbers:
+base-letter accuracy (the thing that has to be right) and, separately,
+vocalization accuracy on voweled samples. Vocalization is a nice-to-have in LSD,
+so treat it as a bonus tier — don't let mark errors mask otherwise-correct
+letter recognition. The `vocalized` flag in `manifest.jsonl` lets you split the
+two cleanly.
 
 ```bash
 tesseract real_page.png - -l fatemi --tessdata-dir tesstrain/data

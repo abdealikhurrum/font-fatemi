@@ -1,9 +1,12 @@
 # Lisan ud-Dawat OCR — synthetic data generator
 
-Off-the-shelf Arabic OCR fails on Lisan ud-Dawat for two reasons: it ignores the
-iʿrāb (vowel marks) that LSD depends on, and it doesn't know the extended
-Urdu/Persian letters and the doubled LSD forms. The fix is a recogniser trained
-on LSD specifically — and the data for that is the usual blocker.
+Off-the-shelf Arabic OCR struggles with Lisan ud-Dawat: it doesn't know the
+extended Urdu/Persian letters and the doubled LSD forms, and it tends to drop or
+mangle the iʿrāb (vowel marks). Vocalization is a *nice-to-have* in LSD — much
+text is written unvocalized — so the priority is reading the base letters
+correctly, with the marks captured faithfully when they're present. The fix is a
+recogniser trained on LSD specifically, in both voweled and plain forms — and
+the data for that is the usual blocker.
 
 It isn't a blocker here, because **we own the fonts**. This package renders any
 Unicode LSD text into perfectly-labelled line images in the exact typefaces real
@@ -56,9 +59,14 @@ python3 ocr/generate.py --corpus path/to/lsd.txt --variants 6 \
 python3 ocr/generate.py --limit 5 --variants 1 --out /tmp/ocrtest
 ```
 
+By default about 35% of samples are rendered **unvocalized** (iʿrāb stripped
+from both image and label) so the model reads plain text as well as voweled
+text — tune with `--unvocalized-frac` (0 = always voweled, 1 = always plain).
+
 Output goes to `ocr/data/ground-truth/{train,eval}/` as `<stem>.png` +
 `<stem>.gt.txt` pairs (tesstrain format), plus a `manifest.jsonl` describing
-every sample (handy if you later train a transformer recogniser instead).
+every sample — including a `vocalized` flag, so you can score voweled and plain
+samples separately (and it's handy if you later train a transformer recogniser).
 
 ## The two things that decide quality
 

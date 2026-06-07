@@ -34,6 +34,7 @@ import numpy as np
 import fonts as font_registry
 from augment import augment
 from corpus import load_lines
+from normalize import strip_vocalization
 from render import render_line
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -61,6 +62,11 @@ def parse_args() -> argparse.Namespace:
                    help="Override point sizes for all fonts.")
     p.add_argument("--max-words", type=int, default=12,
                    help="Split corpus lines into chunks of at most this many words.")
+    p.add_argument("--unvocalized-frac", type=float, default=0.35,
+                   help="Fraction of samples to render WITHOUT iʿrāb. Vocalization "
+                        "is optional in Lisan ud-Dawat, so training on a mix of "
+                        "voweled and plain text makes the model handle both. Only "
+                        "applies to lines that actually carry marks.")
     p.add_argument("--eval-frac", type=float, default=0.05,
                    help="Fraction of corpus lines held out for evaluation.")
     p.add_argument("--limit", type=int, default=0,
@@ -108,25 +114,43 @@ def main() -> None:
         split = split_of(line, args.eval_frac)
         out_dir = eval_dir if split == "eval" else train_dir
 
+        # Plain (unvocalized) spelling of this line. Only differs if the line
+        # actually carries iʿrāb — otherwise there's nothing to strip.
+        plain = strip_vocalization(line)
+        has_marks = plain != line
+
         for spec in specs:
             sizes = args.sizes if args.sizes else spec.point_sizes
             for px in sizes:
-                base = render_line(line, str(spec.path), px,
-                                   language=spec.language)
+                voc_base = render_line(line, str(spec.path), px,
+                                       language=spec.language)
+                plain_base = None  # rendered lazily, only if needed
+
                 # variant 0 is the clean render; 1..N are augmented.
                 for v in range(args.variants + 1):
+                    drop_marks = (has_marks
+                                  and rng.random() < args.unvocalized_frac)
+                    if drop_marks:
+                        if plain_base is None:
+                            plain_base = render_line(plain, str(spec.path), px,
+                                                     language=spec.language)
+                        base, label = plain_base, plain
+                    else:
+                        base, label = voc_base, line
+
                     img = base if v == 0 else augment(base, rng)
                     stem = f"{spec_id(spec)}_{px}_{li:06d}_{v:02d}"
                     png = out_dir / f"{stem}.png"
                     img.save(png)
-                    (out_dir / f"{stem}.gt.txt").write_text(line, encoding="utf-8")
+                    (out_dir / f"{stem}.gt.txt").write_text(label, encoding="utf-8")
                     manifest.write(json.dumps({
                         "image": str(png.relative_to(args.out)),
-                        "text": line,
+                        "text": label,
                         "font": spec.name,
                         "px": px,
                         "split": split,
                         "augmented": v != 0,
+                        "vocalized": not drop_marks,
                     }, ensure_ascii=False) + "\n")
                     counts[split] += 1
 
