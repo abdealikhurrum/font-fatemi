@@ -73,3 +73,46 @@ def render_line(
         anchor="la",
     )
     return img
+
+
+# Tesseract's LSTM normalises a line to a fixed height then a maxpool downsamples
+# the width, so the number of CTC timesteps a line gets is governed by its
+# width-to-height *ratio*, not its absolute size. The default ara/tesstrain net
+# is `[1,48,0,1 Ct3,3,16 Mp3,3 ...]`: height is normalised to 48 and Mp3,3 divides
+# width by 3, giving roughly `48/3 = 16 * (width/height)` timesteps.
+_NET_HEIGHT = 48
+_NET_WIDTH_POOL = 3
+_TIMESTEPS_PER_RATIO = _NET_HEIGHT / _NET_WIDTH_POOL  # = 16
+
+
+def min_ctc_width(n_labels: int, height: int, *, factor: float = 2.5) -> int:
+    """Smallest image width that gives a label of `n_labels` unichars enough CTC
+    timesteps at the given image `height`.
+
+    CTC needs at least one timestep per target label (more when equal labels are
+    adjacent, since a blank must separate them). `factor` keeps a safety margin
+    above that floor — empirically, clean dense lines pass around 2.3x and fail
+    below, so 2.5x is safely clear even after augmentation.
+    """
+    if n_labels <= 0:
+        return 0
+    return int(round(factor * n_labels / _TIMESTEPS_PER_RATIO * height))
+
+
+def pad_to_min_width(img: Image.Image, n_labels: int, *, factor: float = 2.5) -> Image.Image:
+    """Pad `img` with white columns until it has enough CTC timesteps for a label
+    of `n_labels` unichars.
+
+    Diacritic-dense Lisan ud-Dawat lines have tall iʿrāb stacks, which inflate
+    the image height and so *shrink* the width/height ratio — starving the LSTM
+    of timesteps and triggering "Compute CTC targets failed", which drops the
+    sample from training. Padding adds blank timesteps without distorting any
+    glyph or changing the label, so the densest (and most valuable) voweled
+    samples survive instead of being silently skipped.
+    """
+    min_w = min_ctc_width(n_labels, img.height, factor=factor)
+    if img.width >= min_w:
+        return img
+    out = Image.new("L", (min_w, img.height), 255)
+    out.paste(img, ((min_w - img.width) // 2, 0))
+    return out

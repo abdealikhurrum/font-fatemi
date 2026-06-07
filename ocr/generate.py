@@ -36,7 +36,7 @@ from augment import augment
 from corpus import load_lines
 from normalize import strip_vocalization
 from pdfsource import collect_pdfs, ingest_pdf
-from render import render_line
+from render import render_line, pad_to_min_width
 
 HERE = pathlib.Path(__file__).resolve().parent
 DEFAULT_CORPUS = HERE / "data" / "corpus.txt"
@@ -175,6 +175,9 @@ def main() -> None:
                         base, label = voc_base, line
 
                     img = base if v == 0 else augment(base, rng)
+                    # Guarantee enough CTC timesteps for the label, so dense
+                    # voweled lines aren't silently dropped by the trainer.
+                    img = pad_to_min_width(img, len(label))
                     stem = f"{spec_id(spec)}_{px}_{li:06d}_{v:02d}"
                     png = out_dir / f"{stem}.png"
                     img.save(png)

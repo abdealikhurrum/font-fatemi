@@ -26,25 +26,63 @@ before a large run.
 [tesstrain](https://github.com/tesseract-ocr/tesstrain) fine-tunes on
 `<stem>.gt.txt` + image pairs — exactly our output format.
 
-```bash
-# one-time: tesseract 5 with training tools + the tesstrain makefile
-sudo apt-get install tesseract-ocr libtesseract-dev
-git clone https://github.com/tesseract-ocr/tesstrain
-git clone https://github.com/tesseract-ocr/tessdata_best   # for the ara start model
+### Toolchain
 
-cd tesstrain
-make training \
+The training tools (`lstmtraining`, `lstmeval`, `combine_lang_model`, …) ship
+with `tesseract-ocr` + `libtesseract-dev` on Debian/Ubuntu — but **not** with
+Homebrew's tesseract on macOS. The repeatable way to get a correct environment
+on any host (and the only sane way on Apple Silicon) is the bundled Docker image
+`ocr/docker/Dockerfile`, which has tesseract 5 + training tools, a raqm-enabled
+Pillow, PyMuPDF, **python-bidi** (required by the RTL recipe below), the
+tesstrain harness at `/opt/tesstrain`, langdata at `/opt/langdata`, and the
+`ara` start model at `/opt/tessdata_best`:
+
+```bash
+docker build -t lsd-ocr ocr/docker
+# run anything with the repo bind-mounted at /work:
+docker run --rm -v "$PWD":/work lsd-ocr bash -lc '...'
+```
+
+### The recipe that actually learns
+
+> **Use `LANG_TYPE=RTL`.** This is the single most important flag and the reason
+> an earlier fine-tune failed (BCER stuck ~99.8%, "Compute CTC targets failed",
+> "null char mapped"). With the default blank `LANG_TYPE`, tesstrain builds the
+> proto-model with an *empty* recoder and no `--lang_is_rtl`; fine-tuning an RTL
+> script from `ara` on that mismatched recoder simply never learns. `LANG_TYPE=RTL`
+> sets `--pass_through_recoder --lang_is_rtl` (and pulls in `generate_wordstr_box.py`,
+> which needs `python-bidi`).
+
+```bash
+docker run --rm -v "$PWD":/work lsd-ocr bash -lc '
+cd /opt/tesstrain && make -j"$(nproc)" training \
   MODEL_NAME=fatemi \
   START_MODEL=ara \
-  TESSDATA=../tessdata_best \
-  GROUND_TRUTH_DIR=../ocr/data/ground-truth/train \
-  MAX_ITERATIONS=10000
-# -> data/fatemi.traineddata
+  LANG_TYPE=RTL \
+  TESSDATA=/opt/tessdata_best \
+  LANGDATA_DIR=/opt/langdata \
+  DATA_DIR=/work/ocr/data/_train \
+  GROUND_TRUTH_DIR=/work/ocr/data/ground-truth/train \
+  MAX_ITERATIONS=10000'
+# -> /work/ocr/data/_train/fatemi.traineddata
 ```
 
 Fine-tuning from `ara` (the start model) means the network already knows Arabic
 letterforms; we're teaching it our fonts, the iʿrāb, and the extended LSD
-letters. Watch the training CER; push iterations up if it's still falling.
+letters. Watch the training BCER; push iterations up if it's still falling.
+
+> **Diacritic-dense lines and CTC timesteps.** Tesseract gives a line about
+> `16 × width/height` CTC timesteps, and a line needs at least one per label.
+> Tall iʿrāb stacks inflate height and starve the line of timesteps —
+> "Compute CTC targets failed", and the sample is dropped. `generate.py` now
+> pads such images horizontally (`render.pad_to_min_width`) so the densest
+> voweled samples survive. If you still see CTC failures, lower `--max-words`
+> or raise the `factor` in `pad_to_min_width`.
+
+Sanity-check the loop before a long run: training one font of plain, short
+Arabic lines from `ara` should drive BCER from ~100% into single digits within a
+couple of thousand iterations. If it doesn't, the recipe — not the data — is
+wrong.
 
 > Tesseract's LSTM is the pragmatic first target because the result runs in the
 > browser via Tesseract.js with no backend. If diacritic accuracy plateaus too
