@@ -7,4 +7,7 @@
 # Verify with: python3 -c "from PIL import features; print(features.check('raqm'))"
 Pillow>=10.0
 numpy>=1.24
-PyMuPDF>=1.24    # PDF text extraction + page rasterisation (--pdf ingestion)
+PyMuPDF>=1.24      # PDF text extraction + page rasterisation (--pdf ingestion)
+python-bidi       # RTL wordstr box generation for tesstrain LANG_TYPE=RTL
+fonttools>=4.0    # font cmap/GSUB introspection (coverage_corpus, legacy_decode)
+freetype-py       # glyph rasterisation for the legacy-font decoder (--pdf-legacy)

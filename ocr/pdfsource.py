@@ -22,8 +22,10 @@ is not.
 
 from __future__ import annotations
 
+import os
 import pathlib
 import sys
+import tempfile
 from dataclasses import dataclass
 
 import fitz  # PyMuPDF
@@ -141,6 +143,93 @@ def ingest_pdf(
                     if box[2] <= box[0] or box[3] <= box[1]:
                         continue
                     lines.append(PdfLine(page_img.crop(box), label, pno))
+
+    return PdfResult(lines, needs_ocr, n_text, n_image)
+
+
+_LEGACY_MARKERS = ("FATEMI", "DAWAT", "LISAN", "LISAAN", "TAHERI")
+
+
+def ingest_pdf_legacy(
+    path: pathlib.Path,
+    decoder,
+    *,
+    dpi: int = 200,
+    min_arabic_frac: float = 0.3,
+    min_line_chars: int = 2,
+    pad: int = 4,
+) -> PdfResult:
+    """Like ingest_pdf, but recovers text from a *legacy* LSD font (scrambled
+    ToUnicode) by image-matching each glyph against the modern FatemiMaqala face
+    (see legacy_decode). Use for PDFs where plain extraction comes out garbled.
+
+    `decoder` is a legacy_decode.LegacyDecoder (built once, reused across PDFs).
+    """
+    from legacy_decode import decode_page_lines
+
+    scale = dpi / 72.0
+    mat = fitz.Matrix(scale, scale)
+    lines: list[PdfLine] = []
+    needs_ocr: list[PdfPage] = []
+    n_text = n_image = 0
+    cache: dict = {}
+
+    with fitz.open(path) as doc:
+        for pno, page in enumerate(doc):
+            faces: dict = {}
+            default_face = None
+            tmps: list[str] = []
+            for f in page.get_fonts(full=True):
+                xref, ext, base = f[0], f[1], str(f[3])
+                if ext != "ttf":
+                    continue
+                try:
+                    data = doc.extract_font(xref)[-1]
+                    tf = tempfile.NamedTemporaryFile(suffix=".ttf", delete=False)
+                    tf.write(data)
+                    tf.close()
+                    tmps.append(tf.name)
+                    import freetype
+                    face = freetype.Face(tf.name)
+                    faces[base] = face
+                    faces[base.split("+")[-1]] = face
+                    if any(m in base.upper() for m in _LEGACY_MARKERS):
+                        default_face = face
+                except Exception:
+                    pass
+            if default_face is None and faces:
+                default_face = next(iter(faces.values()))
+
+            decoded = decode_page_lines(decoder, page, faces, cache, default_face)
+            page_lines = [
+                (t, bb) for t, bb in decoded
+                if len(t) >= min_line_chars and arabic_fraction(t) >= min_arabic_frac
+            ]
+            pix = page.get_pixmap(matrix=mat, colorspace=fitz.csGRAY)
+            page_img = _pixmap_to_pil(pix)
+            W, H = page_img.size
+            if not page_lines:
+                needs_ocr.append(PdfPage(page_img, pno))
+                n_image += 1
+                for t in tmps:
+                    os.unlink(t)
+                continue
+            n_text += 1
+            for text, bb in page_lines:
+                label = normalize(text)
+                if len(label) < min_line_chars:
+                    continue
+                box = (
+                    max(0, int(bb[0] * scale) - pad),
+                    max(0, int(bb[1] * scale) - pad),
+                    min(W, int(bb[2] * scale) + pad),
+                    min(H, int(bb[3] * scale) + pad),
+                )
+                if box[2] <= box[0] or box[3] <= box[1]:
+                    continue
+                lines.append(PdfLine(page_img.crop(box), label, pno))
+            for t in tmps:
+                os.unlink(t)
 
     return PdfResult(lines, needs_ocr, n_text, n_image)
 

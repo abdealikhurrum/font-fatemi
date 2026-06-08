@@ -35,7 +35,7 @@ import fonts as font_registry
 from augment import augment
 from corpus import load_lines
 from normalize import strip_vocalization
-from pdfsource import collect_pdfs, ingest_pdf
+from pdfsource import collect_pdfs, ingest_pdf, ingest_pdf_legacy
 from render import render_line, pad_to_min_width
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -92,6 +92,11 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--pdf-no-synth", action="store_true",
                    help="Don't also render PDF-extracted text synthetically in "
                         "the project fonts (by default we do, for extra variety).")
+    p.add_argument("--pdf-legacy", action="store_true",
+                   help="Decode PDFs set in a LEGACY LSD font (e.g. "
+                        "AL-FATEMI/Lisaan-ud-Dawat) whose ToUnicode is scrambled, "
+                        "by image-matching each glyph against FatemiMaqala "
+                        "(legacy_decode). ~90%% accurate — check --pdf-verify.")
     p.add_argument("--pdf-verify", type=int, default=12,
                    help="Save this many extracted (crop, label) pairs as a "
                         "<out>/verify.png contact sheet for visual QA. Extraction "
@@ -214,13 +219,26 @@ def ingest_pdfs(args, manifest, train_dir, eval_dir, counts) -> list[str]:
     verify: list[tuple] = []  # (crop image, label) pairs for the QA sheet
     n_real = n_ocr = 0
 
+    decoder = None
+    if args.pdf_legacy:
+        from legacy_decode import LegacyDecoder
+        print("Legacy-font mode: building FatemiMaqala glyph templates...")
+        decoder = LegacyDecoder()
+
     for pdf in pdfs:
-        res = ingest_pdf(
-            pdf,
-            dpi=args.pdf_dpi,
-            convert=not args.pdf_no_convert,
-            min_arabic_frac=args.pdf_min_arabic,
-        )
+        if args.pdf_legacy:
+            res = ingest_pdf_legacy(
+                pdf, decoder,
+                dpi=args.pdf_dpi,
+                min_arabic_frac=args.pdf_min_arabic,
+            )
+        else:
+            res = ingest_pdf(
+                pdf,
+                dpi=args.pdf_dpi,
+                convert=not args.pdf_no_convert,
+                min_arabic_frac=args.pdf_min_arabic,
+            )
         stem = pdf.stem.replace(" ", "_")
 
         for i, pl in enumerate(res.lines):

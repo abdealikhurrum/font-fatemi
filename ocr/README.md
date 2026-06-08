@@ -96,6 +96,21 @@ Useful flags: `--pdf-dpi` (raster resolution), `--pdf-no-convert` (text is
 already proper Unicode), `--pdf-min-arabic` (text/garbled threshold),
 `--pdf-verify N` (QA sheet).
 
+### Three kinds of PDF text layer
+
+LSD PDFs store text three ways; the generator recovers the first two:
+
+1. **Proper Unicode / double-press** — handled by default (`double_press_convert`
+   + `normalize`).
+2. **Presentation forms** (shaped glyphs + ligatures like ﷲ, in logical order) —
+   `normalize` folds these to letters automatically via NFKC.
+3. **Legacy font** (e.g. *AL-FATEMI/Lisaan-ud-Dawat*) whose ToUnicode is
+   scrambled and whose embedded subset drops glyph names — pass **`--pdf-legacy`**.
+   It image-matches each glyph against FatemiMaqala (`legacy_decode.py`) and
+   recovers ~90% of characters. Always check `--pdf-verify`: known residuals are
+   the حم (hah-meem) ligature dropping its ح, and Urdu heh (ہ) vs Arabic heh (ه,
+   often the correct LSD spelling). Needs `freetype-py`.
+
 > **Check RTL extraction before a big run.** How a PDF stores reading order is
 > producer-dependent, and getting it backwards silently corrupts every label.
 > `--pdf-verify` writes `<out>/verify.png` — each line crop above the same text

@@ -56,6 +56,8 @@ RUN pip3 install --no-cache-dir \
         "numpy>=1.24" \
         "PyMuPDF>=1.24" \
         "python-bidi" \
+        "fonttools>=4.0" \
+        "freetype-py" \
     && python3 -c "from PIL import features; assert features.check('raqm'), 'Pillow has no raqm — Arabic shaping would be wrong'; print('raqm OK')" \
     && python3 -c "import bidi.algorithm; print('python-bidi OK')"
 
