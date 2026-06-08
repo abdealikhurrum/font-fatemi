@@ -91,8 +91,37 @@ def strip_vocalization(text: str) -> str:
 CANONICAL_MAP: dict[str, str] = {}
 
 
+def has_presentation_forms(text: str) -> bool:
+    """True if `text` contains Arabic Presentation Forms (shaped/positional or
+    ligature glyphs, U+FB50–FDFF / U+FE70–FEFF)."""
+    return any(
+        0xFB50 <= ord(c) <= 0xFDFF or 0xFE70 <= ord(c) <= 0xFEFF for c in text
+    )
+
+
+def fold_presentation_forms(text: str) -> str:
+    """Fold Arabic Presentation Forms back to ordinary letters.
+
+    Some born-digital PDFs store their text layer as the *shaped* glyphs
+    (initial/medial/final forms and ligatures like ﷲ) rather than logical
+    letters. When the glyphs are in logical reading order, NFKC compatibility
+    normalisation recovers correct text — unlike the cluster-scrambled or
+    legacy-font PDFs, which it cannot fix. Only applied when presentation forms
+    are actually present, so ordinary NFC text is left untouched.
+
+    NFKC of the ﷲ ligature (U+FDF2) emits a leading alef, which doubles when the
+    source also typed an explicit alef before it; we collapse that one artifact.
+    """
+    if not has_presentation_forms(text):
+        return text
+    text = unicodedata.normalize("NFKC", text)
+    text = text.replace("االله", "الله")  # االله -> الله
+    return text
+
+
 def normalize(text: str) -> str:
     """Return the canonical label form of a line of Lisan ud-Dawat text."""
+    text = fold_presentation_forms(text)
     text = unicodedata.normalize("NFC", text)
     if CANONICAL_MAP:
         text = text.translate(str.maketrans(CANONICAL_MAP))
