@@ -78,10 +78,21 @@ class LegacyDecoder:
     """Decodes legacy-font glyphs to Unicode by image-matching against a modern
     reference face (FatemiMaqala by default). Build once, reuse across PDFs."""
 
-    def __init__(self, reference_font: str | None = None):
-        self.ref_path = reference_font or str(
-            REPO_ROOT / "fatemimaqala" / "FatemiMaqala-Regular.ttf"
-        )
+    DEFAULT_REFERENCES = (
+        "fatemimaqala/FatemiMaqala-Regular.ttf",
+        "ocr/fonts/KanzAlMarjaan-Regular.ttf",
+    )
+
+    def __init__(self, reference_fonts=None):
+        """reference_fonts: paths to the modern Unicode faces to match against.
+        Defaults to BOTH FatemiMaqala and Kanz al-Marjaan, so legacy PDFs traced
+        from either style decode well — every template carries the same Unicode
+        label regardless of which face's glyph it came from, so combining them
+        only adds robustness."""
+        if reference_fonts is None:
+            self.ref_paths = [str(REPO_ROOT / p) for p in self.DEFAULT_REFERENCES]
+        else:
+            self.ref_paths = [str(p) for p in reference_fonts]
         self._build_reference()
 
     def _label(self, name: str) -> str | None:
@@ -109,33 +120,34 @@ class LegacyDecoder:
         return "".join(c for c in unicodedata.normalize("NFKC", chr(cp)) if c != " ") or None
 
     def _build_reference(self) -> None:
-        ft = TTFont(self.ref_path, lazy=True)
-        self._rev = {}
-        for cp, gn in ft.getBestCmap().items():
-            self._rev.setdefault(gn, cp)
-        # GSUB ligature reverse map: ligature glyph -> component glyph names
-        self._ligmap = {}
-        try:
-            for lk in ft["GSUB"].table.LookupList.Lookup:
-                for st in lk.SubTable:
-                    ligs = getattr(st, "ligatures", None)
-                    if not ligs:
-                        continue
-                    for first, arr in ligs.items():
-                        for lg in arr:
-                            self._ligmap[lg.LigGlyph] = [first] + list(lg.Component)
-        except Exception:
-            pass
-        face = freetype.Face(self.ref_path)
         vecs, labels = [], []
-        for gid, name in enumerate(ft.getGlyphOrder()):
-            lab = self._label(name)
-            if lab is None:
-                continue
-            v = _norm_vec(face, gid)
-            if v is not None:
-                vecs.append(v)
-                labels.append(lab)
+        for path in self.ref_paths:
+            ft = TTFont(path, lazy=True)
+            self._rev = {}
+            for cp, gn in ft.getBestCmap().items():
+                self._rev.setdefault(gn, cp)
+            # GSUB ligature reverse map: ligature glyph -> component glyph names
+            self._ligmap = {}
+            try:
+                for lk in ft["GSUB"].table.LookupList.Lookup:
+                    for st in lk.SubTable:
+                        ligs = getattr(st, "ligatures", None)
+                        if not ligs:
+                            continue
+                        for first, arr in ligs.items():
+                            for lg in arr:
+                                self._ligmap[lg.LigGlyph] = [first] + list(lg.Component)
+            except Exception:
+                pass
+            face = freetype.Face(path)
+            for gid, name in enumerate(ft.getGlyphOrder()):
+                lab = self._label(name)
+                if lab is None:
+                    continue
+                v = _norm_vec(face, gid)
+                if v is not None:
+                    vecs.append(v)
+                    labels.append(lab)
         self._T = np.stack(vecs)
         self._labels = labels
 
