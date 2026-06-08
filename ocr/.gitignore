@@ -4,6 +4,8 @@ data/ground-truth/
 data/_train/
 # Experiment sub-corpora generated on the fly.
 data/_sanity/
+# Generated coverage corpus (rebuild with coverage_corpus.py).
+data/coverage.txt
 *.traineddata
 *.traineddata.gz
 __pycache__/
