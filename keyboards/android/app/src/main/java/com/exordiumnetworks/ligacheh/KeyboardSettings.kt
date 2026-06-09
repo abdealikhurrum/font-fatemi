@@ -114,6 +114,14 @@ object KeyboardSettings {
     fun setYehStyle(ctx: Context, v: YehStyle) =
         prefs(ctx).edit().putString("urdu_yeh_style", v.key).apply()
 
+    // ── First-run ────────────────────────────────────────────────────────
+
+    fun getFirstRunComplete(ctx: Context): Boolean =
+        prefs(ctx).getBoolean("first_run_complete", false)
+
+    fun setFirstRunComplete(ctx: Context) =
+        prefs(ctx).edit().putBoolean("first_run_complete", true).apply()
+
     // ── BiDi tooltip ─────────────────────────────────────────────────────
 
     fun getBiDiTooltipShown(ctx: Context): Boolean =

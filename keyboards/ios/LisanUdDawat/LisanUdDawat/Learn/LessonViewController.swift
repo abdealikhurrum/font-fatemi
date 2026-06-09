@@ -5,6 +5,9 @@ final class LessonViewController: UIViewController, UITextViewDelegate {
     private let module: LessonModule
     private var stepIndex = 0
 
+    /// Set before presenting modally to override the default pop-on-finish behaviour.
+    var onFinish: (() -> Void)?
+
     // UI
     private let scrollView    = UIScrollView()
     private let contentStack  = UIStackView()
@@ -292,6 +295,8 @@ final class LessonViewController: UIViewController, UITextViewDelegate {
         if stepIndex < module.steps.count - 1 {
             stepIndex += 1
             render()
+        } else if let finish = onFinish {
+            finish()
         } else {
             navigationController?.popViewController(animated: true)
         }
