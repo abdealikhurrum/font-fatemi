@@ -15,6 +15,21 @@ final class ViewController: UIViewController {
         buildUI()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showFirstRunIfNeeded()
+    }
+
+    private func showFirstRunIfNeeded() {
+        guard !UserDefaults.standard.bool(forKey: "first_run_complete") else { return }
+        UserDefaults.standard.set(true, forKey: "first_run_complete")
+        let vc = LessonViewController(module: LessonCatalog.quickStart)
+        vc.onFinish = { [weak self] in self?.dismiss(animated: true) }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
+    }
+
     // MARK: - Layout
 
     private func buildUI() {
