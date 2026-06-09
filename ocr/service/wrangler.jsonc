@@ -1,0 +1,31 @@
+{
+  // Rate-limited FreeType glyph-matcher service.
+  // Deploy: requires the Workers Paid plan (Cloudflare Containers). See README.md.
+  "name": "lsd-freetype",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-06-01",
+
+  // The container: built from THIS directory (self-contained; run ./prepare.sh
+  // first to refresh ./vendor). standard-1 = 0.5 vCPU / 4 GiB — fits the decoder.
+  "containers": [
+    {
+      "class_name": "Decoder",
+      "image": "./Dockerfile",
+      "instance_type": "standard-1",
+      "max_instances": 3
+    }
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "DECODER", "class_name": "Decoder" }]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["Decoder"] }
+  ],
+
+  // Per-IP rate limit: 20 conversions per 60s window.
+  "ratelimits": [
+    { "name": "RATE", "namespace_id": "1001", "simple": { "limit": 20, "period": 60 } }
+  ],
+
+  "observability": { "enabled": true }
+}

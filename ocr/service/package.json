@@ -1,0 +1,15 @@
+{
+  "name": "lsd-freetype-service",
+  "private": true,
+  "description": "Rate-limited Cloudflare Worker + container for the high-accuracy FreeType LSD glyph-matcher",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@cloudflare/containers": "^0.3.7"
+  },
+  "devDependencies": {
+    "wrangler": "^4.99.0"
+  }
+}
