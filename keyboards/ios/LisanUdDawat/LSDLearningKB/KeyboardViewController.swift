@@ -34,6 +34,9 @@ final class KeyboardViewController: UIInputViewController {
     private var lastInsertTime: Date?
     private static let doubleSpaceWindow: TimeInterval = 0.4
 
+    // Set while ۚ was just auto-inserted; cleared on the next keystroke or backspace.
+    private var jeemRevertPending = false
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -147,6 +150,7 @@ final class KeyboardViewController: UIInputViewController {
     // MARK: - Text insertion
 
     private func insert(_ text: String) {
+        jeemRevertPending = false
         textDocumentProxy.insertText(text)
         lastInsertedCharacter = text.last
         lastInsertTime = Date()
@@ -155,7 +159,14 @@ final class KeyboardViewController: UIInputViewController {
         updateBiDi()
     }
 
+    private func isIsolatedJeem(_ context: String) -> Bool {
+        guard context.last == "ج" else { return false }
+        let before = context.dropLast()
+        return before.isEmpty || before.last?.isWhitespace == true
+    }
+
     private func deleteBack() {
+        jeemRevertPending = false
         if let char = lastInsertedCharacter,
            char.isLetter,
            let t = lastInsertTime,
@@ -172,6 +183,10 @@ final class KeyboardViewController: UIInputViewController {
     // MARK: - Predictions
 
     private func updatePredictions() {
+        if jeemRevertPending {
+            predictiveBar.update(suggestions: ["ج"])
+            return
+        }
         guard KeyboardSettings.predictionEnabled else {
             predictiveBar.update(suggestions: [])
             return
@@ -250,6 +265,18 @@ extension KeyboardViewController: KeyboardViewDelegate {
             }
 
         case .space:
+            let spaceCtx = textDocumentProxy.documentContextBeforeInput ?? ""
+            if isIsolatedJeem(spaceCtx) {
+                textDocumentProxy.deleteBackward()
+                textDocumentProxy.insertText("\u{06DA} ")
+                lastInsertedCharacter = " "
+                lastInsertTime = Date()
+                if KeyboardSettings.corpusEnabled { CorpusLogger.shared.record("\u{06DA} ") }
+                jeemRevertPending = true
+                updatePredictions()
+                updateBiDi()
+                return
+            }
             let now = Date()
             if lastInsertedCharacter == " ",
                let lastTime = lastInsertTime,
@@ -376,6 +403,13 @@ extension KeyboardViewController: KeyboardViewDelegate {
 
 extension KeyboardViewController: PredictiveBarDelegate {
     func predictiveBar(_ bar: PredictiveBar, didSelect suggestion: String) {
+        if jeemRevertPending {
+            jeemRevertPending = false
+            textDocumentProxy.deleteBackward() // space after ۚ
+            textDocumentProxy.deleteBackward() // ۚ itself
+            insert("ج ")
+            return
+        }
         let before  = textDocumentProxy.documentContextBeforeInput ?? ""
         let partial = before.components(separatedBy: .whitespaces).last ?? ""
         for _ in partial { textDocumentProxy.deleteBackward() }

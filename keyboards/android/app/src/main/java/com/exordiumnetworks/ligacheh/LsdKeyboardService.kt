@@ -36,6 +36,9 @@ class LsdKeyboardService : InputMethodService() {
     private var lastPressedPrimary: String? = null
     private var lastKeyPressTime: Long = 0
 
+    // Set while ۚ was just auto-inserted; cleared on the next keystroke or backspace.
+    private var jeemRevertPending = false
+
     // ── Lifecycle ────────────────────────────────────────────────────────
 
     override fun onCreateInputView(): View {
@@ -137,6 +140,7 @@ class LsdKeyboardService : InputMethodService() {
     // ── Text operations ───────────────────────────────────────────────────
 
     private fun insert(text: String) {
+        jeemRevertPending = false
         currentInputConnection?.commitText(text, 1)
         lastInsertedChar = text.lastOrNull()
         lastInsertTime   = System.currentTimeMillis()
@@ -145,6 +149,7 @@ class LsdKeyboardService : InputMethodService() {
     }
 
     private fun deleteBack() {
+        jeemRevertPending = false
         currentInputConnection?.deleteSurroundingText(1, 0)
         lastInsertedChar = null
         updatePredictions()
@@ -152,10 +157,22 @@ class LsdKeyboardService : InputMethodService() {
     }
 
     private fun insertSuggestion(suggestion: String) {
+        if (jeemRevertPending) {
+            jeemRevertPending = false
+            currentInputConnection?.deleteSurroundingText(2, 0) // ۚ + space
+            insert("ج ")
+            return
+        }
         val before  = currentInputConnection?.getTextBeforeCursor(100, 0)?.toString() ?: ""
         val partial = before.split(" ", "\n").lastOrNull() ?: ""
         currentInputConnection?.deleteSurroundingText(partial.length, 0)
         insert("$suggestion ")
+    }
+
+    private fun isIsolatedJeem(context: String): Boolean {
+        if (context.isEmpty() || context.last() != 'ج') return false
+        val before = context.dropLast(1)
+        return before.isEmpty() || before.last().isWhitespace()
     }
 
     private fun updateBiDi() {
@@ -164,6 +181,10 @@ class LsdKeyboardService : InputMethodService() {
     }
 
     private fun updatePredictions() {
+        if (jeemRevertPending) {
+            predictiveBar?.update(listOf("ج"))
+            return
+        }
         if (!KeyboardSettings.getPredictions(this)) {
             predictiveBar?.update(emptyList())
             return
@@ -227,6 +248,19 @@ class LsdKeyboardService : InputMethodService() {
 
             KeyType.SPACE -> {
                 val now = System.currentTimeMillis()
+                // Isolated jeem → auto-replace with small high jeem (U+06DA)
+                val spaceCtx = currentInputConnection?.getTextBeforeCursor(50, 0)?.toString() ?: ""
+                if (isIsolatedJeem(spaceCtx)) {
+                    currentInputConnection?.deleteSurroundingText(1, 0) // remove ج
+                    currentInputConnection?.commitText("ۚ ", 1)     // insert ۚ + space
+                    lastInsertedChar = ' '
+                    lastInsertTime   = now
+                    jeemRevertPending = true
+                    updatePredictions()
+                    updateBiDi()
+                    lastPressedPrimary = null
+                    return
+                }
                 // Double-space → period + space: fires only when the previous insert was also a space
                 if (lastInsertedChar == ' ' && now - lastInsertTime < doubleSpaceWindowMs) {
                     val before = currentInputConnection?.getTextBeforeCursor(2, 0)?.toString() ?: ""
