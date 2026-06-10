@@ -172,7 +172,8 @@ class LsdKeyboardService : InputMethodService() {
     private fun isIsolatedJeem(context: String): Boolean {
         if (context.isEmpty() || context.last() != 'ج') return false
         val before = context.dropLast(1)
-        return before.isEmpty() || before.last().isWhitespace()
+        if (before.isEmpty() || !before.last().isWhitespace()) return false
+        return before.any { !it.isWhitespace() }
     }
 
     private fun updateBiDi() {

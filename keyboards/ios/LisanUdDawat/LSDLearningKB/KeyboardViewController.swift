@@ -162,7 +162,8 @@ final class KeyboardViewController: UIInputViewController {
     private func isIsolatedJeem(_ context: String) -> Bool {
         guard context.last == "ج" else { return false }
         let before = context.dropLast()
-        return before.isEmpty || before.last?.isWhitespace == true
+        guard before.last?.isWhitespace == true else { return false }
+        return before.contains(where: { !$0.isWhitespace })
     }
 
     private func deleteBack() {
