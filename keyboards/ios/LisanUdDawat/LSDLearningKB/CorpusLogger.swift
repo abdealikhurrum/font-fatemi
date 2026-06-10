@@ -137,6 +137,51 @@ final class CorpusLogger {
         }
     }
 
+    // MARK: - Character-transition recording (feeds probabilistic hit scoring)
+
+    /// Records that `next` followed `prev` in the character stream.
+    /// Skips word-boundary characters (whitespace, punctuation delimiters).
+    func recordCharTransition(from prev: Character, to next: String) {
+        guard !prev.isWhitespace, !prev.isNewline, !next.isEmpty else { return }
+        var data = loaded()
+        data.charBigrams[String(prev), default: [:]][next, default: 0] += 1
+        memCache     = data
+        offsetsDirty = true   // piggyback on the existing batched persist
+    }
+
+    // MARK: - Probabilistic scoring
+
+    /// Gaussian likelihood that a touch at offset (dx, dy) from a key's visual centre
+    /// belongs to that key, using the key's learned offset mean and standard deviation.
+    /// Returns 1.0 (neutral) when fewer than 5 samples have been collected.
+    func touchScore(for key: String, dx: Float, dy: Float) -> Float {
+        let minStd:    Float = 8   // minimum assumed finger precision (px)
+        let dfltMeanY: Float = -2  // global downward bias assumed before key-level data exists
+
+        if let s = loaded().offsets[key], s.count >= 5 {
+            let stdX  = max(s.stdDx, minStd)
+            let stdY  = max(s.stdDy, minStd)
+            let adjDx = dx - s.meanDx
+            let adjDy = dy - s.meanDy
+            return expf(-(adjDx * adjDx / (2 * stdX * stdX)
+                        + adjDy * adjDy / (2 * stdY * stdY)))
+        }
+        let std:  Float = 12
+        let adjDy = dy - dfltMeanY
+        return expf(-(dx * dx + adjDy * adjDy) / (2 * std * std))
+    }
+
+    /// Laplace-smoothed probability that `char` follows `previous` in the character stream.
+    /// Returns 1.0 (flat prior) at word boundaries or when no transition data exists yet.
+    func characterPrior(for char: String, after previous: String) -> Float {
+        guard let first = previous.first, !first.isWhitespace, !first.isNewline else { return 1.0 }
+        let nexts = loaded().charBigrams[previous] ?? [:]
+        guard !nexts.isEmpty else { return 1.0 }
+        let total = Float(nexts.values.reduce(0, +))
+        let count = Float(nexts[char] ?? 0)
+        return (count + 0.1) / (total + 0.1 * Float(nexts.count + 1))
+    }
+
     // MARK: - Correction tracking
 
     func recordCorrection(for char: String) {
@@ -243,7 +288,8 @@ final class CorpusLogger {
 
 struct CorpusData: Codable {
     var words:              [String]                        = []
-    var bigrams:            [String: [String: Int]]         = [:]  // prev → next → count
+    var bigrams:            [String: [String: Int]]         = [:]  // word  prev → next → count
+    var charBigrams:        [String: [String: Int]]         = [:]  // char  prev → next → count
     var offsets:            [String: OffsetStats]           = [:]  // key primary → running stats
     var corrections:        [String: Int]                   = [:]  // char → immediate-backspace count
     var snapshots:          [String: [String: OffsetStats]] = [:]  // "yyyy-MM-dd" → key → stats

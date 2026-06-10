@@ -151,6 +151,11 @@ final class KeyboardViewController: UIInputViewController {
 
     private func insert(_ text: String) {
         jeemRevertPending = false
+        // Record character-level transition and update hit-scoring context
+        if text.count == 1, let prev = lastInsertedCharacter {
+            CorpusLogger.shared.recordCharTransition(from: prev, to: text)
+        }
+        keyboardView.previousCharacter = text.last.map(String.init) ?? ""
         textDocumentProxy.insertText(text)
         lastInsertedCharacter = text.last
         lastInsertTime = Date()
@@ -168,6 +173,7 @@ final class KeyboardViewController: UIInputViewController {
 
     private func deleteBack() {
         jeemRevertPending = false
+        keyboardView.previousCharacter = ""
         if let char = lastInsertedCharacter,
            char.isLetter,
            let t = lastInsertTime,

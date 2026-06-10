@@ -61,6 +61,10 @@ final class KeyboardView: UIView {
     // Touch offset tracking — record where the finger first lands (touchesBegan)
     private var activeTouchBeganPoint: CGPoint?
 
+    /// Set by KeyboardViewController after each character insertion so hit scoring
+    /// can apply a character-level language prior to nearby candidate keys.
+    var previousCharacter: String = ""
+
     // MARK: - Callout
 
     private var calloutView: KeyCalloutView?
@@ -482,29 +486,48 @@ final class KeyboardView: UIView {
 
     // MARK: - Hit testing
 
-    // Phase 1: any key whose frame (+ 3 pt inset) contains the point wins immediately.
-    // This ensures wide keys like the space bar always fire when touched within their
-    // visible bounds, regardless of nearby key centers.
-    // Phase 2: for touches in the gaps between keys, fall back to nearest-key-center
-    // with vertical distance compressed — row-boundary misses resolve to the closer row.
+    // Phase 1: non-character keys (space, backspace, enter, …) resolve by direct hit only —
+    //   no probabilistic override so functional keys are never stolen by a character score.
+    // Phase 2: character keys scored by P(touch | key) × P(key | previous char).
+    //   P(touch | key) — Gaussian centred at the key's learned touch-offset mean with its
+    //                     learned standard deviation (falls back to a 12 pt wide default).
+    //   P(key | context) — Laplace-smoothed character bigram from the accumulated corpus
+    //                       (flat 1.0 until enough data exists).
+    // Phase 3: geometric fallback (nearest centre, compressed Y) for any touch that lands
+    //   outside every character key's 90 pt scoring radius.
     private func keyButton(at point: CGPoint) -> KeyButton? {
         guard !keyButtons.isEmpty else { return nil }
         guard point.y >= metrics.calloutOverflow else { return nil }
 
-        if let direct = keyButtons.first(where: { $0.frame.insetBy(dx: -3, dy: -3).contains(point) }) {
-            return direct
-        }
+        // Phase 1: non-character keys — direct hit with small expansion
+        if let special = keyButtons.first(where: {
+            $0.keyData.type != .character && $0.frame.insetBy(dx: -3, dy: -3).contains(point)
+        }) { return special }
 
+        // Phase 2: probabilistic scoring over nearby character keys
+        var bestKey: KeyButton?
+        var bestScore = Float(-1)
+
+        for btn in keyButtons where btn.keyData.type == .character {
+            let dx = Float(point.x - btn.frame.midX)
+            let dy = Float(point.y - btn.frame.midY)
+            guard dx * dx + dy * dy < 8_100 else { continue } // 90 pt search radius
+
+            let t = CorpusLogger.shared.touchScore(for: btn.keyData.primary, dx: dx, dy: dy)
+            let l = CorpusLogger.shared.characterPrior(for: btn.keyData.primary, after: previousCharacter)
+            let s = t * l
+            if s > bestScore { bestScore = s; bestKey = btn }
+        }
+        if bestKey != nil { return bestKey }
+
+        // Phase 3: geometric fallback (original behaviour) for edge touches
         var best: KeyButton?
         var bestDist = CGFloat.infinity
         for btn in keyButtons {
             let dx = point.x - btn.frame.midX
             let dy = (point.y - btn.frame.midY) * 0.6
-            let dist = dx * dx + dy * dy
-            if dist < bestDist {
-                bestDist = dist
-                best = btn
-            }
+            let d  = dx * dx + dy * dy
+            if d < bestDist { bestDist = d; best = btn }
         }
         return best
     }
