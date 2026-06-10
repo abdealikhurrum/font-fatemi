@@ -41,6 +41,18 @@ class LsdKeyboardService : InputMethodService() {
 
     // ── Lifecycle ────────────────────────────────────────────────────────
 
+    override fun onStartInput(attribute: android.view.inputmethod.EditorInfo?, restarting: Boolean) {
+        super.onStartInput(attribute, restarting)
+        CorpusLogger.init(this)
+        CorpusLogger.preload()
+    }
+
+    override fun onFinishInput() {
+        super.onFinishInput()
+        CorpusLogger.flush()
+        CorpusLogger.persistOffsets()
+    }
+
     override fun onCreateInputView(): View {
         val root = FrameLayout(this)
         // Fill the area behind the keys (incl. the strip above the nav bar) with the
@@ -141,17 +153,29 @@ class LsdKeyboardService : InputMethodService() {
 
     private fun insert(text: String) {
         jeemRevertPending = false
+        if (text.length == 1) {
+            lastInsertedChar?.let { prev -> CorpusLogger.recordCharTransition(prev, text) }
+        }
+        keyboardView?.previousCharacter = text.lastOrNull()?.toString() ?: ""
         currentInputConnection?.commitText(text, 1)
         lastInsertedChar = text.lastOrNull()
         lastInsertTime   = System.currentTimeMillis()
+        if (KeyboardSettings.getPredictions(this)) CorpusLogger.record(text)
         updatePredictions()
         updateBiDi()
     }
 
     private fun deleteBack() {
         jeemRevertPending = false
+        lastInsertedChar?.let { char ->
+            if (char.isLetter() && System.currentTimeMillis() - lastInsertTime < 600) {
+                CorpusLogger.recordCorrection(char.toString())
+            }
+        }
+        keyboardView?.previousCharacter = ""
         currentInputConnection?.deleteSurroundingText(1, 0)
         lastInsertedChar = null
+        CorpusLogger.recordBackspace()
         updatePredictions()
         updateBiDi()
     }
@@ -190,11 +214,13 @@ class LsdKeyboardService : InputMethodService() {
             predictiveBar?.update(emptyList())
             return
         }
-        val before = currentInputConnection?.getTextBeforeCursor(100, 0)?.toString() ?: ""
-        val word   = before.split(" ", "\n").lastOrNull() ?: ""
+        val before   = currentInputConnection?.getTextBeforeCursor(100, 0)?.toString() ?: ""
+        val parts    = before.split(" ", "\n").filter { it.isNotEmpty() }
+        val word     = parts.lastOrNull() ?: ""
+        val previous = if (parts.size >= 2) parts[parts.size - 2] else ""
         predictiveBar?.update(
             if (word.isEmpty()) emptyList()
-            else listOf(word, "${word}ا", "${word}ه")
+            else CorpusLogger.suggestions(word, previous, 3)
         )
     }
 

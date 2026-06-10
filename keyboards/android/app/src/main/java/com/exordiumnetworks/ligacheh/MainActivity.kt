@@ -93,6 +93,14 @@ class MainActivity : AppCompatActivity() {
         content.addView(makeStep("Settings", "Adjust keyboard layout and behaviour."))
         content.addView(buildSettingsCard())
 
+        // Corpus
+        CorpusLogger.init(this)
+        CorpusLogger.preload()
+        content.addView(makeStep("Typing data",
+            "Touch position and word history collected on-device to improve predictions " +
+            "and key accuracy. Nothing leaves the device."))
+        content.addView(buildCorpusCard())
+
         // About
         content.addView(makeStep("About",
             "Open source under the MIT License. View licenses for the bundled " +
@@ -375,6 +383,70 @@ class MainActivity : AppCompatActivity() {
                 setTextColor(0xFF555555.toInt())
             })
         }
+
+    // ── Corpus card ───────────────────────────────────────────────────────
+
+    private fun buildCorpusCard(): LinearLayout {
+        val wordCount = CorpusLogger.wordCount
+        val card = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(16), dp(8), dp(16), dp(12))
+            background = GradientDrawable().apply {
+                setColor(Color.WHITE); cornerRadius = dp(12).toFloat()
+            }
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).also { it.topMargin = dp(8) }
+        }
+
+        val countLabel = TextView(this).apply {
+            text     = "$wordCount words collected"
+            textSize = 14f
+            setTextColor(0xFF555555.toInt())
+            setPadding(0, dp(8), 0, dp(8))
+        }
+        card.addView(countLabel)
+        card.addView(hairline())
+
+        card.addView(LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity     = Gravity.CENTER_VERTICAL
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT)
+            addView(Button(this@MainActivity).apply {
+                text = "Export"
+                setOnClickListener { shareCorpus() }
+                layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+                    .also { it.marginEnd = dp(8) }
+            })
+            addView(Button(this@MainActivity).apply {
+                text = "Clear"
+                setOnClickListener {
+                    CorpusLogger.clear()
+                    countLabel.text = "0 words collected"
+                    Toast.makeText(this@MainActivity, "Corpus cleared", Toast.LENGTH_SHORT).show()
+                }
+                layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+            })
+        })
+        return card
+    }
+
+    private fun shareCorpus() {
+        val text = CorpusLogger.exportText()
+        if (text.isEmpty()) {
+            Toast.makeText(this, "No data yet", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, text)
+            putExtra(Intent.EXTRA_SUBJECT, "LSD Corpus Export")
+        }
+        startActivity(Intent.createChooser(intent, "Export corpus"))
+    }
 
     private fun dp(v: Int) = (v * resources.displayMetrics.density).toInt()
 }

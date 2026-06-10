@@ -30,6 +30,9 @@ class KeyboardView(context: Context) : ViewGroup(context) {
     // are added here so they can escape KeyboardView's own clipping bounds.
     var overlayContainer: FrameLayout? = null
 
+    // Last character inserted — used for character-bigram scoring in keyButtonAt().
+    var previousCharacter: String = ""
+
     private var keyButtons: MutableList<KeyButton> = mutableListOf()
     private var currentRows: List<List<KeyData>> = emptyList()
 
@@ -42,6 +45,10 @@ class KeyboardView(context: Context) : ViewGroup(context) {
 
     private var calloutView: KeyCalloutView? = null
     private var activePopup: LongPressPopupView? = null
+
+    // Touch-down position captured for offset recording in ACTION_UP.
+    private var lastTouchX = 0f
+    private var lastTouchY = 0f
 
     // Popup-repeat chaining: mirrors iOS schedulePopupRepeat().
     // After 500 ms holding on a selected alternate, repeat it every 100 ms.
@@ -155,10 +162,14 @@ class KeyboardView(context: Context) : ViewGroup(context) {
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
+                lastTouchX = event.x
+                lastTouchY = event.y
                 keyButtonAt(event.x, event.y)?.let { activateKey(it) }
             }
 
             MotionEvent.ACTION_MOVE -> {
+                lastTouchX = event.x
+                lastTouchY = event.y
                 val popup = activePopup
                 if (popup != null) {
                     val kbLoc = IntArray(2).also { getLocationOnScreen(it) }
@@ -190,9 +201,15 @@ class KeyboardView(context: Context) : ViewGroup(context) {
                     dismissPopup()
                 } else {
                     cancelTimers(); dismissCallout()
-                    activeKey?.let {
-                        it.isKeyHighlighted = false
-                        delegate?.keyPressed(it.keyData)
+                    activeKey?.let { key ->
+                        key.isKeyHighlighted = false
+                        // Record touch offset so the model learns per-key drift
+                        if (key.keyData.type == KeyType.CHARACTER && key.keyData.primary.isNotEmpty()) {
+                            val dx = lastTouchX - (key.left + key.width  / 2f)
+                            val dy = lastTouchY - (key.top  + key.height / 2f)
+                            CorpusLogger.recordTouchOffset(key.keyData.primary, dx, dy)
+                        }
+                        delegate?.keyPressed(key.keyData)
                     }
                     activeKey = null
                 }
@@ -383,11 +400,43 @@ class KeyboardView(context: Context) : ViewGroup(context) {
     // ------------------------------------------------------------------  helpers
 
     private fun keyButtonAt(x: Float, y: Float): KeyButton? {
-        val expand = dp(4f)
-        return keyButtons.firstOrNull { btn ->
-            RectF(btn.left.toFloat(), btn.top - expand,
-                  btn.right.toFloat(), btn.bottom + expand).contains(x, y)
+        if (keyButtons.isEmpty()) return null
+
+        // Phase 1: non-character keys by direct hit (3dp inset tolerance)
+        val pad = dp(3f)
+        keyButtons.firstOrNull { btn ->
+            btn.keyData.type != KeyType.CHARACTER &&
+            RectF(btn.left - pad, btn.top - pad,
+                  btn.right + pad, btn.bottom + pad).contains(x, y)
+        }?.let { return it }
+
+        // Phase 2: Gaussian × language prior for character keys
+        val thresh   = dp(90f)
+        val threshSq = thresh * thresh
+        var bestKey: KeyButton? = null
+        var bestScore = -1f
+        for (btn in keyButtons) {
+            if (btn.keyData.type != KeyType.CHARACTER) continue
+            val dx = x - (btn.left + btn.width  / 2f)
+            val dy = y - (btn.top  + btn.height / 2f)
+            if (dx * dx + dy * dy >= threshSq) continue
+            val t = CorpusLogger.touchScore(btn.keyData.primary, dx, dy)
+            val l = CorpusLogger.characterPrior(btn.keyData.primary, previousCharacter)
+            val s = t * l
+            if (s > bestScore) { bestScore = s; bestKey = btn }
         }
+        if (bestKey != null) return bestKey
+
+        // Phase 3: geometric fallback with reduced vertical weight
+        var best: KeyButton? = null
+        var bestDist = Float.MAX_VALUE
+        for (btn in keyButtons) {
+            val dx = x - (btn.left + btn.width  / 2f)
+            val dy = (y - (btn.top  + btn.height / 2f)) * 0.6f
+            val d  = dx * dx + dy * dy
+            if (d < bestDist) { bestDist = d; best = btn }
+        }
+        return best
     }
 
     private fun groupedRows(): List<List<KeyButton>> {
