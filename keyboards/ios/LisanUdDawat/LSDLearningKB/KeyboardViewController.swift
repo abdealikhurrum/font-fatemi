@@ -183,7 +183,13 @@ final class KeyboardViewController: UIInputViewController {
 
     // MARK: - Predictions
 
+    // Bar suggestions that REPLACE recently committed text instead of being
+    // appended (honorific signs, spelling variants). Maps the suggestion to
+    // the number of characters to delete before inserting it.
+    private var barReplacements: [String: Int] = [:]
+
     private func updatePredictions() {
+        barReplacements = [:]
         if jeemRevertPending {
             predictiveBar.update(suggestions: ["ج"])
             return
@@ -193,14 +199,67 @@ final class KeyboardViewController: UIInputViewController {
             return
         }
         let context  = textDocumentProxy.documentContextBeforeInput ?? ""
-        let parts    = context.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
-        let word     = parts.last ?? ""
-        let previous = parts.count >= 2 ? parts[parts.count - 2] : ""
-        if word.isEmpty {
-            predictiveBar.update(suggestions: [])
+        let parts    = context.components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }
+        let midWord  = !(context.isEmpty || context.last!.isWhitespace || context.last!.isNewline)
+
+        if midWord, let word = parts.last {
+            // Typing a word: personal habits first, corpus completions fill,
+            // correction candidates last (only when the partial isn't valid).
+            let previous = parts.count >= 2 ? parts[parts.count - 2] : ""
+            var sugg = CorpusLogger.shared.suggestions(for: word, after: previous, limit: 3)
+            for c in LSDModel.shared.completions(of: word, limit: 3) where !sugg.contains(c) {
+                sugg.append(c)
+            }
+            if sugg.count < 3 {
+                for c in LSDModel.shared.corrections(for: word, limit: 3 - sugg.count) where !sugg.contains(c) {
+                    sugg.append(c)
+                }
+            }
+            predictiveBar.update(suggestions: Array(sugg.prefix(3)))
+        } else if let last = parts.last {
+            // Word just committed: honorific signs and spelling variants
+            // (both replace what was typed), then next-word predictions.
+            let prev2 = parts.count >= 2 ? parts[parts.count - 2] : nil
+            var sugg: [String] = []
+            for h in LSDModel.shared.honorifics(prev1: last, prev2: prev2) where !sugg.contains(h.sign) {
+                let tokens = h.typed.components(separatedBy: " ").count
+                sugg.append(h.sign)
+                barReplacements[h.sign] = charsBack(tokens: tokens, in: context)
+            }
+            for v in LSDModel.shared.variants(of: last) where !sugg.contains(v) {
+                sugg.append(v)
+                barReplacements[v] = charsBack(tokens: 1, in: context)
+            }
+            if sugg.count < 3 {
+                for n in LSDModel.shared.nextWords(after: last, prev2: prev2, limit: 3) where !sugg.contains(n) {
+                    sugg.append(n)
+                }
+            }
+            predictiveBar.update(suggestions: Array(sugg.prefix(3)))
         } else {
-            predictiveBar.update(suggestions: CorpusLogger.shared.suggestions(for: word, after: previous, limit: 3))
+            predictiveBar.update(suggestions: [])
         }
+    }
+
+    // Length of the context suffix covering the last `tokens` words plus the
+    // whitespace after (and between) them — what a replacing suggestion deletes.
+    private func charsBack(tokens: Int, in context: String) -> Int {
+        var count = 0
+        var remaining = tokens
+        var inWord = false
+        for ch in context.reversed() {
+            if ch.isWhitespace || ch.isNewline {
+                if inWord {
+                    remaining -= 1
+                    if remaining == 0 { break }
+                    inWord = false
+                }
+            } else {
+                inWord = true
+            }
+            count += 1
+        }
+        return count
     }
 
     // MARK: - BiDi
@@ -411,8 +470,15 @@ extension KeyboardViewController: PredictiveBarDelegate {
             insert("ج ")
             return
         }
+        // Replacing suggestion (honorific sign / spelling variant): swap the
+        // committed token(s) it covers. Reversible — retyping restores.
+        if let span = barReplacements[suggestion] {
+            for _ in 0..<span { textDocumentProxy.deleteBackward() }
+            insert(suggestion + " ")
+            return
+        }
         let before  = textDocumentProxy.documentContextBeforeInput ?? ""
-        let partial = before.components(separatedBy: .whitespaces).last ?? ""
+        let partial = before.components(separatedBy: .whitespacesAndNewlines).last ?? ""
         for _ in partial { textDocumentProxy.deleteBackward() }
         insert(suggestion + " ")
     }

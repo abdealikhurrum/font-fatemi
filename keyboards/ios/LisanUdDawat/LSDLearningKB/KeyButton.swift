@@ -88,6 +88,12 @@ final class KeyButton: UIView {
         layer.shadowOffset  = CGSize(width: 0, height: 1)
         backgroundColor = normalBackground
 
+        // Re-resolve dynamic colors on light/dark switches.
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: KeyButton, _) in
+            self.backgroundColor = self.normalBackground
+            self.setNeedsDisplay()
+        }
+
         label.text          = visibleText(keyData.primary)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
@@ -226,11 +232,4 @@ final class KeyButton: UIView {
         }
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-            backgroundColor = normalBackground
-            setNeedsDisplay()
-        }
-    }
 }

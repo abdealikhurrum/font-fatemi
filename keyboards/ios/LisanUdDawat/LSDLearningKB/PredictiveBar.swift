@@ -42,11 +42,15 @@ final class PredictiveBar: UIView {
 
     func update(suggestions: [String]) {
         guard tooltipLabel.alpha == 0 else { return }
+        // FatemiMaqala renders LD letters and the honorific superscripts the
+        // way the document will; registered async, so re-resolve every update.
+        let fatemi = UIFont(name: "FatemiMaqala-Regular", size: 19)
         for (i, btn) in suggestionButtons.enumerated() {
             let text = i < suggestions.count ? suggestions[i] : ""
             btn.setTitle(text, for: .normal)
             btn.isEnabled = !text.isEmpty
             btn.alpha = text.isEmpty ? 0.35 : 1
+            btn.titleLabel?.font = fatemi ?? UIFont.systemFont(ofSize: 15, weight: i == 1 ? .medium : .regular)
         }
     }
 
@@ -109,7 +113,7 @@ final class PredictiveBar: UIView {
                 ? UIFont.systemFont(ofSize: 15, weight: .medium)
                 : UIFont.systemFont(ofSize: 15)
             btn.titleLabel?.lineBreakMode = .byTruncatingTail
-            btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+            //btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
             btn.tag = i
             btn.addTarget(self, action: #selector(suggestionTapped(_:)), for: .touchUpInside)
             btn.addTarget(self, action: #selector(highlightBtn(_:)), for: .touchDown)
