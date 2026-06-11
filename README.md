@@ -5,7 +5,13 @@ font-fatemi
 > - **Fatemi Maqala** is developed at [abdealikhurrum/fatemimaqala-googlefonts](https://github.com/abdealikhurrum/fatemimaqala-googlefonts)
 > - **AlFatemi** is developed at [abdealikhurrum/Kanz-al-Marjaan](https://github.com/abdealikhurrum/Kanz-al-Marjaan)
 >
-> This repository keeps the **keyboards** (iOS, Android, macOS, Windows, Linux, Keyman), which bundle built copies of the fonts as assets.
+> **The actively developed keyboards have moved to private repositories:**
+> - iOS → `abdealikhurrum/lsd-keyboard-ios`
+> - Android → `abdealikhurrum/lsd-keyboard-android`
+> - macOS IME → `abdealikhurrum/lsd-ime-macos`
+> - Windows TSF IME → `abdealikhurrum/lsd-ime-windows`
+>
+> This repository keeps the **legacy keyboards** (the original Windows installer keyboard, Linux/IBus, Keyman, arabic101, mac-ukulele, …).
 
 This is a fork of the original AlFatemi font project started many years ago to enable Lisan ud Dawat to be written digitally. Due to their long history, these fonts have grown to be synonymous with digitized Lisan ud Dawat, and they are commonly used by many speakers of Lisan ud Dawat.
 FatemiMaqala is a modified version of ALFATEMILSD (and its variants), and AlFatemi[mn] is a variant of AlFatemi1424 (the first Unicode-standards based Lisan ud Dawat font. The aim of these modifications is to enable cross-platform use of these fonts through conformance with Unicode standards and using OpenType features.

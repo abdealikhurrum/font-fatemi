@@ -139,11 +139,3 @@ $RECYCLE.BIN/
 *.mobileprovision
 *.certSigningRequest
 AuthKey_*.p8
-
-# ─── App Store submission materials (kept on local drive only) ─────────────────
-# Ignore everything under the iOS submission folder except the profile-build
-# tooling, which stays tracked so the signed font profile remains reproducible.
-keyboards/ios/LisanUdDawat/submission/*
-!keyboards/ios/LisanUdDawat/submission/build-profile.py
-!keyboards/ios/LisanUdDawat/submission/sign-profile.sh
-!keyboards/ios/LisanUdDawat/submission/SIGNING_THE_PROFILE.md
