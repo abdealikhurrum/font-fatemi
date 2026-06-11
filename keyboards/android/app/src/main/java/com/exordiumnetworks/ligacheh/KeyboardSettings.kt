@@ -28,6 +28,13 @@ object KeyboardSettings {
     fun setPredictions(ctx: Context, v: Boolean) =
         prefs(ctx).edit().putBoolean("prediction_enabled", v).apply()
 
+    // Pause corpus collection without clearing stored data.
+    fun getCorpusEnabled(ctx: Context): Boolean =
+        prefs(ctx).getBoolean("corpus_enabled", true)
+
+    fun setCorpusEnabled(ctx: Context, v: Boolean) =
+        prefs(ctx).edit().putBoolean("corpus_enabled", v).apply()
+
     // ── Double-press ─────────────────────────────────────────────────────
 
     fun getDoublePressEnabled(ctx: Context): Boolean =

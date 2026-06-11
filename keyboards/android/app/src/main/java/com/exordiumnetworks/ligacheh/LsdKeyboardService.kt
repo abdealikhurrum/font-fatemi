@@ -19,6 +19,9 @@ class LsdKeyboardService : InputMethodService() {
 
     private var latinShifted  = false
     private var latinCapsLock = false
+    // Phonetic layout shift state (one-shot; double-tap = caps lock)
+    private var phoneticShifted  = false
+    private var phoneticCapsLock = false
     private var lastShiftTime = 0L
     private var priorToModal  = Layer.DEFAULT
 
@@ -105,7 +108,9 @@ class LsdKeyboardService : InputMethodService() {
             Layer.DEFAULT -> when (KeyboardSettings.getLayout(this)) {
                 KeyboardSettings.LayoutType.LSD            -> KeyboardLayoutData.defaultLayer(this)
                 KeyboardSettings.LayoutType.ARABIC_STANDARD -> ArabicStandardLayoutData.defaultLayer(this)
-                KeyboardSettings.LayoutType.CRULP_URDU      -> CRULPUrduLayoutData.defaultLayer(this)
+                KeyboardSettings.LayoutType.CRULP_URDU      ->
+                    if (phoneticShifted) CRULPUrduLayoutData.shiftLayer(this)
+                    else                 CRULPUrduLayoutData.defaultLayer(this)
             }
             Layer.NUMERIC   -> KeyboardLayoutData.numericLayer(modalBackLabel)
             Layer.DIACRITIC -> KeyboardLayoutData.diacriticLayer(modalBackLabel)
@@ -144,14 +149,21 @@ class LsdKeyboardService : InputMethodService() {
         currentInputConnection?.commitText(text, 1)
         lastInsertedChar = text.lastOrNull()
         lastInsertTime   = System.currentTimeMillis()
+        if (KeyboardSettings.getCorpusEnabled(this)) CorpusLogger.shared(this).record(text)
         updatePredictions()
         updateBiDi()
     }
 
     private fun deleteBack() {
         jeemRevertPending = false
+        val ch = lastInsertedChar
+        if (ch != null && ch.isLetter() &&
+            System.currentTimeMillis() - lastInsertTime < 600L) {
+            CorpusLogger.shared(this).recordCorrection(ch.toString())
+        }
         currentInputConnection?.deleteSurroundingText(1, 0)
         lastInsertedChar = null
+        CorpusLogger.shared(this).recordBackspace()
         updatePredictions()
         updateBiDi()
     }
@@ -163,9 +175,19 @@ class LsdKeyboardService : InputMethodService() {
             insert("ج ")
             return
         }
+        // Replacing suggestion (honorific sign / spelling variant): swap the
+        // committed token(s) it covers. Reversible — retyping restores.
+        barReplacements[suggestion]?.let { span ->
+            currentInputConnection?.deleteSurroundingText(span, 0)
+            insert("$suggestion ")
+            return
+        }
         val before  = currentInputConnection?.getTextBeforeCursor(100, 0)?.toString() ?: ""
         val partial = before.split(" ", "\n").lastOrNull() ?: ""
         currentInputConnection?.deleteSurroundingText(partial.length, 0)
+        // Drop the partial from the corpus pending word so the logged word is
+        // the suggestion alone, not partial + suggestion.
+        repeat(partial.length) { CorpusLogger.shared(this).recordBackspace() }
         insert("$suggestion ")
     }
 
@@ -181,7 +203,13 @@ class LsdKeyboardService : InputMethodService() {
         predictiveBar?.updateBiDi(text)
     }
 
+    // Bar suggestions that REPLACE recently committed text instead of being
+    // appended (honorific signs, spelling variants). Maps the suggestion to
+    // the number of characters to delete before inserting it.
+    private var barReplacements = mutableMapOf<String, Int>()
+
     private fun updatePredictions() {
+        barReplacements = mutableMapOf()
         if (jeemRevertPending) {
             predictiveBar?.update(listOf("ج"))
             return
@@ -190,12 +218,64 @@ class LsdKeyboardService : InputMethodService() {
             predictiveBar?.update(emptyList())
             return
         }
-        val before = currentInputConnection?.getTextBeforeCursor(100, 0)?.toString() ?: ""
-        val word   = before.split(" ", "\n").lastOrNull() ?: ""
-        predictiveBar?.update(
-            if (word.isEmpty()) emptyList()
-            else listOf(word, "${word}ا", "${word}ه")
-        )
+        val context = currentInputConnection?.getTextBeforeCursor(100, 0)?.toString() ?: ""
+        val parts   = context.split(' ', '\n', '\t').filter { it.isNotEmpty() }
+        val midWord = !(context.isEmpty() || context.last().isWhitespace())
+        val model   = LsdModel.shared(this)
+
+        if (midWord && parts.isNotEmpty()) {
+            // Typing a word: personal habits first, corpus completions fill,
+            // correction candidates last (only when the partial isn't valid).
+            val word     = parts.last()
+            val previous = if (parts.size >= 2) parts[parts.size - 2] else ""
+            val sugg = CorpusLogger.shared(this).suggestions(word, previous, 3).toMutableList()
+            for (c in model.completions(word, 3)) if (c !in sugg) sugg.add(c)
+            if (sugg.size < 3) {
+                for (c in model.corrections(word, 3 - sugg.size)) if (c !in sugg) sugg.add(c)
+            }
+            predictiveBar?.update(sugg.take(3))
+        } else if (parts.isNotEmpty()) {
+            // Word just committed: honorific signs and spelling variants
+            // (both replace what was typed), then next-word predictions.
+            val last  = parts.last()
+            val prev2 = if (parts.size >= 2) parts[parts.size - 2] else null
+            val sugg = mutableListOf<String>()
+            for ((typed, sign) in model.honorifics(last, prev2)) if (sign !in sugg) {
+                sugg.add(sign)
+                barReplacements[sign] = charsBack(typed.split(" ").size, context)
+            }
+            for (v in model.variants(last)) if (v !in sugg) {
+                sugg.add(v)
+                barReplacements[v] = charsBack(1, context)
+            }
+            if (sugg.size < 3) {
+                for (n in model.nextWords(last, prev2, 3)) if (n !in sugg) sugg.add(n)
+            }
+            predictiveBar?.update(sugg.take(3))
+        } else {
+            predictiveBar?.update(emptyList())
+        }
+    }
+
+    // Length of the context suffix covering the last `tokens` words plus the
+    // whitespace after (and between) them — what a replacing suggestion deletes.
+    private fun charsBack(tokens: Int, context: String): Int {
+        var count = 0
+        var remaining = tokens
+        var inWord = false
+        for (ch in context.reversed()) {
+            if (ch.isWhitespace()) {
+                if (inWord) {
+                    remaining -= 1
+                    if (remaining == 0) break
+                    inWord = false
+                }
+            } else {
+                inWord = true
+            }
+            count += 1
+        }
+        return count
     }
 
     private fun moveCursor(keyCode: Int) {
@@ -243,6 +323,10 @@ class LsdKeyboardService : InputMethodService() {
 
                 if (currentLayer == Layer.LATIN && latinShifted && !latinCapsLock) {
                     latinShifted = false
+                    applyLayer()
+                }
+                if (currentLayer == Layer.DEFAULT && phoneticShifted && !phoneticCapsLock) {
+                    phoneticShifted = false
                     applyLayer()
                 }
             }
@@ -316,7 +400,15 @@ class LsdKeyboardService : InputMethodService() {
 
             KeyType.SHIFT -> {
                 val now = System.currentTimeMillis()
-                if (now - lastShiftTime < 350L) {
+                if (currentLayer == Layer.DEFAULT) {
+                    // Phonetic layout shift (one-shot; double-tap = caps lock)
+                    if (now - lastShiftTime < 350L) {
+                        phoneticCapsLock = !phoneticCapsLock
+                        phoneticShifted  = phoneticCapsLock
+                    } else {
+                        if (!phoneticCapsLock) phoneticShifted = !phoneticShifted
+                    }
+                } else if (now - lastShiftTime < 350L) {
                     latinCapsLock = !latinCapsLock
                     latinShifted  = latinCapsLock
                 } else {

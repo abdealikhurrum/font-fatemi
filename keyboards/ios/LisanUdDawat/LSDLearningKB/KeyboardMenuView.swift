@@ -137,7 +137,7 @@ final class KeyboardMenuView: UIView {
         lbl.textColor = .label
         lbl.translatesAutoresizingMaskIntoConstraints = false
 
-        let seg = UISegmentedControl(items: ["LSD", "Arabic", "Urdu"])
+        let seg = UISegmentedControl(items: ["LSD", "Arabic", "Phonetic"])
         seg.translatesAutoresizingMaskIntoConstraints = false
         switch KeyboardSettings.selectedLayout {
         case .lsd:            seg.selectedSegmentIndex = 0

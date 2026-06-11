@@ -101,6 +101,9 @@ class PredictiveBar(context: Context) : LinearLayout(context) {
         val suggestionsRow = LinearLayout(context).apply { orientation = HORIZONTAL }
         val wrapper = FrameLayout(context)
 
+        // Suggestions are LSD words — render them in the FatemiMaqala face.
+        val fatemi = runCatching { resources.getFont(R.font.fatemi_maqala_regular) }.getOrNull()
+
         for (i in 0 until 3) {
             val btn = TextView(context).apply {
                 gravity       = Gravity.CENTER
@@ -108,7 +111,8 @@ class PredictiveBar(context: Context) : LinearLayout(context) {
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)
                 isSingleLine  = true
                 ellipsize     = TextUtils.TruncateAt.END
-                if (i == 1) setTypeface(null, Typeface.BOLD)
+                typeface      = if (i == 1) Typeface.create(fatemi ?: Typeface.DEFAULT, Typeface.BOLD)
+                                else        fatemi ?: Typeface.DEFAULT
                 alpha = 0.35f
                 setPadding(dp(8), 0, dp(8), 0)
                 setOnClickListener {

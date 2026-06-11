@@ -48,20 +48,23 @@ final class KeyboardLayoutTests: XCTestCase {
 
     func testLSDLayout() {
         assertAccessible(Self.standardLSDCharacters,
-                         in: KeyboardLayoutData.defaultLayer,
+                         in: [KeyboardLayoutData.defaultLayer],
                          name: "LSD")
     }
 
     func testArabicStandardLayout() {
         assertAccessible(Self.standardLSDCharacters,
-                         in: ArabicStandardLayoutData.defaultLayer,
+                         in: [ArabicStandardLayoutData.defaultLayer],
                          name: "Arabic Standard")
     }
 
-    func testCRULPUrduLayout() {
+    // The Phonetic-based layout has a shift layer (like a hardware keyboard),
+    // so its reachable set is the union of base and shift — one tap, double-tap,
+    // or shift+tap, still no long-press or numeric/diacritic layers required.
+    func testPhoneticLayout() {
         assertAccessible(Self.standardLSDCharacters,
-                         in: CRULPUrduLayoutData.defaultLayer,
-                         name: "CRULP Urdu")
+                         in: [CRULPUrduLayoutData.defaultLayer, CRULPUrduLayoutData.shiftLayer],
+                         name: "Phonetic-based")
     }
 
     // MARK: - Helper
@@ -81,12 +84,13 @@ final class KeyboardLayoutTests: XCTestCase {
 
     private func assertAccessible(
         _ required: Set<String>,
-        in layer: KeyboardLayer,
+        in layers: [KeyboardLayer],
         name: String,
         file: StaticString = #file,
         line: UInt = #line
     ) {
-        let missing = required.subtracting(reachable(in: layer))
+        let reachableAll = layers.reduce(into: Set<String>()) { $0.formUnion(reachable(in: $1)) }
+        let missing = required.subtracting(reachableAll)
         guard !missing.isEmpty else { return }
         XCTFail(
             "[\(name)] \(missing.count) character(s) missing from base layer " +

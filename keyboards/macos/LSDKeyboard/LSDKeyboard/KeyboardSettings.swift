@@ -140,7 +140,7 @@ enum KeyboardSettings {
             switch self {
             case .lsd:       return "LSD (Windows PC)"
             case .macLsd:    return "LSD (Mac)"
-            case .crulpUrdu: return "CRULP Urdu"
+            case .crulpUrdu: return "Phonetic-based"
             }
         }
     }

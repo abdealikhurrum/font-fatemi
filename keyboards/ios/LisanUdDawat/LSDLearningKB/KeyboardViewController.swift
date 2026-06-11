@@ -21,6 +21,11 @@ final class KeyboardViewController: UIInputViewController {
     private var latinCapsLock = false
     private var lastShiftTime: Date?
 
+    // MARK: - Phonetic layout shift / caps-lock state
+
+    private var phoneticShifted  = false
+    private var phoneticCapsLock = false
+
     // MARK: - Views
 
     private var keyboardView  = KeyboardView()
@@ -143,7 +148,8 @@ final class KeyboardViewController: UIInputViewController {
         switch KeyboardSettings.selectedLayout {
         case .lsd:            return KeyboardLayoutData.defaultLayer
         case .arabicStandard: return ArabicStandardLayoutData.defaultLayer
-        case .crulpUrdu:      return CRULPUrduLayoutData.defaultLayer
+        case .crulpUrdu:      return phoneticShifted ? CRULPUrduLayoutData.shiftLayer
+                                                     : CRULPUrduLayoutData.defaultLayer
         }
     }
 
@@ -323,6 +329,11 @@ extension KeyboardViewController: KeyboardViewDelegate {
                 latinShifted = false
                 applyLayer()
             }
+            // Same one-shot behaviour for the Phonetic layout's shift layer
+            if currentLayer == .default && phoneticShifted && !phoneticCapsLock {
+                phoneticShifted = false
+                applyLayer()
+            }
 
         case .space:
             let spaceCtx = textDocumentProxy.documentContextBeforeInput ?? ""
@@ -389,7 +400,15 @@ extension KeyboardViewController: KeyboardViewDelegate {
 
         case .shift:
             let now = Date()
-            if let last = lastShiftTime, now.timeIntervalSince(last) < 0.35 {
+            if currentLayer == .default {
+                // Phonetic layout shift (one-shot; double-tap = caps lock)
+                if let last = lastShiftTime, now.timeIntervalSince(last) < 0.35 {
+                    phoneticCapsLock = !phoneticCapsLock
+                    phoneticShifted  = phoneticCapsLock
+                } else {
+                    if !phoneticCapsLock { phoneticShifted = !phoneticShifted }
+                }
+            } else if let last = lastShiftTime, now.timeIntervalSince(last) < 0.35 {
                 latinCapsLock = !latinCapsLock
                 latinShifted  = latinCapsLock
             } else {
@@ -480,6 +499,9 @@ extension KeyboardViewController: PredictiveBarDelegate {
         let before  = textDocumentProxy.documentContextBeforeInput ?? ""
         let partial = before.components(separatedBy: .whitespacesAndNewlines).last ?? ""
         for _ in partial { textDocumentProxy.deleteBackward() }
+        // Drop the partial from the corpus pending word so the logged word is
+        // the suggestion alone, not partial + suggestion.
+        for _ in partial { CorpusLogger.shared.recordBackspace() }
         insert(suggestion + " ")
     }
 
