@@ -22,9 +22,48 @@ data class LessonModule(
 
 object LessonCatalog {
 
-    val all get() = listOf(doublePress, diacritics, joiners)
+    val all get() = listOf(quickStart, doublePress, diacritics, joiners)
 
     fun byId(id: String) = all.first { it.id == id }
+
+    // ------------------------------------------------------------------ quick start
+
+    val quickStart = LessonModule(
+        id          = "quick_start",
+        title       = "Quick Start",
+        subtitle    = "Five things to know before you type",
+        iconChar    = "پ",
+        accentColor = Color.parseColor("#F57C00"),
+        steps = listOf(
+            LessonStep(
+                heading = "Welcome to LSD Keyboard",
+                body    = "A keyboard for Lisan ud Dawat with the FatemiMaqala font built in.\n\nThese five steps cover the key features — then you can type right away.",
+                target  = "كيم چهو؟"
+            ),
+            LessonStep(
+                heading = "Double-press for extended letters",
+                body    = "Tap any key twice quickly to enter its extended form — no layer switching needed.\n\nFor example: tap ث twice quickly and get پ. Try it in the practice area below.",
+                target  = "پاني",
+                keyHint = "ث ث → پ"
+            ),
+            LessonStep(
+                heading = "Long-press for alternates",
+                body    = "Hold any character key to open a popup with alternate forms — Farsi yeh, aspirated variants, ligatures, and more. Slide to the one you want.\n\nHold the space bar for NBSP, ZWNJ, and the Tatweel stroke ـ.",
+                target  = "سـلام",
+                keyHint = "Hold space → ـ"
+            ),
+            LessonStep(
+                heading = "Switch to English",
+                body    = "Tap the AaBb key in the bottom row to switch to a full QWERTY keyboard. Tap ع to return to Arabic.\n\nLong-press AaBb to switch the system input method entirely.",
+                keyHint = "AaBb → English"
+            ),
+            LessonStep(
+                heading = "BiDi direction fix",
+                body    = "When Arabic and English mix in a text field, characters can appear in the wrong order. A fix button appears automatically in the suggestion bar — tap it to correct the text direction.",
+                keyHint = "اA button → tap to fix"
+            ),
+        )
+    )
 
     // ------------------------------------------------------------------ module 1
 

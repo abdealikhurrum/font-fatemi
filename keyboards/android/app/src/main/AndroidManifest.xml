@@ -29,6 +29,10 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize"/>
 
+        <activity
+            android:name=".AcknowledgementsActivity"
+            android:exported="false"/>
+
         <service
             android:name=".LsdKeyboardService"
             android:exported="true"

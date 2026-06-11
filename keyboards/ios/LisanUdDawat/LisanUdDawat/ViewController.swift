@@ -15,6 +15,21 @@ final class ViewController: UIViewController {
         buildUI()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showFirstRunIfNeeded()
+    }
+
+    private func showFirstRunIfNeeded() {
+        guard !UserDefaults.standard.bool(forKey: "first_run_complete") else { return }
+        UserDefaults.standard.set(true, forKey: "first_run_complete")
+        let vc = LessonViewController(module: LessonCatalog.quickStart)
+        vc.onFinish = { [weak self] in self?.dismiss(animated: true) }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
+    }
+
     // MARK: - Layout
 
     private func buildUI() {
@@ -45,6 +60,7 @@ final class ViewController: UIViewController {
         stackView.addArrangedSubview(appearanceCard())
         stackView.addArrangedSubview(fontCard())
         stackView.addArrangedSubview(corpusCard())
+        stackView.addArrangedSubview(aboutCard())
     }
 
     // MARK: - Cards
@@ -140,7 +156,22 @@ final class ViewController: UIViewController {
         return v
     }
 
+    private func aboutCard() -> UIView {
+        let v = cardContainer(title: "About")
+        v.addArrangedSubview(bodyLabel(
+            "LigaCheh is open source under the MIT License. View the licenses "
+            + "for the bundled FatemiMaqala font and other components."
+        ))
+        v.addArrangedSubview(actionButton("Acknowledgements", color: .systemGray,
+                                          target: self, action: #selector(showAcknowledgements)))
+        return v
+    }
+
     // MARK: - Actions
+
+    @objc private func showAcknowledgements() {
+        navigationController?.pushViewController(AcknowledgementsViewController(), animated: true)
+    }
 
     @objc private func openSettings() {
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }

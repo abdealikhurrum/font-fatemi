@@ -81,9 +81,28 @@ class MainActivity : AppCompatActivity() {
             setOnClickListener { startActivity(Intent(this@MainActivity, LearnActivity::class.java)) }
         })
 
+        // First-run: launch Quick Start lesson automatically
+        if (!KeyboardSettings.getFirstRunComplete(this)) {
+            KeyboardSettings.setFirstRunComplete(this)
+            startActivity(Intent(this, LessonActivity::class.java).apply {
+                putExtra(LessonActivity.EXTRA_MODULE_ID, "quick_start")
+            })
+        }
+
         // Settings
         content.addView(makeStep("Settings", "Adjust keyboard layout and behaviour."))
         content.addView(buildSettingsCard())
+
+        // About
+        content.addView(makeStep("About",
+            "Open source under the MIT License. View licenses for the bundled " +
+            "FatemiMaqala font and other components."))
+        content.addView(Button(this).apply {
+            text = "Acknowledgements"
+            setOnClickListener {
+                startActivity(Intent(this@MainActivity, AcknowledgementsActivity::class.java))
+            }
+        })
     }
 
     // ── Settings card ─────────────────────────────────────────────────────
@@ -120,19 +139,6 @@ class MainActivity : AppCompatActivity() {
             }
         )))
 
-        // Yeh style — global, applies to all layouts
-        card.addView(hairline())
-        card.addView(settingRow("Default yeh", segControl(
-            items    = listOf("ی", "ي"),
-            current  = if (KeyboardSettings.getYehStyle(this) == KeyboardSettings.YehStyle.FARSI_YEH) 0 else 1,
-            font     = fatemiTypeface,
-            onSelect = { idx ->
-                KeyboardSettings.setYehStyle(this,
-                    if (idx == 0) KeyboardSettings.YehStyle.FARSI_YEH
-                    else          KeyboardSettings.YehStyle.ARABIC_YEH)
-            }
-        )))
-
         card.addView(hairline())
         card.addView(toggleRow("Word predictions",
             get = { KeyboardSettings.getPredictions(this) },
@@ -151,6 +157,7 @@ class MainActivity : AppCompatActivity() {
             onSelect = { idx -> KeyboardSettings.setDoublePressWindowMs(this, windowValues[idx]) }
         )))
 
+        // Character styles
         card.addView(hairline())
         card.addView(settingRow("Double ا", segControl(
             items    = listOf("اٰ", "آ"),
@@ -160,6 +167,50 @@ class MainActivity : AppCompatActivity() {
                 KeyboardSettings.setDoubleAlefStyle(this,
                     if (idx == 0) KeyboardSettings.DoubleAlefStyle.KHARO_ZABAR
                     else          KeyboardSettings.DoubleAlefStyle.ALEF_MADDA)
+            }
+        )))
+        card.addView(hairline())
+        card.addView(settingRow("Yeh", segControl(
+            items    = listOf("ي", "ی"),
+            current  = if (KeyboardSettings.getYehStyle(this) == KeyboardSettings.YehStyle.ARABIC_YEH) 0 else 1,
+            font     = fatemiTypeface,
+            onSelect = { idx ->
+                KeyboardSettings.setYehStyle(this,
+                    if (idx == 0) KeyboardSettings.YehStyle.ARABIC_YEH
+                    else          KeyboardSettings.YehStyle.FARSI_YEH)
+            }
+        )))
+        card.addView(hairline())
+        card.addView(settingRow("Kaaf", segControl(
+            items    = listOf("ك", "ک"),
+            current  = if (KeyboardSettings.getKaafStyle(this) == KeyboardSettings.KaafStyle.ARABIC_KAAF) 0 else 1,
+            font     = fatemiTypeface,
+            onSelect = { idx ->
+                KeyboardSettings.setKaafStyle(this,
+                    if (idx == 0) KeyboardSettings.KaafStyle.ARABIC_KAAF
+                    else          KeyboardSettings.KaafStyle.URDU_KAAF)
+            }
+        )))
+        card.addView(hairline())
+        card.addView(settingRow("Haa", segControl(
+            items    = listOf("ه", "ہ"),
+            current  = if (KeyboardSettings.getHaaStyle(this) == KeyboardSettings.HaaStyle.ARABIC_HAA) 0 else 1,
+            font     = fatemiTypeface,
+            onSelect = { idx ->
+                KeyboardSettings.setHaaStyle(this,
+                    if (idx == 0) KeyboardSettings.HaaStyle.ARABIC_HAA
+                    else          KeyboardSettings.HaaStyle.URDU_HAA)
+            }
+        )))
+        card.addView(hairline())
+        card.addView(settingRow("Taa marbuta", segControl(
+            items    = listOf("ة", "ۃ"),
+            current  = if (KeyboardSettings.getTaaMarbuta(this) == KeyboardSettings.TaaMarbuta.ARABIC_TAA) 0 else 1,
+            font     = fatemiTypeface,
+            onSelect = { idx ->
+                KeyboardSettings.setTaaMarbuta(this,
+                    if (idx == 0) KeyboardSettings.TaaMarbuta.ARABIC_TAA
+                    else          KeyboardSettings.TaaMarbuta.URDU_TAA)
             }
         )))
 
