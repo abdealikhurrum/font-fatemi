@@ -464,6 +464,10 @@ lookup honorifics {
     sub \asciicircum \saadDouble.init \uniFECA  by \SA.super;
     sub \asciicircum \uniFEBB \uniFECA  by \SA.super;
     sub \asciicircum \uni0635 \uni00A0 \uni0639  by \SA.super;
+    # ZWNJ variants first (longer match): the keyboard emits ZWNJ between
+    # the small-high letters so non-supporting fonts show them side-by-side.
+    sub \uni0615 \uni200C \uni08D6  by \TUS.super;
+    sub \uni08D5 \uni200C \uni08D6  by \SA.super;
     sub \uni0615 \uni08D6  by \TUS.super;
     sub \uni08D5 \uni08D6  by \SA.super;
     sub \asciicircum \uni0631 \uni062D  by \uni0612;
