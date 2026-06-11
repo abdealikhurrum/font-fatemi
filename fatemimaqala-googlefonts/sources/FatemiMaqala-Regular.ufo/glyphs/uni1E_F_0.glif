@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<glyph name="uni1EF0" format="2">
-  <advance width="1446"/>
-  <outline>
-    <component base="dotbelowcomb.cap" xOffset="419" yOffset="-58"/>
-    <component base="Uhorn"/>
-  </outline>
-</glyph>

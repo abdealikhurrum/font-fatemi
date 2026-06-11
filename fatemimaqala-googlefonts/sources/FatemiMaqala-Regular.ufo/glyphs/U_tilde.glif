@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<glyph name="Utilde" format="2">
-  <advance width="1446"/>
-  <outline>
-    <component base="tildecomb.cap" xOffset="1241" yOffset="-14"/>
-    <component base="U"/>
-  </outline>
-</glyph>

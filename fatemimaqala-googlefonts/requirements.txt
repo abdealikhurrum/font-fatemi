@@ -1,6 +1,0 @@
-gftools[qa]
-fontmake
-fonttools
-skia-pathops
-ufo2ft
-fontbakery[googlefonts]
