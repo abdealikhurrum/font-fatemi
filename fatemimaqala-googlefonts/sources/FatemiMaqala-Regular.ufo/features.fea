@@ -464,7 +464,8 @@ lookup honorifics {
     sub \asciicircum \saadDouble.init \uniFECA  by \SA.super;
     sub \asciicircum \uniFEBB \uniFECA  by \SA.super;
     sub \asciicircum \uni0635 \uni00A0 \uni0639  by \SA.super;
-    sub \asciicircum \uniFEDF \uniFECA  by \LA.super;
+    sub \uni0615 \uni08D6  by \TUS.super;
+    sub \uni08D5 \uni08D6  by \SA.super;
     sub \asciicircum \uni0631 \uni062D  by \uni0612;
     sub \asciicircum \uniFEAD \uni062D  by \uni0612;
     sub \uniFEBB \uniFEE0 \uniFECA  by \glyph573;
@@ -7997,7 +7998,7 @@ feature  RQD {
 	\uni0233 \uni0237 \uni02BB \uni02BC \uni02BE \uni02BF \uni02C0 \circumflex 
 	\caron \breve \dotaccent \ring \ogonek \tilde \hungarumlaut \uni032E \uni0331 
 	\uni04D9 \uni0600 \uni0601 \uni0602 \uni0603 \uni060C \uni060E \uni060F \uni0610 
-	\uni0611 \uni0613 \uni0614 \uni0615 \uni061B \uni061F \uni0621 \uni0622 \uni0623 
+	\uni0611 \uni0613 \uni0614 \uni0615 \uni08D5 \uni08D6 \uni061B \uni061F \uni0621 \uni0622 \uni0623 
 	\uni0624 \uni0625 \uni0626 \uni0627 \uni0628 \uni0629 \uni062A \uni062B \uni062C 
 	\uni062D \uni062E \uni062F \uni0630 \uni0631 \uni0632 \uni0633 \uni0634 \uni0635 
 	\uni0636 \uni0637 \uni0638 \uni0639 \uni063A \uni0640 \uni0641 \uni0642 \uni0643 
@@ -8047,7 +8048,7 @@ feature  RQD {
 	\proportional \infinity \notequal \lessequal \greaterequal \propersubset 
 	\pehHeh.init \uktub \kaifa \ma_huwa \hall \uzkur \bayyin \limaazaa \fabayyin 
 	\mazaa \maa_hiya \awdih \wabayyin \bhai \bhaisaheb \qasreAali \shehzada 
-	\TUS.super \QR.super \SA.super \LA.super \uniFB50 \uniFB51 \uniFB56 \uniFB57 
+	\TUS.super \QR.super \SA.super \uniFB50 \uniFB51 \uniFB56 \uniFB57 
 	\uniFB58 \uniFB59 \uniFB66 \uniFB67 \uniFB68 \uniFB69 \uniFB6A \uniFB6B \uniFB6C 
 	\uniFB6D \uniFB7A \uniFB7B \uniFB7C \uniFB7D \uniFB88 \uniFB89 \uniFB8A \uniFB8B 
 	\uniFB8C \uniFB8D \uniFB8E \uniFB8F \uniFB90 \uniFB91 \uniFB92 \uniFB93 \uniFB94 

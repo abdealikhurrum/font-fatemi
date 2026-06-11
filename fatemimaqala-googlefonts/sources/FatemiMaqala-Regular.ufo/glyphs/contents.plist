@@ -136,8 +136,6 @@
     <string>K_commaaccent.glif</string>
     <key>L</key>
     <string>L_.glif</string>
-    <key>LA.super</key>
-    <string>L_A_.super.glif</string>
     <key>Lacute</key>
     <string>L_acute.glif</string>
     <key>Lcaron</key>
@@ -304,6 +302,10 @@
     <string>Q_.glif</string>
     <key>Q.alt01</key>
     <string>Q_.alt01.glif</string>
+    <key>uni08D5</key>
+    <string>uni08D_5.glif</string>
+    <key>uni08D6</key>
+    <string>uni08D_6.glif</string>
     <key>QR.super</key>
     <string>Q_R_.super.glif</string>
     <key>R</key>
