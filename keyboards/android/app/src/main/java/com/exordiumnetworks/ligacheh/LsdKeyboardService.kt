@@ -214,6 +214,21 @@ class LsdKeyboardService : InputMethodService() {
             predictiveBar?.update(listOf("ج"))
             return
         }
+        // Experimental Roman typing: on the Latin layer the partial is
+        // romanized LSD — transliterate it instead of completing it. Selecting
+        // a candidate replaces the Roman partial via the normal select path.
+        if (currentLayer == Layer.LATIN && KeyboardSettings.getTranslitEnabled(this)) {
+            val ctx     = currentInputConnection?.getTextBeforeCursor(100, 0)?.toString() ?: ""
+            val midWord = !(ctx.isEmpty() || ctx.last().isWhitespace())
+            val word    = ctx.split(' ', '\n', '\t').lastOrNull() ?: ""
+            if (midWord && word.isNotEmpty() &&
+                word.all { it.code < 128 && (it.isLetter() || it == '\'') }) {
+                predictiveBar?.update(Transliterator.suggestions(LsdModel.shared(this), word))
+            } else {
+                predictiveBar?.update(emptyList())
+            }
+            return
+        }
         if (!KeyboardSettings.getPredictions(this)) {
             predictiveBar?.update(emptyList())
             return

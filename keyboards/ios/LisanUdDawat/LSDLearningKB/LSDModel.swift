@@ -209,4 +209,19 @@ final class LSDModel {
     func honorificSource(of sign: String) -> [String] {
         query("SELECT frm FROM rules WHERE kind = 'honorific' AND dst = ?", [sign]).map { $0[0] }
     }
+
+    // MARK: - Transliteration (translit table; see Transliterator)
+
+    /// Candidates sharing a Latin strong-consonant skeleton, by rank. Empty
+    /// when the bundled model predates the translit table.
+    func translitCandidates(skeleton: String, limit: Int = 500) -> [(word: String, rank: Int)] {
+        guard !skeleton.isEmpty else { return [] }
+        return query(
+            "SELECT word, rank FROM translit WHERE skeleton = ? ORDER BY rank DESC LIMIT \(limit)",
+            [skeleton], limit: limit
+        ).map { ($0[0], Int($0[1]) ?? 0) }
+    }
+
+    private(set) lazy var translitMaxRank: Int =
+        Int(query("SELECT MAX(rank) FROM translit", [], limit: 1).first?.first ?? "1") ?? 1
 }

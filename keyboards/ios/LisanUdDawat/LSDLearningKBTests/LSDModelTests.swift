@@ -41,6 +41,22 @@ final class LSDModelTests: XCTestCase {
         XCTAssertEqual(model.corrections(for: "كريسو"), [])
     }
 
+    func testTransliteration() {
+        // Skeleton reduction (mirrors pipeline/translit.py)
+        XCTAssertEqual(Transliterator.latinSkeleton("sidna"), "sdn")
+        XCTAssertEqual(Transliterator.latinSkeleton("khushi"), "x$")    // kh + sh digraphs
+        XCTAssertEqual(Transliterator.latinSkeleton("topi"), "tp")
+        // Dictionary-grounded lookup, frequency + vowel-similarity ranked
+        XCTAssertEqual(Transliterator.suggestions(for: "sidna").first, "سيدنا")
+        XCTAssertEqual(Transliterator.suggestions(for: "topi").first, "ٹوپي")
+        XCTAssertEqual(Transliterator.suggestions(for: "maa").first, "ماں")
+        XCTAssertEqual(Transliterator.suggestions(for: "khushi").first, "خوشي")
+        // Closed-class function words map directly
+        XCTAssertEqual(Transliterator.suggestions(for: "tame"), ["تميں"])
+        // Empty input -> no candidates
+        XCTAssertEqual(Transliterator.suggestions(for: ""), [])
+    }
+
     func testHonorificsReversible() {
         // Two-token abbreviation: typed "ع م" after a name
         let twoToken = model.honorifics(prev1: "م", prev2: "ع")

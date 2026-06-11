@@ -200,6 +200,20 @@ final class KeyboardViewController: UIInputViewController {
             predictiveBar.update(suggestions: ["ج"])
             return
         }
+        // Experimental Roman typing: on the Latin layer the partial is
+        // romanized LSD — transliterate it instead of completing it. Selecting
+        // a candidate replaces the Roman partial via the normal didSelect path.
+        if currentLayer == .latin && KeyboardSettings.translitEnabled {
+            let context = textDocumentProxy.documentContextBeforeInput ?? ""
+            let midWord = !(context.isEmpty || context.last!.isWhitespace || context.last!.isNewline)
+            let word    = context.components(separatedBy: .whitespacesAndNewlines).last ?? ""
+            if midWord, !word.isEmpty, word.allSatisfy({ $0.isASCII && ($0.isLetter || $0 == "'") }) {
+                predictiveBar.update(suggestions: Transliterator.suggestions(for: word))
+            } else {
+                predictiveBar.update(suggestions: [])
+            }
+            return
+        }
         guard KeyboardSettings.predictionEnabled else {
             predictiveBar.update(suggestions: [])
             return

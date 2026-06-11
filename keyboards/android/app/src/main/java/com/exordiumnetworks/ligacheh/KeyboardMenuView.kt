@@ -89,6 +89,18 @@ class KeyboardMenuView(context: Context) : FrameLayout(context) {
 
         c.addView(hairline())
 
+        addToggleRow(c, "Roman typing on ABC (experimental)",
+            get = { KeyboardSettings.getTranslitEnabled(context) },
+            set = { KeyboardSettings.setTranslitEnabled(context, it) })
+
+        c.addView(hairline())
+
+        addToggleRow(c, "Corpus logging",
+            get = { KeyboardSettings.getCorpusEnabled(context) },
+            set = { KeyboardSettings.setCorpusEnabled(context, it) })
+
+        c.addView(hairline())
+
         addDoublePressSection(c)
 
         c.addView(hairline())

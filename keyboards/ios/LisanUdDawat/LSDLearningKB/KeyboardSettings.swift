@@ -11,6 +11,13 @@ enum KeyboardSettings {
         set { defaults.set(newValue, forKey: "prediction_enabled") }
     }
 
+    // Experimental: on the Latin layer, transliterate the typed Roman word
+    // into LSD candidates in the predictive bar.
+    static var translitEnabled: Bool {
+        get { defaults.bool(forKey: "translit_enabled") }
+        set { defaults.set(newValue, forKey: "translit_enabled") }
+    }
+
     // Pause corpus collection without clearing stored data.
     static var corpusEnabled: Bool {
         get { defaults.object(forKey: "corpus_enabled") as? Bool ?? true }

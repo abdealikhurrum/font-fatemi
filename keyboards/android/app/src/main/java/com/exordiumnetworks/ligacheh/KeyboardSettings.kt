@@ -28,6 +28,14 @@ object KeyboardSettings {
     fun setPredictions(ctx: Context, v: Boolean) =
         prefs(ctx).edit().putBoolean("prediction_enabled", v).apply()
 
+    // Experimental: on the Latin layer, transliterate the typed Roman word
+    // into LSD candidates in the predictive bar.
+    fun getTranslitEnabled(ctx: Context): Boolean =
+        prefs(ctx).getBoolean("translit_enabled", false)
+
+    fun setTranslitEnabled(ctx: Context, v: Boolean) =
+        prefs(ctx).edit().putBoolean("translit_enabled", v).apply()
+
     // Pause corpus collection without clearing stored data.
     fun getCorpusEnabled(ctx: Context): Boolean =
         prefs(ctx).getBoolean("corpus_enabled", true)

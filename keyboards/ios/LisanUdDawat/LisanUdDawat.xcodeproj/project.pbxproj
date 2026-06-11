@@ -74,10 +74,11 @@
 			membershipExceptions = (
 				ArabicStandardLayoutData.swift,
 				CRULPUrduLayoutData.swift,
-				KeyData.swift,
 				KeyboardSettings.swift,
-				LSDModel.swift,
+				KeyData.swift,
 				"lsd-model.sqlite",
+				LSDModel.swift,
+				Transliterator.swift,
 			);
 			target = 7AE10E7C2FBD397500CE0BE8 /* LSDLearningKBTests */;
 		};

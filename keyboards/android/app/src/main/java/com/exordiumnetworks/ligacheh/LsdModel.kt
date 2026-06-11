@@ -225,4 +225,21 @@ class LsdModel private constructor(private val db: SQLiteDatabase?) {
     /** Reverse lookup: the typed abbreviation(s) a sign came from. */
     fun honorificSource(sign: String): List<String> =
         query("SELECT frm FROM rules WHERE kind = 'honorific' AND dst = ?", listOf(sign)).map { it[0] }
+
+    // ── Transliteration (translit table; see Transliterator) ─────────────
+
+    /** Candidates sharing a Latin strong-consonant skeleton, by rank. Empty
+     *  when the bundled model predates the translit table. */
+    fun translitCandidates(skeleton: String, limit: Int = 500): List<Pair<String, Int>> {
+        if (skeleton.isEmpty()) return emptyList()
+        return query(
+            "SELECT word, rank FROM translit WHERE skeleton = ? ORDER BY rank DESC LIMIT $limit",
+            listOf(skeleton), limit = limit
+        ).map { it[0] to (it[1].toIntOrNull() ?: 0) }
+    }
+
+    val translitMaxRank: Int by lazy {
+        query("SELECT MAX(rank) FROM translit", emptyList(), limit = 1)
+            .firstOrNull()?.firstOrNull()?.toIntOrNull() ?: 1
+    }
 }

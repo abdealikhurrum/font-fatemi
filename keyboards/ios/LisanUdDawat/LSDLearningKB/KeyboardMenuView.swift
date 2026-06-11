@@ -69,6 +69,12 @@ final class KeyboardMenuView: UIView {
         )
         addSeparator(to: stack)
         addToggle(to: stack,
+            label: "Roman typing on ABC  (experimental)",
+            getValue: { KeyboardSettings.translitEnabled },
+            setValue: { KeyboardSettings.translitEnabled = $0 }
+        )
+        addSeparator(to: stack)
+        addToggle(to: stack,
             label: "Corpus logging",
             getValue: { KeyboardSettings.corpusEnabled },
             setValue: { KeyboardSettings.corpusEnabled = $0 }
