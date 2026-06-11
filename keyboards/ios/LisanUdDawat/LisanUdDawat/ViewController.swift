@@ -101,12 +101,7 @@ final class ViewController: UIViewController {
             v.addArrangedSubview(bodyLabel(step))
         }
 
-        installButton.setTitle("Save Profile", for: .normal)
-        installButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        installButton.backgroundColor = .systemBlue
-        installButton.setTitleColor(.white, for: .normal)
-        installButton.layer.cornerRadius = 10
-        installButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        installButton.configuration = Self.buttonConfiguration(title: "Save Profile", color: .systemBlue)
         installButton.addTarget(self, action: #selector(saveProfile), for: .touchUpInside)
         v.addArrangedSubview(installButton)
 
@@ -312,13 +307,22 @@ final class ViewController: UIViewController {
 
     private func actionButton(_ title: String, color: UIColor, target: Any, action: Selector) -> UIButton {
         let btn = UIButton(type: .system)
-        btn.setTitle(title, for: .normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        btn.backgroundColor = color
-        btn.setTitleColor(.white, for: .normal)
-        btn.layer.cornerRadius = 10
-        btn.contentEdgeInsets = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        btn.configuration = Self.buttonConfiguration(title: title, color: color)
         btn.addTarget(target, action: action, for: .touchUpInside)
         return btn
+    }
+
+    /// Filled-style configuration shared by the app's action buttons
+    /// (replaces the deprecated contentEdgeInsets/backgroundColor styling).
+    private static func buttonConfiguration(title: String, color: UIColor) -> UIButton.Configuration {
+        var config = UIButton.Configuration.filled()
+        config.baseBackgroundColor = color
+        config.baseForegroundColor = .white
+        config.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 0, bottom: 12, trailing: 0)
+        config.background.cornerRadius = 10
+        var attrTitle = AttributedString(title)
+        attrTitle.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        config.attributedTitle = attrTitle
+        return config
     }
 }
