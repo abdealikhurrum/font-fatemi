@@ -18,15 +18,19 @@ ligatures (so the الله / لله ligatures decode whole) and positional-form 
 
 This gets ~90% of the characters right automatically — enough to bootstrap a
 draft a human can finish, or to feed the OCR trainer once spot-checked against
-the --pdf-verify sheet. Known residuals: a dropped ح in some hah-ligatures, and
-Urdu heh (ہ U+06C1) vs Arabic heh (ه) — the latter is usually the correct LSD
-spelling anyway.
+the --pdf-verify sheet. Known residuals: a dropped ح in some hah-ligatures
+(same family: بچايا -> چايا), and Urdu heh (ہ U+06C1) vs Arabic heh (ه) — the
+latter is usually the correct LSD spelling anyway. Systematic template
+confusions (final heh-goal as ھ, the جہ ligature as خ, zain as قى, some
+subsets' reh as ص / theh as ٹ) are repaired downstream by postpass.py — run
+decoder output through postpass.postprocess() before using it.
 
 Requires: freetype-py, fonttools, PyMuPDF, numpy, Pillow.
 """
 
 from __future__ import annotations
 
+import tempfile
 import unicodedata
 from dataclasses import dataclass
 
@@ -152,6 +156,11 @@ class LegacyDecoder:
         self._labels = labels
 
     def decode_glyph(self, face: "freetype.Face", gid: int, _cache: dict) -> str:
+        # The cache key uses id(face), so the cache MUST NOT outlive the faces
+        # it was filled from: id() values are reused once a face is gc'd, and a
+        # cache shared across pages then poisons later pages with earlier
+        # pages' subset labels. Use one cache per page (decode_page_lines
+        # creates one when cache=None).
         key = (id(face), gid)
         if key in _cache:
             return _cache[key]
@@ -169,12 +178,54 @@ class _Glyph:
     bbox: tuple
 
 
-def decode_page_lines(decoder: LegacyDecoder, page, faces: dict, cache: dict,
+# Substrings of an embedded base font name that mark a legacy LSD face (used to
+# pick the default face for unmatched Arabic spans).
+LEGACY_MARKERS = ("FATEMI", "DAWAT", "LISAN", "LISAAN", "TAHERI", "KANZ")
+
+
+def extract_page_faces(doc, page) -> tuple[dict, "freetype.Face | None", list[str]]:
+    """Extract a page's embedded TTF subsets as freetype Faces.
+
+    Returns (faces, default_face, tmp_paths): `faces` maps both the full base
+    font name and its subset-stripped tail to a Face; `default_face` is the
+    first legacy-marked face (else any face). Caller must os.unlink each tmp
+    path when done with the faces — and must not reuse a decode cache after
+    that (see decode_glyph)."""
+    faces: dict = {}
+    default_face = None
+    tmps: list[str] = []
+    for f in page.get_fonts(full=True):
+        xref, ext, base = f[0], f[1], str(f[3])
+        if ext != "ttf":
+            continue
+        try:
+            data = doc.extract_font(xref)[-1]
+            tf = tempfile.NamedTemporaryFile(suffix=".ttf", delete=False)
+            tf.write(data)
+            tf.close()
+            tmps.append(tf.name)
+            face = freetype.Face(tf.name)
+            faces[base] = face
+            faces[base.split("+")[-1]] = face
+            if default_face is None and any(m in base.upper() for m in LEGACY_MARKERS):
+                default_face = face
+        except Exception:
+            pass
+    if default_face is None and faces:
+        default_face = next(iter(faces.values()))
+    return faces, default_face, tmps
+
+
+def decode_page_lines(decoder: LegacyDecoder, page, faces: dict, cache: dict | None = None,
                       default_face=None, y_tol: float = 4.0) -> list[tuple[str, tuple]]:
     """Decode one page into logical-order text lines. `faces` maps a span font
     name to a freetype.Face of that embedded subset; `default_face` is used for
-    Arabic spans whose font name isn't matched. Returns (text, bbox) per line,
+    Arabic spans whose font name isn't matched. `cache` defaults to a fresh
+    per-page dict — only pass one in to share across calls for the SAME faces,
+    never across pages (see decode_glyph). Returns (text, bbox) per line,
     bbox in PDF points."""
+    if cache is None:
+        cache = {}
     glyphs: list[_Glyph] = []
     for sp in page.get_texttrace():
         fname = sp.get("font", "")
